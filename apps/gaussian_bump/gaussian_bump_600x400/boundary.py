@@ -1,4 +1,4 @@
-import numpy
+import numpy as np
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.pyplot as plt
 import h5py
@@ -48,17 +48,35 @@ rhoE = read_dataset(group1, "rhoE_B0")
 u = rhou/rho
 v = rhov/rho
 p = (0.4)*(rhoE - 0.5*(u**2+v**2)*rho)
-a = numpy.sqrt(1.4*p/rho)
-M = numpy.sqrt(u**2 + v**2)/a
+a = np.sqrt(1.4*p/rho)
+M = np.sqrt(u**2 + v**2)/a
 T = 1.4*(Minf**2)*p/rho
 
+mu = (T**(1.5)*(1.0+SuthT/RefT)/(T+SuthT/RefT))
+#print(mu)
+tau = mu[0,:]*(u[1,:]/y[1,:])
+
+Cf = Cf = tau/(0.5*rho[300,:]*u[300,:])
+print(len(Cf))
 print('x direction = ', len(x[:,0]))
 print('y direction = ',len(x[0,:]))
 
+fig, ax = plt.subplots(figsize=(10,5))
+ax.plot(x[0,:],Cf)
+xl = np.linspace(0,400,20)
+yl = np.zeros(len(xl))
+ax.plot(xl,yl,'--')
+ax.set_title('Skin Friction Coefficient')
+ax.set_xlabel('X')
+ax.set_ylabel('$C_f$')
+
+
+
 # choosing the x position to plot the pressure across.
-plt.plot(x[200,:], p[200,:])
+# plt.plot(x[200,:], p[200,:])
+# print(numpy.shape(x))
+# print(x[,:])
+# print()
+# print(y[:,])
+
 plt.show()
-print(numpy.shape(x))
-#print(x[,:])
-print()
-print(y[:,])
