@@ -1,0 +1,31 @@
+\documentclass{article}
+\title{Algorithm for the equations}
+\author{Satya P Jammy \& OpenSBLI developers team}
+\date{\today}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\begin{document}
+\maketitle
+\noindent Starting of the main program\\
+\\\noindent The kernel is Grid_based_initialisation0, block is 0\\\noindent The ranges are -5,block0np0 + 5\\\begin{dmath}{x_{0}{_{B0}}}[{}] = Delta0block0 \,.\, {idx}[{0}]\end{dmath}
+
+\begin{dmath}{\phi{_{B0}}}[{}] = \sin{\left (2.0 \,.\, \pi \,.\, {x_{0}{_{B0}}}[{}] \right )}\end{dmath}
+
+\noindent Initialising timers\\
+\\\noindent Do loop iter,0, niter - 1\\
+\\\noindent This is an exchange self kernel on variables phi_B0\\\\\noindent This is an exchange self kernel on variables phi_B0\\\\\noindent The kernel is Save equations, block is 0\\\noindent The ranges are 0,block0np0\\\begin{dmath}{\phi_{RKold}{_{B0}}}[{}] = {\phi{_{B0}}}[{}]\end{dmath}
+
+\noindent Do loop stage,0, 2\\
+\\\noindent The kernel is Convective CD phi_B0 x0 , block is 0\\\noindent The ranges are 0,block0np0\\\begin{dmath}{wk_{0}{_{B0}}}[{}] = inv_0 \,.\, \left(\frac{2 \,.\, {\phi{_{B0}}}[{}]}{3} - \frac{2 \,.\, {\phi{_{B0}}}[{}]}{3} + \frac{{\phi{_{B0}}}[{}]}{12} - \frac{{\phi{_{B0}}}[{}]}{12}\right)\end{dmath}
+
+\noindent The kernel is Convective residual , block is 0\\\noindent The ranges are 0,block0np0\\\begin{dmath}{Residual_{0}{_{B0}}}[{}] = - c0 \,.\, {wk_{0}{_{B0}}}[{}]\end{dmath}
+
+\noindent The kernel is Sub stage advancement, block is 0\\\noindent The ranges are 0,block0np0\\\begin{dmath}{\phi{_{B0}}}[{}] = dt \,.\, {rknew}[{stage}] \,.\, {Residual_{0}{_{B0}}}[{}] + {\phi_{RKold}{_{B0}}}[{}]\end{dmath}
+
+\noindent The kernel is Temporal solution advancement, block is 0\\\noindent The ranges are 0,block0np0\\\begin{dmath}{\phi_{RKold}{_{B0}}}[{}] = dt \,.\, {rkold}[{stage}] \,.\, {Residual_{0}{_{B0}}}[{}] + {\phi_{RKold}{_{B0}}}[{}]\end{dmath}
+
+\noindent This is an exchange self kernel on variables phi_B0\\\\\noindent This is an exchange self kernel on variables phi_B0\\\\\noindent Ending Do loop stage\\
+\\\noindent Ending Do loop iter\\
+\\\noindent Ending timers\\
+\\\noindent HDF5 IO type write on arrays phi_B0 x0_B0\\\noindent End of Main\\\end{document}
