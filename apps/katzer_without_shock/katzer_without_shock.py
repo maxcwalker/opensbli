@@ -105,10 +105,10 @@ boundaries[direction][side] = IsothermalWallBC(direction, 0, wall_eqns, scheme=R
 # Top dirichlet shock generator condition
 direction = 1
 side = 1
-rho = parse_expr("Eq(DataObject(rho), Piecewise((1.129734572, (x0)>400.0), (1.00000596004, True)))", local_dict=local_dict)
-rhou0 = parse_expr("Eq(DataObject(rhou0), Piecewise((1.0921171, (x0)>40.0), (1.00000268202, True)))", local_dict=local_dict)
-rhou1 = parse_expr("Eq(DataObject(rhou1), Piecewise((-0.058866065, (x0)>40.0), (0.00565001630205, True)))", local_dict=local_dict)
-rhoE = parse_expr("Eq(DataObject(rhoE), Piecewise((1.0590824, (x0)>40.0), (0.94644428042, True)))", local_dict=local_dict)
+rho = parse_expr("Eq(DataObject(rho), Piecewise((1.129734572, (x0)>500.0), (1.00000596004, True)))", local_dict=local_dict)
+rhou0 = parse_expr("Eq(DataObject(rhou0), Piecewise((1.0921171, (x0)>500.0), (1.00000268202, True)))", local_dict=local_dict)
+rhou1 = parse_expr("Eq(DataObject(rhou1), Piecewise((-0.058866065, (x0)>500.0), (0.00565001630205, True)))", local_dict=local_dict)
+rhoE = parse_expr("Eq(DataObject(rhoE), Piecewise((1.0590824, (x0)>500.0), (0.94644428042, True)))", local_dict=local_dict)
 
 upper_eqns = [x_loc, rho, rhou0, rhou1, rhoE]
 boundaries[direction][side] = DirichletBC(direction, side, upper_eqns, scheme=ReducedAccess())
@@ -145,6 +145,7 @@ OPSC(alg)
 # Substitute simulation parameter values
 constants = ['gama', 'Minf', 'Pr', 'Re', 'Twall', 'dt', 'niter', 'block0np0', 'block0np1',
                  'Delta0block0', 'Delta1block0', 'SuthT', 'RefT', 'eps', 'TENO_CT', 'Lx1', 'by', 'teno_a1', 'teno_a2', 'epsilon']
-values = ['1.4', '2.0', '0.72', '950.0', '1.67619431', '0.05', '10000', '500', '250',
+values = ['1.4', '2.0', '0.72', '950.0', '1.67619431', '0.025', '200000', '500', '250',
               '400.0/(block0np0-1)', '115.0/(block0np1-1)', '110.4', '288.0', '1e-15', '1e-5', '115.0', '5.0','10.5', '4.5', '1.0e-30']
 substitute_simulation_parameters(constants, values)
+print_iteration_ops(NaN_check='rho_B0')

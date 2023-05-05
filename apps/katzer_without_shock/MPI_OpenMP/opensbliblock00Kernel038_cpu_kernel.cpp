@@ -76,10 +76,10 @@ void ops_par_loop_opensbliblock00Kernel038_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ rhou0_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ rhou1_B0_p = (double *)(args[3].data + base3);
+  double * __restrict__ rhoE_B0_p = (double *)(args[3].data + base3);
 
   int base4 = args[4].dat->base_offset;
-  double * __restrict__ rhoE_B0_p = (double *)(args[4].data + base4);
+  double * __restrict__ rhou1_B0_p = (double *)(args[4].data + base4);
 
 
 
@@ -111,24 +111,24 @@ void ops_par_loop_opensbliblock00Kernel038_execute(ops_kernel_descriptor *desc) 
       const ACC<double> x0_B0(xdim0_opensbliblock00Kernel038, x0_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel038*1);
       ACC<double> rho_B0(xdim1_opensbliblock00Kernel038, rho_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel038*1);
       ACC<double> rhou0_B0(xdim2_opensbliblock00Kernel038, rhou0_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel038*1);
-      ACC<double> rhou1_B0(xdim3_opensbliblock00Kernel038, rhou1_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel038*1);
-      ACC<double> rhoE_B0(xdim4_opensbliblock00Kernel038, rhoE_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel038*1);
+      ACC<double> rhoE_B0(xdim3_opensbliblock00Kernel038, rhoE_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel038*1);
+      ACC<double> rhou1_B0(xdim4_opensbliblock00Kernel038, rhou1_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel038*1);
       
-   double u12 = 0.0;
-   double u03 = 0.0;
-   double x0 = 0.0;
-   double u11 = 0.0;
-   double rho_halo_1 = 0.0;
+   double rho_halo_3 = 0.0;
    double u13 = 0.0;
-   double T3 = 0.0;
+   double T2 = 0.0;
+   double u11 = 0.0;
    double u01 = 0.0;
+   double T3 = 0.0;
+   double u12 = 0.0;
+   double u02 = 0.0;
+   double x0 = 0.0;
    double T_above = 0.0;
    double Pwall = 0.0;
+   double u03 = 0.0;
+   double rho_halo_1 = 0.0;
    double rho_halo_2 = 0.0;
    double T1 = 0.0;
-   double rho_halo_3 = 0.0;
-   double u02 = 0.0;
-   double T2 = 0.0;
    x0 = x0_B0(0,0);
 
    rhou0_B0(0,0) = 0.0;

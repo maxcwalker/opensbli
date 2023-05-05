@@ -13,35 +13,35 @@ int xdim3_opensbliblock00Kernel039;
 inline 
 void opensbliblock00Kernel039(ptr_double rho_B0,
   ptr_double rhou0_B0,
-  ptr_double rhou1_B0,
   ptr_double rhoE_B0,
+  ptr_double rhou1_B0,
   const int *idx)
 {
    double x0 = 0.0;
    x0 = Delta0block0*idx[0];
 
-   OPS_ACC(rho_B0, 0,0) = ((x0 > 400.0) ? (
+   OPS_ACC(rho_B0, 0,0) = ((x0 > 500.0) ? (
    1.129734572
 )
 : (
    1.00000596004
 ));
 
-   OPS_ACC(rhou0_B0, 0,0) = ((x0 > 40.0) ? (
+   OPS_ACC(rhou0_B0, 0,0) = ((x0 > 500.0) ? (
    1.0921171
 )
 : (
    1.00000268202
 ));
 
-   OPS_ACC(rhou1_B0, 0,0) = ((x0 > 40.0) ? (
+   OPS_ACC(rhou1_B0, 0,0) = ((x0 > 500.0) ? (
    -0.058866065
 )
 : (
    0.00565001630205
 ));
 
-   OPS_ACC(rhoE_B0, 0,0) = ((x0 > 40.0) ? (
+   OPS_ACC(rhoE_B0, 0,0) = ((x0 > 500.0) ? (
    1.0590824
 )
 : (

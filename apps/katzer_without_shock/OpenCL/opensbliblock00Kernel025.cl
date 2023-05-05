@@ -38,27 +38,27 @@ void opensbliblock00Kernel025(const ptr_double u2_B0,
   const int *idx, const int block0np1, const double inv_0, const double rc8, const double rc9, const double rc10, const double rc11)
 {
     OPS_ACCS(wk4_B0, 0,0) = ((idx[1] == 0) ? (
-   inv_0*(-rc8*OPS_ACCS(u2_B0, 0,0) - rc10*OPS_ACCS(u2_B0, 0,4) +
-      4*OPS_ACCS(u2_B0, 0,1) - 3*OPS_ACCS(u2_B0, 0,2) + (rc9)*OPS_ACCS(u2_B0, 0,3))
+   inv_0*(-3*OPS_ACCS(u2_B0, 0,2) + 4*OPS_ACCS(u2_B0, 0,1) -
+      rc9*OPS_ACCS(u2_B0, 0,4) - rc8*OPS_ACCS(u2_B0, 0,0) + (rc10)*OPS_ACCS(u2_B0, 0,3))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_0*(-10*OPS_ACCS(u2_B0, 0,0) + 18*OPS_ACCS(u2_B0, 0,1) - 3*OPS_ACCS(u2_B0, 0,-1) -
-      6*OPS_ACCS(u2_B0, 0,2) + OPS_ACCS(u2_B0, 0,3))
+      (rc11)*inv_0*(-6*OPS_ACCS(u2_B0, 0,2) + 18*OPS_ACCS(u2_B0, 0,1) - 10*OPS_ACCS(u2_B0, 0,0) -
+      3*OPS_ACCS(u2_B0, 0,-1) + OPS_ACCS(u2_B0, 0,3))
 )
 : ((idx[1] == block0np1 - 1) ? (
 
-      inv_0*((rc10)*OPS_ACCS(u2_B0, 0,-4) + (rc8)*OPS_ACCS(u2_B0, 0,0) - rc9*OPS_ACCS(u2_B0, 0,-3) -
-      4*OPS_ACCS(u2_B0, 0,-1) + 3*OPS_ACCS(u2_B0, 0,-2))
+      inv_0*((rc9)*OPS_ACCS(u2_B0, 0,-4) + (rc8)*OPS_ACCS(u2_B0, 0,0) - 4*OPS_ACCS(u2_B0, 0,-1) +
+      3*OPS_ACCS(u2_B0, 0,-2) - rc10*OPS_ACCS(u2_B0, 0,-3))
 )
 : ((idx[1] == block0np1 - 2) ? (
 
-      (rc11)*inv_0*(10*OPS_ACCS(u2_B0, 0,0) - OPS_ACCS(u2_B0, 0,-3) + 3*OPS_ACCS(u2_B0, 0,1) - 18*OPS_ACCS(u2_B0, 0,-1)
-      + 6*OPS_ACCS(u2_B0, 0,-2))
+      (rc11)*inv_0*(3*OPS_ACCS(u2_B0, 0,1) + 10*OPS_ACCS(u2_B0, 0,0) + 6*OPS_ACCS(u2_B0, 0,-2) -
+      18*OPS_ACCS(u2_B0, 0,-1) - OPS_ACCS(u2_B0, 0,-3))
 )
 : (
-   (rc11)*inv_0*(-8*OPS_ACCS(u2_B0, 0,-1) + OPS_ACCS(u2_B0, 0,-2) -
-      OPS_ACCS(u2_B0, 0,2) + 8*OPS_ACCS(u2_B0, 0,1))
+   (rc11)*inv_0*(-OPS_ACCS(u2_B0, 0,2) +
+      8*OPS_ACCS(u2_B0, 0,1) - 8*OPS_ACCS(u2_B0, 0,-1) + OPS_ACCS(u2_B0, 0,-2))
 )))));
 
 }

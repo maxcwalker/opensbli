@@ -33,11 +33,14 @@
 
 //user function
 
-void opensbliblock00Kernel007(const ptr_double rho_B0,
-  const ptr_double rhou1_B0,
-  ptr_double u1_B0)
+ void opensbliblock00Kernel007(const ptr_double rho_B0,
+  const ptr_double u1_B0,
+  const ptr_double rhoE_B0,
+  const ptr_double u0_B0,
+  ptr_double p_B0, const double gama, const double rc13)
 {
-   OPS_ACCS(u1_B0, 0,0) = OPS_ACCS(rhou1_B0, 0,0)/OPS_ACCS(rho_B0, 0,0);
+    OPS_ACCS(p_B0, 0,0) = (gama - 1)*(OPS_ACCS(rhoE_B0, 0,0) - rc13*OPS_ACCS(rho_B0, 0,0)*pow(OPS_ACCS(u0_B0, 0,0), 2) -
+      rc13*OPS_ACCS(rho_B0, 0,0)*pow(OPS_ACCS(u1_B0, 0,0), 2));
 
 }
 
@@ -45,10 +48,16 @@ void opensbliblock00Kernel007(const ptr_double rho_B0,
 __kernel void ops_opensbliblock00Kernel007(
 __global const double* restrict arg0,
 __global const double* restrict arg1,
-__global double* restrict arg2,
+__global const double* restrict arg2,
+__global const double* restrict arg3,
+__global double* restrict arg4,
+const double gama,
+const double rc13,
 const int base0,
 const int base1,
 const int base2,
+const int base3,
+const int base4,
 const int size0,
 const int size1 ){
 
@@ -59,10 +68,16 @@ const int size1 ){
   if (idx_x < size0 && idx_y < size1) {
     const ptr_double ptr0 = { &arg0[base0 + idx_x * 1*1 + idx_y * 1*1 * xdim0_opensbliblock00Kernel007], xdim0_opensbliblock00Kernel007};
     const ptr_double ptr1 = { &arg1[base1 + idx_x * 1*1 + idx_y * 1*1 * xdim1_opensbliblock00Kernel007], xdim1_opensbliblock00Kernel007};
-    ptr_double ptr2 = { &arg2[base2 + idx_x * 1*1 + idx_y * 1*1 * xdim2_opensbliblock00Kernel007], xdim2_opensbliblock00Kernel007};
+    const ptr_double ptr2 = { &arg2[base2 + idx_x * 1*1 + idx_y * 1*1 * xdim2_opensbliblock00Kernel007], xdim2_opensbliblock00Kernel007};
+    const ptr_double ptr3 = { &arg3[base3 + idx_x * 1*1 + idx_y * 1*1 * xdim3_opensbliblock00Kernel007], xdim3_opensbliblock00Kernel007};
+    ptr_double ptr4 = { &arg4[base4 + idx_x * 1*1 + idx_y * 1*1 * xdim4_opensbliblock00Kernel007], xdim4_opensbliblock00Kernel007};
     opensbliblock00Kernel007(ptr0,
                                   ptr1,
-                                  ptr2);
+                                  ptr2,
+                                  ptr3,
+                                  ptr4,
+                                  gama,
+                                  rc13);
   }
 
 }

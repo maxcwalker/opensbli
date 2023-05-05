@@ -33,18 +33,18 @@
 
 //user function
 
- void opensbliblock00Kernel040(ptr_double rhou0_B0,
-  ptr_double rhou1_B0,
-  ptr_double rhoE_B0,
+ void opensbliblock00Kernel040(ptr_double rhou1_B0,
   ptr_double rho_B0,
+  ptr_double rhoE_B0,
   ptr_double x0_B0,
+  ptr_double rhou0_B0,
   ptr_double x1_B0,
   const int *idx, const double Delta0block0, const double Delta1block0, const double by, const double Lx1, const double rcinv4, const double rcinv5, const double rcinv6, const double rcinv7)
 {
-   double rhou0 = 0.0;
-   double rho = 0.0;
-   double T = 0.0;
    double rhou1 = 0.0;
+   double rhou0 = 0.0;
+   double T = 0.0;
+   double rho = 0.0;
    OPS_ACCS(x0_B0, 0,0) = Delta0block0*idx[0];
 
    OPS_ACCS(x1_B0, 0,0) = Lx1*sinh(Delta1block0*by*rcinv4*idx[1])/sinh(by);

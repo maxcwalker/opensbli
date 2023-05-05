@@ -40,27 +40,27 @@ void opensbliblock00Kernel042(const ptr_double x1_B0,
 {
    double localeval_0 = 0.0;
     localeval_0 = ((idx[1] == 0) ? (
-   inv_0*(-rc8*OPS_ACCS(x1_B0, 0,0) + 4*OPS_ACCS(x1_B0, 0,1) -
-      3*OPS_ACCS(x1_B0, 0,2) + (rc9)*OPS_ACCS(x1_B0, 0,3) - rc10*OPS_ACCS(x1_B0, 0,4))
+   inv_0*(4*OPS_ACCS(x1_B0, 0,1) - rc8*OPS_ACCS(x1_B0, 0,0) -
+      rc9*OPS_ACCS(x1_B0, 0,4) + (rc10)*OPS_ACCS(x1_B0, 0,3) - 3*OPS_ACCS(x1_B0, 0,2))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_0*(-10*OPS_ACCS(x1_B0, 0,0) + 18*OPS_ACCS(x1_B0, 0,1) - 6*OPS_ACCS(x1_B0, 0,2) -
-      3*OPS_ACCS(x1_B0, 0,-1) + OPS_ACCS(x1_B0, 0,3))
+      (rc11)*inv_0*(18*OPS_ACCS(x1_B0, 0,1) - 10*OPS_ACCS(x1_B0, 0,0) + OPS_ACCS(x1_B0, 0,3) - 3*OPS_ACCS(x1_B0, 0,-1) -
+      6*OPS_ACCS(x1_B0, 0,2))
 )
 : ((idx[1] == block0np1 - 1) ? (
-
-      inv_0*((rc8)*OPS_ACCS(x1_B0, 0,0) + (rc10)*OPS_ACCS(x1_B0, 0,-4) - rc9*OPS_ACCS(x1_B0, 0,-3) +
-      3*OPS_ACCS(x1_B0, 0,-2) - 4*OPS_ACCS(x1_B0, 0,-1))
+   inv_0*(-rc10*OPS_ACCS(x1_B0, 0,-3) +
+      3*OPS_ACCS(x1_B0, 0,-2) + (rc9)*OPS_ACCS(x1_B0, 0,-4) + (rc8)*OPS_ACCS(x1_B0, 0,0) - 4*OPS_ACCS(x1_B0, 0,-1))
 )
-: ((idx[1] == block0np1 - 2) ? (
-
-      (rc11)*inv_0*(10*OPS_ACCS(x1_B0, 0,0) + 3*OPS_ACCS(x1_B0, 0,1) - OPS_ACCS(x1_B0, 0,-3) + 6*OPS_ACCS(x1_B0, 0,-2) -
-      18*OPS_ACCS(x1_B0, 0,-1))
+:
+      ((idx[1] == block0np1 - 2) ? (
+   (rc11)*inv_0*(-OPS_ACCS(x1_B0, 0,-3) + 3*OPS_ACCS(x1_B0, 0,1) +
+      6*OPS_ACCS(x1_B0, 0,-2) + 10*OPS_ACCS(x1_B0, 0,0) - 18*OPS_ACCS(x1_B0, 0,-1))
 )
 : (
-   (rc11)*inv_0*(8*OPS_ACCS(x1_B0, 0,1) - OPS_ACCS(x1_B0, 0,2) +
-      OPS_ACCS(x1_B0, 0,-2) - 8*OPS_ACCS(x1_B0, 0,-1))
+
+      (rc11)*inv_0*(-8*OPS_ACCS(x1_B0, 0,-1) + 8*OPS_ACCS(x1_B0, 0,1) + OPS_ACCS(x1_B0, 0,-2) -
+      OPS_ACCS(x1_B0, 0,2))
 )))));
 
    OPS_ACCS(detJ_B0, 0,0) = localeval_0;

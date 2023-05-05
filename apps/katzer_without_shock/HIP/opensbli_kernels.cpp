@@ -33,14 +33,14 @@ __constant__ double dt;
 __constant__ double Twall;
 #define Minf Minf_OPSCONSTANT
 __constant__ double Minf;
-#define RefT RefT_OPSCONSTANT
-__constant__ double RefT;
-#define epsilon epsilon_OPSCONSTANT
-__constant__ double epsilon;
 #define gama gama_OPSCONSTANT
 __constant__ double gama;
 #define SuthT SuthT_OPSCONSTANT
 __constant__ double SuthT;
+#define epsilon epsilon_OPSCONSTANT
+__constant__ double epsilon;
+#define RefT RefT_OPSCONSTANT
+__constant__ double RefT;
 #define Re Re_OPSCONSTANT
 __constant__ double Re;
 #define Pr Pr_OPSCONSTANT
@@ -127,10 +127,10 @@ __global__ void ops_internal_this_is_stupid() {
 ((int*)&dt)[0]=0;
 ((int*)&Twall)[0]=0;
 ((int*)&Minf)[0]=0;
-((int*)&RefT)[0]=0;
-((int*)&epsilon)[0]=0;
 ((int*)&gama)[0]=0;
 ((int*)&SuthT)[0]=0;
+((int*)&epsilon)[0]=0;
+((int*)&RefT)[0]=0;
 ((int*)&Re)[0]=0;
 ((int*)&Pr)[0]=0;
 ((int*)&inv_0)[0]=0;
@@ -208,20 +208,20 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Minf_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"RefT")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(RefT_OPSCONSTANT), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"epsilon")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(epsilon_OPSCONSTANT), dat, dim*size));
-  }
-  else
   if (!strcmp(name,"gama")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(gama_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"SuthT")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(SuthT_OPSCONSTANT), dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"epsilon")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(epsilon_OPSCONSTANT), dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"RefT")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(RefT_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"Re")) {
@@ -386,11 +386,11 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel037_hip_kernel.cpp"
 #include "opensbliblock00Kernel038_hip_kernel.cpp"
 #include "opensbliblock00Kernel039_hip_kernel.cpp"
-#include "opensbliblock00Kernel005_hip_kernel.cpp"
-#include "opensbliblock00Kernel007_hip_kernel.cpp"
-#include "opensbliblock00Kernel008_hip_kernel.cpp"
-#include "opensbliblock00Kernel002_hip_kernel.cpp"
 #include "opensbliblock00Kernel006_hip_kernel.cpp"
+#include "opensbliblock00Kernel009_hip_kernel.cpp"
+#include "opensbliblock00Kernel007_hip_kernel.cpp"
+#include "opensbliblock00Kernel002_hip_kernel.cpp"
+#include "opensbliblock00Kernel008_hip_kernel.cpp"
 #include "opensbliblock00Kernel015_hip_kernel.cpp"
 #include "opensbliblock00Kernel016_hip_kernel.cpp"
 #include "opensbliblock00Kernel003_hip_kernel.cpp"

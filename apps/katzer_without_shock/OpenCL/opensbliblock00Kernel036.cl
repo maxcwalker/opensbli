@@ -35,14 +35,14 @@
 
 void opensbliblock00Kernel036(ptr_double rho_B0,
   ptr_double rhou0_B0,
-  ptr_double rhou1_B0,
-  ptr_double rhoE_B0, const double gama)
+  ptr_double rhoE_B0,
+  ptr_double rhou1_B0, const double gama)
 {
-   double ab = 0.0;
    double rhob = 0.0;
-   double pb = 0.0;
-   double ub1 = 0.0;
    double ub0 = 0.0;
+   double pb = 0.0;
+   double ab = 0.0;
+   double ub1 = 0.0;
    rhob = OPS_ACCS(rho_B0, 0,0);
 
    ub0 = fabs(OPS_ACCS(rhou0_B0, 0,0)/OPS_ACCS(rho_B0, 0,0));

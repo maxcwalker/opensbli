@@ -10,25 +10,25 @@ __device__
  void opensbliblock00Kernel038_gpu(const ACC<double> &x0_B0,
   ACC<double> &rho_B0,
   ACC<double> &rhou0_B0,
-  ACC<double> &rhou1_B0,
+  ACC<double> &rhoE_B0,
   ACC<double>
-&rhoE_B0)
+&rhou1_B0)
 {
-   double u12 = 0.0;
-   double u03 = 0.0;
-   double x0 = 0.0;
-   double u11 = 0.0;
-   double rho_halo_1 = 0.0;
+   double rho_halo_3 = 0.0;
    double u13 = 0.0;
-   double T3 = 0.0;
+   double T2 = 0.0;
+   double u11 = 0.0;
    double u01 = 0.0;
+   double T3 = 0.0;
+   double u12 = 0.0;
+   double u02 = 0.0;
+   double x0 = 0.0;
    double T_above = 0.0;
    double Pwall = 0.0;
+   double u03 = 0.0;
+   double rho_halo_1 = 0.0;
    double rho_halo_2 = 0.0;
    double T1 = 0.0;
-   double rho_halo_3 = 0.0;
-   double u02 = 0.0;
-   double T2 = 0.0;
    x0 = x0_B0(0,0);
 
    rhou0_B0(0,0) = 0.0;

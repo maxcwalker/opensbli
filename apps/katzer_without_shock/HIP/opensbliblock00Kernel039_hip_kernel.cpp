@@ -9,35 +9,35 @@ __device__
 
 void opensbliblock00Kernel039_gpu(ACC<double> &rho_B0,
   ACC<double> &rhou0_B0,
-  ACC<double> &rhou1_B0,
   ACC<double> &rhoE_B0,
+  ACC<double> &rhou1_B0,
   const int *idx)
 {
    double x0 = 0.0;
    x0 = Delta0block0*idx[0];
 
-   rho_B0(0,0) = ((x0 > 400.0) ? (
+   rho_B0(0,0) = ((x0 > 500.0) ? (
    1.129734572
 )
 : (
    1.00000596004
 ));
 
-   rhou0_B0(0,0) = ((x0 > 40.0) ? (
+   rhou0_B0(0,0) = ((x0 > 500.0) ? (
    1.0921171
 )
 : (
    1.00000268202
 ));
 
-   rhou1_B0(0,0) = ((x0 > 40.0) ? (
+   rhou1_B0(0,0) = ((x0 > 500.0) ? (
    -0.058866065
 )
 : (
    0.00565001630205
 ));
 
-   rhoE_B0(0,0) = ((x0 > 40.0) ? (
+   rhoE_B0(0,0) = ((x0 > 500.0) ? (
    1.0590824
 )
 : (

@@ -34,10 +34,10 @@
 //user function
 
 void opensbliblock00Kernel006(const ptr_double rho_B0,
-  const ptr_double p_B0,
-  ptr_double a_B0, const double gama)
+  const ptr_double rhou1_B0,
+  ptr_double u1_B0)
 {
-   OPS_ACCS(a_B0, 0,0) = sqrt(gama*OPS_ACCS(p_B0, 0,0)/OPS_ACCS(rho_B0, 0,0));
+   OPS_ACCS(u1_B0, 0,0) = OPS_ACCS(rhou1_B0, 0,0)/OPS_ACCS(rho_B0, 0,0);
 
 }
 
@@ -46,7 +46,6 @@ __kernel void ops_opensbliblock00Kernel006(
 __global const double* restrict arg0,
 __global const double* restrict arg1,
 __global double* restrict arg2,
-const double gama,
 const int base0,
 const int base1,
 const int base2,
@@ -63,8 +62,7 @@ const int size1 ){
     ptr_double ptr2 = { &arg2[base2 + idx_x * 1*1 + idx_y * 1*1 * xdim2_opensbliblock00Kernel006], xdim2_opensbliblock00Kernel006};
     opensbliblock00Kernel006(ptr0,
                                   ptr1,
-                                  ptr2,
-                                  gama);
+                                  ptr2);
   }
 
 }

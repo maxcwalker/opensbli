@@ -83,10 +83,10 @@ void ops_par_loop_opensbliblock00Kernel039_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ rhou0_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
-  double * __restrict__ rhou1_B0_p = (double *)(args[2].data + base2);
+  double * __restrict__ rhoE_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ rhoE_B0_p = (double *)(args[3].data + base3);
+  double * __restrict__ rhou1_B0_p = (double *)(args[3].data + base3);
 
 
 
@@ -119,34 +119,34 @@ void ops_par_loop_opensbliblock00Kernel039_execute(ops_kernel_descriptor *desc) 
       int idx[] = {arg_idx[0]+n_x, arg_idx[1]+n_y};
       ACC<double> rho_B0(xdim0_opensbliblock00Kernel039, rho_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel039*1);
       ACC<double> rhou0_B0(xdim1_opensbliblock00Kernel039, rhou0_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel039*1);
-      ACC<double> rhou1_B0(xdim2_opensbliblock00Kernel039, rhou1_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel039*1);
-      ACC<double> rhoE_B0(xdim3_opensbliblock00Kernel039, rhoE_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel039*1);
+      ACC<double> rhoE_B0(xdim2_opensbliblock00Kernel039, rhoE_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel039*1);
+      ACC<double> rhou1_B0(xdim3_opensbliblock00Kernel039, rhou1_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel039*1);
       
    double x0 = 0.0;
    x0 = Delta0block0*idx[0];
 
-   rho_B0(0,0) = ((x0 > 400.0) ? (
+   rho_B0(0,0) = ((x0 > 500.0) ? (
    1.129734572
 )
 : (
    1.00000596004
 ));
 
-   rhou0_B0(0,0) = ((x0 > 40.0) ? (
+   rhou0_B0(0,0) = ((x0 > 500.0) ? (
    1.0921171
 )
 : (
    1.00000268202
 ));
 
-   rhou1_B0(0,0) = ((x0 > 40.0) ? (
+   rhou1_B0(0,0) = ((x0 > 500.0) ? (
    -0.058866065
 )
 : (
    0.00565001630205
 ));
 
-   rhoE_B0(0,0) = ((x0 > 40.0) ? (
+   rhoE_B0(0,0) = ((x0 > 500.0) ? (
    1.0590824
 )
 : (

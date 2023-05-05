@@ -175,7 +175,7 @@ class KatzerPlot(plotFunctions):
         f.close()
 
 
-fname = "opensbli_output.h5"
+fname = "opensbli_output_035000.h5"
 n_contour_levels = 25
 directory = './simulation_plots/'
 

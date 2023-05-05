@@ -9,8 +9,8 @@ __device__
 
 void opensbliblock00Kernel037_gpu(ACC<double> &rho_B0,
   ACC<double> &rhou0_B0,
-  ACC<double> &rhou1_B0,
-  ACC<double> &rhoE_B0)
+  ACC<double> &rhoE_B0,
+  ACC<double> &rhou1_B0)
 {
    rho_B0(0,0) = rho_B0(-1,0);
 

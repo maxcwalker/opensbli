@@ -14,26 +14,26 @@ void opensbliblock00Kernel024(const ptr_double u1_B0,
   const int *idx)
 {
     OPS_ACC(wk3_B0, 0,0) = ((idx[0] == 0) ? (
-   inv_1*(-rc10*OPS_ACC(u1_B0, 4,0) - 3*OPS_ACC(u1_B0, 2,0) +
-      (rc9)*OPS_ACC(u1_B0, 3,0) - rc8*OPS_ACC(u1_B0, 0,0) + 4*OPS_ACC(u1_B0, 1,0))
+   inv_1*(-rc9*OPS_ACC(u1_B0, 4,0) + (rc10)*OPS_ACC(u1_B0, 3,0) -
+      rc8*OPS_ACC(u1_B0, 0,0) + 4*OPS_ACC(u1_B0, 1,0) - 3*OPS_ACC(u1_B0, 2,0))
 )
 : ((idx[0] == 1) ? (
 
-      (rc11)*inv_1*(-3*OPS_ACC(u1_B0, -1,0) - 6*OPS_ACC(u1_B0, 2,0) + OPS_ACC(u1_B0, 3,0) - 10*OPS_ACC(u1_B0, 0,0) +
-      18*OPS_ACC(u1_B0, 1,0))
+      (rc11)*inv_1*(-3*OPS_ACC(u1_B0, -1,0) + OPS_ACC(u1_B0, 3,0) - 10*OPS_ACC(u1_B0, 0,0) + 18*OPS_ACC(u1_B0, 1,0)
+      - 6*OPS_ACC(u1_B0, 2,0))
 )
 : ((idx[0] == block0np0 - 1) ? (
    inv_1*(-4*OPS_ACC(u1_B0, -1,0) +
-      3*OPS_ACC(u1_B0, -2,0) + (rc10)*OPS_ACC(u1_B0, -4,0) - rc9*OPS_ACC(u1_B0, -3,0) +
-      (rc8)*OPS_ACC(u1_B0, 0,0))
+      3*OPS_ACC(u1_B0, -2,0) + (rc8)*OPS_ACC(u1_B0, 0,0) + (rc9)*OPS_ACC(u1_B0, -4,0) -
+      rc10*OPS_ACC(u1_B0, -3,0))
 )
 : ((idx[0] == block0np0 - 2) ? (
    (rc11)*inv_1*(-18*OPS_ACC(u1_B0, -1,0) +
-      6*OPS_ACC(u1_B0, -2,0) - OPS_ACC(u1_B0, -3,0) + 10*OPS_ACC(u1_B0, 0,0) + 3*OPS_ACC(u1_B0, 1,0))
+      6*OPS_ACC(u1_B0, -2,0) + 10*OPS_ACC(u1_B0, 0,0) + 3*OPS_ACC(u1_B0, 1,0) - OPS_ACC(u1_B0, -3,0))
 )
 : (
 
-      (rc11)*inv_1*(-8*OPS_ACC(u1_B0, -1,0) + OPS_ACC(u1_B0, -2,0) + 8*OPS_ACC(u1_B0, 1,0) -
+      (rc11)*inv_1*(8*OPS_ACC(u1_B0, 1,0) - 8*OPS_ACC(u1_B0, -1,0) + OPS_ACC(u1_B0, -2,0) -
       OPS_ACC(u1_B0, 2,0))
 )))));
 

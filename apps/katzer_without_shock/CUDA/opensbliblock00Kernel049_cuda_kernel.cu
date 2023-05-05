@@ -7,20 +7,19 @@ static int dims_opensbliblock00Kernel049_h [14][1] = {0};
 //user function
 __device__
 
- void opensbliblock00Kernel049_gpu(const ACC<double> &Residual3_B0,
-  const ACC<double> &Residual0_B0,
+ void opensbliblock00Kernel049_gpu(const ACC<double> &Residual0_B0,
   const ACC<double> &Residual2_B0,
+  const ACC<double> &Residual1_B0,
   const
-ACC<double> &Residual1_B0,
-  ACC<double> &tempRK_rhoE_B0,
-  ACC<double> &tempRK_rhou0_B0,
-  ACC<double> &rhou0_B0,
-  ACC<double> &rhou1_B0,
-  ACC<double>
-&rhoE_B0,
-  ACC<double> &tempRK_rho_B0,
-  ACC<double> &rho_B0,
+ACC<double> &Residual3_B0,
   ACC<double> &tempRK_rhou1_B0,
+  ACC<double> &rhou1_B0,
+  ACC<double> &rho_B0,
+  ACC<double> &tempRK_rho_B0,
+  ACC<double> &rhoE_B0,
+  ACC<double> &tempRK_rhou0_B0,
+  ACC<double> &tempRK_rhoE_B0,
+  ACC<double> &rhou0_B0,
   const double *rkB,
   const double *rkA)
 {

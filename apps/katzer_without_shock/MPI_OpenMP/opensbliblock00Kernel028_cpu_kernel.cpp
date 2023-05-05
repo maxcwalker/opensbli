@@ -110,27 +110,26 @@ void ops_par_loop_opensbliblock00Kernel028_execute(ops_kernel_descriptor *desc) 
       ACC<double> wk6_B0(xdim1_opensbliblock00Kernel028, wk6_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel028*1);
       
     wk6_B0(0,0) = ((idx[1] == 0) ? (
-   inv_0*((rc9)*T_B0(0,3) - rc10*T_B0(0,4) -
-      rc8*T_B0(0,0) + 4*T_B0(0,1) - 3*T_B0(0,2))
+   inv_0*(-rc8*T_B0(0,0) + 4*T_B0(0,1) -
+      3*T_B0(0,2) + (rc10)*T_B0(0,3) - rc9*T_B0(0,4))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_0*(T_B0(0,3) - 10*T_B0(0,0) - 3*T_B0(0,-1) + 18*T_B0(0,1) -
-      6*T_B0(0,2))
+      (rc11)*inv_0*(-10*T_B0(0,0) + 18*T_B0(0,1) - 6*T_B0(0,2) - 3*T_B0(0,-1) +
+      T_B0(0,3))
 )
 : ((idx[1] == block0np1 - 1) ? (
-   inv_0*(-rc9*T_B0(0,-3) +
-      (rc8)*T_B0(0,0) + 3*T_B0(0,-2) - 4*T_B0(0,-1) + (rc10)*T_B0(0,-4))
+   inv_0*((rc8)*T_B0(0,0) +
+      (rc9)*T_B0(0,-4) - rc10*T_B0(0,-3) - 4*T_B0(0,-1) + 3*T_B0(0,-2))
 )
 :
       ((idx[1] == block0np1 - 2) ? (
-   (rc11)*inv_0*(-T_B0(0,-3) + 10*T_B0(0,0) +
-      6*T_B0(0,-2) - 18*T_B0(0,-1) + 3*T_B0(0,1))
+   (rc11)*inv_0*(10*T_B0(0,0) + 3*T_B0(0,1) -
+      T_B0(0,-3) - 18*T_B0(0,-1) + 6*T_B0(0,-2))
 )
 : (
 
-      (rc11)*inv_0*(-T_B0(0,2) + T_B0(0,-2) + 8*T_B0(0,1) -
-      8*T_B0(0,-1))
+      (rc11)*inv_0*(8*T_B0(0,1) - T_B0(0,2) - 8*T_B0(0,-1) + T_B0(0,-2))
 )))));
 
 

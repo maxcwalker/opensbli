@@ -36,24 +36,24 @@
  void opensbliblock00Kernel038(const ptr_double x0_B0,
   ptr_double rho_B0,
   ptr_double rhou0_B0,
-  ptr_double rhou1_B0,
-  ptr_double rhoE_B0, const double Twall, const double Minf, const double gama, const double rcinv5, const double rcinv12, const double rc13)
+  ptr_double rhoE_B0,
+  ptr_double rhou1_B0, const double Twall, const double Minf, const double gama, const double rcinv5, const double rcinv12, const double rc13)
 {
-   double u12 = 0.0;
-   double u03 = 0.0;
-   double x0 = 0.0;
-   double u11 = 0.0;
-   double rho_halo_1 = 0.0;
+   double rho_halo_3 = 0.0;
    double u13 = 0.0;
-   double T3 = 0.0;
+   double T2 = 0.0;
+   double u11 = 0.0;
    double u01 = 0.0;
+   double T3 = 0.0;
+   double u12 = 0.0;
+   double u02 = 0.0;
+   double x0 = 0.0;
    double T_above = 0.0;
    double Pwall = 0.0;
+   double u03 = 0.0;
+   double rho_halo_1 = 0.0;
    double rho_halo_2 = 0.0;
    double T1 = 0.0;
-   double rho_halo_3 = 0.0;
-   double u02 = 0.0;
-   double T2 = 0.0;
    x0 = OPS_ACCS(x0_B0, 0,0);
 
    OPS_ACCS(rhou0_B0, 0,0) = 0.0;

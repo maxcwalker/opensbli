@@ -46,20 +46,20 @@ int size, char *dat, char const *name){
     Minf = *(double*)dat;
   }
   else
-  if (!strcmp(name,"RefT")) {
-    RefT = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"epsilon")) {
-    epsilon = *(double*)dat;
-  }
-  else
   if (!strcmp(name,"gama")) {
     gama = *(double*)dat;
   }
   else
   if (!strcmp(name,"SuthT")) {
     SuthT = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"epsilon")) {
+    epsilon = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"RefT")) {
+    RefT = *(double*)dat;
   }
   else
   if (!strcmp(name,"Re")) {
@@ -223,11 +223,11 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel037_openacc_kernel.cpp"
 #include "opensbliblock00Kernel038_openacc_kernel.cpp"
 #include "opensbliblock00Kernel039_openacc_kernel.cpp"
-#include "opensbliblock00Kernel005_openacc_kernel.cpp"
-#include "opensbliblock00Kernel007_openacc_kernel.cpp"
-#include "opensbliblock00Kernel008_openacc_kernel.cpp"
-#include "opensbliblock00Kernel002_openacc_kernel.cpp"
 #include "opensbliblock00Kernel006_openacc_kernel.cpp"
+#include "opensbliblock00Kernel009_openacc_kernel.cpp"
+#include "opensbliblock00Kernel007_openacc_kernel.cpp"
+#include "opensbliblock00Kernel002_openacc_kernel.cpp"
+#include "opensbliblock00Kernel008_openacc_kernel.cpp"
 #include "opensbliblock00Kernel015_openacc_kernel.cpp"
 #include "opensbliblock00Kernel016_openacc_kernel.cpp"
 #include "opensbliblock00Kernel003_openacc_kernel.cpp"

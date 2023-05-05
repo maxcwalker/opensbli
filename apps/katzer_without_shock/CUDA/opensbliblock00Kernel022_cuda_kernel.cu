@@ -12,8 +12,8 @@ void opensbliblock00Kernel022_gpu(const ACC<double> &u1_B0,
   const int *idx)
 {
     wk2_B0(0,0) = ((idx[1] == 0) ? (
-   inv_0*(-3*u1_B0(0,2) + (rc9)*u1_B0(0,3) -
-      rc8*u1_B0(0,0) - rc10*u1_B0(0,4) + 4*u1_B0(0,1))
+   inv_0*(-3*u1_B0(0,2) + (rc10)*u1_B0(0,3) -
+      rc8*u1_B0(0,0) - rc9*u1_B0(0,4) + 4*u1_B0(0,1))
 )
 : ((idx[1] == 1) ? (
 
@@ -22,8 +22,8 @@ void opensbliblock00Kernel022_gpu(const ACC<double> &u1_B0,
 )
 : ((idx[1] == block0np1 - 1) ? (
    inv_0*(-4*u1_B0(0,-1) +
-      3*u1_B0(0,-2) + (rc10)*u1_B0(0,-4) + (rc8)*u1_B0(0,0) -
-      rc9*u1_B0(0,-3))
+      3*u1_B0(0,-2) + (rc9)*u1_B0(0,-4) + (rc8)*u1_B0(0,0) -
+      rc10*u1_B0(0,-3))
 )
 : ((idx[1] == block0np1 - 2) ? (
    (rc11)*inv_0*(-18*u1_B0(0,-1) +
@@ -31,8 +31,8 @@ void opensbliblock00Kernel022_gpu(const ACC<double> &u1_B0,
 )
 : (
 
-      (rc11)*inv_0*(-8*u1_B0(0,-1) + u1_B0(0,-2) - u1_B0(0,2) +
-      8*u1_B0(0,1))
+      (rc11)*inv_0*(-8*u1_B0(0,-1) + u1_B0(0,-2) + 8*u1_B0(0,1) -
+      u1_B0(0,2))
 )))));
 
 }

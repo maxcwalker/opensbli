@@ -33,311 +33,310 @@
 
 //user function
 
- void opensbliblock00Kernel034(const ptr_double wk2_B0,
-  const ptr_double SD111_B0,
-  const ptr_double wk6_B0,
+ void opensbliblock00Kernel034(const ptr_double D11_B0,
+  const ptr_double wk3_B0,
+  const ptr_double wk2_B0,
   const ptr_double u0_B0,
   const ptr_double wk0_B0,
   const ptr_double u1_B0,
   const ptr_double T_B0,
-  const ptr_double wk3_B0,
-  const ptr_double D11_B0,
+  const ptr_double mu_B0,
   const ptr_double wk1_B0,
   const ptr_double wk7_B0,
-  const ptr_double mu_B0,
-  ptr_double Residual3_B0,
+  const ptr_double SD111_B0,
+  const ptr_double wk6_B0,
   ptr_double Residual2_B0,
   ptr_double Residual1_B0,
+  ptr_double Residual3_B0,
   const int *idx, const int block0np0, const int block0np1, const double inv_0, const double inv_1, const double inv_2, const double inv_3, const double rcinv5, const double rcinv7, const double rc8, const double rc9, const double rc10, const double rc11, const double rcinv25, const double rc26, const double rc27, const double rcinv28)
 {
-   double localeval_6 = 0.0;
-   double localeval_0 = 0.0;
+   double localeval_7 = 0.0;
    double localeval_3 = 0.0;
    double localeval_9 = 0.0;
    double localeval_2 = 0.0;
-   double localeval_8 = 0.0;
    double localeval_4 = 0.0;
+   double localeval_0 = 0.0;
    double localeval_1 = 0.0;
    double localeval_5 = 0.0;
-   double localeval_7 = 0.0;
-    localeval_0 = ((idx[0] == 0) ? (
-   (rc11)*inv_2*(114*OPS_ACCS(T_B0, 2,0) - 56*OPS_ACCS(T_B0, 3,0) +
-      35*OPS_ACCS(T_B0, 0,0) - 104*OPS_ACCS(T_B0, 1,0) + 11*OPS_ACCS(T_B0, 4,0))
-)
-: ((idx[0] == 1) ? (
-
-      (rc11)*inv_2*(4*OPS_ACCS(T_B0, 2,0) - OPS_ACCS(T_B0, 3,0) - 20*OPS_ACCS(T_B0, 0,0) + 11*OPS_ACCS(T_B0, -1,0) +
-      6*OPS_ACCS(T_B0, 1,0))
-)
-: ((idx[0] == block0np0 - 1) ? (
-   (rc11)*inv_2*(35*OPS_ACCS(T_B0, 0,0) -
-      104*OPS_ACCS(T_B0, -1,0) + 114*OPS_ACCS(T_B0, -2,0) + 11*OPS_ACCS(T_B0, -4,0) - 56*OPS_ACCS(T_B0, -3,0))
-)
-:
-      ((idx[0] == block0np0 - 2) ? (
-   (rc11)*inv_2*(-20*OPS_ACCS(T_B0, 0,0) + 4*OPS_ACCS(T_B0, -2,0) +
-      6*OPS_ACCS(T_B0, -1,0) + 11*OPS_ACCS(T_B0, 1,0) - OPS_ACCS(T_B0, -3,0))
-)
-: (
-
-      (rc11)*inv_2*(-OPS_ACCS(T_B0, 2,0) - 30*OPS_ACCS(T_B0, 0,0) - OPS_ACCS(T_B0, -2,0) + 16*OPS_ACCS(T_B0, -1,0) +
-      16*OPS_ACCS(T_B0, 1,0))
-)))));
-
-    localeval_1 = ((idx[1] == 0) ? (
-   (rc11)*inv_3*(-56*OPS_ACCS(T_B0, 0,3) + 11*OPS_ACCS(T_B0, 0,4) +
-      35*OPS_ACCS(T_B0, 0,0) - 104*OPS_ACCS(T_B0, 0,1) + 114*OPS_ACCS(T_B0, 0,2))
+   double localeval_8 = 0.0;
+   double localeval_6 = 0.0;
+    localeval_0 = ((idx[1] == 0) ? (
+   (rc11)*inv_2*(35*OPS_ACCS(T_B0, 0,0) - 104*OPS_ACCS(T_B0, 0,1) +
+      114*OPS_ACCS(T_B0, 0,2) - 56*OPS_ACCS(T_B0, 0,3) + 11*OPS_ACCS(T_B0, 0,4))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_3*(-OPS_ACCS(T_B0, 0,3) - 20*OPS_ACCS(T_B0, 0,0) + 11*OPS_ACCS(T_B0, 0,-1) + 6*OPS_ACCS(T_B0, 0,1) +
-      4*OPS_ACCS(T_B0, 0,2))
+      (rc11)*inv_2*(-20*OPS_ACCS(T_B0, 0,0) + 6*OPS_ACCS(T_B0, 0,1) + 4*OPS_ACCS(T_B0, 0,2) + 11*OPS_ACCS(T_B0, 0,-1) -
+      OPS_ACCS(T_B0, 0,3))
 )
 : ((idx[1] == block0np1 - 1) ? (
-   (rc11)*inv_3*(-56*OPS_ACCS(T_B0, 0,-3) +
-      35*OPS_ACCS(T_B0, 0,0) - 104*OPS_ACCS(T_B0, 0,-1) + 114*OPS_ACCS(T_B0, 0,-2) + 11*OPS_ACCS(T_B0, 0,-4))
+   (rc11)*inv_2*(35*OPS_ACCS(T_B0, 0,0) +
+      11*OPS_ACCS(T_B0, 0,-4) - 56*OPS_ACCS(T_B0, 0,-3) - 104*OPS_ACCS(T_B0, 0,-1) + 114*OPS_ACCS(T_B0, 0,-2))
 )
 :
       ((idx[1] == block0np1 - 2) ? (
-   (rc11)*inv_3*(-OPS_ACCS(T_B0, 0,-3) - 20*OPS_ACCS(T_B0, 0,0) +
-      4*OPS_ACCS(T_B0, 0,-2) + 6*OPS_ACCS(T_B0, 0,-1) + 11*OPS_ACCS(T_B0, 0,1))
+   (rc11)*inv_2*(-20*OPS_ACCS(T_B0, 0,0) + 11*OPS_ACCS(T_B0, 0,1) -
+      OPS_ACCS(T_B0, 0,-3) + 4*OPS_ACCS(T_B0, 0,-2) + 6*OPS_ACCS(T_B0, 0,-1))
 )
 : (
 
-      (rc11)*inv_3*(-30*OPS_ACCS(T_B0, 0,0) - OPS_ACCS(T_B0, 0,-2) + 16*OPS_ACCS(T_B0, 0,-1) + 16*OPS_ACCS(T_B0, 0,1) -
-      OPS_ACCS(T_B0, 0,2))
+      (rc11)*inv_2*(-30*OPS_ACCS(T_B0, 0,0) + 16*OPS_ACCS(T_B0, 0,1) - OPS_ACCS(T_B0, 0,2) - OPS_ACCS(T_B0, 0,-2) +
+      16*OPS_ACCS(T_B0, 0,-1))
 )))));
 
-    localeval_2 = ((idx[0] == 0) ? (
-   inv_1*(4*OPS_ACCS(mu_B0, 1,0) - 3*OPS_ACCS(mu_B0, 2,0) -
-      rc10*OPS_ACCS(mu_B0, 4,0) + (rc9)*OPS_ACCS(mu_B0, 3,0) - rc8*OPS_ACCS(mu_B0, 0,0))
+    localeval_1 = ((idx[0] == 0) ? (
+   (rc11)*inv_3*(35*OPS_ACCS(T_B0, 0,0) - 104*OPS_ACCS(T_B0, 1,0) +
+      114*OPS_ACCS(T_B0, 2,0) - 56*OPS_ACCS(T_B0, 3,0) + 11*OPS_ACCS(T_B0, 4,0))
 )
 : ((idx[0] == 1) ? (
 
-      (rc11)*inv_1*(18*OPS_ACCS(mu_B0, 1,0) - 6*OPS_ACCS(mu_B0, 2,0) + OPS_ACCS(mu_B0, 3,0) -
-      3*OPS_ACCS(mu_B0, -1,0) - 10*OPS_ACCS(mu_B0, 0,0))
+      (rc11)*inv_3*(-20*OPS_ACCS(T_B0, 0,0) + 6*OPS_ACCS(T_B0, 1,0) + 4*OPS_ACCS(T_B0, 2,0) - OPS_ACCS(T_B0, 3,0) +
+      11*OPS_ACCS(T_B0, -1,0))
 )
 : ((idx[0] == block0np0 - 1) ? (
-
-      inv_1*(-4*OPS_ACCS(mu_B0, -1,0) + (rc10)*OPS_ACCS(mu_B0, -4,0) - rc9*OPS_ACCS(mu_B0, -3,0) +
-      3*OPS_ACCS(mu_B0, -2,0) + (rc8)*OPS_ACCS(mu_B0, 0,0))
+   (rc11)*inv_3*(35*OPS_ACCS(T_B0, 0,0) +
+      11*OPS_ACCS(T_B0, -4,0) - 56*OPS_ACCS(T_B0, -3,0) - 104*OPS_ACCS(T_B0, -1,0) + 114*OPS_ACCS(T_B0, -2,0))
 )
-: ((idx[0] == block0np0 - 2) ? (
-
-      (rc11)*inv_1*(3*OPS_ACCS(mu_B0, 1,0) + 6*OPS_ACCS(mu_B0, -2,0) - OPS_ACCS(mu_B0, -3,0) -
-      18*OPS_ACCS(mu_B0, -1,0) + 10*OPS_ACCS(mu_B0, 0,0))
+:
+      ((idx[0] == block0np0 - 2) ? (
+   (rc11)*inv_3*(-20*OPS_ACCS(T_B0, 0,0) + 11*OPS_ACCS(T_B0, 1,0) -
+      OPS_ACCS(T_B0, -3,0) + 4*OPS_ACCS(T_B0, -2,0) + 6*OPS_ACCS(T_B0, -1,0))
 )
 : (
-   (rc11)*inv_1*(8*OPS_ACCS(mu_B0, 1,0) -
-      8*OPS_ACCS(mu_B0, -1,0) + OPS_ACCS(mu_B0, -2,0) - OPS_ACCS(mu_B0, 2,0))
+
+      (rc11)*inv_3*(-30*OPS_ACCS(T_B0, 0,0) + 16*OPS_ACCS(T_B0, 1,0) - OPS_ACCS(T_B0, 2,0) - OPS_ACCS(T_B0, -2,0) +
+      16*OPS_ACCS(T_B0, -1,0))
 )))));
 
-    localeval_3 = ((idx[1] == 0) ? (
-   inv_0*(-rc10*OPS_ACCS(mu_B0, 0,4) + 4*OPS_ACCS(mu_B0, 0,1) -
-      3*OPS_ACCS(mu_B0, 0,2) + (rc9)*OPS_ACCS(mu_B0, 0,3) - rc8*OPS_ACCS(mu_B0, 0,0))
+    localeval_2 = ((idx[1] == 0) ? (
+   inv_0*(4*OPS_ACCS(mu_B0, 0,1) - rc9*OPS_ACCS(mu_B0, 0,4) -
+      rc8*OPS_ACCS(mu_B0, 0,0) + (rc10)*OPS_ACCS(mu_B0, 0,3) - 3*OPS_ACCS(mu_B0, 0,2))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_0*(18*OPS_ACCS(mu_B0, 0,1) - 6*OPS_ACCS(mu_B0, 0,2) + OPS_ACCS(mu_B0, 0,3) -
-      3*OPS_ACCS(mu_B0, 0,-1) - 10*OPS_ACCS(mu_B0, 0,0))
+      (rc11)*inv_0*(18*OPS_ACCS(mu_B0, 0,1) - 10*OPS_ACCS(mu_B0, 0,0) + OPS_ACCS(mu_B0, 0,3) - 6*OPS_ACCS(mu_B0, 0,2) -
+      3*OPS_ACCS(mu_B0, 0,-1))
 )
 : ((idx[1] == block0np1 - 1) ? (
-
-      inv_0*(-4*OPS_ACCS(mu_B0, 0,-1) + (rc10)*OPS_ACCS(mu_B0, 0,-4) - rc9*OPS_ACCS(mu_B0, 0,-3) +
-      3*OPS_ACCS(mu_B0, 0,-2) + (rc8)*OPS_ACCS(mu_B0, 0,0))
+   inv_0*(-rc10*OPS_ACCS(mu_B0, 0,-3) +
+      (rc8)*OPS_ACCS(mu_B0, 0,0) + (rc9)*OPS_ACCS(mu_B0, 0,-4) - 4*OPS_ACCS(mu_B0, 0,-1) + 3*OPS_ACCS(mu_B0, 0,-2))
 )
-: ((idx[1] == block0np1 - 2) ? (
-
-      (rc11)*inv_0*(6*OPS_ACCS(mu_B0, 0,-2) + 3*OPS_ACCS(mu_B0, 0,1) - OPS_ACCS(mu_B0, 0,-3) -
-      18*OPS_ACCS(mu_B0, 0,-1) + 10*OPS_ACCS(mu_B0, 0,0))
+:
+      ((idx[1] == block0np1 - 2) ? (
+   (rc11)*inv_0*(3*OPS_ACCS(mu_B0, 0,1) - OPS_ACCS(mu_B0, 0,-3) +
+      10*OPS_ACCS(mu_B0, 0,0) - 18*OPS_ACCS(mu_B0, 0,-1) + 6*OPS_ACCS(mu_B0, 0,-2))
 )
 : (
-   (rc11)*inv_0*(OPS_ACCS(mu_B0, 0,-2) -
-      8*OPS_ACCS(mu_B0, 0,-1) + 8*OPS_ACCS(mu_B0, 0,1) - OPS_ACCS(mu_B0, 0,2))
+
+      (rc11)*inv_0*(-OPS_ACCS(mu_B0, 0,2) + 8*OPS_ACCS(mu_B0, 0,1) - 8*OPS_ACCS(mu_B0, 0,-1) +
+      OPS_ACCS(mu_B0, 0,-2))
+)))));
+
+    localeval_3 = ((idx[0] == 0) ? (
+   inv_1*(-3*OPS_ACCS(mu_B0, 2,0) + 4*OPS_ACCS(mu_B0, 1,0) -
+      rc8*OPS_ACCS(mu_B0, 0,0) - rc9*OPS_ACCS(mu_B0, 4,0) + (rc10)*OPS_ACCS(mu_B0, 3,0))
+)
+: ((idx[0] == 1) ? (
+
+      (rc11)*inv_1*(-6*OPS_ACCS(mu_B0, 2,0) + 18*OPS_ACCS(mu_B0, 1,0) - 10*OPS_ACCS(mu_B0, 0,0) -
+      3*OPS_ACCS(mu_B0, -1,0) + OPS_ACCS(mu_B0, 3,0))
+)
+: ((idx[0] == block0np0 - 1) ? (
+
+      inv_1*((rc8)*OPS_ACCS(mu_B0, 0,0) - 4*OPS_ACCS(mu_B0, -1,0) + 3*OPS_ACCS(mu_B0, -2,0) - rc10*OPS_ACCS(mu_B0, -3,0)
+      + (rc9)*OPS_ACCS(mu_B0, -4,0))
+)
+: ((idx[0] == block0np0 - 2) ? (
+   (rc11)*inv_1*(3*OPS_ACCS(mu_B0, 1,0) +
+      10*OPS_ACCS(mu_B0, 0,0) - 18*OPS_ACCS(mu_B0, -1,0) + 6*OPS_ACCS(mu_B0, -2,0) - OPS_ACCS(mu_B0, -3,0))
+)
+: (
+
+      (rc11)*inv_1*(-OPS_ACCS(mu_B0, 2,0) - 8*OPS_ACCS(mu_B0, -1,0) + 8*OPS_ACCS(mu_B0, 1,0) +
+      OPS_ACCS(mu_B0, -2,0))
 )))));
 
     localeval_4 = ((idx[0] == 0) ? (
-   (rc11)*inv_2*(-104*OPS_ACCS(u0_B0, 1,0) + 35*OPS_ACCS(u0_B0, 0,0) -
-      56*OPS_ACCS(u0_B0, 3,0) + 11*OPS_ACCS(u0_B0, 4,0) + 114*OPS_ACCS(u0_B0, 2,0))
+   (rc11)*inv_3*(-56*OPS_ACCS(u0_B0, 3,0) + 114*OPS_ACCS(u0_B0, 2,0) +
+      11*OPS_ACCS(u0_B0, 4,0) - 104*OPS_ACCS(u0_B0, 1,0) + 35*OPS_ACCS(u0_B0, 0,0))
 )
 : ((idx[0] == 1) ? (
 
-      (rc11)*inv_2*(6*OPS_ACCS(u0_B0, 1,0) - 20*OPS_ACCS(u0_B0, 0,0) - OPS_ACCS(u0_B0, 3,0) + 11*OPS_ACCS(u0_B0, -1,0) +
-      4*OPS_ACCS(u0_B0, 2,0))
+      (rc11)*inv_3*(-OPS_ACCS(u0_B0, 3,0) + 11*OPS_ACCS(u0_B0, -1,0) + 4*OPS_ACCS(u0_B0, 2,0) + 6*OPS_ACCS(u0_B0, 1,0) -
+      20*OPS_ACCS(u0_B0, 0,0))
 )
 : ((idx[0] == block0np0 - 1) ? (
-   (rc11)*inv_2*(11*OPS_ACCS(u0_B0, -4,0) +
-      35*OPS_ACCS(u0_B0, 0,0) + 114*OPS_ACCS(u0_B0, -2,0) - 104*OPS_ACCS(u0_B0, -1,0) - 56*OPS_ACCS(u0_B0, -3,0))
+   (rc11)*inv_3*(114*OPS_ACCS(u0_B0, -2,0) -
+      104*OPS_ACCS(u0_B0, -1,0) - 56*OPS_ACCS(u0_B0, -3,0) + 11*OPS_ACCS(u0_B0, -4,0) + 35*OPS_ACCS(u0_B0, 0,0))
 )
 :
       ((idx[0] == block0np0 - 2) ? (
-   (rc11)*inv_2*(11*OPS_ACCS(u0_B0, 1,0) - 20*OPS_ACCS(u0_B0, 0,0) +
-      6*OPS_ACCS(u0_B0, -1,0) + 4*OPS_ACCS(u0_B0, -2,0) - OPS_ACCS(u0_B0, -3,0))
+   (rc11)*inv_3*(6*OPS_ACCS(u0_B0, -1,0) + 4*OPS_ACCS(u0_B0, -2,0) -
+      OPS_ACCS(u0_B0, -3,0) + 11*OPS_ACCS(u0_B0, 1,0) - 20*OPS_ACCS(u0_B0, 0,0))
 )
 : (
 
-      (rc11)*inv_2*(16*OPS_ACCS(u0_B0, 1,0) - 30*OPS_ACCS(u0_B0, 0,0) + 16*OPS_ACCS(u0_B0, -1,0) - OPS_ACCS(u0_B0, -2,0)
-      - OPS_ACCS(u0_B0, 2,0))
+      (rc11)*inv_3*(16*OPS_ACCS(u0_B0, -1,0) - OPS_ACCS(u0_B0, -2,0) - OPS_ACCS(u0_B0, 2,0) + 16*OPS_ACCS(u0_B0, 1,0) -
+      30*OPS_ACCS(u0_B0, 0,0))
 )))));
 
     localeval_5 = ((idx[1] == 0) ? (
-   (rc11)*inv_3*(35*OPS_ACCS(u0_B0, 0,0) + 11*OPS_ACCS(u0_B0, 0,4) -
-      56*OPS_ACCS(u0_B0, 0,3) + 114*OPS_ACCS(u0_B0, 0,2) - 104*OPS_ACCS(u0_B0, 0,1))
+   (rc11)*inv_2*(11*OPS_ACCS(u0_B0, 0,4) - 56*OPS_ACCS(u0_B0, 0,3) +
+      114*OPS_ACCS(u0_B0, 0,2) - 104*OPS_ACCS(u0_B0, 0,1) + 35*OPS_ACCS(u0_B0, 0,0))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_3*(11*OPS_ACCS(u0_B0, 0,-1) - 20*OPS_ACCS(u0_B0, 0,0) - OPS_ACCS(u0_B0, 0,3) + 4*OPS_ACCS(u0_B0, 0,2) +
-      6*OPS_ACCS(u0_B0, 0,1))
+      (rc11)*inv_2*(-OPS_ACCS(u0_B0, 0,3) + 11*OPS_ACCS(u0_B0, 0,-1) + 4*OPS_ACCS(u0_B0, 0,2) + 6*OPS_ACCS(u0_B0, 0,1) -
+      20*OPS_ACCS(u0_B0, 0,0))
 )
 : ((idx[1] == block0np1 - 1) ? (
-   (rc11)*inv_3*(114*OPS_ACCS(u0_B0, 0,-2) -
-      104*OPS_ACCS(u0_B0, 0,-1) + 35*OPS_ACCS(u0_B0, 0,0) - 56*OPS_ACCS(u0_B0, 0,-3) + 11*OPS_ACCS(u0_B0, 0,-4))
+   (rc11)*inv_2*(-104*OPS_ACCS(u0_B0, 0,-1) +
+      114*OPS_ACCS(u0_B0, 0,-2) - 56*OPS_ACCS(u0_B0, 0,-3) + 11*OPS_ACCS(u0_B0, 0,-4) + 35*OPS_ACCS(u0_B0, 0,0))
 )
 :
       ((idx[1] == block0np1 - 2) ? (
-   (rc11)*inv_3*(6*OPS_ACCS(u0_B0, 0,-1) + 4*OPS_ACCS(u0_B0, 0,-2) -
-      20*OPS_ACCS(u0_B0, 0,0) - OPS_ACCS(u0_B0, 0,-3) + 11*OPS_ACCS(u0_B0, 0,1))
+   (rc11)*inv_2*(4*OPS_ACCS(u0_B0, 0,-2) + 6*OPS_ACCS(u0_B0, 0,-1) -
+      OPS_ACCS(u0_B0, 0,-3) + 11*OPS_ACCS(u0_B0, 0,1) - 20*OPS_ACCS(u0_B0, 0,0))
 )
 : (
 
-      (rc11)*inv_3*(16*OPS_ACCS(u0_B0, 0,-1) - OPS_ACCS(u0_B0, 0,-2) - 30*OPS_ACCS(u0_B0, 0,0) - OPS_ACCS(u0_B0, 0,2) +
-      16*OPS_ACCS(u0_B0, 0,1))
+      (rc11)*inv_2*(-OPS_ACCS(u0_B0, 0,-2) + 16*OPS_ACCS(u0_B0, 0,-1) - OPS_ACCS(u0_B0, 0,2) + 16*OPS_ACCS(u0_B0, 0,1) -
+      30*OPS_ACCS(u0_B0, 0,0))
 )))));
 
-    localeval_6 = ((idx[0] == 0) ? (
-   (rc11)*inv_2*(11*OPS_ACCS(u1_B0, 4,0) + 114*OPS_ACCS(u1_B0, 2,0) -
-      56*OPS_ACCS(u1_B0, 3,0) + 35*OPS_ACCS(u1_B0, 0,0) - 104*OPS_ACCS(u1_B0, 1,0))
-)
-: ((idx[0] == 1) ? (
-
-      (rc11)*inv_2*(11*OPS_ACCS(u1_B0, -1,0) + 4*OPS_ACCS(u1_B0, 2,0) - OPS_ACCS(u1_B0, 3,0) - 20*OPS_ACCS(u1_B0, 0,0) +
-      6*OPS_ACCS(u1_B0, 1,0))
-)
-: ((idx[0] == block0np0 - 1) ? (
-   (rc11)*inv_2*(-104*OPS_ACCS(u1_B0, -1,0) +
-      114*OPS_ACCS(u1_B0, -2,0) + 11*OPS_ACCS(u1_B0, -4,0) - 56*OPS_ACCS(u1_B0, -3,0) + 35*OPS_ACCS(u1_B0, 0,0))
-)
-:
-      ((idx[0] == block0np0 - 2) ? (
-   (rc11)*inv_2*(4*OPS_ACCS(u1_B0, -2,0) + 6*OPS_ACCS(u1_B0, -1,0) -
-      OPS_ACCS(u1_B0, -3,0) - 20*OPS_ACCS(u1_B0, 0,0) + 11*OPS_ACCS(u1_B0, 1,0))
-)
-: (
-
-      (rc11)*inv_2*(-OPS_ACCS(u1_B0, -2,0) + 16*OPS_ACCS(u1_B0, -1,0) - OPS_ACCS(u1_B0, 2,0) - 30*OPS_ACCS(u1_B0, 0,0) +
-      16*OPS_ACCS(u1_B0, 1,0))
-)))));
-
-    localeval_7 = ((idx[1] == 0) ? (
-   (rc11)*inv_3*(114*OPS_ACCS(u1_B0, 0,2) - 56*OPS_ACCS(u1_B0, 0,3) +
+    localeval_6 = ((idx[1] == 0) ? (
+   (rc11)*inv_2*(114*OPS_ACCS(u1_B0, 0,2) - 56*OPS_ACCS(u1_B0, 0,3) +
       35*OPS_ACCS(u1_B0, 0,0) + 11*OPS_ACCS(u1_B0, 0,4) - 104*OPS_ACCS(u1_B0, 0,1))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_3*(11*OPS_ACCS(u1_B0, 0,-1) + 4*OPS_ACCS(u1_B0, 0,2) - OPS_ACCS(u1_B0, 0,3) - 20*OPS_ACCS(u1_B0, 0,0) +
+      (rc11)*inv_2*(11*OPS_ACCS(u1_B0, 0,-1) + 4*OPS_ACCS(u1_B0, 0,2) - OPS_ACCS(u1_B0, 0,3) - 20*OPS_ACCS(u1_B0, 0,0) +
       6*OPS_ACCS(u1_B0, 0,1))
 )
 : ((idx[1] == block0np1 - 1) ? (
-   (rc11)*inv_3*(-104*OPS_ACCS(u1_B0, 0,-1) +
+   (rc11)*inv_2*(-104*OPS_ACCS(u1_B0, 0,-1) +
       114*OPS_ACCS(u1_B0, 0,-2) + 11*OPS_ACCS(u1_B0, 0,-4) + 35*OPS_ACCS(u1_B0, 0,0) - 56*OPS_ACCS(u1_B0, 0,-3))
 )
 :
       ((idx[1] == block0np1 - 2) ? (
-   (rc11)*inv_3*(4*OPS_ACCS(u1_B0, 0,-2) + 6*OPS_ACCS(u1_B0, 0,-1) -
+   (rc11)*inv_2*(4*OPS_ACCS(u1_B0, 0,-2) + 6*OPS_ACCS(u1_B0, 0,-1) -
       20*OPS_ACCS(u1_B0, 0,0) - OPS_ACCS(u1_B0, 0,-3) + 11*OPS_ACCS(u1_B0, 0,1))
 )
 : (
 
-      (rc11)*inv_3*(-OPS_ACCS(u1_B0, 0,-2) + 16*OPS_ACCS(u1_B0, 0,-1) - OPS_ACCS(u1_B0, 0,2) - 30*OPS_ACCS(u1_B0, 0,0) +
+      (rc11)*inv_2*(-OPS_ACCS(u1_B0, 0,-2) + 16*OPS_ACCS(u1_B0, 0,-1) - OPS_ACCS(u1_B0, 0,2) - 30*OPS_ACCS(u1_B0, 0,0) +
       16*OPS_ACCS(u1_B0, 0,1))
 )))));
 
+    localeval_7 = ((idx[0] == 0) ? (
+   (rc11)*inv_3*(11*OPS_ACCS(u1_B0, 4,0) - 56*OPS_ACCS(u1_B0, 3,0) +
+      35*OPS_ACCS(u1_B0, 0,0) - 104*OPS_ACCS(u1_B0, 1,0) + 114*OPS_ACCS(u1_B0, 2,0))
+)
+: ((idx[0] == 1) ? (
+
+      (rc11)*inv_3*(11*OPS_ACCS(u1_B0, -1,0) - OPS_ACCS(u1_B0, 3,0) - 20*OPS_ACCS(u1_B0, 0,0) + 6*OPS_ACCS(u1_B0, 1,0) +
+      4*OPS_ACCS(u1_B0, 2,0))
+)
+: ((idx[0] == block0np0 - 1) ? (
+   (rc11)*inv_3*(-104*OPS_ACCS(u1_B0, -1,0) +
+      114*OPS_ACCS(u1_B0, -2,0) + 35*OPS_ACCS(u1_B0, 0,0) + 11*OPS_ACCS(u1_B0, -4,0) - 56*OPS_ACCS(u1_B0, -3,0))
+)
+:
+      ((idx[0] == block0np0 - 2) ? (
+   (rc11)*inv_3*(4*OPS_ACCS(u1_B0, -2,0) + 6*OPS_ACCS(u1_B0, -1,0) -
+      20*OPS_ACCS(u1_B0, 0,0) + 11*OPS_ACCS(u1_B0, 1,0) - OPS_ACCS(u1_B0, -3,0))
+)
+: (
+
+      (rc11)*inv_3*(-OPS_ACCS(u1_B0, -2,0) + 16*OPS_ACCS(u1_B0, -1,0) - 30*OPS_ACCS(u1_B0, 0,0) +
+      16*OPS_ACCS(u1_B0, 1,0) - OPS_ACCS(u1_B0, 2,0))
+)))));
+
     localeval_8 = ((idx[1] == 0) ? (
-   inv_0*(-rc8*OPS_ACCS(wk1_B0, 0,0) + (rc9)*OPS_ACCS(wk1_B0, 0,3) -
-      3*OPS_ACCS(wk1_B0, 0,2) + 4*OPS_ACCS(wk1_B0, 0,1) - rc10*OPS_ACCS(wk1_B0, 0,4))
+   inv_0*(-rc8*OPS_ACCS(wk1_B0, 0,0) - rc9*OPS_ACCS(wk1_B0, 0,4) +
+      4*OPS_ACCS(wk1_B0, 0,1) - 3*OPS_ACCS(wk1_B0, 0,2) + (rc10)*OPS_ACCS(wk1_B0, 0,3))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_0*(-10*OPS_ACCS(wk1_B0, 0,0) - 3*OPS_ACCS(wk1_B0, 0,-1) + OPS_ACCS(wk1_B0, 0,3) -
-      6*OPS_ACCS(wk1_B0, 0,2) + 18*OPS_ACCS(wk1_B0, 0,1))
+      (rc11)*inv_0*(-10*OPS_ACCS(wk1_B0, 0,0) + 18*OPS_ACCS(wk1_B0, 0,1) - 3*OPS_ACCS(wk1_B0, 0,-1) -
+      6*OPS_ACCS(wk1_B0, 0,2) + OPS_ACCS(wk1_B0, 0,3))
 )
 : ((idx[1] == block0np1 - 1) ? (
 
-      inv_0*((rc8)*OPS_ACCS(wk1_B0, 0,0) - 4*OPS_ACCS(wk1_B0, 0,-1) + 3*OPS_ACCS(wk1_B0, 0,-2) -
-      rc9*OPS_ACCS(wk1_B0, 0,-3) + (rc10)*OPS_ACCS(wk1_B0, 0,-4))
+      inv_0*((rc9)*OPS_ACCS(wk1_B0, 0,-4) + (rc8)*OPS_ACCS(wk1_B0, 0,0) - rc10*OPS_ACCS(wk1_B0, 0,-3) -
+      4*OPS_ACCS(wk1_B0, 0,-1) + 3*OPS_ACCS(wk1_B0, 0,-2))
 )
 : ((idx[1] == block0np1 - 2) ? (
 
-      (rc11)*inv_0*(10*OPS_ACCS(wk1_B0, 0,0) - 18*OPS_ACCS(wk1_B0, 0,-1) + 6*OPS_ACCS(wk1_B0, 0,-2) -
-      OPS_ACCS(wk1_B0, 0,-3) + 3*OPS_ACCS(wk1_B0, 0,1))
+      (rc11)*inv_0*(10*OPS_ACCS(wk1_B0, 0,0) - OPS_ACCS(wk1_B0, 0,-3) + 3*OPS_ACCS(wk1_B0, 0,1) -
+      18*OPS_ACCS(wk1_B0, 0,-1) + 6*OPS_ACCS(wk1_B0, 0,-2))
 )
 : (
-   (rc11)*inv_0*(-OPS_ACCS(wk1_B0, 0,2) +
-      8*OPS_ACCS(wk1_B0, 0,1) - 8*OPS_ACCS(wk1_B0, 0,-1) + OPS_ACCS(wk1_B0, 0,-2))
+   (rc11)*inv_0*(-8*OPS_ACCS(wk1_B0, 0,-1) -
+      OPS_ACCS(wk1_B0, 0,2) + OPS_ACCS(wk1_B0, 0,-2) + 8*OPS_ACCS(wk1_B0, 0,1))
 )))));
 
     localeval_9 = ((idx[1] == 0) ? (
-   inv_0*(4*OPS_ACCS(wk3_B0, 0,1) - rc8*OPS_ACCS(wk3_B0, 0,0) -
-      rc10*OPS_ACCS(wk3_B0, 0,4) + (rc9)*OPS_ACCS(wk3_B0, 0,3) - 3*OPS_ACCS(wk3_B0, 0,2))
+   inv_0*(-rc8*OPS_ACCS(wk3_B0, 0,0) - rc9*OPS_ACCS(wk3_B0, 0,4) +
+      (rc10)*OPS_ACCS(wk3_B0, 0,3) - 3*OPS_ACCS(wk3_B0, 0,2) + 4*OPS_ACCS(wk3_B0, 0,1))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_0*(18*OPS_ACCS(wk3_B0, 0,1) - 10*OPS_ACCS(wk3_B0, 0,0) + OPS_ACCS(wk3_B0, 0,3) -
-      3*OPS_ACCS(wk3_B0, 0,-1) - 6*OPS_ACCS(wk3_B0, 0,2))
+      (rc11)*inv_0*(-3*OPS_ACCS(wk3_B0, 0,-1) - 10*OPS_ACCS(wk3_B0, 0,0) + OPS_ACCS(wk3_B0, 0,3) -
+      6*OPS_ACCS(wk3_B0, 0,2) + 18*OPS_ACCS(wk3_B0, 0,1))
 )
 : ((idx[1] == block0np1 - 1) ? (
 
-      inv_0*(-rc9*OPS_ACCS(wk3_B0, 0,-3) - 4*OPS_ACCS(wk3_B0, 0,-1) + (rc10)*OPS_ACCS(wk3_B0, 0,-4) +
-      (rc8)*OPS_ACCS(wk3_B0, 0,0) + 3*OPS_ACCS(wk3_B0, 0,-2))
+      inv_0*(3*OPS_ACCS(wk3_B0, 0,-2) - 4*OPS_ACCS(wk3_B0, 0,-1) + (rc8)*OPS_ACCS(wk3_B0, 0,0) -
+      rc10*OPS_ACCS(wk3_B0, 0,-3) + (rc9)*OPS_ACCS(wk3_B0, 0,-4))
 )
 : ((idx[1] == block0np1 - 2) ? (
 
-      (rc11)*inv_0*(-OPS_ACCS(wk3_B0, 0,-3) + 3*OPS_ACCS(wk3_B0, 0,1) - 18*OPS_ACCS(wk3_B0, 0,-1) +
-      10*OPS_ACCS(wk3_B0, 0,0) + 6*OPS_ACCS(wk3_B0, 0,-2))
+      (rc11)*inv_0*(6*OPS_ACCS(wk3_B0, 0,-2) - 18*OPS_ACCS(wk3_B0, 0,-1) + 10*OPS_ACCS(wk3_B0, 0,0) -
+      OPS_ACCS(wk3_B0, 0,-3) + 3*OPS_ACCS(wk3_B0, 0,1))
 )
 : (
    (rc11)*inv_0*(OPS_ACCS(wk3_B0, 0,-2) -
       8*OPS_ACCS(wk3_B0, 0,-1) - OPS_ACCS(wk3_B0, 0,2) + 8*OPS_ACCS(wk3_B0, 0,1))
 )))));
 
-    OPS_ACCS(Residual1_B0, 0,0) = rcinv25*localeval_2*(-rc26*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) +
-      (rc9)*OPS_ACCS(wk1_B0, 0,0)) + rcinv25*localeval_3*(OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) +
-      OPS_ACCS(wk3_B0, 0,0))*OPS_ACCS(D11_B0, 0,0) + rcinv25*((rc9)*localeval_4 + localeval_5*pow(OPS_ACCS(D11_B0, 0,0),
-      2) + (rc27)*localeval_9*OPS_ACCS(D11_B0, 0,0) +
-      OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(SD111_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0))*OPS_ACCS(mu_B0, 0,0) +
+    OPS_ACCS(Residual1_B0, 0,0) = rcinv25*localeval_2*(OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) +
+      OPS_ACCS(wk3_B0, 0,0))*OPS_ACCS(D11_B0, 0,0) +
+      rcinv25*localeval_3*(-rc26*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) + (rc10)*OPS_ACCS(wk1_B0, 0,0)) +
+      rcinv25*((rc10)*localeval_4 + localeval_5*pow(OPS_ACCS(D11_B0, 0,0), 2) + (rc27)*localeval_9*OPS_ACCS(D11_B0, 0,0)
+      + OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(SD111_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0))*OPS_ACCS(mu_B0, 0,0) +
       OPS_ACCS(Residual1_B0, 0,0);
 
-    OPS_ACCS(Residual2_B0, 0,0) = rcinv25*localeval_2*(OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) +
-      OPS_ACCS(wk3_B0, 0,0)) + rcinv25*localeval_3*((rc9)*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) -
-      rc26*OPS_ACCS(wk1_B0, 0,0))*OPS_ACCS(D11_B0, 0,0) + rcinv25*(localeval_6 +
-      (rc9)*localeval_7*pow(OPS_ACCS(D11_B0, 0,0), 2) + (rc27)*localeval_8*OPS_ACCS(D11_B0, 0,0) +
-      (rc9)*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(SD111_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0))*OPS_ACCS(mu_B0, 0,0) +
+    OPS_ACCS(Residual2_B0, 0,0) = rcinv25*localeval_2*((rc10)*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) -
+      rc26*OPS_ACCS(wk1_B0, 0,0))*OPS_ACCS(D11_B0, 0,0) +
+      rcinv25*localeval_3*(OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) + OPS_ACCS(wk3_B0, 0,0)) +
+      rcinv25*((rc10)*localeval_6*pow(OPS_ACCS(D11_B0, 0,0), 2) + localeval_7 + (rc27)*localeval_8*OPS_ACCS(D11_B0, 0,0)
+      + (rc10)*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(SD111_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0))*OPS_ACCS(mu_B0, 0,0) +
       OPS_ACCS(Residual2_B0, 0,0);
 
-    OPS_ACCS(Residual3_B0, 0,0) = rcinv25*rcinv28*rcinv5*rcinv7*localeval_2*OPS_ACCS(wk7_B0, 0,0) +
-      rcinv25*rcinv28*rcinv5*rcinv7*localeval_3*pow(OPS_ACCS(D11_B0, 0,0), 2)*OPS_ACCS(wk6_B0, 0,0) +
-      rcinv25*rcinv28*rcinv5*rcinv7*(localeval_0 + localeval_1*pow(OPS_ACCS(D11_B0, 0,0), 2) +
+    OPS_ACCS(Residual3_B0, 0,0) = rcinv25*rcinv28*rcinv5*rcinv7*localeval_2*pow(OPS_ACCS(D11_B0, 0,0),
+      2)*OPS_ACCS(wk6_B0, 0,0) + rcinv25*rcinv28*rcinv5*rcinv7*localeval_3*OPS_ACCS(wk7_B0, 0,0) +
+      rcinv25*rcinv28*rcinv5*rcinv7*(localeval_0*pow(OPS_ACCS(D11_B0, 0,0), 2) + localeval_1 +
       OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(SD111_B0, 0,0)*OPS_ACCS(wk6_B0, 0,0))*OPS_ACCS(mu_B0, 0,0) +
-      rcinv25*localeval_2*(OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) + OPS_ACCS(wk3_B0, 0,0))*OPS_ACCS(u1_B0, 0,0) +
-      rcinv25*localeval_2*(-rc26*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) +
-      (rc9)*OPS_ACCS(wk1_B0, 0,0))*OPS_ACCS(u0_B0, 0,0) +
-      rcinv25*localeval_3*(OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) +
+      rcinv25*localeval_2*(OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) +
       OPS_ACCS(wk3_B0, 0,0))*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(u0_B0, 0,0) +
-      rcinv25*localeval_3*((rc9)*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) -
+      rcinv25*localeval_2*((rc10)*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) -
       rc26*OPS_ACCS(wk1_B0, 0,0))*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(u1_B0, 0,0) +
-      rcinv25*(OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) +
+      rcinv25*localeval_3*(OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) + OPS_ACCS(wk3_B0, 0,0))*OPS_ACCS(u1_B0, 0,0) +
+      rcinv25*localeval_3*(-rc26*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) +
+      (rc10)*OPS_ACCS(wk1_B0, 0,0))*OPS_ACCS(u0_B0, 0,0) + rcinv25*(OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) +
       OPS_ACCS(wk3_B0, 0,0))*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(mu_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) +
       rcinv25*(OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0) +
       OPS_ACCS(wk3_B0, 0,0))*OPS_ACCS(mu_B0, 0,0)*OPS_ACCS(wk3_B0, 0,0) +
       rcinv25*(-rc26*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) +
-      (rc9)*OPS_ACCS(wk1_B0, 0,0))*OPS_ACCS(mu_B0, 0,0)*OPS_ACCS(wk1_B0, 0,0) +
-      rcinv25*((rc9)*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) -
+      (rc10)*OPS_ACCS(wk1_B0, 0,0))*OPS_ACCS(mu_B0, 0,0)*OPS_ACCS(wk1_B0, 0,0) +
+      rcinv25*((rc10)*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) -
       rc26*OPS_ACCS(wk1_B0, 0,0))*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(mu_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0) +
-      rcinv25*((rc9)*localeval_4 + localeval_5*pow(OPS_ACCS(D11_B0, 0,0), 2) + (rc27)*localeval_9*OPS_ACCS(D11_B0, 0,0)
+      rcinv25*((rc10)*localeval_4 + localeval_5*pow(OPS_ACCS(D11_B0, 0,0), 2) + (rc27)*localeval_9*OPS_ACCS(D11_B0, 0,0)
       + OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(SD111_B0, 0,0)*OPS_ACCS(wk0_B0, 0,0))*OPS_ACCS(mu_B0, 0,0)*OPS_ACCS(u0_B0, 0,0)
-      + rcinv25*(localeval_6 + (rc9)*localeval_7*pow(OPS_ACCS(D11_B0, 0,0), 2) +
+      + rcinv25*((rc10)*localeval_6*pow(OPS_ACCS(D11_B0, 0,0), 2) + localeval_7 +
       (rc27)*localeval_8*OPS_ACCS(D11_B0, 0,0) +
-      (rc9)*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(SD111_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0))*OPS_ACCS(mu_B0, 0,0)*OPS_ACCS(u1_B0, 0,0)
+      (rc10)*OPS_ACCS(D11_B0, 0,0)*OPS_ACCS(SD111_B0, 0,0)*OPS_ACCS(wk2_B0, 0,0))*OPS_ACCS(mu_B0, 0,0)*OPS_ACCS(u1_B0, 0,0)
       + OPS_ACCS(Residual3_B0, 0,0);
 
 }
