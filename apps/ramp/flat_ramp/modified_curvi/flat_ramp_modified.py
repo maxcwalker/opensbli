@@ -9,7 +9,7 @@ from opensbli import *
 import copy
 from opensbli.utilities.katzer_init import Initialise_Katzer
 from opensbli.utilities.helperfunctions import substitute_simulation_parameters
-from sympy import sin, cos, sinh, tanh, exp, pi, log
+from sympy import sin, cos, tan, sinh, cosh, tanh, exp, pi, log
 
 #############################################################################################################################################
 #																																			#
@@ -22,21 +22,27 @@ input_dict = {
     "Minf"                 : "2.0", 
     "Pr"                   : "0.72",
     "Re"                   : "950.0",
-    "Twall"                : "1.68",
-    "dt"                   : "0.001", 
-    "niter"                : "5000000", 
-    "block0np0"            : "400", 
-    "block0np1"            : "400",    
+    "Twall"                : "1.67619431",
+    "dt"                   : "0.05", 
+    "niter"                : "250000", 
+    "block0np0"            : "500", 
+    "block0np1"            : "200",    
     "Delta0block0"         : "400.0/(block0np0-1)",
-    "Delta1block0"         : "115.0/(block0np1-1)",
+    "Delta1block0"         : "1.0/(block0np1-1)",
     "SuthT"                : "110.4",
     "RefT"                 : "288.0",
     "eps"                  : "1e-15",
     "TENO_CT"              : "1e-5",
-    "L"                    : "400.0",
-    "H"                    : "115.0",
-    "a"                    : "10.0",
+
+    "Ly"                   : "115.0",
+    "tramp"                : "tan(0.0*M_PI/180.0)",     # tan of ramp angle
+    "aramp"                : "1.0",                     # parameter for ramp grid
+    "xramp"                : "200.0",                   # x-location of ramp start
     "b"                    : "5.0",
+    "A"                    : "0.05",
+    "omega"                : "0.5",
+    "xF"                   : "400.0",
+    "yF"                   : "155.0",
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
     "epsilon"              : "1.0e-30",
@@ -72,7 +78,8 @@ stress_tensor = "Eq(tau_i_j, (mu/Re)*(Der(u_i,x_j)+ Der(u_j,x_i) - (2/3)* KD(_i,
 heat_flux = "Eq(q_j, (-mu/((gama-1)*Minf*Minf*Pr*Re))*Der(T,x_j))"
 
 # Substitutions
-substitutions = [stress_tensor, heat_flux]
+# substitutions = [stress_tensor, heat_flux]
+substitutions = []
 constants_var = ["Re", "Pr", "gama", "Minf", "SuthT", "RefT"]
 # Formulas for the variables used in the equations
 velocity = "Eq(u_i, rhou_i/rho)"
@@ -103,7 +110,8 @@ metric_vel = "Eq(U_i, D_i_j*u_j)"
 simulation_eq = SimulationEquations()
 constituent = ConstituentRelations()
 
-#'''
+
+
 # change coordinate symbol to curvilinear
 coordinate_symbol = "xi"
 base_eqns = [mass, momentum, energy]
@@ -202,6 +210,7 @@ boundaries[direction][side] = ZeroGradientOutletBC(1, 1)
 
 block.set_block_boundaries(boundaries)
 
+
 #############################################################################################################################################
 #																																			#
 # Grid and intial conditions																												#
@@ -214,12 +223,13 @@ Re, xMach, Tinf = 950.0, 2.0, 288.0
 ## Ensure the grid size passed to the initialisation routine matches the grid sizes used in the simulation parameters
 polynomial_directions = [(False, DataObject('x0')), (True, DataObject('x1'))]
 n_poly_coefficients = 50
-grid_const = ["L", "H", "a", "b"]
+grid_const = ["Lx", "Ly", "tramp","aramp","xramp","b"]
 for con in grid_const:
     local_dict[con] = ConstantObject(con)
+
 gridx0 = parse_expr("Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])", local_dict=local_dict)
-#gridx1 = parse_expr("Eq(DataObject(x1), H/10*exp(-((block.deltas[1]*block.grid_indexes[1]-L/2)**2)/a) + (H - (H/10*exp(-((block.deltas[1]*block.grid_indexes[1]-L/2)**2)/a))*sinh(b*block.grid_indexes[1])) / sinh(b))", local_dict=local_dict)
-gridx1 = parse_expr("Eq(DataObject(x1), H/50*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2) + (H - H/50*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2))*sinh(b*block.deltas[1]*block.grid_indexes[1]/H)/sinh(b))", local_dict=local_dict)
+
+gridx1=parse_expr("Eq(DataObject(x1),Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*tramp*(block.deltas[0]*block.grid_indexes[0]+(aramp*Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*block.deltas[0])*(log(cosh((block.deltas[0]*block.grid_indexes[0]-xramp)/(aramp*Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*block.deltas[0])))-log(cosh(-xramp/(aramp*Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*block.deltas[0]))))))", local_dict=local_dict)
 
 coordinate_evaluation = [gridx0, gridx1]
 initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)

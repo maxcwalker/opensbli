@@ -39,7 +39,6 @@ Ly = 115.0
 Lx = 400.0
 scale = 2.31669259
 
-
 x = read_dataset(group1, "x0_B0")
 y = read_dataset(group1, "x1_B0")
 rho = read_dataset(group1, "rho_B0")
@@ -52,7 +51,6 @@ p = (0.4)*(rhoE - 0.5*(u**2+v**2)*rho)
 a = numpy.sqrt(1.4*p/rho)
 M = numpy.sqrt(u**2 + v**2)/a
 T = 1.4*(Minf**2)*p/rho
-
 
 levelsT = 100 #np.linspace(min(T),max(T),1000)
 levelsP = 100 #np.linspace(min(P),max(P),1000)
@@ -79,10 +77,6 @@ ubar = plt.colorbar(U, ax=ax3)
 ubar.set_label("Mach Number") #X_Velocity [ms$^{-1}$]
 plt.legend
 plt.style.use('classic')
-
-print(x)
-
-
 #plt.scatter(x,y)
 
 plt.savefig('Gaussian_bump_contours.pdf')

@@ -7,7 +7,6 @@ import matplotlib.cm as cm
 import os
 
 plt.style.use('classic')
-
 fname = 'opensbli_output.h5'
 
 def read_file(fname):
