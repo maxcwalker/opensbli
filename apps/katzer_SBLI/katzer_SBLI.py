@@ -39,7 +39,7 @@ block = SimulationBlock(ndim, block_number=0)
 
 # Create metrics before the scheme selection
 metriceq = MetricsEquation()
-metriceq.generate_transformations(ndim, coordinate_symbol, [(False, False), (True, False)], 2)
+metriceq.generate_transformations(ndim, coordinate_symbol, [(True, True), (True, True)], 2)
 
 # Create SimulationEquations and Constituent relations, add the expanded equations
 simulation_eq = SimulationEquations()

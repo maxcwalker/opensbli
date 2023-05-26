@@ -51,6 +51,26 @@ class OPSCCodePrinter(C99CodePrinter):
     dataset_accs_dictionary = {}
     settings_opsc = {'rational': False, 'kernel': False}
 
+
+
+    def _print_Pow(self, expr):
+
+        ######################################################################################
+        """ Replace pow function calls with direct multiplication."""
+        from sympy.printing.precedence import precedence
+        from sympy import Rational
+        PREC = precedence(expr)
+        if expr.exp in range(2, 7):
+            return '*'.join([self.parenthesize(expr.base, PREC)] * int(expr.exp))
+        elif expr.exp in range(-6, 0):
+            return '1.0/(' + ('*'.join([self.parenthesize(expr.base, PREC)] * int(-expr.exp))) + ')'
+        elif expr.exp == Rational(3,2):
+            return '*'.join([self.parenthesize(expr.base, PREC)] + ['sqrt(' + self.parenthesize(expr.base, PREC) + ')'])
+        else:
+            return super()._print_Pow(expr)
+        ######################################################################################
+
+
     def __init__(self, settings={}):
         """ Initialise the code printer. """
         self.settings_opsc = settings

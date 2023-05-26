@@ -17,14 +17,14 @@ extern double Delta1block0;
 extern double eps;
 extern int niter;
 extern double dt;
-extern double Twall;
 extern double Minf;
-extern double gama;
-extern double SuthT;
-extern double epsilon;
+extern double Twall;
 extern double RefT;
-extern double Re;
+extern double epsilon;
+extern double SuthT;
+extern double gama;
 extern double Pr;
+extern double Re;
 extern double inv_0;
 extern double inv_1;
 extern double gamma_m1;
@@ -75,12 +75,12 @@ void ops_init_backend() {}
 #include "opensbliblock00Kernel038_cpu_kernel.cpp"
 #include "opensbliblock00Kernel039_cpu_kernel.cpp"
 #include "opensbliblock00Kernel006_cpu_kernel.cpp"
-#include "opensbliblock00Kernel009_cpu_kernel.cpp"
-#include "opensbliblock00Kernel007_cpu_kernel.cpp"
-#include "opensbliblock00Kernel002_cpu_kernel.cpp"
 #include "opensbliblock00Kernel008_cpu_kernel.cpp"
-#include "opensbliblock00Kernel015_cpu_kernel.cpp"
-#include "opensbliblock00Kernel016_cpu_kernel.cpp"
+#include "opensbliblock00Kernel009_cpu_kernel.cpp"
+#include "opensbliblock00Kernel002_cpu_kernel.cpp"
+#include "opensbliblock00Kernel012_cpu_kernel.cpp"
+#include "opensbliblock00Kernel017_cpu_kernel.cpp"
+#include "opensbliblock00Kernel018_cpu_kernel.cpp"
 #include "opensbliblock00Kernel003_cpu_kernel.cpp"
 #include "opensbliblock00Kernel004_cpu_kernel.cpp"
 #include "opensbliblock00Kernel014_cpu_kernel.cpp"

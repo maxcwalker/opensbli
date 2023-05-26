@@ -520,7 +520,8 @@ class Globalvariable(EinsteinTerm, GlobalValue):
 
     def __new__(cls, label, **kwargs):
         ret = super(Globalvariable, cls).__new__(cls, label, **kwargs)
-        ret._datatype = SimulationDataType()
+        # ret._datatype = SimulationDataType()
+        ret._datatype = int()
         ret.is_input = True
         ret._value = "Input"
         return ret

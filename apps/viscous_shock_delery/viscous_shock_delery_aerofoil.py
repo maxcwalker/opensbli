@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # Viscous Delery bump: Hiten Mulchandani 2019
-
 # Import all the functions from opensbli
 from opensbli import *
 import copy
@@ -22,16 +21,18 @@ input_dict = {
     "Re"                   : "1000.0",
     "Twall"                : "1.0",
     "dt"                   : "0.01",    # original number is 0.01
-    "niter"                : "250000",  # set as 1 to de-bug
+    "niter"                : "25000",  # set as 1 to de-bug
     "block0np0"            : "701",    # original number is 1401
-    "block0np1"            : "1401",    # original number is 1401
+    "block0np1"            : "701",    # original number is 1401
     "lx"                   : "700.0",   # change this manually under domain boundaries (below) as well!
     "ly"                   : "700.0",   # change this manually under domain boundaries (below) as well!
     "Delta0block0"         : "lx/(block0np0-1)",
     "Delta1block0"         : "ly/(block0np1-1)",
     "by"                   : "3.19",    # original number is 3.19
     "SuthT"                : "110.4",
-    "RefT"                 : "288.0"
+    "RefT"                 : "288.0",
+    "eps"                  : "1e-15",
+    "TENO_CT"              : "1e-5",
 }
 constants = input_dict.keys()
 values = input_dict.values()
@@ -278,10 +279,9 @@ block.set_block_boundaries(boundaries)
 #############################################################################################################################################
 
 # write data
-save_every = 250
 kwargs = {'iotype': "Write"}
 #h5 = iohdf5(**kwargs)
-h5 = iohdf5(**kwargs)
+h5 = iohdf5(save_every=2500,**kwargs)
 h5.add_arrays(simulation_eq.time_advance_arrays)
 h5.add_arrays([DataObject('x0'), DataObject('x1')]) # save grid coordinates
 h5.add_arrays([DataObject('p')]) # save pressure
