@@ -8,26 +8,26 @@ static int dims_opensbliblock00Kernel064_h [6][1] = {{0}};
 __device__
 
  void opensbliblock00Kernel064_gpu(const ACC<double> &x0_B0,
-  ACC<double> &rho_B0,
   ACC<double> &rhoE_B0,
-  ACC<double> &rhou1_B0,
   ACC<double> &rhou0_B0,
+  ACC<double> &rho_B0,
+  ACC<double> &rhou1_B0,
   const int *iter)
 {
-   double u02 = 0.0;
-   double T1 = 0.0;
-   double Pwall = 0.0;
-   double T3 = 0.0;
-   double u01 = 0.0;
-   double u12 = 0.0;
-   double T2 = 0.0;
-   double T_above = 0.0;
-   double rho_halo_2 = 0.0;
-   double u03 = 0.0;
-   double rho_halo_3 = 0.0;
-   double rho_halo_1 = 0.0;
    double u13 = 0.0;
    double u11 = 0.0;
+   double rho_halo_2 = 0.0;
+   double rho_halo_3 = 0.0;
+   double u01 = 0.0;
+   double u02 = 0.0;
+   double T3 = 0.0;
+   double u03 = 0.0;
+   double Pwall = 0.0;
+   double T2 = 0.0;
+   double T1 = 0.0;
+   double rho_halo_1 = 0.0;
+   double T_above = 0.0;
+   double u12 = 0.0;
     rhou1_B0(0,0) = tripA*exp(-k_0*pow(-xts + x0_B0(0,0), 2))*sin(dt*omega_0*
       *iter)*rho_B0(0,0);
 
@@ -83,11 +83,11 @@ __device__
 
    rhou1_B0(0,-3) = -rho_halo_3*u13;
 
-   rhoE_B0(0,-1) = rcinv8*Pwall + (rc7)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   rhoE_B0(0,-1) = rcinv9*Pwall + (rc7)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
 
-   rhoE_B0(0,-2) = rcinv8*Pwall + (rc7)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
+   rhoE_B0(0,-2) = rcinv9*Pwall + (rc7)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
 
-   rhoE_B0(0,-3) = rcinv8*Pwall + (rc7)*rho_halo_3*(pow(u03, 2) + pow(u13, 2));
+   rhoE_B0(0,-3) = rcinv9*Pwall + (rc7)*rho_halo_3*(pow(u03, 2) + pow(u13, 2));
 
 }
 

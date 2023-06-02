@@ -26,12 +26,12 @@ void ops_par_loop_opensbliblock00Kernel040_execute(ops_kernel_descriptor *desc) 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,3,range,44)) return;
+  if (!ops_checkpointing_before(args,3,range,43)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,44,"opensbliblock00Kernel040");
-    block->instance->OPS_kernels[44].count++;
+    ops_timing_realloc(block->instance,43,"opensbliblock00Kernel040");
+    block->instance->OPS_kernels[43].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -89,7 +89,7 @@ void ops_par_loop_opensbliblock00Kernel040_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[44].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[43].mpi_time += __t1-__t2;
   }
 
   #pragma omp parallel for
@@ -109,26 +109,37 @@ void ops_par_loop_opensbliblock00Kernel040_execute(ops_kernel_descriptor *desc) 
       const ACC<double> u1_B0(xdim0_opensbliblock00Kernel040, u1_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel040*1);
       ACC<double> wk12_B0(xdim1_opensbliblock00Kernel040, wk12_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel040*1);
       
-    wk12_B0(0,0) = inv_1*((idx[1] == 0) ? (
-   -rc9*u1_B0(0,4) + 4*u1_B0(0,1) -
-      3*u1_B0(0,2) + (rc8)*u1_B0(0,3) - rc7*u1_B0(0,0)
+    wk12_B0(0,0) = inv_0*((idx[0] == 0) ? (
+   (rc35)*u1_B0(0,0) - rc36*u1_B0(1,0) +
+      (rc33)*u1_B0(2,0) - rc34*u1_B0(3,0) + (rc31)*u1_B0(4,0)
 )
-: ((idx[1] == 1) ? (
+: ((idx[0] == 1) ? (
 
-      (rc13)*u1_B0(0,1) - rc12*u1_B0(0,2) + (rc11)*u1_B0(0,3) - rc9*u1_B0(0,-1)
-      - rc10*u1_B0(0,0)
+      -rc18*u1_B0(0,0) + (rc10)*u1_B0(1,0) + (rc31)*u1_B0(-1,0) +
+      (rc23)*u1_B0(2,0) - rc13*u1_B0(3,0)
+)
+: ((idx[0] == block0np0 - 1) ? (
+
+      (rc31)*u1_B0(-4,0) + (rc35)*u1_B0(0,0) - rc34*u1_B0(-3,0) +
+      (rc33)*u1_B0(-2,0) - rc36*u1_B0(-1,0)
+)
+: ((idx[0] == block0np0 - 2) ? (
+
+      -rc18*u1_B0(0,0) - rc13*u1_B0(-3,0) + (rc31)*u1_B0(1,0) +
+      (rc23)*u1_B0(-2,0) + (rc10)*u1_B0(-1,0)
 )
 : (
-   -rc14*u1_B0(0,-1) - rc11*u1_B0(0,2) +
-      (rc11)*u1_B0(0,-2) + (rc14)*u1_B0(0,1)
-)));
+   -rc37*u1_B0(0,0) +
+      (rc9)*u1_B0(1,0) + (rc9)*u1_B0(-1,0) - rc13*u1_B0(-2,0) -
+      rc13*u1_B0(2,0)
+)))));
 
 
     }
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[44].time += __t2-__t1;
+    block->instance->OPS_kernels[43].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_host(args, 3);
@@ -138,9 +149,9 @@ void ops_par_loop_opensbliblock00Kernel040_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[44].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[44].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[44].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[43].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
@@ -153,9 +164,9 @@ void ops_par_loop_opensbliblock00Kernel040(char const *name, ops_block block, in
   desc->block = block;
   desc->dim = dim;
   desc->device = 0;
-  desc->index = 44;
+  desc->index = 43;
   desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 44;
+  desc->hash = ((desc->hash << 5) + desc->hash) + 43;
   for ( int i=0; i<4; i++ ){
     desc->range[i] = range[i];
     desc->orig_range[i] = range[i];
@@ -170,7 +181,7 @@ void ops_par_loop_opensbliblock00Kernel040(char const *name, ops_block block, in
   desc->args[2] = arg2;
   desc->function = ops_par_loop_opensbliblock00Kernel040_execute;
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,44,"opensbliblock00Kernel040");
+    ops_timing_realloc(block->instance,43,"opensbliblock00Kernel040");
   }
   ops_enqueue_kernel(desc);
 }

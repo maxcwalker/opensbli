@@ -26,12 +26,12 @@ void ops_par_loop_opensbliblock00Kernel012_execute(ops_kernel_descriptor *desc) 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,3,range,23)) return;
+  if (!ops_checkpointing_before(args,3,range,24)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,23,"opensbliblock00Kernel012");
-    block->instance->OPS_kernels[23].count++;
+    ops_timing_realloc(block->instance,24,"opensbliblock00Kernel012");
+    block->instance->OPS_kernels[24].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -62,13 +62,13 @@ void ops_par_loop_opensbliblock00Kernel012_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ rhou1_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ rho_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ rho_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ rhou0_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
-  double * __restrict__ u1_B0_p = (double *)(args[2].data + base2);
+  double * __restrict__ u0_B0_p = (double *)(args[2].data + base2);
 
 
 
@@ -81,7 +81,7 @@ void ops_par_loop_opensbliblock00Kernel012_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[23].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[24].mpi_time += __t1-__t2;
   }
 
   #pragma omp parallel for
@@ -97,18 +97,18 @@ void ops_par_loop_opensbliblock00Kernel012_execute(ops_kernel_descriptor *desc) 
     #pragma simd
     #endif
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
-      const ACC<double> rhou1_B0(xdim0_opensbliblock00Kernel012, rhou1_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel012*1);
-      const ACC<double> rho_B0(xdim1_opensbliblock00Kernel012, rho_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel012*1);
-      ACC<double> u1_B0(xdim2_opensbliblock00Kernel012, u1_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel012*1);
+      const ACC<double> rho_B0(xdim0_opensbliblock00Kernel012, rho_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel012*1);
+      const ACC<double> rhou0_B0(xdim1_opensbliblock00Kernel012, rhou0_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel012*1);
+      ACC<double> u0_B0(xdim2_opensbliblock00Kernel012, u0_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel012*1);
       
-   u1_B0(0,0) = rhou1_B0(0,0)/rho_B0(0,0);
+   u0_B0(0,0) = rhou0_B0(0,0)/rho_B0(0,0);
 
 
     }
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[23].time += __t2-__t1;
+    block->instance->OPS_kernels[24].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_host(args, 3);
@@ -118,10 +118,10 @@ void ops_par_loop_opensbliblock00Kernel012_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[23].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[23].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[23].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[23].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[24].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[24].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[24].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[24].transfer += ops_compute_transfer(dim, start, end, &arg2);
   }
 }
 
@@ -134,9 +134,9 @@ void ops_par_loop_opensbliblock00Kernel012(char const *name, ops_block block, in
   desc->block = block;
   desc->dim = dim;
   desc->device = 0;
-  desc->index = 23;
+  desc->index = 24;
   desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 23;
+  desc->hash = ((desc->hash << 5) + desc->hash) + 24;
   for ( int i=0; i<4; i++ ){
     desc->range[i] = range[i];
     desc->orig_range[i] = range[i];
@@ -152,7 +152,7 @@ void ops_par_loop_opensbliblock00Kernel012(char const *name, ops_block block, in
   desc->hash = ((desc->hash << 5) + desc->hash) + arg2.dat->index;
   desc->function = ops_par_loop_opensbliblock00Kernel012_execute;
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,23,"opensbliblock00Kernel012");
+    ops_timing_realloc(block->instance,24,"opensbliblock00Kernel012");
   }
   ops_enqueue_kernel(desc);
 }

@@ -33,11 +33,11 @@
 
 //user function
 
-void opensbliblock00Kernel006(const ptr_double rho_B0,
-  const ptr_double rhou1_B0,
-  ptr_double u1_B0)
+void opensbliblock00Kernel006(const ptr_double rhou0_B0,
+  const ptr_double rho_B0,
+  ptr_double u0_B0)
 {
-   OPS_ACCS(u1_B0, 0,0) = OPS_ACCS(rhou1_B0, 0,0)/OPS_ACCS(rho_B0, 0,0);
+   OPS_ACCS(u0_B0, 0,0) = OPS_ACCS(rhou0_B0, 0,0)/OPS_ACCS(rho_B0, 0,0);
 
 }
 

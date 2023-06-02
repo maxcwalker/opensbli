@@ -35,30 +35,30 @@
 
 void opensbliblock00Kernel022(const ptr_double u1_B0,
   ptr_double wk2_B0,
-  const int *idx, const int block0np1, const double inv_0, const double rc8, const double rc9, const double rc10, const double rc11)
+  const int *idx, const int block0np1, const double inv_1, const double rc8, const double rc9, const double rc10, const double rc11)
 {
     OPS_ACCS(wk2_B0, 0,0) = ((idx[1] == 0) ? (
-   inv_0*(-3*OPS_ACCS(u1_B0, 0,2) + (rc10)*OPS_ACCS(u1_B0, 0,3) -
-      rc8*OPS_ACCS(u1_B0, 0,0) - rc9*OPS_ACCS(u1_B0, 0,4) + 4*OPS_ACCS(u1_B0, 0,1))
+   inv_1*(-rc10*OPS_ACCS(u1_B0, 0,0) - rc8*OPS_ACCS(u1_B0, 0,4) +
+      (rc9)*OPS_ACCS(u1_B0, 0,3) - 3*OPS_ACCS(u1_B0, 0,2) + 4*OPS_ACCS(u1_B0, 0,1))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_0*(-3*OPS_ACCS(u1_B0, 0,-1) - 6*OPS_ACCS(u1_B0, 0,2) + OPS_ACCS(u1_B0, 0,3) - 10*OPS_ACCS(u1_B0, 0,0) +
+      (rc11)*inv_1*(-3*OPS_ACCS(u1_B0, 0,-1) - 10*OPS_ACCS(u1_B0, 0,0) + OPS_ACCS(u1_B0, 0,3) - 6*OPS_ACCS(u1_B0, 0,2) +
       18*OPS_ACCS(u1_B0, 0,1))
 )
 : ((idx[1] == block0np1 - 1) ? (
-   inv_0*(-4*OPS_ACCS(u1_B0, 0,-1) +
-      3*OPS_ACCS(u1_B0, 0,-2) + (rc9)*OPS_ACCS(u1_B0, 0,-4) + (rc8)*OPS_ACCS(u1_B0, 0,0) -
-      rc10*OPS_ACCS(u1_B0, 0,-3))
+   inv_1*(-4*OPS_ACCS(u1_B0, 0,-1) +
+      3*OPS_ACCS(u1_B0, 0,-2) + (rc10)*OPS_ACCS(u1_B0, 0,0) - rc9*OPS_ACCS(u1_B0, 0,-3) +
+      (rc8)*OPS_ACCS(u1_B0, 0,-4))
 )
 : ((idx[1] == block0np1 - 2) ? (
-   (rc11)*inv_0*(-18*OPS_ACCS(u1_B0, 0,-1) +
+   (rc11)*inv_1*(-18*OPS_ACCS(u1_B0, 0,-1) +
       6*OPS_ACCS(u1_B0, 0,-2) + 10*OPS_ACCS(u1_B0, 0,0) - OPS_ACCS(u1_B0, 0,-3) + 3*OPS_ACCS(u1_B0, 0,1))
 )
 : (
 
-      (rc11)*inv_0*(-8*OPS_ACCS(u1_B0, 0,-1) + OPS_ACCS(u1_B0, 0,-2) + 8*OPS_ACCS(u1_B0, 0,1) -
-      OPS_ACCS(u1_B0, 0,2))
+      (rc11)*inv_1*(-8*OPS_ACCS(u1_B0, 0,-1) - OPS_ACCS(u1_B0, 0,2) + 8*OPS_ACCS(u1_B0, 0,1) +
+      OPS_ACCS(u1_B0, 0,-2))
 )))));
 
 }
@@ -68,7 +68,7 @@ __kernel void ops_opensbliblock00Kernel022(
 __global const double* restrict arg0,
 __global double* restrict arg1,
 const int block0np1,
-const double inv_0,
+const double inv_1,
 const double rc8,
 const double rc9,
 const double rc10,
@@ -93,7 +93,7 @@ const int size1 ){
                                   ptr1,
                                   arg_idx,
                                   block0np1,
-                                  inv_0,
+                                  inv_1,
                                   rc8,
                                   rc9,
                                   rc10,

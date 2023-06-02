@@ -7,10 +7,10 @@ static int dims_opensbliblock00Kernel065_h [4][1] = {{0}};
 //user function
 __device__
 
-void opensbliblock00Kernel065_gpu(ACC<double> &rhoE_B0,
-  ACC<double> &rhou1_B0,
+void opensbliblock00Kernel065_gpu(ACC<double> &rhou1_B0,
+  ACC<double> &rho_B0,
   ACC<double> &rhou0_B0,
-  ACC<double> &rho_B0)
+  ACC<double> &rhoE_B0)
 {
    rho_B0(0,0) = rho_B0(0,-1);
 

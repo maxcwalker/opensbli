@@ -7,22 +7,22 @@ static int dims_opensbliblock00Kernel067_h [3][1] = {{0}};
 //user function
 __device__
 
-void opensbliblock00Kernel067_gpu(const ACC<double> &x0_B0,
+void opensbliblock00Kernel067_gpu(const ACC<double> &x1_B0,
   ACC<double> &wk0_B0,
   const int *idx)
 {
-    wk0_B0(0,0) = inv_1*((idx[1] == 0) ? (
-   -rc7*x0_B0(0,0) + (rc8)*x0_B0(0,3) -
-      3*x0_B0(0,2) + 4*x0_B0(0,1) - rc9*x0_B0(0,4)
+    wk0_B0(0,0) = inv_2*((idx[1] == 0) ? (
+   -3*x1_B0(0,2) + 4*x1_B0(0,1) -
+      rc7*x1_B0(0,0) - rc8*x1_B0(0,4) + (rc9)*x1_B0(0,3)
 )
 : ((idx[1] == 1) ? (
 
-      -rc10*x0_B0(0,0) - rc9*x0_B0(0,-1) + (rc11)*x0_B0(0,3) - rc12*x0_B0(0,2) +
-      (rc13)*x0_B0(0,1)
+      -rc10*x1_B0(0,2) + (rc11)*x1_B0(0,1) - rc8*x1_B0(0,-1) - rc12*x1_B0(0,0) +
+      (rc13)*x1_B0(0,3)
 )
 : (
-   (rc14)*x0_B0(0,1) - rc11*x0_B0(0,2) +
-      (rc11)*x0_B0(0,-2) - rc14*x0_B0(0,-1)
+   (rc13)*x1_B0(0,-2) - rc14*x1_B0(0,-1) +
+      (rc14)*x1_B0(0,1) - rc13*x1_B0(0,2)
 )));
 
 }

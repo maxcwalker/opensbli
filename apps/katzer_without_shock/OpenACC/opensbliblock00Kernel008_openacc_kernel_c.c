@@ -10,11 +10,11 @@ int xdim2_opensbliblock00Kernel008;
 
 //user function
 inline 
-void opensbliblock00Kernel008(const ptr_double rho_B0,
-  const ptr_double p_B0,
-  ptr_double a_B0)
+void opensbliblock00Kernel008(const ptr_double rhou1_B0,
+  const ptr_double rho_B0,
+  ptr_double u1_B0)
 {
-   OPS_ACC(a_B0, 0,0) = sqrt(gama*OPS_ACC(p_B0, 0,0)/OPS_ACC(rho_B0, 0,0));
+   OPS_ACC(u1_B0, 0,0) = OPS_ACC(rhou1_B0, 0,0)/OPS_ACC(rho_B0, 0,0);
 
 }
 

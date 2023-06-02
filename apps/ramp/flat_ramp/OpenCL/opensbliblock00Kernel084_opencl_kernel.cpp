@@ -213,7 +213,7 @@ void ops_par_loop_opensbliblock00Kernel084(char const *name, ops_block block, in
 
     clSafeCall( clSetKernelArg(block->instance->opencl_instance->OPS_opencl_core.kernel[16], 0, sizeof(cl_mem), (void*) &arg0.data_d ));
     clSafeCall( clSetKernelArg(block->instance->opencl_instance->OPS_opencl_core.kernel[16], 1, sizeof(cl_mem), (void*) &arg1.data_d ));
-    clSafeCall( clSetKernelArg(block->instance->opencl_instance->OPS_opencl_core.kernel[16], 2, sizeof(cl_double), (void*) &inv_1 ));
+    clSafeCall( clSetKernelArg(block->instance->opencl_instance->OPS_opencl_core.kernel[16], 2, sizeof(cl_double), (void*) &inv_2 ));
     clSafeCall( clSetKernelArg(block->instance->opencl_instance->OPS_opencl_core.kernel[16], 3, sizeof(cl_double), (void*) &rc7 ));
     clSafeCall( clSetKernelArg(block->instance->opencl_instance->OPS_opencl_core.kernel[16], 4, sizeof(cl_double), (void*) &rc8 ));
     clSafeCall( clSetKernelArg(block->instance->opencl_instance->OPS_opencl_core.kernel[16], 5, sizeof(cl_double), (void*) &rc9 ));

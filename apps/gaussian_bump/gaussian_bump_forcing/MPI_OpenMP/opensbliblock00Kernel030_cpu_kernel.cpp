@@ -72,7 +72,7 @@ void ops_par_loop_opensbliblock00Kernel030_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ u0_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ T_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
   double * __restrict__ wk2_B0_p = (double *)(args[1].data + base1);
@@ -106,32 +106,22 @@ void ops_par_loop_opensbliblock00Kernel030_execute(ops_kernel_descriptor *desc) 
     #endif
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
       int idx[] = {arg_idx[0]+n_x, arg_idx[1]+n_y};
-      const ACC<double> u0_B0(xdim0_opensbliblock00Kernel030, u0_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel030*1);
+      const ACC<double> T_B0(xdim0_opensbliblock00Kernel030, T_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel030*1);
       ACC<double> wk2_B0(xdim1_opensbliblock00Kernel030, wk2_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel030*1);
       
-    wk2_B0(0,0) = inv_1*((idx[0] == 0) ? (
-   -rc13*u0_B0(0,0) + 4*u0_B0(1,0) -
-      3*u0_B0(2,0) - rc11*u0_B0(4,0) + (rc12)*u0_B0(3,0)
+    wk2_B0(0,0) = inv_1*((idx[1] == 0) ? (
+   -rc36*T_B0(0,1) + (rc34)*T_B0(0,4) +
+      (rc37)*T_B0(0,0) - rc38*T_B0(0,3) + (rc39)*T_B0(0,2)
 )
-: ((idx[0] == 1) ? (
+: ((idx[1] == 1) ? (
 
-      -rc15*u0_B0(0,0) + (rc16)*u0_B0(1,0) - rc7*u0_B0(2,0) - rc11*u0_B0(-1,0) +
-      (rc14)*u0_B0(3,0)
-)
-: ((idx[0] == block0np0 - 1) ? (
-   (rc13)*u0_B0(0,0) +
-      (rc11)*u0_B0(-4,0) - rc12*u0_B0(-3,0) - 4*u0_B0(-1,0) + 3*u0_B0(-2,0)
-)
-:
-      ((idx[0] == block0np0 - 2) ? (
-   (rc15)*u0_B0(0,0) + (rc11)*u0_B0(1,0) -
-      rc14*u0_B0(-3,0) + (rc7)*u0_B0(-2,0) - rc16*u0_B0(-1,0)
+      (rc7)*T_B0(0,1) - rc21*T_B0(0,0) - rc16*T_B0(0,3) + (rc26)*T_B0(0,2) +
+      (rc34)*T_B0(0,-1)
 )
 : (
-
-      (rc17)*u0_B0(1,0) - rc17*u0_B0(-1,0) + (rc14)*u0_B0(-2,0) -
-      rc14*u0_B0(2,0)
-)))));
+   (rc13)*T_B0(0,1) - rc40*T_B0(0,0) -
+      rc16*T_B0(0,-2) - rc16*T_B0(0,2) + (rc13)*T_B0(0,-1)
+)));
 
 
     }

@@ -81,6 +81,8 @@ plt.legend
 plt.style.use('classic')
 
 
-#plt.scatter(x,y)
+plt.scatter(x,y)
+
+plt.show()
 
 plt.savefig('ramp_contours.pdf')

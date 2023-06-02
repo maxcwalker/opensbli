@@ -21,19 +21,19 @@ int xdim11_opensbliblock00Kernel049;
 inline 
  void opensbliblock00Kernel049(const ptr_double Residual0_B0,
   const ptr_double Residual2_B0,
-  const ptr_double Residual1_B0,
+  const ptr_double Residual3_B0,
   const
-ptr_double Residual3_B0,
-  ptr_double tempRK_rhou1_B0,
-  ptr_double rhou1_B0,
-  ptr_double rho_B0,
+ptr_double Residual1_B0,
   ptr_double tempRK_rho_B0,
-  ptr_double rhoE_B0,
   ptr_double tempRK_rhou0_B0,
+  ptr_double rho_B0,
+  ptr_double rhou1_B0,
   ptr_double tempRK_rhoE_B0,
+  ptr_double tempRK_rhou1_B0,
   ptr_double rhou0_B0,
-  const double *rkB,
-  const double *rkA)
+  ptr_double rhoE_B0,
+  const double *rkA,
+  const double *rkB)
 {
    OPS_ACC(tempRK_rho_B0, 0,0) = dt*OPS_ACC(Residual0_B0, 0,0) + rkA[0]*OPS_ACC(tempRK_rho_B0, 0,0);
 

@@ -34,26 +34,26 @@
 //user function
 
  void opensbliblock00Kernel038(const ptr_double x0_B0,
-  ptr_double rho_B0,
+  ptr_double rhou1_B0,
   ptr_double rhou0_B0,
   ptr_double rhoE_B0,
-  ptr_double rhou1_B0, const double Twall, const double Minf, const double gama, const double rcinv5, const double rcinv12, const double rc13)
+  ptr_double rho_B0, const double Minf, const double Twall, const double gama, const double rcinv6, const double rcinv12, const double rc13)
 {
-   double rho_halo_3 = 0.0;
-   double u13 = 0.0;
-   double T2 = 0.0;
-   double u11 = 0.0;
-   double u01 = 0.0;
-   double T3 = 0.0;
-   double u12 = 0.0;
-   double u02 = 0.0;
-   double x0 = 0.0;
-   double T_above = 0.0;
-   double Pwall = 0.0;
    double u03 = 0.0;
    double rho_halo_1 = 0.0;
-   double rho_halo_2 = 0.0;
+   double Pwall = 0.0;
+   double u02 = 0.0;
+   double x0 = 0.0;
    double T1 = 0.0;
+   double u13 = 0.0;
+   double rho_halo_2 = 0.0;
+   double u12 = 0.0;
+   double u11 = 0.0;
+   double T_above = 0.0;
+   double T2 = 0.0;
+   double u01 = 0.0;
+   double rho_halo_3 = 0.0;
+   double T3 = 0.0;
    x0 = OPS_ACCS(x0_B0, 0,0);
 
    OPS_ACCS(rhou0_B0, 0,0) = 0.0;
@@ -90,7 +90,7 @@
 
    OPS_ACCS(rhou1_B0, 0,-1) = -rho_halo_1*u11;
 
-   OPS_ACCS(rhoE_B0, 0,-1) = rcinv5*Pwall + (rc13)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   OPS_ACCS(rhoE_B0, 0,-1) = rcinv6*Pwall + (rc13)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
 
    T2 = 3*Twall - 2*T_above;
 
@@ -110,9 +110,9 @@
 
    OPS_ACCS(rhou1_B0, 0,-2) = -rho_halo_2*u12;
 
-   OPS_ACCS(rhoE_B0, 0,-1) = rcinv5*Pwall + (rc13)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   OPS_ACCS(rhoE_B0, 0,-1) = rcinv6*Pwall + (rc13)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
 
-   OPS_ACCS(rhoE_B0, 0,-2) = rcinv5*Pwall + (rc13)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
+   OPS_ACCS(rhoE_B0, 0,-2) = rcinv6*Pwall + (rc13)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
 
    T3 = 4*Twall - 3*T_above;
 
@@ -140,11 +140,11 @@
 
    OPS_ACCS(rhou1_B0, 0,-3) = -rho_halo_3*u13;
 
-   OPS_ACCS(rhoE_B0, 0,-1) = rcinv5*Pwall + (rc13)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   OPS_ACCS(rhoE_B0, 0,-1) = rcinv6*Pwall + (rc13)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
 
-   OPS_ACCS(rhoE_B0, 0,-2) = rcinv5*Pwall + (rc13)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
+   OPS_ACCS(rhoE_B0, 0,-2) = rcinv6*Pwall + (rc13)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
 
-   OPS_ACCS(rhoE_B0, 0,-3) = rcinv5*Pwall + (rc13)*rho_halo_3*(pow(u03, 2) + pow(u13, 2));
+   OPS_ACCS(rhoE_B0, 0,-3) = rcinv6*Pwall + (rc13)*rho_halo_3*(pow(u03, 2) + pow(u13, 2));
 
 }
 
@@ -155,10 +155,10 @@ __global double* restrict arg1,
 __global double* restrict arg2,
 __global double* restrict arg3,
 __global double* restrict arg4,
-const double Twall,
 const double Minf,
+const double Twall,
 const double gama,
-const double rcinv5,
+const double rcinv6,
 const double rcinv12,
 const double rc13,
 const int base0,
@@ -184,10 +184,10 @@ const int size1 ){
                                   ptr2,
                                   ptr3,
                                   ptr4,
-                                  Twall,
                                   Minf,
+                                  Twall,
                                   gama,
-                                  rcinv5,
+                                  rcinv6,
                                   rcinv12,
                                   rc13);
   }

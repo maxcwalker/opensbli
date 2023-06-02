@@ -76,10 +76,10 @@ void ops_par_loop_opensbliblock00Kernel075_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ D00_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ D11_B0_p = (double *)(args[3].data + base3);
+  double * __restrict__ detJ_B0_p = (double *)(args[3].data + base3);
 
   int base4 = args[4].dat->base_offset;
-  double * __restrict__ detJ_B0_p = (double *)(args[4].data + base4);
+  double * __restrict__ D11_B0_p = (double *)(args[4].data + base4);
 
 
 
@@ -111,8 +111,8 @@ void ops_par_loop_opensbliblock00Kernel075_execute(ops_kernel_descriptor *desc) 
       ACC<double> D10_B0(xdim0_opensbliblock00Kernel075, D10_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel075*1);
       ACC<double> D01_B0(xdim1_opensbliblock00Kernel075, D01_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel075*1);
       ACC<double> D00_B0(xdim2_opensbliblock00Kernel075, D00_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel075*1);
-      ACC<double> D11_B0(xdim3_opensbliblock00Kernel075, D11_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel075*1);
-      ACC<double> detJ_B0(xdim4_opensbliblock00Kernel075, detJ_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel075*1);
+      ACC<double> detJ_B0(xdim3_opensbliblock00Kernel075, detJ_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel075*1);
+      ACC<double> D11_B0(xdim4_opensbliblock00Kernel075, D11_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel075*1);
       
    D00_B0(1,0) = D00_B0(-1,0);
 

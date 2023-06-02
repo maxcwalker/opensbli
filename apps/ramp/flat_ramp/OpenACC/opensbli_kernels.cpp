@@ -34,12 +34,12 @@ int size, char *dat, char const *name){
     Delta1block0 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"Minf")) {
-    Minf = *(double*)dat;
-  }
-  else
   if (!strcmp(name,"Twall")) {
     Twall = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"Minf")) {
+    Minf = *(double*)dat;
   }
   else
   if (!strcmp(name,"RefT")) {
@@ -82,10 +82,6 @@ int size, char *dat, char const *name){
     inv_3 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"b")) {
-    b = *(double*)dat;
-  }
-  else
   if (!strcmp(name,"tramp")) {
     tramp = *(double*)dat;
   }
@@ -96,6 +92,10 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"Ly")) {
     Ly = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"b")) {
+    b = *(double*)dat;
   }
   else
   if (!strcmp(name,"aramp")) {
@@ -279,33 +279,33 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel063_openacc_kernel.cpp"
 #include "opensbliblock00Kernel064_openacc_kernel.cpp"
 #include "opensbliblock00Kernel065_openacc_kernel.cpp"
-#include "opensbliblock00Kernel010_openacc_kernel.cpp"
-#include "opensbliblock00Kernel011_openacc_kernel.cpp"
+#include "opensbliblock00Kernel007_openacc_kernel.cpp"
+#include "opensbliblock00Kernel012_openacc_kernel.cpp"
 #include "opensbliblock00Kernel005_openacc_kernel.cpp"
-#include "opensbliblock00Kernel008_openacc_kernel.cpp"
-#include "opensbliblock00Kernel015_openacc_kernel.cpp"
-#include "opensbliblock00Kernel003_openacc_kernel.cpp"
-#include "opensbliblock00Kernel020_openacc_kernel.cpp"
-#include "opensbliblock00Kernel022_openacc_kernel.cpp"
+#include "opensbliblock00Kernel011_openacc_kernel.cpp"
+#include "opensbliblock00Kernel014_openacc_kernel.cpp"
+#include "opensbliblock00Kernel006_openacc_kernel.cpp"
+#include "opensbliblock00Kernel027_openacc_kernel.cpp"
+#include "opensbliblock00Kernel023_openacc_kernel.cpp"
 #include "opensbliblock00Kernel000_openacc_kernel.cpp"
 #include "opensbliblock00Kernel001_openacc_kernel.cpp"
 #include "opensbliblock00Kernel017_openacc_kernel.cpp"
 #include "opensbliblock00Kernel028_openacc_kernel.cpp"
 #include "opensbliblock00Kernel029_openacc_kernel.cpp"
-#include "opensbliblock00Kernel030_openacc_kernel.cpp"
 #include "opensbliblock00Kernel031_openacc_kernel.cpp"
 #include "opensbliblock00Kernel032_openacc_kernel.cpp"
 #include "opensbliblock00Kernel033_openacc_kernel.cpp"
 #include "opensbliblock00Kernel034_openacc_kernel.cpp"
 #include "opensbliblock00Kernel035_openacc_kernel.cpp"
-#include "opensbliblock00Kernel036_openacc_kernel.cpp"
+#include "opensbliblock00Kernel037_openacc_kernel.cpp"
 #include "opensbliblock00Kernel038_openacc_kernel.cpp"
 #include "opensbliblock00Kernel040_openacc_kernel.cpp"
 #include "opensbliblock00Kernel041_openacc_kernel.cpp"
 #include "opensbliblock00Kernel042_openacc_kernel.cpp"
-#include "opensbliblock00Kernel044_openacc_kernel.cpp"
-#include "opensbliblock00Kernel037_openacc_kernel.cpp"
-#include "opensbliblock00Kernel039_openacc_kernel.cpp"
 #include "opensbliblock00Kernel043_openacc_kernel.cpp"
+#include "opensbliblock00Kernel044_openacc_kernel.cpp"
+#include "opensbliblock00Kernel030_openacc_kernel.cpp"
+#include "opensbliblock00Kernel036_openacc_kernel.cpp"
+#include "opensbliblock00Kernel039_openacc_kernel.cpp"
 #include "opensbliblock00Kernel061_openacc_kernel.cpp"
 #include "opensbliblock00Kernel091_openacc_kernel.cpp"

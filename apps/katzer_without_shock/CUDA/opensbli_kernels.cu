@@ -23,14 +23,14 @@ __constant__ double Delta1block0;
 __constant__ double eps;
 __constant__ int niter;
 __constant__ double dt;
-__constant__ double Twall;
 __constant__ double Minf;
-__constant__ double gama;
-__constant__ double SuthT;
-__constant__ double epsilon;
+__constant__ double Twall;
 __constant__ double RefT;
-__constant__ double Re;
+__constant__ double epsilon;
+__constant__ double SuthT;
+__constant__ double gama;
 __constant__ double Pr;
+__constant__ double Re;
 __constant__ double inv_0;
 __constant__ double inv_1;
 __constant__ double gamma_m1;
@@ -99,36 +99,36 @@ int size, char *dat, char const *name){
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(dt, dat, dim*size));
   }
   else
-  if (!strcmp(name,"Twall")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(Twall, dat, dim*size));
-  }
-  else
   if (!strcmp(name,"Minf")) {
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(Minf, dat, dim*size));
   }
   else
-  if (!strcmp(name,"gama")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(gama, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"SuthT")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(SuthT, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"epsilon")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(epsilon, dat, dim*size));
+  if (!strcmp(name,"Twall")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(Twall, dat, dim*size));
   }
   else
   if (!strcmp(name,"RefT")) {
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(RefT, dat, dim*size));
   }
   else
-  if (!strcmp(name,"Re")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(Re, dat, dim*size));
+  if (!strcmp(name,"epsilon")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(epsilon, dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"SuthT")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(SuthT, dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"gama")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(gama, dat, dim*size));
   }
   else
   if (!strcmp(name,"Pr")) {
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(Pr, dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"Re")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(Re, dat, dim*size));
   }
   else
   if (!strcmp(name,"inv_0")) {
@@ -286,12 +286,12 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel038_cuda_kernel.cu"
 #include "opensbliblock00Kernel039_cuda_kernel.cu"
 #include "opensbliblock00Kernel006_cuda_kernel.cu"
-#include "opensbliblock00Kernel009_cuda_kernel.cu"
-#include "opensbliblock00Kernel007_cuda_kernel.cu"
-#include "opensbliblock00Kernel002_cuda_kernel.cu"
 #include "opensbliblock00Kernel008_cuda_kernel.cu"
-#include "opensbliblock00Kernel015_cuda_kernel.cu"
-#include "opensbliblock00Kernel016_cuda_kernel.cu"
+#include "opensbliblock00Kernel009_cuda_kernel.cu"
+#include "opensbliblock00Kernel002_cuda_kernel.cu"
+#include "opensbliblock00Kernel012_cuda_kernel.cu"
+#include "opensbliblock00Kernel017_cuda_kernel.cu"
+#include "opensbliblock00Kernel018_cuda_kernel.cu"
 #include "opensbliblock00Kernel003_cuda_kernel.cu"
 #include "opensbliblock00Kernel004_cuda_kernel.cu"
 #include "opensbliblock00Kernel014_cuda_kernel.cu"

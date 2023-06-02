@@ -72,7 +72,7 @@ void ops_par_loop_opensbliblock00Kernel068_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ x1_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ x0_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
   double * __restrict__ wk1_B0_p = (double *)(args[1].data + base1);
@@ -106,22 +106,47 @@ void ops_par_loop_opensbliblock00Kernel068_execute(ops_kernel_descriptor *desc) 
     #endif
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
       int idx[] = {arg_idx[0]+n_x, arg_idx[1]+n_y};
-      const ACC<double> x1_B0(xdim0_opensbliblock00Kernel068, x1_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel068*1);
+      const ACC<double> x0_B0(xdim0_opensbliblock00Kernel068, x0_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel068*1);
       ACC<double> wk1_B0(xdim1_opensbliblock00Kernel068, wk1_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel068*1);
       
-    wk1_B0(0,0) = inv_1*((idx[1] == 0) ? (
-   -rc7*x1_B0(0,0) + (rc8)*x1_B0(0,3) -
-      3*x1_B0(0,2) + 4*x1_B0(0,1) - rc9*x1_B0(0,4)
+    wk1_B0(0,0) = inv_1*((idx[0] == 0) ? (
+   3.00000000000002*x0_B0(1,0) -
+      1.83333333333334*x0_B0(0,0) + 0.333333333333356*x0_B0(3,0) +
+      1.06910315192207e-15*x0_B0(5,0) - 1.50000000000003*x0_B0(2,0) -
+      8.34657956545823e-15*x0_B0(4,0)
 )
-: ((idx[1] == 1) ? (
-
-      -rc10*x1_B0(0,0) - rc9*x1_B0(0,-1) + (rc11)*x1_B0(0,3) - rc12*x1_B0(0,2) +
-      (rc13)*x1_B0(0,1)
+: ((idx[0] == 1) ? (
+   0.719443173328855*x0_B0(1,0) -
+      0.322484932882161*x0_B0(0,0) - 0.0658051057710389*x0_B0(3,0) +
+      0.0394168524399447*x0_B0(2,0) + 0.00571369039775442*x0_B0(4,0) -
+      0.376283677513354*x0_B0(-1,0)
+)
+: ((idx[0] == 2) ? (
+   0.521455851089587*x0_B0(1,0) +
+      0.197184333887745*x0_B0(0,0) - 0.00412637789557492*x0_B0(3,0) -
+      0.791245592765872*x0_B0(-1,0) - 0.0367146847001261*x0_B0(2,0) +
+      0.113446470384241*x0_B0(-2,0)
+)
+: ((idx[0] == 3) ? (
+   0.652141084861241*x0_B0(1,0) -
+      0.00932597985049999*x0_B0(-3,0) + 0.0451033223343881*x0_B0(0,0) +
+      0.121937153224065*x0_B0(-2,0) - 0.082033432844602*x0_B0(2,0) -
+      0.727822147724592*x0_B0(-1,0)
+)
+: ((idx[0] == block0np0 - 1) ? (
+   -rc9*x0_B0(-3,0) +
+      (rc7)*x0_B0(0,0) + (rc8)*x0_B0(-4,0) - 4*x0_B0(-1,0) + 3*x0_B0(-2,0)
+)
+:
+      ((idx[0] == block0np0 - 2) ? (
+   (rc8)*x0_B0(1,0) - rc13*x0_B0(-3,0) +
+      (rc12)*x0_B0(0,0) + (rc10)*x0_B0(-2,0) - rc11*x0_B0(-1,0)
 )
 : (
-   -rc11*x1_B0(0,2) + (rc14)*x1_B0(0,1) +
-      (rc11)*x1_B0(0,-2) - rc14*x1_B0(0,-1)
-)));
+
+      -rc13*x0_B0(2,0) + (rc14)*x0_B0(1,0) + (rc13)*x0_B0(-2,0) -
+      rc14*x0_B0(-1,0)
+)))))));
 
 
     }

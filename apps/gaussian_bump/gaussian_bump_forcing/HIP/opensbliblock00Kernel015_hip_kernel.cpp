@@ -7,10 +7,10 @@ static int dims_opensbliblock00Kernel015_h [5][1] = {{0}};
 //user function
 __device__
 
- void opensbliblock00Kernel015_gpu(const ACC<double> &D11_B0,
-  const ACC<double> &D10_B0,
+ void opensbliblock00Kernel015_gpu(const ACC<double> &u1_B0,
   const ACC<double> &u0_B0,
-  const ACC<double> &u1_B0,
+  const ACC<double> &D10_B0,
+  const ACC<double> &D11_B0,
   ACC<double> &U1_B0)
 {
    U1_B0(0,0) = D10_B0(0,0)*u0_B0(0,0) + D11_B0(0,0)*u1_B0(0,0);

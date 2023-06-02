@@ -11,20 +11,29 @@ void opensbliblock00Kernel035_gpu(const ACC<double> &u0_B0,
   ACC<double> &wk7_B0,
   const int *idx)
 {
-    wk7_B0(0,0) = inv_3*((idx[1] == 0) ? (
-   (rc36)*u0_B0(0,2) - rc33*u0_B0(0,1) +
-      (rc31)*u0_B0(0,4) + (rc34)*u0_B0(0,0) - rc35*u0_B0(0,3)
+    wk7_B0(0,0) = inv_0*((idx[0] == 0) ? (
+   -rc36*u0_B0(1,0) + (rc35)*u0_B0(0,0) -
+      rc34*u0_B0(3,0) + (rc31)*u0_B0(4,0) + (rc33)*u0_B0(2,0)
 )
-: ((idx[1] == 1) ? (
+: ((idx[0] == 1) ? (
 
-      (rc23)*u0_B0(0,2) + (rc12)*u0_B0(0,1) - rc18*u0_B0(0,0) +
-      (rc31)*u0_B0(0,-1) - rc11*u0_B0(0,3)
+      (rc10)*u0_B0(1,0) - rc18*u0_B0(0,0) - rc13*u0_B0(3,0) + (rc31)*u0_B0(-1,0)
+      + (rc23)*u0_B0(2,0)
+)
+: ((idx[0] == block0np0 - 1) ? (
+   (rc31)*u0_B0(-4,0) +
+      (rc33)*u0_B0(-2,0) + (rc35)*u0_B0(0,0) - rc36*u0_B0(-1,0) -
+      rc34*u0_B0(-3,0)
+)
+: ((idx[0] == block0np0 - 2) ? (
+   (rc31)*u0_B0(1,0) +
+      (rc23)*u0_B0(-2,0) - rc18*u0_B0(0,0) + (rc10)*u0_B0(-1,0) -
+      rc13*u0_B0(-3,0)
 )
 : (
-   -rc11*u0_B0(0,2) +
-      (rc8)*u0_B0(0,1) - rc37*u0_B0(0,0) + (rc8)*u0_B0(0,-1) -
-      rc11*u0_B0(0,-2)
-)));
+   (rc9)*u0_B0(1,0) + (rc9)*u0_B0(-1,0) -
+      rc37*u0_B0(0,0) - rc13*u0_B0(-2,0) - rc13*u0_B0(2,0)
+)))));
 
 }
 
@@ -81,12 +90,12 @@ void ops_par_loop_opensbliblock00Kernel035_execute(ops_kernel_descriptor *desc) 
 
 
   #if CHECKPOINTING && !OPS_LAZY
-  if (!ops_checkpointing_before(args,3,range,41)) return;
+  if (!ops_checkpointing_before(args,3,range,40)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,41,"opensbliblock00Kernel035");
-    block->instance->OPS_kernels[41].count++;
+    ops_timing_realloc(block->instance,40,"opensbliblock00Kernel035");
+    block->instance->OPS_kernels[40].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -153,7 +162,7 @@ void ops_par_loop_opensbliblock00Kernel035_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[41].mpi_time += t2-t1;
+    block->instance->OPS_kernels[40].mpi_time += t2-t1;
   }
 
 
@@ -167,7 +176,7 @@ void ops_par_loop_opensbliblock00Kernel035_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags>1) {
     hipSafeCall(block->instance->ostream(), hipDeviceSynchronize());
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[41].time += t1-t2;
+    block->instance->OPS_kernels[40].time += t1-t2;
   }
 
   #ifndef OPS_LAZY
@@ -178,9 +187,9 @@ void ops_par_loop_opensbliblock00Kernel035_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[41].mpi_time += t2-t1;
-    block->instance->OPS_kernels[41].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[41].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[40].mpi_time += t2-t1;
+    block->instance->OPS_kernels[40].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[40].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
@@ -192,9 +201,9 @@ void ops_par_loop_opensbliblock00Kernel035(char const *name, ops_block block, in
   desc->block = block;
   desc->dim = dim;
   desc->device = 1;
-  desc->index = 41;
+  desc->index = 40;
   desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 41;
+  desc->hash = ((desc->hash << 5) + desc->hash) + 40;
   for ( int i=0; i<4; i++ ){
     desc->range[i] = range[i];
     desc->orig_range[i] = range[i];
@@ -209,7 +218,7 @@ void ops_par_loop_opensbliblock00Kernel035(char const *name, ops_block block, in
   desc->args[2] = arg2;
   desc->function = ops_par_loop_opensbliblock00Kernel035_execute;
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,41,"opensbliblock00Kernel035");
+    ops_timing_realloc(block->instance,40,"opensbliblock00Kernel035");
   }
   ops_enqueue_kernel(desc);
 }

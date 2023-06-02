@@ -185,12 +185,10 @@ rhoE = parse_expr("Eq(DataObject(rhoE), p/(gama-1) + 0.5* d *(u0**2+u1**2))", lo
 
 boundaries = [[0, 0] for t in range(ndim)]
 
-
 # Left pressure extrapolation at x= 0, inlet conditions
 direction = 0
 side = 0
 boundaries[direction][side] = InletPressureExtrapolateBC(direction, side)
-
 
 # Right extrapolation at outlet
 direction = 0
@@ -239,7 +237,6 @@ for con in grid_const:
 
 gridx0 = parse_expr("Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])", local_dict=local_dict)
 
-# gridx1=parse_expr("Eq(DataObject(x1),Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*tramp*(block.deltas[0]*block.grid_indexes[0]+(aramp*Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*block.deltas[0])*(log(cosh((block.deltas[0]*block.grid_indexes[0]-xramp)/(aramp*Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*block.deltas[0])))-log(cosh(-xramp/(aramp*Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*block.deltas[0]))))))", local_dict=local_dict)
 gridx1 = parse_expr("Eq(DataObject(x1), Ly*sinh(b*block.deltas[1]*block.grid_indexes[1]/Ly)/sinh(b))", local_dict=local_dict)
 coordinate_evaluation = [gridx0, gridx1]
 initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)

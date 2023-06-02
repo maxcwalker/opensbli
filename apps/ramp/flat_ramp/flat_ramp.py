@@ -24,11 +24,11 @@ input_dict = {
     "Re"                   : "950.0",
     "Twall"                : "1.67619431",
     "dt"                   : "0.005", 
-    "niter"                : "250", 
+    "niter"                : "50000", 
     "block0np0"            : "500", 
     "block0np1"            : "250",    
     "Delta0block0"         : "400.0/(block0np0-1)",
-    "Delta1block0"         : "1.0/(block0np1-1)",
+    "Delta1block0"         : "115.0/(block0np1-1)",
     "SuthT"                : "110.4",
     "RefT"                 : "288.0",
     "eps"                  : "1e-15",
@@ -65,7 +65,6 @@ metriceq.generate_transformations(ndim, coordinate_symbol, [(True, True), (True,
 # Define the compresible Navier-Stokes equations in Einstein notation.
 sc1 = "**{\'scheme\':\'Weno\'}"
 
-# sc1 = "**{\'scheme\':\'Teno\'}"
 a = "Conservative(detJ * rho*U_j,xi_j,%s)" % sc1
 mass = "Eq(Der(rho,t), - %s/detJ)" % (a)
 a = "Conservative(detJ * (rhou_i*U_j + p*D_j_i), xi_j , %s)" % sc1
@@ -218,7 +217,6 @@ boundaries[direction][side] = ZeroGradientOutletBC(1, 1)
 # side = 1
 # boundaries[direction][side] = ExtrapolationBC(direction, side, order=0)
 
-
 block.set_block_boundaries(boundaries)
 
 #############################################################################################################################################
@@ -240,7 +238,6 @@ for con in grid_const:
 gridx0 = parse_expr("Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])", local_dict=local_dict)
 
 gridx1=parse_expr("Eq(DataObject(x1),Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*tramp*(block.deltas[0]*block.grid_indexes[0]+(aramp*Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*block.deltas[0])*(log(cosh((block.deltas[0]*block.grid_indexes[0]-xramp)/(aramp*Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*block.deltas[0])))-log(cosh(-xramp/(aramp*Ly*sinh(b*block.deltas[1]*block.grid_indexes[1])/sinh(b)+0.5*block.deltas[0]))))))", local_dict=local_dict)
-# gridx1 = parse_expr("Eq(DataObject(x1), Lx*sinh(b*block.deltas[1]*block.grid_indexes[1]/Lx)/sinh(b))", local_dict=local_dict)
 coordinate_evaluation = [gridx0, gridx1]
 initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)
 

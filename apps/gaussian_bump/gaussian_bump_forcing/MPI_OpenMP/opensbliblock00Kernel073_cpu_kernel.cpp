@@ -82,25 +82,25 @@ void ops_par_loop_opensbliblock00Kernel073_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ wk1_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
-  double * __restrict__ wk0_B0_p = (double *)(args[2].data + base2);
+  double * __restrict__ wk2_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ wk2_B0_p = (double *)(args[3].data + base3);
+  double * __restrict__ wk0_B0_p = (double *)(args[3].data + base3);
 
   int base4 = args[4].dat->base_offset;
-  double * __restrict__ detJ_B0_p = (double *)(args[4].data + base4);
+  double * __restrict__ D10_B0_p = (double *)(args[4].data + base4);
 
   int base5 = args[5].dat->base_offset;
-  double * __restrict__ D10_B0_p = (double *)(args[5].data + base5);
+  double * __restrict__ D01_B0_p = (double *)(args[5].data + base5);
 
   int base6 = args[6].dat->base_offset;
-  double * __restrict__ D01_B0_p = (double *)(args[6].data + base6);
+  double * __restrict__ detJ_B0_p = (double *)(args[6].data + base6);
 
   int base7 = args[7].dat->base_offset;
-  double * __restrict__ D11_B0_p = (double *)(args[7].data + base7);
+  double * __restrict__ D00_B0_p = (double *)(args[7].data + base7);
 
   int base8 = args[8].dat->base_offset;
-  double * __restrict__ D00_B0_p = (double *)(args[8].data + base8);
+  double * __restrict__ D11_B0_p = (double *)(args[8].data + base8);
 
 
 
@@ -131,26 +131,26 @@ void ops_par_loop_opensbliblock00Kernel073_execute(ops_kernel_descriptor *desc) 
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
       const ACC<double> wk3_B0(xdim0_opensbliblock00Kernel073, wk3_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel073*1);
       const ACC<double> wk1_B0(xdim1_opensbliblock00Kernel073, wk1_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel073*1);
-      const ACC<double> wk0_B0(xdim2_opensbliblock00Kernel073, wk0_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel073*1);
-      const ACC<double> wk2_B0(xdim3_opensbliblock00Kernel073, wk2_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel073*1);
-      ACC<double> detJ_B0(xdim4_opensbliblock00Kernel073, detJ_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel073*1);
-      ACC<double> D10_B0(xdim5_opensbliblock00Kernel073, D10_B0_p + n_x*1 + n_y * xdim5_opensbliblock00Kernel073*1);
-      ACC<double> D01_B0(xdim6_opensbliblock00Kernel073, D01_B0_p + n_x*1 + n_y * xdim6_opensbliblock00Kernel073*1);
-      ACC<double> D11_B0(xdim7_opensbliblock00Kernel073, D11_B0_p + n_x*1 + n_y * xdim7_opensbliblock00Kernel073*1);
-      ACC<double> D00_B0(xdim8_opensbliblock00Kernel073, D00_B0_p + n_x*1 + n_y * xdim8_opensbliblock00Kernel073*1);
+      const ACC<double> wk2_B0(xdim2_opensbliblock00Kernel073, wk2_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel073*1);
+      const ACC<double> wk0_B0(xdim3_opensbliblock00Kernel073, wk0_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel073*1);
+      ACC<double> D10_B0(xdim4_opensbliblock00Kernel073, D10_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel073*1);
+      ACC<double> D01_B0(xdim5_opensbliblock00Kernel073, D01_B0_p + n_x*1 + n_y * xdim5_opensbliblock00Kernel073*1);
+      ACC<double> detJ_B0(xdim6_opensbliblock00Kernel073, detJ_B0_p + n_x*1 + n_y * xdim6_opensbliblock00Kernel073*1);
+      ACC<double> D00_B0(xdim7_opensbliblock00Kernel073, D00_B0_p + n_x*1 + n_y * xdim7_opensbliblock00Kernel073*1);
+      ACC<double> D11_B0(xdim8_opensbliblock00Kernel073, D11_B0_p + n_x*1 + n_y * xdim8_opensbliblock00Kernel073*1);
       
-   detJ_B0(0,0) = wk0_B0(0,0)*wk1_B0(0,0) - wk2_B0(0,0)*wk3_B0(0,0);
+   detJ_B0(0,0) = -wk0_B0(0,0)*wk1_B0(0,0) + wk2_B0(0,0)*wk3_B0(0,0);
 
-    D00_B0(0,0) = wk1_B0(0,0)/(wk0_B0(0,0)*wk1_B0(0,0) -
+    D00_B0(0,0) = wk2_B0(0,0)/(-wk0_B0(0,0)*wk1_B0(0,0) +
       wk2_B0(0,0)*wk3_B0(0,0));
 
-    D01_B0(0,0) = -wk2_B0(0,0)/(wk0_B0(0,0)*wk1_B0(0,0) -
+    D01_B0(0,0) = -wk0_B0(0,0)/(-wk0_B0(0,0)*wk1_B0(0,0) +
       wk2_B0(0,0)*wk3_B0(0,0));
 
-    D10_B0(0,0) = -wk3_B0(0,0)/(wk0_B0(0,0)*wk1_B0(0,0) -
+    D10_B0(0,0) = -wk1_B0(0,0)/(-wk0_B0(0,0)*wk1_B0(0,0) +
       wk2_B0(0,0)*wk3_B0(0,0));
 
-    D11_B0(0,0) = wk0_B0(0,0)/(wk0_B0(0,0)*wk1_B0(0,0) -
+    D11_B0(0,0) = wk3_B0(0,0)/(-wk0_B0(0,0)*wk1_B0(0,0) +
       wk2_B0(0,0)*wk3_B0(0,0));
 
 

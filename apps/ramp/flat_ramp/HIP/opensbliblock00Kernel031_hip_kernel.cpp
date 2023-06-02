@@ -7,33 +7,23 @@ static int dims_opensbliblock00Kernel031_h [3][1] = {{0}};
 //user function
 __device__
 
-void opensbliblock00Kernel031_gpu(const ACC<double> &u0_B0,
+void opensbliblock00Kernel031_gpu(const ACC<double> &mu_B0,
   ACC<double> &wk3_B0,
   const int *idx)
 {
-    wk3_B0(0,0) = inv_0*((idx[0] == 0) ? (
-   -rc33*u0_B0(1,0) + (rc34)*u0_B0(0,0) -
-      rc35*u0_B0(3,0) + (rc36)*u0_B0(2,0) + (rc31)*u0_B0(4,0)
+    wk3_B0(0,0) = inv_2*((idx[1] == 0) ? (
+   -rc7*mu_B0(0,0) + 4*mu_B0(0,1) -
+      3*mu_B0(0,2) + (rc9)*mu_B0(0,3) - rc8*mu_B0(0,4)
 )
-: ((idx[0] == 1) ? (
+: ((idx[1] == 1) ? (
 
-      (rc12)*u0_B0(1,0) + (rc31)*u0_B0(-1,0) - rc18*u0_B0(0,0) - rc11*u0_B0(3,0)
-      + (rc23)*u0_B0(2,0)
-)
-: ((idx[0] == block0np0 - 1) ? (
-   -rc35*u0_B0(-3,0) +
-      (rc31)*u0_B0(-4,0) + (rc36)*u0_B0(-2,0) - rc33*u0_B0(-1,0) +
-      (rc34)*u0_B0(0,0)
-)
-: ((idx[0] == block0np0 - 2) ? (
-   -rc11*u0_B0(-3,0) +
-      (rc31)*u0_B0(1,0) + (rc23)*u0_B0(-2,0) + (rc12)*u0_B0(-1,0) -
-      rc18*u0_B0(0,0)
+      -rc12*mu_B0(0,0) + (rc11)*mu_B0(0,1) - rc10*mu_B0(0,2) - rc8*mu_B0(0,-1) +
+      (rc13)*mu_B0(0,3)
 )
 : (
-   (rc8)*u0_B0(1,0) + (rc8)*u0_B0(-1,0) -
-      rc11*u0_B0(-2,0) - rc37*u0_B0(0,0) - rc11*u0_B0(2,0)
-)))));
+   -rc13*mu_B0(0,2) + (rc14)*mu_B0(0,1) -
+      rc14*mu_B0(0,-1) + (rc13)*mu_B0(0,-2)
+)));
 
 }
 
@@ -90,12 +80,12 @@ void ops_par_loop_opensbliblock00Kernel031_execute(ops_kernel_descriptor *desc) 
 
 
   #if CHECKPOINTING && !OPS_LAZY
-  if (!ops_checkpointing_before(args,3,range,37)) return;
+  if (!ops_checkpointing_before(args,3,range,36)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,37,"opensbliblock00Kernel031");
-    block->instance->OPS_kernels[37].count++;
+    ops_timing_realloc(block->instance,36,"opensbliblock00Kernel031");
+    block->instance->OPS_kernels[36].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -162,7 +152,7 @@ void ops_par_loop_opensbliblock00Kernel031_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[37].mpi_time += t2-t1;
+    block->instance->OPS_kernels[36].mpi_time += t2-t1;
   }
 
 
@@ -176,7 +166,7 @@ void ops_par_loop_opensbliblock00Kernel031_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags>1) {
     hipSafeCall(block->instance->ostream(), hipDeviceSynchronize());
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[37].time += t1-t2;
+    block->instance->OPS_kernels[36].time += t1-t2;
   }
 
   #ifndef OPS_LAZY
@@ -187,9 +177,9 @@ void ops_par_loop_opensbliblock00Kernel031_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[37].mpi_time += t2-t1;
-    block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[36].mpi_time += t2-t1;
+    block->instance->OPS_kernels[36].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[36].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
@@ -201,9 +191,9 @@ void ops_par_loop_opensbliblock00Kernel031(char const *name, ops_block block, in
   desc->block = block;
   desc->dim = dim;
   desc->device = 1;
-  desc->index = 37;
+  desc->index = 36;
   desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 37;
+  desc->hash = ((desc->hash << 5) + desc->hash) + 36;
   for ( int i=0; i<4; i++ ){
     desc->range[i] = range[i];
     desc->orig_range[i] = range[i];
@@ -218,7 +208,7 @@ void ops_par_loop_opensbliblock00Kernel031(char const *name, ops_block block, in
   desc->args[2] = arg2;
   desc->function = ops_par_loop_opensbliblock00Kernel031_execute;
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,37,"opensbliblock00Kernel031");
+    ops_timing_realloc(block->instance,36,"opensbliblock00Kernel031");
   }
   ops_enqueue_kernel(desc);
 }

@@ -35,29 +35,30 @@
 
 void opensbliblock00Kernel028(const ptr_double T_B0,
   ptr_double wk6_B0,
-  const int *idx, const int block0np1, const double inv_0, const double rc8, const double rc9, const double rc10, const double rc11)
+  const int *idx, const int block0np1, const double inv_1, const double rc8, const double rc9, const double rc10, const double rc11)
 {
     OPS_ACCS(wk6_B0, 0,0) = ((idx[1] == 0) ? (
-   inv_0*(-rc8*OPS_ACCS(T_B0, 0,0) + 4*OPS_ACCS(T_B0, 0,1) -
-      3*OPS_ACCS(T_B0, 0,2) + (rc10)*OPS_ACCS(T_B0, 0,3) - rc9*OPS_ACCS(T_B0, 0,4))
+   inv_1*(-3*OPS_ACCS(T_B0, 0,2) + (rc9)*OPS_ACCS(T_B0, 0,3) -
+      rc10*OPS_ACCS(T_B0, 0,0) - rc8*OPS_ACCS(T_B0, 0,4) + 4*OPS_ACCS(T_B0, 0,1))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_0*(-10*OPS_ACCS(T_B0, 0,0) + 18*OPS_ACCS(T_B0, 0,1) - 6*OPS_ACCS(T_B0, 0,2) - 3*OPS_ACCS(T_B0, 0,-1) +
-      OPS_ACCS(T_B0, 0,3))
+      (rc11)*inv_1*(-3*OPS_ACCS(T_B0, 0,-1) - 6*OPS_ACCS(T_B0, 0,2) + OPS_ACCS(T_B0, 0,3) - 10*OPS_ACCS(T_B0, 0,0) +
+      18*OPS_ACCS(T_B0, 0,1))
 )
 : ((idx[1] == block0np1 - 1) ? (
-   inv_0*((rc8)*OPS_ACCS(T_B0, 0,0) +
-      (rc9)*OPS_ACCS(T_B0, 0,-4) - rc10*OPS_ACCS(T_B0, 0,-3) - 4*OPS_ACCS(T_B0, 0,-1) + 3*OPS_ACCS(T_B0, 0,-2))
+   inv_1*(-4*OPS_ACCS(T_B0, 0,-1) +
+      3*OPS_ACCS(T_B0, 0,-2) + (rc8)*OPS_ACCS(T_B0, 0,-4) + (rc10)*OPS_ACCS(T_B0, 0,0) - rc9*OPS_ACCS(T_B0, 0,-3))
 )
 :
       ((idx[1] == block0np1 - 2) ? (
-   (rc11)*inv_0*(10*OPS_ACCS(T_B0, 0,0) + 3*OPS_ACCS(T_B0, 0,1) -
-      OPS_ACCS(T_B0, 0,-3) - 18*OPS_ACCS(T_B0, 0,-1) + 6*OPS_ACCS(T_B0, 0,-2))
+   (rc11)*inv_1*(-18*OPS_ACCS(T_B0, 0,-1) + 6*OPS_ACCS(T_B0, 0,-2) +
+      10*OPS_ACCS(T_B0, 0,0) - OPS_ACCS(T_B0, 0,-3) + 3*OPS_ACCS(T_B0, 0,1))
 )
 : (
 
-      (rc11)*inv_0*(8*OPS_ACCS(T_B0, 0,1) - OPS_ACCS(T_B0, 0,2) - 8*OPS_ACCS(T_B0, 0,-1) + OPS_ACCS(T_B0, 0,-2))
+      (rc11)*inv_1*(-8*OPS_ACCS(T_B0, 0,-1) + OPS_ACCS(T_B0, 0,-2) - OPS_ACCS(T_B0, 0,2) +
+      8*OPS_ACCS(T_B0, 0,1))
 )))));
 
 }
@@ -67,7 +68,7 @@ __kernel void ops_opensbliblock00Kernel028(
 __global const double* restrict arg0,
 __global double* restrict arg1,
 const int block0np1,
-const double inv_0,
+const double inv_1,
 const double rc8,
 const double rc9,
 const double rc10,
@@ -92,7 +93,7 @@ const int size1 ){
                                   ptr1,
                                   arg_idx,
                                   block0np1,
-                                  inv_0,
+                                  inv_1,
                                   rc8,
                                   rc9,
                                   rc10,

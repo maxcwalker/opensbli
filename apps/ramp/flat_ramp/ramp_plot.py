@@ -8,7 +8,7 @@ import os
 
 plt.style.use('classic')
 
-fname = 'opensbli_output.h5'
+fname = 'outputs/opensbli_output_020000.h5'
 
 def read_file(fname):
     f = h5py.File(fname, 'r')
@@ -77,7 +77,7 @@ ubar = plt.colorbar(U, ax=ax3)
 ubar.set_label("Mach Number") #X_Velocity [ms$^{-1}$]
 plt.legend
 plt.style.use('classic')
-plt.savefig('ramp_5deg_contours.pdf')
+# plt.savefig('ramp_5deg_contours.pdf')
 
 fig, ab = plt.subplots(1,1)
 nth = 10

@@ -109,19 +109,29 @@ void ops_par_loop_opensbliblock00Kernel081_execute(ops_kernel_descriptor *desc) 
       const ACC<double> D11_B0(xdim0_opensbliblock00Kernel081, D11_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel081*1);
       ACC<double> wk3_B0(xdim1_opensbliblock00Kernel081, wk3_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel081*1);
       
-    wk3_B0(0,0) = inv_0*((idx[1] == 0) ? (
-   (rc12)*D11_B0(0,3) - rc11*D11_B0(0,4) -
-      rc13*D11_B0(0,0) + 4*D11_B0(0,1) - 3*D11_B0(0,2)
+    wk3_B0(0,0) = inv_2*((idx[0] == 0) ? (
+   -rc11*D11_B0(4,0) - 3*D11_B0(2,0) +
+      (rc13)*D11_B0(3,0) - rc12*D11_B0(0,0) + 4*D11_B0(1,0)
 )
-: ((idx[1] == 1) ? (
+: ((idx[0] == 1) ? (
 
-      (rc14)*D11_B0(0,3) - rc15*D11_B0(0,0) - rc11*D11_B0(0,-1) +
-      (rc16)*D11_B0(0,1) - rc7*D11_B0(0,2)
+      -rc7*D11_B0(2,0) + (rc16)*D11_B0(3,0) - rc15*D11_B0(0,0) -
+      rc11*D11_B0(-1,0) + (rc14)*D11_B0(1,0)
+)
+: ((idx[0] == block0np0 - 1) ? (
+
+      (rc11)*D11_B0(-4,0) - rc13*D11_B0(-3,0) - 4*D11_B0(-1,0) +
+      (rc12)*D11_B0(0,0) + 3*D11_B0(-2,0)
+)
+: ((idx[0] == block0np0 - 2) ? (
+
+      -rc16*D11_B0(-3,0) + (rc7)*D11_B0(-2,0) + (rc15)*D11_B0(0,0) -
+      rc14*D11_B0(-1,0) + (rc11)*D11_B0(1,0)
 )
 : (
-   -rc14*D11_B0(0,2) +
-      (rc14)*D11_B0(0,-2) + (rc17)*D11_B0(0,1) - rc17*D11_B0(0,-1)
-)));
+   -rc16*D11_B0(2,0) +
+      (rc16)*D11_B0(-2,0) - rc17*D11_B0(-1,0) + (rc17)*D11_B0(1,0)
+)))));
 
 
     }

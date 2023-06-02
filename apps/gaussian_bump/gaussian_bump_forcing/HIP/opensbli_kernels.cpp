@@ -27,16 +27,16 @@ __constant__ int block0np1;
 __constant__ double Delta0block0;
 #define Delta1block0 Delta1block0_OPSCONSTANT
 __constant__ double Delta1block0;
-#define Twall Twall_OPSCONSTANT
-__constant__ double Twall;
 #define Minf Minf_OPSCONSTANT
 __constant__ double Minf;
-#define SuthT SuthT_OPSCONSTANT
-__constant__ double SuthT;
-#define RefT RefT_OPSCONSTANT
-__constant__ double RefT;
+#define Twall Twall_OPSCONSTANT
+__constant__ double Twall;
 #define gama gama_OPSCONSTANT
 __constant__ double gama;
+#define RefT RefT_OPSCONSTANT
+__constant__ double RefT;
+#define SuthT SuthT_OPSCONSTANT
+__constant__ double SuthT;
 #define Re Re_OPSCONSTANT
 __constant__ double Re;
 #define Pr Pr_OPSCONSTANT
@@ -53,18 +53,18 @@ __constant__ double inv_2;
 __constant__ double inv_3;
 #define xts xts_OPSCONSTANT
 __constant__ double xts;
+#define k_0 k_0_OPSCONSTANT
+__constant__ double k_0;
 #define tripA tripA_OPSCONSTANT
 __constant__ double tripA;
 #define omega_0 omega_0_OPSCONSTANT
 __constant__ double omega_0;
-#define k_0 k_0_OPSCONSTANT
-__constant__ double k_0;
 #define L L_OPSCONSTANT
 __constant__ double L;
-#define b b_OPSCONSTANT
-__constant__ double b;
 #define H H_OPSCONSTANT
 __constant__ double H;
+#define b b_OPSCONSTANT
+__constant__ double b;
 #define a a_OPSCONSTANT
 __constant__ double a;
 #define rcinv4 rcinv4_OPSCONSTANT
@@ -158,11 +158,11 @@ __global__ void ops_internal_this_is_stupid() {
 ((int*)&block0np1)[0]=0;
 ((int*)&Delta0block0)[0]=0;
 ((int*)&Delta1block0)[0]=0;
-((int*)&Twall)[0]=0;
 ((int*)&Minf)[0]=0;
-((int*)&SuthT)[0]=0;
-((int*)&RefT)[0]=0;
+((int*)&Twall)[0]=0;
 ((int*)&gama)[0]=0;
+((int*)&RefT)[0]=0;
+((int*)&SuthT)[0]=0;
 ((int*)&Re)[0]=0;
 ((int*)&Pr)[0]=0;
 ((int*)&gamma_m1)[0]=0;
@@ -171,12 +171,12 @@ __global__ void ops_internal_this_is_stupid() {
 ((int*)&inv_2)[0]=0;
 ((int*)&inv_3)[0]=0;
 ((int*)&xts)[0]=0;
+((int*)&k_0)[0]=0;
 ((int*)&tripA)[0]=0;
 ((int*)&omega_0)[0]=0;
-((int*)&k_0)[0]=0;
 ((int*)&L)[0]=0;
-((int*)&b)[0]=0;
 ((int*)&H)[0]=0;
+((int*)&b)[0]=0;
 ((int*)&a)[0]=0;
 ((int*)&rcinv4)[0]=0;
 ((int*)&rcinv5)[0]=0;
@@ -247,24 +247,24 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Delta1block0_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"Twall")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Twall_OPSCONSTANT), dat, dim*size));
-  }
-  else
   if (!strcmp(name,"Minf")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Minf_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"SuthT")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(SuthT_OPSCONSTANT), dat, dim*size));
+  if (!strcmp(name,"Twall")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Twall_OPSCONSTANT), dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"gama")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(gama_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"RefT")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(RefT_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"gama")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(gama_OPSCONSTANT), dat, dim*size));
+  if (!strcmp(name,"SuthT")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(SuthT_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"Re")) {
@@ -299,6 +299,10 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(xts_OPSCONSTANT), dat, dim*size));
   }
   else
+  if (!strcmp(name,"k_0")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(k_0_OPSCONSTANT), dat, dim*size));
+  }
+  else
   if (!strcmp(name,"tripA")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(tripA_OPSCONSTANT), dat, dim*size));
   }
@@ -307,20 +311,16 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(omega_0_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"k_0")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(k_0_OPSCONSTANT), dat, dim*size));
-  }
-  else
   if (!strcmp(name,"L")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(L_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"b")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(b_OPSCONSTANT), dat, dim*size));
-  }
-  else
   if (!strcmp(name,"H")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(H_OPSCONSTANT), dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"b")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(b_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"a")) {
@@ -517,40 +517,40 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel063_hip_kernel.cpp"
 #include "opensbliblock00Kernel064_hip_kernel.cpp"
 #include "opensbliblock00Kernel065_hip_kernel.cpp"
-#include "opensbliblock00Kernel007_hip_kernel.cpp"
-#include "opensbliblock00Kernel010_hip_kernel.cpp"
-#include "opensbliblock00Kernel009_hip_kernel.cpp"
-#include "opensbliblock00Kernel012_hip_kernel.cpp"
-#include "opensbliblock00Kernel015_hip_kernel.cpp"
 #include "opensbliblock00Kernel005_hip_kernel.cpp"
+#include "opensbliblock00Kernel009_hip_kernel.cpp"
+#include "opensbliblock00Kernel006_hip_kernel.cpp"
+#include "opensbliblock00Kernel010_hip_kernel.cpp"
+#include "opensbliblock00Kernel015_hip_kernel.cpp"
+#include "opensbliblock00Kernel004_hip_kernel.cpp"
 #include "opensbliblock00Kernel019_hip_kernel.cpp"
 #include "opensbliblock00Kernel018_hip_kernel.cpp"
 #include "opensbliblock00Kernel000_hip_kernel.cpp"
 #include "opensbliblock00Kernel001_hip_kernel.cpp"
 #include "opensbliblock00Kernel017_hip_kernel.cpp"
-#include "opensbliblock00Kernel029_hip_kernel.cpp"
+#include "opensbliblock00Kernel028_hip_kernel.cpp"
 #include "opensbliblock00Kernel030_hip_kernel.cpp"
 #include "opensbliblock00Kernel031_hip_kernel.cpp"
 #include "opensbliblock00Kernel032_hip_kernel.cpp"
+#include "opensbliblock00Kernel033_hip_kernel.cpp"
+#include "opensbliblock00Kernel034_hip_kernel.cpp"
 #include "opensbliblock00Kernel035_hip_kernel.cpp"
 #include "opensbliblock00Kernel036_hip_kernel.cpp"
 #include "opensbliblock00Kernel037_hip_kernel.cpp"
 #include "opensbliblock00Kernel038_hip_kernel.cpp"
-#include "opensbliblock00Kernel039_hip_kernel.cpp"
 #include "opensbliblock00Kernel040_hip_kernel.cpp"
 #include "opensbliblock00Kernel041_hip_kernel.cpp"
 #include "opensbliblock00Kernel042_hip_kernel.cpp"
-#include "opensbliblock00Kernel043_hip_kernel.cpp"
 #include "opensbliblock00Kernel044_hip_kernel.cpp"
-#include "opensbliblock00Kernel028_hip_kernel.cpp"
-#include "opensbliblock00Kernel033_hip_kernel.cpp"
-#include "opensbliblock00Kernel034_hip_kernel.cpp"
+#include "opensbliblock00Kernel029_hip_kernel.cpp"
+#include "opensbliblock00Kernel039_hip_kernel.cpp"
+#include "opensbliblock00Kernel043_hip_kernel.cpp"
 #include "opensbliblock00Kernel061_hip_kernel.cpp"
 #include "opensbliblock00Kernel091_hip_kernel.cpp"
-#include "monitor_0_p_B0_hip_kernel.cpp"
-#include "monitor_1_p_B0_hip_kernel.cpp"
-#include "monitor_2_p_B0_hip_kernel.cpp"
-#include "monitor_3_p_B0_hip_kernel.cpp"
-#include "monitor_4_p_B0_hip_kernel.cpp"
-#include "monitor_5_p_B0_hip_kernel.cpp"
-#include "monitor_6_p_B0_hip_kernel.cpp"
+#include "monitor_0_rhou0_B0_hip_kernel.cpp"
+#include "monitor_1_rhou0_B0_hip_kernel.cpp"
+#include "monitor_2_rhou0_B0_hip_kernel.cpp"
+#include "monitor_3_rhou0_B0_hip_kernel.cpp"
+#include "monitor_4_rhou0_B0_hip_kernel.cpp"
+#include "monitor_5_rhou0_B0_hip_kernel.cpp"
+#include "monitor_6_rhou0_B0_hip_kernel.cpp"

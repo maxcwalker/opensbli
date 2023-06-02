@@ -7,8 +7,8 @@ static int dims_opensbliblock00Kernel006_h [3][1] = {{0}};
 //user function
 __device__
 
-void opensbliblock00Kernel006_gpu(const ACC<double> &p_B0,
-  const ACC<double> &rho_B0,
+void opensbliblock00Kernel006_gpu(const ACC<double> &rho_B0,
+  const ACC<double> &p_B0,
   ACC<double> &a_B0)
 {
    a_B0(0,0) = sqrt(gama*p_B0(0,0)/rho_B0(0,0));

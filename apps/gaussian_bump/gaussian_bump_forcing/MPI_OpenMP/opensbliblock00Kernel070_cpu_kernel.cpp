@@ -72,7 +72,7 @@ void ops_par_loop_opensbliblock00Kernel070_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ x1_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ x0_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
   double * __restrict__ wk3_B0_p = (double *)(args[1].data + base1);
@@ -106,31 +106,31 @@ void ops_par_loop_opensbliblock00Kernel070_execute(ops_kernel_descriptor *desc) 
     #endif
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
       int idx[] = {arg_idx[0]+n_x, arg_idx[1]+n_y};
-      const ACC<double> x1_B0(xdim0_opensbliblock00Kernel070, x1_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel070*1);
+      const ACC<double> x0_B0(xdim0_opensbliblock00Kernel070, x0_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel070*1);
       ACC<double> wk3_B0(xdim1_opensbliblock00Kernel070, wk3_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel070*1);
       
-    wk3_B0(0,0) = inv_1*((idx[0] == 0) ? (
-   -3*x1_B0(2,0) + (rc12)*x1_B0(3,0) -
-      rc11*x1_B0(4,0) - rc13*x1_B0(0,0) + 4*x1_B0(1,0)
+    wk3_B0(0,0) = inv_2*((idx[0] == 0) ? (
+   (rc13)*x0_B0(3,0) - 3*x0_B0(2,0) +
+      4*x0_B0(1,0) - rc12*x0_B0(0,0) - rc11*x0_B0(4,0)
 )
 : ((idx[0] == 1) ? (
 
-      -rc7*x1_B0(2,0) + (rc14)*x1_B0(3,0) - rc15*x1_B0(0,0) + (rc16)*x1_B0(1,0)
-      - rc11*x1_B0(-1,0)
+      (rc16)*x0_B0(3,0) - rc7*x0_B0(2,0) - rc11*x0_B0(-1,0) + (rc14)*x0_B0(1,0)
+      - rc15*x0_B0(0,0)
 )
 : ((idx[0] == block0np0 - 1) ? (
-   (rc11)*x1_B0(-4,0) -
-      4*x1_B0(-1,0) + (rc13)*x1_B0(0,0) - rc12*x1_B0(-3,0) + 3*x1_B0(-2,0)
+   3*x0_B0(-2,0) -
+      4*x0_B0(-1,0) - rc13*x0_B0(-3,0) + (rc12)*x0_B0(0,0) +
+      (rc11)*x0_B0(-4,0)
 )
-:
-      ((idx[0] == block0np0 - 2) ? (
-   (rc7)*x1_B0(-2,0) + (rc15)*x1_B0(0,0) -
-      rc14*x1_B0(-3,0) + (rc11)*x1_B0(1,0) - rc16*x1_B0(-1,0)
+: ((idx[0] == block0np0 - 2) ? (
+   -rc14*x0_B0(-1,0) +
+      (rc7)*x0_B0(-2,0) + (rc11)*x0_B0(1,0) - rc16*x0_B0(-3,0) +
+      (rc15)*x0_B0(0,0)
 )
 : (
-
-      -rc14*x1_B0(2,0) + (rc14)*x1_B0(-2,0) + (rc17)*x1_B0(1,0) -
-      rc17*x1_B0(-1,0)
+   -rc16*x0_B0(2,0) + (rc16)*x0_B0(-2,0) -
+      rc17*x0_B0(-1,0) + (rc17)*x0_B0(1,0)
 )))));
 
 

@@ -17,26 +17,26 @@ void opensbliblock00Kernel042(const ptr_double x1_B0,
 {
    double localeval_0 = 0.0;
     localeval_0 = ((idx[1] == 0) ? (
-   inv_0*(4*OPS_ACC(x1_B0, 0,1) - rc8*OPS_ACC(x1_B0, 0,0) -
-      rc9*OPS_ACC(x1_B0, 0,4) + (rc10)*OPS_ACC(x1_B0, 0,3) - 3*OPS_ACC(x1_B0, 0,2))
+   inv_1*(-rc8*OPS_ACC(x1_B0, 0,4) + 4*OPS_ACC(x1_B0, 0,1) -
+      3*OPS_ACC(x1_B0, 0,2) + (rc9)*OPS_ACC(x1_B0, 0,3) - rc10*OPS_ACC(x1_B0, 0,0))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_0*(18*OPS_ACC(x1_B0, 0,1) - 10*OPS_ACC(x1_B0, 0,0) + OPS_ACC(x1_B0, 0,3) - 3*OPS_ACC(x1_B0, 0,-1) -
-      6*OPS_ACC(x1_B0, 0,2))
+      (rc11)*inv_1*(18*OPS_ACC(x1_B0, 0,1) - 6*OPS_ACC(x1_B0, 0,2) + OPS_ACC(x1_B0, 0,3) - 3*OPS_ACC(x1_B0, 0,-1) -
+      10*OPS_ACC(x1_B0, 0,0))
 )
 : ((idx[1] == block0np1 - 1) ? (
-   inv_0*(-rc10*OPS_ACC(x1_B0, 0,-3) +
-      3*OPS_ACC(x1_B0, 0,-2) + (rc9)*OPS_ACC(x1_B0, 0,-4) + (rc8)*OPS_ACC(x1_B0, 0,0) - 4*OPS_ACC(x1_B0, 0,-1))
+   inv_1*((rc8)*OPS_ACC(x1_B0, 0,-4) +
+      3*OPS_ACC(x1_B0, 0,-2) - rc9*OPS_ACC(x1_B0, 0,-3) - 4*OPS_ACC(x1_B0, 0,-1) + (rc10)*OPS_ACC(x1_B0, 0,0))
 )
 :
       ((idx[1] == block0np1 - 2) ? (
-   (rc11)*inv_0*(-OPS_ACC(x1_B0, 0,-3) + 3*OPS_ACC(x1_B0, 0,1) +
-      6*OPS_ACC(x1_B0, 0,-2) + 10*OPS_ACC(x1_B0, 0,0) - 18*OPS_ACC(x1_B0, 0,-1))
+   (rc11)*inv_1*(3*OPS_ACC(x1_B0, 0,1) + 6*OPS_ACC(x1_B0, 0,-2) -
+      OPS_ACC(x1_B0, 0,-3) - 18*OPS_ACC(x1_B0, 0,-1) + 10*OPS_ACC(x1_B0, 0,0))
 )
 : (
 
-      (rc11)*inv_0*(-8*OPS_ACC(x1_B0, 0,-1) + 8*OPS_ACC(x1_B0, 0,1) + OPS_ACC(x1_B0, 0,-2) -
+      (rc11)*inv_1*(-8*OPS_ACC(x1_B0, 0,-1) + OPS_ACC(x1_B0, 0,-2) + 8*OPS_ACC(x1_B0, 0,1) -
       OPS_ACC(x1_B0, 0,2))
 )))));
 

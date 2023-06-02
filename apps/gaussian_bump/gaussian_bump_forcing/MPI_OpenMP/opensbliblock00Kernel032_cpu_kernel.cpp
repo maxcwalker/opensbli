@@ -72,7 +72,7 @@ void ops_par_loop_opensbliblock00Kernel032_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ u1_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ mu_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
   double * __restrict__ wk4_B0_p = (double *)(args[1].data + base1);
@@ -106,32 +106,22 @@ void ops_par_loop_opensbliblock00Kernel032_execute(ops_kernel_descriptor *desc) 
     #endif
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
       int idx[] = {arg_idx[0]+n_x, arg_idx[1]+n_y};
-      const ACC<double> u1_B0(xdim0_opensbliblock00Kernel032, u1_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel032*1);
+      const ACC<double> mu_B0(xdim0_opensbliblock00Kernel032, mu_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel032*1);
       ACC<double> wk4_B0(xdim1_opensbliblock00Kernel032, wk4_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel032*1);
       
-    wk4_B0(0,0) = inv_1*((idx[0] == 0) ? (
-   -3*u1_B0(2,0) - rc11*u1_B0(4,0) +
-      4*u1_B0(1,0) - rc13*u1_B0(0,0) + (rc12)*u1_B0(3,0)
+    wk4_B0(0,0) = inv_0*((idx[1] == 0) ? (
+   -rc12*mu_B0(0,0) + (rc13)*mu_B0(0,3) -
+      3*mu_B0(0,2) + 4*mu_B0(0,1) - rc11*mu_B0(0,4)
 )
-: ((idx[0] == 1) ? (
+: ((idx[1] == 1) ? (
 
-      -rc7*u1_B0(2,0) - rc11*u1_B0(-1,0) + (rc16)*u1_B0(1,0) - rc15*u1_B0(0,0) +
-      (rc14)*u1_B0(3,0)
-)
-: ((idx[0] == block0np0 - 1) ? (
-   3*u1_B0(-2,0) -
-      4*u1_B0(-1,0) - rc12*u1_B0(-3,0) + (rc13)*u1_B0(0,0) +
-      (rc11)*u1_B0(-4,0)
-)
-: ((idx[0] == block0np0 - 2) ? (
-   -rc16*u1_B0(-1,0) +
-      (rc7)*u1_B0(-2,0) + (rc11)*u1_B0(1,0) - rc14*u1_B0(-3,0) +
-      (rc15)*u1_B0(0,0)
+      -rc15*mu_B0(0,0) - rc11*mu_B0(0,-1) + (rc16)*mu_B0(0,3) - rc7*mu_B0(0,2) +
+      (rc14)*mu_B0(0,1)
 )
 : (
-   (rc17)*u1_B0(1,0) - rc14*u1_B0(2,0) +
-      (rc14)*u1_B0(-2,0) - rc17*u1_B0(-1,0)
-)))));
+   -rc16*mu_B0(0,2) + (rc17)*mu_B0(0,1) -
+      rc17*mu_B0(0,-1) + (rc16)*mu_B0(0,-2)
+)));
 
 
     }

@@ -76,11 +76,11 @@
 
 \begin{dmath}{rhoE{_{B0}}}[{0}] = \frac{1}{\rho} \,.\, \left(0.5 \,.\, \left(rhou_{0} \right)^{2} + 0.5 \,.\, \left(rhou_{1} \right)^{2}\right) + \frac{T \,.\, \rho}{\left(Minf \right)^{2} \,.\, gama \,.\, \left(gama - 1\right)}\end{dmath}
 
-\noindent The kernel is MetricsEquation evaluation, block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}localeval_{0} = \begin{cases} inv_0 \,.\, \left(4 \,.\, {x_{1}{_{B0}}}[{0}] - \frac{25 \,.\, {x_{1}{_{B0}}}[{0}]}{12} - \frac{{x_{1}{_{B0}}}[{0}]}{4} + \frac{4 \,.\, {x_{1}{_{B0}}}[{0}]}{3} - 3 \,.\, {x_{1}{_{B0}}}[{0}]\right) & 
-\text{for}\: {idx}[{1}] = 0 \\\frac{inv_0}{12} \,.\, \left(18 \,.\, {x_{1}{_{B0}}}[{0}] - 10 \,.\, {x_{1}{_{B0}}}[{0}] + {x_{1}{_{B0}}}[{0}] - 3 \,.\, {x_{1}{_{B0}}}[{0}] - 6 \,.\, {x_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_0 
-\,.\, \left(- \frac{4 \,.\, {x_{1}{_{B0}}}[{0}]}{3} + 3 \,.\, {x_{1}{_{B0}}}[{0}] + \frac{{x_{1}{_{B0}}}[{0}]}{4} + \frac{25 \,.\, {x_{1}{_{B0}}}[{0}]}{12} - 4 \,.\, {x_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
-\\\frac{inv_0}{12} \,.\, \left(- {x_{1}{_{B0}}}[{0}] + 3 \,.\, {x_{1}{_{B0}}}[{0}] + 6 \,.\, {x_{1}{_{B0}}}[{0}] + 10 \,.\, {x_{1}{_{B0}}}[{0}] - 18 \,.\, {x_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_0}{12} \,.\, 
-\left(- 8 \,.\, {x_{1}{_{B0}}}[{0}] + 8 \,.\, {x_{1}{_{B0}}}[{0}] + {x_{1}{_{B0}}}[{0}] - {x_{1}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\noindent The kernel is MetricsEquation evaluation, block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}localeval_{0} = \begin{cases} inv_1 \,.\, \left(- \frac{{x_{1}{_{B0}}}[{0}]}{4} + 4 \,.\, {x_{1}{_{B0}}}[{0}] - 3 \,.\, {x_{1}{_{B0}}}[{0}] + \frac{4 \,.\, {x_{1}{_{B0}}}[{0}]}{3} - \frac{25 \,.\, {x_{1}{_{B0}}}[{0}]}{12}\right) & 
+\text{for}\: {idx}[{1}] = 0 \\\frac{inv_1}{12} \,.\, \left(18 \,.\, {x_{1}{_{B0}}}[{0}] - 6 \,.\, {x_{1}{_{B0}}}[{0}] + {x_{1}{_{B0}}}[{0}] - 3 \,.\, {x_{1}{_{B0}}}[{0}] - 10 \,.\, {x_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_1 
+\,.\, \left(\frac{{x_{1}{_{B0}}}[{0}]}{4} + 3 \,.\, {x_{1}{_{B0}}}[{0}] - \frac{4 \,.\, {x_{1}{_{B0}}}[{0}]}{3} - 4 \,.\, {x_{1}{_{B0}}}[{0}] + \frac{25 \,.\, {x_{1}{_{B0}}}[{0}]}{12}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
+\\\frac{inv_1}{12} \,.\, \left(3 \,.\, {x_{1}{_{B0}}}[{0}] + 6 \,.\, {x_{1}{_{B0}}}[{0}] - {x_{1}{_{B0}}}[{0}] - 18 \,.\, {x_{1}{_{B0}}}[{0}] + 10 \,.\, {x_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_1}{12} \,.\, 
+\left(- 8 \,.\, {x_{1}{_{B0}}}[{0}] + {x_{1}{_{B0}}}[{0}] + 8 \,.\, {x_{1}{_{B0}}}[{0}] - {x_{1}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
 \begin{dmath}{detJ{_{B0}}}[{0}] = localeval_{0}\end{dmath}
 
@@ -142,11 +142,11 @@
 
 \begin{dmath}{detJ{_{B0}}}[{0}] = {detJ{_{B0}}}[{0}]\end{dmath}
 
-\noindent The kernel is MetricsEquation evaluation, block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}localeval_{0} = \begin{cases} inv_0 \,.\, \left(\frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} - \frac{25 \,.\, {D_{11}{_{B0}}}[{0}]}{12} - \frac{{D_{11}{_{B0}}}[{0}]}{4} + 4 \,.\, {D_{11}{_{B0}}}[{0}] - 3 \,.\, {D_{11}{_{B0}}}[{0}]\right) & 
-\text{for}\: {idx}[{1}] = 0 \\\frac{inv_0}{12} \,.\, \left({D_{11}{_{B0}}}[{0}] - 3 \,.\, {D_{11}{_{B0}}}[{0}] - 10 \,.\, {D_{11}{_{B0}}}[{0}] + 18 \,.\, {D_{11}{_{B0}}}[{0}] - 6 \,.\, {D_{11}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_0 
-\,.\, \left(- \frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} - 4 \,.\, {D_{11}{_{B0}}}[{0}] + 3 \,.\, {D_{11}{_{B0}}}[{0}] + \frac{25 \,.\, {D_{11}{_{B0}}}[{0}]}{12} + \frac{{D_{11}{_{B0}}}[{0}]}{4}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
-\\\frac{inv_0}{12} \,.\, \left(- {D_{11}{_{B0}}}[{0}] - 18 \,.\, {D_{11}{_{B0}}}[{0}] + 6 \,.\, {D_{11}{_{B0}}}[{0}] + 10 \,.\, {D_{11}{_{B0}}}[{0}] + 3 \,.\, {D_{11}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_0}{12} 
-\,.\, \left(- 8 \,.\, {D_{11}{_{B0}}}[{0}] + {D_{11}{_{B0}}}[{0}] + 8 \,.\, {D_{11}{_{B0}}}[{0}] - {D_{11}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\noindent The kernel is MetricsEquation evaluation, block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}localeval_{0} = \begin{cases} inv_1 \,.\, \left(- \frac{25 \,.\, {D_{11}{_{B0}}}[{0}]}{12} + \frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} - 3 \,.\, {D_{11}{_{B0}}}[{0}] + 4 \,.\, {D_{11}{_{B0}}}[{0}] - \frac{{D_{11}{_{B0}}}[{0}]}{4}\right) & 
+\text{for}\: {idx}[{1}] = 0 \\\frac{inv_1}{12} \,.\, \left(- 10 \,.\, {D_{11}{_{B0}}}[{0}] - 3 \,.\, {D_{11}{_{B0}}}[{0}] + {D_{11}{_{B0}}}[{0}] - 6 \,.\, {D_{11}{_{B0}}}[{0}] + 18 \,.\, {D_{11}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 
+\\inv_1 \,.\, \left(\frac{25 \,.\, {D_{11}{_{B0}}}[{0}]}{12} + 3 \,.\, {D_{11}{_{B0}}}[{0}] - 4 \,.\, {D_{11}{_{B0}}}[{0}] - \frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} + \frac{{D_{11}{_{B0}}}[{0}]}{4}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
+\\\frac{inv_1}{12} \,.\, \left(10 \,.\, {D_{11}{_{B0}}}[{0}] + 6 \,.\, {D_{11}{_{B0}}}[{0}] - 18 \,.\, {D_{11}{_{B0}}}[{0}] - {D_{11}{_{B0}}}[{0}] + 3 \,.\, {D_{11}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_1}{12} 
+\,.\, \left(- {D_{11}{_{B0}}}[{0}] + 8 \,.\, {D_{11}{_{B0}}}[{0}] + {D_{11}{_{B0}}}[{0}] - 8 \,.\, {D_{11}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
 \begin{dmath}{SD_{111}{_{B0}}}[{0}] = localeval_{0}\end{dmath}
 
@@ -318,39 +318,39 @@
 \begin{dmath}{rhoE{_{B0}}}[{0}] = \begin{cases} 1.0590824 & \text{for}\: x_{0} > 500.0 \\0.94644428042 & \text{otherwise} \end{cases}\end{dmath}
 
 \noindent Do loop stage,0, 2\\
-\\\noindent The kernel is CRu1, block is 0\\\noindent The ranges are -3,block0np0 + 4,-3,block0np1 + 4\\\begin{dmath}{u_{1}{_{B0}}}[{0}] = \frac{{rhou_{1}{_{B0}}}[{0}]}{{\rho{_{B0}}}[{0}]}\end{dmath}
+\\\noindent The kernel is CRu0, block is 0\\\noindent The ranges are -3,block0np0 + 4,-3,block0np1 + 4\\\begin{dmath}{u_{0}{_{B0}}}[{0}] = \frac{{rhou_{0}{_{B0}}}[{0}]}{{\rho{_{B0}}}[{0}]}\end{dmath}
 
-\noindent The kernel is CRu0, block is 0\\\noindent The ranges are -3,block0np0 + 4,-3,block0np1 + 4\\\begin{dmath}{u_{0}{_{B0}}}[{0}] = \frac{{rhou_{0}{_{B0}}}[{0}]}{{\rho{_{B0}}}[{0}]}\end{dmath}
+\noindent The kernel is CRu1, block is 0\\\noindent The ranges are -3,block0np0 + 4,-3,block0np1 + 4\\\begin{dmath}{u_{1}{_{B0}}}[{0}] = \frac{{rhou_{1}{_{B0}}}[{0}]}{{\rho{_{B0}}}[{0}]}\end{dmath}
 
 \noindent The kernel is CRp, block is 0\\\noindent The ranges are -3,block0np0 + 4,-3,block0np1 + 4\\\begin{dmath}{p{_{B0}}}[{0}] = \left(gama - 1\right) \,.\, \left({rhoE{_{B0}}}[{0}] - \frac{\left({u_{0}{_{B0}}}[{0}] \right)^{2}}{2} \,.\, {\rho{_{B0}}}[{0}] - \frac{\left({u_{1}{_{B0}}}[{0}] \right)^{2}}{2} \,.\, 
 {\rho{_{B0}}}[{0}]\right)\end{dmath}
 
-\noindent The kernel is ConstituentRelations evaluation, block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}localeval_{0} = \begin{cases} inv_0 \,.\, \left(- 3 \,.\, {u_{1}{_{B0}}}[{0}] + \frac{4 \,.\, {u_{1}{_{B0}}}[{0}]}{3} - \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} - \frac{{u_{1}{_{B0}}}[{0}]}{4} + 4 \,.\, {u_{1}{_{B0}}}[{0}]\right) & 
-\text{for}\: {idx}[{1}] = 0 \\\frac{inv_0}{12} \,.\, \left(- 3 \,.\, {u_{1}{_{B0}}}[{0}] - 6 \,.\, {u_{1}{_{B0}}}[{0}] + {u_{1}{_{B0}}}[{0}] - 10 \,.\, {u_{1}{_{B0}}}[{0}] + 18 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_0 
-\,.\, \left(- 4 \,.\, {u_{1}{_{B0}}}[{0}] + 3 \,.\, {u_{1}{_{B0}}}[{0}] + \frac{{u_{1}{_{B0}}}[{0}]}{4} + \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} - \frac{4 \,.\, {u_{1}{_{B0}}}[{0}]}{3}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
-\\\frac{inv_0}{12} \,.\, \left(- 18 \,.\, {u_{1}{_{B0}}}[{0}] + 6 \,.\, {u_{1}{_{B0}}}[{0}] + 10 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}] + 3 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_0}{12} \,.\, 
-\left(- 8 \,.\, {u_{1}{_{B0}}}[{0}] + {u_{1}{_{B0}}}[{0}] + 8 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\noindent The kernel is ConstituentRelations evaluation, block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}localeval_{0} = \begin{cases} inv_0 \,.\, \left(4 \,.\, {u_{1}{_{B0}}}[{1}] - \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} + \frac{4 \,.\, {u_{1}{_{B0}}}[{3}]}{3} - \frac{{u_{1}{_{B0}}}[{4}]}{4} - 3 \,.\, {u_{1}{_{B0}}}[{2}]\right) & 
+\text{for}\: {idx}[{0}] = 0 \\\frac{inv_0}{12} \,.\, \left(18 \,.\, {u_{1}{_{B0}}}[{1}] - 10 \,.\, {u_{1}{_{B0}}}[{0}] + {u_{1}{_{B0}}}[{3}] - 3 \,.\, {u_{1}{_{B0}}}[{-1}] - 6 \,.\, {u_{1}{_{B0}}}[{2}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_0 
+\,.\, \left(\frac{{u_{1}{_{B0}}}[{-4}]}{4} + \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} + 3 \,.\, {u_{1}{_{B0}}}[{-2}] - 4 \,.\, {u_{1}{_{B0}}}[{-1}] - \frac{4 \,.\, {u_{1}{_{B0}}}[{-3}]}{3}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 
+\\\frac{inv_0}{12} \,.\, \left(3 \,.\, {u_{1}{_{B0}}}[{1}] + 10 \,.\, {u_{1}{_{B0}}}[{0}] + 6 \,.\, {u_{1}{_{B0}}}[{-2}] - 18 \,.\, {u_{1}{_{B0}}}[{-1}] - {u_{1}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_0}{12} \,.\, 
+\left(- 8 \,.\, {u_{1}{_{B0}}}[{-1}] + 8 \,.\, {u_{1}{_{B0}}}[{1}] + {u_{1}{_{B0}}}[{-2}] - {u_{1}{_{B0}}}[{2}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{1} = \begin{cases} inv_0 \,.\, \left(- \frac{{u_{0}{_{B0}}}[{0}]}{4} + \frac{4 \,.\, {u_{0}{_{B0}}}[{0}]}{3} - 3 \,.\, {u_{0}{_{B0}}}[{0}] + 4 \,.\, {u_{0}{_{B0}}}[{0}] - \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12}\right) & 
-\text{for}\: {idx}[{1}] = 0 \\\frac{inv_0}{12} \,.\, \left({u_{0}{_{B0}}}[{0}] - 3 \,.\, {u_{0}{_{B0}}}[{0}] - 6 \,.\, {u_{0}{_{B0}}}[{0}] + 18 \,.\, {u_{0}{_{B0}}}[{0}] - 10 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_0 
-\,.\, \left(- 4 \,.\, {u_{0}{_{B0}}}[{0}] + 3 \,.\, {u_{0}{_{B0}}}[{0}] - \frac{4 \,.\, {u_{0}{_{B0}}}[{0}]}{3} + \frac{{u_{0}{_{B0}}}[{0}]}{4} + \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
-\\\frac{inv_0}{12} \,.\, \left(- 18 \,.\, {u_{0}{_{B0}}}[{0}] + 6 \,.\, {u_{0}{_{B0}}}[{0}] - {u_{0}{_{B0}}}[{0}] + 3 \,.\, {u_{0}{_{B0}}}[{0}] + 10 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_0}{12} \,.\, 
-\left(- 8 \,.\, {u_{0}{_{B0}}}[{0}] + 8 \,.\, {u_{0}{_{B0}}}[{0}] + {u_{0}{_{B0}}}[{0}] - {u_{0}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\begin{dmath}localeval_{1} = \begin{cases} inv_1 \,.\, \left(- \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} - \frac{{u_{1}{_{B0}}}[{0}]}{4} + \frac{4 \,.\, {u_{1}{_{B0}}}[{0}]}{3} - 3 \,.\, {u_{1}{_{B0}}}[{0}] + 4 \,.\, {u_{1}{_{B0}}}[{0}]\right) & 
+\text{for}\: {idx}[{1}] = 0 \\\frac{inv_1}{12} \,.\, \left(- 3 \,.\, {u_{1}{_{B0}}}[{0}] - 10 \,.\, {u_{1}{_{B0}}}[{0}] + {u_{1}{_{B0}}}[{0}] - 6 \,.\, {u_{1}{_{B0}}}[{0}] + 18 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_1 
+\,.\, \left(- 4 \,.\, {u_{1}{_{B0}}}[{0}] + 3 \,.\, {u_{1}{_{B0}}}[{0}] + \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} - \frac{4 \,.\, {u_{1}{_{B0}}}[{0}]}{3} + \frac{{u_{1}{_{B0}}}[{0}]}{4}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
+\\\frac{inv_1}{12} \,.\, \left(- 18 \,.\, {u_{1}{_{B0}}}[{0}] + 6 \,.\, {u_{1}{_{B0}}}[{0}] + 10 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}] + 3 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_1}{12} \,.\, 
+\left(- 8 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}] + 8 \,.\, {u_{1}{_{B0}}}[{0}] + {u_{1}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{2} = \begin{cases} inv_1 \,.\, \left(- \frac{{u_{1}{_{B0}}}[{4}]}{4} + \frac{4 \,.\, {u_{1}{_{B0}}}[{3}]}{3} - \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} + 4 \,.\, {u_{1}{_{B0}}}[{1}] - 3 \,.\, {u_{1}{_{B0}}}[{2}]\right) & 
-\text{for}\: {idx}[{0}] = 0 \\\frac{inv_1}{12} \,.\, \left(- 3 \,.\, {u_{1}{_{B0}}}[{-1}] + {u_{1}{_{B0}}}[{3}] - 10 \,.\, {u_{1}{_{B0}}}[{0}] + 18 \,.\, {u_{1}{_{B0}}}[{1}] - 6 \,.\, {u_{1}{_{B0}}}[{2}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_1 
-\,.\, \left(- 4 \,.\, {u_{1}{_{B0}}}[{-1}] + 3 \,.\, {u_{1}{_{B0}}}[{-2}] + \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} + \frac{{u_{1}{_{B0}}}[{-4}]}{4} - \frac{4 \,.\, {u_{1}{_{B0}}}[{-3}]}{3}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 
-\\\frac{inv_1}{12} \,.\, \left(- 18 \,.\, {u_{1}{_{B0}}}[{-1}] + 6 \,.\, {u_{1}{_{B0}}}[{-2}] + 10 \,.\, {u_{1}{_{B0}}}[{0}] + 3 \,.\, {u_{1}{_{B0}}}[{1}] - {u_{1}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_1}{12} 
-\,.\, \left(8 \,.\, {u_{1}{_{B0}}}[{1}] - 8 \,.\, {u_{1}{_{B0}}}[{-1}] + {u_{1}{_{B0}}}[{-2}] - {u_{1}{_{B0}}}[{2}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\begin{dmath}localeval_{2} = \begin{cases} inv_0 \,.\, \left(- 3 \,.\, {u_{0}{_{B0}}}[{2}] + \frac{4 \,.\, {u_{0}{_{B0}}}[{3}]}{3} - \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12} + 4 \,.\, {u_{0}{_{B0}}}[{1}] - \frac{{u_{0}{_{B0}}}[{4}]}{4}\right) & 
+\text{for}\: {idx}[{0}] = 0 \\\frac{inv_0}{12} \,.\, \left(- 6 \,.\, {u_{0}{_{B0}}}[{2}] - 3 \,.\, {u_{0}{_{B0}}}[{-1}] + {u_{0}{_{B0}}}[{3}] - 10 \,.\, {u_{0}{_{B0}}}[{0}] + 18 \,.\, {u_{0}{_{B0}}}[{1}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_0 
+\,.\, \left(- 4 \,.\, {u_{0}{_{B0}}}[{-1}] + 3 \,.\, {u_{0}{_{B0}}}[{-2}] + \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12} + \frac{{u_{0}{_{B0}}}[{-4}]}{4} - \frac{4 \,.\, {u_{0}{_{B0}}}[{-3}]}{3}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 
+\\\frac{inv_0}{12} \,.\, \left(- 18 \,.\, {u_{0}{_{B0}}}[{-1}] + 6 \,.\, {u_{0}{_{B0}}}[{-2}] + 10 \,.\, {u_{0}{_{B0}}}[{0}] + 3 \,.\, {u_{0}{_{B0}}}[{1}] - {u_{0}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_0}{12} 
+\,.\, \left(- 8 \,.\, {u_{0}{_{B0}}}[{-1}] + 8 \,.\, {u_{0}{_{B0}}}[{1}] - {u_{0}{_{B0}}}[{2}] + {u_{0}{_{B0}}}[{-2}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{3} = \begin{cases} inv_1 \,.\, \left(\frac{4 \,.\, {u_{0}{_{B0}}}[{3}]}{3} - 3 \,.\, {u_{0}{_{B0}}}[{2}] - \frac{{u_{0}{_{B0}}}[{4}]}{4} + 4 \,.\, {u_{0}{_{B0}}}[{1}] - \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12}\right) & 
-\text{for}\: {idx}[{0}] = 0 \\\frac{inv_1}{12} \,.\, \left({u_{0}{_{B0}}}[{3}] - 3 \,.\, {u_{0}{_{B0}}}[{-1}] - 6 \,.\, {u_{0}{_{B0}}}[{2}] + 18 \,.\, {u_{0}{_{B0}}}[{1}] - 10 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_1 
-\,.\, \left(3 \,.\, {u_{0}{_{B0}}}[{-2}] - 4 \,.\, {u_{0}{_{B0}}}[{-1}] - \frac{4 \,.\, {u_{0}{_{B0}}}[{-3}]}{3} + \frac{{u_{0}{_{B0}}}[{-4}]}{4} + \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 
-\\\frac{inv_1}{12} \,.\, \left(6 \,.\, {u_{0}{_{B0}}}[{-2}] - 18 \,.\, {u_{0}{_{B0}}}[{-1}] - {u_{0}{_{B0}}}[{-3}] + 3 \,.\, {u_{0}{_{B0}}}[{1}] + 10 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_1}{12} \,.\, 
-\left(8 \,.\, {u_{0}{_{B0}}}[{1}] + {u_{0}{_{B0}}}[{-2}] - 8 \,.\, {u_{0}{_{B0}}}[{-1}] - {u_{0}{_{B0}}}[{2}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\begin{dmath}localeval_{3} = \begin{cases} inv_1 \,.\, \left(\frac{4 \,.\, {u_{0}{_{B0}}}[{0}]}{3} - \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12} - \frac{{u_{0}{_{B0}}}[{0}]}{4} + 4 \,.\, {u_{0}{_{B0}}}[{0}] - 3 \,.\, {u_{0}{_{B0}}}[{0}]\right) & 
+\text{for}\: {idx}[{1}] = 0 \\\frac{inv_1}{12} \,.\, \left({u_{0}{_{B0}}}[{0}] - 3 \,.\, {u_{0}{_{B0}}}[{0}] - 10 \,.\, {u_{0}{_{B0}}}[{0}] + 18 \,.\, {u_{0}{_{B0}}}[{0}] - 6 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_1 
+\,.\, \left(- \frac{4 \,.\, {u_{0}{_{B0}}}[{0}]}{3} - 4 \,.\, {u_{0}{_{B0}}}[{0}] + 3 \,.\, {u_{0}{_{B0}}}[{0}] + \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12} + \frac{{u_{0}{_{B0}}}[{0}]}{4}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
+\\\frac{inv_1}{12} \,.\, \left(- {u_{0}{_{B0}}}[{0}] - 18 \,.\, {u_{0}{_{B0}}}[{0}] + 6 \,.\, {u_{0}{_{B0}}}[{0}] + 10 \,.\, {u_{0}{_{B0}}}[{0}] + 3 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_1}{12} \,.\, 
+\left(- 8 \,.\, {u_{0}{_{B0}}}[{0}] + {u_{0}{_{B0}}}[{0}] - {u_{0}{_{B0}}}[{0}] + 8 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}{\theta{_{B0}}}[{0}] = \frac{\left(localeval_{0} \,.\, {D_{11}{_{B0}}}[{0}] + localeval_{3} \right)^{2} \,.\, \left(- \frac{1}{2} \,.\, \tanh{\left (250.0 \,.\, localeval_{0} \,.\, {D_{11}{_{B0}}}[{0}] + 250.0 \,.\, localeval_{3} + 2.5 
-\right )} + \frac{1}{2}\right)}{epsilon + \left(localeval_{0} \,.\, {D_{11}{_{B0}}}[{0}] + localeval_{3} \right)^{2} + \left(- localeval_{1} \,.\, {D_{11}{_{B0}}}[{0}] + localeval_{2} \right)^{2}}\end{dmath}
+\begin{dmath}{\theta{_{B0}}}[{0}] = \frac{\left(localeval_{1} \,.\, {D_{11}{_{B0}}}[{0}] + localeval_{2} \right)^{2} \,.\, \left(- \frac{1}{2} \,.\, \tanh{\left (250.0 \,.\, localeval_{1} \,.\, {D_{11}{_{B0}}}[{0}] + 250.0 \,.\, localeval_{2} + 2.5 
+\right )} + \frac{1}{2}\right)}{epsilon + \left(localeval_{0} - localeval_{3} \,.\, {D_{11}{_{B0}}}[{0}] \right)^{2} + \left(localeval_{1} \,.\, {D_{11}{_{B0}}}[{0}] + localeval_{2} \right)^{2}}\end{dmath}
 
 \noindent The kernel is CRa, block is 0\\\noindent The ranges are -3,block0np0 + 4,-3,block0np1 + 4\\\begin{dmath}{a{_{B0}}}[{0}] = \left(\frac{gama \,.\, {p{_{B0}}}[{0}]}{{\rho{_{B0}}}[{0}]} \right)^{0.5}\end{dmath}
 
@@ -366,7 +366,7 @@
 
 \begin{dmath}AVG_{0 u1} = AVG_{0 inv \rho} \,.\, \left(\left({\rho{_{B0}}}[{0}] \right)^{\frac{1}{2}} \,.\, {u_{1}{_{B0}}}[{0}] + \left({\rho{_{B0}}}[{1}] \right)^{\frac{1}{2}} \,.\, {u_{1}{_{B0}}}[{1}]\right)\end{dmath}
 
-\begin{dmath}AVG_{0 a} = \left(gamma_m1 \,.\, \left(AVG_{0 inv \rho} \,.\, \left(\frac{{p{_{B0}}}[{0}] + {rhoE{_{B0}}}[{0}]}{\left({\rho{_{B0}}}[{0}] \right)^{\frac{1}{2}}} + \frac{{p{_{B0}}}[{1}] + {rhoE{_{B0}}}[{1}]}{\left({\rho{_{B0}}}[{1}] 
+\begin{dmath}AVG_{0 a} = \left(gamma_m1 \,.\, \left(AVG_{0 inv \rho} \,.\, \left(\frac{{p{_{B0}}}[{1}] + {rhoE{_{B0}}}[{1}]}{\left({\rho{_{B0}}}[{1}] \right)^{\frac{1}{2}}} + \frac{{p{_{B0}}}[{0}] + {rhoE{_{B0}}}[{0}]}{\left({\rho{_{B0}}}[{0}] 
 \right)^{\frac{1}{2}}}\right) - \frac{1}{2} \,.\, \left(\left(AVG_{0 u0} \right)^{2} + \left(AVG_{0 u1} \right)^{2}\right)\right) \right)^{\frac{1}{2}}\end{dmath}
 
 \begin{dmath}inv_{AVG a} = \left(AVG_{0 a} \right)^{-1}\end{dmath}
@@ -518,16 +518,16 @@
 
 \begin{dmath}CS_{35} = AVG_{0 0 LEV 30} \,.\, {\rho{_{B0}}}[{3}] + AVG_{0 0 LEV 31} \,.\, {rhou_{0}{_{B0}}}[{3}] + AVG_{0 0 LEV 32} \,.\, {rhou_{1}{_{B0}}}[{3}] + AVG_{0 0 LEV 33} \,.\, {rhoE{_{B0}}}[{3}]\end{dmath}
 
-\begin{dmath}max_{\lambda 0 00} = \max\left(\left|{{u_{0}{_{B0}}}[{-2}]}\right|, \left|{{u_{0}{_{B0}}}[{-1}]}\right|, \left|{{u_{0}{_{B0}}}[{1}]}\right|, \left|{{u_{0}{_{B0}}}[{3}]}\right|, \left|{{u_{0}{_{B0}}}[{0}]}\right|, 
+\begin{dmath}max_{\lambda 0 00} = \max\left(\left|{{u_{0}{_{B0}}}[{-2}]}\right|, \left|{{u_{0}{_{B0}}}[{1}]}\right|, \left|{{u_{0}{_{B0}}}[{-1}]}\right|, \left|{{u_{0}{_{B0}}}[{3}]}\right|, \left|{{u_{0}{_{B0}}}[{0}]}\right|, 
 \left|{{u_{0}{_{B0}}}[{2}]}\right|\right)\end{dmath}
 
 \begin{dmath}max_{\lambda 0 11} = max_{\lambda 0 00}\end{dmath}
 
-\begin{dmath}max_{\lambda 0 22} = \max\left(\left|{{a{_{B0}}}[{0}] + {u_{0}{_{B0}}}[{0}]}\right|, \left|{{a{_{B0}}}[{-1}] + {u_{0}{_{B0}}}[{-1}]}\right|, \left|{{a{_{B0}}}[{1}] + {u_{0}{_{B0}}}[{1}]}\right|, \left|{{a{_{B0}}}[{2}] + 
-{u_{0}{_{B0}}}[{2}]}\right|, \left|{{a{_{B0}}}[{3}] + {u_{0}{_{B0}}}[{3}]}\right|, \left|{{a{_{B0}}}[{-2}] + {u_{0}{_{B0}}}[{-2}]}\right|\right)\end{dmath}
+\begin{dmath}max_{\lambda 0 22} = \max\left(\left|{{a{_{B0}}}[{1}] + {u_{0}{_{B0}}}[{1}]}\right|, \left|{{a{_{B0}}}[{3}] + {u_{0}{_{B0}}}[{3}]}\right|, \left|{{a{_{B0}}}[{0}] + {u_{0}{_{B0}}}[{0}]}\right|, \left|{{a{_{B0}}}[{-2}] + 
+{u_{0}{_{B0}}}[{-2}]}\right|, \left|{{a{_{B0}}}[{-1}] + {u_{0}{_{B0}}}[{-1}]}\right|, \left|{{a{_{B0}}}[{2}] + {u_{0}{_{B0}}}[{2}]}\right|\right)\end{dmath}
 
-\begin{dmath}max_{\lambda 0 33} = \max\left(\left|{{a{_{B0}}}[{2}] - {u_{0}{_{B0}}}[{2}]}\right|, \left|{{a{_{B0}}}[{-2}] - {u_{0}{_{B0}}}[{-2}]}\right|, \left|{{a{_{B0}}}[{1}] - {u_{0}{_{B0}}}[{1}]}\right|, \left|{{a{_{B0}}}[{0}] - 
-{u_{0}{_{B0}}}[{0}]}\right|, \left|{{a{_{B0}}}[{-1}] - {u_{0}{_{B0}}}[{-1}]}\right|, \left|{{a{_{B0}}}[{3}] - {u_{0}{_{B0}}}[{3}]}\right|\right)\end{dmath}
+\begin{dmath}max_{\lambda 0 33} = \max\left(\left|{{a{_{B0}}}[{2}] - {u_{0}{_{B0}}}[{2}]}\right|, \left|{{a{_{B0}}}[{3}] - {u_{0}{_{B0}}}[{3}]}\right|, \left|{{a{_{B0}}}[{1}] - {u_{0}{_{B0}}}[{1}]}\right|, \left|{{a{_{B0}}}[{-2}] - 
+{u_{0}{_{B0}}}[{-2}]}\right|, \left|{{a{_{B0}}}[{0}] - {u_{0}{_{B0}}}[{0}]}\right|, \left|{{a{_{B0}}}[{-1}] - {u_{0}{_{B0}}}[{-1}]}\right|\right)\end{dmath}
 
 \begin{dmath}TENO_{CT} = \left(10.0 \right)^{- \lfloor{teno_a1 - teno_a2 \,.\, \left(- \left(- {\theta{_{B0}}}[{0}] + 1 \right)^{4} \,.\, \left(4 \,.\, {\theta{_{B0}}}[{0}] + 1\right) + 1\right)}\rfloor}\end{dmath}
 
@@ -1244,143 +1244,142 @@ AVG_{1 u1}\right) + AVG_{1 u1} \,.\, Recon_{0}\end{dmath}
 \frac{1}{gamma_m1} \,.\, \left(\frac{gamma_m1}{2} \,.\, \left(\left(AVG_{1 u0} \right)^{2} + \left(AVG_{1 u1} \right)^{2}\right) + \left(AVG_{1 a} \right)^{2}\right)\right) + Recon_{0} \,.\, \left(\frac{\left(AVG_{1 u0} \right)^{2}}{2} + 
 \frac{\left(AVG_{1 u1} \right)^{2}}{2}\right)\end{dmath}
 
-\noindent The kernel is LLFTeno Residual, block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{Residual_{0}{_{B0}}}[{0}] = - \frac{{D_{11}{_{B0}}}[{0}]}{Delta1block0} \,.\, \left({wk_{4}{_{B0}}}[{0}] - {wk_{4}{_{B0}}}[{0}]\right) - \frac{{wk_{0}{_{B0}}}[{0}] - {wk_{0}{_{B0}}}[{-1}]}{Delta0block0}\end{dmath}
+\noindent The kernel is LLFTeno Residual, block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{Residual_{0}{_{B0}}}[{0}] = - \frac{{D_{11}{_{B0}}}[{0}]}{Delta1block0} \,.\, \left(- {wk_{4}{_{B0}}}[{0}] + {wk_{4}{_{B0}}}[{0}]\right) - \frac{{wk_{0}{_{B0}}}[{0}] - {wk_{0}{_{B0}}}[{-1}]}{Delta0block0}\end{dmath}
 
-\begin{dmath}{Residual_{1}{_{B0}}}[{0}] = - \frac{{D_{11}{_{B0}}}[{0}]}{Delta1block0} \,.\, \left({wk_{5}{_{B0}}}[{0}] - {wk_{5}{_{B0}}}[{0}]\right) - \frac{1}{Delta0block0} \,.\, \left(- {wk_{1}{_{B0}}}[{-1}] + {wk_{1}{_{B0}}}[{0}]\right)\end{dmath}
+\begin{dmath}{Residual_{1}{_{B0}}}[{0}] = - \frac{{D_{11}{_{B0}}}[{0}]}{Delta1block0} \,.\, \left({wk_{5}{_{B0}}}[{0}] - {wk_{5}{_{B0}}}[{0}]\right) - \frac{{wk_{1}{_{B0}}}[{0}] - {wk_{1}{_{B0}}}[{-1}]}{Delta0block0}\end{dmath}
 
-\begin{dmath}{Residual_{2}{_{B0}}}[{0}] = - \frac{{D_{11}{_{B0}}}[{0}]}{Delta1block0} \,.\, \left(- {wk_{6}{_{B0}}}[{0}] + {wk_{6}{_{B0}}}[{0}]\right) - \frac{1}{Delta0block0} \,.\, \left(- {wk_{2}{_{B0}}}[{-1}] + 
-{wk_{2}{_{B0}}}[{0}]\right)\end{dmath}
+\begin{dmath}{Residual_{2}{_{B0}}}[{0}] = - \frac{{D_{11}{_{B0}}}[{0}]}{Delta1block0} \,.\, \left(- {wk_{6}{_{B0}}}[{0}] + {wk_{6}{_{B0}}}[{0}]\right) - \frac{{wk_{2}{_{B0}}}[{0}] - {wk_{2}{_{B0}}}[{-1}]}{Delta0block0}\end{dmath}
 
-\begin{dmath}{Residual_{3}{_{B0}}}[{0}] = - \frac{{D_{11}{_{B0}}}[{0}]}{Delta1block0} \,.\, \left({wk_{7}{_{B0}}}[{0}] - {wk_{7}{_{B0}}}[{0}]\right) - \frac{1}{Delta0block0} \,.\, \left(- {wk_{3}{_{B0}}}[{-1}] + {wk_{3}{_{B0}}}[{0}]\right)\end{dmath}
+\begin{dmath}{Residual_{3}{_{B0}}}[{0}] = - \frac{{D_{11}{_{B0}}}[{0}]}{Delta1block0} \,.\, \left(- {wk_{7}{_{B0}}}[{0}] + {wk_{7}{_{B0}}}[{0}]\right) - \frac{{wk_{3}{_{B0}}}[{0}] - {wk_{3}{_{B0}}}[{-1}]}{Delta0block0}\end{dmath}
 
-\noindent The kernel is Derivative evaluation CD u0_B0 xi1 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{0}{_{B0}}}[{0}] = \begin{cases} inv_0 \,.\, \left(- \frac{{u_{0}{_{B0}}}[{0}]}{4} + \frac{4 \,.\, {u_{0}{_{B0}}}[{0}]}{3} - 3 \,.\, {u_{0}{_{B0}}}[{0}] + 4 \,.\, {u_{0}{_{B0}}}[{0}] - \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12}\right) & 
-\text{for}\: {idx}[{1}] = 0 \\\frac{inv_0}{12} \,.\, \left({u_{0}{_{B0}}}[{0}] - 3 \,.\, {u_{0}{_{B0}}}[{0}] - 6 \,.\, {u_{0}{_{B0}}}[{0}] + 18 \,.\, {u_{0}{_{B0}}}[{0}] - 10 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_0 
-\,.\, \left(- 4 \,.\, {u_{0}{_{B0}}}[{0}] + 3 \,.\, {u_{0}{_{B0}}}[{0}] - \frac{4 \,.\, {u_{0}{_{B0}}}[{0}]}{3} + \frac{{u_{0}{_{B0}}}[{0}]}{4} + \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
-\\\frac{inv_0}{12} \,.\, \left(- 18 \,.\, {u_{0}{_{B0}}}[{0}] + 6 \,.\, {u_{0}{_{B0}}}[{0}] - {u_{0}{_{B0}}}[{0}] + 3 \,.\, {u_{0}{_{B0}}}[{0}] + 10 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_0}{12} \,.\, 
-\left(- 8 \,.\, {u_{0}{_{B0}}}[{0}] + 8 \,.\, {u_{0}{_{B0}}}[{0}] + {u_{0}{_{B0}}}[{0}] - {u_{0}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\noindent The kernel is Derivative evaluation CD u0_B0 xi1 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{0}{_{B0}}}[{0}] = \begin{cases} inv_1 \,.\, \left(\frac{4 \,.\, {u_{0}{_{B0}}}[{0}]}{3} - \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12} - \frac{{u_{0}{_{B0}}}[{0}]}{4} + 4 \,.\, {u_{0}{_{B0}}}[{0}] - 3 \,.\, {u_{0}{_{B0}}}[{0}]\right) & 
+\text{for}\: {idx}[{1}] = 0 \\\frac{inv_1}{12} \,.\, \left({u_{0}{_{B0}}}[{0}] - 3 \,.\, {u_{0}{_{B0}}}[{0}] - 10 \,.\, {u_{0}{_{B0}}}[{0}] + 18 \,.\, {u_{0}{_{B0}}}[{0}] - 6 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_1 
+\,.\, \left(- \frac{4 \,.\, {u_{0}{_{B0}}}[{0}]}{3} - 4 \,.\, {u_{0}{_{B0}}}[{0}] + 3 \,.\, {u_{0}{_{B0}}}[{0}] + \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12} + \frac{{u_{0}{_{B0}}}[{0}]}{4}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
+\\\frac{inv_1}{12} \,.\, \left(- {u_{0}{_{B0}}}[{0}] - 18 \,.\, {u_{0}{_{B0}}}[{0}] + 6 \,.\, {u_{0}{_{B0}}}[{0}] + 10 \,.\, {u_{0}{_{B0}}}[{0}] + 3 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_1}{12} \,.\, 
+\left(- 8 \,.\, {u_{0}{_{B0}}}[{0}] + {u_{0}{_{B0}}}[{0}] - {u_{0}{_{B0}}}[{0}] + 8 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\noindent The kernel is Derivative evaluation CD u0_B0 xi0 , block is 0\\\noindent The ranges are 0,block0np0,-2,block0np1 + 2\\\begin{dmath}{wk_{1}{_{B0}}}[{0}] = \begin{cases} inv_1 \,.\, \left(\frac{4 \,.\, {u_{0}{_{B0}}}[{3}]}{3} - 3 \,.\, {u_{0}{_{B0}}}[{2}] - \frac{{u_{0}{_{B0}}}[{4}]}{4} + 4 \,.\, {u_{0}{_{B0}}}[{1}] - \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12}\right) & 
-\text{for}\: {idx}[{0}] = 0 \\\frac{inv_1}{12} \,.\, \left({u_{0}{_{B0}}}[{3}] - 3 \,.\, {u_{0}{_{B0}}}[{-1}] - 6 \,.\, {u_{0}{_{B0}}}[{2}] + 18 \,.\, {u_{0}{_{B0}}}[{1}] - 10 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_1 
-\,.\, \left(3 \,.\, {u_{0}{_{B0}}}[{-2}] - 4 \,.\, {u_{0}{_{B0}}}[{-1}] - \frac{4 \,.\, {u_{0}{_{B0}}}[{-3}]}{3} + \frac{{u_{0}{_{B0}}}[{-4}]}{4} + \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 
-\\\frac{inv_1}{12} \,.\, \left(6 \,.\, {u_{0}{_{B0}}}[{-2}] - 18 \,.\, {u_{0}{_{B0}}}[{-1}] - {u_{0}{_{B0}}}[{-3}] + 3 \,.\, {u_{0}{_{B0}}}[{1}] + 10 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_1}{12} \,.\, 
-\left(8 \,.\, {u_{0}{_{B0}}}[{1}] + {u_{0}{_{B0}}}[{-2}] - 8 \,.\, {u_{0}{_{B0}}}[{-1}] - {u_{0}{_{B0}}}[{2}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\noindent The kernel is Derivative evaluation CD u0_B0 xi0 , block is 0\\\noindent The ranges are 0,block0np0,-2,block0np1 + 2\\\begin{dmath}{wk_{1}{_{B0}}}[{0}] = \begin{cases} inv_0 \,.\, \left(- 3 \,.\, {u_{0}{_{B0}}}[{2}] + \frac{4 \,.\, {u_{0}{_{B0}}}[{3}]}{3} - \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12} + 4 \,.\, {u_{0}{_{B0}}}[{1}] - \frac{{u_{0}{_{B0}}}[{4}]}{4}\right) & 
+\text{for}\: {idx}[{0}] = 0 \\\frac{inv_0}{12} \,.\, \left(- 6 \,.\, {u_{0}{_{B0}}}[{2}] - 3 \,.\, {u_{0}{_{B0}}}[{-1}] + {u_{0}{_{B0}}}[{3}] - 10 \,.\, {u_{0}{_{B0}}}[{0}] + 18 \,.\, {u_{0}{_{B0}}}[{1}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_0 
+\,.\, \left(- 4 \,.\, {u_{0}{_{B0}}}[{-1}] + 3 \,.\, {u_{0}{_{B0}}}[{-2}] + \frac{25 \,.\, {u_{0}{_{B0}}}[{0}]}{12} + \frac{{u_{0}{_{B0}}}[{-4}]}{4} - \frac{4 \,.\, {u_{0}{_{B0}}}[{-3}]}{3}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 
+\\\frac{inv_0}{12} \,.\, \left(- 18 \,.\, {u_{0}{_{B0}}}[{-1}] + 6 \,.\, {u_{0}{_{B0}}}[{-2}] + 10 \,.\, {u_{0}{_{B0}}}[{0}] + 3 \,.\, {u_{0}{_{B0}}}[{1}] - {u_{0}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_0}{12} 
+\,.\, \left(- 8 \,.\, {u_{0}{_{B0}}}[{-1}] + 8 \,.\, {u_{0}{_{B0}}}[{1}] - {u_{0}{_{B0}}}[{2}] + {u_{0}{_{B0}}}[{-2}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\noindent The kernel is Derivative evaluation CD u1_B0 xi1 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{2}{_{B0}}}[{0}] = \begin{cases} inv_0 \,.\, \left(- 3 \,.\, {u_{1}{_{B0}}}[{0}] + \frac{4 \,.\, {u_{1}{_{B0}}}[{0}]}{3} - \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} - \frac{{u_{1}{_{B0}}}[{0}]}{4} + 4 \,.\, {u_{1}{_{B0}}}[{0}]\right) & 
-\text{for}\: {idx}[{1}] = 0 \\\frac{inv_0}{12} \,.\, \left(- 3 \,.\, {u_{1}{_{B0}}}[{0}] - 6 \,.\, {u_{1}{_{B0}}}[{0}] + {u_{1}{_{B0}}}[{0}] - 10 \,.\, {u_{1}{_{B0}}}[{0}] + 18 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_0 
-\,.\, \left(- 4 \,.\, {u_{1}{_{B0}}}[{0}] + 3 \,.\, {u_{1}{_{B0}}}[{0}] + \frac{{u_{1}{_{B0}}}[{0}]}{4} + \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} - \frac{4 \,.\, {u_{1}{_{B0}}}[{0}]}{3}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
-\\\frac{inv_0}{12} \,.\, \left(- 18 \,.\, {u_{1}{_{B0}}}[{0}] + 6 \,.\, {u_{1}{_{B0}}}[{0}] + 10 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}] + 3 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_0}{12} \,.\, 
-\left(- 8 \,.\, {u_{1}{_{B0}}}[{0}] + {u_{1}{_{B0}}}[{0}] + 8 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\noindent The kernel is Derivative evaluation CD u1_B0 xi1 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{2}{_{B0}}}[{0}] = \begin{cases} inv_1 \,.\, \left(- \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} - \frac{{u_{1}{_{B0}}}[{0}]}{4} + \frac{4 \,.\, {u_{1}{_{B0}}}[{0}]}{3} - 3 \,.\, {u_{1}{_{B0}}}[{0}] + 4 \,.\, {u_{1}{_{B0}}}[{0}]\right) & 
+\text{for}\: {idx}[{1}] = 0 \\\frac{inv_1}{12} \,.\, \left(- 3 \,.\, {u_{1}{_{B0}}}[{0}] - 10 \,.\, {u_{1}{_{B0}}}[{0}] + {u_{1}{_{B0}}}[{0}] - 6 \,.\, {u_{1}{_{B0}}}[{0}] + 18 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_1 
+\,.\, \left(- 4 \,.\, {u_{1}{_{B0}}}[{0}] + 3 \,.\, {u_{1}{_{B0}}}[{0}] + \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} - \frac{4 \,.\, {u_{1}{_{B0}}}[{0}]}{3} + \frac{{u_{1}{_{B0}}}[{0}]}{4}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
+\\\frac{inv_1}{12} \,.\, \left(- 18 \,.\, {u_{1}{_{B0}}}[{0}] + 6 \,.\, {u_{1}{_{B0}}}[{0}] + 10 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}] + 3 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_1}{12} \,.\, 
+\left(- 8 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}] + 8 \,.\, {u_{1}{_{B0}}}[{0}] + {u_{1}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\noindent The kernel is Derivative evaluation CD u1_B0 xi0 , block is 0\\\noindent The ranges are 0,block0np0,-2,block0np1 + 2\\\begin{dmath}{wk_{3}{_{B0}}}[{0}] = \begin{cases} inv_1 \,.\, \left(- \frac{{u_{1}{_{B0}}}[{4}]}{4} + \frac{4 \,.\, {u_{1}{_{B0}}}[{3}]}{3} - \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} + 4 \,.\, {u_{1}{_{B0}}}[{1}] - 3 \,.\, {u_{1}{_{B0}}}[{2}]\right) & 
-\text{for}\: {idx}[{0}] = 0 \\\frac{inv_1}{12} \,.\, \left(- 3 \,.\, {u_{1}{_{B0}}}[{-1}] + {u_{1}{_{B0}}}[{3}] - 10 \,.\, {u_{1}{_{B0}}}[{0}] + 18 \,.\, {u_{1}{_{B0}}}[{1}] - 6 \,.\, {u_{1}{_{B0}}}[{2}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_1 
-\,.\, \left(- 4 \,.\, {u_{1}{_{B0}}}[{-1}] + 3 \,.\, {u_{1}{_{B0}}}[{-2}] + \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} + \frac{{u_{1}{_{B0}}}[{-4}]}{4} - \frac{4 \,.\, {u_{1}{_{B0}}}[{-3}]}{3}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 
-\\\frac{inv_1}{12} \,.\, \left(- 18 \,.\, {u_{1}{_{B0}}}[{-1}] + 6 \,.\, {u_{1}{_{B0}}}[{-2}] + 10 \,.\, {u_{1}{_{B0}}}[{0}] + 3 \,.\, {u_{1}{_{B0}}}[{1}] - {u_{1}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_1}{12} 
-\,.\, \left(8 \,.\, {u_{1}{_{B0}}}[{1}] - 8 \,.\, {u_{1}{_{B0}}}[{-1}] + {u_{1}{_{B0}}}[{-2}] - {u_{1}{_{B0}}}[{2}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\noindent The kernel is Derivative evaluation CD u1_B0 xi0 , block is 0\\\noindent The ranges are 0,block0np0,-2,block0np1 + 2\\\begin{dmath}{wk_{3}{_{B0}}}[{0}] = \begin{cases} inv_0 \,.\, \left(4 \,.\, {u_{1}{_{B0}}}[{1}] - \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} + \frac{4 \,.\, {u_{1}{_{B0}}}[{3}]}{3} - \frac{{u_{1}{_{B0}}}[{4}]}{4} - 3 \,.\, {u_{1}{_{B0}}}[{2}]\right) & 
+\text{for}\: {idx}[{0}] = 0 \\\frac{inv_0}{12} \,.\, \left(18 \,.\, {u_{1}{_{B0}}}[{1}] - 10 \,.\, {u_{1}{_{B0}}}[{0}] + {u_{1}{_{B0}}}[{3}] - 3 \,.\, {u_{1}{_{B0}}}[{-1}] - 6 \,.\, {u_{1}{_{B0}}}[{2}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_0 
+\,.\, \left(\frac{{u_{1}{_{B0}}}[{-4}]}{4} + \frac{25 \,.\, {u_{1}{_{B0}}}[{0}]}{12} + 3 \,.\, {u_{1}{_{B0}}}[{-2}] - 4 \,.\, {u_{1}{_{B0}}}[{-1}] - \frac{4 \,.\, {u_{1}{_{B0}}}[{-3}]}{3}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 
+\\\frac{inv_0}{12} \,.\, \left(3 \,.\, {u_{1}{_{B0}}}[{1}] + 10 \,.\, {u_{1}{_{B0}}}[{0}] + 6 \,.\, {u_{1}{_{B0}}}[{-2}] - 18 \,.\, {u_{1}{_{B0}}}[{-1}] - {u_{1}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_0}{12} \,.\, 
+\left(- 8 \,.\, {u_{1}{_{B0}}}[{-1}] + 8 \,.\, {u_{1}{_{B0}}}[{1}] + {u_{1}{_{B0}}}[{-2}] - {u_{1}{_{B0}}}[{2}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\noindent The kernel is Derivative evaluation CD u2_B0 xi1 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{4}{_{B0}}}[{0}] = \begin{cases} inv_0 \,.\, \left(- 3 \,.\, {u_{2}{_{B0}}}[{0}] + 4 \,.\, {u_{2}{_{B0}}}[{0}] - \frac{{u_{2}{_{B0}}}[{0}]}{4} - \frac{25 \,.\, {u_{2}{_{B0}}}[{0}]}{12} + \frac{4 \,.\, {u_{2}{_{B0}}}[{0}]}{3}\right) & 
-\text{for}\: {idx}[{1}] = 0 \\\frac{inv_0}{12} \,.\, \left(- 6 \,.\, {u_{2}{_{B0}}}[{0}] + 18 \,.\, {u_{2}{_{B0}}}[{0}] - 10 \,.\, {u_{2}{_{B0}}}[{0}] - 3 \,.\, {u_{2}{_{B0}}}[{0}] + {u_{2}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_0 
-\,.\, \left(\frac{{u_{2}{_{B0}}}[{0}]}{4} + \frac{25 \,.\, {u_{2}{_{B0}}}[{0}]}{12} - 4 \,.\, {u_{2}{_{B0}}}[{0}] + 3 \,.\, {u_{2}{_{B0}}}[{0}] - \frac{4 \,.\, {u_{2}{_{B0}}}[{0}]}{3}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
-\\\frac{inv_0}{12} \,.\, \left(3 \,.\, {u_{2}{_{B0}}}[{0}] + 10 \,.\, {u_{2}{_{B0}}}[{0}] + 6 \,.\, {u_{2}{_{B0}}}[{0}] - 18 \,.\, {u_{2}{_{B0}}}[{0}] - {u_{2}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_0}{12} \,.\, 
-\left(- {u_{2}{_{B0}}}[{0}] + 8 \,.\, {u_{2}{_{B0}}}[{0}] - 8 \,.\, {u_{2}{_{B0}}}[{0}] + {u_{2}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\noindent The kernel is Derivative evaluation CD u2_B0 xi1 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{4}{_{B0}}}[{0}] = \begin{cases} inv_1 \,.\, \left(\frac{4 \,.\, {u_{2}{_{B0}}}[{0}]}{3} - \frac{25 \,.\, {u_{2}{_{B0}}}[{0}]}{12} - \frac{{u_{2}{_{B0}}}[{0}]}{4} + 4 \,.\, {u_{2}{_{B0}}}[{0}] - 3 \,.\, {u_{2}{_{B0}}}[{0}]\right) & 
+\text{for}\: {idx}[{1}] = 0 \\\frac{inv_1}{12} \,.\, \left({u_{2}{_{B0}}}[{0}] - 3 \,.\, {u_{2}{_{B0}}}[{0}] - 10 \,.\, {u_{2}{_{B0}}}[{0}] + 18 \,.\, {u_{2}{_{B0}}}[{0}] - 6 \,.\, {u_{2}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_1 
+\,.\, \left(- \frac{4 \,.\, {u_{2}{_{B0}}}[{0}]}{3} - 4 \,.\, {u_{2}{_{B0}}}[{0}] + 3 \,.\, {u_{2}{_{B0}}}[{0}] + \frac{25 \,.\, {u_{2}{_{B0}}}[{0}]}{12} + \frac{{u_{2}{_{B0}}}[{0}]}{4}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
+\\\frac{inv_1}{12} \,.\, \left(- {u_{2}{_{B0}}}[{0}] - 18 \,.\, {u_{2}{_{B0}}}[{0}] + 6 \,.\, {u_{2}{_{B0}}}[{0}] + 10 \,.\, {u_{2}{_{B0}}}[{0}] + 3 \,.\, {u_{2}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_1}{12} \,.\, 
+\left(- 8 \,.\, {u_{2}{_{B0}}}[{0}] + {u_{2}{_{B0}}}[{0}] - {u_{2}{_{B0}}}[{0}] + 8 \,.\, {u_{2}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\noindent The kernel is Derivative evaluation CD u2_B0 xi0 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{5}{_{B0}}}[{0}] = \begin{cases} inv_1 \,.\, \left(\frac{4 \,.\, {u_{2}{_{B0}}}[{3}]}{3} - 3 \,.\, {u_{2}{_{B0}}}[{2}] + 4 \,.\, {u_{2}{_{B0}}}[{1}] - \frac{25 \,.\, {u_{2}{_{B0}}}[{0}]}{12} - \frac{{u_{2}{_{B0}}}[{4}]}{4}\right) & 
-\text{for}\: {idx}[{0}] = 0 \\\frac{inv_1}{12} \,.\, \left({u_{2}{_{B0}}}[{3}] - 6 \,.\, {u_{2}{_{B0}}}[{2}] - 3 \,.\, {u_{2}{_{B0}}}[{-1}] + 18 \,.\, {u_{2}{_{B0}}}[{1}] - 10 \,.\, {u_{2}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_1 
-\,.\, \left(3 \,.\, {u_{2}{_{B0}}}[{-2}] - 4 \,.\, {u_{2}{_{B0}}}[{-1}] - \frac{4 \,.\, {u_{2}{_{B0}}}[{-3}]}{3} + \frac{25 \,.\, {u_{2}{_{B0}}}[{0}]}{12} + \frac{{u_{2}{_{B0}}}[{-4}]}{4}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 
-\\\frac{inv_1}{12} \,.\, \left(6 \,.\, {u_{2}{_{B0}}}[{-2}] - 18 \,.\, {u_{2}{_{B0}}}[{-1}] + 3 \,.\, {u_{2}{_{B0}}}[{1}] - {u_{2}{_{B0}}}[{-3}] + 10 \,.\, {u_{2}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_1}{12} \,.\, 
-\left(- {u_{2}{_{B0}}}[{2}] + {u_{2}{_{B0}}}[{-2}] - 8 \,.\, {u_{2}{_{B0}}}[{-1}] + 8 \,.\, {u_{2}{_{B0}}}[{1}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\noindent The kernel is Derivative evaluation CD u2_B0 xi0 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{5}{_{B0}}}[{0}] = \begin{cases} inv_0 \,.\, \left(- 3 \,.\, {u_{2}{_{B0}}}[{2}] + \frac{4 \,.\, {u_{2}{_{B0}}}[{3}]}{3} - \frac{25 \,.\, {u_{2}{_{B0}}}[{0}]}{12} + 4 \,.\, {u_{2}{_{B0}}}[{1}] - \frac{{u_{2}{_{B0}}}[{4}]}{4}\right) & 
+\text{for}\: {idx}[{0}] = 0 \\\frac{inv_0}{12} \,.\, \left(- 6 \,.\, {u_{2}{_{B0}}}[{2}] - 3 \,.\, {u_{2}{_{B0}}}[{-1}] + {u_{2}{_{B0}}}[{3}] - 10 \,.\, {u_{2}{_{B0}}}[{0}] + 18 \,.\, {u_{2}{_{B0}}}[{1}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_0 
+\,.\, \left(- 4 \,.\, {u_{2}{_{B0}}}[{-1}] + 3 \,.\, {u_{2}{_{B0}}}[{-2}] + \frac{25 \,.\, {u_{2}{_{B0}}}[{0}]}{12} + \frac{{u_{2}{_{B0}}}[{-4}]}{4} - \frac{4 \,.\, {u_{2}{_{B0}}}[{-3}]}{3}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 
+\\\frac{inv_0}{12} \,.\, \left(- 18 \,.\, {u_{2}{_{B0}}}[{-1}] + 6 \,.\, {u_{2}{_{B0}}}[{-2}] + 10 \,.\, {u_{2}{_{B0}}}[{0}] + 3 \,.\, {u_{2}{_{B0}}}[{1}] - {u_{2}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_0}{12} 
+\,.\, \left(- 8 \,.\, {u_{2}{_{B0}}}[{-1}] + 8 \,.\, {u_{2}{_{B0}}}[{1}] - {u_{2}{_{B0}}}[{2}] + {u_{2}{_{B0}}}[{-2}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\noindent The kernel is Derivative evaluation CD T_B0 xi1 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{6}{_{B0}}}[{0}] = \begin{cases} inv_0 \,.\, \left(- \frac{25 \,.\, {T{_{B0}}}[{0}]}{12} + 4 \,.\, {T{_{B0}}}[{0}] - 3 \,.\, {T{_{B0}}}[{0}] + \frac{4 \,.\, {T{_{B0}}}[{0}]}{3} - \frac{{T{_{B0}}}[{0}]}{4}\right) & \text{for}\: 
-{idx}[{1}] = 0 \\\frac{inv_0}{12} \,.\, \left(- 10 \,.\, {T{_{B0}}}[{0}] + 18 \,.\, {T{_{B0}}}[{0}] - 6 \,.\, {T{_{B0}}}[{0}] - 3 \,.\, {T{_{B0}}}[{0}] + {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_0 \,.\, \left(\frac{25 \,.\, 
-{T{_{B0}}}[{0}]}{12} + \frac{{T{_{B0}}}[{0}]}{4} - \frac{4 \,.\, {T{_{B0}}}[{0}]}{3} - 4 \,.\, {T{_{B0}}}[{0}] + 3 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 \\\frac{inv_0}{12} \,.\, \left(10 \,.\, {T{_{B0}}}[{0}] + 3 
-\,.\, {T{_{B0}}}[{0}] - {T{_{B0}}}[{0}] - 18 \,.\, {T{_{B0}}}[{0}] + 6 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_0}{12} \,.\, \left(8 \,.\, {T{_{B0}}}[{0}] - {T{_{B0}}}[{0}] - 8 \,.\, {T{_{B0}}}[{0}] + 
+\noindent The kernel is Derivative evaluation CD T_B0 xi1 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{6}{_{B0}}}[{0}] = \begin{cases} inv_1 \,.\, \left(- 3 \,.\, {T{_{B0}}}[{0}] + \frac{4 \,.\, {T{_{B0}}}[{0}]}{3} - \frac{25 \,.\, {T{_{B0}}}[{0}]}{12} - \frac{{T{_{B0}}}[{0}]}{4} + 4 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: 
+{idx}[{1}] = 0 \\\frac{inv_1}{12} \,.\, \left(- 3 \,.\, {T{_{B0}}}[{0}] - 6 \,.\, {T{_{B0}}}[{0}] + {T{_{B0}}}[{0}] - 10 \,.\, {T{_{B0}}}[{0}] + 18 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_1 \,.\, \left(- 4 \,.\, 
+{T{_{B0}}}[{0}] + 3 \,.\, {T{_{B0}}}[{0}] + \frac{{T{_{B0}}}[{0}]}{4} + \frac{25 \,.\, {T{_{B0}}}[{0}]}{12} - \frac{4 \,.\, {T{_{B0}}}[{0}]}{3}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 \\\frac{inv_1}{12} \,.\, \left(- 18 \,.\, {T{_{B0}}}[{0}] 
++ 6 \,.\, {T{_{B0}}}[{0}] + 10 \,.\, {T{_{B0}}}[{0}] - {T{_{B0}}}[{0}] + 3 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_1}{12} \,.\, \left(- 8 \,.\, {T{_{B0}}}[{0}] + {T{_{B0}}}[{0}] - {T{_{B0}}}[{0}] + 8 \,.\, 
 {T{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\noindent The kernel is Derivative evaluation CD T_B0 xi0 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{7}{_{B0}}}[{0}] = \begin{cases} inv_1 \,.\, \left(- \frac{25 \,.\, {T{_{B0}}}[{0}]}{12} + 4 \,.\, {T{_{B0}}}[{1}] - 3 \,.\, {T{_{B0}}}[{2}] + \frac{4 \,.\, {T{_{B0}}}[{3}]}{3} - \frac{{T{_{B0}}}[{4}]}{4}\right) & \text{for}\: 
-{idx}[{0}] = 0 \\\frac{inv_1}{12} \,.\, \left(- 10 \,.\, {T{_{B0}}}[{0}] + 18 \,.\, {T{_{B0}}}[{1}] - 6 \,.\, {T{_{B0}}}[{2}] + {T{_{B0}}}[{3}] - 3 \,.\, {T{_{B0}}}[{-1}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_1 \,.\, \left(\frac{25 \,.\, 
-{T{_{B0}}}[{0}]}{12} + \frac{{T{_{B0}}}[{-4}]}{4} - \frac{4 \,.\, {T{_{B0}}}[{-3}]}{3} - 4 \,.\, {T{_{B0}}}[{-1}] + 3 \,.\, {T{_{B0}}}[{-2}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 \\\frac{inv_1}{12} \,.\, \left(10 \,.\, {T{_{B0}}}[{0}] + 3 
-\,.\, {T{_{B0}}}[{1}] - {T{_{B0}}}[{-3}] - 18 \,.\, {T{_{B0}}}[{-1}] + 6 \,.\, {T{_{B0}}}[{-2}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_1}{12} \,.\, \left(- {T{_{B0}}}[{2}] + 8 \,.\, {T{_{B0}}}[{1}] - 8 \,.\, {T{_{B0}}}[{-1}] + 
-{T{_{B0}}}[{-2}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\noindent The kernel is Derivative evaluation CD T_B0 xi0 , block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{wk_{7}{_{B0}}}[{0}] = \begin{cases} inv_0 \,.\, \left(- \frac{{T{_{B0}}}[{4}]}{4} - 3 \,.\, {T{_{B0}}}[{2}] + \frac{4 \,.\, {T{_{B0}}}[{3}]}{3} - \frac{25 \,.\, {T{_{B0}}}[{0}]}{12} + 4 \,.\, {T{_{B0}}}[{1}]\right) & \text{for}\: 
+{idx}[{0}] = 0 \\\frac{inv_0}{12} \,.\, \left(- 3 \,.\, {T{_{B0}}}[{-1}] - 6 \,.\, {T{_{B0}}}[{2}] + {T{_{B0}}}[{3}] - 10 \,.\, {T{_{B0}}}[{0}] + 18 \,.\, {T{_{B0}}}[{1}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_0 \,.\, \left(- 4 \,.\, 
+{T{_{B0}}}[{-1}] + 3 \,.\, {T{_{B0}}}[{-2}] + \frac{{T{_{B0}}}[{-4}]}{4} - \frac{4 \,.\, {T{_{B0}}}[{-3}]}{3} + \frac{25 \,.\, {T{_{B0}}}[{0}]}{12}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 \\\frac{inv_0}{12} \,.\, \left(- 18 \,.\, 
+{T{_{B0}}}[{-1}] + 6 \,.\, {T{_{B0}}}[{-2}] - {T{_{B0}}}[{-3}] + 10 \,.\, {T{_{B0}}}[{0}] + 3 \,.\, {T{_{B0}}}[{1}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_0}{12} \,.\, \left(- 8 \,.\, {T{_{B0}}}[{-1}] + {T{_{B0}}}[{-2}] + 8 
+\,.\, {T{_{B0}}}[{1}] - {T{_{B0}}}[{2}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\noindent The kernel is Viscous terms, block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}localeval_{0} = \begin{cases} \frac{inv_2}{12} \,.\, \left(35 \,.\, {T{_{B0}}}[{0}] - 104 \,.\, {T{_{B0}}}[{0}] + 114 \,.\, {T{_{B0}}}[{0}] - 56 \,.\, {T{_{B0}}}[{0}] + 11 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 0 
-\\\frac{inv_2}{12} \,.\, \left(- 20 \,.\, {T{_{B0}}}[{0}] + 6 \,.\, {T{_{B0}}}[{0}] + 4 \,.\, {T{_{B0}}}[{0}] + 11 \,.\, {T{_{B0}}}[{0}] - {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\\frac{inv_2}{12} \,.\, \left(35 \,.\, {T{_{B0}}}[{0}] + 
-11 \,.\, {T{_{B0}}}[{0}] - 56 \,.\, {T{_{B0}}}[{0}] - 104 \,.\, {T{_{B0}}}[{0}] + 114 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 \\\frac{inv_2}{12} \,.\, \left(- 20 \,.\, {T{_{B0}}}[{0}] + 11 \,.\, {T{_{B0}}}[{0}] - 
-{T{_{B0}}}[{0}] + 4 \,.\, {T{_{B0}}}[{0}] + 6 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_2}{12} \,.\, \left(- 30 \,.\, {T{_{B0}}}[{0}] + 16 \,.\, {T{_{B0}}}[{0}] - {T{_{B0}}}[{0}] - {T{_{B0}}}[{0}] + 16 \,.\, 
+\noindent The kernel is Viscous terms, block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}localeval_{0} = \begin{cases} \frac{inv_2}{12} \,.\, \left(114 \,.\, {T{_{B0}}}[{0}] - 56 \,.\, {T{_{B0}}}[{0}] + 35 \,.\, {T{_{B0}}}[{0}] + 11 \,.\, {T{_{B0}}}[{0}] - 104 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 0 
+\\\frac{inv_2}{12} \,.\, \left(11 \,.\, {T{_{B0}}}[{0}] + 4 \,.\, {T{_{B0}}}[{0}] - {T{_{B0}}}[{0}] - 20 \,.\, {T{_{B0}}}[{0}] + 6 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\\frac{inv_2}{12} \,.\, \left(- 104 \,.\, {T{_{B0}}}[{0}] + 
+114 \,.\, {T{_{B0}}}[{0}] + 11 \,.\, {T{_{B0}}}[{0}] + 35 \,.\, {T{_{B0}}}[{0}] - 56 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 \\\frac{inv_2}{12} \,.\, \left(4 \,.\, {T{_{B0}}}[{0}] + 6 \,.\, {T{_{B0}}}[{0}] - 20 \,.\, 
+{T{_{B0}}}[{0}] - {T{_{B0}}}[{0}] + 11 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_2}{12} \,.\, \left(- {T{_{B0}}}[{0}] + 16 \,.\, {T{_{B0}}}[{0}] - {T{_{B0}}}[{0}] - 30 \,.\, {T{_{B0}}}[{0}] + 16 \,.\, 
 {T{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{1} = \begin{cases} \frac{inv_3}{12} \,.\, \left(35 \,.\, {T{_{B0}}}[{0}] - 104 \,.\, {T{_{B0}}}[{1}] + 114 \,.\, {T{_{B0}}}[{2}] - 56 \,.\, {T{_{B0}}}[{3}] + 11 \,.\, {T{_{B0}}}[{4}]\right) & \text{for}\: {idx}[{0}] = 0 
-\\\frac{inv_3}{12} \,.\, \left(- 20 \,.\, {T{_{B0}}}[{0}] + 6 \,.\, {T{_{B0}}}[{1}] + 4 \,.\, {T{_{B0}}}[{2}] - {T{_{B0}}}[{3}] + 11 \,.\, {T{_{B0}}}[{-1}]\right) & \text{for}\: {idx}[{0}] = 1 \\\frac{inv_3}{12} \,.\, \left(35 \,.\, {T{_{B0}}}[{0}] + 
-11 \,.\, {T{_{B0}}}[{-4}] - 56 \,.\, {T{_{B0}}}[{-3}] - 104 \,.\, {T{_{B0}}}[{-1}] + 114 \,.\, {T{_{B0}}}[{-2}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 \\\frac{inv_3}{12} \,.\, \left(- 20 \,.\, {T{_{B0}}}[{0}] + 11 \,.\, {T{_{B0}}}[{1}] - 
-{T{_{B0}}}[{-3}] + 4 \,.\, {T{_{B0}}}[{-2}] + 6 \,.\, {T{_{B0}}}[{-1}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_3}{12} \,.\, \left(- 30 \,.\, {T{_{B0}}}[{0}] + 16 \,.\, {T{_{B0}}}[{1}] - {T{_{B0}}}[{2}] - {T{_{B0}}}[{-2}] + 16 
-\,.\, {T{_{B0}}}[{-1}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\begin{dmath}localeval_{1} = \begin{cases} \frac{inv_3}{12} \,.\, \left(11 \,.\, {T{_{B0}}}[{4}] + 114 \,.\, {T{_{B0}}}[{2}] - 56 \,.\, {T{_{B0}}}[{3}] + 35 \,.\, {T{_{B0}}}[{0}] - 104 \,.\, {T{_{B0}}}[{1}]\right) & \text{for}\: {idx}[{0}] = 0 
+\\\frac{inv_3}{12} \,.\, \left(11 \,.\, {T{_{B0}}}[{-1}] + 4 \,.\, {T{_{B0}}}[{2}] - {T{_{B0}}}[{3}] - 20 \,.\, {T{_{B0}}}[{0}] + 6 \,.\, {T{_{B0}}}[{1}]\right) & \text{for}\: {idx}[{0}] = 1 \\\frac{inv_3}{12} \,.\, \left(- 104 \,.\, {T{_{B0}}}[{-1}] 
++ 114 \,.\, {T{_{B0}}}[{-2}] + 11 \,.\, {T{_{B0}}}[{-4}] - 56 \,.\, {T{_{B0}}}[{-3}] + 35 \,.\, {T{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 \\\frac{inv_3}{12} \,.\, \left(4 \,.\, {T{_{B0}}}[{-2}] + 6 \,.\, {T{_{B0}}}[{-1}] - 
+{T{_{B0}}}[{-3}] - 20 \,.\, {T{_{B0}}}[{0}] + 11 \,.\, {T{_{B0}}}[{1}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_3}{12} \,.\, \left(- {T{_{B0}}}[{-2}] + 16 \,.\, {T{_{B0}}}[{-1}] - {T{_{B0}}}[{2}] - 30 \,.\, {T{_{B0}}}[{0}] + 16 
+\,.\, {T{_{B0}}}[{1}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{2} = \begin{cases} inv_0 \,.\, \left(4 \,.\, {\mu{_{B0}}}[{0}] - \frac{{\mu{_{B0}}}[{0}]}{4} - \frac{25 \,.\, {\mu{_{B0}}}[{0}]}{12} + \frac{4 \,.\, {\mu{_{B0}}}[{0}]}{3} - 3 \,.\, {\mu{_{B0}}}[{0}]\right) & \text{for}\: 
-{idx}[{1}] = 0 \\\frac{inv_0}{12} \,.\, \left(18 \,.\, {\mu{_{B0}}}[{0}] - 10 \,.\, {\mu{_{B0}}}[{0}] + {\mu{_{B0}}}[{0}] - 6 \,.\, {\mu{_{B0}}}[{0}] - 3 \,.\, {\mu{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_0 \,.\, \left(- \frac{4 \,.\, 
-{\mu{_{B0}}}[{0}]}{3} + \frac{25 \,.\, {\mu{_{B0}}}[{0}]}{12} + \frac{{\mu{_{B0}}}[{0}]}{4} - 4 \,.\, {\mu{_{B0}}}[{0}] + 3 \,.\, {\mu{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 \\\frac{inv_0}{12} \,.\, \left(3 \,.\, 
-{\mu{_{B0}}}[{0}] - {\mu{_{B0}}}[{0}] + 10 \,.\, {\mu{_{B0}}}[{0}] - 18 \,.\, {\mu{_{B0}}}[{0}] + 6 \,.\, {\mu{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_0}{12} \,.\, \left(- {\mu{_{B0}}}[{0}] + 8 \,.\, 
-{\mu{_{B0}}}[{0}] - 8 \,.\, {\mu{_{B0}}}[{0}] + {\mu{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\begin{dmath}localeval_{2} = \begin{cases} inv_0 \,.\, \left(\frac{4 \,.\, {\mu{_{B0}}}[{3}]}{3} - 3 \,.\, {\mu{_{B0}}}[{2}] - \frac{{\mu{_{B0}}}[{4}]}{4} + 4 \,.\, {\mu{_{B0}}}[{1}] - \frac{25 \,.\, {\mu{_{B0}}}[{0}]}{12}\right) & \text{for}\: 
+{idx}[{0}] = 0 \\\frac{inv_0}{12} \,.\, \left({\mu{_{B0}}}[{3}] - 3 \,.\, {\mu{_{B0}}}[{-1}] - 6 \,.\, {\mu{_{B0}}}[{2}] + 18 \,.\, {\mu{_{B0}}}[{1}] - 10 \,.\, {\mu{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_0 \,.\, \left(- 4 \,.\, 
+{\mu{_{B0}}}[{-1}] + 3 \,.\, {\mu{_{B0}}}[{-2}] - \frac{4 \,.\, {\mu{_{B0}}}[{-3}]}{3} + \frac{{\mu{_{B0}}}[{-4}]}{4} + \frac{25 \,.\, {\mu{_{B0}}}[{0}]}{12}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 \\\frac{inv_0}{12} \,.\, \left(- 18 \,.\, 
+{\mu{_{B0}}}[{-1}] + 6 \,.\, {\mu{_{B0}}}[{-2}] - {\mu{_{B0}}}[{-3}] + 3 \,.\, {\mu{_{B0}}}[{1}] + 10 \,.\, {\mu{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_0}{12} \,.\, \left(8 \,.\, {\mu{_{B0}}}[{1}] - 8 \,.\, 
+{\mu{_{B0}}}[{-1}] + {\mu{_{B0}}}[{-2}] - {\mu{_{B0}}}[{2}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{3} = \begin{cases} inv_1 \,.\, \left(- 3 \,.\, {\mu{_{B0}}}[{2}] + 4 \,.\, {\mu{_{B0}}}[{1}] - \frac{25 \,.\, {\mu{_{B0}}}[{0}]}{12} - \frac{{\mu{_{B0}}}[{4}]}{4} + \frac{4 \,.\, {\mu{_{B0}}}[{3}]}{3}\right) & \text{for}\: 
-{idx}[{0}] = 0 \\\frac{inv_1}{12} \,.\, \left(- 6 \,.\, {\mu{_{B0}}}[{2}] + 18 \,.\, {\mu{_{B0}}}[{1}] - 10 \,.\, {\mu{_{B0}}}[{0}] - 3 \,.\, {\mu{_{B0}}}[{-1}] + {\mu{_{B0}}}[{3}]\right) & \text{for}\: {idx}[{0}] = 1 \\inv_1 \,.\, \left(\frac{25 
-\,.\, {\mu{_{B0}}}[{0}]}{12} - 4 \,.\, {\mu{_{B0}}}[{-1}] + 3 \,.\, {\mu{_{B0}}}[{-2}] - \frac{4 \,.\, {\mu{_{B0}}}[{-3}]}{3} + \frac{{\mu{_{B0}}}[{-4}]}{4}\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 \\\frac{inv_1}{12} \,.\, \left(3 \,.\, 
-{\mu{_{B0}}}[{1}] + 10 \,.\, {\mu{_{B0}}}[{0}] - 18 \,.\, {\mu{_{B0}}}[{-1}] + 6 \,.\, {\mu{_{B0}}}[{-2}] - {\mu{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_1}{12} \,.\, \left(- {\mu{_{B0}}}[{2}] - 8 \,.\, 
-{\mu{_{B0}}}[{-1}] + 8 \,.\, {\mu{_{B0}}}[{1}] + {\mu{_{B0}}}[{-2}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\begin{dmath}localeval_{3} = \begin{cases} inv_1 \,.\, \left(- \frac{{\mu{_{B0}}}[{0}]}{4} + \frac{4 \,.\, {\mu{_{B0}}}[{0}]}{3} - 3 \,.\, {\mu{_{B0}}}[{0}] + 4 \,.\, {\mu{_{B0}}}[{0}] - \frac{25 \,.\, {\mu{_{B0}}}[{0}]}{12}\right) & \text{for}\: 
+{idx}[{1}] = 0 \\\frac{inv_1}{12} \,.\, \left({\mu{_{B0}}}[{0}] - 3 \,.\, {\mu{_{B0}}}[{0}] - 6 \,.\, {\mu{_{B0}}}[{0}] + 18 \,.\, {\mu{_{B0}}}[{0}] - 10 \,.\, {\mu{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_1 \,.\, \left(3 \,.\, 
+{\mu{_{B0}}}[{0}] - 4 \,.\, {\mu{_{B0}}}[{0}] - \frac{4 \,.\, {\mu{_{B0}}}[{0}]}{3} + \frac{{\mu{_{B0}}}[{0}]}{4} + \frac{25 \,.\, {\mu{_{B0}}}[{0}]}{12}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 \\\frac{inv_1}{12} \,.\, \left(6 \,.\, 
+{\mu{_{B0}}}[{0}] - 18 \,.\, {\mu{_{B0}}}[{0}] - {\mu{_{B0}}}[{0}] + 3 \,.\, {\mu{_{B0}}}[{0}] + 10 \,.\, {\mu{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_1}{12} \,.\, \left({\mu{_{B0}}}[{0}] - 8 \,.\, {\mu{_{B0}}}[{0}] 
++ 8 \,.\, {\mu{_{B0}}}[{0}] - {\mu{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{4} = \begin{cases} \frac{inv_3}{12} \,.\, \left(- 56 \,.\, {u_{0}{_{B0}}}[{3}] + 114 \,.\, {u_{0}{_{B0}}}[{2}] + 11 \,.\, {u_{0}{_{B0}}}[{4}] - 104 \,.\, {u_{0}{_{B0}}}[{1}] + 35 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: 
-{idx}[{0}] = 0 \\\frac{inv_3}{12} \,.\, \left(- {u_{0}{_{B0}}}[{3}] + 11 \,.\, {u_{0}{_{B0}}}[{-1}] + 4 \,.\, {u_{0}{_{B0}}}[{2}] + 6 \,.\, {u_{0}{_{B0}}}[{1}] - 20 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = 1 \\\frac{inv_3}{12} 
-\,.\, \left(114 \,.\, {u_{0}{_{B0}}}[{-2}] - 104 \,.\, {u_{0}{_{B0}}}[{-1}] - 56 \,.\, {u_{0}{_{B0}}}[{-3}] + 11 \,.\, {u_{0}{_{B0}}}[{-4}] + 35 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 \\\frac{inv_3}{12} \,.\, 
-\left(6 \,.\, {u_{0}{_{B0}}}[{-1}] + 4 \,.\, {u_{0}{_{B0}}}[{-2}] - {u_{0}{_{B0}}}[{-3}] + 11 \,.\, {u_{0}{_{B0}}}[{1}] - 20 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_3}{12} \,.\, \left(16 \,.\, 
-{u_{0}{_{B0}}}[{-1}] - {u_{0}{_{B0}}}[{-2}] - {u_{0}{_{B0}}}[{2}] + 16 \,.\, {u_{0}{_{B0}}}[{1}] - 30 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\begin{dmath}localeval_{4} = \begin{cases} \frac{inv_3}{12} \,.\, \left(114 \,.\, {u_{0}{_{B0}}}[{2}] - 56 \,.\, {u_{0}{_{B0}}}[{3}] + 35 \,.\, {u_{0}{_{B0}}}[{0}] - 104 \,.\, {u_{0}{_{B0}}}[{1}] + 11 \,.\, {u_{0}{_{B0}}}[{4}]\right) & \text{for}\: 
+{idx}[{0}] = 0 \\\frac{inv_3}{12} \,.\, \left(4 \,.\, {u_{0}{_{B0}}}[{2}] + 11 \,.\, {u_{0}{_{B0}}}[{-1}] - {u_{0}{_{B0}}}[{3}] - 20 \,.\, {u_{0}{_{B0}}}[{0}] + 6 \,.\, {u_{0}{_{B0}}}[{1}]\right) & \text{for}\: {idx}[{0}] = 1 \\\frac{inv_3}{12} \,.\, 
+\left(- 104 \,.\, {u_{0}{_{B0}}}[{-1}] + 114 \,.\, {u_{0}{_{B0}}}[{-2}] + 35 \,.\, {u_{0}{_{B0}}}[{0}] + 11 \,.\, {u_{0}{_{B0}}}[{-4}] - 56 \,.\, {u_{0}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 \\\frac{inv_3}{12} \,.\, \left(4 
+\,.\, {u_{0}{_{B0}}}[{-2}] + 6 \,.\, {u_{0}{_{B0}}}[{-1}] - 20 \,.\, {u_{0}{_{B0}}}[{0}] + 11 \,.\, {u_{0}{_{B0}}}[{1}] - {u_{0}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_3}{12} \,.\, \left(- {u_{0}{_{B0}}}[{2}] - 
+{u_{0}{_{B0}}}[{-2}] + 16 \,.\, {u_{0}{_{B0}}}[{-1}] - 30 \,.\, {u_{0}{_{B0}}}[{0}] + 16 \,.\, {u_{0}{_{B0}}}[{1}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{5} = \begin{cases} \frac{inv_2}{12} \,.\, \left(11 \,.\, {u_{0}{_{B0}}}[{0}] - 56 \,.\, {u_{0}{_{B0}}}[{0}] + 114 \,.\, {u_{0}{_{B0}}}[{0}] - 104 \,.\, {u_{0}{_{B0}}}[{0}] + 35 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: 
-{idx}[{1}] = 0 \\\frac{inv_2}{12} \,.\, \left(- {u_{0}{_{B0}}}[{0}] + 11 \,.\, {u_{0}{_{B0}}}[{0}] + 4 \,.\, {u_{0}{_{B0}}}[{0}] + 6 \,.\, {u_{0}{_{B0}}}[{0}] - 20 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\\frac{inv_2}{12} 
-\,.\, \left(- 104 \,.\, {u_{0}{_{B0}}}[{0}] + 114 \,.\, {u_{0}{_{B0}}}[{0}] - 56 \,.\, {u_{0}{_{B0}}}[{0}] + 11 \,.\, {u_{0}{_{B0}}}[{0}] + 35 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 \\\frac{inv_2}{12} \,.\, \left(4 
-\,.\, {u_{0}{_{B0}}}[{0}] + 6 \,.\, {u_{0}{_{B0}}}[{0}] - {u_{0}{_{B0}}}[{0}] + 11 \,.\, {u_{0}{_{B0}}}[{0}] - 20 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_2}{12} \,.\, \left(- {u_{0}{_{B0}}}[{0}] + 16 
-\,.\, {u_{0}{_{B0}}}[{0}] - {u_{0}{_{B0}}}[{0}] + 16 \,.\, {u_{0}{_{B0}}}[{0}] - 30 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\begin{dmath}localeval_{5} = \begin{cases} \frac{inv_2}{12} \,.\, \left(- 56 \,.\, {u_{0}{_{B0}}}[{0}] + 35 \,.\, {u_{0}{_{B0}}}[{0}] + 11 \,.\, {u_{0}{_{B0}}}[{0}] - 104 \,.\, {u_{0}{_{B0}}}[{0}] + 114 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: 
+{idx}[{1}] = 0 \\\frac{inv_2}{12} \,.\, \left(- {u_{0}{_{B0}}}[{0}] + 11 \,.\, {u_{0}{_{B0}}}[{0}] - 20 \,.\, {u_{0}{_{B0}}}[{0}] + 6 \,.\, {u_{0}{_{B0}}}[{0}] + 4 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\\frac{inv_2}{12} 
+\,.\, \left(- 56 \,.\, {u_{0}{_{B0}}}[{0}] - 104 \,.\, {u_{0}{_{B0}}}[{0}] + 114 \,.\, {u_{0}{_{B0}}}[{0}] + 35 \,.\, {u_{0}{_{B0}}}[{0}] + 11 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 \\\frac{inv_2}{12} \,.\, \left(- 
+{u_{0}{_{B0}}}[{0}] + 4 \,.\, {u_{0}{_{B0}}}[{0}] + 6 \,.\, {u_{0}{_{B0}}}[{0}] - 20 \,.\, {u_{0}{_{B0}}}[{0}] + 11 \,.\, {u_{0}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_2}{12} \,.\, \left(- {u_{0}{_{B0}}}[{0}] + 16 
+\,.\, {u_{0}{_{B0}}}[{0}] - 30 \,.\, {u_{0}{_{B0}}}[{0}] + 16 \,.\, {u_{0}{_{B0}}}[{0}] - {u_{0}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{6} = \begin{cases} \frac{inv_2}{12} \,.\, \left(114 \,.\, {u_{1}{_{B0}}}[{0}] - 56 \,.\, {u_{1}{_{B0}}}[{0}] + 35 \,.\, {u_{1}{_{B0}}}[{0}] + 11 \,.\, {u_{1}{_{B0}}}[{0}] - 104 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: 
-{idx}[{1}] = 0 \\\frac{inv_2}{12} \,.\, \left(11 \,.\, {u_{1}{_{B0}}}[{0}] + 4 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}] - 20 \,.\, {u_{1}{_{B0}}}[{0}] + 6 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\\frac{inv_2}{12} \,.\, 
-\left(- 104 \,.\, {u_{1}{_{B0}}}[{0}] + 114 \,.\, {u_{1}{_{B0}}}[{0}] + 11 \,.\, {u_{1}{_{B0}}}[{0}] + 35 \,.\, {u_{1}{_{B0}}}[{0}] - 56 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 \\\frac{inv_2}{12} \,.\, \left(4 \,.\, 
+\begin{dmath}localeval_{6} = \begin{cases} \frac{inv_3}{12} \,.\, \left(- 104 \,.\, {u_{1}{_{B0}}}[{1}] + 35 \,.\, {u_{1}{_{B0}}}[{0}] - 56 \,.\, {u_{1}{_{B0}}}[{3}] + 11 \,.\, {u_{1}{_{B0}}}[{4}] + 114 \,.\, {u_{1}{_{B0}}}[{2}]\right) & \text{for}\: 
+{idx}[{0}] = 0 \\\frac{inv_3}{12} \,.\, \left(6 \,.\, {u_{1}{_{B0}}}[{1}] - 20 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{3}] + 11 \,.\, {u_{1}{_{B0}}}[{-1}] + 4 \,.\, {u_{1}{_{B0}}}[{2}]\right) & \text{for}\: {idx}[{0}] = 1 \\\frac{inv_3}{12} \,.\, 
+\left(11 \,.\, {u_{1}{_{B0}}}[{-4}] + 35 \,.\, {u_{1}{_{B0}}}[{0}] + 114 \,.\, {u_{1}{_{B0}}}[{-2}] - 104 \,.\, {u_{1}{_{B0}}}[{-1}] - 56 \,.\, {u_{1}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 \\\frac{inv_3}{12} \,.\, \left(11 
+\,.\, {u_{1}{_{B0}}}[{1}] - 20 \,.\, {u_{1}{_{B0}}}[{0}] + 6 \,.\, {u_{1}{_{B0}}}[{-1}] + 4 \,.\, {u_{1}{_{B0}}}[{-2}] - {u_{1}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_3}{12} \,.\, \left(16 \,.\, {u_{1}{_{B0}}}[{1}] 
+- 30 \,.\, {u_{1}{_{B0}}}[{0}] + 16 \,.\, {u_{1}{_{B0}}}[{-1}] - {u_{1}{_{B0}}}[{-2}] - {u_{1}{_{B0}}}[{2}]\right) & \text{otherwise} \end{cases}\end{dmath}
+
+\begin{dmath}localeval_{7} = \begin{cases} \frac{inv_2}{12} \,.\, \left(35 \,.\, {u_{1}{_{B0}}}[{0}] + 11 \,.\, {u_{1}{_{B0}}}[{0}] - 56 \,.\, {u_{1}{_{B0}}}[{0}] + 114 \,.\, {u_{1}{_{B0}}}[{0}] - 104 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: 
+{idx}[{1}] = 0 \\\frac{inv_2}{12} \,.\, \left(11 \,.\, {u_{1}{_{B0}}}[{0}] - 20 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}] + 4 \,.\, {u_{1}{_{B0}}}[{0}] + 6 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\\frac{inv_2}{12} \,.\, 
+\left(- 104 \,.\, {u_{1}{_{B0}}}[{0}] + 114 \,.\, {u_{1}{_{B0}}}[{0}] + 35 \,.\, {u_{1}{_{B0}}}[{0}] - 56 \,.\, {u_{1}{_{B0}}}[{0}] + 11 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 \\\frac{inv_2}{12} \,.\, \left(4 \,.\, 
 {u_{1}{_{B0}}}[{0}] + 6 \,.\, {u_{1}{_{B0}}}[{0}] - 20 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}] + 11 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_2}{12} \,.\, \left(- {u_{1}{_{B0}}}[{0}] + 16 \,.\, 
-{u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}] - 30 \,.\, {u_{1}{_{B0}}}[{0}] + 16 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+{u_{1}{_{B0}}}[{0}] - 30 \,.\, {u_{1}{_{B0}}}[{0}] - {u_{1}{_{B0}}}[{0}] + 16 \,.\, {u_{1}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{7} = \begin{cases} \frac{inv_3}{12} \,.\, \left(11 \,.\, {u_{1}{_{B0}}}[{4}] - 56 \,.\, {u_{1}{_{B0}}}[{3}] + 35 \,.\, {u_{1}{_{B0}}}[{0}] - 104 \,.\, {u_{1}{_{B0}}}[{1}] + 114 \,.\, {u_{1}{_{B0}}}[{2}]\right) & \text{for}\: 
-{idx}[{0}] = 0 \\\frac{inv_3}{12} \,.\, \left(11 \,.\, {u_{1}{_{B0}}}[{-1}] - {u_{1}{_{B0}}}[{3}] - 20 \,.\, {u_{1}{_{B0}}}[{0}] + 6 \,.\, {u_{1}{_{B0}}}[{1}] + 4 \,.\, {u_{1}{_{B0}}}[{2}]\right) & \text{for}\: {idx}[{0}] = 1 \\\frac{inv_3}{12} \,.\, 
-\left(- 104 \,.\, {u_{1}{_{B0}}}[{-1}] + 114 \,.\, {u_{1}{_{B0}}}[{-2}] + 35 \,.\, {u_{1}{_{B0}}}[{0}] + 11 \,.\, {u_{1}{_{B0}}}[{-4}] - 56 \,.\, {u_{1}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 1 \\\frac{inv_3}{12} \,.\, \left(4 
-\,.\, {u_{1}{_{B0}}}[{-2}] + 6 \,.\, {u_{1}{_{B0}}}[{-1}] - 20 \,.\, {u_{1}{_{B0}}}[{0}] + 11 \,.\, {u_{1}{_{B0}}}[{1}] - {u_{1}{_{B0}}}[{-3}]\right) & \text{for}\: {idx}[{0}] = block0np0 - 2 \\\frac{inv_3}{12} \,.\, \left(- {u_{1}{_{B0}}}[{-2}] + 16 
-\,.\, {u_{1}{_{B0}}}[{-1}] - 30 \,.\, {u_{1}{_{B0}}}[{0}] + 16 \,.\, {u_{1}{_{B0}}}[{1}] - {u_{1}{_{B0}}}[{2}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\begin{dmath}localeval_{8} = \begin{cases} inv_1 \,.\, \left(\frac{4 \,.\, {wk_{1}{_{B0}}}[{0}]}{3} - 3 \,.\, {wk_{1}{_{B0}}}[{0}] + 4 \,.\, {wk_{1}{_{B0}}}[{0}] - \frac{{wk_{1}{_{B0}}}[{0}]}{4} - \frac{25 \,.\, {wk_{1}{_{B0}}}[{0}]}{12}\right) & 
+\text{for}\: {idx}[{1}] = 0 \\\frac{inv_1}{12} \,.\, \left({wk_{1}{_{B0}}}[{0}] - 6 \,.\, {wk_{1}{_{B0}}}[{0}] - 3 \,.\, {wk_{1}{_{B0}}}[{0}] + 18 \,.\, {wk_{1}{_{B0}}}[{0}] - 10 \,.\, {wk_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 \\inv_1 
+\,.\, \left(3 \,.\, {wk_{1}{_{B0}}}[{0}] - 4 \,.\, {wk_{1}{_{B0}}}[{0}] - \frac{4 \,.\, {wk_{1}{_{B0}}}[{0}]}{3} + \frac{25 \,.\, {wk_{1}{_{B0}}}[{0}]}{12} + \frac{{wk_{1}{_{B0}}}[{0}]}{4}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
+\\\frac{inv_1}{12} \,.\, \left(6 \,.\, {wk_{1}{_{B0}}}[{0}] + 3 \,.\, {wk_{1}{_{B0}}}[{0}] - 18 \,.\, {wk_{1}{_{B0}}}[{0}] - {wk_{1}{_{B0}}}[{0}] + 10 \,.\, {wk_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_1}{12} 
+\,.\, \left(8 \,.\, {wk_{1}{_{B0}}}[{0}] + {wk_{1}{_{B0}}}[{0}] - {wk_{1}{_{B0}}}[{0}] - 8 \,.\, {wk_{1}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{8} = \begin{cases} inv_0 \,.\, \left(- \frac{25 \,.\, {wk_{1}{_{B0}}}[{0}]}{12} - \frac{{wk_{1}{_{B0}}}[{0}]}{4} + 4 \,.\, {wk_{1}{_{B0}}}[{0}] - 3 \,.\, {wk_{1}{_{B0}}}[{0}] + \frac{4 \,.\, {wk_{1}{_{B0}}}[{0}]}{3}\right) & 
-\text{for}\: {idx}[{1}] = 0 \\\frac{inv_0}{12} \,.\, \left(- 10 \,.\, {wk_{1}{_{B0}}}[{0}] + 18 \,.\, {wk_{1}{_{B0}}}[{0}] - 3 \,.\, {wk_{1}{_{B0}}}[{0}] - 6 \,.\, {wk_{1}{_{B0}}}[{0}] + {wk_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 
-\\inv_0 \,.\, \left(\frac{{wk_{1}{_{B0}}}[{0}]}{4} + \frac{25 \,.\, {wk_{1}{_{B0}}}[{0}]}{12} - \frac{4 \,.\, {wk_{1}{_{B0}}}[{0}]}{3} - 4 \,.\, {wk_{1}{_{B0}}}[{0}] + 3 \,.\, {wk_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
-\\\frac{inv_0}{12} \,.\, \left(10 \,.\, {wk_{1}{_{B0}}}[{0}] - {wk_{1}{_{B0}}}[{0}] + 3 \,.\, {wk_{1}{_{B0}}}[{0}] - 18 \,.\, {wk_{1}{_{B0}}}[{0}] + 6 \,.\, {wk_{1}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_0}{12} 
-\,.\, \left(- 8 \,.\, {wk_{1}{_{B0}}}[{0}] - {wk_{1}{_{B0}}}[{0}] + {wk_{1}{_{B0}}}[{0}] + 8 \,.\, {wk_{1}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
+\begin{dmath}localeval_{9} = \begin{cases} inv_1 \,.\, \left(- \frac{25 \,.\, {wk_{3}{_{B0}}}[{0}]}{12} + 4 \,.\, {wk_{3}{_{B0}}}[{0}] - 3 \,.\, {wk_{3}{_{B0}}}[{0}] + \frac{4 \,.\, {wk_{3}{_{B0}}}[{0}]}{3} - \frac{{wk_{3}{_{B0}}}[{0}]}{4}\right) & 
+\text{for}\: {idx}[{1}] = 0 \\\frac{inv_1}{12} \,.\, \left(- 10 \,.\, {wk_{3}{_{B0}}}[{0}] + 18 \,.\, {wk_{3}{_{B0}}}[{0}] - 6 \,.\, {wk_{3}{_{B0}}}[{0}] - 3 \,.\, {wk_{3}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 
+\\inv_1 \,.\, \left(\frac{25 \,.\, {wk_{3}{_{B0}}}[{0}]}{12} + \frac{{wk_{3}{_{B0}}}[{0}]}{4} - \frac{4 \,.\, {wk_{3}{_{B0}}}[{0}]}{3} + 3 \,.\, {wk_{3}{_{B0}}}[{0}] - 4 \,.\, {wk_{3}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
+\\\frac{inv_1}{12} \,.\, \left(10 \,.\, {wk_{3}{_{B0}}}[{0}] + 3 \,.\, {wk_{3}{_{B0}}}[{0}] - {wk_{3}{_{B0}}}[{0}] + 6 \,.\, {wk_{3}{_{B0}}}[{0}] - 18 \,.\, {wk_{3}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_1}{12} 
+\,.\, \left(- {wk_{3}{_{B0}}}[{0}] + 8 \,.\, {wk_{3}{_{B0}}}[{0}] - 8 \,.\, {wk_{3}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
 
-\begin{dmath}localeval_{9} = \begin{cases} inv_0 \,.\, \left(- \frac{25 \,.\, {wk_{3}{_{B0}}}[{0}]}{12} - \frac{{wk_{3}{_{B0}}}[{0}]}{4} + \frac{4 \,.\, {wk_{3}{_{B0}}}[{0}]}{3} - 3 \,.\, {wk_{3}{_{B0}}}[{0}] + 4 \,.\, {wk_{3}{_{B0}}}[{0}]\right) & 
-\text{for}\: {idx}[{1}] = 0 \\\frac{inv_0}{12} \,.\, \left(- 3 \,.\, {wk_{3}{_{B0}}}[{0}] - 10 \,.\, {wk_{3}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}] - 6 \,.\, {wk_{3}{_{B0}}}[{0}] + 18 \,.\, {wk_{3}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = 1 
-\\inv_0 \,.\, \left(3 \,.\, {wk_{3}{_{B0}}}[{0}] - 4 \,.\, {wk_{3}{_{B0}}}[{0}] + \frac{25 \,.\, {wk_{3}{_{B0}}}[{0}]}{12} - \frac{4 \,.\, {wk_{3}{_{B0}}}[{0}]}{3} + \frac{{wk_{3}{_{B0}}}[{0}]}{4}\right) & \text{for}\: {idx}[{1}] = block0np1 - 1 
-\\\frac{inv_0}{12} \,.\, \left(6 \,.\, {wk_{3}{_{B0}}}[{0}] - 18 \,.\, {wk_{3}{_{B0}}}[{0}] + 10 \,.\, {wk_{3}{_{B0}}}[{0}] - {wk_{3}{_{B0}}}[{0}] + 3 \,.\, {wk_{3}{_{B0}}}[{0}]\right) & \text{for}\: {idx}[{1}] = block0np1 - 2 \\\frac{inv_0}{12} 
-\,.\, \left({wk_{3}{_{B0}}}[{0}] - 8 \,.\, {wk_{3}{_{B0}}}[{0}] - {wk_{3}{_{B0}}}[{0}] + 8 \,.\, {wk_{3}{_{B0}}}[{0}]\right) & \text{otherwise} \end{cases}\end{dmath}
-
-\begin{dmath}{Residual_{1}{_{B0}}}[{0}] = {Residual_{1}{_{B0}}}[{0}] + \frac{localeval_{2} \,.\, {D_{11}{_{B0}}}[{0}]}{Re} \,.\, \left({D_{11}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) + \frac{localeval_{3}}{Re} \,.\, 
-\left(- \frac{2 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {wk_{2}{_{B0}}}[{0}] + \frac{4 \,.\, {wk_{1}{_{B0}}}[{0}]}{3}\right) + \frac{{\mu{_{B0}}}[{0}]}{Re} \,.\, \left(\frac{4 \,.\, localeval_{4}}{3} + localeval_{5} \,.\, \left({D_{11}{_{B0}}}[{0}] 
+\begin{dmath}{Residual_{1}{_{B0}}}[{0}] = {Residual_{1}{_{B0}}}[{0}] + \frac{localeval_{2}}{Re} \,.\, \left(- \frac{2 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {wk_{2}{_{B0}}}[{0}] + \frac{4 \,.\, {wk_{1}{_{B0}}}[{0}]}{3}\right) + \frac{localeval_{3} 
+\,.\, {D_{11}{_{B0}}}[{0}]}{Re} \,.\, \left({D_{11}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) + \frac{{\mu{_{B0}}}[{0}]}{Re} \,.\, \left(\frac{4 \,.\, localeval_{4}}{3} + localeval_{5} \,.\, \left({D_{11}{_{B0}}}[{0}] 
 \right)^{2} + \frac{localeval_{9} \,.\, {D_{11}{_{B0}}}[{0}]}{3} + {D_{11}{_{B0}}}[{0}] \,.\, {SD_{111}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}]\right)\end{dmath}
 
-\begin{dmath}{Residual_{2}{_{B0}}}[{0}] = {Residual_{2}{_{B0}}}[{0}] + \frac{localeval_{2} \,.\, {D_{11}{_{B0}}}[{0}]}{Re} \,.\, \left(\frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {wk_{2}{_{B0}}}[{0}] - \frac{2 \,.\, {wk_{1}{_{B0}}}[{0}]}{3}\right) + 
-\frac{localeval_{3}}{Re} \,.\, \left({D_{11}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) + \frac{{\mu{_{B0}}}[{0}]}{Re} \,.\, \left(\frac{4 \,.\, localeval_{6}}{3} \,.\, \left({D_{11}{_{B0}}}[{0}] \right)^{2} + localeval_{7} 
-+ \frac{localeval_{8} \,.\, {D_{11}{_{B0}}}[{0}]}{3} + \frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {SD_{111}{_{B0}}}[{0}] \,.\, {wk_{2}{_{B0}}}[{0}]\right)\end{dmath}
+\begin{dmath}{Residual_{2}{_{B0}}}[{0}] = {Residual_{2}{_{B0}}}[{0}] + \frac{localeval_{2}}{Re} \,.\, \left({D_{11}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) + \frac{localeval_{3} \,.\, {D_{11}{_{B0}}}[{0}]}{Re} \,.\, 
+\left(\frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {wk_{2}{_{B0}}}[{0}] - \frac{2 \,.\, {wk_{1}{_{B0}}}[{0}]}{3}\right) + \frac{{\mu{_{B0}}}[{0}]}{Re} \,.\, \left(localeval_{6} + \frac{4 \,.\, localeval_{7}}{3} \,.\, \left({D_{11}{_{B0}}}[{0}] 
+\right)^{2} + \frac{localeval_{8} \,.\, {D_{11}{_{B0}}}[{0}]}{3} + \frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {SD_{111}{_{B0}}}[{0}] \,.\, {wk_{2}{_{B0}}}[{0}]\right)\end{dmath}
 
-\begin{dmath}{Residual_{3}{_{B0}}}[{0}] = {Residual_{3}{_{B0}}}[{0}] + \frac{{D_{11}{_{B0}}}[{0}] \,.\, {u_{0}{_{B0}}}[{0}]}{Re} \,.\, localeval_{2} \,.\, \left({D_{11}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) + 
-\frac{{D_{11}{_{B0}}}[{0}] \,.\, {u_{1}{_{B0}}}[{0}]}{Re} \,.\, localeval_{2} \,.\, \left(\frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {wk_{2}{_{B0}}}[{0}] - \frac{2 \,.\, {wk_{1}{_{B0}}}[{0}]}{3}\right) + \frac{localeval_{3} \,.\, 
-{u_{1}{_{B0}}}[{0}]}{Re} \,.\, \left({D_{11}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) + \frac{localeval_{3} \,.\, {u_{0}{_{B0}}}[{0}]}{Re} \,.\, \left(- \frac{2 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {wk_{2}{_{B0}}}[{0}] + 
-\frac{4 \,.\, {wk_{1}{_{B0}}}[{0}]}{3}\right) + \frac{{D_{11}{_{B0}}}[{0}] \,.\, {\mu{_{B0}}}[{0}]}{Re} \,.\, \left({D_{11}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) \,.\, {wk_{0}{_{B0}}}[{0}] + \frac{{\mu{_{B0}}}[{0}] 
+\begin{dmath}{Residual_{3}{_{B0}}}[{0}] = {Residual_{3}{_{B0}}}[{0}] + \frac{localeval_{2} \,.\, {u_{1}{_{B0}}}[{0}]}{Re} \,.\, \left({D_{11}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) + \frac{localeval_{2} \,.\, 
+{u_{0}{_{B0}}}[{0}]}{Re} \,.\, \left(- \frac{2 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {wk_{2}{_{B0}}}[{0}] + \frac{4 \,.\, {wk_{1}{_{B0}}}[{0}]}{3}\right) + \frac{{D_{11}{_{B0}}}[{0}] \,.\, {u_{0}{_{B0}}}[{0}]}{Re} \,.\, localeval_{3} \,.\, 
+\left({D_{11}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) + \frac{{D_{11}{_{B0}}}[{0}] \,.\, {u_{1}{_{B0}}}[{0}]}{Re} \,.\, localeval_{3} \,.\, \left(\frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {wk_{2}{_{B0}}}[{0}] - 
+\frac{2 \,.\, {wk_{1}{_{B0}}}[{0}]}{3}\right) + \frac{{D_{11}{_{B0}}}[{0}] \,.\, {\mu{_{B0}}}[{0}]}{Re} \,.\, \left({D_{11}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) \,.\, {wk_{0}{_{B0}}}[{0}] + \frac{{\mu{_{B0}}}[{0}] 
 \,.\, {wk_{3}{_{B0}}}[{0}]}{Re} \,.\, \left({D_{11}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}] + {wk_{3}{_{B0}}}[{0}]\right) + \frac{{\mu{_{B0}}}[{0}] \,.\, {wk_{1}{_{B0}}}[{0}]}{Re} \,.\, \left(- \frac{2 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, 
 {wk_{2}{_{B0}}}[{0}] + \frac{4 \,.\, {wk_{1}{_{B0}}}[{0}]}{3}\right) + \frac{{D_{11}{_{B0}}}[{0}] \,.\, {\mu{_{B0}}}[{0}]}{Re} \,.\, \left(\frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {wk_{2}{_{B0}}}[{0}] - \frac{2 \,.\, 
 {wk_{1}{_{B0}}}[{0}]}{3}\right) \,.\, {wk_{2}{_{B0}}}[{0}] + \frac{{\mu{_{B0}}}[{0}] \,.\, {u_{0}{_{B0}}}[{0}]}{Re} \,.\, \left(\frac{4 \,.\, localeval_{4}}{3} + localeval_{5} \,.\, \left({D_{11}{_{B0}}}[{0}] \right)^{2} + \frac{localeval_{9} \,.\, 
-{D_{11}{_{B0}}}[{0}]}{3} + {D_{11}{_{B0}}}[{0}] \,.\, {SD_{111}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}]\right) + \frac{{\mu{_{B0}}}[{0}] \,.\, {u_{1}{_{B0}}}[{0}]}{Re} \,.\, \left(\frac{4 \,.\, localeval_{6}}{3} \,.\, \left({D_{11}{_{B0}}}[{0}] 
-\right)^{2} + localeval_{7} + \frac{localeval_{8} \,.\, {D_{11}{_{B0}}}[{0}]}{3} + \frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {SD_{111}{_{B0}}}[{0}] \,.\, {wk_{2}{_{B0}}}[{0}]\right) + \frac{localeval_{2} \,.\, \left({D_{11}{_{B0}}}[{0}] 
-\right)^{2} \,.\, {wk_{6}{_{B0}}}[{0}]}{\left(Minf \right)^{2} \,.\, Pr \,.\, Re \,.\, \left(gama - 1\right)} + \frac{localeval_{3} \,.\, {wk_{7}{_{B0}}}[{0}]}{\left(Minf \right)^{2} \,.\, Pr \,.\, Re \,.\, \left(gama - 1\right)} + 
-\frac{\left(localeval_{0} \,.\, \left({D_{11}{_{B0}}}[{0}] \right)^{2} + localeval_{1} + {D_{11}{_{B0}}}[{0}] \,.\, {SD_{111}{_{B0}}}[{0}] \,.\, {wk_{6}{_{B0}}}[{0}]\right) \,.\, {\mu{_{B0}}}[{0}]}{\left(Minf \right)^{2} \,.\, Pr \,.\, Re \,.\, 
-\left(gama - 1\right)}\end{dmath}
+{D_{11}{_{B0}}}[{0}]}{3} + {D_{11}{_{B0}}}[{0}] \,.\, {SD_{111}{_{B0}}}[{0}] \,.\, {wk_{0}{_{B0}}}[{0}]\right) + \frac{{\mu{_{B0}}}[{0}] \,.\, {u_{1}{_{B0}}}[{0}]}{Re} \,.\, \left(localeval_{6} + \frac{4 \,.\, localeval_{7}}{3} \,.\, 
+\left({D_{11}{_{B0}}}[{0}] \right)^{2} + \frac{localeval_{8} \,.\, {D_{11}{_{B0}}}[{0}]}{3} + \frac{4 \,.\, {D_{11}{_{B0}}}[{0}]}{3} \,.\, {SD_{111}{_{B0}}}[{0}] \,.\, {wk_{2}{_{B0}}}[{0}]\right) + \frac{localeval_{2} \,.\, 
+{wk_{7}{_{B0}}}[{0}]}{\left(Minf \right)^{2} \,.\, Pr \,.\, Re \,.\, \left(gama - 1\right)} + \frac{localeval_{3} \,.\, \left({D_{11}{_{B0}}}[{0}] \right)^{2} \,.\, {wk_{6}{_{B0}}}[{0}]}{\left(Minf \right)^{2} \,.\, Pr \,.\, Re \,.\, \left(gama - 
+1\right)} + \frac{\left(localeval_{0} \,.\, \left({D_{11}{_{B0}}}[{0}] \right)^{2} + localeval_{1} + {D_{11}{_{B0}}}[{0}] \,.\, {SD_{111}{_{B0}}}[{0}] \,.\, {wk_{6}{_{B0}}}[{0}]\right) \,.\, {\mu{_{B0}}}[{0}]}{\left(Minf \right)^{2} \,.\, Pr \,.\, Re 
+\,.\, \left(gama - 1\right)}\end{dmath}
 
 \noindent The kernel is Temporal solution advancement, block is 0\\\noindent The ranges are 0,block0np0,0,block0np1\\\begin{dmath}{tempRK_{\rho}{_{B0}}}[{0}] = dt \,.\, {Residual_{0}{_{B0}}}[{0}] + {rkA}[{stage}] \,.\, {tempRK_{\rho}{_{B0}}}[{0}]\end{dmath}
 
@@ -1564,6 +1563,6 @@ AVG_{1 u1}\right) + AVG_{1 u1} \,.\, Recon_{0}\end{dmath}
 \begin{dmath}{rhoE{_{B0}}}[{0}] = \begin{cases} 1.0590824 & \text{for}\: x_{0} > 500.0 \\0.94644428042 & \text{otherwise} \end{cases}\end{dmath}
 
 \noindent Ending Do loop stage\\
-\\\noindent Ending Do loop iter\\
+\\\noindent Condition Eq(Mod(iter + 1, 200), 0)\\\noindent HDF5 IO type write on arrays rho_B0 rhou0_B0 rhou1_B0 rhoE_B0 x0_B0 x1_B0 D11_B0 TENO_B0\\\noindent Ending condition loop %s\\\noindent Ending Do loop iter\\
 \\\noindent Ending timers\\
 \\\noindent HDF5 IO type write on arrays rho_B0 rhou0_B0 rhou1_B0 rhoE_B0 x0_B0 x1_B0 D11_B0 TENO_B0\\\noindent End of Main\\\end{document}

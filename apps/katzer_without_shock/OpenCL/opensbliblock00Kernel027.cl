@@ -35,30 +35,30 @@
 
 void opensbliblock00Kernel027(const ptr_double u2_B0,
   ptr_double wk5_B0,
-  const int *idx, const int block0np0, const double inv_1, const double rc8, const double rc9, const double rc10, const double rc11)
+  const int *idx, const int block0np0, const double inv_0, const double rc8, const double rc9, const double rc10, const double rc11)
 {
     OPS_ACCS(wk5_B0, 0,0) = ((idx[0] == 0) ? (
-   inv_1*((rc10)*OPS_ACCS(u2_B0, 3,0) - 3*OPS_ACCS(u2_B0, 2,0) +
-      4*OPS_ACCS(u2_B0, 1,0) - rc8*OPS_ACCS(u2_B0, 0,0) - rc9*OPS_ACCS(u2_B0, 4,0))
+   inv_0*(-3*OPS_ACCS(u2_B0, 2,0) + (rc9)*OPS_ACCS(u2_B0, 3,0) -
+      rc10*OPS_ACCS(u2_B0, 0,0) + 4*OPS_ACCS(u2_B0, 1,0) - rc8*OPS_ACCS(u2_B0, 4,0))
 )
 : ((idx[0] == 1) ? (
 
-      (rc11)*inv_1*(OPS_ACCS(u2_B0, 3,0) - 6*OPS_ACCS(u2_B0, 2,0) - 3*OPS_ACCS(u2_B0, -1,0) + 18*OPS_ACCS(u2_B0, 1,0) -
-      10*OPS_ACCS(u2_B0, 0,0))
+      (rc11)*inv_0*(-6*OPS_ACCS(u2_B0, 2,0) - 3*OPS_ACCS(u2_B0, -1,0) + OPS_ACCS(u2_B0, 3,0) - 10*OPS_ACCS(u2_B0, 0,0) +
+      18*OPS_ACCS(u2_B0, 1,0))
 )
 : ((idx[0] == block0np0 - 1) ? (
-   inv_1*(3*OPS_ACCS(u2_B0, -2,0) -
-      4*OPS_ACCS(u2_B0, -1,0) - rc10*OPS_ACCS(u2_B0, -3,0) + (rc8)*OPS_ACCS(u2_B0, 0,0) +
-      (rc9)*OPS_ACCS(u2_B0, -4,0))
+   inv_0*(-4*OPS_ACCS(u2_B0, -1,0) +
+      3*OPS_ACCS(u2_B0, -2,0) + (rc10)*OPS_ACCS(u2_B0, 0,0) + (rc8)*OPS_ACCS(u2_B0, -4,0) -
+      rc9*OPS_ACCS(u2_B0, -3,0))
 )
 : ((idx[0] == block0np0 - 2) ? (
-   (rc11)*inv_1*(6*OPS_ACCS(u2_B0, -2,0) -
-      18*OPS_ACCS(u2_B0, -1,0) + 3*OPS_ACCS(u2_B0, 1,0) - OPS_ACCS(u2_B0, -3,0) + 10*OPS_ACCS(u2_B0, 0,0))
+   (rc11)*inv_0*(-18*OPS_ACCS(u2_B0, -1,0) +
+      6*OPS_ACCS(u2_B0, -2,0) + 10*OPS_ACCS(u2_B0, 0,0) + 3*OPS_ACCS(u2_B0, 1,0) - OPS_ACCS(u2_B0, -3,0))
 )
 : (
 
-      (rc11)*inv_1*(-OPS_ACCS(u2_B0, 2,0) + OPS_ACCS(u2_B0, -2,0) - 8*OPS_ACCS(u2_B0, -1,0) +
-      8*OPS_ACCS(u2_B0, 1,0))
+      (rc11)*inv_0*(-8*OPS_ACCS(u2_B0, -1,0) + 8*OPS_ACCS(u2_B0, 1,0) - OPS_ACCS(u2_B0, 2,0) +
+      OPS_ACCS(u2_B0, -2,0))
 )))));
 
 }
@@ -68,7 +68,7 @@ __kernel void ops_opensbliblock00Kernel027(
 __global const double* restrict arg0,
 __global double* restrict arg1,
 const int block0np0,
-const double inv_1,
+const double inv_0,
 const double rc8,
 const double rc9,
 const double rc10,
@@ -93,7 +93,7 @@ const int size1 ){
                                   ptr1,
                                   arg_idx,
                                   block0np0,
-                                  inv_1,
+                                  inv_0,
                                   rc8,
                                   rc9,
                                   rc10,

@@ -33,10 +33,10 @@
 
 //user function
 
-void opensbliblock00Kernel039(ptr_double rho_B0,
+void opensbliblock00Kernel039(ptr_double rhou1_B0,
   ptr_double rhou0_B0,
   ptr_double rhoE_B0,
-  ptr_double rhou1_B0,
+  ptr_double rho_B0,
   const int *idx, const double Delta0block0)
 {
    double x0 = 0.0;

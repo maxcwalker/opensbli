@@ -22,15 +22,15 @@ int xdim12_opensbliblock00Kernel014;
 
 
 void opensbliblock00Kernel014_c_wrapper(
-  double * restrict wk4_B0_p,
-  double * restrict wk5_B0_p,
-  double * restrict D11_B0_p,
-  double * restrict wk3_B0_p,
   double * restrict wk0_B0_p,
-  double * restrict wk1_B0_p,
-  double * restrict wk7_B0_p,
   double * restrict wk2_B0_p,
   double * restrict wk6_B0_p,
+  double * restrict wk3_B0_p,
+  double * restrict wk4_B0_p,
+  double * restrict wk1_B0_p,
+  double * restrict D11_B0_p,
+  double * restrict wk7_B0_p,
+  double * restrict wk5_B0_p,
   double * restrict Residual0_B0_p,
   double * restrict Residual2_B0_p,
   double * restrict Residual3_B0_p,
@@ -39,31 +39,31 @@ void opensbliblock00Kernel014_c_wrapper(
   #pragma omp parallel for
   for ( int n_y=0; n_y<y_size; n_y++ ){
     for ( int n_x=0; n_x<x_size; n_x++ ){
-      const ptr_double wk4_B0 = { wk4_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel014*1, xdim0_opensbliblock00Kernel014};
-      const ptr_double wk5_B0 = { wk5_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel014*1, xdim1_opensbliblock00Kernel014};
-      const ptr_double D11_B0 = { D11_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel014*1, xdim2_opensbliblock00Kernel014};
+      const ptr_double wk0_B0 = { wk0_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel014*1, xdim0_opensbliblock00Kernel014};
+      const ptr_double wk2_B0 = { wk2_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel014*1, xdim1_opensbliblock00Kernel014};
+      const ptr_double wk6_B0 = { wk6_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel014*1, xdim2_opensbliblock00Kernel014};
       const ptr_double wk3_B0 = { wk3_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel014*1, xdim3_opensbliblock00Kernel014};
-      const ptr_double wk0_B0 = { wk0_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel014*1, xdim4_opensbliblock00Kernel014};
+      const ptr_double wk4_B0 = { wk4_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel014*1, xdim4_opensbliblock00Kernel014};
       const ptr_double wk1_B0 = { wk1_B0_p + n_x*1 + n_y * xdim5_opensbliblock00Kernel014*1, xdim5_opensbliblock00Kernel014};
-      const ptr_double wk7_B0 = { wk7_B0_p + n_x*1 + n_y * xdim6_opensbliblock00Kernel014*1, xdim6_opensbliblock00Kernel014};
-      const ptr_double wk2_B0 = { wk2_B0_p + n_x*1 + n_y * xdim7_opensbliblock00Kernel014*1, xdim7_opensbliblock00Kernel014};
-      const ptr_double wk6_B0 = { wk6_B0_p + n_x*1 + n_y * xdim8_opensbliblock00Kernel014*1, xdim8_opensbliblock00Kernel014};
+      const ptr_double D11_B0 = { D11_B0_p + n_x*1 + n_y * xdim6_opensbliblock00Kernel014*1, xdim6_opensbliblock00Kernel014};
+      const ptr_double wk7_B0 = { wk7_B0_p + n_x*1 + n_y * xdim7_opensbliblock00Kernel014*1, xdim7_opensbliblock00Kernel014};
+      const ptr_double wk5_B0 = { wk5_B0_p + n_x*1 + n_y * xdim8_opensbliblock00Kernel014*1, xdim8_opensbliblock00Kernel014};
       ptr_double Residual0_B0 = { Residual0_B0_p + n_x*1 + n_y * xdim9_opensbliblock00Kernel014*1, xdim9_opensbliblock00Kernel014};
       ptr_double Residual2_B0 = { Residual2_B0_p + n_x*1 + n_y * xdim10_opensbliblock00Kernel014*1, xdim10_opensbliblock00Kernel014};
       ptr_double Residual3_B0 = { Residual3_B0_p + n_x*1 + n_y * xdim11_opensbliblock00Kernel014*1, xdim11_opensbliblock00Kernel014};
       ptr_double Residual1_B0 = { Residual1_B0_p + n_x*1 + n_y * xdim12_opensbliblock00Kernel014*1, xdim12_opensbliblock00Kernel014};
       
-    OPS_ACC(Residual0_B0, 0,0) = -inv_0*(OPS_ACC(wk4_B0, 0,0) - OPS_ACC(wk4_B0, 0,-1))*OPS_ACC(D11_B0, 0,0) -
-      inv_1*(OPS_ACC(wk0_B0, 0,0) - OPS_ACC(wk0_B0, -1,0));
+    OPS_ACC(Residual0_B0, 0,0) = -inv_0*(OPS_ACC(wk0_B0, 0,0) - OPS_ACC(wk0_B0, -1,0)) -
+      inv_1*(-OPS_ACC(wk4_B0, 0,-1) + OPS_ACC(wk4_B0, 0,0))*OPS_ACC(D11_B0, 0,0);
 
-    OPS_ACC(Residual1_B0, 0,0) = -inv_0*(OPS_ACC(wk5_B0, 0,0) - OPS_ACC(wk5_B0, 0,-1))*OPS_ACC(D11_B0, 0,0) -
-      inv_1*(-OPS_ACC(wk1_B0, -1,0) + OPS_ACC(wk1_B0, 0,0));
+    OPS_ACC(Residual1_B0, 0,0) = -inv_0*(OPS_ACC(wk1_B0, 0,0) - OPS_ACC(wk1_B0, -1,0)) -
+      inv_1*(OPS_ACC(wk5_B0, 0,0) - OPS_ACC(wk5_B0, 0,-1))*OPS_ACC(D11_B0, 0,0);
 
-    OPS_ACC(Residual2_B0, 0,0) = -inv_0*(-OPS_ACC(wk6_B0, 0,-1) + OPS_ACC(wk6_B0, 0,0))*OPS_ACC(D11_B0, 0,0) -
-      inv_1*(-OPS_ACC(wk2_B0, -1,0) + OPS_ACC(wk2_B0, 0,0));
+    OPS_ACC(Residual2_B0, 0,0) = -inv_0*(OPS_ACC(wk2_B0, 0,0) - OPS_ACC(wk2_B0, -1,0)) -
+      inv_1*(-OPS_ACC(wk6_B0, 0,-1) + OPS_ACC(wk6_B0, 0,0))*OPS_ACC(D11_B0, 0,0);
 
-    OPS_ACC(Residual3_B0, 0,0) = -inv_0*(OPS_ACC(wk7_B0, 0,0) - OPS_ACC(wk7_B0, 0,-1))*OPS_ACC(D11_B0, 0,0) -
-      inv_1*(-OPS_ACC(wk3_B0, -1,0) + OPS_ACC(wk3_B0, 0,0));
+    OPS_ACC(Residual3_B0, 0,0) = -inv_0*(OPS_ACC(wk3_B0, 0,0) - OPS_ACC(wk3_B0, -1,0)) -
+      inv_1*(-OPS_ACC(wk7_B0, 0,-1) + OPS_ACC(wk7_B0, 0,0))*OPS_ACC(D11_B0, 0,0);
 
 
     }

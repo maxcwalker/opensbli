@@ -11,10 +11,10 @@ int xdim3_opensbliblock00Kernel039;
 
 //user function
 inline 
-void opensbliblock00Kernel039(ptr_double rho_B0,
+void opensbliblock00Kernel039(ptr_double rhou1_B0,
   ptr_double rhou0_B0,
   ptr_double rhoE_B0,
-  ptr_double rhou1_B0,
+  ptr_double rho_B0,
   const int *idx)
 {
    double x0 = 0.0;

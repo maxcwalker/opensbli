@@ -35,31 +35,31 @@
 
 void opensbliblock00Kernel048(const ptr_double D11_B0,
   ptr_double SD111_B0,
-  const int *idx, const int block0np1, const double inv_0, const double rc8, const double rc9, const double rc10, const double rc11)
+  const int *idx, const int block0np1, const double inv_1, const double rc8, const double rc9, const double rc10, const double rc11)
 {
    double localeval_0 = 0.0;
     localeval_0 = ((idx[1] == 0) ? (
-   inv_0*((rc10)*OPS_ACCS(D11_B0, 0,3) - rc8*OPS_ACCS(D11_B0, 0,0) -
-      rc9*OPS_ACCS(D11_B0, 0,4) + 4*OPS_ACCS(D11_B0, 0,1) - 3*OPS_ACCS(D11_B0, 0,2))
+   inv_1*(-rc10*OPS_ACCS(D11_B0, 0,0) + (rc9)*OPS_ACCS(D11_B0, 0,3) -
+      3*OPS_ACCS(D11_B0, 0,2) + 4*OPS_ACCS(D11_B0, 0,1) - rc8*OPS_ACCS(D11_B0, 0,4))
 )
 : ((idx[1] == 1) ? (
 
-      (rc11)*inv_0*(OPS_ACCS(D11_B0, 0,3) - 3*OPS_ACCS(D11_B0, 0,-1) - 10*OPS_ACCS(D11_B0, 0,0) +
-      18*OPS_ACCS(D11_B0, 0,1) - 6*OPS_ACCS(D11_B0, 0,2))
+      (rc11)*inv_1*(-10*OPS_ACCS(D11_B0, 0,0) - 3*OPS_ACCS(D11_B0, 0,-1) + OPS_ACCS(D11_B0, 0,3) -
+      6*OPS_ACCS(D11_B0, 0,2) + 18*OPS_ACCS(D11_B0, 0,1))
 )
 : ((idx[1] == block0np1 - 1) ? (
 
-      inv_0*(-rc10*OPS_ACCS(D11_B0, 0,-3) - 4*OPS_ACCS(D11_B0, 0,-1) + 3*OPS_ACCS(D11_B0, 0,-2) +
-      (rc8)*OPS_ACCS(D11_B0, 0,0) + (rc9)*OPS_ACCS(D11_B0, 0,-4))
+      inv_1*((rc10)*OPS_ACCS(D11_B0, 0,0) + 3*OPS_ACCS(D11_B0, 0,-2) - 4*OPS_ACCS(D11_B0, 0,-1) -
+      rc9*OPS_ACCS(D11_B0, 0,-3) + (rc8)*OPS_ACCS(D11_B0, 0,-4))
 )
 : ((idx[1] == block0np1 - 2) ? (
 
-      (rc11)*inv_0*(-OPS_ACCS(D11_B0, 0,-3) - 18*OPS_ACCS(D11_B0, 0,-1) + 6*OPS_ACCS(D11_B0, 0,-2) +
-      10*OPS_ACCS(D11_B0, 0,0) + 3*OPS_ACCS(D11_B0, 0,1))
+      (rc11)*inv_1*(10*OPS_ACCS(D11_B0, 0,0) + 6*OPS_ACCS(D11_B0, 0,-2) - 18*OPS_ACCS(D11_B0, 0,-1) -
+      OPS_ACCS(D11_B0, 0,-3) + 3*OPS_ACCS(D11_B0, 0,1))
 )
 : (
-   (rc11)*inv_0*(-8*OPS_ACCS(D11_B0, 0,-1) +
-      OPS_ACCS(D11_B0, 0,-2) + 8*OPS_ACCS(D11_B0, 0,1) - OPS_ACCS(D11_B0, 0,2))
+   (rc11)*inv_1*(-OPS_ACCS(D11_B0, 0,2) +
+      8*OPS_ACCS(D11_B0, 0,1) + OPS_ACCS(D11_B0, 0,-2) - 8*OPS_ACCS(D11_B0, 0,-1))
 )))));
 
    OPS_ACCS(SD111_B0, 0,0) = localeval_0;
@@ -71,7 +71,7 @@ __kernel void ops_opensbliblock00Kernel048(
 __global const double* restrict arg0,
 __global double* restrict arg1,
 const int block0np1,
-const double inv_0,
+const double inv_1,
 const double rc8,
 const double rc9,
 const double rc10,
@@ -96,7 +96,7 @@ const int size1 ){
                                   ptr1,
                                   arg_idx,
                                   block0np1,
-                                  inv_0,
+                                  inv_1,
                                   rc8,
                                   rc9,
                                   rc10,

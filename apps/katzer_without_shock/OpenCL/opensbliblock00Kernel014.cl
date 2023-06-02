@@ -33,31 +33,31 @@
 
 //user function
 
- void opensbliblock00Kernel014(const ptr_double wk4_B0,
-  const ptr_double wk5_B0,
-  const ptr_double D11_B0,
-  const ptr_double wk3_B0,
-  const ptr_double wk0_B0,
-  const ptr_double wk1_B0,
-  const ptr_double wk7_B0,
+ void opensbliblock00Kernel014(const ptr_double wk0_B0,
   const ptr_double wk2_B0,
   const ptr_double wk6_B0,
+  const ptr_double wk3_B0,
+  const ptr_double wk4_B0,
+  const ptr_double wk1_B0,
+  const ptr_double D11_B0,
+  const ptr_double wk7_B0,
+  const ptr_double wk5_B0,
   ptr_double Residual0_B0,
   ptr_double Residual2_B0,
   ptr_double Residual3_B0,
   ptr_double Residual1_B0, const double inv_0, const double inv_1)
 {
-    OPS_ACCS(Residual0_B0, 0,0) = -inv_0*(OPS_ACCS(wk4_B0, 0,0) - OPS_ACCS(wk4_B0, 0,-1))*OPS_ACCS(D11_B0, 0,0) -
-      inv_1*(OPS_ACCS(wk0_B0, 0,0) - OPS_ACCS(wk0_B0, -1,0));
+    OPS_ACCS(Residual0_B0, 0,0) = -inv_0*(OPS_ACCS(wk0_B0, 0,0) - OPS_ACCS(wk0_B0, -1,0)) -
+      inv_1*(-OPS_ACCS(wk4_B0, 0,-1) + OPS_ACCS(wk4_B0, 0,0))*OPS_ACCS(D11_B0, 0,0);
 
-    OPS_ACCS(Residual1_B0, 0,0) = -inv_0*(OPS_ACCS(wk5_B0, 0,0) - OPS_ACCS(wk5_B0, 0,-1))*OPS_ACCS(D11_B0, 0,0) -
-      inv_1*(-OPS_ACCS(wk1_B0, -1,0) + OPS_ACCS(wk1_B0, 0,0));
+    OPS_ACCS(Residual1_B0, 0,0) = -inv_0*(OPS_ACCS(wk1_B0, 0,0) - OPS_ACCS(wk1_B0, -1,0)) -
+      inv_1*(OPS_ACCS(wk5_B0, 0,0) - OPS_ACCS(wk5_B0, 0,-1))*OPS_ACCS(D11_B0, 0,0);
 
-    OPS_ACCS(Residual2_B0, 0,0) = -inv_0*(-OPS_ACCS(wk6_B0, 0,-1) + OPS_ACCS(wk6_B0, 0,0))*OPS_ACCS(D11_B0, 0,0) -
-      inv_1*(-OPS_ACCS(wk2_B0, -1,0) + OPS_ACCS(wk2_B0, 0,0));
+    OPS_ACCS(Residual2_B0, 0,0) = -inv_0*(OPS_ACCS(wk2_B0, 0,0) - OPS_ACCS(wk2_B0, -1,0)) -
+      inv_1*(-OPS_ACCS(wk6_B0, 0,-1) + OPS_ACCS(wk6_B0, 0,0))*OPS_ACCS(D11_B0, 0,0);
 
-    OPS_ACCS(Residual3_B0, 0,0) = -inv_0*(OPS_ACCS(wk7_B0, 0,0) - OPS_ACCS(wk7_B0, 0,-1))*OPS_ACCS(D11_B0, 0,0) -
-      inv_1*(-OPS_ACCS(wk3_B0, -1,0) + OPS_ACCS(wk3_B0, 0,0));
+    OPS_ACCS(Residual3_B0, 0,0) = -inv_0*(OPS_ACCS(wk3_B0, 0,0) - OPS_ACCS(wk3_B0, -1,0)) -
+      inv_1*(-OPS_ACCS(wk7_B0, 0,-1) + OPS_ACCS(wk7_B0, 0,0))*OPS_ACCS(D11_B0, 0,0);
 
 }
 

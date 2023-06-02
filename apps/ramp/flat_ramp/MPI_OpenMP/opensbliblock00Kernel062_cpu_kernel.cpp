@@ -64,16 +64,16 @@ void ops_par_loop_opensbliblock00Kernel062_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ rhoE_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ rhou1_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ rhou1_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ rho_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
   double * __restrict__ rhou0_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ rho_B0_p = (double *)(args[3].data + base3);
+  double * __restrict__ rhoE_B0_p = (double *)(args[3].data + base3);
 
 
 
@@ -102,16 +102,16 @@ void ops_par_loop_opensbliblock00Kernel062_execute(ops_kernel_descriptor *desc) 
     #pragma simd
     #endif
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
-      ACC<double> rhoE_B0(xdim0_opensbliblock00Kernel062, rhoE_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel062*1);
-      ACC<double> rhou1_B0(xdim1_opensbliblock00Kernel062, rhou1_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel062*1);
+      ACC<double> rhou1_B0(xdim0_opensbliblock00Kernel062, rhou1_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel062*1);
+      ACC<double> rho_B0(xdim1_opensbliblock00Kernel062, rho_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel062*1);
       ACC<double> rhou0_B0(xdim2_opensbliblock00Kernel062, rhou0_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel062*1);
-      ACC<double> rho_B0(xdim3_opensbliblock00Kernel062, rho_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel062*1);
+      ACC<double> rhoE_B0(xdim3_opensbliblock00Kernel062, rhoE_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel062*1);
       
-   double ub1 = 0.0;
-   double pb = 0.0;
+   double ub0 = 0.0;
    double ab = 0.0;
    double rhob = 0.0;
-   double ub0 = 0.0;
+   double ub1 = 0.0;
+   double pb = 0.0;
    rhob = rho_B0(0,0);
 
    ub0 = fabs(rhou0_B0(0,0)/rho_B0(0,0));

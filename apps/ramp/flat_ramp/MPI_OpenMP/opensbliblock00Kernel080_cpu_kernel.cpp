@@ -72,7 +72,7 @@ void ops_par_loop_opensbliblock00Kernel080_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ D10_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ D11_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
   double * __restrict__ wk2_B0_p = (double *)(args[1].data + base1);
@@ -106,21 +106,21 @@ void ops_par_loop_opensbliblock00Kernel080_execute(ops_kernel_descriptor *desc) 
     #endif
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
       int idx[] = {arg_idx[0]+n_x, arg_idx[1]+n_y};
-      const ACC<double> D10_B0(xdim0_opensbliblock00Kernel080, D10_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel080*1);
+      const ACC<double> D11_B0(xdim0_opensbliblock00Kernel080, D11_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel080*1);
       ACC<double> wk2_B0(xdim1_opensbliblock00Kernel080, wk2_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel080*1);
       
-    wk2_B0(0,0) = inv_1*((idx[1] == 0) ? (
-   4*D10_B0(0,1) - rc7*D10_B0(0,0) -
-      rc9*D10_B0(0,4) + (rc8)*D10_B0(0,3) - 3*D10_B0(0,2)
+    wk2_B0(0,0) = inv_2*((idx[1] == 0) ? (
+   (rc9)*D11_B0(0,3) - 3*D11_B0(0,2) +
+      4*D11_B0(0,1) - rc8*D11_B0(0,4) - rc7*D11_B0(0,0)
 )
 : ((idx[1] == 1) ? (
 
-      (rc13)*D10_B0(0,1) - rc10*D10_B0(0,0) + (rc11)*D10_B0(0,3) -
-      rc9*D10_B0(0,-1) - rc12*D10_B0(0,2)
+      (rc13)*D11_B0(0,3) - rc10*D11_B0(0,2) - rc8*D11_B0(0,-1) +
+      (rc11)*D11_B0(0,1) - rc12*D11_B0(0,0)
 )
 : (
-   -rc14*D10_B0(0,-1) +
-      (rc14)*D10_B0(0,1) - rc11*D10_B0(0,2) + (rc11)*D10_B0(0,-2)
+   (rc14)*D11_B0(0,1) +
+      (rc13)*D11_B0(0,-2) - rc13*D11_B0(0,2) - rc14*D11_B0(0,-1)
 )));
 
 

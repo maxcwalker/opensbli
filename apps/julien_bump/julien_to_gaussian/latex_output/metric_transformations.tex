@@ -1,0 +1,61 @@
+\documentclass{article}
+\title{Transformations of the equations in OpenSBLI framework}
+\author{Satya P Jammy \& OpenSBLI developers team}
+\date{\today}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\begin{document}
+\maketitle
+\noindent The Cartesian coordinates system is (x0,x1,x2)\\\noindent The Curvilinear coordinate system is vector is (xi0,xi1,xi2)\\\noindent The transformation parameters provided are curvilinear in x0,curvilinear in x1,curvilinear in x2\\\noindent The transformation parameters provided are stretched in x0,stretched in x1,stretched in x2\\\begin{dmath}\frac{d}{d x0} f = D00 \,.\, \frac{d}{d xi0} f + D10 \,.\, \frac{d}{d xi1} f + D20 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\begin{dmath}\frac{d}{d x1} f = D01 \,.\, \frac{d}{d xi0} f + D11 \,.\, \frac{d}{d xi1} f + D21 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\begin{dmath}\frac{d}{d x2} f = D02 \,.\, \frac{d}{d xi0} f + D12 \,.\, \frac{d}{d xi1} f + D22 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\begin{dmath}\frac{d^{2}}{d x0^{2}}  f = \left(D00 \right)^{2} \,.\, \frac{d^{2}}{d xi0^{2}}  f + D00 \,.\, D10 \,.\, \frac{d^{2}}{d xi0d xi1}  f + D00 \,.\, D10 \,.\, \frac{d^{2}}{d xi1d xi0}  f + D00 \,.\, D20 \,.\, \frac{d^{2}}{d xi0d xi2}  f + 
+D00 \,.\, D20 \,.\, \frac{d^{2}}{d xi2d xi0}  f + D00 \,.\, SD000 \,.\, \frac{d}{d xi0} f + D00 \,.\, SD100 \,.\, \frac{d}{d xi1} f + D00 \,.\, SD200 \,.\, \frac{d}{d xi2} f + \left(D10 \right)^{2} \,.\, \frac{d^{2}}{d xi1^{2}}  f + D10 \,.\, D20 
+\,.\, \frac{d^{2}}{d xi1d xi2}  f + D10 \,.\, D20 \,.\, \frac{d^{2}}{d xi2d xi1}  f + D10 \,.\, SD001 \,.\, \frac{d}{d xi0} f + D10 \,.\, SD101 \,.\, \frac{d}{d xi1} f + D10 \,.\, SD201 \,.\, \frac{d}{d xi2} f + \left(D20 \right)^{2} \,.\, 
+\frac{d^{2}}{d xi2^{2}}  f + D20 \,.\, SD002 \,.\, \frac{d}{d xi0} f + D20 \,.\, SD102 \,.\, \frac{d}{d xi1} f + D20 \,.\, SD202 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\begin{dmath}\frac{d^{2}}{d x0d x1}  f = D00 \,.\, D01 \,.\, \frac{d^{2}}{d xi0^{2}}  f + D00 \,.\, D11 \,.\, \frac{d^{2}}{d xi0d xi1}  f + D00 \,.\, D21 \,.\, \frac{d^{2}}{d xi0d xi2}  f + D01 \,.\, D10 \,.\, \frac{d^{2}}{d xi1d xi0}  f + D01 \,.\, 
+D20 \,.\, \frac{d^{2}}{d xi2d xi0}  f + D01 \,.\, SD000 \,.\, \frac{d}{d xi0} f + D01 \,.\, SD100 \,.\, \frac{d}{d xi1} f + D01 \,.\, SD200 \,.\, \frac{d}{d xi2} f + D10 \,.\, D11 \,.\, \frac{d^{2}}{d xi1^{2}}  f + D10 \,.\, D21 \,.\, \frac{d^{2}}{d 
+xi1d xi2}  f + D11 \,.\, D20 \,.\, \frac{d^{2}}{d xi2d xi1}  f + D11 \,.\, SD001 \,.\, \frac{d}{d xi0} f + D11 \,.\, SD101 \,.\, \frac{d}{d xi1} f + D11 \,.\, SD201 \,.\, \frac{d}{d xi2} f + D20 \,.\, D21 \,.\, \frac{d^{2}}{d xi2^{2}}  f + D21 \,.\, 
+SD002 \,.\, \frac{d}{d xi0} f + D21 \,.\, SD102 \,.\, \frac{d}{d xi1} f + D21 \,.\, SD202 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\begin{dmath}\frac{d^{2}}{d x0d x2}  f = D00 \,.\, D02 \,.\, \frac{d^{2}}{d xi0^{2}}  f + D00 \,.\, D12 \,.\, \frac{d^{2}}{d xi0d xi1}  f + D00 \,.\, D22 \,.\, \frac{d^{2}}{d xi0d xi2}  f + D02 \,.\, D10 \,.\, \frac{d^{2}}{d xi1d xi0}  f + D02 \,.\, 
+D20 \,.\, \frac{d^{2}}{d xi2d xi0}  f + D02 \,.\, SD000 \,.\, \frac{d}{d xi0} f + D02 \,.\, SD100 \,.\, \frac{d}{d xi1} f + D02 \,.\, SD200 \,.\, \frac{d}{d xi2} f + D10 \,.\, D12 \,.\, \frac{d^{2}}{d xi1^{2}}  f + D10 \,.\, D22 \,.\, \frac{d^{2}}{d 
+xi1d xi2}  f + D12 \,.\, D20 \,.\, \frac{d^{2}}{d xi2d xi1}  f + D12 \,.\, SD001 \,.\, \frac{d}{d xi0} f + D12 \,.\, SD101 \,.\, \frac{d}{d xi1} f + D12 \,.\, SD201 \,.\, \frac{d}{d xi2} f + D20 \,.\, D22 \,.\, \frac{d^{2}}{d xi2^{2}}  f + D22 \,.\, 
+SD002 \,.\, \frac{d}{d xi0} f + D22 \,.\, SD102 \,.\, \frac{d}{d xi1} f + D22 \,.\, SD202 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\begin{dmath}\frac{d^{2}}{d x1d x0}  f = D00 \,.\, D01 \,.\, \frac{d^{2}}{d xi0^{2}}  f + D00 \,.\, D11 \,.\, \frac{d^{2}}{d xi1d xi0}  f + D00 \,.\, D21 \,.\, \frac{d^{2}}{d xi2d xi0}  f + D00 \,.\, SD010 \,.\, \frac{d}{d xi0} f + D00 \,.\, SD110 
+\,.\, \frac{d}{d xi1} f + D00 \,.\, SD210 \,.\, \frac{d}{d xi2} f + D01 \,.\, D10 \,.\, \frac{d^{2}}{d xi0d xi1}  f + D01 \,.\, D20 \,.\, \frac{d^{2}}{d xi0d xi2}  f + D10 \,.\, D11 \,.\, \frac{d^{2}}{d xi1^{2}}  f + D10 \,.\, D21 \,.\, 
+\frac{d^{2}}{d xi2d xi1}  f + D10 \,.\, SD011 \,.\, \frac{d}{d xi0} f + D10 \,.\, SD111 \,.\, \frac{d}{d xi1} f + D10 \,.\, SD211 \,.\, \frac{d}{d xi2} f + D11 \,.\, D20 \,.\, \frac{d^{2}}{d xi1d xi2}  f + D20 \,.\, D21 \,.\, \frac{d^{2}}{d xi2^{2}} 
+f + D20 \,.\, SD012 \,.\, \frac{d}{d xi0} f + D20 \,.\, SD112 \,.\, \frac{d}{d xi1} f + D20 \,.\, SD212 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\begin{dmath}\frac{d^{2}}{d x1^{2}}  f = \left(D01 \right)^{2} \,.\, \frac{d^{2}}{d xi0^{2}}  f + D01 \,.\, D11 \,.\, \frac{d^{2}}{d xi0d xi1}  f + D01 \,.\, D11 \,.\, \frac{d^{2}}{d xi1d xi0}  f + D01 \,.\, D21 \,.\, \frac{d^{2}}{d xi0d xi2}  f + 
+D01 \,.\, D21 \,.\, \frac{d^{2}}{d xi2d xi0}  f + D01 \,.\, SD010 \,.\, \frac{d}{d xi0} f + D01 \,.\, SD110 \,.\, \frac{d}{d xi1} f + D01 \,.\, SD210 \,.\, \frac{d}{d xi2} f + \left(D11 \right)^{2} \,.\, \frac{d^{2}}{d xi1^{2}}  f + D11 \,.\, D21 
+\,.\, \frac{d^{2}}{d xi1d xi2}  f + D11 \,.\, D21 \,.\, \frac{d^{2}}{d xi2d xi1}  f + D11 \,.\, SD011 \,.\, \frac{d}{d xi0} f + D11 \,.\, SD111 \,.\, \frac{d}{d xi1} f + D11 \,.\, SD211 \,.\, \frac{d}{d xi2} f + \left(D21 \right)^{2} \,.\, 
+\frac{d^{2}}{d xi2^{2}}  f + D21 \,.\, SD012 \,.\, \frac{d}{d xi0} f + D21 \,.\, SD112 \,.\, \frac{d}{d xi1} f + D21 \,.\, SD212 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\begin{dmath}\frac{d^{2}}{d x1d x2}  f = D01 \,.\, D02 \,.\, \frac{d^{2}}{d xi0^{2}}  f + D01 \,.\, D12 \,.\, \frac{d^{2}}{d xi0d xi1}  f + D01 \,.\, D22 \,.\, \frac{d^{2}}{d xi0d xi2}  f + D02 \,.\, D11 \,.\, \frac{d^{2}}{d xi1d xi0}  f + D02 \,.\, 
+D21 \,.\, \frac{d^{2}}{d xi2d xi0}  f + D02 \,.\, SD010 \,.\, \frac{d}{d xi0} f + D02 \,.\, SD110 \,.\, \frac{d}{d xi1} f + D02 \,.\, SD210 \,.\, \frac{d}{d xi2} f + D11 \,.\, D12 \,.\, \frac{d^{2}}{d xi1^{2}}  f + D11 \,.\, D22 \,.\, \frac{d^{2}}{d 
+xi1d xi2}  f + D12 \,.\, D21 \,.\, \frac{d^{2}}{d xi2d xi1}  f + D12 \,.\, SD011 \,.\, \frac{d}{d xi0} f + D12 \,.\, SD111 \,.\, \frac{d}{d xi1} f + D12 \,.\, SD211 \,.\, \frac{d}{d xi2} f + D21 \,.\, D22 \,.\, \frac{d^{2}}{d xi2^{2}}  f + D22 \,.\, 
+SD012 \,.\, \frac{d}{d xi0} f + D22 \,.\, SD112 \,.\, \frac{d}{d xi1} f + D22 \,.\, SD212 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\begin{dmath}\frac{d^{2}}{d x2d x0}  f = D00 \,.\, D02 \,.\, \frac{d^{2}}{d xi0^{2}}  f + D00 \,.\, D12 \,.\, \frac{d^{2}}{d xi1d xi0}  f + D00 \,.\, D22 \,.\, \frac{d^{2}}{d xi2d xi0}  f + D00 \,.\, SD020 \,.\, \frac{d}{d xi0} f + D00 \,.\, SD120 
+\,.\, \frac{d}{d xi1} f + D00 \,.\, SD220 \,.\, \frac{d}{d xi2} f + D02 \,.\, D10 \,.\, \frac{d^{2}}{d xi0d xi1}  f + D02 \,.\, D20 \,.\, \frac{d^{2}}{d xi0d xi2}  f + D10 \,.\, D12 \,.\, \frac{d^{2}}{d xi1^{2}}  f + D10 \,.\, D22 \,.\, 
+\frac{d^{2}}{d xi2d xi1}  f + D10 \,.\, SD021 \,.\, \frac{d}{d xi0} f + D10 \,.\, SD121 \,.\, \frac{d}{d xi1} f + D10 \,.\, SD221 \,.\, \frac{d}{d xi2} f + D12 \,.\, D20 \,.\, \frac{d^{2}}{d xi1d xi2}  f + D20 \,.\, D22 \,.\, \frac{d^{2}}{d xi2^{2}} 
+f + D20 \,.\, SD022 \,.\, \frac{d}{d xi0} f + D20 \,.\, SD122 \,.\, \frac{d}{d xi1} f + D20 \,.\, SD222 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\begin{dmath}\frac{d^{2}}{d x2d x1}  f = D01 \,.\, D02 \,.\, \frac{d^{2}}{d xi0^{2}}  f + D01 \,.\, D12 \,.\, \frac{d^{2}}{d xi1d xi0}  f + D01 \,.\, D22 \,.\, \frac{d^{2}}{d xi2d xi0}  f + D01 \,.\, SD020 \,.\, \frac{d}{d xi0} f + D01 \,.\, SD120 
+\,.\, \frac{d}{d xi1} f + D01 \,.\, SD220 \,.\, \frac{d}{d xi2} f + D02 \,.\, D11 \,.\, \frac{d^{2}}{d xi0d xi1}  f + D02 \,.\, D21 \,.\, \frac{d^{2}}{d xi0d xi2}  f + D11 \,.\, D12 \,.\, \frac{d^{2}}{d xi1^{2}}  f + D11 \,.\, D22 \,.\, 
+\frac{d^{2}}{d xi2d xi1}  f + D11 \,.\, SD021 \,.\, \frac{d}{d xi0} f + D11 \,.\, SD121 \,.\, \frac{d}{d xi1} f + D11 \,.\, SD221 \,.\, \frac{d}{d xi2} f + D12 \,.\, D21 \,.\, \frac{d^{2}}{d xi1d xi2}  f + D21 \,.\, D22 \,.\, \frac{d^{2}}{d xi2^{2}} 
+f + D21 \,.\, SD022 \,.\, \frac{d}{d xi0} f + D21 \,.\, SD122 \,.\, \frac{d}{d xi1} f + D21 \,.\, SD222 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\begin{dmath}\frac{d^{2}}{d x2^{2}}  f = \left(D02 \right)^{2} \,.\, \frac{d^{2}}{d xi0^{2}}  f + D02 \,.\, D12 \,.\, \frac{d^{2}}{d xi0d xi1}  f + D02 \,.\, D12 \,.\, \frac{d^{2}}{d xi1d xi0}  f + D02 \,.\, D22 \,.\, \frac{d^{2}}{d xi0d xi2}  f + 
+D02 \,.\, D22 \,.\, \frac{d^{2}}{d xi2d xi0}  f + D02 \,.\, SD020 \,.\, \frac{d}{d xi0} f + D02 \,.\, SD120 \,.\, \frac{d}{d xi1} f + D02 \,.\, SD220 \,.\, \frac{d}{d xi2} f + \left(D12 \right)^{2} \,.\, \frac{d^{2}}{d xi1^{2}}  f + D12 \,.\, D22 
+\,.\, \frac{d^{2}}{d xi1d xi2}  f + D12 \,.\, D22 \,.\, \frac{d^{2}}{d xi2d xi1}  f + D12 \,.\, SD021 \,.\, \frac{d}{d xi0} f + D12 \,.\, SD121 \,.\, \frac{d}{d xi1} f + D12 \,.\, SD221 \,.\, \frac{d}{d xi2} f + \left(D22 \right)^{2} \,.\, 
+\frac{d^{2}}{d xi2^{2}}  f + D22 \,.\, SD022 \,.\, \frac{d}{d xi0} f + D22 \,.\, SD122 \,.\, \frac{d}{d xi1} f + D22 \,.\, SD222 \,.\, \frac{d}{d xi2} f\end{dmath}
+
+\end{document}

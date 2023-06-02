@@ -70,16 +70,16 @@ void ops_par_loop_opensbliblock00Kernel064_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ x0_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ rhoE_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ rhou1_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
-  double * __restrict__ rhou1_B0_p = (double *)(args[2].data + base2);
+  double * __restrict__ rho_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
   double * __restrict__ rhou0_B0_p = (double *)(args[3].data + base3);
 
   int base4 = args[4].dat->base_offset;
-  double * __restrict__ rho_B0_p = (double *)(args[4].data + base4);
+  double * __restrict__ rhoE_B0_p = (double *)(args[4].data + base4);
 
 
 
@@ -109,26 +109,26 @@ void ops_par_loop_opensbliblock00Kernel064_execute(ops_kernel_descriptor *desc) 
     #endif
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
       const ACC<double> x0_B0(xdim0_opensbliblock00Kernel064, x0_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel064*1);
-      ACC<double> rhoE_B0(xdim1_opensbliblock00Kernel064, rhoE_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel064*1);
-      ACC<double> rhou1_B0(xdim2_opensbliblock00Kernel064, rhou1_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel064*1);
+      ACC<double> rhou1_B0(xdim1_opensbliblock00Kernel064, rhou1_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel064*1);
+      ACC<double> rho_B0(xdim2_opensbliblock00Kernel064, rho_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel064*1);
       ACC<double> rhou0_B0(xdim3_opensbliblock00Kernel064, rhou0_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel064*1);
-      ACC<double> rho_B0(xdim4_opensbliblock00Kernel064, rho_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel064*1);
+      ACC<double> rhoE_B0(xdim4_opensbliblock00Kernel064, rhoE_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel064*1);
       
-   double u13 = 0.0;
-   double u01 = 0.0;
-   double u02 = 0.0;
-   double T1 = 0.0;
-   double u11 = 0.0;
-   double T2 = 0.0;
-   double u03 = 0.0;
-   double u12 = 0.0;
-   double x0 = 0.0;
    double T_above = 0.0;
+   double T1 = 0.0;
+   double Pwall = 0.0;
+   double u03 = 0.0;
+   double u11 = 0.0;
+   double u02 = 0.0;
+   double rho_halo_1 = 0.0;
+   double x0 = 0.0;
+   double T2 = 0.0;
+   double rho_halo_2 = 0.0;
    double rho_halo_3 = 0.0;
    double T3 = 0.0;
-   double Pwall = 0.0;
-   double rho_halo_1 = 0.0;
-   double rho_halo_2 = 0.0;
+   double u12 = 0.0;
+   double u13 = 0.0;
+   double u01 = 0.0;
    x0 = x0_B0(0,0);
 
    rhou0_B0(0,0) = 0.0;
@@ -137,7 +137,7 @@ void ops_par_loop_opensbliblock00Kernel064_execute(ops_kernel_descriptor *desc) 
 
    rhoE_B0(0,0) = Twall*rcinv15*rho_B0(0,0)/(gama*(gama - 1.0));
 
-    Pwall = (gama - 1)*(-((rc12)*pow(rhou0_B0(0,0), 2) + (rc12)*pow(rhou1_B0(0,0),
+    Pwall = (gama - 1)*(-((rc10)*pow(rhou0_B0(0,0), 2) + (rc10)*pow(rhou1_B0(0,0),
       2))/rho_B0(0,0) + rhoE_B0(0,0));
 
    u01 = rhou0_B0(0,1)/rho_B0(0,1);
@@ -152,8 +152,8 @@ void ops_par_loop_opensbliblock00Kernel064_execute(ops_kernel_descriptor *desc) 
 
    u13 = rhou1_B0(0,3)/rho_B0(0,3);
 
-    T_above = pow(Minf, 2)*gama*(gama - 1)*(-((rc12)*pow(rhou0_B0(0,1), 2) +
-      (rc12)*pow(rhou1_B0(0,1), 2))/rho_B0(0,1) + rhoE_B0(0,1))/rho_B0(0,1);
+    T_above = pow(Minf, 2)*gama*(gama - 1)*(-((rc10)*pow(rhou0_B0(0,1), 2) +
+      (rc10)*pow(rhou1_B0(0,1), 2))/rho_B0(0,1) + rhoE_B0(0,1))/rho_B0(0,1);
 
    T1 = 2*Twall - T_above;
 
@@ -165,7 +165,7 @@ void ops_par_loop_opensbliblock00Kernel064_execute(ops_kernel_descriptor *desc) 
 
    rhou1_B0(0,-1) = -rho_halo_1*u11;
 
-   rhoE_B0(0,-1) = rcinv4*Pwall + (rc12)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   rhoE_B0(0,-1) = rcinv4*Pwall + (rc10)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
 
    T2 = 3*Twall - 2*T_above;
 
@@ -185,9 +185,9 @@ void ops_par_loop_opensbliblock00Kernel064_execute(ops_kernel_descriptor *desc) 
 
    rhou1_B0(0,-2) = -rho_halo_2*u12;
 
-   rhoE_B0(0,-1) = rcinv4*Pwall + (rc12)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   rhoE_B0(0,-1) = rcinv4*Pwall + (rc10)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
 
-   rhoE_B0(0,-2) = rcinv4*Pwall + (rc12)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
+   rhoE_B0(0,-2) = rcinv4*Pwall + (rc10)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
 
    T3 = 4*Twall - 3*T_above;
 
@@ -215,11 +215,11 @@ void ops_par_loop_opensbliblock00Kernel064_execute(ops_kernel_descriptor *desc) 
 
    rhou1_B0(0,-3) = -rho_halo_3*u13;
 
-   rhoE_B0(0,-1) = rcinv4*Pwall + (rc12)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   rhoE_B0(0,-1) = rcinv4*Pwall + (rc10)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
 
-   rhoE_B0(0,-2) = rcinv4*Pwall + (rc12)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
+   rhoE_B0(0,-2) = rcinv4*Pwall + (rc10)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
 
-   rhoE_B0(0,-3) = rcinv4*Pwall + (rc12)*rho_halo_3*(pow(u03, 2) + pow(u13, 2));
+   rhoE_B0(0,-3) = rcinv4*Pwall + (rc10)*rho_halo_3*(pow(u03, 2) + pow(u13, 2));
 
 
     }

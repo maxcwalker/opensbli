@@ -7,33 +7,23 @@ static int dims_opensbliblock00Kernel043_h [3][1] = {{0}};
 //user function
 __device__
 
-void opensbliblock00Kernel043_gpu(const ACC<double> &T_B0,
+void opensbliblock00Kernel043_gpu(const ACC<double> &wk9_B0,
   ACC<double> &wk15_B0,
   const int *idx)
 {
-    wk15_B0(0,0) = inv_1*((idx[0] == 0) ? (
-   -rc11*T_B0(4,0) - rc13*T_B0(0,0) +
-      4*T_B0(1,0) - 3*T_B0(2,0) + (rc12)*T_B0(3,0)
+    wk15_B0(0,0) = inv_0*((idx[1] == 0) ? (
+   -3*wk9_B0(0,2) + 4*wk9_B0(0,1) -
+      rc11*wk9_B0(0,4) - rc12*wk9_B0(0,0) + (rc13)*wk9_B0(0,3)
 )
-: ((idx[0] == 1) ? (
+: ((idx[1] == 1) ? (
 
-      -rc11*T_B0(-1,0) - rc15*T_B0(0,0) + (rc16)*T_B0(1,0) - rc7*T_B0(2,0) +
-      (rc14)*T_B0(3,0)
-)
-: ((idx[0] == block0np0 - 1) ? (
-   -rc12*T_B0(-3,0) -
-      4*T_B0(-1,0) + 3*T_B0(-2,0) + (rc13)*T_B0(0,0) + (rc11)*T_B0(-4,0)
-)
-:
-      ((idx[0] == block0np0 - 2) ? (
-   -rc14*T_B0(-3,0) + (rc7)*T_B0(-2,0) -
-      rc16*T_B0(-1,0) + (rc15)*T_B0(0,0) + (rc11)*T_B0(1,0)
+      -rc7*wk9_B0(0,2) + (rc14)*wk9_B0(0,1) - rc15*wk9_B0(0,0) -
+      rc11*wk9_B0(0,-1) + (rc16)*wk9_B0(0,3)
 )
 : (
-
-      -rc14*T_B0(2,0) + (rc17)*T_B0(1,0) - rc17*T_B0(-1,0) +
-      (rc14)*T_B0(-2,0)
-)))));
+   -rc16*wk9_B0(0,2) +
+      (rc16)*wk9_B0(0,-2) - rc17*wk9_B0(0,-1) + (rc17)*wk9_B0(0,1)
+)));
 
 }
 
@@ -90,12 +80,12 @@ void ops_par_loop_opensbliblock00Kernel043_execute(ops_kernel_descriptor *desc) 
 
 
   #if CHECKPOINTING && !OPS_LAZY
-  if (!ops_checkpointing_before(args,3,range,46)) return;
+  if (!ops_checkpointing_before(args,3,range,50)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,46,"opensbliblock00Kernel043");
-    block->instance->OPS_kernels[46].count++;
+    ops_timing_realloc(block->instance,50,"opensbliblock00Kernel043");
+    block->instance->OPS_kernels[50].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -162,7 +152,7 @@ void ops_par_loop_opensbliblock00Kernel043_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[46].mpi_time += t2-t1;
+    block->instance->OPS_kernels[50].mpi_time += t2-t1;
   }
 
 
@@ -176,7 +166,7 @@ void ops_par_loop_opensbliblock00Kernel043_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags>1) {
     hipSafeCall(block->instance->ostream(), hipDeviceSynchronize());
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[46].time += t1-t2;
+    block->instance->OPS_kernels[50].time += t1-t2;
   }
 
   #ifndef OPS_LAZY
@@ -187,9 +177,9 @@ void ops_par_loop_opensbliblock00Kernel043_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[46].mpi_time += t2-t1;
-    block->instance->OPS_kernels[46].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[46].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[50].mpi_time += t2-t1;
+    block->instance->OPS_kernels[50].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[50].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
@@ -201,9 +191,9 @@ void ops_par_loop_opensbliblock00Kernel043(char const *name, ops_block block, in
   desc->block = block;
   desc->dim = dim;
   desc->device = 1;
-  desc->index = 46;
+  desc->index = 50;
   desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 46;
+  desc->hash = ((desc->hash << 5) + desc->hash) + 50;
   for ( int i=0; i<4; i++ ){
     desc->range[i] = range[i];
     desc->orig_range[i] = range[i];
@@ -218,7 +208,7 @@ void ops_par_loop_opensbliblock00Kernel043(char const *name, ops_block block, in
   desc->args[2] = arg2;
   desc->function = ops_par_loop_opensbliblock00Kernel043_execute;
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,46,"opensbliblock00Kernel043");
+    ops_timing_realloc(block->instance,50,"opensbliblock00Kernel043");
   }
   ops_enqueue_kernel(desc);
 }

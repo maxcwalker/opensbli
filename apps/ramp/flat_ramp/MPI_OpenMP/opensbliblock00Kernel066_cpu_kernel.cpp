@@ -87,13 +87,13 @@ void ops_par_loop_opensbliblock00Kernel066_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ rho_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
-  double * __restrict__ rhou1_B0_p = (double *)(args[2].data + base2);
+  double * __restrict__ rhoE_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ rhoE_B0_p = (double *)(args[3].data + base3);
+  double * __restrict__ rhou0_B0_p = (double *)(args[3].data + base3);
 
   int base4 = args[4].dat->base_offset;
-  double * __restrict__ rhou0_B0_p = (double *)(args[4].data + base4);
+  double * __restrict__ rhou1_B0_p = (double *)(args[4].data + base4);
 
   int base5 = args[5].dat->base_offset;
   double * __restrict__ x1_B0_p = (double *)(args[5].data + base5);
@@ -129,13 +129,13 @@ void ops_par_loop_opensbliblock00Kernel066_execute(ops_kernel_descriptor *desc) 
       int idx[] = {arg_idx[0]+n_x, arg_idx[1]+n_y};
       ACC<double> x0_B0(xdim0_opensbliblock00Kernel066, x0_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel066*1);
       ACC<double> rho_B0(xdim1_opensbliblock00Kernel066, rho_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel066*1);
-      ACC<double> rhou1_B0(xdim2_opensbliblock00Kernel066, rhou1_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel066*1);
-      ACC<double> rhoE_B0(xdim3_opensbliblock00Kernel066, rhoE_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel066*1);
-      ACC<double> rhou0_B0(xdim4_opensbliblock00Kernel066, rhou0_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel066*1);
+      ACC<double> rhoE_B0(xdim2_opensbliblock00Kernel066, rhoE_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel066*1);
+      ACC<double> rhou0_B0(xdim3_opensbliblock00Kernel066, rhou0_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel066*1);
+      ACC<double> rhou1_B0(xdim4_opensbliblock00Kernel066, rhou1_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel066*1);
       ACC<double> x1_B0(xdim5_opensbliblock00Kernel066, x1_B0_p + n_x*1 + n_y * xdim5_opensbliblock00Kernel066*1);
       
-   double T = 0.0;
    double rhou1 = 0.0;
+   double T = 0.0;
    double rho = 0.0;
    double rhou0 = 0.0;
    x0_B0(0,0) = Delta0block0*idx[0];
