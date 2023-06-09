@@ -13,26 +13,26 @@ int xdim4_opensbliblock00Kernel064;
 //user function
 inline 
  void opensbliblock00Kernel064(const ptr_double x0_B0,
-  ptr_double rhou1_B0,
+  ptr_double rhoE_B0,
   ptr_double rho_B0,
   ptr_double rhou0_B0,
-  ptr_double rhoE_B0)
+  ptr_double rhou1_B0)
 {
-   double T_above = 0.0;
-   double T1 = 0.0;
-   double Pwall = 0.0;
-   double u03 = 0.0;
-   double u11 = 0.0;
-   double u02 = 0.0;
-   double rho_halo_1 = 0.0;
    double x0 = 0.0;
-   double T2 = 0.0;
-   double rho_halo_2 = 0.0;
-   double rho_halo_3 = 0.0;
    double T3 = 0.0;
+   double u01 = 0.0;
+   double T2 = 0.0;
+   double u03 = 0.0;
+   double rho_halo_3 = 0.0;
+   double rho_halo_1 = 0.0;
+   double Pwall = 0.0;
+   double u11 = 0.0;
+   double rho_halo_2 = 0.0;
+   double T_above = 0.0;
+   double u02 = 0.0;
+   double T1 = 0.0;
    double u12 = 0.0;
    double u13 = 0.0;
-   double u01 = 0.0;
    x0 = OPS_ACC(x0_B0, 0,0);
 
    OPS_ACC(rhou0_B0, 0,0) = 0.0;
@@ -41,7 +41,7 @@ inline
 
    OPS_ACC(rhoE_B0, 0,0) = Twall*rcinv15*OPS_ACC(rho_B0, 0,0)/(gama*(gama - 1.0));
 
-    Pwall = (gama - 1)*(-((rc10)*pow(OPS_ACC(rhou0_B0, 0,0), 2) + (rc10)*pow(OPS_ACC(rhou1_B0, 0,0),
+    Pwall = (gama - 1)*(-((rc12)*pow(OPS_ACC(rhou0_B0, 0,0), 2) + (rc12)*pow(OPS_ACC(rhou1_B0, 0,0),
       2))/OPS_ACC(rho_B0, 0,0) + OPS_ACC(rhoE_B0, 0,0));
 
    u01 = OPS_ACC(rhou0_B0, 0,1)/OPS_ACC(rho_B0, 0,1);
@@ -56,8 +56,8 @@ inline
 
    u13 = OPS_ACC(rhou1_B0, 0,3)/OPS_ACC(rho_B0, 0,3);
 
-    T_above = pow(Minf, 2)*gama*(gama - 1)*(-((rc10)*pow(OPS_ACC(rhou0_B0, 0,1), 2) +
-      (rc10)*pow(OPS_ACC(rhou1_B0, 0,1), 2))/OPS_ACC(rho_B0, 0,1) + OPS_ACC(rhoE_B0, 0,1))/OPS_ACC(rho_B0, 0,1);
+    T_above = pow(Minf, 2)*gama*(gama - 1)*(-((rc12)*pow(OPS_ACC(rhou0_B0, 0,1), 2) +
+      (rc12)*pow(OPS_ACC(rhou1_B0, 0,1), 2))/OPS_ACC(rho_B0, 0,1) + OPS_ACC(rhoE_B0, 0,1))/OPS_ACC(rho_B0, 0,1);
 
    T1 = 2*Twall - T_above;
 
@@ -69,7 +69,7 @@ inline
 
    OPS_ACC(rhou1_B0, 0,-1) = -rho_halo_1*u11;
 
-   OPS_ACC(rhoE_B0, 0,-1) = rcinv4*Pwall + (rc10)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   OPS_ACC(rhoE_B0, 0,-1) = rcinv6*Pwall + (rc12)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
 
    T2 = 3*Twall - 2*T_above;
 
@@ -89,9 +89,9 @@ inline
 
    OPS_ACC(rhou1_B0, 0,-2) = -rho_halo_2*u12;
 
-   OPS_ACC(rhoE_B0, 0,-1) = rcinv4*Pwall + (rc10)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   OPS_ACC(rhoE_B0, 0,-1) = rcinv6*Pwall + (rc12)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
 
-   OPS_ACC(rhoE_B0, 0,-2) = rcinv4*Pwall + (rc10)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
+   OPS_ACC(rhoE_B0, 0,-2) = rcinv6*Pwall + (rc12)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
 
    T3 = 4*Twall - 3*T_above;
 
@@ -119,11 +119,11 @@ inline
 
    OPS_ACC(rhou1_B0, 0,-3) = -rho_halo_3*u13;
 
-   OPS_ACC(rhoE_B0, 0,-1) = rcinv4*Pwall + (rc10)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   OPS_ACC(rhoE_B0, 0,-1) = rcinv6*Pwall + (rc12)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
 
-   OPS_ACC(rhoE_B0, 0,-2) = rcinv4*Pwall + (rc10)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
+   OPS_ACC(rhoE_B0, 0,-2) = rcinv6*Pwall + (rc12)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
 
-   OPS_ACC(rhoE_B0, 0,-3) = rcinv4*Pwall + (rc10)*rho_halo_3*(pow(u03, 2) + pow(u13, 2));
+   OPS_ACC(rhoE_B0, 0,-3) = rcinv6*Pwall + (rc12)*rho_halo_3*(pow(u03, 2) + pow(u13, 2));
 
 }
 

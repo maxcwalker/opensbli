@@ -12,14 +12,14 @@ int xdim4_opensbliblock00Kernel005;
 
 //user function
 inline 
- void opensbliblock00Kernel005(const ptr_double rho_B0,
-  const ptr_double u1_B0,
+ void opensbliblock00Kernel005(const ptr_double u1_B0,
   const ptr_double rhoE_B0,
   const ptr_double u0_B0,
+  const ptr_double rho_B0,
   ptr_double p_B0)
 {
-    OPS_ACC(p_B0, 0,0) = (gama - 1)*(OPS_ACC(rhoE_B0, 0,0) - rc10*OPS_ACC(rho_B0, 0,0)*pow(OPS_ACC(u0_B0, 0,0), 2) -
-      rc10*OPS_ACC(rho_B0, 0,0)*pow(OPS_ACC(u1_B0, 0,0), 2));
+    OPS_ACC(p_B0, 0,0) = (gama - 1)*(OPS_ACC(rhoE_B0, 0,0) - rc12*OPS_ACC(rho_B0, 0,0)*pow(OPS_ACC(u0_B0, 0,0), 2) -
+      rc12*OPS_ACC(rho_B0, 0,0)*pow(OPS_ACC(u1_B0, 0,0), 2));
 
 }
 

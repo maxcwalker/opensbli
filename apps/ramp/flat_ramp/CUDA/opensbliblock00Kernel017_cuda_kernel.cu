@@ -7,32 +7,32 @@ static int dims_opensbliblock00Kernel017_h [13][1] = {0};
 //user function
 __device__
 
- void opensbliblock00Kernel017_gpu(const ACC<double> &detJ_B0,
+ void opensbliblock00Kernel017_gpu(const ACC<double> &wk7_B0,
   const ACC<double> &wk3_B0,
-  const ACC<double> &wk7_B0,
+  const ACC<double> &wk2_B0,
+  const ACC<double> &wk6_B0,
+  const ACC<double> &detJ_B0,
   const ACC<double> &wk1_B0,
   const ACC<double> &wk4_B0,
   const ACC<double> &wk0_B0,
-  const ACC<double> &wk2_B0,
-  const ACC<double> &wk6_B0,
   const ACC<double> &wk5_B0,
   ACC<double>
-&Residual2_B0,
-  ACC<double> &Residual3_B0,
+&Residual3_B0,
+  ACC<double> &Residual1_B0,
   ACC<double> &Residual0_B0,
-  ACC<double> &Residual1_B0)
+  ACC<double> &Residual2_B0)
 {
     Residual0_B0(0,0) = -(inv_1*(wk0_B0(0,0) - wk0_B0(-1,0)) +
-      inv_2*(-wk4_B0(0,-1) + wk4_B0(0,0)))/detJ_B0(0,0);
+      inv_2*(wk4_B0(0,0) - wk4_B0(0,-1)))/detJ_B0(0,0);
 
-    Residual1_B0(0,0) = -(inv_1*(-wk1_B0(-1,0) + wk1_B0(0,0)) +
-      inv_2*(wk5_B0(0,0) - wk5_B0(0,-1)))/detJ_B0(0,0);
+    Residual1_B0(0,0) = -(inv_1*(wk1_B0(0,0) - wk1_B0(-1,0)) +
+      inv_2*(-wk5_B0(0,-1) + wk5_B0(0,0)))/detJ_B0(0,0);
 
-    Residual2_B0(0,0) = -(inv_1*(-wk2_B0(-1,0) + wk2_B0(0,0)) +
+    Residual2_B0(0,0) = -(inv_1*(wk2_B0(0,0) - wk2_B0(-1,0)) +
       inv_2*(wk6_B0(0,0) - wk6_B0(0,-1)))/detJ_B0(0,0);
 
     Residual3_B0(0,0) = -(inv_1*(wk3_B0(0,0) - wk3_B0(-1,0)) +
-      inv_2*(-wk7_B0(0,-1) + wk7_B0(0,0)))/detJ_B0(0,0);
+      inv_2*(wk7_B0(0,0) - wk7_B0(0,-1)))/detJ_B0(0,0);
 
 }
 

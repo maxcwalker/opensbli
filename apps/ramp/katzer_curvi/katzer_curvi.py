@@ -234,9 +234,7 @@ n_poly_coefficients = 50
 grid_const = ["xF", "Ly", "tramp","aramp","xramp","b"]
 for con in grid_const:
     local_dict[con] = ConstantObject(con)
-
 gridx0 = parse_expr("Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])", local_dict=local_dict)
-
 gridx1 = parse_expr("Eq(DataObject(x1), Ly*sinh(b*block.deltas[1]*block.grid_indexes[1]/Ly)/sinh(b))", local_dict=local_dict)
 coordinate_evaluation = [gridx0, gridx1]
 initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)

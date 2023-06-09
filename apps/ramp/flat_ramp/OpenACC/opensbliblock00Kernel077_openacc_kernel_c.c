@@ -12,10 +12,10 @@ int xdim4_opensbliblock00Kernel077;
 
 //user function
 inline 
-void opensbliblock00Kernel077(ptr_double detJ_B0,
-  ptr_double D01_B0,
+void opensbliblock00Kernel077(ptr_double D10_B0,
+  ptr_double detJ_B0,
   ptr_double D11_B0,
-  ptr_double D10_B0,
+  ptr_double D01_B0,
   ptr_double D00_B0)
 {
    OPS_ACC(D00_B0, 0,1) = OPS_ACC(D00_B0, 0,-1);

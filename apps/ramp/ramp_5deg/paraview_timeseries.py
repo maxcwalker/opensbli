@@ -143,7 +143,7 @@ if(__name__ == "__main__"):
     #     raise ValueError("Provide the HDF5 file with .h5 extension")
     
 
-    dir_path = '/home/maxwalker/git/opensbli/apps/viscous_shock_delery/outputs/'
+    dir_path = '/home/maxwalker/git/opensbli/apps/ramp/ramp_5deg/outputs/'
     # dir_path = sys.argv[1]
     new_path = dir_path
 

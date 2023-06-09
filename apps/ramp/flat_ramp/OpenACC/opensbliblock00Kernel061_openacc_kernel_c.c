@@ -42,198 +42,199 @@ int xdim34_opensbliblock00Kernel061;
 
 //user function
 inline 
- void opensbliblock00Kernel061(const ptr_double wk15_B0,
-  const ptr_double SD011_B0,
-  const ptr_double mu_B0,
-  const ptr_double SD110_B0,
-  const ptr_double wk13_B0,
-  const ptr_double wk16_B0,
+ void opensbliblock00Kernel061(const ptr_double SD100_B0,
   const ptr_double wk3_B0,
-  const ptr_double wk11_B0,
-  const ptr_double u0_B0,
-  const ptr_double wk0_B0,
-  const ptr_double SD001_B0,
-  const ptr_double wk14_B0,
-  const ptr_double wk6_B0,
-  const ptr_double SD100_B0,
-  const ptr_double wk8_B0,
-  const ptr_double D01_B0,
-  const ptr_double wk1_B0,
-  const ptr_double SD111_B0,
-  const ptr_double wk4_B0,
-  const ptr_double D11_B0,
   const ptr_double wk12_B0,
-  const ptr_double wk9_B0,
+  const ptr_double wk16_B0,
   const ptr_double wk2_B0,
-  const ptr_double wk5_B0,
-  const ptr_double D00_B0,
-  const ptr_double SD101_B0,
-  const ptr_double wk10_B0,
-  const ptr_double SD000_B0,
-  const ptr_double wk7_B0,
-  const
-ptr_double SD010_B0,
-  const ptr_double D10_B0,
+  const ptr_double SD001_B0,
+  const ptr_double wk6_B0,
   const ptr_double u1_B0,
-  ptr_double Residual2_B0,
+  const ptr_double wk0_B0,
+  const ptr_double D00_B0,
+  const ptr_double wk7_B0,
+  const ptr_double SD101_B0,
+  const ptr_double D10_B0,
+  const ptr_double SD110_B0,
+  const
+ptr_double wk13_B0,
+  const ptr_double u0_B0,
+  const ptr_double SD011_B0,
+  const ptr_double D11_B0,
+  const ptr_double D01_B0,
+  const ptr_double wk5_B0,
+  const ptr_double wk11_B0,
+  const ptr_double wk14_B0,
+  const ptr_double wk1_B0,
+  const ptr_double wk4_B0,
+  const ptr_double wk8_B0,
+  const ptr_double mu_B0,
+  const ptr_double wk9_B0,
+  const ptr_double SD000_B0,
+  const ptr_double SD010_B0,
+  const ptr_double wk15_B0,
+  const
+ptr_double SD111_B0,
+  const ptr_double wk10_B0,
+  ptr_double Residual1_B0,
   ptr_double Residual3_B0,
-  ptr_double Residual1_B0)
+  ptr_double Residual2_B0)
 {
-    OPS_ACC(Residual1_B0, 0,0) = rcinv38*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk3_B0, 0,0))*((rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) -
-      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) + (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) -
-      rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk13_B0, 0,0)) + rcinv38*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk15_B0, 0,0)) + rcinv38*((rc9)*pow(OPS_ACC(D00_B0, 0,0),
-      2)*OPS_ACC(wk7_B0, 0,0) + (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk12_B0, 0,0) +
-      (rc39)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
-      (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
-      (rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) -
-      rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      (rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) -
-      rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) + pow(OPS_ACC(D01_B0, 0,0),
-      2)*OPS_ACC(wk7_B0, 0,0) + (rc23)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
-      2*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) + (rc9)*pow(OPS_ACC(D10_B0, 0,0),
-      2)*OPS_ACC(wk14_B0, 0,0) + (rc23)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
-      (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) -
-      rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) -
-      rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) + pow(OPS_ACC(D11_B0, 0,0),
-      2)*OPS_ACC(wk14_B0, 0,0) + OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk15_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
+    OPS_ACC(Residual1_B0, 0,0) = rcinv38*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk14_B0, 0,0))*((rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) -
+      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) + (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) -
+      rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk11_B0, 0,0)) + rcinv38*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk14_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk8_B0, 0,0)) + rcinv38*((rc9)*pow(OPS_ACC(D00_B0, 0,0),
+      2)*OPS_ACC(wk12_B0, 0,0) + (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
+      (rc39)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk2_B0, 0,0) +
+      (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk9_B0, 0,0) +
+      (rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) -
+      rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      (rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) -
+      rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) + pow(OPS_ACC(D01_B0, 0,0),
+      2)*OPS_ACC(wk12_B0, 0,0) + (rc23)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk9_B0, 0,0) +
+      2*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk2_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) + (rc9)*pow(OPS_ACC(D10_B0, 0,0),
+      2)*OPS_ACC(wk0_B0, 0,0) + (rc23)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0) +
+      (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) -
+      rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) -
+      rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) + pow(OPS_ACC(D11_B0, 0,0),
+      2)*OPS_ACC(wk0_B0, 0,0) + OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk8_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
       OPS_ACC(Residual1_B0, 0,0);
 
-    OPS_ACC(Residual2_B0, 0,0) = rcinv38*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk3_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk15_B0, 0,0)) + rcinv38*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0))*(-rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) - rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) +
-      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk13_B0, 0,0)) + rcinv38*(pow(OPS_ACC(D00_B0, 0,0),
-      2)*OPS_ACC(wk12_B0, 0,0) + (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
-      2*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
-      (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
-      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) + (rc9)*pow(OPS_ACC(D01_B0, 0,0),
-      2)*OPS_ACC(wk12_B0, 0,0) + (rc23)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
-      (rc39)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) -
-      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) -
-      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) +
-      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) + pow(OPS_ACC(D10_B0, 0,0),
-      2)*OPS_ACC(wk16_B0, 0,0) + (rc23)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk14_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) + (rc9)*pow(OPS_ACC(D11_B0, 0,0),
-      2)*OPS_ACC(wk16_B0, 0,0) - rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) -
-      rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) +
-      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk13_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
+    OPS_ACC(Residual2_B0, 0,0) = rcinv38*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk14_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk8_B0, 0,0)) + rcinv38*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk14_B0, 0,0))*(-rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) - rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
+      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk11_B0, 0,0)) + rcinv38*(pow(OPS_ACC(D00_B0, 0,0),
+      2)*OPS_ACC(wk13_B0, 0,0) + (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk12_B0, 0,0) +
+      2*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk9_B0, 0,0) +
+      (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk2_B0, 0,0) +
+      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) + (rc9)*pow(OPS_ACC(D01_B0, 0,0),
+      2)*OPS_ACC(wk13_B0, 0,0) + (rc23)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk2_B0, 0,0) +
+      (rc39)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk9_B0, 0,0) -
+      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) -
+      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
+      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) + pow(OPS_ACC(D10_B0, 0,0),
+      2)*OPS_ACC(wk3_B0, 0,0) + (rc23)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk0_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) + (rc9)*pow(OPS_ACC(D11_B0, 0,0),
+      2)*OPS_ACC(wk3_B0, 0,0) - rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) -
+      rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
+      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk11_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
       OPS_ACC(Residual2_B0, 0,0);
 
-    OPS_ACC(Residual3_B0, 0,0) = rcinv38*rcinv4*rcinv40*rcinv6*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk3_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk6_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk9_B0, 0,0)) +
-      rcinv38*rcinv4*rcinv40*rcinv6*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0))*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk6_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk9_B0, 0,0)) + rcinv38*rcinv4*rcinv40*rcinv6*(pow(OPS_ACC(D00_B0, 0,0),
-      2)*OPS_ACC(wk0_B0, 0,0) + 2*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk2_B0, 0,0) +
-      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk6_B0, 0,0) +
-      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk9_B0, 0,0) + pow(OPS_ACC(D01_B0, 0,0),
-      2)*OPS_ACC(wk0_B0, 0,0) + 2*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk2_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk6_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk9_B0, 0,0) + pow(OPS_ACC(D10_B0, 0,0),
-      2)*OPS_ACC(wk10_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk6_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk9_B0, 0,0) + pow(OPS_ACC(D11_B0, 0,0),
-      2)*OPS_ACC(wk10_B0, 0,0) + OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk6_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk9_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
-      rcinv38*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk3_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk15_B0, 0,0))*OPS_ACC(u1_B0, 0,0) +
-      rcinv38*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk3_B0, 0,0))*((rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) -
-      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) + (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) -
-      rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk13_B0, 0,0))*OPS_ACC(u0_B0, 0,0) +
-      rcinv38*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk13_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk15_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
+    OPS_ACC(Residual3_B0, 0,0) = rcinv38*rcinv40*rcinv5*rcinv6*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk14_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk4_B0, 0,0)) +
+      rcinv38*rcinv40*rcinv5*rcinv6*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk14_B0, 0,0))*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0)) + rcinv38*rcinv40*rcinv5*rcinv6*(pow(OPS_ACC(D00_B0, 0,0),
+      2)*OPS_ACC(wk6_B0, 0,0) + 2*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) +
+      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
+      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) + pow(OPS_ACC(D01_B0, 0,0),
+      2)*OPS_ACC(wk6_B0, 0,0) + 2*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) + pow(OPS_ACC(D10_B0, 0,0),
+      2)*OPS_ACC(wk10_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) + pow(OPS_ACC(D11_B0, 0,0),
+      2)*OPS_ACC(wk10_B0, 0,0) + OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk4_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
+      rcinv38*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk14_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk8_B0, 0,0))*OPS_ACC(u1_B0, 0,0) +
+      rcinv38*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk14_B0, 0,0))*((rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) -
+      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) + (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) -
+      rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk11_B0, 0,0))*OPS_ACC(u0_B0, 0,0) +
       rcinv38*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk15_B0, 0,0))*((rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) -
-      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) + (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) -
-      rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk13_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
-      rcinv38*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk15_B0, 0,0))*OPS_ACC(u0_B0, 0,0) +
-      rcinv38*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0))*(-rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) - rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) +
-      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk13_B0, 0,0))*OPS_ACC(u1_B0, 0,0) +
-      rcinv38*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk13_B0, 0,0))*(-rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) - rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) +
-      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk13_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk11_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk8_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
+      rcinv38*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk8_B0, 0,0))*((rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) -
+      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) + (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) -
+      rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk11_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
+      rcinv38*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk14_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk8_B0, 0,0))*OPS_ACC(u0_B0, 0,0) +
+      rcinv38*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk14_B0, 0,0))*(-rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) - rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
+      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk11_B0, 0,0))*OPS_ACC(u1_B0, 0,0) +
       rcinv38*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk15_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk15_B0, 0,0))*OPS_ACC(mu_B0, 0,0) + rcinv38*(pow(OPS_ACC(D00_B0, 0,0),
-      2)*OPS_ACC(wk12_B0, 0,0) + (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
-      2*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
-      (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
-      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) + (rc9)*pow(OPS_ACC(D01_B0, 0,0),
-      2)*OPS_ACC(wk12_B0, 0,0) + (rc23)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
-      (rc39)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) -
-      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) -
-      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) +
-      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) + pow(OPS_ACC(D10_B0, 0,0),
-      2)*OPS_ACC(wk16_B0, 0,0) + (rc23)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk14_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) + (rc9)*pow(OPS_ACC(D11_B0, 0,0),
-      2)*OPS_ACC(wk16_B0, 0,0) - rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) -
-      rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) +
-      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk13_B0, 0,0))*OPS_ACC(mu_B0, 0,0)*OPS_ACC(u1_B0, 0,0)
-      + rcinv38*((rc9)*pow(OPS_ACC(D00_B0, 0,0), 2)*OPS_ACC(wk7_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk11_B0, 0,0))*(-rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) - rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
+      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk11_B0, 0,0))*OPS_ACC(mu_B0, 0,0) +
+      rcinv38*(OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk8_B0, 0,0))*(OPS_ACC(D00_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) + OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk8_B0, 0,0))*OPS_ACC(mu_B0, 0,0) + rcinv38*((rc9)*pow(OPS_ACC(D00_B0, 0,0),
+      2)*OPS_ACC(wk12_B0, 0,0) + (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
+      (rc39)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk2_B0, 0,0) +
+      (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk9_B0, 0,0) +
+      (rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) -
+      rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      (rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) -
+      rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) + pow(OPS_ACC(D01_B0, 0,0),
+      2)*OPS_ACC(wk12_B0, 0,0) + (rc23)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk9_B0, 0,0) +
+      2*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk2_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) + (rc9)*pow(OPS_ACC(D10_B0, 0,0),
+      2)*OPS_ACC(wk0_B0, 0,0) + (rc23)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0) +
+      (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) -
+      rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) -
+      rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) + pow(OPS_ACC(D11_B0, 0,0),
+      2)*OPS_ACC(wk0_B0, 0,0) + OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk8_B0, 0,0))*OPS_ACC(mu_B0, 0,0)*OPS_ACC(u0_B0, 0,0)
+      + rcinv38*(pow(OPS_ACC(D00_B0, 0,0), 2)*OPS_ACC(wk13_B0, 0,0) +
       (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(wk12_B0, 0,0) +
-      (rc39)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
-      (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
-      (rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) -
-      rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      (rc9)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) -
-      rc14*OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) + pow(OPS_ACC(D01_B0, 0,0),
-      2)*OPS_ACC(wk7_B0, 0,0) + (rc23)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
-      2*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) + (rc9)*pow(OPS_ACC(D10_B0, 0,0),
-      2)*OPS_ACC(wk14_B0, 0,0) + (rc23)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk16_B0, 0,0) +
-      (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) -
-      rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      (rc9)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk15_B0, 0,0) -
-      rc14*OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) + pow(OPS_ACC(D11_B0, 0,0),
-      2)*OPS_ACC(wk14_B0, 0,0) + OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk13_B0, 0,0) +
-      OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk15_B0, 0,0))*OPS_ACC(mu_B0, 0,0)*OPS_ACC(u0_B0, 0,0)
+      2*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk9_B0, 0,0) +
+      (rc23)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk2_B0, 0,0) +
+      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D00_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) + (rc9)*pow(OPS_ACC(D01_B0, 0,0),
+      2)*OPS_ACC(wk13_B0, 0,0) + (rc23)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(wk2_B0, 0,0) +
+      (rc39)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk9_B0, 0,0) -
+      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD000_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD010_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) -
+      rc14*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD100_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
+      (rc9)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(SD110_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) + pow(OPS_ACC(D10_B0, 0,0),
+      2)*OPS_ACC(wk3_B0, 0,0) + (rc23)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk0_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk11_B0, 0,0) +
+      OPS_ACC(D10_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) + (rc9)*pow(OPS_ACC(D11_B0, 0,0),
+      2)*OPS_ACC(wk3_B0, 0,0) - rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD001_B0, 0,0)*OPS_ACC(wk7_B0, 0,0) +
+      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD011_B0, 0,0)*OPS_ACC(wk5_B0, 0,0) -
+      rc14*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD101_B0, 0,0)*OPS_ACC(wk8_B0, 0,0) +
+      (rc9)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(SD111_B0, 0,0)*OPS_ACC(wk11_B0, 0,0))*OPS_ACC(mu_B0, 0,0)*OPS_ACC(u1_B0, 0,0)
       + OPS_ACC(Residual3_B0, 0,0);
 
 }

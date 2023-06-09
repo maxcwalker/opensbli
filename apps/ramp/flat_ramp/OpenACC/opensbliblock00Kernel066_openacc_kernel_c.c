@@ -13,18 +13,18 @@ int xdim5_opensbliblock00Kernel066;
 
 //user function
 inline 
- void opensbliblock00Kernel066(ptr_double x0_B0,
+ void opensbliblock00Kernel066(ptr_double rhou1_B0,
   ptr_double rho_B0,
   ptr_double rhoE_B0,
   ptr_double rhou0_B0,
-  ptr_double rhou1_B0,
+  ptr_double x0_B0,
   ptr_double x1_B0,
   const int *idx)
 {
-   double rhou1 = 0.0;
    double T = 0.0;
-   double rho = 0.0;
    double rhou0 = 0.0;
+   double rhou1 = 0.0;
+   double rho = 0.0;
    OPS_ACC(x0_B0, 0,0) = Delta0block0*idx[0];
 
     OPS_ACC(x1_B0, 0,0) = Ly*sinh(Delta1block0*b*idx[1])/sinh(b) + 0.5*tramp*(Delta0block0*idx[0] + (0.5*Delta0block0 +

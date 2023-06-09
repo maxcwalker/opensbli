@@ -1,0 +1,38 @@
+Running SLURM prolog script on indigo56.cluster.local
+===============================================================================
+Job started on Tue May 23 17:49:10 BST 2023
+Job ID          : 3343929
+Job name        : GPU_2node
+WorkDir         : /mainfs/home/mcww1g22/openSBLI/opensbli-cpc_release/apps/gaussian_bump/gaussian_bump_curvi_test
+Command         : /mainfs/home/mcww1g22/openSBLI/opensbli-cpc_release/apps/gaussian_bump/gaussian_bump_curvi_test/slurm
+Partition       : gpu
+Num hosts       : 1
+Num cores       : 6
+Num of tasks    : 6
+Hosts allocated : indigo56
+Job Output Follows ...
+===============================================================================
+Changed directory to /mainfs/home/mcww1g22/openSBLI/opensbli-cpc_release/apps/gaussian_bump/gaussian_bump_curvi_test.
+
+number of numnodes, mpi_tasks_per_node, nprocs: 1, 6, 6
+slurmstepd-indigo56: error: *** JOB 3343929 ON indigo56 CANCELLED AT 2023-05-24T03:49:27 DUE TO TIME LIMIT ***
+==============================================================================
+Running epilogue script on indigo56.
+
+Submit time  : 2023-05-23T16:49:16
+Start time   : 2023-05-23T17:49:09
+End time     : 2023-05-24T03:49:27
+Elapsed time : 10:00:18 (Timelimit=10:00:00)
+
+Job ID: 3343929
+Cluster: i5
+User/Group: mcww1g22/mm
+State: TIMEOUT (exit code 0)
+Nodes: 1
+Cores per node: 6
+CPU Utilized: 00:00:01
+CPU Efficiency: 0.00% of 2-12:01:48 core-walltime
+Job Wall-clock time: 10:00:18
+Memory Utilized: 1.29 GB
+Memory Efficiency: 5.43% of 23.73 GB
+

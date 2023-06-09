@@ -23,34 +23,34 @@ int xdim15_opensbliblock00Kernel090;
 
 //user function
 inline 
- void opensbliblock00Kernel090(const ptr_double wk3_B0,
-  const ptr_double wk7_B0,
+ void opensbliblock00Kernel090(const ptr_double wk7_B0,
+  const ptr_double wk3_B0,
+  const ptr_double wk2_B0,
+  const ptr_double wk6_B0,
   const ptr_double wk1_B0,
   const ptr_double wk4_B0,
   const ptr_double wk0_B0,
-  const ptr_double wk2_B0,
-  const ptr_double wk6_B0,
   const ptr_double wk5_B0,
-  ptr_double SD101_B0,
-  ptr_double SD000_B0,
-  ptr_double SD111_B0,
-  ptr_double SD011_B0,
   ptr_double SD010_B0,
+  ptr_double SD100_B0,
+  ptr_double SD101_B0,
   ptr_double SD110_B0,
   ptr_double SD001_B0,
-  ptr_double SD100_B0)
+  ptr_double SD011_B0,
+  ptr_double SD111_B0,
+  ptr_double SD000_B0)
 {
-   OPS_ACC(SD000_B0, 0,0) = OPS_ACC(wk7_B0, 0,0);
+   OPS_ACC(SD000_B0, 0,0) = OPS_ACC(wk0_B0, 0,0);
 
    OPS_ACC(SD001_B0, 0,0) = OPS_ACC(wk6_B0, 0,0);
 
-   OPS_ACC(SD010_B0, 0,0) = OPS_ACC(wk1_B0, 0,0);
+   OPS_ACC(SD010_B0, 0,0) = OPS_ACC(wk7_B0, 0,0);
 
-   OPS_ACC(SD011_B0, 0,0) = OPS_ACC(wk4_B0, 0,0);
+   OPS_ACC(SD011_B0, 0,0) = OPS_ACC(wk3_B0, 0,0);
 
-   OPS_ACC(SD100_B0, 0,0) = OPS_ACC(wk3_B0, 0,0);
+   OPS_ACC(SD100_B0, 0,0) = OPS_ACC(wk1_B0, 0,0);
 
-   OPS_ACC(SD101_B0, 0,0) = OPS_ACC(wk0_B0, 0,0);
+   OPS_ACC(SD101_B0, 0,0) = OPS_ACC(wk4_B0, 0,0);
 
    OPS_ACC(SD110_B0, 0,0) = OPS_ACC(wk5_B0, 0,0);
 

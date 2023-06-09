@@ -31,12 +31,12 @@ __constant__ double Delta1block0;
 __constant__ double Twall;
 #define Minf Minf_OPSCONSTANT
 __constant__ double Minf;
+#define SuthT SuthT_OPSCONSTANT
+__constant__ double SuthT;
 #define RefT RefT_OPSCONSTANT
 __constant__ double RefT;
 #define gama gama_OPSCONSTANT
 __constant__ double gama;
-#define SuthT SuthT_OPSCONSTANT
-__constant__ double SuthT;
 #define Re Re_OPSCONSTANT
 __constant__ double Re;
 #define Pr Pr_OPSCONSTANT
@@ -51,16 +51,16 @@ __constant__ double inv_1;
 __constant__ double inv_2;
 #define inv_3 inv_3_OPSCONSTANT
 __constant__ double inv_3;
-#define tramp tramp_OPSCONSTANT
-__constant__ double tramp;
 #define xramp xramp_OPSCONSTANT
 __constant__ double xramp;
-#define Ly Ly_OPSCONSTANT
-__constant__ double Ly;
 #define b b_OPSCONSTANT
 __constant__ double b;
 #define aramp aramp_OPSCONSTANT
 __constant__ double aramp;
+#define tramp tramp_OPSCONSTANT
+__constant__ double tramp;
+#define Ly Ly_OPSCONSTANT
+__constant__ double Ly;
 #define rcinv4 rcinv4_OPSCONSTANT
 __constant__ double rcinv4;
 #define rcinv5 rcinv5_OPSCONSTANT
@@ -148,9 +148,9 @@ __global__ void ops_internal_this_is_stupid() {
 ((int*)&Delta1block0)[0]=0;
 ((int*)&Twall)[0]=0;
 ((int*)&Minf)[0]=0;
+((int*)&SuthT)[0]=0;
 ((int*)&RefT)[0]=0;
 ((int*)&gama)[0]=0;
-((int*)&SuthT)[0]=0;
 ((int*)&Re)[0]=0;
 ((int*)&Pr)[0]=0;
 ((int*)&gamma_m1)[0]=0;
@@ -158,11 +158,11 @@ __global__ void ops_internal_this_is_stupid() {
 ((int*)&inv_1)[0]=0;
 ((int*)&inv_2)[0]=0;
 ((int*)&inv_3)[0]=0;
-((int*)&tramp)[0]=0;
 ((int*)&xramp)[0]=0;
-((int*)&Ly)[0]=0;
 ((int*)&b)[0]=0;
 ((int*)&aramp)[0]=0;
+((int*)&tramp)[0]=0;
+((int*)&Ly)[0]=0;
 ((int*)&rcinv4)[0]=0;
 ((int*)&rcinv5)[0]=0;
 ((int*)&rcinv6)[0]=0;
@@ -237,16 +237,16 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Minf_OPSCONSTANT), dat, dim*size));
   }
   else
+  if (!strcmp(name,"SuthT")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(SuthT_OPSCONSTANT), dat, dim*size));
+  }
+  else
   if (!strcmp(name,"RefT")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(RefT_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"gama")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(gama_OPSCONSTANT), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"SuthT")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(SuthT_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"Re")) {
@@ -277,16 +277,8 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(inv_3_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"tramp")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(tramp_OPSCONSTANT), dat, dim*size));
-  }
-  else
   if (!strcmp(name,"xramp")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(xramp_OPSCONSTANT), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"Ly")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Ly_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"b")) {
@@ -295,6 +287,14 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"aramp")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(aramp_OPSCONSTANT), dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"tramp")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(tramp_OPSCONSTANT), dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"Ly")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Ly_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"rcinv4")) {
@@ -476,13 +476,13 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel064_hip_kernel.cpp"
 #include "opensbliblock00Kernel065_hip_kernel.cpp"
 #include "opensbliblock00Kernel007_hip_kernel.cpp"
-#include "opensbliblock00Kernel012_hip_kernel.cpp"
-#include "opensbliblock00Kernel005_hip_kernel.cpp"
 #include "opensbliblock00Kernel011_hip_kernel.cpp"
-#include "opensbliblock00Kernel014_hip_kernel.cpp"
-#include "opensbliblock00Kernel006_hip_kernel.cpp"
+#include "opensbliblock00Kernel005_hip_kernel.cpp"
+#include "opensbliblock00Kernel008_hip_kernel.cpp"
+#include "opensbliblock00Kernel016_hip_kernel.cpp"
+#include "opensbliblock00Kernel003_hip_kernel.cpp"
 #include "opensbliblock00Kernel027_hip_kernel.cpp"
-#include "opensbliblock00Kernel023_hip_kernel.cpp"
+#include "opensbliblock00Kernel024_hip_kernel.cpp"
 #include "opensbliblock00Kernel000_hip_kernel.cpp"
 #include "opensbliblock00Kernel001_hip_kernel.cpp"
 #include "opensbliblock00Kernel017_hip_kernel.cpp"
@@ -493,15 +493,15 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel033_hip_kernel.cpp"
 #include "opensbliblock00Kernel034_hip_kernel.cpp"
 #include "opensbliblock00Kernel035_hip_kernel.cpp"
-#include "opensbliblock00Kernel037_hip_kernel.cpp"
+#include "opensbliblock00Kernel036_hip_kernel.cpp"
 #include "opensbliblock00Kernel038_hip_kernel.cpp"
+#include "opensbliblock00Kernel039_hip_kernel.cpp"
 #include "opensbliblock00Kernel040_hip_kernel.cpp"
 #include "opensbliblock00Kernel041_hip_kernel.cpp"
 #include "opensbliblock00Kernel042_hip_kernel.cpp"
-#include "opensbliblock00Kernel043_hip_kernel.cpp"
 #include "opensbliblock00Kernel044_hip_kernel.cpp"
 #include "opensbliblock00Kernel030_hip_kernel.cpp"
-#include "opensbliblock00Kernel036_hip_kernel.cpp"
-#include "opensbliblock00Kernel039_hip_kernel.cpp"
+#include "opensbliblock00Kernel037_hip_kernel.cpp"
+#include "opensbliblock00Kernel043_hip_kernel.cpp"
 #include "opensbliblock00Kernel061_hip_kernel.cpp"
 #include "opensbliblock00Kernel091_hip_kernel.cpp"

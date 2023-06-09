@@ -9,22 +9,22 @@ int xdim1_opensbliblock00Kernel082;
 
 //user function
 inline 
-void opensbliblock00Kernel082(const ptr_double D01_B0,
+void opensbliblock00Kernel082(const ptr_double D10_B0,
   ptr_double wk4_B0,
   const int *idx)
 {
     OPS_ACC(wk4_B0, 0,0) = inv_2*((idx[1] == 0) ? (
-   (rc9)*OPS_ACC(D01_B0, 0,3) - rc7*OPS_ACC(D01_B0, 0,0) -
-      rc8*OPS_ACC(D01_B0, 0,4) + 4*OPS_ACC(D01_B0, 0,1) - 3*OPS_ACC(D01_B0, 0,2)
+   -3*OPS_ACC(D10_B0, 0,2) + (rc9)*OPS_ACC(D10_B0, 0,3) -
+      rc7*OPS_ACC(D10_B0, 0,0) - rc8*OPS_ACC(D10_B0, 0,4) + 4*OPS_ACC(D10_B0, 0,1)
 )
 : ((idx[1] == 1) ? (
 
-      (rc13)*OPS_ACC(D01_B0, 0,3) - rc8*OPS_ACC(D01_B0, 0,-1) - rc12*OPS_ACC(D01_B0, 0,0) +
-      (rc11)*OPS_ACC(D01_B0, 0,1) - rc10*OPS_ACC(D01_B0, 0,2)
+      -rc8*OPS_ACC(D10_B0, 0,-1) - rc12*OPS_ACC(D10_B0, 0,2) + (rc11)*OPS_ACC(D10_B0, 0,3) -
+      rc10*OPS_ACC(D10_B0, 0,0) + (rc13)*OPS_ACC(D10_B0, 0,1)
 )
 : (
-   -rc14*OPS_ACC(D01_B0, 0,-1) -
-      rc13*OPS_ACC(D01_B0, 0,2) + (rc14)*OPS_ACC(D01_B0, 0,1) + (rc13)*OPS_ACC(D01_B0, 0,-2)
+   -rc14*OPS_ACC(D10_B0, 0,-1) +
+      (rc14)*OPS_ACC(D10_B0, 0,1) + (rc11)*OPS_ACC(D10_B0, 0,-2) - rc11*OPS_ACC(D10_B0, 0,2)
 )));
 
 }

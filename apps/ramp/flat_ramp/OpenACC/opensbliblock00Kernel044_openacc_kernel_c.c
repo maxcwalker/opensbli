@@ -9,24 +9,48 @@ int xdim1_opensbliblock00Kernel044;
 
 //user function
 inline 
-void opensbliblock00Kernel044(const ptr_double u1_B0,
+void opensbliblock00Kernel044(const ptr_double mu_B0,
   ptr_double wk16_B0,
   const int *idx)
 {
-    OPS_ACC(wk16_B0, 0,0) = inv_3*((idx[1] == 0) ? (
-   -rc34*OPS_ACC(u1_B0, 0,3) + (rc31)*OPS_ACC(u1_B0, 0,4) +
-      (rc35)*OPS_ACC(u1_B0, 0,0) - rc36*OPS_ACC(u1_B0, 0,1) + (rc33)*OPS_ACC(u1_B0, 0,2)
+    OPS_ACC(wk16_B0, 0,0) = inv_1*((idx[0] == 0) ? (
+   3.00000000000002*OPS_ACC(mu_B0, 1,0) -
+      1.83333333333334*OPS_ACC(mu_B0, 0,0) + 1.06910315192207e-15*OPS_ACC(mu_B0, 5,0) +
+      0.333333333333356*OPS_ACC(mu_B0, 3,0) - 8.34657956545823e-15*OPS_ACC(mu_B0, 4,0) -
+      1.50000000000003*OPS_ACC(mu_B0, 2,0)
 )
-: ((idx[1] == 1) ? (
-
-      -rc13*OPS_ACC(u1_B0, 0,3) - rc18*OPS_ACC(u1_B0, 0,0) + (rc31)*OPS_ACC(u1_B0, 0,-1) +
-      (rc10)*OPS_ACC(u1_B0, 0,1) + (rc23)*OPS_ACC(u1_B0, 0,2)
+: ((idx[0] == 1) ? (
+   0.719443173328855*OPS_ACC(mu_B0, 1,0) -
+      0.322484932882161*OPS_ACC(mu_B0, 0,0) - 0.0658051057710389*OPS_ACC(mu_B0, 3,0) -
+      0.376283677513354*OPS_ACC(mu_B0, -1,0) + 0.00571369039775442*OPS_ACC(mu_B0, 4,0) +
+      0.0394168524399447*OPS_ACC(mu_B0, 2,0)
+)
+: ((idx[0] == 2) ? (
+   0.521455851089587*OPS_ACC(mu_B0, 1,0) +
+      0.197184333887745*OPS_ACC(mu_B0, 0,0) - 0.00412637789557492*OPS_ACC(mu_B0, 3,0) +
+      0.113446470384241*OPS_ACC(mu_B0, -2,0) - 0.791245592765872*OPS_ACC(mu_B0, -1,0) -
+      0.0367146847001261*OPS_ACC(mu_B0, 2,0)
+)
+: ((idx[0] == 3) ? (
+   0.652141084861241*OPS_ACC(mu_B0, 1,0) +
+      0.0451033223343881*OPS_ACC(mu_B0, 0,0) + 0.121937153224065*OPS_ACC(mu_B0, -2,0) -
+      0.727822147724592*OPS_ACC(mu_B0, -1,0) - 0.082033432844602*OPS_ACC(mu_B0, 2,0) -
+      0.00932597985049999*OPS_ACC(mu_B0, -3,0)
+)
+: ((idx[0] == block0np0 - 1) ? (
+   (rc8)*OPS_ACC(mu_B0, -4,0) +
+      (rc7)*OPS_ACC(mu_B0, 0,0) - 4*OPS_ACC(mu_B0, -1,0) + 3*OPS_ACC(mu_B0, -2,0) - rc9*OPS_ACC(mu_B0, -3,0)
+)
+:
+      ((idx[0] == block0np0 - 2) ? (
+   (rc8)*OPS_ACC(mu_B0, 1,0) + (rc10)*OPS_ACC(mu_B0, 0,0) +
+      (rc12)*OPS_ACC(mu_B0, -2,0) - rc13*OPS_ACC(mu_B0, -1,0) - rc11*OPS_ACC(mu_B0, -3,0)
 )
 : (
-   -rc37*OPS_ACC(u1_B0, 0,0) -
-      rc13*OPS_ACC(u1_B0, 0,-2) + (rc9)*OPS_ACC(u1_B0, 0,-1) + (rc9)*OPS_ACC(u1_B0, 0,1) -
-      rc13*OPS_ACC(u1_B0, 0,2)
-)));
+
+      -rc14*OPS_ACC(mu_B0, -1,0) + (rc11)*OPS_ACC(mu_B0, -2,0) - rc11*OPS_ACC(mu_B0, 2,0) +
+      (rc14)*OPS_ACC(mu_B0, 1,0)
+)))))));
 
 }
 

@@ -20,9 +20,9 @@ extern double Delta0block0;
 extern double Delta1block0;
 extern double Twall;
 extern double Minf;
+extern double SuthT;
 extern double RefT;
 extern double gama;
-extern double SuthT;
 extern double Re;
 extern double Pr;
 extern double gamma_m1;
@@ -30,11 +30,11 @@ extern double inv_0;
 extern double inv_1;
 extern double inv_2;
 extern double inv_3;
-extern double tramp;
 extern double xramp;
-extern double Ly;
 extern double b;
 extern double aramp;
+extern double tramp;
+extern double Ly;
 extern double rcinv4;
 extern double rcinv5;
 extern double rcinv6;
@@ -175,7 +175,7 @@ void ops_decl_const_char(int dim, char const * type, int typeSize, char * dat, c
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"RefT")) {
+  if (!strcmp(name,"SuthT")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[8] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[8] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -186,7 +186,7 @@ void ops_decl_const_char(int dim, char const * type, int typeSize, char * dat, c
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"gama")) {
+  if (!strcmp(name,"RefT")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[9] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[9] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -197,7 +197,7 @@ void ops_decl_const_char(int dim, char const * type, int typeSize, char * dat, c
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"SuthT")) {
+  if (!strcmp(name,"gama")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[10] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[10] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -285,7 +285,7 @@ void ops_decl_const_char(int dim, char const * type, int typeSize, char * dat, c
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"tramp")) {
+  if (!strcmp(name,"xramp")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[18] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[18] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -296,7 +296,7 @@ void ops_decl_const_char(int dim, char const * type, int typeSize, char * dat, c
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"xramp")) {
+  if (!strcmp(name,"b")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[19] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[19] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -307,7 +307,7 @@ void ops_decl_const_char(int dim, char const * type, int typeSize, char * dat, c
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"Ly")) {
+  if (!strcmp(name,"aramp")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[20] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[20] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -318,7 +318,7 @@ void ops_decl_const_char(int dim, char const * type, int typeSize, char * dat, c
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"b")) {
+  if (!strcmp(name,"tramp")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[21] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[21] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -329,7 +329,7 @@ void ops_decl_const_char(int dim, char const * type, int typeSize, char * dat, c
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"aramp")) {
+  if (!strcmp(name,"Ly")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[22] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[22] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -767,56 +767,56 @@ void ops_decl_const_char(int dim, char const * type, int typeSize, char * dat, c
   }
   
 //user kernel files
-#include "opensbliblock00Kernel031_opencl_kernel.cpp"
-#include "opensbliblock00Kernel075_opencl_kernel.cpp"
-#include "opensbliblock00Kernel040_opencl_kernel.cpp"
-#include "opensbliblock00Kernel074_opencl_kernel.cpp"
-#include "opensbliblock00Kernel044_opencl_kernel.cpp"
-#include "opensbliblock00Kernel023_opencl_kernel.cpp"
-#include "opensbliblock00Kernel064_opencl_kernel.cpp"
-#include "opensbliblock00Kernel006_opencl_kernel.cpp"
-#include "opensbliblock00Kernel007_opencl_kernel.cpp"
-#include "opensbliblock00Kernel066_opencl_kernel.cpp"
-#include "opensbliblock00Kernel027_opencl_kernel.cpp"
-#include "opensbliblock00Kernel034_opencl_kernel.cpp"
-#include "opensbliblock00Kernel017_opencl_kernel.cpp"
+#include "opensbliblock00Kernel068_opencl_kernel.cpp"
+#include "opensbliblock00Kernel043_opencl_kernel.cpp"
 #include "opensbliblock00Kernel069_opencl_kernel.cpp"
 #include "opensbliblock00Kernel080_opencl_kernel.cpp"
-#include "opensbliblock00Kernel029_opencl_kernel.cpp"
-#include "opensbliblock00Kernel083_opencl_kernel.cpp"
-#include "opensbliblock00Kernel035_opencl_kernel.cpp"
-#include "opensbliblock00Kernel038_opencl_kernel.cpp"
-#include "opensbliblock00Kernel039_opencl_kernel.cpp"
-#include "opensbliblock00Kernel000_opencl_kernel.cpp"
 #include "opensbliblock00Kernel037_opencl_kernel.cpp"
-#include "opensbliblock00Kernel090_opencl_kernel.cpp"
-#include "opensbliblock00Kernel062_opencl_kernel.cpp"
-#include "opensbliblock00Kernel063_opencl_kernel.cpp"
-#include "opensbliblock00Kernel001_opencl_kernel.cpp"
-#include "opensbliblock00Kernel070_opencl_kernel.cpp"
-#include "opensbliblock00Kernel005_opencl_kernel.cpp"
-#include "opensbliblock00Kernel079_opencl_kernel.cpp"
-#include "opensbliblock00Kernel081_opencl_kernel.cpp"
-#include "opensbliblock00Kernel065_opencl_kernel.cpp"
-#include "opensbliblock00Kernel091_opencl_kernel.cpp"
-#include "opensbliblock00Kernel068_opencl_kernel.cpp"
-#include "opensbliblock00Kernel067_opencl_kernel.cpp"
-#include "opensbliblock00Kernel011_opencl_kernel.cpp"
-#include "opensbliblock00Kernel073_opencl_kernel.cpp"
-#include "opensbliblock00Kernel076_opencl_kernel.cpp"
-#include "opensbliblock00Kernel084_opencl_kernel.cpp"
-#include "opensbliblock00Kernel078_opencl_kernel.cpp"
+#include "opensbliblock00Kernel024_opencl_kernel.cpp"
+#include "opensbliblock00Kernel044_opencl_kernel.cpp"
+#include "opensbliblock00Kernel035_opencl_kernel.cpp"
+#include "opensbliblock00Kernel034_opencl_kernel.cpp"
 #include "opensbliblock00Kernel085_opencl_kernel.cpp"
-#include "opensbliblock00Kernel036_opencl_kernel.cpp"
-#include "opensbliblock00Kernel077_opencl_kernel.cpp"
-#include "opensbliblock00Kernel041_opencl_kernel.cpp"
-#include "opensbliblock00Kernel030_opencl_kernel.cpp"
-#include "opensbliblock00Kernel032_opencl_kernel.cpp"
-#include "opensbliblock00Kernel082_opencl_kernel.cpp"
-#include "opensbliblock00Kernel014_opencl_kernel.cpp"
-#include "opensbliblock00Kernel043_opencl_kernel.cpp"
 #include "opensbliblock00Kernel028_opencl_kernel.cpp"
-#include "opensbliblock00Kernel012_opencl_kernel.cpp"
+#include "opensbliblock00Kernel079_opencl_kernel.cpp"
+#include "opensbliblock00Kernel091_opencl_kernel.cpp"
+#include "opensbliblock00Kernel067_opencl_kernel.cpp"
+#include "opensbliblock00Kernel016_opencl_kernel.cpp"
+#include "opensbliblock00Kernel040_opencl_kernel.cpp"
+#include "opensbliblock00Kernel070_opencl_kernel.cpp"
+#include "opensbliblock00Kernel081_opencl_kernel.cpp"
+#include "opensbliblock00Kernel084_opencl_kernel.cpp"
 #include "opensbliblock00Kernel033_opencl_kernel.cpp"
-#include "opensbliblock00Kernel061_opencl_kernel.cpp"
+#include "opensbliblock00Kernel083_opencl_kernel.cpp"
+#include "opensbliblock00Kernel001_opencl_kernel.cpp"
+#include "opensbliblock00Kernel041_opencl_kernel.cpp"
+#include "opensbliblock00Kernel074_opencl_kernel.cpp"
+#include "opensbliblock00Kernel039_opencl_kernel.cpp"
+#include "opensbliblock00Kernel077_opencl_kernel.cpp"
+#include "opensbliblock00Kernel036_opencl_kernel.cpp"
+#include "opensbliblock00Kernel064_opencl_kernel.cpp"
+#include "opensbliblock00Kernel017_opencl_kernel.cpp"
+#include "opensbliblock00Kernel078_opencl_kernel.cpp"
+#include "opensbliblock00Kernel027_opencl_kernel.cpp"
+#include "opensbliblock00Kernel029_opencl_kernel.cpp"
+#include "opensbliblock00Kernel066_opencl_kernel.cpp"
+#include "opensbliblock00Kernel090_opencl_kernel.cpp"
+#include "opensbliblock00Kernel075_opencl_kernel.cpp"
+#include "opensbliblock00Kernel007_opencl_kernel.cpp"
+#include "opensbliblock00Kernel030_opencl_kernel.cpp"
+#include "opensbliblock00Kernel003_opencl_kernel.cpp"
+#include "opensbliblock00Kernel005_opencl_kernel.cpp"
+#include "opensbliblock00Kernel063_opencl_kernel.cpp"
+#include "opensbliblock00Kernel000_opencl_kernel.cpp"
+#include "opensbliblock00Kernel073_opencl_kernel.cpp"
+#include "opensbliblock00Kernel065_opencl_kernel.cpp"
+#include "opensbliblock00Kernel008_opencl_kernel.cpp"
+#include "opensbliblock00Kernel062_opencl_kernel.cpp"
+#include "opensbliblock00Kernel011_opencl_kernel.cpp"
+#include "opensbliblock00Kernel031_opencl_kernel.cpp"
 #include "opensbliblock00Kernel042_opencl_kernel.cpp"
+#include "opensbliblock00Kernel082_opencl_kernel.cpp"
+#include "opensbliblock00Kernel032_opencl_kernel.cpp"
+#include "opensbliblock00Kernel061_opencl_kernel.cpp"
+#include "opensbliblock00Kernel076_opencl_kernel.cpp"
+#include "opensbliblock00Kernel038_opencl_kernel.cpp"

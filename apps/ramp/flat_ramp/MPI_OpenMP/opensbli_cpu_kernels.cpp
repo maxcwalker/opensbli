@@ -18,9 +18,9 @@ extern double Delta0block0;
 extern double Delta1block0;
 extern double Twall;
 extern double Minf;
+extern double SuthT;
 extern double RefT;
 extern double gama;
-extern double SuthT;
 extern double Re;
 extern double Pr;
 extern double gamma_m1;
@@ -28,11 +28,11 @@ extern double inv_0;
 extern double inv_1;
 extern double inv_2;
 extern double inv_3;
-extern double tramp;
 extern double xramp;
-extern double Ly;
 extern double b;
 extern double aramp;
+extern double tramp;
+extern double Ly;
 extern double rcinv4;
 extern double rcinv5;
 extern double rcinv6;
@@ -98,13 +98,13 @@ void ops_init_backend() {}
 #include "opensbliblock00Kernel064_cpu_kernel.cpp"
 #include "opensbliblock00Kernel065_cpu_kernel.cpp"
 #include "opensbliblock00Kernel007_cpu_kernel.cpp"
-#include "opensbliblock00Kernel012_cpu_kernel.cpp"
-#include "opensbliblock00Kernel005_cpu_kernel.cpp"
 #include "opensbliblock00Kernel011_cpu_kernel.cpp"
-#include "opensbliblock00Kernel014_cpu_kernel.cpp"
-#include "opensbliblock00Kernel006_cpu_kernel.cpp"
+#include "opensbliblock00Kernel005_cpu_kernel.cpp"
+#include "opensbliblock00Kernel008_cpu_kernel.cpp"
+#include "opensbliblock00Kernel016_cpu_kernel.cpp"
+#include "opensbliblock00Kernel003_cpu_kernel.cpp"
 #include "opensbliblock00Kernel027_cpu_kernel.cpp"
-#include "opensbliblock00Kernel023_cpu_kernel.cpp"
+#include "opensbliblock00Kernel024_cpu_kernel.cpp"
 #include "opensbliblock00Kernel000_cpu_kernel.cpp"
 #include "opensbliblock00Kernel001_cpu_kernel.cpp"
 #include "opensbliblock00Kernel017_cpu_kernel.cpp"
@@ -115,15 +115,15 @@ void ops_init_backend() {}
 #include "opensbliblock00Kernel033_cpu_kernel.cpp"
 #include "opensbliblock00Kernel034_cpu_kernel.cpp"
 #include "opensbliblock00Kernel035_cpu_kernel.cpp"
-#include "opensbliblock00Kernel037_cpu_kernel.cpp"
+#include "opensbliblock00Kernel036_cpu_kernel.cpp"
 #include "opensbliblock00Kernel038_cpu_kernel.cpp"
+#include "opensbliblock00Kernel039_cpu_kernel.cpp"
 #include "opensbliblock00Kernel040_cpu_kernel.cpp"
 #include "opensbliblock00Kernel041_cpu_kernel.cpp"
 #include "opensbliblock00Kernel042_cpu_kernel.cpp"
-#include "opensbliblock00Kernel043_cpu_kernel.cpp"
 #include "opensbliblock00Kernel044_cpu_kernel.cpp"
 #include "opensbliblock00Kernel030_cpu_kernel.cpp"
-#include "opensbliblock00Kernel036_cpu_kernel.cpp"
-#include "opensbliblock00Kernel039_cpu_kernel.cpp"
+#include "opensbliblock00Kernel037_cpu_kernel.cpp"
+#include "opensbliblock00Kernel043_cpu_kernel.cpp"
 #include "opensbliblock00Kernel061_cpu_kernel.cpp"
 #include "opensbliblock00Kernel091_cpu_kernel.cpp"

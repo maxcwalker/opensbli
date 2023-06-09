@@ -19,19 +19,19 @@ int xdim11_opensbliblock00Kernel091;
 
 //user function
 inline 
- void opensbliblock00Kernel091(const ptr_double Residual2_B0,
-  const ptr_double Residual3_B0,
+ void opensbliblock00Kernel091(const ptr_double Residual3_B0,
+  const ptr_double Residual1_B0,
   const ptr_double Residual0_B0,
   const
-ptr_double Residual1_B0,
+ptr_double Residual2_B0,
+  ptr_double rhou1_B0,
   ptr_double tempRK_rhou1_B0,
   ptr_double rho_B0,
-  ptr_double tempRK_rho_B0,
-  ptr_double rhoE_B0,
-  ptr_double rhou0_B0,
-  ptr_double tempRK_rhou0_B0,
   ptr_double tempRK_rhoE_B0,
-  ptr_double rhou1_B0,
+  ptr_double rhoE_B0,
+  ptr_double tempRK_rho_B0,
+  ptr_double tempRK_rhou0_B0,
+  ptr_double rhou0_B0,
   const double *rkB,
   const double *rkA)
 {

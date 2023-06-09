@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python 
 # Import all the functions from opensbli
 from opensbli import *
 from sympy import pi, tan, exp, cos, tanh, sqrt, sinh
@@ -65,8 +65,6 @@ if os.path.exists(output_folder):
 os.makedirs(output_folder)
 
 block = SimulationBlock(ndim, block_number=0)
-
-
 
 ### Schemes
 Weno_order = 5

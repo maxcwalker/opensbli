@@ -13,24 +13,24 @@ int xdim3_opensbliblock00Kernel062;
 
 
 void opensbliblock00Kernel062_c_wrapper(
-  double * restrict rhou1_B0_p,
+  double * restrict rhoE_B0_p,
   double * restrict rho_B0_p,
   double * restrict rhou0_B0_p,
-  double * restrict rhoE_B0_p,
+  double * restrict rhou1_B0_p,
   int x_size, int y_size) {
   #pragma omp parallel for
   for ( int n_y=0; n_y<y_size; n_y++ ){
     for ( int n_x=0; n_x<x_size; n_x++ ){
-      ptr_double rhou1_B0 = { rhou1_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel062*1, xdim0_opensbliblock00Kernel062};
+      ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel062*1, xdim0_opensbliblock00Kernel062};
       ptr_double rho_B0 = { rho_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel062*1, xdim1_opensbliblock00Kernel062};
       ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel062*1, xdim2_opensbliblock00Kernel062};
-      ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel062*1, xdim3_opensbliblock00Kernel062};
+      ptr_double rhou1_B0 = { rhou1_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel062*1, xdim3_opensbliblock00Kernel062};
       
-   double ub0 = 0.0;
    double ab = 0.0;
    double rhob = 0.0;
-   double ub1 = 0.0;
+   double ub0 = 0.0;
    double pb = 0.0;
+   double ub1 = 0.0;
    rhob = OPS_ACC(rho_B0, 0,0);
 
    ub0 = fabs(OPS_ACC(rhou0_B0, 0,0)/OPS_ACC(rho_B0, 0,0));

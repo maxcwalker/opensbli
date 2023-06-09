@@ -15,11 +15,11 @@ int xdim5_opensbliblock00Kernel066;
 
 
 void opensbliblock00Kernel066_c_wrapper(
-  double * restrict x0_B0_p,
+  double * restrict rhou1_B0_p,
   double * restrict rho_B0_p,
   double * restrict rhoE_B0_p,
   double * restrict rhou0_B0_p,
-  double * restrict rhou1_B0_p,
+  double * restrict x0_B0_p,
   double * restrict x1_B0_p,
   int * restrict idx,
   int arg_idx0, int arg_idx1,
@@ -28,17 +28,17 @@ void opensbliblock00Kernel066_c_wrapper(
   for ( int n_y=0; n_y<y_size; n_y++ ){
     for ( int n_x=0; n_x<x_size; n_x++ ){
       int idx[] = {arg_idx0+n_x, arg_idx1+n_y};
-      ptr_double x0_B0 = { x0_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel066*1, xdim0_opensbliblock00Kernel066};
+      ptr_double rhou1_B0 = { rhou1_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel066*1, xdim0_opensbliblock00Kernel066};
       ptr_double rho_B0 = { rho_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel066*1, xdim1_opensbliblock00Kernel066};
       ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel066*1, xdim2_opensbliblock00Kernel066};
       ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel066*1, xdim3_opensbliblock00Kernel066};
-      ptr_double rhou1_B0 = { rhou1_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel066*1, xdim4_opensbliblock00Kernel066};
+      ptr_double x0_B0 = { x0_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel066*1, xdim4_opensbliblock00Kernel066};
       ptr_double x1_B0 = { x1_B0_p + n_x*1 + n_y * xdim5_opensbliblock00Kernel066*1, xdim5_opensbliblock00Kernel066};
       
-   double rhou1 = 0.0;
    double T = 0.0;
-   double rho = 0.0;
    double rhou0 = 0.0;
+   double rhou1 = 0.0;
+   double rho = 0.0;
    OPS_ACC(x0_B0, 0,0) = Delta0block0*idx[0];
 
     OPS_ACC(x1_B0, 0,0) = Ly*sinh(Delta1block0*b*idx[1])/sinh(b) + 0.5*tramp*(Delta0block0*idx[0] + (0.5*Delta0block0 +

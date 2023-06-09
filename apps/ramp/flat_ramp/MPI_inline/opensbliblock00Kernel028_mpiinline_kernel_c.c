@@ -11,7 +11,7 @@ int xdim1_opensbliblock00Kernel028;
 
 
 void opensbliblock00Kernel028_c_wrapper(
-  double * restrict T_B0_p,
+  double * restrict u0_B0_p,
   double * restrict wk0_B0_p,
   int * restrict idx,
   int arg_idx0, int arg_idx1,
@@ -20,32 +20,22 @@ void opensbliblock00Kernel028_c_wrapper(
   for ( int n_y=0; n_y<y_size; n_y++ ){
     for ( int n_x=0; n_x<x_size; n_x++ ){
       int idx[] = {arg_idx0+n_x, arg_idx1+n_y};
-      const ptr_double T_B0 = { T_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel028*1, xdim0_opensbliblock00Kernel028};
+      const ptr_double u0_B0 = { u0_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel028*1, xdim0_opensbliblock00Kernel028};
       ptr_double wk0_B0 = { wk0_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel028*1, xdim1_opensbliblock00Kernel028};
       
-    OPS_ACC(wk0_B0, 0,0) = inv_0*((idx[0] == 0) ? (
-   (rc33)*OPS_ACC(T_B0, 2,0) - rc34*OPS_ACC(T_B0, 3,0) +
-      (rc31)*OPS_ACC(T_B0, 4,0) + (rc35)*OPS_ACC(T_B0, 0,0) - rc36*OPS_ACC(T_B0, 1,0)
+    OPS_ACC(wk0_B0, 0,0) = inv_0*((idx[1] == 0) ? (
+   (rc33)*OPS_ACC(u0_B0, 0,2) - rc34*OPS_ACC(u0_B0, 0,3) +
+      (rc31)*OPS_ACC(u0_B0, 0,4) + (rc35)*OPS_ACC(u0_B0, 0,0) - rc36*OPS_ACC(u0_B0, 0,1)
 )
-: ((idx[0] == 1) ? (
+: ((idx[1] == 1) ? (
 
-      (rc23)*OPS_ACC(T_B0, 2,0) - rc13*OPS_ACC(T_B0, 3,0) - rc18*OPS_ACC(T_B0, 0,0) + (rc10)*OPS_ACC(T_B0, 1,0) +
-      (rc31)*OPS_ACC(T_B0, -1,0)
-)
-: ((idx[0] == block0np0 - 1) ? (
-   -rc36*OPS_ACC(T_B0, -1,0) +
-      (rc31)*OPS_ACC(T_B0, -4,0) + (rc35)*OPS_ACC(T_B0, 0,0) - rc34*OPS_ACC(T_B0, -3,0) +
-      (rc33)*OPS_ACC(T_B0, -2,0)
-)
-: ((idx[0] == block0np0 - 2) ? (
-   (rc10)*OPS_ACC(T_B0, -1,0) -
-      rc18*OPS_ACC(T_B0, 0,0) - rc13*OPS_ACC(T_B0, -3,0) + (rc31)*OPS_ACC(T_B0, 1,0) +
-      (rc23)*OPS_ACC(T_B0, -2,0)
+      (rc23)*OPS_ACC(u0_B0, 0,2) + (rc31)*OPS_ACC(u0_B0, 0,-1) - rc11*OPS_ACC(u0_B0, 0,3) - rc18*OPS_ACC(u0_B0, 0,0)
+      + (rc12)*OPS_ACC(u0_B0, 0,1)
 )
 : (
-   -rc13*OPS_ACC(T_B0, 2,0) + (rc9)*OPS_ACC(T_B0, -1,0) -
-      rc37*OPS_ACC(T_B0, 0,0) + (rc9)*OPS_ACC(T_B0, 1,0) - rc13*OPS_ACC(T_B0, -2,0)
-)))));
+   -rc11*OPS_ACC(u0_B0, 0,2) + (rc9)*OPS_ACC(u0_B0, 0,-1) -
+      rc11*OPS_ACC(u0_B0, 0,-2) - rc37*OPS_ACC(u0_B0, 0,0) + (rc9)*OPS_ACC(u0_B0, 0,1)
+)));
 
 
     }

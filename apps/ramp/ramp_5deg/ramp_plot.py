@@ -35,8 +35,8 @@ Minf = 2.0
 Re = 950
 RefT = 288.0
 SuthT = 110.4
-#Ly = 115.0
-#Lx = 400.0
+Ly = 115.0
+Lx = 400.0
 scale = 2.31669259
 
 
@@ -59,7 +59,7 @@ levels = 25
 fig, (ax1,ax2, ax3) = plt.subplots(3,1)
 fig.set_size_inches(18.5, 10.5)
 T = ax1.contourf(x, y, T, levels = levels, cmap=cm.jet ) 
-ax1.set_title("Contours for flat ramp with expansion method from hybrid inviscid bump (20000 iterations)")
+ax1.set_title("Contours for a 5 degree ramp")
 plt.xlabel('x')
 ax1.set_ylabel("y")
 tbar = plt.colorbar(T, ax=ax1)
@@ -77,8 +77,10 @@ ubar = plt.colorbar(U, ax=ax3)
 ubar.set_label("Mach Number") #X_Velocity [ms$^{-1}$]
 plt.legend
 plt.style.use('classic')
-plt.savefig('ramp_5deg_contours.pdf')
+plt.savefig('ramp_contours_5deg.pdf')
 
-fig, ab = plt.subplots(1,1)
-ab.scatter(x,y)
+
+
 plt.show()
+
+

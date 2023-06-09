@@ -7,14 +7,14 @@ static int dims_opensbliblock00Kernel073_h [9][1] = {0};
 //user function
 __device__
 
- void opensbliblock00Kernel073_gpu(const ACC<double> &wk0_B0,
+ void opensbliblock00Kernel073_gpu(const ACC<double> &wk2_B0,
+  const ACC<double> &wk0_B0,
   const ACC<double> &wk1_B0,
   const ACC<double> &wk3_B0,
-  const ACC<double> &wk2_B0,
   ACC<double> &detJ_B0,
   ACC<double> &D11_B0,
-  ACC<double> &D01_B0,
   ACC<double> &D10_B0,
+  ACC<double> &D01_B0,
   ACC<double> &D00_B0)
 {
    detJ_B0(0,0) = wk0_B0(0,0)*wk1_B0(0,0) - wk2_B0(0,0)*wk3_B0(0,0);
@@ -22,10 +22,10 @@ __device__
     D00_B0(0,0) = wk0_B0(0,0)/(wk0_B0(0,0)*wk1_B0(0,0) -
       wk2_B0(0,0)*wk3_B0(0,0));
 
-    D01_B0(0,0) = -wk2_B0(0,0)/(wk0_B0(0,0)*wk1_B0(0,0) -
+    D01_B0(0,0) = -wk3_B0(0,0)/(wk0_B0(0,0)*wk1_B0(0,0) -
       wk2_B0(0,0)*wk3_B0(0,0));
 
-    D10_B0(0,0) = -wk3_B0(0,0)/(wk0_B0(0,0)*wk1_B0(0,0) -
+    D10_B0(0,0) = -wk2_B0(0,0)/(wk0_B0(0,0)*wk1_B0(0,0) -
       wk2_B0(0,0)*wk3_B0(0,0));
 
     D11_B0(0,0) = wk1_B0(0,0)/(wk0_B0(0,0)*wk1_B0(0,0) -

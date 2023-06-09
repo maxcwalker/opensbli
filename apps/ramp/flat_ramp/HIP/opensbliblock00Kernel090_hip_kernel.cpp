@@ -7,35 +7,35 @@ static int dims_opensbliblock00Kernel090_h [16][1] = {{0}};
 //user function
 __device__
 
- void opensbliblock00Kernel090_gpu(const ACC<double> &wk3_B0,
-  const ACC<double> &wk7_B0,
+ void opensbliblock00Kernel090_gpu(const ACC<double> &wk7_B0,
+  const ACC<double> &wk3_B0,
+  const ACC<double> &wk2_B0,
+  const ACC<double> &wk6_B0,
   const ACC<double> &wk1_B0,
   const ACC<double> &wk4_B0,
   const ACC<double> &wk0_B0,
-  const ACC<double> &wk2_B0,
-  const ACC<double> &wk6_B0,
   const ACC<double> &wk5_B0,
-  ACC<double> &SD101_B0,
-  ACC<double>
-&SD000_B0,
-  ACC<double> &SD111_B0,
-  ACC<double> &SD011_B0,
   ACC<double> &SD010_B0,
+  ACC<double>
+&SD100_B0,
+  ACC<double> &SD101_B0,
   ACC<double> &SD110_B0,
   ACC<double> &SD001_B0,
-  ACC<double> &SD100_B0)
+  ACC<double> &SD011_B0,
+  ACC<double> &SD111_B0,
+  ACC<double> &SD000_B0)
 {
-   SD000_B0(0,0) = wk7_B0(0,0);
+   SD000_B0(0,0) = wk0_B0(0,0);
 
    SD001_B0(0,0) = wk6_B0(0,0);
 
-   SD010_B0(0,0) = wk1_B0(0,0);
+   SD010_B0(0,0) = wk7_B0(0,0);
 
-   SD011_B0(0,0) = wk4_B0(0,0);
+   SD011_B0(0,0) = wk3_B0(0,0);
 
-   SD100_B0(0,0) = wk3_B0(0,0);
+   SD100_B0(0,0) = wk1_B0(0,0);
 
-   SD101_B0(0,0) = wk0_B0(0,0);
+   SD101_B0(0,0) = wk4_B0(0,0);
 
    SD110_B0(0,0) = wk5_B0(0,0);
 
