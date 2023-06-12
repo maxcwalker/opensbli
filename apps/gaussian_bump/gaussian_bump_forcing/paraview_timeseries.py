@@ -143,7 +143,7 @@ if(__name__ == "__main__"):
     #     raise ValueError("Provide the HDF5 file with .h5 extension")
     
 
-    dir_path = '/home/maxwalker/git/opensbli/apps/gaussian_bump/gaussian_bump_forcing/outputs_unforced/'
+    dir_path = '/home/maxwalker/git/opensbli/apps/gaussian_bump/gaussian_bump_forcing/outputs/'
     # dir_path = sys.argv[1]
     new_path = dir_path
 

@@ -24,7 +24,7 @@ input_dict = {
     "Re"                   : "950.0",
     "Twall"                : "1.68",
     "dt"                   : "0.001", 
-    "niter"                : "2000", 
+    "niter"                : "1000000", 
     "block0np0"            : "600.0", 
     "block0np1"            : "400.0",    
     "Delta0block0"         : "400.0/(block0np0-1)",
@@ -35,7 +35,7 @@ input_dict = {
     "TENO_CT"              : "1e-5",
     "L"                    : "400.0",
     "H"                    : "115.0",
-    "a"                    : "20.0", # larger numbers create a wider and smoother bump
+    "a"                    : "20.0", # larger values create a wider and smoother bump
     "b"                    : "5.0",
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
@@ -154,7 +154,7 @@ schemes[LLF.name] = LLF
 fns = 'u0 u1 T'
 cent = StoreSome(4, fns)
 
-cent = Central(4)
+#cent = Central(4)
 schemes[cent.name] = cent
 # RungeKutta scheme for temporal discretisation and add to the schemes dictionary
 rk = RungeKuttaLS(3)
@@ -247,8 +247,8 @@ boundaries[direction][side] = ZeroGradientOutletBC(1, 1)
 block.set_block_boundaries(boundaries)
 
 # Monitor points
-#arrays = ['p', 'p', 'p', 'p', 'p', 'p', 'p']
-arrays = ['rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0']
+arrays = ['p', 'p', 'p', 'p', 'p', 'p', 'p']
+#arrays = ['rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0']
 arrays = [block.location_dataset('%s' % dset) for dset in arrays]
 indices = [(178, 45), (178, 72), (178, 96), (178, 118), (178, 139), (178, 160), (178, 176)]
 SM = SimulationMonitor(arrays, indices, block, print_frequency=100, fp_precision=12, output_file='monitor.log')
