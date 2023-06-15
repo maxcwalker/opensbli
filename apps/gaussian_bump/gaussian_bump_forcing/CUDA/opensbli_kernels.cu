@@ -22,8 +22,8 @@ __constant__ int block0np0;
 __constant__ int block0np1;
 __constant__ double Delta0block0;
 __constant__ double Delta1block0;
-__constant__ double Minf;
 __constant__ double Twall;
+__constant__ double Minf;
 __constant__ double gama;
 __constant__ double RefT;
 __constant__ double SuthT;
@@ -34,14 +34,14 @@ __constant__ double inv_0;
 __constant__ double inv_1;
 __constant__ double inv_2;
 __constant__ double inv_3;
+__constant__ double tripA;
 __constant__ double xts;
 __constant__ double k_0;
-__constant__ double tripA;
 __constant__ double omega_0;
-__constant__ double L;
 __constant__ double H;
-__constant__ double b;
+__constant__ double L;
 __constant__ double a;
+__constant__ double b;
 __constant__ double rcinv4;
 __constant__ double rcinv5;
 __constant__ double rc6;
@@ -53,11 +53,11 @@ __constant__ double rc11;
 __constant__ double rc12;
 __constant__ double rc13;
 __constant__ double rc14;
-__constant__ double rc15;
-__constant__ double rc16;
+__constant__ double rcinv15;
+__constant__ double rcinv16;
 __constant__ double rc17;
-__constant__ double rcinv18;
-__constant__ double rcinv19;
+__constant__ double rc18;
+__constant__ double rc19;
 __constant__ double rc20;
 __constant__ double rc21;
 __constant__ double rc22;
@@ -72,16 +72,10 @@ __constant__ double rc30;
 __constant__ double rc31;
 __constant__ double rc32;
 __constant__ double rc33;
-__constant__ double rc34;
+__constant__ double rcinv34;
 __constant__ double rcinv35;
 __constant__ double rc36;
-__constant__ double rc37;
-__constant__ double rc38;
-__constant__ double rc39;
-__constant__ double rc40;
-__constant__ double rcinv41;
-__constant__ double rc42;
-__constant__ double rcinv43;
+__constant__ double rcinv37;
 
 void ops_init_backend() {}
 
@@ -112,12 +106,12 @@ int size, char *dat, char const *name){
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(Delta1block0, dat, dim*size));
   }
   else
-  if (!strcmp(name,"Minf")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(Minf, dat, dim*size));
-  }
-  else
   if (!strcmp(name,"Twall")) {
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(Twall, dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"Minf")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(Minf, dat, dim*size));
   }
   else
   if (!strcmp(name,"gama")) {
@@ -160,6 +154,10 @@ int size, char *dat, char const *name){
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(inv_3, dat, dim*size));
   }
   else
+  if (!strcmp(name,"tripA")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(tripA, dat, dim*size));
+  }
+  else
   if (!strcmp(name,"xts")) {
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(xts, dat, dim*size));
   }
@@ -168,28 +166,24 @@ int size, char *dat, char const *name){
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(k_0, dat, dim*size));
   }
   else
-  if (!strcmp(name,"tripA")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(tripA, dat, dim*size));
-  }
-  else
   if (!strcmp(name,"omega_0")) {
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(omega_0, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"L")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(L, dat, dim*size));
   }
   else
   if (!strcmp(name,"H")) {
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(H, dat, dim*size));
   }
   else
-  if (!strcmp(name,"b")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(b, dat, dim*size));
+  if (!strcmp(name,"L")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(L, dat, dim*size));
   }
   else
   if (!strcmp(name,"a")) {
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(a, dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"b")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(b, dat, dim*size));
   }
   else
   if (!strcmp(name,"rcinv4")) {
@@ -236,24 +230,24 @@ int size, char *dat, char const *name){
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc14, dat, dim*size));
   }
   else
-  if (!strcmp(name,"rc15")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc15, dat, dim*size));
+  if (!strcmp(name,"rcinv15")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rcinv15, dat, dim*size));
   }
   else
-  if (!strcmp(name,"rc16")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc16, dat, dim*size));
+  if (!strcmp(name,"rcinv16")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rcinv16, dat, dim*size));
   }
   else
   if (!strcmp(name,"rc17")) {
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc17, dat, dim*size));
   }
   else
-  if (!strcmp(name,"rcinv18")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rcinv18, dat, dim*size));
+  if (!strcmp(name,"rc18")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc18, dat, dim*size));
   }
   else
-  if (!strcmp(name,"rcinv19")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rcinv19, dat, dim*size));
+  if (!strcmp(name,"rc19")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc19, dat, dim*size));
   }
   else
   if (!strcmp(name,"rc20")) {
@@ -312,8 +306,8 @@ int size, char *dat, char const *name){
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc33, dat, dim*size));
   }
   else
-  if (!strcmp(name,"rc34")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc34, dat, dim*size));
+  if (!strcmp(name,"rcinv34")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rcinv34, dat, dim*size));
   }
   else
   if (!strcmp(name,"rcinv35")) {
@@ -324,32 +318,8 @@ int size, char *dat, char const *name){
     cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc36, dat, dim*size));
   }
   else
-  if (!strcmp(name,"rc37")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc37, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rc38")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc38, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rc39")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc39, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rc40")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc40, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rcinv41")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rcinv41, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rc42")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rc42, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rcinv43")) {
-    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rcinv43, dat, dim*size));
+  if (!strcmp(name,"rcinv37")) {
+    cutilSafeCall(OPS_instance::getOPSInstance()->ostream(),cudaMemcpyToSymbol(rcinv37, dat, dim*size));
   }
   else
   {
@@ -359,63 +329,40 @@ int size, char *dat, char const *name){
 
 
 //user kernel files
-#include "opensbliblock00Kernel066_cuda_kernel.cu"
-#include "opensbliblock00Kernel067_cuda_kernel.cu"
-#include "opensbliblock00Kernel068_cuda_kernel.cu"
-#include "opensbliblock00Kernel069_cuda_kernel.cu"
-#include "opensbliblock00Kernel070_cuda_kernel.cu"
-#include "opensbliblock00Kernel073_cuda_kernel.cu"
-#include "opensbliblock00Kernel074_cuda_kernel.cu"
-#include "opensbliblock00Kernel075_cuda_kernel.cu"
-#include "opensbliblock00Kernel076_cuda_kernel.cu"
-#include "opensbliblock00Kernel077_cuda_kernel.cu"
-#include "opensbliblock00Kernel078_cuda_kernel.cu"
-#include "opensbliblock00Kernel079_cuda_kernel.cu"
-#include "opensbliblock00Kernel080_cuda_kernel.cu"
-#include "opensbliblock00Kernel081_cuda_kernel.cu"
-#include "opensbliblock00Kernel082_cuda_kernel.cu"
-#include "opensbliblock00Kernel083_cuda_kernel.cu"
-#include "opensbliblock00Kernel084_cuda_kernel.cu"
-#include "opensbliblock00Kernel085_cuda_kernel.cu"
-#include "opensbliblock00Kernel090_cuda_kernel.cu"
-#include "opensbliblock00Kernel062_cuda_kernel.cu"
-#include "opensbliblock00Kernel063_cuda_kernel.cu"
-#include "opensbliblock00Kernel064_cuda_kernel.cu"
-#include "opensbliblock00Kernel065_cuda_kernel.cu"
-#include "opensbliblock00Kernel005_cuda_kernel.cu"
+#include "opensbliblock00Kernel049_cuda_kernel.cu"
+#include "opensbliblock00Kernel052_cuda_kernel.cu"
+#include "opensbliblock00Kernel053_cuda_kernel.cu"
+#include "opensbliblock00Kernel054_cuda_kernel.cu"
+#include "opensbliblock00Kernel055_cuda_kernel.cu"
+#include "opensbliblock00Kernel056_cuda_kernel.cu"
+#include "opensbliblock00Kernel061_cuda_kernel.cu"
+#include "opensbliblock00Kernel045_cuda_kernel.cu"
+#include "opensbliblock00Kernel046_cuda_kernel.cu"
+#include "opensbliblock00Kernel047_cuda_kernel.cu"
+#include "opensbliblock00Kernel048_cuda_kernel.cu"
+#include "opensbliblock00Kernel003_cuda_kernel.cu"
+#include "opensbliblock00Kernel013_cuda_kernel.cu"
+#include "opensbliblock00Kernel008_cuda_kernel.cu"
 #include "opensbliblock00Kernel009_cuda_kernel.cu"
-#include "opensbliblock00Kernel006_cuda_kernel.cu"
-#include "opensbliblock00Kernel010_cuda_kernel.cu"
 #include "opensbliblock00Kernel015_cuda_kernel.cu"
-#include "opensbliblock00Kernel004_cuda_kernel.cu"
+#include "opensbliblock00Kernel012_cuda_kernel.cu"
 #include "opensbliblock00Kernel019_cuda_kernel.cu"
-#include "opensbliblock00Kernel018_cuda_kernel.cu"
+#include "opensbliblock00Kernel020_cuda_kernel.cu"
 #include "opensbliblock00Kernel000_cuda_kernel.cu"
 #include "opensbliblock00Kernel001_cuda_kernel.cu"
 #include "opensbliblock00Kernel017_cuda_kernel.cu"
 #include "opensbliblock00Kernel028_cuda_kernel.cu"
 #include "opensbliblock00Kernel030_cuda_kernel.cu"
 #include "opensbliblock00Kernel031_cuda_kernel.cu"
-#include "opensbliblock00Kernel032_cuda_kernel.cu"
 #include "opensbliblock00Kernel033_cuda_kernel.cu"
 #include "opensbliblock00Kernel034_cuda_kernel.cu"
-#include "opensbliblock00Kernel035_cuda_kernel.cu"
 #include "opensbliblock00Kernel036_cuda_kernel.cu"
-#include "opensbliblock00Kernel037_cuda_kernel.cu"
-#include "opensbliblock00Kernel038_cuda_kernel.cu"
-#include "opensbliblock00Kernel040_cuda_kernel.cu"
 #include "opensbliblock00Kernel041_cuda_kernel.cu"
-#include "opensbliblock00Kernel042_cuda_kernel.cu"
-#include "opensbliblock00Kernel044_cuda_kernel.cu"
-#include "opensbliblock00Kernel029_cuda_kernel.cu"
-#include "opensbliblock00Kernel039_cuda_kernel.cu"
-#include "opensbliblock00Kernel043_cuda_kernel.cu"
-#include "opensbliblock00Kernel061_cuda_kernel.cu"
-#include "opensbliblock00Kernel091_cuda_kernel.cu"
-#include "monitor_0_rhou0_B0_cuda_kernel.cu"
-#include "monitor_1_rhou0_B0_cuda_kernel.cu"
-#include "monitor_2_rhou0_B0_cuda_kernel.cu"
-#include "monitor_3_rhou0_B0_cuda_kernel.cu"
-#include "monitor_4_rhou0_B0_cuda_kernel.cu"
-#include "monitor_5_rhou0_B0_cuda_kernel.cu"
-#include "monitor_6_rhou0_B0_cuda_kernel.cu"
+#include "opensbliblock00Kernel062_cuda_kernel.cu"
+#include "monitor_0_p_B0_cuda_kernel.cu"
+#include "monitor_1_p_B0_cuda_kernel.cu"
+#include "monitor_2_p_B0_cuda_kernel.cu"
+#include "monitor_3_p_B0_cuda_kernel.cu"
+#include "monitor_4_p_B0_cuda_kernel.cu"
+#include "monitor_5_p_B0_cuda_kernel.cu"
+#include "monitor_6_p_B0_cuda_kernel.cu"

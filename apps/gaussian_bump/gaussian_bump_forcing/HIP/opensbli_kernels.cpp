@@ -27,10 +27,10 @@ __constant__ int block0np1;
 __constant__ double Delta0block0;
 #define Delta1block0 Delta1block0_OPSCONSTANT
 __constant__ double Delta1block0;
-#define Minf Minf_OPSCONSTANT
-__constant__ double Minf;
 #define Twall Twall_OPSCONSTANT
 __constant__ double Twall;
+#define Minf Minf_OPSCONSTANT
+__constant__ double Minf;
 #define gama gama_OPSCONSTANT
 __constant__ double gama;
 #define RefT RefT_OPSCONSTANT
@@ -51,22 +51,22 @@ __constant__ double inv_1;
 __constant__ double inv_2;
 #define inv_3 inv_3_OPSCONSTANT
 __constant__ double inv_3;
+#define tripA tripA_OPSCONSTANT
+__constant__ double tripA;
 #define xts xts_OPSCONSTANT
 __constant__ double xts;
 #define k_0 k_0_OPSCONSTANT
 __constant__ double k_0;
-#define tripA tripA_OPSCONSTANT
-__constant__ double tripA;
 #define omega_0 omega_0_OPSCONSTANT
 __constant__ double omega_0;
-#define L L_OPSCONSTANT
-__constant__ double L;
 #define H H_OPSCONSTANT
 __constant__ double H;
-#define b b_OPSCONSTANT
-__constant__ double b;
+#define L L_OPSCONSTANT
+__constant__ double L;
 #define a a_OPSCONSTANT
 __constant__ double a;
+#define b b_OPSCONSTANT
+__constant__ double b;
 #define rcinv4 rcinv4_OPSCONSTANT
 __constant__ double rcinv4;
 #define rcinv5 rcinv5_OPSCONSTANT
@@ -89,16 +89,16 @@ __constant__ double rc12;
 __constant__ double rc13;
 #define rc14 rc14_OPSCONSTANT
 __constant__ double rc14;
-#define rc15 rc15_OPSCONSTANT
-__constant__ double rc15;
-#define rc16 rc16_OPSCONSTANT
-__constant__ double rc16;
+#define rcinv15 rcinv15_OPSCONSTANT
+__constant__ double rcinv15;
+#define rcinv16 rcinv16_OPSCONSTANT
+__constant__ double rcinv16;
 #define rc17 rc17_OPSCONSTANT
 __constant__ double rc17;
-#define rcinv18 rcinv18_OPSCONSTANT
-__constant__ double rcinv18;
-#define rcinv19 rcinv19_OPSCONSTANT
-__constant__ double rcinv19;
+#define rc18 rc18_OPSCONSTANT
+__constant__ double rc18;
+#define rc19 rc19_OPSCONSTANT
+__constant__ double rc19;
 #define rc20 rc20_OPSCONSTANT
 __constant__ double rc20;
 #define rc21 rc21_OPSCONSTANT
@@ -127,26 +127,14 @@ __constant__ double rc31;
 __constant__ double rc32;
 #define rc33 rc33_OPSCONSTANT
 __constant__ double rc33;
-#define rc34 rc34_OPSCONSTANT
-__constant__ double rc34;
+#define rcinv34 rcinv34_OPSCONSTANT
+__constant__ double rcinv34;
 #define rcinv35 rcinv35_OPSCONSTANT
 __constant__ double rcinv35;
 #define rc36 rc36_OPSCONSTANT
 __constant__ double rc36;
-#define rc37 rc37_OPSCONSTANT
-__constant__ double rc37;
-#define rc38 rc38_OPSCONSTANT
-__constant__ double rc38;
-#define rc39 rc39_OPSCONSTANT
-__constant__ double rc39;
-#define rc40 rc40_OPSCONSTANT
-__constant__ double rc40;
-#define rcinv41 rcinv41_OPSCONSTANT
-__constant__ double rcinv41;
-#define rc42 rc42_OPSCONSTANT
-__constant__ double rc42;
-#define rcinv43 rcinv43_OPSCONSTANT
-__constant__ double rcinv43;
+#define rcinv37 rcinv37_OPSCONSTANT
+__constant__ double rcinv37;
 
 void ops_init_backend() {}
 
@@ -158,8 +146,8 @@ __global__ void ops_internal_this_is_stupid() {
 ((int*)&block0np1)[0]=0;
 ((int*)&Delta0block0)[0]=0;
 ((int*)&Delta1block0)[0]=0;
-((int*)&Minf)[0]=0;
 ((int*)&Twall)[0]=0;
+((int*)&Minf)[0]=0;
 ((int*)&gama)[0]=0;
 ((int*)&RefT)[0]=0;
 ((int*)&SuthT)[0]=0;
@@ -170,14 +158,14 @@ __global__ void ops_internal_this_is_stupid() {
 ((int*)&inv_1)[0]=0;
 ((int*)&inv_2)[0]=0;
 ((int*)&inv_3)[0]=0;
+((int*)&tripA)[0]=0;
 ((int*)&xts)[0]=0;
 ((int*)&k_0)[0]=0;
-((int*)&tripA)[0]=0;
 ((int*)&omega_0)[0]=0;
-((int*)&L)[0]=0;
 ((int*)&H)[0]=0;
-((int*)&b)[0]=0;
+((int*)&L)[0]=0;
 ((int*)&a)[0]=0;
+((int*)&b)[0]=0;
 ((int*)&rcinv4)[0]=0;
 ((int*)&rcinv5)[0]=0;
 ((int*)&rc6)[0]=0;
@@ -189,11 +177,11 @@ __global__ void ops_internal_this_is_stupid() {
 ((int*)&rc12)[0]=0;
 ((int*)&rc13)[0]=0;
 ((int*)&rc14)[0]=0;
-((int*)&rc15)[0]=0;
-((int*)&rc16)[0]=0;
+((int*)&rcinv15)[0]=0;
+((int*)&rcinv16)[0]=0;
 ((int*)&rc17)[0]=0;
-((int*)&rcinv18)[0]=0;
-((int*)&rcinv19)[0]=0;
+((int*)&rc18)[0]=0;
+((int*)&rc19)[0]=0;
 ((int*)&rc20)[0]=0;
 ((int*)&rc21)[0]=0;
 ((int*)&rc22)[0]=0;
@@ -208,16 +196,10 @@ __global__ void ops_internal_this_is_stupid() {
 ((int*)&rc31)[0]=0;
 ((int*)&rc32)[0]=0;
 ((int*)&rc33)[0]=0;
-((int*)&rc34)[0]=0;
+((int*)&rcinv34)[0]=0;
 ((int*)&rcinv35)[0]=0;
 ((int*)&rc36)[0]=0;
-((int*)&rc37)[0]=0;
-((int*)&rc38)[0]=0;
-((int*)&rc39)[0]=0;
-((int*)&rc40)[0]=0;
-((int*)&rcinv41)[0]=0;
-((int*)&rc42)[0]=0;
-((int*)&rcinv43)[0]=0;
+((int*)&rcinv37)[0]=0;
 }
 
 void ops_decl_const_char(int dim, char const *type,
@@ -247,12 +229,12 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Delta1block0_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"Minf")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Minf_OPSCONSTANT), dat, dim*size));
-  }
-  else
   if (!strcmp(name,"Twall")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Twall_OPSCONSTANT), dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"Minf")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Minf_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"gama")) {
@@ -295,6 +277,10 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(inv_3_OPSCONSTANT), dat, dim*size));
   }
   else
+  if (!strcmp(name,"tripA")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(tripA_OPSCONSTANT), dat, dim*size));
+  }
+  else
   if (!strcmp(name,"xts")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(xts_OPSCONSTANT), dat, dim*size));
   }
@@ -303,28 +289,24 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(k_0_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"tripA")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(tripA_OPSCONSTANT), dat, dim*size));
-  }
-  else
   if (!strcmp(name,"omega_0")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(omega_0_OPSCONSTANT), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"L")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(L_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"H")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(H_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"b")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(b_OPSCONSTANT), dat, dim*size));
+  if (!strcmp(name,"L")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(L_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"a")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(a_OPSCONSTANT), dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"b")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(b_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"rcinv4")) {
@@ -371,24 +353,24 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc14_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"rc15")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc15_OPSCONSTANT), dat, dim*size));
+  if (!strcmp(name,"rcinv15")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rcinv15_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"rc16")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc16_OPSCONSTANT), dat, dim*size));
+  if (!strcmp(name,"rcinv16")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rcinv16_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"rc17")) {
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc17_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"rcinv18")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rcinv18_OPSCONSTANT), dat, dim*size));
+  if (!strcmp(name,"rc18")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc18_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"rcinv19")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rcinv19_OPSCONSTANT), dat, dim*size));
+  if (!strcmp(name,"rc19")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc19_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"rc20")) {
@@ -447,8 +429,8 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc33_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"rc34")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc34_OPSCONSTANT), dat, dim*size));
+  if (!strcmp(name,"rcinv34")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rcinv34_OPSCONSTANT), dat, dim*size));
   }
   else
   if (!strcmp(name,"rcinv35")) {
@@ -459,32 +441,8 @@ int size, char *dat, char const *name){
     hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc36_OPSCONSTANT), dat, dim*size));
   }
   else
-  if (!strcmp(name,"rc37")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc37_OPSCONSTANT), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rc38")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc38_OPSCONSTANT), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rc39")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc39_OPSCONSTANT), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rc40")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc40_OPSCONSTANT), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rcinv41")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rcinv41_OPSCONSTANT), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rc42")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rc42_OPSCONSTANT), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"rcinv43")) {
-    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rcinv43_OPSCONSTANT), dat, dim*size));
+  if (!strcmp(name,"rcinv37")) {
+    hipSafeCall(OPS_instance::getOPSInstance()->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(rcinv37_OPSCONSTANT), dat, dim*size));
   }
   else
   {
@@ -494,63 +452,40 @@ int size, char *dat, char const *name){
 
 
 //user kernel files
-#include "opensbliblock00Kernel066_hip_kernel.cpp"
-#include "opensbliblock00Kernel067_hip_kernel.cpp"
-#include "opensbliblock00Kernel068_hip_kernel.cpp"
-#include "opensbliblock00Kernel069_hip_kernel.cpp"
-#include "opensbliblock00Kernel070_hip_kernel.cpp"
-#include "opensbliblock00Kernel073_hip_kernel.cpp"
-#include "opensbliblock00Kernel074_hip_kernel.cpp"
-#include "opensbliblock00Kernel075_hip_kernel.cpp"
-#include "opensbliblock00Kernel076_hip_kernel.cpp"
-#include "opensbliblock00Kernel077_hip_kernel.cpp"
-#include "opensbliblock00Kernel078_hip_kernel.cpp"
-#include "opensbliblock00Kernel079_hip_kernel.cpp"
-#include "opensbliblock00Kernel080_hip_kernel.cpp"
-#include "opensbliblock00Kernel081_hip_kernel.cpp"
-#include "opensbliblock00Kernel082_hip_kernel.cpp"
-#include "opensbliblock00Kernel083_hip_kernel.cpp"
-#include "opensbliblock00Kernel084_hip_kernel.cpp"
-#include "opensbliblock00Kernel085_hip_kernel.cpp"
-#include "opensbliblock00Kernel090_hip_kernel.cpp"
-#include "opensbliblock00Kernel062_hip_kernel.cpp"
-#include "opensbliblock00Kernel063_hip_kernel.cpp"
-#include "opensbliblock00Kernel064_hip_kernel.cpp"
-#include "opensbliblock00Kernel065_hip_kernel.cpp"
-#include "opensbliblock00Kernel005_hip_kernel.cpp"
+#include "opensbliblock00Kernel049_hip_kernel.cpp"
+#include "opensbliblock00Kernel052_hip_kernel.cpp"
+#include "opensbliblock00Kernel053_hip_kernel.cpp"
+#include "opensbliblock00Kernel054_hip_kernel.cpp"
+#include "opensbliblock00Kernel055_hip_kernel.cpp"
+#include "opensbliblock00Kernel056_hip_kernel.cpp"
+#include "opensbliblock00Kernel061_hip_kernel.cpp"
+#include "opensbliblock00Kernel045_hip_kernel.cpp"
+#include "opensbliblock00Kernel046_hip_kernel.cpp"
+#include "opensbliblock00Kernel047_hip_kernel.cpp"
+#include "opensbliblock00Kernel048_hip_kernel.cpp"
+#include "opensbliblock00Kernel003_hip_kernel.cpp"
+#include "opensbliblock00Kernel013_hip_kernel.cpp"
+#include "opensbliblock00Kernel008_hip_kernel.cpp"
 #include "opensbliblock00Kernel009_hip_kernel.cpp"
-#include "opensbliblock00Kernel006_hip_kernel.cpp"
-#include "opensbliblock00Kernel010_hip_kernel.cpp"
 #include "opensbliblock00Kernel015_hip_kernel.cpp"
-#include "opensbliblock00Kernel004_hip_kernel.cpp"
+#include "opensbliblock00Kernel012_hip_kernel.cpp"
 #include "opensbliblock00Kernel019_hip_kernel.cpp"
-#include "opensbliblock00Kernel018_hip_kernel.cpp"
+#include "opensbliblock00Kernel020_hip_kernel.cpp"
 #include "opensbliblock00Kernel000_hip_kernel.cpp"
 #include "opensbliblock00Kernel001_hip_kernel.cpp"
 #include "opensbliblock00Kernel017_hip_kernel.cpp"
 #include "opensbliblock00Kernel028_hip_kernel.cpp"
 #include "opensbliblock00Kernel030_hip_kernel.cpp"
 #include "opensbliblock00Kernel031_hip_kernel.cpp"
-#include "opensbliblock00Kernel032_hip_kernel.cpp"
 #include "opensbliblock00Kernel033_hip_kernel.cpp"
 #include "opensbliblock00Kernel034_hip_kernel.cpp"
-#include "opensbliblock00Kernel035_hip_kernel.cpp"
 #include "opensbliblock00Kernel036_hip_kernel.cpp"
-#include "opensbliblock00Kernel037_hip_kernel.cpp"
-#include "opensbliblock00Kernel038_hip_kernel.cpp"
-#include "opensbliblock00Kernel040_hip_kernel.cpp"
 #include "opensbliblock00Kernel041_hip_kernel.cpp"
-#include "opensbliblock00Kernel042_hip_kernel.cpp"
-#include "opensbliblock00Kernel044_hip_kernel.cpp"
-#include "opensbliblock00Kernel029_hip_kernel.cpp"
-#include "opensbliblock00Kernel039_hip_kernel.cpp"
-#include "opensbliblock00Kernel043_hip_kernel.cpp"
-#include "opensbliblock00Kernel061_hip_kernel.cpp"
-#include "opensbliblock00Kernel091_hip_kernel.cpp"
-#include "monitor_0_rhou0_B0_hip_kernel.cpp"
-#include "monitor_1_rhou0_B0_hip_kernel.cpp"
-#include "monitor_2_rhou0_B0_hip_kernel.cpp"
-#include "monitor_3_rhou0_B0_hip_kernel.cpp"
-#include "monitor_4_rhou0_B0_hip_kernel.cpp"
-#include "monitor_5_rhou0_B0_hip_kernel.cpp"
-#include "monitor_6_rhou0_B0_hip_kernel.cpp"
+#include "opensbliblock00Kernel062_hip_kernel.cpp"
+#include "monitor_0_p_B0_hip_kernel.cpp"
+#include "monitor_1_p_B0_hip_kernel.cpp"
+#include "monitor_2_p_B0_hip_kernel.cpp"
+#include "monitor_3_p_B0_hip_kernel.cpp"
+#include "monitor_4_p_B0_hip_kernel.cpp"
+#include "monitor_5_p_B0_hip_kernel.cpp"
+#include "monitor_6_p_B0_hip_kernel.cpp"

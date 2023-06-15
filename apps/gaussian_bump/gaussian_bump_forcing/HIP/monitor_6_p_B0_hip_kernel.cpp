@@ -62,12 +62,12 @@ void ops_par_loop_monitor_6_p_B0_execute(ops_kernel_descriptor *desc) {
 
 
   #if CHECKPOINTING && !OPS_LAZY
-  if (!ops_checkpointing_before(args,2,range,59)) return;
+  if (!ops_checkpointing_before(args,2,range,36)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,59,"monitor_6_p_B0");
-    block->instance->OPS_kernels[59].count++;
+    ops_timing_realloc(block->instance,36,"monitor_6_p_B0");
+    block->instance->OPS_kernels[36].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -150,7 +150,7 @@ void ops_par_loop_monitor_6_p_B0_execute(ops_kernel_descriptor *desc) {
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[59].mpi_time += t2-t1;
+    block->instance->OPS_kernels[36].mpi_time += t2-t1;
   }
 
   size_t nshared = 0;
@@ -177,7 +177,7 @@ void ops_par_loop_monitor_6_p_B0_execute(ops_kernel_descriptor *desc) {
   if (block->instance->OPS_diags>1) {
     hipSafeCall(block->instance->ostream(), hipDeviceSynchronize());
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[59].time += t1-t2;
+    block->instance->OPS_kernels[36].time += t1-t2;
   }
 
   #ifndef OPS_LAZY
@@ -187,8 +187,8 @@ void ops_par_loop_monitor_6_p_B0_execute(ops_kernel_descriptor *desc) {
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[59].mpi_time += t2-t1;
-    block->instance->OPS_kernels[59].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[36].mpi_time += t2-t1;
+    block->instance->OPS_kernels[36].transfer += ops_compute_transfer(dim, start, end, &arg0);
   }
 }
 
@@ -200,9 +200,9 @@ void ops_par_loop_monitor_6_p_B0(char const *name, ops_block block, int dim, int
   desc->block = block;
   desc->dim = dim;
   desc->device = 1;
-  desc->index = 59;
+  desc->index = 36;
   desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 59;
+  desc->hash = ((desc->hash << 5) + desc->hash) + 36;
   for ( int i=0; i<4; i++ ){
     desc->range[i] = range[i];
     desc->orig_range[i] = range[i];
@@ -215,7 +215,7 @@ void ops_par_loop_monitor_6_p_B0(char const *name, ops_block block, int dim, int
   desc->args[1] = arg1;
   desc->function = ops_par_loop_monitor_6_p_B0_execute;
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,59,"monitor_6_p_B0");
+    ops_timing_realloc(block->instance,36,"monitor_6_p_B0");
   }
   ops_enqueue_kernel(desc);
 }

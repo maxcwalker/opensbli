@@ -9,7 +9,6 @@ import os
 plt.style.use('classic')
 
 fname = 'opensbli_output.h5'
-#   fname = './outputs/opensbli_output_025000_pp.h5'
 
 def read_file(fname):
     f = h5py.File(fname, 'r')
@@ -89,4 +88,3 @@ plt.savefig('Gaussian_bump_contours.pdf')
 # fig, ab = plt.subplots(1,1)
 # ab.scatter(x,y)
 plt.show()
-

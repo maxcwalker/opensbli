@@ -142,8 +142,8 @@ if(__name__ == "__main__"):
     # if '.h5' not in a[-1]:
     #     raise ValueError("Provide the HDF5 file with .h5 extension")
     
-
     dir_path = '/home/maxwalker/git/opensbli/apps/gaussian_bump/gaussian_bump_forcing/outputs/'
+    #dir_path = '/home/maxwalker/git/opensbli/apps/gaussian_bump/gaussian_bump_forcing/Mixlay_3D_050_NEQ_ML_Air_3ev_1rho_Tecplot/'
     # dir_path = sys.argv[1]
     new_path = dir_path
 

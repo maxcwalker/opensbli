@@ -34,12 +34,12 @@ int size, char *dat, char const *name){
     Delta1block0 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"Minf")) {
-    Minf = *(double*)dat;
-  }
-  else
   if (!strcmp(name,"Twall")) {
     Twall = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"Minf")) {
+    Minf = *(double*)dat;
   }
   else
   if (!strcmp(name,"gama")) {
@@ -82,6 +82,10 @@ int size, char *dat, char const *name){
     inv_3 = *(double*)dat;
   }
   else
+  if (!strcmp(name,"tripA")) {
+    tripA = *(double*)dat;
+  }
+  else
   if (!strcmp(name,"xts")) {
     xts = *(double*)dat;
   }
@@ -90,28 +94,24 @@ int size, char *dat, char const *name){
     k_0 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"tripA")) {
-    tripA = *(double*)dat;
-  }
-  else
   if (!strcmp(name,"omega_0")) {
     omega_0 = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"L")) {
-    L = *(double*)dat;
   }
   else
   if (!strcmp(name,"H")) {
     H = *(double*)dat;
   }
   else
-  if (!strcmp(name,"b")) {
-    b = *(double*)dat;
+  if (!strcmp(name,"L")) {
+    L = *(double*)dat;
   }
   else
   if (!strcmp(name,"a")) {
     a = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"b")) {
+    b = *(double*)dat;
   }
   else
   if (!strcmp(name,"rcinv4")) {
@@ -158,24 +158,24 @@ int size, char *dat, char const *name){
     rc14 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"rc15")) {
-    rc15 = *(double*)dat;
+  if (!strcmp(name,"rcinv15")) {
+    rcinv15 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"rc16")) {
-    rc16 = *(double*)dat;
+  if (!strcmp(name,"rcinv16")) {
+    rcinv16 = *(double*)dat;
   }
   else
   if (!strcmp(name,"rc17")) {
     rc17 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"rcinv18")) {
-    rcinv18 = *(double*)dat;
+  if (!strcmp(name,"rc18")) {
+    rc18 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"rcinv19")) {
-    rcinv19 = *(double*)dat;
+  if (!strcmp(name,"rc19")) {
+    rc19 = *(double*)dat;
   }
   else
   if (!strcmp(name,"rc20")) {
@@ -234,8 +234,8 @@ int size, char *dat, char const *name){
     rc33 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"rc34")) {
-    rc34 = *(double*)dat;
+  if (!strcmp(name,"rcinv34")) {
+    rcinv34 = *(double*)dat;
   }
   else
   if (!strcmp(name,"rcinv35")) {
@@ -246,32 +246,8 @@ int size, char *dat, char const *name){
     rc36 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"rc37")) {
-    rc37 = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"rc38")) {
-    rc38 = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"rc39")) {
-    rc39 = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"rc40")) {
-    rc40 = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"rcinv41")) {
-    rcinv41 = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"rc42")) {
-    rc42 = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"rcinv43")) {
-    rcinv43 = *(double*)dat;
+  if (!strcmp(name,"rcinv37")) {
+    rcinv37 = *(double*)dat;
   }
   else
   {
@@ -280,63 +256,40 @@ int size, char *dat, char const *name){
 }
 
 //user kernel files
-#include "opensbliblock00Kernel066_openacc_kernel.cpp"
-#include "opensbliblock00Kernel067_openacc_kernel.cpp"
-#include "opensbliblock00Kernel068_openacc_kernel.cpp"
-#include "opensbliblock00Kernel069_openacc_kernel.cpp"
-#include "opensbliblock00Kernel070_openacc_kernel.cpp"
-#include "opensbliblock00Kernel073_openacc_kernel.cpp"
-#include "opensbliblock00Kernel074_openacc_kernel.cpp"
-#include "opensbliblock00Kernel075_openacc_kernel.cpp"
-#include "opensbliblock00Kernel076_openacc_kernel.cpp"
-#include "opensbliblock00Kernel077_openacc_kernel.cpp"
-#include "opensbliblock00Kernel078_openacc_kernel.cpp"
-#include "opensbliblock00Kernel079_openacc_kernel.cpp"
-#include "opensbliblock00Kernel080_openacc_kernel.cpp"
-#include "opensbliblock00Kernel081_openacc_kernel.cpp"
-#include "opensbliblock00Kernel082_openacc_kernel.cpp"
-#include "opensbliblock00Kernel083_openacc_kernel.cpp"
-#include "opensbliblock00Kernel084_openacc_kernel.cpp"
-#include "opensbliblock00Kernel085_openacc_kernel.cpp"
-#include "opensbliblock00Kernel090_openacc_kernel.cpp"
-#include "opensbliblock00Kernel062_openacc_kernel.cpp"
-#include "opensbliblock00Kernel063_openacc_kernel.cpp"
-#include "opensbliblock00Kernel064_openacc_kernel.cpp"
-#include "opensbliblock00Kernel065_openacc_kernel.cpp"
-#include "opensbliblock00Kernel005_openacc_kernel.cpp"
+#include "opensbliblock00Kernel049_openacc_kernel.cpp"
+#include "opensbliblock00Kernel052_openacc_kernel.cpp"
+#include "opensbliblock00Kernel053_openacc_kernel.cpp"
+#include "opensbliblock00Kernel054_openacc_kernel.cpp"
+#include "opensbliblock00Kernel055_openacc_kernel.cpp"
+#include "opensbliblock00Kernel056_openacc_kernel.cpp"
+#include "opensbliblock00Kernel061_openacc_kernel.cpp"
+#include "opensbliblock00Kernel045_openacc_kernel.cpp"
+#include "opensbliblock00Kernel046_openacc_kernel.cpp"
+#include "opensbliblock00Kernel047_openacc_kernel.cpp"
+#include "opensbliblock00Kernel048_openacc_kernel.cpp"
+#include "opensbliblock00Kernel003_openacc_kernel.cpp"
+#include "opensbliblock00Kernel013_openacc_kernel.cpp"
+#include "opensbliblock00Kernel008_openacc_kernel.cpp"
 #include "opensbliblock00Kernel009_openacc_kernel.cpp"
-#include "opensbliblock00Kernel006_openacc_kernel.cpp"
-#include "opensbliblock00Kernel010_openacc_kernel.cpp"
 #include "opensbliblock00Kernel015_openacc_kernel.cpp"
-#include "opensbliblock00Kernel004_openacc_kernel.cpp"
+#include "opensbliblock00Kernel012_openacc_kernel.cpp"
 #include "opensbliblock00Kernel019_openacc_kernel.cpp"
-#include "opensbliblock00Kernel018_openacc_kernel.cpp"
+#include "opensbliblock00Kernel020_openacc_kernel.cpp"
 #include "opensbliblock00Kernel000_openacc_kernel.cpp"
 #include "opensbliblock00Kernel001_openacc_kernel.cpp"
 #include "opensbliblock00Kernel017_openacc_kernel.cpp"
 #include "opensbliblock00Kernel028_openacc_kernel.cpp"
 #include "opensbliblock00Kernel030_openacc_kernel.cpp"
 #include "opensbliblock00Kernel031_openacc_kernel.cpp"
-#include "opensbliblock00Kernel032_openacc_kernel.cpp"
 #include "opensbliblock00Kernel033_openacc_kernel.cpp"
 #include "opensbliblock00Kernel034_openacc_kernel.cpp"
-#include "opensbliblock00Kernel035_openacc_kernel.cpp"
 #include "opensbliblock00Kernel036_openacc_kernel.cpp"
-#include "opensbliblock00Kernel037_openacc_kernel.cpp"
-#include "opensbliblock00Kernel038_openacc_kernel.cpp"
-#include "opensbliblock00Kernel040_openacc_kernel.cpp"
 #include "opensbliblock00Kernel041_openacc_kernel.cpp"
-#include "opensbliblock00Kernel042_openacc_kernel.cpp"
-#include "opensbliblock00Kernel044_openacc_kernel.cpp"
-#include "opensbliblock00Kernel029_openacc_kernel.cpp"
-#include "opensbliblock00Kernel039_openacc_kernel.cpp"
-#include "opensbliblock00Kernel043_openacc_kernel.cpp"
-#include "opensbliblock00Kernel061_openacc_kernel.cpp"
-#include "opensbliblock00Kernel091_openacc_kernel.cpp"
-#include "monitor_0_rhou0_B0_openacc_kernel.cpp"
-#include "monitor_1_rhou0_B0_openacc_kernel.cpp"
-#include "monitor_2_rhou0_B0_openacc_kernel.cpp"
-#include "monitor_3_rhou0_B0_openacc_kernel.cpp"
-#include "monitor_4_rhou0_B0_openacc_kernel.cpp"
-#include "monitor_5_rhou0_B0_openacc_kernel.cpp"
-#include "monitor_6_rhou0_B0_openacc_kernel.cpp"
+#include "opensbliblock00Kernel062_openacc_kernel.cpp"
+#include "monitor_0_p_B0_openacc_kernel.cpp"
+#include "monitor_1_p_B0_openacc_kernel.cpp"
+#include "monitor_2_p_B0_openacc_kernel.cpp"
+#include "monitor_3_p_B0_openacc_kernel.cpp"
+#include "monitor_4_p_B0_openacc_kernel.cpp"
+#include "monitor_5_p_B0_openacc_kernel.cpp"
+#include "monitor_6_p_B0_openacc_kernel.cpp"

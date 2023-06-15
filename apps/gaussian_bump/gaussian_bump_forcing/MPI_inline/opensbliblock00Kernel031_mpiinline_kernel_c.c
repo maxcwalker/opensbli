@@ -12,7 +12,7 @@ int xdim1_opensbliblock00Kernel031;
 
 void opensbliblock00Kernel031_c_wrapper(
   double * restrict u1_B0_p,
-  double * restrict wk3_B0_p,
+  double * restrict wk2_B0_p,
   int * restrict idx,
   int arg_idx0, int arg_idx1,
   int x_size, int y_size) {
@@ -21,20 +21,20 @@ void opensbliblock00Kernel031_c_wrapper(
     for ( int n_x=0; n_x<x_size; n_x++ ){
       int idx[] = {arg_idx0+n_x, arg_idx1+n_y};
       const ptr_double u1_B0 = { u1_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel031*1, xdim0_opensbliblock00Kernel031};
-      ptr_double wk3_B0 = { wk3_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel031*1, xdim1_opensbliblock00Kernel031};
+      ptr_double wk2_B0 = { wk2_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel031*1, xdim1_opensbliblock00Kernel031};
       
-    OPS_ACC(wk3_B0, 0,0) = inv_0*((idx[1] == 0) ? (
-   (rc13)*OPS_ACC(u1_B0, 0,3) - rc12*OPS_ACC(u1_B0, 0,0) -
-      rc11*OPS_ACC(u1_B0, 0,4) + 4*OPS_ACC(u1_B0, 0,1) - 3*OPS_ACC(u1_B0, 0,2)
+    OPS_ACC(wk2_B0, 0,0) = ((idx[1] == 0) ? (
+   inv_0*(-3*OPS_ACC(u1_B0, 0,2) + (rc13)*OPS_ACC(u1_B0, 0,3) -
+      rc12*OPS_ACC(u1_B0, 0,4) - rc11*OPS_ACC(u1_B0, 0,0) + 4*OPS_ACC(u1_B0, 0,1))
 )
 : ((idx[1] == 1) ? (
 
-      (rc16)*OPS_ACC(u1_B0, 0,3) - rc11*OPS_ACC(u1_B0, 0,-1) - rc15*OPS_ACC(u1_B0, 0,0) + (rc14)*OPS_ACC(u1_B0, 0,1)
-      - rc7*OPS_ACC(u1_B0, 0,2)
+      (rc14)*inv_0*(-6*OPS_ACC(u1_B0, 0,2) - 3*OPS_ACC(u1_B0, 0,-1) + OPS_ACC(u1_B0, 0,3) - 10*OPS_ACC(u1_B0, 0,0) +
+      18*OPS_ACC(u1_B0, 0,1))
 )
 : (
-   -rc17*OPS_ACC(u1_B0, 0,-1) + (rc16)*OPS_ACC(u1_B0, 0,-2) -
-      rc16*OPS_ACC(u1_B0, 0,2) + (rc17)*OPS_ACC(u1_B0, 0,1)
+   (rc14)*inv_0*(8*OPS_ACC(u1_B0, 0,1) - OPS_ACC(u1_B0, 0,2) -
+      8*OPS_ACC(u1_B0, 0,-1) + OPS_ACC(u1_B0, 0,-2))
 )));
 
 

@@ -20,31 +20,31 @@ int xdim12_opensbliblock00Kernel017;
 
 //user function
 inline 
- void opensbliblock00Kernel017(const ptr_double wk3_B0,
+ void opensbliblock00Kernel017(const ptr_double detJ_B0,
+  const ptr_double wk4_B0,
   const ptr_double wk6_B0,
-  const ptr_double wk1_B0,
+  const ptr_double wk0_B0,
+  const ptr_double wk3_B0,
+  const ptr_double wk2_B0,
   const ptr_double wk7_B0,
   const ptr_double wk5_B0,
-  const ptr_double wk4_B0,
-  const ptr_double detJ_B0,
-  const ptr_double wk2_B0,
-  const ptr_double wk0_B0,
+  const ptr_double wk1_B0,
   ptr_double Residual2_B0,
-  ptr_double Residual3_B0,
   ptr_double Residual0_B0,
-  ptr_double Residual1_B0)
+  ptr_double Residual1_B0,
+  ptr_double Residual3_B0)
 {
     OPS_ACC(Residual0_B0, 0,0) = -(inv_0*(-OPS_ACC(wk4_B0, 0,-1) + OPS_ACC(wk4_B0, 0,0)) +
-      inv_2*(-OPS_ACC(wk0_B0, -1,0) + OPS_ACC(wk0_B0, 0,0)))/OPS_ACC(detJ_B0, 0,0);
+      inv_1*(-OPS_ACC(wk0_B0, -1,0) + OPS_ACC(wk0_B0, 0,0)))/OPS_ACC(detJ_B0, 0,0);
 
-    OPS_ACC(Residual1_B0, 0,0) = -(inv_0*(-OPS_ACC(wk5_B0, 0,-1) + OPS_ACC(wk5_B0, 0,0)) +
-      inv_2*(-OPS_ACC(wk1_B0, -1,0) + OPS_ACC(wk1_B0, 0,0)))/OPS_ACC(detJ_B0, 0,0);
+    OPS_ACC(Residual1_B0, 0,0) = -(inv_0*(OPS_ACC(wk5_B0, 0,0) - OPS_ACC(wk5_B0, 0,-1)) +
+      inv_1*(OPS_ACC(wk1_B0, 0,0) - OPS_ACC(wk1_B0, -1,0)))/OPS_ACC(detJ_B0, 0,0);
 
     OPS_ACC(Residual2_B0, 0,0) = -(inv_0*(OPS_ACC(wk6_B0, 0,0) - OPS_ACC(wk6_B0, 0,-1)) +
-      inv_2*(-OPS_ACC(wk2_B0, -1,0) + OPS_ACC(wk2_B0, 0,0)))/OPS_ACC(detJ_B0, 0,0);
+      inv_1*(-OPS_ACC(wk2_B0, -1,0) + OPS_ACC(wk2_B0, 0,0)))/OPS_ACC(detJ_B0, 0,0);
 
     OPS_ACC(Residual3_B0, 0,0) = -(inv_0*(-OPS_ACC(wk7_B0, 0,-1) + OPS_ACC(wk7_B0, 0,0)) +
-      inv_2*(OPS_ACC(wk3_B0, 0,0) - OPS_ACC(wk3_B0, -1,0)))/OPS_ACC(detJ_B0, 0,0);
+      inv_1*(OPS_ACC(wk3_B0, 0,0) - OPS_ACC(wk3_B0, -1,0)))/OPS_ACC(detJ_B0, 0,0);
 
 }
 

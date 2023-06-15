@@ -7,7 +7,13 @@
 // host stub function
 #ifndef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel041(char const *name, ops_block block, int dim, int* range,
- ops_arg arg0, ops_arg arg1, ops_arg arg2) {
+ ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
+ ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
+ ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
+ ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
+ ops_arg arg16, ops_arg arg17, ops_arg arg18, ops_arg arg19,
+ ops_arg arg20, ops_arg arg21, ops_arg arg22, ops_arg arg23,
+ ops_arg arg24, ops_arg arg25) {
 #else
 void ops_par_loop_opensbliblock00Kernel041_execute(ops_kernel_descriptor *desc) {
   ops_block block = desc->block;
@@ -16,22 +22,45 @@ void ops_par_loop_opensbliblock00Kernel041_execute(ops_kernel_descriptor *desc) 
   ops_arg arg0 = desc->args[0];
   ops_arg arg1 = desc->args[1];
   ops_arg arg2 = desc->args[2];
+  ops_arg arg3 = desc->args[3];
+  ops_arg arg4 = desc->args[4];
+  ops_arg arg5 = desc->args[5];
+  ops_arg arg6 = desc->args[6];
+  ops_arg arg7 = desc->args[7];
+  ops_arg arg8 = desc->args[8];
+  ops_arg arg9 = desc->args[9];
+  ops_arg arg10 = desc->args[10];
+  ops_arg arg11 = desc->args[11];
+  ops_arg arg12 = desc->args[12];
+  ops_arg arg13 = desc->args[13];
+  ops_arg arg14 = desc->args[14];
+  ops_arg arg15 = desc->args[15];
+  ops_arg arg16 = desc->args[16];
+  ops_arg arg17 = desc->args[17];
+  ops_arg arg18 = desc->args[18];
+  ops_arg arg19 = desc->args[19];
+  ops_arg arg20 = desc->args[20];
+  ops_arg arg21 = desc->args[21];
+  ops_arg arg22 = desc->args[22];
+  ops_arg arg23 = desc->args[23];
+  ops_arg arg24 = desc->args[24];
+  ops_arg arg25 = desc->args[25];
   #endif
 
   //Timing
   double __t1,__t2,__c1,__c2;
 
-  ops_arg args[3] = { arg0, arg1, arg2};
+  ops_arg args[26] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25};
 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,3,range,45)) return;
+  if (!ops_checkpointing_before(args,26,range,28)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,45,"opensbliblock00Kernel041");
-    block->instance->OPS_kernels[45].count++;
+    ops_timing_realloc(block->instance,28,"opensbliblock00Kernel041");
+    block->instance->OPS_kernels[28].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -49,7 +78,7 @@ void ops_par_loop_opensbliblock00Kernel041_execute(ops_kernel_descriptor *desc) 
     start[n] = range[2*n];end[n] = range[2*n+1];
   }
   #else
-  if (compute_ranges(args, 3,block, range, start, end, arg_idx) < 0) return;
+  if (compute_ranges(args, 26,block, range, start, end, arg_idx) < 0) return;
   #endif
 
   #if defined(OPS_MPI)
@@ -69,27 +98,119 @@ void ops_par_loop_opensbliblock00Kernel041_execute(ops_kernel_descriptor *desc) 
   //initialize global variable with the dimension of dats
   int xdim0_opensbliblock00Kernel041 = args[0].dat->size[0];
   int xdim1_opensbliblock00Kernel041 = args[1].dat->size[0];
+  int xdim2_opensbliblock00Kernel041 = args[2].dat->size[0];
+  int xdim3_opensbliblock00Kernel041 = args[3].dat->size[0];
+  int xdim4_opensbliblock00Kernel041 = args[4].dat->size[0];
+  int xdim5_opensbliblock00Kernel041 = args[5].dat->size[0];
+  int xdim6_opensbliblock00Kernel041 = args[6].dat->size[0];
+  int xdim7_opensbliblock00Kernel041 = args[7].dat->size[0];
+  int xdim8_opensbliblock00Kernel041 = args[8].dat->size[0];
+  int xdim9_opensbliblock00Kernel041 = args[9].dat->size[0];
+  int xdim10_opensbliblock00Kernel041 = args[10].dat->size[0];
+  int xdim11_opensbliblock00Kernel041 = args[11].dat->size[0];
+  int xdim12_opensbliblock00Kernel041 = args[12].dat->size[0];
+  int xdim13_opensbliblock00Kernel041 = args[13].dat->size[0];
+  int xdim14_opensbliblock00Kernel041 = args[14].dat->size[0];
+  int xdim15_opensbliblock00Kernel041 = args[15].dat->size[0];
+  int xdim16_opensbliblock00Kernel041 = args[16].dat->size[0];
+  int xdim17_opensbliblock00Kernel041 = args[17].dat->size[0];
+  int xdim18_opensbliblock00Kernel041 = args[18].dat->size[0];
+  int xdim19_opensbliblock00Kernel041 = args[19].dat->size[0];
+  int xdim20_opensbliblock00Kernel041 = args[20].dat->size[0];
+  int xdim21_opensbliblock00Kernel041 = args[21].dat->size[0];
+  int xdim22_opensbliblock00Kernel041 = args[22].dat->size[0];
+  int xdim23_opensbliblock00Kernel041 = args[23].dat->size[0];
+  int xdim24_opensbliblock00Kernel041 = args[24].dat->size[0];
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ T_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ u1_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ wk13_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ SD111_B0_p = (double *)(args[1].data + base1);
+
+  int base2 = args[2].dat->base_offset;
+  double * __restrict__ D01_B0_p = (double *)(args[2].data + base2);
+
+  int base3 = args[3].dat->base_offset;
+  double * __restrict__ wk0_B0_p = (double *)(args[3].data + base3);
+
+  int base4 = args[4].dat->base_offset;
+  double * __restrict__ wk3_B0_p = (double *)(args[4].data + base4);
+
+  int base5 = args[5].dat->base_offset;
+  double * __restrict__ u0_B0_p = (double *)(args[5].data + base5);
+
+  int base6 = args[6].dat->base_offset;
+  double * __restrict__ D10_B0_p = (double *)(args[6].data + base6);
+
+  int base7 = args[7].dat->base_offset;
+  double * __restrict__ D00_B0_p = (double *)(args[7].data + base7);
+
+  int base8 = args[8].dat->base_offset;
+  double * __restrict__ SD010_B0_p = (double *)(args[8].data + base8);
+
+  int base9 = args[9].dat->base_offset;
+  double * __restrict__ wk2_B0_p = (double *)(args[9].data + base9);
+
+  int base10 = args[10].dat->base_offset;
+  double * __restrict__ D11_B0_p = (double *)(args[10].data + base10);
+
+  int base11 = args[11].dat->base_offset;
+  double * __restrict__ wk1_B0_p = (double *)(args[11].data + base11);
+
+  int base12 = args[12].dat->base_offset;
+  double * __restrict__ wk4_B0_p = (double *)(args[12].data + base12);
+
+  int base13 = args[13].dat->base_offset;
+  double * __restrict__ SD110_B0_p = (double *)(args[13].data + base13);
+
+  int base14 = args[14].dat->base_offset;
+  double * __restrict__ mu_B0_p = (double *)(args[14].data + base14);
+
+  int base15 = args[15].dat->base_offset;
+  double * __restrict__ SD101_B0_p = (double *)(args[15].data + base15);
+
+  int base16 = args[16].dat->base_offset;
+  double * __restrict__ SD100_B0_p = (double *)(args[16].data + base16);
+
+  int base17 = args[17].dat->base_offset;
+  double * __restrict__ SD001_B0_p = (double *)(args[17].data + base17);
+
+  int base18 = args[18].dat->base_offset;
+  double * __restrict__ wk5_B0_p = (double *)(args[18].data + base18);
+
+  int base19 = args[19].dat->base_offset;
+  double * __restrict__ SD011_B0_p = (double *)(args[19].data + base19);
+
+  int base20 = args[20].dat->base_offset;
+  double * __restrict__ SD000_B0_p = (double *)(args[20].data + base20);
+
+  int base21 = args[21].dat->base_offset;
+  double * __restrict__ T_B0_p = (double *)(args[21].data + base21);
+
+  int base22 = args[22].dat->base_offset;
+  double * __restrict__ Residual2_B0_p = (double *)(args[22].data + base22);
+
+  int base23 = args[23].dat->base_offset;
+  double * __restrict__ Residual1_B0_p = (double *)(args[23].data + base23);
+
+  int base24 = args[24].dat->base_offset;
+  double * __restrict__ Residual3_B0_p = (double *)(args[24].data + base24);
 
 
 
 
   #ifndef OPS_LAZY
   //Halo Exchanges
-  ops_H_D_exchanges_host(args, 3);
-  ops_halo_exchanges(args,3,range);
-  ops_H_D_exchanges_host(args, 3);
+  ops_H_D_exchanges_host(args, 26);
+  ops_halo_exchanges(args,26,range);
+  ops_H_D_exchanges_host(args, 26);
   #endif
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[45].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[28].mpi_time += __t1-__t2;
   }
 
   #pragma omp parallel for
@@ -106,81 +227,525 @@ void ops_par_loop_opensbliblock00Kernel041_execute(ops_kernel_descriptor *desc) 
     #endif
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
       int idx[] = {arg_idx[0]+n_x, arg_idx[1]+n_y};
-      const ACC<double> T_B0(xdim0_opensbliblock00Kernel041, T_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel041*1);
-      ACC<double> wk13_B0(xdim1_opensbliblock00Kernel041, wk13_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel041*1);
+      const ACC<double> u1_B0(xdim0_opensbliblock00Kernel041, u1_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel041*1);
+      const ACC<double> SD111_B0(xdim1_opensbliblock00Kernel041, SD111_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel041*1);
+      const ACC<double> D01_B0(xdim2_opensbliblock00Kernel041, D01_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel041*1);
+      const ACC<double> wk0_B0(xdim3_opensbliblock00Kernel041, wk0_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel041*1);
+      const ACC<double> wk3_B0(xdim4_opensbliblock00Kernel041, wk3_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel041*1);
+      const ACC<double> u0_B0(xdim5_opensbliblock00Kernel041, u0_B0_p + n_x*1 + n_y * xdim5_opensbliblock00Kernel041*1);
+      const ACC<double> D10_B0(xdim6_opensbliblock00Kernel041, D10_B0_p + n_x*1 + n_y * xdim6_opensbliblock00Kernel041*1);
+      const ACC<double> D00_B0(xdim7_opensbliblock00Kernel041, D00_B0_p + n_x*1 + n_y * xdim7_opensbliblock00Kernel041*1);
+      const ACC<double> SD010_B0(xdim8_opensbliblock00Kernel041, SD010_B0_p + n_x*1 + n_y * xdim8_opensbliblock00Kernel041*1);
+      const ACC<double> wk2_B0(xdim9_opensbliblock00Kernel041, wk2_B0_p + n_x*1 + n_y * xdim9_opensbliblock00Kernel041*1);
+      const ACC<double> D11_B0(xdim10_opensbliblock00Kernel041, D11_B0_p + n_x*1 + n_y * xdim10_opensbliblock00Kernel041*1);
+      const ACC<double> wk1_B0(xdim11_opensbliblock00Kernel041, wk1_B0_p + n_x*1 + n_y * xdim11_opensbliblock00Kernel041*1);
+      const ACC<double> wk4_B0(xdim12_opensbliblock00Kernel041, wk4_B0_p + n_x*1 + n_y * xdim12_opensbliblock00Kernel041*1);
+      const ACC<double> SD110_B0(xdim13_opensbliblock00Kernel041, SD110_B0_p + n_x*1 + n_y * xdim13_opensbliblock00Kernel041*1);
+      const ACC<double> mu_B0(xdim14_opensbliblock00Kernel041, mu_B0_p + n_x*1 + n_y * xdim14_opensbliblock00Kernel041*1);
+      const ACC<double> SD101_B0(xdim15_opensbliblock00Kernel041, SD101_B0_p + n_x*1 + n_y * xdim15_opensbliblock00Kernel041*1);
+      const ACC<double> SD100_B0(xdim16_opensbliblock00Kernel041, SD100_B0_p + n_x*1 + n_y * xdim16_opensbliblock00Kernel041*1);
+      const ACC<double> SD001_B0(xdim17_opensbliblock00Kernel041, SD001_B0_p + n_x*1 + n_y * xdim17_opensbliblock00Kernel041*1);
+      const ACC<double> wk5_B0(xdim18_opensbliblock00Kernel041, wk5_B0_p + n_x*1 + n_y * xdim18_opensbliblock00Kernel041*1);
+      const ACC<double> SD011_B0(xdim19_opensbliblock00Kernel041, SD011_B0_p + n_x*1 + n_y * xdim19_opensbliblock00Kernel041*1);
+      const ACC<double> SD000_B0(xdim20_opensbliblock00Kernel041, SD000_B0_p + n_x*1 + n_y * xdim20_opensbliblock00Kernel041*1);
+      const ACC<double> T_B0(xdim21_opensbliblock00Kernel041, T_B0_p + n_x*1 + n_y * xdim21_opensbliblock00Kernel041*1);
+      ACC<double> Residual2_B0(xdim22_opensbliblock00Kernel041, Residual2_B0_p + n_x*1 + n_y * xdim22_opensbliblock00Kernel041*1);
+      ACC<double> Residual1_B0(xdim23_opensbliblock00Kernel041, Residual1_B0_p + n_x*1 + n_y * xdim23_opensbliblock00Kernel041*1);
+      ACC<double> Residual3_B0(xdim24_opensbliblock00Kernel041, Residual3_B0_p + n_x*1 + n_y * xdim24_opensbliblock00Kernel041*1);
       
-    wk13_B0(0,0) = inv_2*((idx[0] == 0) ? (
-   4*T_B0(1,0) - rc12*T_B0(0,0) +
-      (rc13)*T_B0(3,0) - 3*T_B0(2,0) - rc11*T_B0(4,0)
+   double localeval_1 = 0.0;
+   double localeval_5 = 0.0;
+   double localeval_8 = 0.0;
+   double localeval_0 = 0.0;
+   double localeval_9 = 0.0;
+   double localeval_7 = 0.0;
+   double localeval_4 = 0.0;
+   double localeval_2 = 0.0;
+   double localeval_6 = 0.0;
+   double localeval_3 = 0.0;
+   double localeval_10 = 0.0;
+    localeval_0 = ((idx[0] == 0) ? (
+   (rc14)*inv_2*(-56*T_B0(3,0) + 35*T_B0(0,0) -
+      104*T_B0(1,0) + 11*T_B0(4,0) + 114*T_B0(2,0))
 )
 : ((idx[0] == 1) ? (
 
-      (rc14)*T_B0(1,0) - rc15*T_B0(0,0) + (rc16)*T_B0(3,0) - rc7*T_B0(2,0) -
-      rc11*T_B0(-1,0)
+      (rc14)*inv_2*(-T_B0(3,0) - 20*T_B0(0,0) + 6*T_B0(1,0) + 11*T_B0(-1,0)
+      + 4*T_B0(2,0))
 )
 : ((idx[0] == block0np0 - 1) ? (
-   -rc13*T_B0(-3,0) +
-      (rc12)*T_B0(0,0) + (rc11)*T_B0(-4,0) - 4*T_B0(-1,0) + 3*T_B0(-2,0)
+   (rc14)*inv_2*(35*T_B0(0,0) -
+      104*T_B0(-1,0) + 114*T_B0(-2,0) + 11*T_B0(-4,0) - 56*T_B0(-3,0))
 )
 :
       ((idx[0] == block0np0 - 2) ? (
-   (rc11)*T_B0(1,0) - rc16*T_B0(-3,0) +
-      (rc15)*T_B0(0,0) + (rc7)*T_B0(-2,0) - rc14*T_B0(-1,0)
+   (rc14)*inv_2*(-20*T_B0(0,0) + 11*T_B0(1,0) +
+      4*T_B0(-2,0) + 6*T_B0(-1,0) - T_B0(-3,0))
 )
 : (
 
-      -rc16*T_B0(2,0) + (rc17)*T_B0(1,0) + (rc16)*T_B0(-2,0) -
-      rc17*T_B0(-1,0)
+      (rc14)*inv_2*(-30*T_B0(0,0) + 16*T_B0(1,0) - T_B0(-2,0) +
+      16*T_B0(-1,0) - T_B0(2,0))
 )))));
+
+    localeval_1 = ((idx[1] == 0) ? (
+   (rc14)*inv_3*(35*T_B0(0,0) + 11*T_B0(0,4) -
+      104*T_B0(0,1) + 114*T_B0(0,2) - 56*T_B0(0,3))
+)
+: ((idx[1] == 1) ? (
+
+      (rc14)*inv_3*(-20*T_B0(0,0) + 6*T_B0(0,1) + 11*T_B0(0,-1) +
+      4*T_B0(0,2) - T_B0(0,3))
+)
+: (
+   (rc14)*inv_3*(-30*T_B0(0,0) +
+      16*T_B0(0,1) - T_B0(0,-2) + 16*T_B0(0,-1) - T_B0(0,2))
+)));
+
+    localeval_2 = ((idx[1] == 0) ? (
+   inv_0*(-rc12*mu_B0(0,4) + (rc13)*mu_B0(0,3) -
+      3*mu_B0(0,2) + 4*mu_B0(0,1) - rc11*mu_B0(0,0))
+)
+: ((idx[1] == 1) ? (
+
+      (rc14)*inv_0*(mu_B0(0,3) - 3*mu_B0(0,-1) - 6*mu_B0(0,2) +
+      18*mu_B0(0,1) - 10*mu_B0(0,0))
+)
+: (
+   (rc14)*inv_0*(mu_B0(0,-2) -
+      8*mu_B0(0,-1) + 8*mu_B0(0,1) - mu_B0(0,2))
+)));
+
+    localeval_3 = ((idx[0] == 0) ? (
+   inv_1*((rc13)*mu_B0(3,0) - 3*mu_B0(2,0) -
+      rc12*mu_B0(4,0) + 4*mu_B0(1,0) - rc11*mu_B0(0,0))
+)
+: ((idx[0] == 1) ? (
+
+      (rc14)*inv_1*(mu_B0(3,0) - 3*mu_B0(-1,0) - 6*mu_B0(2,0) +
+      18*mu_B0(1,0) - 10*mu_B0(0,0))
+)
+: ((idx[0] == block0np0 - 1) ? (
+
+      inv_1*(3*mu_B0(-2,0) - 4*mu_B0(-1,0) - rc13*mu_B0(-3,0) +
+      (rc12)*mu_B0(-4,0) + (rc11)*mu_B0(0,0))
+)
+: ((idx[0] == block0np0 - 2) ? (
+
+      (rc14)*inv_1*(6*mu_B0(-2,0) - 18*mu_B0(-1,0) - mu_B0(-3,0) +
+      3*mu_B0(1,0) + 10*mu_B0(0,0))
+)
+: (
+   (rc14)*inv_1*(8*mu_B0(1,0) +
+      mu_B0(-2,0) - 8*mu_B0(-1,0) - mu_B0(2,0))
+)))));
+
+    localeval_4 = ((idx[1] == 0) ? (
+   (rc14)*inv_3*(35*u0_B0(0,0) + 11*u0_B0(0,4) -
+      56*u0_B0(0,3) + 114*u0_B0(0,2) - 104*u0_B0(0,1))
+)
+: ((idx[1] == 1) ? (
+
+      (rc14)*inv_3*(11*u0_B0(0,-1) - 20*u0_B0(0,0) - u0_B0(0,3) + 4*u0_B0(0,2) +
+      6*u0_B0(0,1))
+)
+: (
+   (rc14)*inv_3*(16*u0_B0(0,-1) - u0_B0(0,-2) -
+      30*u0_B0(0,0) - u0_B0(0,2) + 16*u0_B0(0,1))
+)));
+
+    localeval_5 = ((idx[0] == 0) ? (
+   (rc14)*inv_2*(-104*u0_B0(1,0) + 35*u0_B0(0,0) -
+      56*u0_B0(3,0) + 11*u0_B0(4,0) + 114*u0_B0(2,0))
+)
+: ((idx[0] == 1) ? (
+
+      (rc14)*inv_2*(6*u0_B0(1,0) - 20*u0_B0(0,0) - u0_B0(3,0) + 11*u0_B0(-1,0) +
+      4*u0_B0(2,0))
+)
+: ((idx[0] == block0np0 - 1) ? (
+   (rc14)*inv_2*(11*u0_B0(-4,0) +
+      35*u0_B0(0,0) + 114*u0_B0(-2,0) - 104*u0_B0(-1,0) - 56*u0_B0(-3,0))
+)
+:
+      ((idx[0] == block0np0 - 2) ? (
+   (rc14)*inv_2*(11*u0_B0(1,0) - 20*u0_B0(0,0) +
+      6*u0_B0(-1,0) + 4*u0_B0(-2,0) - u0_B0(-3,0))
+)
+: (
+
+      (rc14)*inv_2*(16*u0_B0(1,0) - 30*u0_B0(0,0) + 16*u0_B0(-1,0) - u0_B0(-2,0)
+      - u0_B0(2,0))
+)))));
+
+    localeval_6 = ((idx[0] == 0) ? (
+   (rc14)*inv_2*(11*u1_B0(4,0) + 35*u1_B0(0,0) -
+      104*u1_B0(1,0) + 114*u1_B0(2,0) - 56*u1_B0(3,0))
+)
+: ((idx[0] == 1) ? (
+
+      (rc14)*inv_2*(11*u1_B0(-1,0) - 20*u1_B0(0,0) + 6*u1_B0(1,0) + 4*u1_B0(2,0)
+      - u1_B0(3,0))
+)
+: ((idx[0] == block0np0 - 1) ? (
+   (rc14)*inv_2*(-56*u1_B0(-3,0) -
+      104*u1_B0(-1,0) + 114*u1_B0(-2,0) + 35*u1_B0(0,0) + 11*u1_B0(-4,0))
+)
+:
+      ((idx[0] == block0np0 - 2) ? (
+   (rc14)*inv_2*(-u1_B0(-3,0) + 4*u1_B0(-2,0) +
+      6*u1_B0(-1,0) - 20*u1_B0(0,0) + 11*u1_B0(1,0))
+)
+: (
+
+      (rc14)*inv_2*(-u1_B0(-2,0) + 16*u1_B0(-1,0) - 30*u1_B0(0,0) +
+      16*u1_B0(1,0) - u1_B0(2,0))
+)))));
+
+    localeval_7 = ((idx[1] == 0) ? (
+   (rc14)*inv_3*(114*u1_B0(0,2) - 56*u1_B0(0,3) +
+      11*u1_B0(0,4) + 35*u1_B0(0,0) - 104*u1_B0(0,1))
+)
+: ((idx[1] == 1) ? (
+
+      (rc14)*inv_3*(4*u1_B0(0,2) + 11*u1_B0(0,-1) - u1_B0(0,3) - 20*u1_B0(0,0) +
+      6*u1_B0(0,1))
+)
+: (
+   (rc14)*inv_3*(-u1_B0(0,2) - u1_B0(0,-2) +
+      16*u1_B0(0,-1) - 30*u1_B0(0,0) + 16*u1_B0(0,1))
+)));
+
+    localeval_8 = ((idx[1] == 0) ? (
+   inv_0*(-rc11*wk1_B0(0,0) + (rc13)*wk1_B0(0,3) -
+      3*wk1_B0(0,2) + 4*wk1_B0(0,1) - rc12*wk1_B0(0,4))
+)
+: ((idx[1] == 1) ? (
+
+      (rc14)*inv_0*(-10*wk1_B0(0,0) - 3*wk1_B0(0,-1) + wk1_B0(0,3) -
+      6*wk1_B0(0,2) + 18*wk1_B0(0,1))
+)
+: (
+   (rc14)*inv_0*(8*wk1_B0(0,1) -
+      wk1_B0(0,2) + wk1_B0(0,-2) - 8*wk1_B0(0,-1))
+)));
+
+    localeval_9 = ((idx[1] == 0) ? (
+   inv_0*(-rc11*wk3_B0(0,0) + 4*wk3_B0(0,1) -
+      3*wk3_B0(0,2) + (rc13)*wk3_B0(0,3) - rc12*wk3_B0(0,4))
+)
+: ((idx[1] == 1) ? (
+
+      (rc14)*inv_0*(-10*wk3_B0(0,0) + 18*wk3_B0(0,1) - 6*wk3_B0(0,2) -
+      3*wk3_B0(0,-1) + wk3_B0(0,3))
+)
+: (
+   (rc14)*inv_0*(-wk3_B0(0,2) +
+      8*wk3_B0(0,1) - 8*wk3_B0(0,-1) + wk3_B0(0,-2))
+)));
+
+    localeval_10 = ((idx[1] == 0) ? (
+   inv_0*(-3*wk5_B0(0,2) + (rc13)*wk5_B0(0,3) -
+      rc12*wk5_B0(0,4) - rc11*wk5_B0(0,0) + 4*wk5_B0(0,1))
+)
+: ((idx[1] == 1) ? (
+
+      (rc14)*inv_0*(-6*wk5_B0(0,2) - 3*wk5_B0(0,-1) + wk5_B0(0,3) -
+      10*wk5_B0(0,0) + 18*wk5_B0(0,1))
+)
+: (
+   (rc14)*inv_0*(-wk5_B0(0,2) +
+      wk5_B0(0,-2) + 8*wk5_B0(0,1) - 8*wk5_B0(0,-1))
+)));
+
+    Residual1_B0(0,0) = rcinv35*(localeval_2*D10_B0(0,0) +
+      localeval_3*D00_B0(0,0))*((rc13)*D00_B0(0,0)*wk1_B0(0,0) -
+      rc24*D01_B0(0,0)*wk3_B0(0,0) + (rc13)*D10_B0(0,0)*wk0_B0(0,0) -
+      rc24*D11_B0(0,0)*wk2_B0(0,0)) + rcinv35*(localeval_2*D11_B0(0,0) +
+      localeval_3*D01_B0(0,0))*(D00_B0(0,0)*wk3_B0(0,0) +
+      D01_B0(0,0)*wk1_B0(0,0) + D10_B0(0,0)*wk2_B0(0,0) +
+      D11_B0(0,0)*wk0_B0(0,0)) + rcinv35*((rc13)*localeval_4*pow(D10_B0(0,0), 2) +
+      localeval_4*pow(D11_B0(0,0), 2) + (rc13)*localeval_5*pow(D00_B0(0,0), 2) +
+      localeval_5*pow(D01_B0(0,0), 2) + (rc23)*localeval_6*D00_B0(0,0)*D01_B0(0,0) +
+      (rc23)*localeval_7*D10_B0(0,0)*D11_B0(0,0) +
+      (rc36)*localeval_8*D00_B0(0,0)*D10_B0(0,0) +
+      2*localeval_8*D01_B0(0,0)*D11_B0(0,0) +
+      (rc23)*localeval_9*D00_B0(0,0)*D11_B0(0,0) +
+      (rc23)*localeval_9*D01_B0(0,0)*D10_B0(0,0) +
+      (rc13)*D00_B0(0,0)*SD000_B0(0,0)*wk1_B0(0,0) -
+      rc24*D00_B0(0,0)*SD010_B0(0,0)*wk3_B0(0,0) +
+      (rc13)*D00_B0(0,0)*SD100_B0(0,0)*wk0_B0(0,0) -
+      rc24*D00_B0(0,0)*SD110_B0(0,0)*wk2_B0(0,0) +
+      D01_B0(0,0)*SD000_B0(0,0)*wk3_B0(0,0) +
+      D01_B0(0,0)*SD010_B0(0,0)*wk1_B0(0,0) +
+      D01_B0(0,0)*SD100_B0(0,0)*wk2_B0(0,0) +
+      D01_B0(0,0)*SD110_B0(0,0)*wk0_B0(0,0) +
+      (rc13)*D10_B0(0,0)*SD001_B0(0,0)*wk1_B0(0,0) -
+      rc24*D10_B0(0,0)*SD011_B0(0,0)*wk3_B0(0,0) +
+      (rc13)*D10_B0(0,0)*SD101_B0(0,0)*wk0_B0(0,0) -
+      rc24*D10_B0(0,0)*SD111_B0(0,0)*wk2_B0(0,0) +
+      D11_B0(0,0)*SD001_B0(0,0)*wk3_B0(0,0) +
+      D11_B0(0,0)*SD011_B0(0,0)*wk1_B0(0,0) +
+      D11_B0(0,0)*SD101_B0(0,0)*wk2_B0(0,0) +
+      D11_B0(0,0)*SD111_B0(0,0)*wk0_B0(0,0))*mu_B0(0,0) +
+      Residual1_B0(0,0);
+
+    Residual2_B0(0,0) = rcinv35*(localeval_2*D10_B0(0,0) +
+      localeval_3*D00_B0(0,0))*(D00_B0(0,0)*wk3_B0(0,0) +
+      D01_B0(0,0)*wk1_B0(0,0) + D10_B0(0,0)*wk2_B0(0,0) +
+      D11_B0(0,0)*wk0_B0(0,0)) + rcinv35*(localeval_2*D11_B0(0,0) +
+      localeval_3*D01_B0(0,0))*(-rc24*D00_B0(0,0)*wk1_B0(0,0) +
+      (rc13)*D01_B0(0,0)*wk3_B0(0,0) - rc24*D10_B0(0,0)*wk0_B0(0,0) +
+      (rc13)*D11_B0(0,0)*wk2_B0(0,0)) +
+      rcinv35*((rc23)*localeval_4*D10_B0(0,0)*D11_B0(0,0) +
+      (rc23)*localeval_5*D00_B0(0,0)*D01_B0(0,0) + localeval_6*pow(D00_B0(0,0), 2) +
+      (rc13)*localeval_6*pow(D01_B0(0,0), 2) + localeval_7*pow(D10_B0(0,0), 2) +
+      (rc13)*localeval_7*pow(D11_B0(0,0), 2) +
+      (rc23)*localeval_8*D00_B0(0,0)*D11_B0(0,0) +
+      (rc23)*localeval_8*D01_B0(0,0)*D10_B0(0,0) +
+      2*localeval_9*D00_B0(0,0)*D10_B0(0,0) +
+      (rc36)*localeval_9*D01_B0(0,0)*D11_B0(0,0) +
+      D00_B0(0,0)*SD000_B0(0,0)*wk3_B0(0,0) +
+      D00_B0(0,0)*SD010_B0(0,0)*wk1_B0(0,0) +
+      D00_B0(0,0)*SD100_B0(0,0)*wk2_B0(0,0) +
+      D00_B0(0,0)*SD110_B0(0,0)*wk0_B0(0,0) -
+      rc24*D01_B0(0,0)*SD000_B0(0,0)*wk1_B0(0,0) +
+      (rc13)*D01_B0(0,0)*SD010_B0(0,0)*wk3_B0(0,0) -
+      rc24*D01_B0(0,0)*SD100_B0(0,0)*wk0_B0(0,0) +
+      (rc13)*D01_B0(0,0)*SD110_B0(0,0)*wk2_B0(0,0) +
+      D10_B0(0,0)*SD001_B0(0,0)*wk3_B0(0,0) +
+      D10_B0(0,0)*SD011_B0(0,0)*wk1_B0(0,0) +
+      D10_B0(0,0)*SD101_B0(0,0)*wk2_B0(0,0) +
+      D10_B0(0,0)*SD111_B0(0,0)*wk0_B0(0,0) -
+      rc24*D11_B0(0,0)*SD001_B0(0,0)*wk1_B0(0,0) +
+      (rc13)*D11_B0(0,0)*SD011_B0(0,0)*wk3_B0(0,0) -
+      rc24*D11_B0(0,0)*SD101_B0(0,0)*wk0_B0(0,0) +
+      (rc13)*D11_B0(0,0)*SD111_B0(0,0)*wk2_B0(0,0))*mu_B0(0,0) +
+      Residual2_B0(0,0);
+
+    Residual3_B0(0,0) = rcinv10*rcinv35*rcinv37*rcinv8*(localeval_2*D10_B0(0,0) +
+      localeval_3*D00_B0(0,0))*(D00_B0(0,0)*wk5_B0(0,0) +
+      D10_B0(0,0)*wk4_B0(0,0)) + rcinv10*rcinv35*rcinv37*rcinv8*(localeval_2*D11_B0(0,0)
+      + localeval_3*D01_B0(0,0))*(D01_B0(0,0)*wk5_B0(0,0) +
+      D11_B0(0,0)*wk4_B0(0,0)) +
+      rcinv10*rcinv35*rcinv37*rcinv8*(localeval_0*pow(D00_B0(0,0), 2) + localeval_0*pow(D01_B0(0,0),
+      2) + localeval_1*pow(D10_B0(0,0), 2) + localeval_1*pow(D11_B0(0,0), 2) +
+      2*localeval_10*D00_B0(0,0)*D10_B0(0,0) +
+      2*localeval_10*D01_B0(0,0)*D11_B0(0,0) +
+      D00_B0(0,0)*SD000_B0(0,0)*wk5_B0(0,0) +
+      D00_B0(0,0)*SD100_B0(0,0)*wk4_B0(0,0) +
+      D01_B0(0,0)*SD010_B0(0,0)*wk5_B0(0,0) +
+      D01_B0(0,0)*SD110_B0(0,0)*wk4_B0(0,0) +
+      D10_B0(0,0)*SD001_B0(0,0)*wk5_B0(0,0) +
+      D10_B0(0,0)*SD101_B0(0,0)*wk4_B0(0,0) +
+      D11_B0(0,0)*SD011_B0(0,0)*wk5_B0(0,0) +
+      D11_B0(0,0)*SD111_B0(0,0)*wk4_B0(0,0))*mu_B0(0,0) +
+      rcinv35*(localeval_2*D10_B0(0,0) +
+      localeval_3*D00_B0(0,0))*((rc13)*D00_B0(0,0)*wk1_B0(0,0) -
+      rc24*D01_B0(0,0)*wk3_B0(0,0) + (rc13)*D10_B0(0,0)*wk0_B0(0,0) -
+      rc24*D11_B0(0,0)*wk2_B0(0,0))*u0_B0(0,0) +
+      rcinv35*(localeval_2*D10_B0(0,0) +
+      localeval_3*D00_B0(0,0))*(D00_B0(0,0)*wk3_B0(0,0) +
+      D01_B0(0,0)*wk1_B0(0,0) + D10_B0(0,0)*wk2_B0(0,0) +
+      D11_B0(0,0)*wk0_B0(0,0))*u1_B0(0,0) + rcinv35*(localeval_2*D11_B0(0,0) +
+      localeval_3*D01_B0(0,0))*(-rc24*D00_B0(0,0)*wk1_B0(0,0) +
+      (rc13)*D01_B0(0,0)*wk3_B0(0,0) - rc24*D10_B0(0,0)*wk0_B0(0,0) +
+      (rc13)*D11_B0(0,0)*wk2_B0(0,0))*u1_B0(0,0) +
+      rcinv35*(localeval_2*D11_B0(0,0) +
+      localeval_3*D01_B0(0,0))*(D00_B0(0,0)*wk3_B0(0,0) +
+      D01_B0(0,0)*wk1_B0(0,0) + D10_B0(0,0)*wk2_B0(0,0) +
+      D11_B0(0,0)*wk0_B0(0,0))*u0_B0(0,0) +
+      rcinv35*(D00_B0(0,0)*wk1_B0(0,0) +
+      D10_B0(0,0)*wk0_B0(0,0))*((rc13)*D00_B0(0,0)*wk1_B0(0,0) -
+      rc24*D01_B0(0,0)*wk3_B0(0,0) + (rc13)*D10_B0(0,0)*wk0_B0(0,0) -
+      rc24*D11_B0(0,0)*wk2_B0(0,0))*mu_B0(0,0) +
+      rcinv35*(D00_B0(0,0)*wk3_B0(0,0) +
+      D10_B0(0,0)*wk2_B0(0,0))*(D00_B0(0,0)*wk3_B0(0,0) +
+      D01_B0(0,0)*wk1_B0(0,0) + D10_B0(0,0)*wk2_B0(0,0) +
+      D11_B0(0,0)*wk0_B0(0,0))*mu_B0(0,0) +
+      rcinv35*(D01_B0(0,0)*wk1_B0(0,0) +
+      D11_B0(0,0)*wk0_B0(0,0))*(D00_B0(0,0)*wk3_B0(0,0) +
+      D01_B0(0,0)*wk1_B0(0,0) + D10_B0(0,0)*wk2_B0(0,0) +
+      D11_B0(0,0)*wk0_B0(0,0))*mu_B0(0,0) +
+      rcinv35*(D01_B0(0,0)*wk3_B0(0,0) +
+      D11_B0(0,0)*wk2_B0(0,0))*(-rc24*D00_B0(0,0)*wk1_B0(0,0) +
+      (rc13)*D01_B0(0,0)*wk3_B0(0,0) - rc24*D10_B0(0,0)*wk0_B0(0,0) +
+      (rc13)*D11_B0(0,0)*wk2_B0(0,0))*mu_B0(0,0) +
+      rcinv35*((rc13)*localeval_4*pow(D10_B0(0,0), 2) + localeval_4*pow(D11_B0(0,0), 2) +
+      (rc13)*localeval_5*pow(D00_B0(0,0), 2) + localeval_5*pow(D01_B0(0,0), 2) +
+      (rc23)*localeval_6*D00_B0(0,0)*D01_B0(0,0) +
+      (rc23)*localeval_7*D10_B0(0,0)*D11_B0(0,0) +
+      (rc36)*localeval_8*D00_B0(0,0)*D10_B0(0,0) +
+      2*localeval_8*D01_B0(0,0)*D11_B0(0,0) +
+      (rc23)*localeval_9*D00_B0(0,0)*D11_B0(0,0) +
+      (rc23)*localeval_9*D01_B0(0,0)*D10_B0(0,0) +
+      (rc13)*D00_B0(0,0)*SD000_B0(0,0)*wk1_B0(0,0) -
+      rc24*D00_B0(0,0)*SD010_B0(0,0)*wk3_B0(0,0) +
+      (rc13)*D00_B0(0,0)*SD100_B0(0,0)*wk0_B0(0,0) -
+      rc24*D00_B0(0,0)*SD110_B0(0,0)*wk2_B0(0,0) +
+      D01_B0(0,0)*SD000_B0(0,0)*wk3_B0(0,0) +
+      D01_B0(0,0)*SD010_B0(0,0)*wk1_B0(0,0) +
+      D01_B0(0,0)*SD100_B0(0,0)*wk2_B0(0,0) +
+      D01_B0(0,0)*SD110_B0(0,0)*wk0_B0(0,0) +
+      (rc13)*D10_B0(0,0)*SD001_B0(0,0)*wk1_B0(0,0) -
+      rc24*D10_B0(0,0)*SD011_B0(0,0)*wk3_B0(0,0) +
+      (rc13)*D10_B0(0,0)*SD101_B0(0,0)*wk0_B0(0,0) -
+      rc24*D10_B0(0,0)*SD111_B0(0,0)*wk2_B0(0,0) +
+      D11_B0(0,0)*SD001_B0(0,0)*wk3_B0(0,0) +
+      D11_B0(0,0)*SD011_B0(0,0)*wk1_B0(0,0) +
+      D11_B0(0,0)*SD101_B0(0,0)*wk2_B0(0,0) +
+      D11_B0(0,0)*SD111_B0(0,0)*wk0_B0(0,0))*mu_B0(0,0)*u0_B0(0,0) +
+      rcinv35*((rc23)*localeval_4*D10_B0(0,0)*D11_B0(0,0) +
+      (rc23)*localeval_5*D00_B0(0,0)*D01_B0(0,0) + localeval_6*pow(D00_B0(0,0), 2) +
+      (rc13)*localeval_6*pow(D01_B0(0,0), 2) + localeval_7*pow(D10_B0(0,0), 2) +
+      (rc13)*localeval_7*pow(D11_B0(0,0), 2) +
+      (rc23)*localeval_8*D00_B0(0,0)*D11_B0(0,0) +
+      (rc23)*localeval_8*D01_B0(0,0)*D10_B0(0,0) +
+      2*localeval_9*D00_B0(0,0)*D10_B0(0,0) +
+      (rc36)*localeval_9*D01_B0(0,0)*D11_B0(0,0) +
+      D00_B0(0,0)*SD000_B0(0,0)*wk3_B0(0,0) +
+      D00_B0(0,0)*SD010_B0(0,0)*wk1_B0(0,0) +
+      D00_B0(0,0)*SD100_B0(0,0)*wk2_B0(0,0) +
+      D00_B0(0,0)*SD110_B0(0,0)*wk0_B0(0,0) -
+      rc24*D01_B0(0,0)*SD000_B0(0,0)*wk1_B0(0,0) +
+      (rc13)*D01_B0(0,0)*SD010_B0(0,0)*wk3_B0(0,0) -
+      rc24*D01_B0(0,0)*SD100_B0(0,0)*wk0_B0(0,0) +
+      (rc13)*D01_B0(0,0)*SD110_B0(0,0)*wk2_B0(0,0) +
+      D10_B0(0,0)*SD001_B0(0,0)*wk3_B0(0,0) +
+      D10_B0(0,0)*SD011_B0(0,0)*wk1_B0(0,0) +
+      D10_B0(0,0)*SD101_B0(0,0)*wk2_B0(0,0) +
+      D10_B0(0,0)*SD111_B0(0,0)*wk0_B0(0,0) -
+      rc24*D11_B0(0,0)*SD001_B0(0,0)*wk1_B0(0,0) +
+      (rc13)*D11_B0(0,0)*SD011_B0(0,0)*wk3_B0(0,0) -
+      rc24*D11_B0(0,0)*SD101_B0(0,0)*wk0_B0(0,0) +
+      (rc13)*D11_B0(0,0)*SD111_B0(0,0)*wk2_B0(0,0))*mu_B0(0,0)*u1_B0(0,0)
+      + Residual3_B0(0,0);
 
 
     }
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[45].time += __t2-__t1;
+    block->instance->OPS_kernels[28].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
-  ops_set_dirtybit_host(args, 3);
-  ops_set_halo_dirtybit3(&args[1],range);
+  ops_set_dirtybit_host(args, 26);
+  ops_set_halo_dirtybit3(&args[22],range);
+  ops_set_halo_dirtybit3(&args[23],range);
+  ops_set_halo_dirtybit3(&args[24],range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[45].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[45].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[45].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[28].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg5);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg6);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg7);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg8);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg9);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg10);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg11);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg12);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg13);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg14);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg15);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg16);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg17);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg18);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg19);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg20);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg21);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg22);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg23);
+    block->instance->OPS_kernels[28].transfer += ops_compute_transfer(dim, start, end, &arg24);
   }
 }
 
 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel041(char const *name, ops_block block, int dim, int* range,
- ops_arg arg0, ops_arg arg1, ops_arg arg2) {
+ ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
+ ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
+ ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
+ ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
+ ops_arg arg16, ops_arg arg17, ops_arg arg18, ops_arg arg19,
+ ops_arg arg20, ops_arg arg21, ops_arg arg22, ops_arg arg23,
+ ops_arg arg24, ops_arg arg25) {
   ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
   desc->name = name;
   desc->block = block;
   desc->dim = dim;
   desc->device = 0;
-  desc->index = 45;
+  desc->index = 28;
   desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 45;
+  desc->hash = ((desc->hash << 5) + desc->hash) + 28;
   for ( int i=0; i<4; i++ ){
     desc->range[i] = range[i];
     desc->orig_range[i] = range[i];
     desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
   }
-  desc->nargs = 3;
-  desc->args = (ops_arg*)ops_malloc(3*sizeof(ops_arg));
+  desc->nargs = 26;
+  desc->args = (ops_arg*)ops_malloc(26*sizeof(ops_arg));
   desc->args[0] = arg0;
   desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
   desc->args[1] = arg1;
   desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
   desc->args[2] = arg2;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg2.dat->index;
+  desc->args[3] = arg3;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg3.dat->index;
+  desc->args[4] = arg4;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg4.dat->index;
+  desc->args[5] = arg5;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg5.dat->index;
+  desc->args[6] = arg6;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg6.dat->index;
+  desc->args[7] = arg7;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg7.dat->index;
+  desc->args[8] = arg8;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg8.dat->index;
+  desc->args[9] = arg9;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg9.dat->index;
+  desc->args[10] = arg10;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg10.dat->index;
+  desc->args[11] = arg11;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg11.dat->index;
+  desc->args[12] = arg12;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg12.dat->index;
+  desc->args[13] = arg13;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg13.dat->index;
+  desc->args[14] = arg14;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg14.dat->index;
+  desc->args[15] = arg15;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg15.dat->index;
+  desc->args[16] = arg16;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg16.dat->index;
+  desc->args[17] = arg17;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg17.dat->index;
+  desc->args[18] = arg18;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg18.dat->index;
+  desc->args[19] = arg19;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg19.dat->index;
+  desc->args[20] = arg20;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg20.dat->index;
+  desc->args[21] = arg21;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg21.dat->index;
+  desc->args[22] = arg22;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg22.dat->index;
+  desc->args[23] = arg23;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg23.dat->index;
+  desc->args[24] = arg24;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg24.dat->index;
+  desc->args[25] = arg25;
   desc->function = ops_par_loop_opensbliblock00Kernel041_execute;
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,45,"opensbliblock00Kernel041");
+    ops_timing_realloc(block->instance,28,"opensbliblock00Kernel041");
   }
   ops_enqueue_kernel(desc);
 }

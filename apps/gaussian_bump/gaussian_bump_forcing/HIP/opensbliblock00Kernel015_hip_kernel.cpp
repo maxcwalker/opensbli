@@ -8,9 +8,9 @@ static int dims_opensbliblock00Kernel015_h [5][1] = {{0}};
 __device__
 
  void opensbliblock00Kernel015_gpu(const ACC<double> &u1_B0,
+  const ACC<double> &D11_B0,
   const ACC<double> &u0_B0,
   const ACC<double> &D10_B0,
-  const ACC<double> &D11_B0,
   ACC<double> &U1_B0)
 {
    U1_B0(0,0) = D10_B0(0,0)*u0_B0(0,0) + D11_B0(0,0)*u1_B0(0,0);
@@ -79,12 +79,12 @@ void ops_par_loop_opensbliblock00Kernel015_execute(ops_kernel_descriptor *desc) 
 
 
   #if CHECKPOINTING && !OPS_LAZY
-  if (!ops_checkpointing_before(args,5,range,27)) return;
+  if (!ops_checkpointing_before(args,5,range,15)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,27,"opensbliblock00Kernel015");
-    block->instance->OPS_kernels[27].count++;
+    ops_timing_realloc(block->instance,15,"opensbliblock00Kernel015");
+    block->instance->OPS_kernels[15].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -182,7 +182,7 @@ void ops_par_loop_opensbliblock00Kernel015_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[27].mpi_time += t2-t1;
+    block->instance->OPS_kernels[15].mpi_time += t2-t1;
   }
 
 
@@ -197,7 +197,7 @@ void ops_par_loop_opensbliblock00Kernel015_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags>1) {
     hipSafeCall(block->instance->ostream(), hipDeviceSynchronize());
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[27].time += t1-t2;
+    block->instance->OPS_kernels[15].time += t1-t2;
   }
 
   #ifndef OPS_LAZY
@@ -208,12 +208,12 @@ void ops_par_loop_opensbliblock00Kernel015_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[27].mpi_time += t2-t1;
-    block->instance->OPS_kernels[27].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[27].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[27].transfer += ops_compute_transfer(dim, start, end, &arg2);
-    block->instance->OPS_kernels[27].transfer += ops_compute_transfer(dim, start, end, &arg3);
-    block->instance->OPS_kernels[27].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[15].mpi_time += t2-t1;
+    block->instance->OPS_kernels[15].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[15].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[15].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[15].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[15].transfer += ops_compute_transfer(dim, start, end, &arg4);
   }
 }
 
@@ -225,9 +225,9 @@ void ops_par_loop_opensbliblock00Kernel015(char const *name, ops_block block, in
   desc->block = block;
   desc->dim = dim;
   desc->device = 1;
-  desc->index = 27;
+  desc->index = 15;
   desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 27;
+  desc->hash = ((desc->hash << 5) + desc->hash) + 15;
   for ( int i=0; i<4; i++ ){
     desc->range[i] = range[i];
     desc->orig_range[i] = range[i];
@@ -247,7 +247,7 @@ void ops_par_loop_opensbliblock00Kernel015(char const *name, ops_block block, in
   desc->hash = ((desc->hash << 5) + desc->hash) + arg4.dat->index;
   desc->function = ops_par_loop_opensbliblock00Kernel015_execute;
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,27,"opensbliblock00Kernel015");
+    ops_timing_realloc(block->instance,15,"opensbliblock00Kernel015");
   }
   ops_enqueue_kernel(desc);
 }

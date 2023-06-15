@@ -13,9 +13,9 @@ int xdim4_opensbliblock00Kernel015;
 //user function
 inline 
  void opensbliblock00Kernel015(const ptr_double u1_B0,
+  const ptr_double D11_B0,
   const ptr_double u0_B0,
   const ptr_double D10_B0,
-  const ptr_double D11_B0,
   ptr_double U1_B0)
 {
    OPS_ACC(U1_B0, 0,0) = OPS_ACC(D10_B0, 0,0)*OPS_ACC(u0_B0, 0,0) + OPS_ACC(D11_B0, 0,0)*OPS_ACC(u1_B0, 0,0);
