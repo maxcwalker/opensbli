@@ -6,7 +6,7 @@ import os.path
 import matplotlib.cm as cm
 import os
 
-plt.style.use('classic')
+# plt.style.use('classic')
 
 fname = 'opensbli_output.h5'
 

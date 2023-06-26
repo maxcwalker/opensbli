@@ -6,9 +6,9 @@ import os.path
 import matplotlib.cm as cm
 import os
 
-plt.style.use('classic')
+# plt.style.use('classic')
 
-fname = 'opensbli_output_082500.h5'
+fname = 'opensbli_output.h5'
 
 def read_file(fname):
     f = h5py.File(fname, 'r')
@@ -57,13 +57,13 @@ plt.xlabel('x')
 plt.ylabel('v')
 plt.title('v velocity along the wall')
 plt.savefig('v_vel_along_wall.pdf')
-levelsT = 100 #np.linspace(min(T),max(T),1000)
-levelsP = 100 #np.linspace(min(P),max(P),1000)
-levelsU = 100 #np.linspace(0,max(u),1000)
+levelsT = 25 #np.linspace(min(T),max(T),1000)
+levelsP = 25 #np.linspace(min(P),max(P),1000)
+levelsU = 25 #np.linspace(0,max(u),1000)
 
 fig, (ax1,ax2, ax3) = plt.subplots(3,1)
 fig.set_size_inches(18.5, 10.5)
-T = ax1.contourf(x, y, T, levels = levelsT, cmap=cm.jet ) 
+T = ax1.contourf(x, y, T, levels = levelsT) 
 ax1.set_title("Contours for flow over a Gaussian bump")
 plt.xlabel('x')
 ax1.set_ylabel("y")
@@ -85,6 +85,15 @@ plt.style.use('classic')
 plt.savefig('Gaussian_bump_contours.pdf')
 
 
-# fig, ab = plt.subplots(1,1)
-# ab.scatter(x,y)
+
+fig2, b1 = plt.subplots(1,1)
+x = b1.contourf(x, y, u, levels= numpy.linspace(-0.2,0.05,40), cmap=cm.jet) 
+b1.set_title("u velocity contours to show the regions of separation")
+plt.xlabel('x')
+b1.set_ylabel("y")
+ubar = plt.colorbar(x, ax=b1)
+ubar.set_label("u velocity [$ms^1$]" ) #rotation= 270
+
+
+
 plt.show()
