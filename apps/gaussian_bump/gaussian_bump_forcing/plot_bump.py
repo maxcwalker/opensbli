@@ -39,6 +39,8 @@ Ly = 115.0
 Lx = 400.0
 scale = 2.31669259
 
+
+D11 = read_dataset(group1, "D11_B0")
 x = read_dataset(group1, "x0_B0")
 y = read_dataset(group1, "x1_B0")
 rho = read_dataset(group1, "rho_B0")
@@ -63,7 +65,7 @@ levelsU = 25 #np.linspace(0,max(u),1000)
 
 fig, (ax1,ax2, ax3) = plt.subplots(3,1)
 fig.set_size_inches(18.5, 10.5)
-T = ax1.contourf(x, y, T, levels = levelsT) 
+T = ax1.contourf(x, y, D11, levels = levelsT) 
 ax1.set_title("Contours for flow over a Gaussian bump")
 plt.xlabel('x')
 ax1.set_ylabel("y")

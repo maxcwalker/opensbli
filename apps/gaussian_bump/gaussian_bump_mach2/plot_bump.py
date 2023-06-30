@@ -8,7 +8,7 @@ import os
 
 # plt.style.use('classic')
 
-fname = 'opensbli_output.h5'
+fname = 'outputs/opensbli_output_905000.h5'
 
 def read_file(fname):
     f = h5py.File(fname, 'r')
@@ -59,7 +59,7 @@ plt.title('v velocity along the wall')
 plt.savefig('v_vel_along_wall.pdf')
 
 
-levels = 25
+levels = 100
 
 
 fig, (ax1,ax2, ax3) = plt.subplots(3,1)
@@ -100,7 +100,7 @@ plt.savefig('shock_patern_contours.pdf')
 # ubar.set_label("u velocity [$ms^1$]" ) #rotation= 270
 
 fig3, c1 = plt.subplots(1,1)
-z = c1.contourf(x, y, rho, levels =25, cmap=cm.jet) 
+z = c1.contourf(x, y, rho, levels =100, cmap=cm.jet) 
 c1.set_title("density")
 plt.xlabel('x')
 c1.set_ylabel("y")
@@ -108,6 +108,7 @@ ubar = plt.colorbar(z, ax=c1)
 c1.set_aspect(1)
 # b1.set_ylim([0,15])
 ubar.set_label("density [kg/m$^3$]" ) #rotation= 270
+plt.savefig('density_contours.pdf')
 
 
 
