@@ -156,6 +156,7 @@ if(__name__ == "__main__"):
         if os.path.isfile(os.path.join(dir_path, path)):
             h5files.append(path)
 
+    # h5files = sorted(h5files)
 
     timeseries = [s.replace('opensbli_output_', '') for s in h5files]
     timeseries = [s.replace('.h5', '') for s in timeseries]
@@ -165,8 +166,9 @@ if(__name__ == "__main__"):
     
     # os.remove(read)
 
+    h5files = [i for _,i in sorted(zip(timeseries,h5files))]
+    timeseries = sorted(timeseries)
     # print(timeseries)
-
     for i in range(0,len(timeseries)):
 
         it = timeseries[i]
