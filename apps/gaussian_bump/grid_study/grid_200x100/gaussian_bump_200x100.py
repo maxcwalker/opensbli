@@ -166,7 +166,6 @@ schemes[rk.name] = rk
 block = SimulationBlock(ndim, block_number=0)
 block.set_discretisation_schemes(schemes)
 
-
 local_dict = {"block": block, "GridVariable": GridVariable, "DataObject": DataObject}
 x_loc = parse_expr("Eq(GridVariable(x0), block.deltas[0]*block.grid_indexes[0])", local_dict=local_dict)
 
@@ -200,7 +199,6 @@ direction = 1
 side = 1
 
 boundaries[direction][side] = ZeroGradientOutletBC(1, 1)
-
 block.set_block_boundaries(boundaries)
 
 # Monitor points
