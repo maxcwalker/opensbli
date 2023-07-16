@@ -1,4 +1,5 @@
 import numpy
+import numpy as np
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.pyplot as plt
 import h5py
@@ -8,7 +9,7 @@ import os
 
 # plt.style.use('classic')
 
-fname = 'outputs/opensbli_output_905000.h5'
+fname = 'opensbli_output.h5'
 
 def read_file(fname):
     f = h5py.File(fname, 'r')
@@ -59,36 +60,36 @@ plt.title('v velocity along the wall')
 plt.savefig('v_vel_along_wall.pdf')
 
 
-levels = 100
+# levels = 25
 
 
-fig, (ax1,ax2, ax3) = plt.subplots(3,1)
-fig.set_size_inches(18.5, 10.5)
-T = ax1.contourf(x, y, T, levels = levels,  cmap=cm.jet) 
-ax1.set_title("Contours for flow over a Gaussian bump")
-plt.xlabel('x')
-ax1.set_aspect(1)
-ax1.set_ylabel("y")
-tbar = plt.colorbar(T, ax=ax1)
-tbar.set_label("Temperature [$^{\circ}$C]" ) #rotation= 270
+# fig, (ax1,ax2, ax3) = plt.subplots(3,1)
+# fig.set_size_inches(18.5, 10.5)
+# T = ax1.contourf(x, y, T, levels = levels,  cmap=cm.jet) 
+# ax1.set_title("Contours for flow over a Gaussian bump")
+# plt.xlabel('x')
+# ax1.set_aspect(1)
+# ax1.set_ylabel("y")
+# tbar = plt.colorbar(T, ax=ax1)
+# tbar.set_label("Temperature [$^{\circ}$C]" ) #rotation= 270
 
-P = ax2.contourf(x, y, p, levels = levels,  cmap=cm.jet)
-ax2.set_ylabel("y")
-ax2.set_aspect(1)
-Pbar = plt.colorbar(P, ax=ax2)
-Pbar.set_label("Pressure [Pa]" ) #rotation= 270
-plt.legend
+# P = ax2.contourf(x, y, p, levels = levels,  cmap=cm.jet)
+# ax2.set_ylabel("y")
+# ax2.set_aspect(1)
+# Pbar = plt.colorbar(P, ax=ax2)
+# Pbar.set_label("Pressure [Pa]" ) #rotation= 270
+# plt.legend
 
-U = ax3.contourf(x, y, M, levels = levels, cmap=cm.jet)
-ax3.set_ylabel("y")
-ax3.set_aspect(1)
-ubar = plt.colorbar(U, ax=ax3)
-ubar.set_label("Mach Number") #X_Velocity [ms$^{-1}$]
-plt.legend
-plt.style.use('classic')
-plt.savefig('shock_patern_contours.pdf')
+# U = ax3.contourf(x, y, M, levels = levels, cmap=cm.jet)
+# ax3.set_ylabel("y")
+# ax3.set_aspect(1)
+# ubar = plt.colorbar(U, ax=ax3)
+# ubar.set_label("Mach Number") #X_Velocity [ms$^{-1}$]
+# plt.legend
+# plt.style.use('classic')
+# plt.savefig('shock_patern_contours.pdf')
 
-
+print(numpy.shape(x))
 
 # fig2, b1 = plt.subplots(1,1)
 # x = b1.contourf(x, y, u, levels= numpy.linspace(-0.2,0.05,40), cmap=cm.jet) 
@@ -100,17 +101,23 @@ plt.savefig('shock_patern_contours.pdf')
 # ubar.set_label("u velocity [$ms^1$]" ) #rotation= 270
 
 fig3, c1 = plt.subplots(1,1)
-z = c1.contourf(x, y, rho, levels =100, cmap=cm.jet) 
+z = c1.contourf(x, y, rho, levels =25, cmap=cm.jet) 
 c1.set_title("density")
 plt.xlabel('x')
 c1.set_ylabel("y")
-ubar = plt.colorbar(z, ax=c1)
+divider = make_axes_locatable(c1)
+cax = divider.append_axes("right", size=0.2,pad=0.1)
+ubar = plt.colorbar(z, ax=c1, cax=cax)
 c1.set_aspect(1)
 # b1.set_ylim([0,15])
 ubar.set_label("density [kg/m$^3$]" ) #rotation= 270
-plt.savefig('density_contours.pdf')
 
 
-
-
+fig2, bx1 = plt.subplots(1,1)
+bx1.plot(u[:,0],y[:,0])
+bx1.set_ylim([0,3])
+bx1.axhline(y=1, color =  'k', linestyle ='--',  label = 'position of boundary layer comparison')
+bx1.set_title('Plot to show the boundary layer thickness')
+bx1.set_ylabel('nromal distance from ')
+fig2.savefig('u_velocity_profile_at_inlet.pdf')
 plt.show()

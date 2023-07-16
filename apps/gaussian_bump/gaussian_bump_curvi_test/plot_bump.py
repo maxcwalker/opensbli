@@ -88,7 +88,7 @@ plt.legend
 plt.style.use('classic')
 plt.savefig('shock_patern_contours.pdf')
 
-
+print(x)
 
 # fig2, b1 = plt.subplots(1,1)
 # x = b1.contourf(x, y, u, levels= numpy.linspace(-0.2,0.05,40), cmap=cm.jet) 
@@ -112,4 +112,4 @@ ubar.set_label("density [kg/m$^3$]" ) #rotation= 270
 
 
 
-plt.show()
+# plt.show()
