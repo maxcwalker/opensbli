@@ -22,7 +22,7 @@ def oblique_shock(theta, Ma, T, p, rho, gamma=1.4):
     """
     Computes the weak oblique shock resulting from supersonic
     flow impinging on a wedge in 2 dimensional flow.
-    
+
     Inputs:
      - theta is the angle of the wedge in radians.
      - Ma, T, p, and rho are the Mach number, temperature (K),
@@ -87,7 +87,6 @@ def cone_shock(cone_angle, Ma, T, p, rho):
         sol = odeint(taylor_maccoll, y0, thetas)
         if sol[-1, 1] < 0:
             return B, a, Ma2, T2, p2, rho2, v_x, v_y
-
 
 # Example of a wedge with half-angle of 10 degrees in Mach 2.1 flow:
 result = oblique_shock(10 * np.pi / 180, 2.1, 280, 10000, 0.1)

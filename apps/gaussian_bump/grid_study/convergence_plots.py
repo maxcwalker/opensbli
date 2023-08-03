@@ -40,12 +40,13 @@ Lx = 400.0
 scale = 2.31669259
 
 
-list = ['100x100', '200x100', '400x100']
+list = ['100x100', '200x100', '400x100', '600x100']
+#list = ['400x100', '400x200', '400x400']
 
 fig1, ax1 = plt.subplots(1,1)
 fig2, ax2 = plt.subplots(1,1)
 
-line_styles = ['-.', '.', '-', ':']
+line_styles = ['-.', '.', '-', '-']
 
 for i in range(len(list)):
 
