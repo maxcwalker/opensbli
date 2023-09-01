@@ -60,8 +60,8 @@ double rkold[] = {1.0/4.0, 3.0/20.0, 3.0/5.0};
 double rknew[] = {2.0/3.0, 5.0/12.0, 3.0/5.0};
 dt = 0.001;
 inv_0 = 1.0/Delta0block0;
-rc1 = 2.0/3.0;
-rc2 = 1.0/12.0;
+rc1 = 1.0/12.0;
+rc2 = 2.0/3.0;
 
 ops_init(argc,argv,1);
   ops_init_backend();ops_decl_const2( "block0np0",1, "int",&block0np0);ops_decl_const2( "Delta0block0",1, "double",&Delta0block0);ops_decl_const2( "c0",1, "double",&c0);ops_decl_const2( "niter",1, "int",&niter);ops_decl_const2( "dt",1, "double",&dt);ops_decl_const2( "inv_0",1, "double",&inv_0);ops_decl_const2( "rc1",1, "double",&rc1);ops_decl_const2( "rc2",1, "double",&rc2);
@@ -103,8 +103,8 @@ int iteration_range_4_block0[] = {0, block0np0}; ops_par_loop_opensbliblock00Ker
              ops_arg_dat(Residual0_B0, 1, stencil_0_00, "double", OPS_WRITE));
 
 int iteration_range_9_block0[] = {0, block0np0}; ops_par_loop_opensbliblock00Kernel009("Sub stage advancement", opensbliblock00, 1, iteration_range_9_block0,
-             ops_arg_dat(Residual0_B0, 1, stencil_0_00, "double", OPS_READ),
              ops_arg_dat(phi_RKold_B0, 1, stencil_0_00, "double", OPS_READ),
+             ops_arg_dat(Residual0_B0, 1, stencil_0_00, "double", OPS_READ),
              ops_arg_dat(phi_B0, 1, stencil_0_00, "double", OPS_WRITE),
              ops_arg_gbl(&rknew[stage], 1, "double", OPS_READ));
 

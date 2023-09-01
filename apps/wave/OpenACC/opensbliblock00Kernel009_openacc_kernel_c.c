@@ -10,8 +10,8 @@ int xdim2_opensbliblock00Kernel009;
 
 //user function
 inline 
- void opensbliblock00Kernel009(const ptr_double Residual0_B0,
-  const ptr_double phi_RKold_B0,
+ void opensbliblock00Kernel009(const ptr_double phi_RKold_B0,
+  const ptr_double Residual0_B0,
   ptr_double phi_B0,
   const double
 *rknew)

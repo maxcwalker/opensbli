@@ -1,0 +1,432 @@
+\documentclass{article}
+\title{Algorithm for the equations}
+\author{Satya P Jammy \& OpenSBLI developers team}
+\date{\today}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\begin{document}
+\maketitle
+\noindent Starting of the main program\\
+\\\noindent The kernel is Grid_based_initialisation0, block is 0\\\noindent The ranges are -5,block0np0 + 5\\\begin{dmath}{x_{0}{_{B0}}}[{}] = Delta0block0 \,.\, {idx}[{0}]\end{dmath}
+
+\begin{dmath}u_{0} = 0\end{dmath}
+
+\begin{dmath}p = \begin{cases} 1.0 & \text{for}\: {x_{0}{_{B0}}}[{}] < 0.5 \\0.1 & \text{otherwise} \end{cases}\end{dmath}
+
+\begin{dmath}d = \begin{cases} 1.0 & \text{for}\: {x_{0}{_{B0}}}[{}] < 0.5 \\0.125 & \text{otherwise} \end{cases}\end{dmath}
+
+\begin{dmath}{\rho{_{B0}}}[{}] = d\end{dmath}
+
+\begin{dmath}{rhou_{0}{_{B0}}}[{}] = d \,.\, u_{0}\end{dmath}
+
+\begin{dmath}{rhoE{_{B0}}}[{}] = 0.5 \,.\, d \,.\, \left(u_{0} \right)^{2.0} + \frac{p}{gama - 1.0}\end{dmath}
+
+\noindent Initialising timers\\
+\\\noindent Do loop iter,0, niter - 1\\
+\\\noindent The kernel is Dirichlet boundary dir0 side0, block is 0\\\noindent The ranges are -3,1\\\begin{dmath}d = 1.0\end{dmath}
+
+\begin{dmath}u_{0} = 0.0\end{dmath}
+
+\begin{dmath}p = 1.0\end{dmath}
+
+\begin{dmath}{\rho{_{B0}}}[{}] = d\end{dmath}
+
+\begin{dmath}{rhou_{0}{_{B0}}}[{}] = d \,.\, u_{0}\end{dmath}
+
+\begin{dmath}{rhoE{_{B0}}}[{}] = 0.5 \,.\, d \,.\, \left(u_{0} \right)^{2.0} + \frac{p}{gama - 1.0}\end{dmath}
+
+\noindent The kernel is Dirichlet boundary dir0 side1, block is 0\\\noindent The ranges are block0np0 - 1,block0np0 + 4\\\begin{dmath}d = 0.125\end{dmath}
+
+\begin{dmath}u_{0} = 0.0\end{dmath}
+
+\begin{dmath}p = 0.1\end{dmath}
+
+\begin{dmath}{\rho{_{B0}}}[{}] = d\end{dmath}
+
+\begin{dmath}{rhou_{0}{_{B0}}}[{}] = d \,.\, u_{0}\end{dmath}
+
+\begin{dmath}{rhoE{_{B0}}}[{}] = 0.5 \,.\, d \,.\, \left(u_{0} \right)^{2.0} + \frac{p}{gama - 1.0}\end{dmath}
+
+\noindent Do loop stage,0, 2\\
+\\\noindent The kernel is CRu0, block is 0\\\noindent The ranges are -3,block0np0 + 4\\\begin{dmath}{u_{0}{_{B0}}}[{}] = \frac{{rhou_{0}{_{B0}}}[{}]}{{\rho{_{B0}}}[{}]}\end{dmath}
+
+\noindent The kernel is CRp, block is 0\\\noindent The ranges are -3,block0np0 + 4\\\begin{dmath}{p{_{B0}}}[{}] = \left(gama - 1\right) \,.\, \left({rhoE{_{B0}}}[{}] - \frac{\left({u_{0}{_{B0}}}[{}] \right)^{2}}{2} \,.\, {\rho{_{B0}}}[{}]\right)\end{dmath}
+
+\noindent The kernel is CRa, block is 0\\\noindent The ranges are -3,block0np0 + 4\\\begin{dmath}{a{_{B0}}}[{}] = \left(\frac{gama \,.\, {p{_{B0}}}[{}]}{{\rho{_{B0}}}[{}]} \right)^{0.5}\end{dmath}
+
+\noindent The kernel is LLFTeno_reconstruction_0_direction, block is 0\\\noindent The ranges are -1,block0np0 + 1\\\begin{dmath}AVG_{0 \rho} = \left({\rho{_{B0}}}[{}] \,.\, {\rho{_{B0}}}[{}] \right)^{\frac{1}{2}}\end{dmath}
+
+\begin{dmath}AVG_{0 inv \rho} = \left(\left({\rho{_{B0}}}[{}] \right)^{\frac{1}{2}} + \left({\rho{_{B0}}}[{}] \right)^{\frac{1}{2}} \right)^{-1}\end{dmath}
+
+\begin{dmath}AVG_{0 u0} = AVG_{0 inv \rho} \,.\, \left(\left({\rho{_{B0}}}[{}] \right)^{\frac{1}{2}} \,.\, {u_{0}{_{B0}}}[{}] + \left({\rho{_{B0}}}[{}] \right)^{\frac{1}{2}} \,.\, {u_{0}{_{B0}}}[{}]\right)\end{dmath}
+
+\begin{dmath}AVG_{0 a} = \left(gamma_m1 \,.\, \left(AVG_{0 inv \rho} \,.\, \left(\frac{{p{_{B0}}}[{}] + {rhoE{_{B0}}}[{}]}{\left({\rho{_{B0}}}[{}] \right)^{\frac{1}{2}}} + \frac{{p{_{B0}}}[{}] + {rhoE{_{B0}}}[{}]}{\left({\rho{_{B0}}}[{}] 
+\right)^{\frac{1}{2}}}\right) - \frac{\left(AVG_{0 u0} \right)^{2}}{2}\right) \right)^{\frac{1}{2}}\end{dmath}
+
+\begin{dmath}inv_{AVG a} = \left(AVG_{0 a} \right)^{-1}\end{dmath}
+
+\begin{dmath}inv_{AVG \rho} = \left(AVG_{0 \rho} \right)^{-1}\end{dmath}
+
+\begin{dmath}AVG_{0 0 LEV 00} = \frac{AVG_{0 u0}}{4} \,.\, inv_{AVG a} \,.\, \left(gama \,.\, AVG_{0 a} \,.\, AVG_{0 u0} \,.\, \left(inv_{AVG a} \right)^{2} - AVG_{0 a} \,.\, AVG_{0 u0} \,.\, \left(inv_{AVG a} \right)^{2} + 2\right)\end{dmath}
+
+\begin{dmath}AVG_{0 0 LEV 01} = - \frac{inv_{AVG a}}{2} \,.\, \left(gama \,.\, AVG_{0 a} \,.\, AVG_{0 u0} \,.\, \left(inv_{AVG a} \right)^{2} - AVG_{0 a} \,.\, AVG_{0 u0} \,.\, \left(inv_{AVG a} \right)^{2} + 1\right)\end{dmath}
+
+\begin{dmath}AVG_{0 0 LEV 02} = \frac{\left(inv_{AVG a} \right)^{2}}{2} \,.\, gamma_m1\end{dmath}
+
+\begin{dmath}AVG_{0 0 LEV 10} = - \frac{1}{2} \,.\, \left(gama \,.\, \left(AVG_{0 u0} \right)^{2} \,.\, \left(inv_{AVG a} \right)^{2} - \left(AVG_{0 u0} \right)^{2} \,.\, \left(inv_{AVG a} \right)^{2} - 2\right)\end{dmath}
+
+\begin{dmath}AVG_{0 0 LEV 11} = gamma_m1 \,.\, AVG_{0 u0} \,.\, \left(inv_{AVG a} \right)^{2}\end{dmath}
+
+\begin{dmath}AVG_{0 0 LEV 12} = - gamma_m1 \,.\, \left(inv_{AVG a} \right)^{2}\end{dmath}
+
+\begin{dmath}AVG_{0 0 LEV 20} = \frac{AVG_{0 u0}}{4} \,.\, inv_{AVG a} \,.\, \left(gama \,.\, AVG_{0 a} \,.\, AVG_{0 u0} \,.\, \left(inv_{AVG a} \right)^{2} - AVG_{0 a} \,.\, AVG_{0 u0} \,.\, \left(inv_{AVG a} \right)^{2} - 2\right)\end{dmath}
+
+\begin{dmath}AVG_{0 0 LEV 21} = - \frac{inv_{AVG a}}{2} \,.\, \left(gama \,.\, AVG_{0 a} \,.\, AVG_{0 u0} \,.\, \left(inv_{AVG a} \right)^{2} - AVG_{0 a} \,.\, AVG_{0 u0} \,.\, \left(inv_{AVG a} \right)^{2} - 1\right)\end{dmath}
+
+\begin{dmath}AVG_{0 0 LEV 22} = \frac{\left(inv_{AVG a} \right)^{2}}{2} \,.\, gamma_m1\end{dmath}
+
+\begin{dmath}CF_{00} = AVG_{0 0 LEV 00} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{10} = AVG_{0 0 LEV 10} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{20} = AVG_{0 0 LEV 20} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{01} = AVG_{0 0 LEV 00} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{11} = AVG_{0 0 LEV 10} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{21} = AVG_{0 0 LEV 20} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{02} = AVG_{0 0 LEV 00} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{12} = AVG_{0 0 LEV 10} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{22} = AVG_{0 0 LEV 20} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{03} = AVG_{0 0 LEV 00} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{13} = AVG_{0 0 LEV 10} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{23} = AVG_{0 0 LEV 20} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{04} = AVG_{0 0 LEV 00} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{14} = AVG_{0 0 LEV 10} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{24} = AVG_{0 0 LEV 20} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{05} = AVG_{0 0 LEV 00} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{15} = AVG_{0 0 LEV 10} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CF_{25} = AVG_{0 0 LEV 20} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {p{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {p{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}] + 
+AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}] \,.\, {u_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{00} = AVG_{0 0 LEV 00} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{01} = AVG_{0 0 LEV 00} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{02} = AVG_{0 0 LEV 00} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{03} = AVG_{0 0 LEV 00} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{04} = AVG_{0 0 LEV 00} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{05} = AVG_{0 0 LEV 00} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 01} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 02} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{10} = AVG_{0 0 LEV 10} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{11} = AVG_{0 0 LEV 10} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{12} = AVG_{0 0 LEV 10} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{13} = AVG_{0 0 LEV 10} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{14} = AVG_{0 0 LEV 10} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{15} = AVG_{0 0 LEV 10} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 11} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 12} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{20} = AVG_{0 0 LEV 20} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{21} = AVG_{0 0 LEV 20} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{22} = AVG_{0 0 LEV 20} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{23} = AVG_{0 0 LEV 20} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{24} = AVG_{0 0 LEV 20} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}CS_{25} = AVG_{0 0 LEV 20} \,.\, {\rho{_{B0}}}[{}] + AVG_{0 0 LEV 21} \,.\, {rhou_{0}{_{B0}}}[{}] + AVG_{0 0 LEV 22} \,.\, {rhoE{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}max_{\lambda 0 00} = \max\left(\left|{{a{_{B0}}}[{}] - {u_{0}{_{B0}}}[{}]}\right|, \left|{{a{_{B0}}}[{}] - {u_{0}{_{B0}}}[{}]}\right|, \left|{{a{_{B0}}}[{}] - {u_{0}{_{B0}}}[{}]}\right|, \left|{{a{_{B0}}}[{}] - 
+{u_{0}{_{B0}}}[{}]}\right|, \left|{{a{_{B0}}}[{}] - {u_{0}{_{B0}}}[{}]}\right|, \left|{{a{_{B0}}}[{}] - {u_{0}{_{B0}}}[{}]}\right|\right)\end{dmath}
+
+\begin{dmath}max_{\lambda 0 11} = \max\left(\left|{{u_{0}{_{B0}}}[{}]}\right|, \left|{{u_{0}{_{B0}}}[{}]}\right|, \left|{{u_{0}{_{B0}}}[{}]}\right|, \left|{{u_{0}{_{B0}}}[{}]}\right|, \left|{{u_{0}{_{B0}}}[{}]}\right|, 
+\left|{{u_{0}{_{B0}}}[{}]}\right|\right)\end{dmath}
+
+\begin{dmath}max_{\lambda 0 22} = \max\left(\left|{{a{_{B0}}}[{}] + {u_{0}{_{B0}}}[{}]}\right|, \left|{{a{_{B0}}}[{}] + {u_{0}{_{B0}}}[{}]}\right|, \left|{{a{_{B0}}}[{}] + {u_{0}{_{B0}}}[{}]}\right|, \left|{{a{_{B0}}}[{}] + 
+{u_{0}{_{B0}}}[{}]}\right|, \left|{{a{_{B0}}}[{}] + {u_{0}{_{B0}}}[{}]}\right|, \left|{{a{_{B0}}}[{}] + {u_{0}{_{B0}}}[{}]}\right|\right)\end{dmath}
+
+\begin{dmath}\beta_{0} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{01} + CS_{01} \,.\, max_{\lambda 0 00}\right) - \frac{1}{2} \,.\, \left(CF_{03} + CS_{03} \,.\, max_{\lambda 0 00}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} 
+\,.\, \left(CF_{01} + CS_{01} \,.\, max_{\lambda 0 00}\right) - CF_{02} + CS_{02} \,.\, max_{\lambda 0 00} + \frac{1}{2} \,.\, \left(CF_{03} + CS_{03} \,.\, max_{\lambda 0 00}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{1} = \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{02} + CS_{02} \,.\, max_{\lambda 0 00}\right) - CF_{03} + CS_{03} \,.\, max_{\lambda 0 00} + \frac{1}{2} \,.\, \left(CF_{04} + CS_{04} \,.\, max_{\lambda 0 00}\right) 
+\right)^{2} + \frac{1}{4} \,.\, \left(\frac{3}{2} \,.\, \left(CF_{02} + CS_{02} \,.\, max_{\lambda 0 00}\right) - 2 \,.\, \left(CF_{03} + CS_{03} \,.\, max_{\lambda 0 00}\right) + \frac{1}{2} \,.\, \left(CF_{04} + CS_{04} \,.\, max_{\lambda 0 
+00}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{2} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{00} + CS_{00} \,.\, max_{\lambda 0 00}\right) - 2 \,.\, \left(CF_{01} + CS_{01} \,.\, max_{\lambda 0 00}\right) + \frac{3}{2} \,.\, \left(CF_{02} + CS_{02} \,.\, 
+max_{\lambda 0 00}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{00} + CS_{00} \,.\, max_{\lambda 0 00}\right) - CF_{01} + CS_{01} \,.\, max_{\lambda 0 00} + \frac{1}{2} \,.\, \left(CF_{02} + CS_{02} \,.\, max_{\lambda 0 
+00}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\alpha_{0} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{0}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{1} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{1}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{2} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{2}} \right)^{6}\end{dmath}
+
+\begin{dmath}inv_{\alpha sum} = \left(\alpha_{0} + \alpha_{1} + \alpha_{2} \right)^{-1}\end{dmath}
+
+\begin{dmath}\delta_{0} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{1} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{2} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}inv_{\omega sum} = \left(\frac{11 \,.\, \delta_{0}}{20} + \frac{2 \,.\, \delta_{1}}{5} + \frac{\delta_{2}}{20} \right)^{-1}\end{dmath}
+
+\begin{dmath}Recon_{0} = Recon_{0} + \frac{11 \,.\, \delta_{0}}{20} \,.\, inv_{\omega sum} \,.\, \left(- \frac{1}{12} \,.\, \left(CF_{01} + CS_{01} \,.\, max_{\lambda 0 00}\right) + \frac{5}{12} \,.\, \left(CF_{02} + CS_{02} \,.\, max_{\lambda 0 
+00}\right) + \frac{1}{6} \,.\, \left(CF_{03} + CS_{03} \,.\, max_{\lambda 0 00}\right)\right) + \frac{2 \,.\, \delta_{1}}{5} \,.\, inv_{\omega sum} \,.\, \left(\frac{1}{6} \,.\, \left(CF_{02} + CS_{02} \,.\, max_{\lambda 0 00}\right) + \frac{5}{12} 
+\,.\, \left(CF_{03} + CS_{03} \,.\, max_{\lambda 0 00}\right) - \frac{1}{12} \,.\, \left(CF_{04} + CS_{04} \,.\, max_{\lambda 0 00}\right)\right) + \frac{\delta_{2}}{20} \,.\, inv_{\omega sum} \,.\, \left(\frac{1}{6} \,.\, \left(CF_{00} + CS_{00} 
+\,.\, max_{\lambda 0 00}\right) - \frac{7}{12} \,.\, \left(CF_{01} + CS_{01} \,.\, max_{\lambda 0 00}\right) + \frac{11}{12} \,.\, \left(CF_{02} + CS_{02} \,.\, max_{\lambda 0 00}\right)\right)\end{dmath}
+
+\begin{dmath}\beta_{0} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{02} - CS_{02} \,.\, max_{\lambda 0 00}\right) - \frac{1}{2} \,.\, \left(CF_{04} - CS_{04} \,.\, max_{\lambda 0 00}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} 
+\,.\, \left(CF_{02} - CS_{02} \,.\, max_{\lambda 0 00}\right) - CF_{03} - CS_{03} \,.\, max_{\lambda 0 00} + \frac{1}{2} \,.\, \left(CF_{04} - CS_{04} \,.\, max_{\lambda 0 00}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{1} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{01} - CS_{01} \,.\, max_{\lambda 0 00}\right) - 2 \,.\, \left(CF_{02} - CS_{02} \,.\, max_{\lambda 0 00}\right) + \frac{3}{2} \,.\, \left(CF_{03} - CS_{03} \,.\, 
+max_{\lambda 0 00}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{01} - CS_{01} \,.\, max_{\lambda 0 00}\right) - CF_{02} - CS_{02} \,.\, max_{\lambda 0 00} + \frac{1}{2} \,.\, \left(CF_{03} - CS_{03} \,.\, max_{\lambda 0 
+00}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{2} = \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{03} - CS_{03} \,.\, max_{\lambda 0 00}\right) - CF_{04} - CS_{04} \,.\, max_{\lambda 0 00} + \frac{1}{2} \,.\, \left(CF_{05} - CS_{05} \,.\, max_{\lambda 0 00}\right) 
+\right)^{2} + \frac{1}{4} \,.\, \left(\frac{3}{2} \,.\, \left(CF_{03} - CS_{03} \,.\, max_{\lambda 0 00}\right) - 2 \,.\, \left(CF_{04} - CS_{04} \,.\, max_{\lambda 0 00}\right) + \frac{1}{2} \,.\, \left(CF_{05} - CS_{05} \,.\, max_{\lambda 0 
+00}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\alpha_{0} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{0}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{1} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{1}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{2} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{2}} \right)^{6}\end{dmath}
+
+\begin{dmath}inv_{\alpha sum} = \left(\alpha_{0} + \alpha_{1} + \alpha_{2} \right)^{-1}\end{dmath}
+
+\begin{dmath}\delta_{0} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{1} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{2} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}inv_{\omega sum} = \left(\frac{11 \,.\, \delta_{0}}{20} + \frac{2 \,.\, \delta_{1}}{5} + \frac{\delta_{2}}{20} \right)^{-1}\end{dmath}
+
+\begin{dmath}Recon_{0} = Recon_{0} + \frac{11 \,.\, \delta_{0}}{20} \,.\, inv_{\omega sum} \,.\, \left(\frac{1}{6} \,.\, \left(CF_{02} - CS_{02} \,.\, max_{\lambda 0 00}\right) + \frac{5}{12} \,.\, \left(CF_{03} - CS_{03} \,.\, max_{\lambda 0 
+00}\right) - \frac{1}{12} \,.\, \left(CF_{04} - CS_{04} \,.\, max_{\lambda 0 00}\right)\right) + \frac{2 \,.\, \delta_{1}}{5} \,.\, inv_{\omega sum} \,.\, \left(- \frac{1}{12} \,.\, \left(CF_{01} - CS_{01} \,.\, max_{\lambda 0 00}\right) + 
+\frac{5}{12} \,.\, \left(CF_{02} - CS_{02} \,.\, max_{\lambda 0 00}\right) + \frac{1}{6} \,.\, \left(CF_{03} - CS_{03} \,.\, max_{\lambda 0 00}\right)\right) + \frac{\delta_{2}}{20} \,.\, inv_{\omega sum} \,.\, \left(\frac{11}{12} \,.\, \left(CF_{03} 
+- CS_{03} \,.\, max_{\lambda 0 00}\right) - \frac{7}{12} \,.\, \left(CF_{04} - CS_{04} \,.\, max_{\lambda 0 00}\right) + \frac{1}{6} \,.\, \left(CF_{05} - CS_{05} \,.\, max_{\lambda 0 00}\right)\right)\end{dmath}
+
+\begin{dmath}\beta_{0} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{11} + CS_{11} \,.\, max_{\lambda 0 11}\right) - \frac{1}{2} \,.\, \left(CF_{13} + CS_{13} \,.\, max_{\lambda 0 11}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} 
+\,.\, \left(CF_{11} + CS_{11} \,.\, max_{\lambda 0 11}\right) - CF_{12} + CS_{12} \,.\, max_{\lambda 0 11} + \frac{1}{2} \,.\, \left(CF_{13} + CS_{13} \,.\, max_{\lambda 0 11}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{1} = \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{12} + CS_{12} \,.\, max_{\lambda 0 11}\right) - CF_{13} + CS_{13} \,.\, max_{\lambda 0 11} + \frac{1}{2} \,.\, \left(CF_{14} + CS_{14} \,.\, max_{\lambda 0 11}\right) 
+\right)^{2} + \frac{1}{4} \,.\, \left(\frac{3}{2} \,.\, \left(CF_{12} + CS_{12} \,.\, max_{\lambda 0 11}\right) - 2 \,.\, \left(CF_{13} + CS_{13} \,.\, max_{\lambda 0 11}\right) + \frac{1}{2} \,.\, \left(CF_{14} + CS_{14} \,.\, max_{\lambda 0 
+11}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{2} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{10} + CS_{10} \,.\, max_{\lambda 0 11}\right) - 2 \,.\, \left(CF_{11} + CS_{11} \,.\, max_{\lambda 0 11}\right) + \frac{3}{2} \,.\, \left(CF_{12} + CS_{12} \,.\, 
+max_{\lambda 0 11}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{10} + CS_{10} \,.\, max_{\lambda 0 11}\right) - CF_{11} + CS_{11} \,.\, max_{\lambda 0 11} + \frac{1}{2} \,.\, \left(CF_{12} + CS_{12} \,.\, max_{\lambda 0 
+11}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\alpha_{0} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{0}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{1} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{1}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{2} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{2}} \right)^{6}\end{dmath}
+
+\begin{dmath}inv_{\alpha sum} = \left(\alpha_{0} + \alpha_{1} + \alpha_{2} \right)^{-1}\end{dmath}
+
+\begin{dmath}\delta_{0} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{1} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{2} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}inv_{\omega sum} = \left(\frac{11 \,.\, \delta_{0}}{20} + \frac{2 \,.\, \delta_{1}}{5} + \frac{\delta_{2}}{20} \right)^{-1}\end{dmath}
+
+\begin{dmath}Recon_{1} = Recon_{1} + \frac{11 \,.\, \delta_{0}}{20} \,.\, inv_{\omega sum} \,.\, \left(- \frac{1}{12} \,.\, \left(CF_{11} + CS_{11} \,.\, max_{\lambda 0 11}\right) + \frac{5}{12} \,.\, \left(CF_{12} + CS_{12} \,.\, max_{\lambda 0 
+11}\right) + \frac{1}{6} \,.\, \left(CF_{13} + CS_{13} \,.\, max_{\lambda 0 11}\right)\right) + \frac{2 \,.\, \delta_{1}}{5} \,.\, inv_{\omega sum} \,.\, \left(\frac{1}{6} \,.\, \left(CF_{12} + CS_{12} \,.\, max_{\lambda 0 11}\right) + \frac{5}{12} 
+\,.\, \left(CF_{13} + CS_{13} \,.\, max_{\lambda 0 11}\right) - \frac{1}{12} \,.\, \left(CF_{14} + CS_{14} \,.\, max_{\lambda 0 11}\right)\right) + \frac{\delta_{2}}{20} \,.\, inv_{\omega sum} \,.\, \left(\frac{1}{6} \,.\, \left(CF_{10} + CS_{10} 
+\,.\, max_{\lambda 0 11}\right) - \frac{7}{12} \,.\, \left(CF_{11} + CS_{11} \,.\, max_{\lambda 0 11}\right) + \frac{11}{12} \,.\, \left(CF_{12} + CS_{12} \,.\, max_{\lambda 0 11}\right)\right)\end{dmath}
+
+\begin{dmath}\beta_{0} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{12} - CS_{12} \,.\, max_{\lambda 0 11}\right) - \frac{1}{2} \,.\, \left(CF_{14} - CS_{14} \,.\, max_{\lambda 0 11}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} 
+\,.\, \left(CF_{12} - CS_{12} \,.\, max_{\lambda 0 11}\right) - CF_{13} - CS_{13} \,.\, max_{\lambda 0 11} + \frac{1}{2} \,.\, \left(CF_{14} - CS_{14} \,.\, max_{\lambda 0 11}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{1} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{11} - CS_{11} \,.\, max_{\lambda 0 11}\right) - 2 \,.\, \left(CF_{12} - CS_{12} \,.\, max_{\lambda 0 11}\right) + \frac{3}{2} \,.\, \left(CF_{13} - CS_{13} \,.\, 
+max_{\lambda 0 11}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{11} - CS_{11} \,.\, max_{\lambda 0 11}\right) - CF_{12} - CS_{12} \,.\, max_{\lambda 0 11} + \frac{1}{2} \,.\, \left(CF_{13} - CS_{13} \,.\, max_{\lambda 0 
+11}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{2} = \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{13} - CS_{13} \,.\, max_{\lambda 0 11}\right) - CF_{14} - CS_{14} \,.\, max_{\lambda 0 11} + \frac{1}{2} \,.\, \left(CF_{15} - CS_{15} \,.\, max_{\lambda 0 11}\right) 
+\right)^{2} + \frac{1}{4} \,.\, \left(\frac{3}{2} \,.\, \left(CF_{13} - CS_{13} \,.\, max_{\lambda 0 11}\right) - 2 \,.\, \left(CF_{14} - CS_{14} \,.\, max_{\lambda 0 11}\right) + \frac{1}{2} \,.\, \left(CF_{15} - CS_{15} \,.\, max_{\lambda 0 
+11}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\alpha_{0} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{0}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{1} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{1}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{2} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{2}} \right)^{6}\end{dmath}
+
+\begin{dmath}inv_{\alpha sum} = \left(\alpha_{0} + \alpha_{1} + \alpha_{2} \right)^{-1}\end{dmath}
+
+\begin{dmath}\delta_{0} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{1} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{2} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}inv_{\omega sum} = \left(\frac{11 \,.\, \delta_{0}}{20} + \frac{2 \,.\, \delta_{1}}{5} + \frac{\delta_{2}}{20} \right)^{-1}\end{dmath}
+
+\begin{dmath}Recon_{1} = Recon_{1} + \frac{11 \,.\, \delta_{0}}{20} \,.\, inv_{\omega sum} \,.\, \left(\frac{1}{6} \,.\, \left(CF_{12} - CS_{12} \,.\, max_{\lambda 0 11}\right) + \frac{5}{12} \,.\, \left(CF_{13} - CS_{13} \,.\, max_{\lambda 0 
+11}\right) - \frac{1}{12} \,.\, \left(CF_{14} - CS_{14} \,.\, max_{\lambda 0 11}\right)\right) + \frac{2 \,.\, \delta_{1}}{5} \,.\, inv_{\omega sum} \,.\, \left(- \frac{1}{12} \,.\, \left(CF_{11} - CS_{11} \,.\, max_{\lambda 0 11}\right) + 
+\frac{5}{12} \,.\, \left(CF_{12} - CS_{12} \,.\, max_{\lambda 0 11}\right) + \frac{1}{6} \,.\, \left(CF_{13} - CS_{13} \,.\, max_{\lambda 0 11}\right)\right) + \frac{\delta_{2}}{20} \,.\, inv_{\omega sum} \,.\, \left(\frac{11}{12} \,.\, \left(CF_{13} 
+- CS_{13} \,.\, max_{\lambda 0 11}\right) - \frac{7}{12} \,.\, \left(CF_{14} - CS_{14} \,.\, max_{\lambda 0 11}\right) + \frac{1}{6} \,.\, \left(CF_{15} - CS_{15} \,.\, max_{\lambda 0 11}\right)\right)\end{dmath}
+
+\begin{dmath}\beta_{0} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{21} + CS_{21} \,.\, max_{\lambda 0 22}\right) - \frac{1}{2} \,.\, \left(CF_{23} + CS_{23} \,.\, max_{\lambda 0 22}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} 
+\,.\, \left(CF_{21} + CS_{21} \,.\, max_{\lambda 0 22}\right) - CF_{22} + CS_{22} \,.\, max_{\lambda 0 22} + \frac{1}{2} \,.\, \left(CF_{23} + CS_{23} \,.\, max_{\lambda 0 22}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{1} = \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{22} + CS_{22} \,.\, max_{\lambda 0 22}\right) - CF_{23} + CS_{23} \,.\, max_{\lambda 0 22} + \frac{1}{2} \,.\, \left(CF_{24} + CS_{24} \,.\, max_{\lambda 0 22}\right) 
+\right)^{2} + \frac{1}{4} \,.\, \left(\frac{3}{2} \,.\, \left(CF_{22} + CS_{22} \,.\, max_{\lambda 0 22}\right) - 2 \,.\, \left(CF_{23} + CS_{23} \,.\, max_{\lambda 0 22}\right) + \frac{1}{2} \,.\, \left(CF_{24} + CS_{24} \,.\, max_{\lambda 0 
+22}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{2} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{20} + CS_{20} \,.\, max_{\lambda 0 22}\right) - 2 \,.\, \left(CF_{21} + CS_{21} \,.\, max_{\lambda 0 22}\right) + \frac{3}{2} \,.\, \left(CF_{22} + CS_{22} \,.\, 
+max_{\lambda 0 22}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{20} + CS_{20} \,.\, max_{\lambda 0 22}\right) - CF_{21} + CS_{21} \,.\, max_{\lambda 0 22} + \frac{1}{2} \,.\, \left(CF_{22} + CS_{22} \,.\, max_{\lambda 0 
+22}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\alpha_{0} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{0}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{1} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{1}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{2} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{2}} \right)^{6}\end{dmath}
+
+\begin{dmath}inv_{\alpha sum} = \left(\alpha_{0} + \alpha_{1} + \alpha_{2} \right)^{-1}\end{dmath}
+
+\begin{dmath}\delta_{0} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{1} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{2} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}inv_{\omega sum} = \left(\frac{11 \,.\, \delta_{0}}{20} + \frac{2 \,.\, \delta_{1}}{5} + \frac{\delta_{2}}{20} \right)^{-1}\end{dmath}
+
+\begin{dmath}Recon_{2} = Recon_{2} + \frac{11 \,.\, \delta_{0}}{20} \,.\, inv_{\omega sum} \,.\, \left(- \frac{1}{12} \,.\, \left(CF_{21} + CS_{21} \,.\, max_{\lambda 0 22}\right) + \frac{5}{12} \,.\, \left(CF_{22} + CS_{22} \,.\, max_{\lambda 0 
+22}\right) + \frac{1}{6} \,.\, \left(CF_{23} + CS_{23} \,.\, max_{\lambda 0 22}\right)\right) + \frac{2 \,.\, \delta_{1}}{5} \,.\, inv_{\omega sum} \,.\, \left(\frac{1}{6} \,.\, \left(CF_{22} + CS_{22} \,.\, max_{\lambda 0 22}\right) + \frac{5}{12} 
+\,.\, \left(CF_{23} + CS_{23} \,.\, max_{\lambda 0 22}\right) - \frac{1}{12} \,.\, \left(CF_{24} + CS_{24} \,.\, max_{\lambda 0 22}\right)\right) + \frac{\delta_{2}}{20} \,.\, inv_{\omega sum} \,.\, \left(\frac{1}{6} \,.\, \left(CF_{20} + CS_{20} 
+\,.\, max_{\lambda 0 22}\right) - \frac{7}{12} \,.\, \left(CF_{21} + CS_{21} \,.\, max_{\lambda 0 22}\right) + \frac{11}{12} \,.\, \left(CF_{22} + CS_{22} \,.\, max_{\lambda 0 22}\right)\right)\end{dmath}
+
+\begin{dmath}\beta_{0} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{22} - CS_{22} \,.\, max_{\lambda 0 22}\right) - \frac{1}{2} \,.\, \left(CF_{24} - CS_{24} \,.\, max_{\lambda 0 22}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} 
+\,.\, \left(CF_{22} - CS_{22} \,.\, max_{\lambda 0 22}\right) - CF_{23} - CS_{23} \,.\, max_{\lambda 0 22} + \frac{1}{2} \,.\, \left(CF_{24} - CS_{24} \,.\, max_{\lambda 0 22}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{1} = \frac{1}{4} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{21} - CS_{21} \,.\, max_{\lambda 0 22}\right) - 2 \,.\, \left(CF_{22} - CS_{22} \,.\, max_{\lambda 0 22}\right) + \frac{3}{2} \,.\, \left(CF_{23} - CS_{23} \,.\, 
+max_{\lambda 0 22}\right) \right)^{2} + \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{21} - CS_{21} \,.\, max_{\lambda 0 22}\right) - CF_{22} - CS_{22} \,.\, max_{\lambda 0 22} + \frac{1}{2} \,.\, \left(CF_{23} - CS_{23} \,.\, max_{\lambda 0 
+22}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\beta_{2} = \frac{13}{12} \,.\, \left(\frac{1}{2} \,.\, \left(CF_{23} - CS_{23} \,.\, max_{\lambda 0 22}\right) - CF_{24} - CS_{24} \,.\, max_{\lambda 0 22} + \frac{1}{2} \,.\, \left(CF_{25} - CS_{25} \,.\, max_{\lambda 0 22}\right) 
+\right)^{2} + \frac{1}{4} \,.\, \left(\frac{3}{2} \,.\, \left(CF_{23} - CS_{23} \,.\, max_{\lambda 0 22}\right) - 2 \,.\, \left(CF_{24} - CS_{24} \,.\, max_{\lambda 0 22}\right) + \frac{1}{2} \,.\, \left(CF_{25} - CS_{25} \,.\, max_{\lambda 0 
+22}\right) \right)^{2}\end{dmath}
+
+\begin{dmath}\alpha_{0} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{0}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{1} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{1}} \right)^{6}\end{dmath}
+
+\begin{dmath}\alpha_{2} = \left(1 + \frac{\left|{\beta_{0} - \beta_{2}}\right|}{eps + \beta_{2}} \right)^{6}\end{dmath}
+
+\begin{dmath}inv_{\alpha sum} = \left(\alpha_{0} + \alpha_{1} + \alpha_{2} \right)^{-1}\end{dmath}
+
+\begin{dmath}\delta_{0} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{1} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}\delta_{2} = \[= \left\{\begin{array}{lr} x(n), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\\ x(n-1), & \text{for } 0\leq n\leq 1\end{array}\right\} = xy\]\end{dmath}
+
+\begin{dmath}inv_{\omega sum} = \left(\frac{11 \,.\, \delta_{0}}{20} + \frac{2 \,.\, \delta_{1}}{5} + \frac{\delta_{2}}{20} \right)^{-1}\end{dmath}
+
+\begin{dmath}Recon_{2} = Recon_{2} + \frac{11 \,.\, \delta_{0}}{20} \,.\, inv_{\omega sum} \,.\, \left(\frac{1}{6} \,.\, \left(CF_{22} - CS_{22} \,.\, max_{\lambda 0 22}\right) + \frac{5}{12} \,.\, \left(CF_{23} - CS_{23} \,.\, max_{\lambda 0 
+22}\right) - \frac{1}{12} \,.\, \left(CF_{24} - CS_{24} \,.\, max_{\lambda 0 22}\right)\right) + \frac{2 \,.\, \delta_{1}}{5} \,.\, inv_{\omega sum} \,.\, \left(- \frac{1}{12} \,.\, \left(CF_{21} - CS_{21} \,.\, max_{\lambda 0 22}\right) + 
+\frac{5}{12} \,.\, \left(CF_{22} - CS_{22} \,.\, max_{\lambda 0 22}\right) + \frac{1}{6} \,.\, \left(CF_{23} - CS_{23} \,.\, max_{\lambda 0 22}\right)\right) + \frac{\delta_{2}}{20} \,.\, inv_{\omega sum} \,.\, \left(\frac{11}{12} \,.\, \left(CF_{23} 
+- CS_{23} \,.\, max_{\lambda 0 22}\right) - \frac{7}{12} \,.\, \left(CF_{24} - CS_{24} \,.\, max_{\lambda 0 22}\right) + \frac{1}{6} \,.\, \left(CF_{25} - CS_{25} \,.\, max_{\lambda 0 22}\right)\right)\end{dmath}
+
+\begin{dmath}{wk_{0}{_{B0}}}[{}] = Recon_{0} + Recon_{1} + Recon_{2}\end{dmath}
+
+\begin{dmath}{wk_{1}{_{B0}}}[{}] = AVG_{0 u0} \,.\, Recon_{1} + Recon_{0} \,.\, \left(- AVG_{0 a} + AVG_{0 u0}\right) + Recon_{2} \,.\, \left(AVG_{0 a} + AVG_{0 u0}\right)\end{dmath}
+
+\begin{dmath}{wk_{2}{_{B0}}}[{}] = \frac{\left(AVG_{0 u0} \right)^{2}}{2} \,.\, Recon_{1} + Recon_{0} \,.\, \left(- AVG_{0 a} \,.\, AVG_{0 u0} + \frac{\left(AVG_{0 u0} \right)^{2}}{2} + \frac{\left(AVG_{0 a} \right)^{2}}{gamma_m1}\right) + Recon_{2} 
+\,.\, \left(AVG_{0 a} \,.\, AVG_{0 u0} + \frac{\left(AVG_{0 u0} \right)^{2}}{2} + \frac{\left(AVG_{0 a} \right)^{2}}{gamma_m1}\right)\end{dmath}
+
+\noindent The kernel is LLFTeno Residual, block is 0\\\noindent The ranges are 0,block0np0\\\begin{dmath}{Residual_{0}{_{B0}}}[{}] = - \frac{1}{Delta0block0} \,.\, \left(- {wk_{0}{_{B0}}}[{}] + {wk_{0}{_{B0}}}[{}]\right)\end{dmath}
+
+\begin{dmath}{Residual_{1}{_{B0}}}[{}] = - \frac{1}{Delta0block0} \,.\, \left(- {wk_{1}{_{B0}}}[{}] + {wk_{1}{_{B0}}}[{}]\right)\end{dmath}
+
+\begin{dmath}{Residual_{2}{_{B0}}}[{}] = - \frac{{wk_{2}{_{B0}}}[{}] - {wk_{2}{_{B0}}}[{}]}{Delta0block0}\end{dmath}
+
+\noindent The kernel is Temporal solution advancement, block is 0\\\noindent The ranges are 0,block0np0\\\begin{dmath}{tempRK_{\rho}{_{B0}}}[{}] = dt \,.\, {Residual_{0}{_{B0}}}[{}] + {rkA}[{stage}] \,.\, {tempRK_{\rho}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}{\rho{_{B0}}}[{}] = {rkB}[{stage}] \,.\, {tempRK_{\rho}{_{B0}}}[{}] + {\rho{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}{tempRK_{rhou0}{_{B0}}}[{}] = dt \,.\, {Residual_{1}{_{B0}}}[{}] + {rkA}[{stage}] \,.\, {tempRK_{rhou0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}{rhou_{0}{_{B0}}}[{}] = {rkB}[{stage}] \,.\, {tempRK_{rhou0}{_{B0}}}[{}] + {rhou_{0}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}{tempRK_{rhoE}{_{B0}}}[{}] = dt \,.\, {Residual_{2}{_{B0}}}[{}] + {rkA}[{stage}] \,.\, {tempRK_{rhoE}{_{B0}}}[{}]\end{dmath}
+
+\begin{dmath}{rhoE{_{B0}}}[{}] = {rkB}[{stage}] \,.\, {tempRK_{rhoE}{_{B0}}}[{}] + {rhoE{_{B0}}}[{}]\end{dmath}
+
+\noindent The kernel is Dirichlet boundary dir0 side0, block is 0\\\noindent The ranges are -3,1\\\begin{dmath}d = 1.0\end{dmath}
+
+\begin{dmath}u_{0} = 0.0\end{dmath}
+
+\begin{dmath}p = 1.0\end{dmath}
+
+\begin{dmath}{\rho{_{B0}}}[{}] = d\end{dmath}
+
+\begin{dmath}{rhou_{0}{_{B0}}}[{}] = d \,.\, u_{0}\end{dmath}
+
+\begin{dmath}{rhoE{_{B0}}}[{}] = 0.5 \,.\, d \,.\, \left(u_{0} \right)^{2.0} + \frac{p}{gama - 1.0}\end{dmath}
+
+\noindent The kernel is Dirichlet boundary dir0 side1, block is 0\\\noindent The ranges are block0np0 - 1,block0np0 + 4\\\begin{dmath}d = 0.125\end{dmath}
+
+\begin{dmath}u_{0} = 0.0\end{dmath}
+
+\begin{dmath}p = 0.1\end{dmath}
+
+\begin{dmath}{\rho{_{B0}}}[{}] = d\end{dmath}
+
+\begin{dmath}{rhou_{0}{_{B0}}}[{}] = d \,.\, u_{0}\end{dmath}
+
+\begin{dmath}{rhoE{_{B0}}}[{}] = 0.5 \,.\, d \,.\, \left(u_{0} \right)^{2.0} + \frac{p}{gama - 1.0}\end{dmath}
+
+\noindent Ending Do loop stage\\
+\\\noindent Ending Do loop iter\\
+\\\noindent Ending timers\\
+\\\noindent HDF5 IO type write on arrays rho_B0 rhou0_B0 rhoE_B0 x0_B0\\\noindent End of Main\\\end{document}

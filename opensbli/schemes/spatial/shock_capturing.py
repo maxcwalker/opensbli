@@ -496,6 +496,7 @@ class LLFCharacteristic(Characteristic):
 
     def flux_vector_to_characteristic(self, derivatives, direction, name):
         fv = self.direction_flux_vector(derivatives, direction)
+
         stencil_points = sorted(list(set(self.reconstruction_classes[0].func_points + self.reconstruction_classes[1].func_points)))
         flux_stencil = zeros(len(fv), len(stencil_points))
         CF_matrix = zeros(len(fv), len(stencil_points))

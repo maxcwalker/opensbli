@@ -7,8 +7,8 @@ static int dims_opensbliblock00Kernel009_h [4][1] = {0};
 //user function
 __device__
 
- void opensbliblock00Kernel009_gpu(const ACC<double> &Residual0_B0,
-  const ACC<double> &phi_RKold_B0,
+ void opensbliblock00Kernel009_gpu(const ACC<double> &phi_RKold_B0,
+  const ACC<double> &Residual0_B0,
   ACC<double> &phi_B0,
   const double
 *rknew)

@@ -82,8 +82,8 @@ void ops_par_loop_opensbliblock00Kernel003_execute(ops_kernel_descriptor *desc) 
     const ACC<double> phi_B0(phi_B0_p + n_x*1);
     ACC<double> wk0_B0(wk0_B0_p + n_x*1);
     
-    wk0_B0(0) = inv_0*((rc1)*phi_B0(1) - rc1*phi_B0(-1) + (rc2)*phi_B0(-2) -
-      rc2*phi_B0(2));
+    wk0_B0(0) = inv_0*((rc1)*phi_B0(-2) + (rc2)*phi_B0(1) - rc2*phi_B0(-1) -
+      rc1*phi_B0(2));
 
 
   }

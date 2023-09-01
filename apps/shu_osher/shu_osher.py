@@ -3,6 +3,7 @@
 from opensbli import *
 import copy
 from opensbli.utilities.helperfunctions import substitute_simulation_parameters
+from sympy import *
 
 ndim = 1
 sc1 = "**{\'scheme\':\'Weno\'}"
@@ -49,6 +50,8 @@ eqns = eq.expand(speed_of_sound, ndim, coordinate_symbol, substitutions, constan
 constituent.add_equations(eqns)
 
 
+
+
 block = SimulationBlock(ndim, block_number=0)
 
 # Initial conditions
@@ -65,12 +68,15 @@ rho = "Eq(DataObject(rho), d)"
 rhou0 = "Eq(DataObject(rhou0), d*u0)"
 rhoE = "Eq(DataObject(rhoE), p/(gama-1.0) + 0.5* d *(u0**2.0))"
 
+
+
 eqns = [x0, x0_dset, u0, p, d, rho, rhou0, rhoE]
 
 local_dict = {"block": block, "GridVariable": GridVariable, "DataObject": DataObject}
 initial_equations = [parse_expr(eq, local_dict=local_dict) for eq in eqns]
 initial = GridBasedInitialisation()
 initial.add_equations(initial_equations)
+
 
 
 # Shu Osher boundary condition values left side
@@ -89,7 +95,6 @@ boundaries = []
 for direction in range(ndim):
     boundaries += [DirichletBC(direction, 0, left_eqns)]
     boundaries += [DirichletBC(direction, 1, right_eqns)]
-
 
 schemes = {}
 # Local LaxFredirich scheme for weno
@@ -121,3 +126,4 @@ OPSC(alg)
 constants = ['gama', 'Minf', 'dt', 'niter', 'block0np0', 'Delta0block0']
 values = ['1.4', '0.1', '0.0002', 'ceil(1.8/0.0002)', '3200', '10.0/(block0np0-1)']
 substitute_simulation_parameters(constants, values)
+

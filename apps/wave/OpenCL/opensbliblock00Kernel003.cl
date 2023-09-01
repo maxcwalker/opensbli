@@ -36,8 +36,8 @@
 void opensbliblock00Kernel003(const ptr_double phi_B0,
   ptr_double wk0_B0, const double inv_0, const double rc1, const double rc2)
 {
-    OPS_ACCS(wk0_B0, 0) = inv_0*((rc1)*OPS_ACCS(phi_B0, 1) - rc1*OPS_ACCS(phi_B0, -1) + (rc2)*OPS_ACCS(phi_B0, -2) -
-      rc2*OPS_ACCS(phi_B0, 2));
+    OPS_ACCS(wk0_B0, 0) = inv_0*((rc1)*OPS_ACCS(phi_B0, -2) + (rc2)*OPS_ACCS(phi_B0, 1) - rc2*OPS_ACCS(phi_B0, -1) -
+      rc1*OPS_ACCS(phi_B0, 2));
 
 }
 

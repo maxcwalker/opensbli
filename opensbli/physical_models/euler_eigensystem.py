@@ -62,6 +62,8 @@ class EulerEquations(object):
             ev = 'diag([u0-a, u0, u0+a])'
             REV = 'Matrix([[1,1,1], [u0-a,u0,u0+a], [H-u0*a,u0**2 /2,H+u0*a]])'
             LEV = 'Matrix([[ u0*(2*H + a*u0 - u0**2)/(2*a*(2*H - u0**2)), (-H - a*u0 + u0**2/2)/(a*(2*H - u0**2)),  1/(2*H - u0**2)],[2*(H - u0**2)/(2*H - u0**2),2*u0/(2*H - u0**2), 2/(-2*H + u0**2)],[u0*(-2*H + a*u0 + u0**2)/(2*a*(2*H - u0**2)),  (H - a*u0 - u0**2/2)/(a*(2*H - u0**2)),  1/(2*H - u0**2)]])'
+            pprint(LEV)
+            exit()
             ev = parse_expr(ev, local_dict=local_dict, evaluate=False)
             REV = parse_expr(REV, local_dict=local_dict, evaluate=False)
             LEV = parse_expr(LEV, local_dict=local_dict, evaluate=False)

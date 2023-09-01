@@ -16,8 +16,8 @@ void opensbliblock00Kernel007(const double *phi_B0, double *phi_RKold_B0)
 
 void opensbliblock00Kernel003(const double *phi_B0, double *wk0_B0)
 {
-    wk0_B0[OPS_ACC1(0)] = inv_0*((rc1)*phi_B0[OPS_ACC0(1)] - rc1*phi_B0[OPS_ACC0(-1)] + (rc2)*phi_B0[OPS_ACC0(-2)] -
-      rc2*phi_B0[OPS_ACC0(2)]);
+    wk0_B0[OPS_ACC1(0)] = inv_0*((rc1)*phi_B0[OPS_ACC0(-2)] + (rc2)*phi_B0[OPS_ACC0(1)] - rc2*phi_B0[OPS_ACC0(-1)] -
+      rc1*phi_B0[OPS_ACC0(2)]);
 
 }
 
@@ -27,10 +27,10 @@ void opensbliblock00Kernel004(const double *wk0_B0, double *Residual0_B0)
 
 }
 
- void opensbliblock00Kernel009(const double *Residual0_B0, const double *phi_RKold_B0, double *phi_B0, const double
+ void opensbliblock00Kernel009(const double *phi_RKold_B0, const double *Residual0_B0, double *phi_B0, const double
 *rknew)
 {
-   phi_B0[OPS_ACC2(0)] = dt*rknew[0]*Residual0_B0[OPS_ACC0(0)] + phi_RKold_B0[OPS_ACC1(0)];
+   phi_B0[OPS_ACC2(0)] = dt*rknew[0]*Residual0_B0[OPS_ACC1(0)] + phi_RKold_B0[OPS_ACC0(0)];
 
 }
 
