@@ -78,22 +78,22 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ Residual1_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ rho_B0_p = (double *)(args[3].data + base3);
+  double * __restrict__ tempRK_rhoE_B0_p = (double *)(args[3].data + base3);
 
   int base4 = args[4].dat->base_offset;
-  double * __restrict__ tempRK_rhou0_B0_p = (double *)(args[4].data + base4);
+  double * __restrict__ rhoE_B0_p = (double *)(args[4].data + base4);
 
   int base5 = args[5].dat->base_offset;
   double * __restrict__ rhou0_B0_p = (double *)(args[5].data + base5);
 
   int base6 = args[6].dat->base_offset;
-  double * __restrict__ tempRK_rhoE_B0_p = (double *)(args[6].data + base6);
+  double * __restrict__ tempRK_rhou0_B0_p = (double *)(args[6].data + base6);
 
   int base7 = args[7].dat->base_offset;
-  double * __restrict__ tempRK_rho_B0_p = (double *)(args[7].data + base7);
+  double * __restrict__ rho_B0_p = (double *)(args[7].data + base7);
 
   int base8 = args[8].dat->base_offset;
-  double * __restrict__ rhoE_B0_p = (double *)(args[8].data + base8);
+  double * __restrict__ tempRK_rho_B0_p = (double *)(args[8].data + base8);
 
   double * __restrict__ rkB = (double *)args[9].data;
 
@@ -120,12 +120,12 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
     const ACC<double> Residual2_B0(Residual2_B0_p + n_x*1);
     const ACC<double> Residual0_B0(Residual0_B0_p + n_x*1);
     const ACC<double> Residual1_B0(Residual1_B0_p + n_x*1);
-    ACC<double> rho_B0(rho_B0_p + n_x*1);
-    ACC<double> tempRK_rhou0_B0(tempRK_rhou0_B0_p + n_x*1);
-    ACC<double> rhou0_B0(rhou0_B0_p + n_x*1);
     ACC<double> tempRK_rhoE_B0(tempRK_rhoE_B0_p + n_x*1);
-    ACC<double> tempRK_rho_B0(tempRK_rho_B0_p + n_x*1);
     ACC<double> rhoE_B0(rhoE_B0_p + n_x*1);
+    ACC<double> rhou0_B0(rhou0_B0_p + n_x*1);
+    ACC<double> tempRK_rhou0_B0(tempRK_rhou0_B0_p + n_x*1);
+    ACC<double> rho_B0(rho_B0_p + n_x*1);
+    ACC<double> tempRK_rho_B0(tempRK_rho_B0_p + n_x*1);
     
    tempRK_rho_B0(0) = dt*Residual0_B0(0) + rkA[0]*tempRK_rho_B0(0);
 

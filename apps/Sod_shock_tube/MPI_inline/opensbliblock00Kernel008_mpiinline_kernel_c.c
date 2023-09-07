@@ -22,9 +22,9 @@ void opensbliblock00Kernel008_c_wrapper(
     ptr_double rho_B0 = { rho_B0_p + n_x*1};
     ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
     
-   double u0 = 0.0;
    double p = 0.0;
    double d = 0.0;
+   double u0 = 0.0;
    d = 1.00000000000000;
 
    u0 = 0.0;

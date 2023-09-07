@@ -7,8 +7,8 @@ static int dims_opensbliblock00Kernel003_h [3][1] = {{0}};
 //user function
 __device__
 
-void opensbliblock00Kernel003_gpu(const ACC<double> &rhou0_B0,
-  const ACC<double> &rho_B0,
+void opensbliblock00Kernel003_gpu(const ACC<double> &rho_B0,
+  const ACC<double> &rhou0_B0,
   ACC<double> &u0_B0)
 {
    u0_B0(0) = rhou0_B0(0)/rho_B0(0);

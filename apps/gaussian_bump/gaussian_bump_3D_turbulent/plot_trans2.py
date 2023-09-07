@@ -18,7 +18,7 @@ def read_dataset(file, dataset):
 
 print('Reading data')
 #fname='opensbli_output.h5'
-fname='opensbli_output.h5'
+fname='opensbli_output2.h5'
 f=h5py.File(fname, 'r')
 x0dum=read_dataset(f,'x0_B0')
 x1dum=read_dataset(f,'x1_B0')

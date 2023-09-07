@@ -87,9 +87,9 @@ void ops_par_loop_opensbliblock00Kernel008_execute(ops_kernel_descriptor *desc) 
     ACC<double> rho_B0(rho_B0_p + n_x*1);
     ACC<double> rhoE_B0(rhoE_B0_p + n_x*1);
     
-   double u0 = 0.0;
    double p = 0.0;
    double d = 0.0;
+   double u0 = 0.0;
    d = 1.00000000000000;
 
    u0 = 0.0;

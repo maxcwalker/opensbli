@@ -8,7 +8,7 @@ import os
 
 # plt.style.use('classic')
 
-fname = 'opensbli_output.h5'
+fname = 'opensbli_output2.h5'
 
 def read_file(fname):
     f = h5py.File(fname, 'r')

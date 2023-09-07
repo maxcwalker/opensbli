@@ -10,13 +10,13 @@ __device__
  void opensbliblock00Kernel011_gpu(const ACC<double> &Residual2_B0,
   const ACC<double> &Residual0_B0,
   const ACC<double> &Residual1_B0,
-  ACC<double> &rho_B0,
-  ACC<double> &tempRK_rhou0_B0,
-  ACC<double> &rhou0_B0,
   ACC<double> &tempRK_rhoE_B0,
-  ACC<double> &tempRK_rho_B0,
+  ACC<double> &rhoE_B0,
+  ACC<double> &rhou0_B0,
+  ACC<double> &tempRK_rhou0_B0,
+  ACC<double> &rho_B0,
   ACC<double>
-&rhoE_B0,
+&tempRK_rho_B0,
   const double *rkB,
   const double *rkA)
 {

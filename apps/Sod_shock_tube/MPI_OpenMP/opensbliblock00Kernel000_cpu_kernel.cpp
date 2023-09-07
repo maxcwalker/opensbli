@@ -67,31 +67,31 @@ void ops_par_loop_opensbliblock00Kernel000_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ rhou0_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ a_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ p_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ rho_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
-  double * __restrict__ a_B0_p = (double *)(args[2].data + base2);
+  double * __restrict__ rhoE_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ rho_B0_p = (double *)(args[3].data + base3);
+  double * __restrict__ rhou0_B0_p = (double *)(args[3].data + base3);
 
   int base4 = args[4].dat->base_offset;
   double * __restrict__ u0_B0_p = (double *)(args[4].data + base4);
 
   int base5 = args[5].dat->base_offset;
-  double * __restrict__ rhoE_B0_p = (double *)(args[5].data + base5);
+  double * __restrict__ p_B0_p = (double *)(args[5].data + base5);
 
   int base6 = args[6].dat->base_offset;
   double * __restrict__ wk2_B0_p = (double *)(args[6].data + base6);
 
   int base7 = args[7].dat->base_offset;
-  double * __restrict__ wk0_B0_p = (double *)(args[7].data + base7);
+  double * __restrict__ wk1_B0_p = (double *)(args[7].data + base7);
 
   int base8 = args[8].dat->base_offset;
-  double * __restrict__ wk1_B0_p = (double *)(args[8].data + base8);
+  double * __restrict__ wk0_B0_p = (double *)(args[8].data + base8);
 
 
 
@@ -109,84 +109,84 @@ void ops_par_loop_opensbliblock00Kernel000_execute(ops_kernel_descriptor *desc) 
 
   #pragma omp parallel for
   for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
-    const ACC<double> rhou0_B0(rhou0_B0_p + n_x*1);
-    const ACC<double> p_B0(p_B0_p + n_x*1);
     const ACC<double> a_B0(a_B0_p + n_x*1);
     const ACC<double> rho_B0(rho_B0_p + n_x*1);
-    const ACC<double> u0_B0(u0_B0_p + n_x*1);
     const ACC<double> rhoE_B0(rhoE_B0_p + n_x*1);
+    const ACC<double> rhou0_B0(rhou0_B0_p + n_x*1);
+    const ACC<double> u0_B0(u0_B0_p + n_x*1);
+    const ACC<double> p_B0(p_B0_p + n_x*1);
     ACC<double> wk2_B0(wk2_B0_p + n_x*1);
-    ACC<double> wk0_B0(wk0_B0_p + n_x*1);
     ACC<double> wk1_B0(wk1_B0_p + n_x*1);
+    ACC<double> wk0_B0(wk0_B0_p + n_x*1);
     
-   double AVG_0_0_LEV_02 = 0.0;
-   double CS_04 = 0.0;
+   double alpha_2 = 0.0;
    double Recon_1 = 0.0;
-   double beta_2 = 0.0;
-   double CS_24 = 0.0;
-   double CF_11 = 0.0;
-   double AVG_0_0_LEV_12 = 0.0;
-   double CS_20 = 0.0;
-   double AVG_0_0_LEV_20 = 0.0;
-   double CF_15 = 0.0;
-   double CS_01 = 0.0;
-   double CF_25 = 0.0;
-   double CS_05 = 0.0;
-   double inv_omega_sum = 0.0;
-   double CF_00 = 0.0;
-   double beta_1 = 0.0;
-   double CS_03 = 0.0;
-   double max_lambda_0_00 = 0.0;
-   double CF_12 = 0.0;
-   double AVG_0_a = 0.0;
    double CS_14 = 0.0;
-   double CF_21 = 0.0;
-   double AVG_0_0_LEV_01 = 0.0;
-   double AVG_0_rho = 0.0;
-   double AVG_0_0_LEV_21 = 0.0;
-   double AVG_0_0_LEV_11 = 0.0;
-   double AVG_0_inv_rho = 0.0;
-   double CS_10 = 0.0;
-   double alpha_0 = 0.0;
-   double CF_05 = 0.0;
-   double CF_24 = 0.0;
-   double CS_15 = 0.0;
-   double CF_14 = 0.0;
-   double CF_10 = 0.0;
-   double alpha_1 = 0.0;
-   double CS_12 = 0.0;
-   double delta_2 = 0.0;
-   double Recon_0 = 0.0;
-   double CF_13 = 0.0;
-   double CS_21 = 0.0;
+   double CS_01 = 0.0;
    double CF_23 = 0.0;
-   double CS_23 = 0.0;
-   double inv_AVG_rho = 0.0;
-   double AVG_0_0_LEV_00 = 0.0;
-   double inv_alpha_sum = 0.0;
-   double AVG_0_u0 = 0.0;
-   double CS_11 = 0.0;
+   double AVG_0_0_LEV_11 = 0.0;
+   double CS_22 = 0.0;
+   double CF_11 = 0.0;
+   double AVG_0_rho = 0.0;
+   double CS_25 = 0.0;
+   double AVG_0_0_LEV_12 = 0.0;
+   double CF_15 = 0.0;
+   double AVG_0_inv_rho = 0.0;
    double beta_0 = 0.0;
-   double CS_02 = 0.0;
-   double CF_01 = 0.0;
    double CS_00 = 0.0;
-   double AVG_0_0_LEV_22 = 0.0;
    double max_lambda_0_22 = 0.0;
    double CF_02 = 0.0;
-   double CS_22 = 0.0;
-   double AVG_0_0_LEV_10 = 0.0;
-   double CF_20 = 0.0;
-   double CS_13 = 0.0;
+   double inv_AVG_rho = 0.0;
    double inv_AVG_a = 0.0;
-   double Recon_2 = 0.0;
-   double CS_25 = 0.0;
-   double delta_0 = 0.0;
-   double CF_04 = 0.0;
-   double delta_1 = 0.0;
+   double alpha_0 = 0.0;
+   double CF_01 = 0.0;
+   double Recon_0 = 0.0;
+   double CF_14 = 0.0;
+   double CS_03 = 0.0;
+   double beta_1 = 0.0;
+   double CS_24 = 0.0;
+   double AVG_0_u0 = 0.0;
+   double CF_13 = 0.0;
+   double CS_11 = 0.0;
+   double CS_04 = 0.0;
+   double inv_alpha_sum = 0.0;
    double CF_22 = 0.0;
-   double CF_03 = 0.0;
+   double CS_12 = 0.0;
+   double CS_10 = 0.0;
+   double CF_20 = 0.0;
+   double AVG_0_0_LEV_21 = 0.0;
+   double AVG_0_a = 0.0;
+   double CF_21 = 0.0;
+   double AVG_0_0_LEV_20 = 0.0;
+   double CF_00 = 0.0;
+   double AVG_0_0_LEV_02 = 0.0;
+   double AVG_0_0_LEV_00 = 0.0;
+   double AVG_0_0_LEV_01 = 0.0;
+   double max_lambda_0_00 = 0.0;
+   double CF_25 = 0.0;
+   double delta_1 = 0.0;
+   double CF_05 = 0.0;
+   double inv_omega_sum = 0.0;
+   double CS_05 = 0.0;
+   double CS_13 = 0.0;
+   double alpha_1 = 0.0;
+   double CF_04 = 0.0;
+   double Recon_2 = 0.0;
+   double CS_15 = 0.0;
+   double CF_24 = 0.0;
+   double AVG_0_0_LEV_22 = 0.0;
+   double CS_23 = 0.0;
    double max_lambda_0_11 = 0.0;
-   double alpha_2 = 0.0;
+   double CF_03 = 0.0;
+   double CS_20 = 0.0;
+   double CS_21 = 0.0;
+   double beta_2 = 0.0;
+   double delta_0 = 0.0;
+   double CF_12 = 0.0;
+   double AVG_0_0_LEV_10 = 0.0;
+   double CF_10 = 0.0;
+   double delta_2 = 0.0;
+   double CS_02 = 0.0;
    AVG_0_rho = sqrt(rho_B0(0)*rho_B0(1));
 
    AVG_0_inv_rho = 1.0/(sqrt(rho_B0(1)) + sqrt(rho_B0(0)));
@@ -347,18 +347,18 @@ void ops_par_loop_opensbliblock00Kernel000_execute(ops_kernel_descriptor *desc) 
     CS_25 = AVG_0_0_LEV_20*rho_B0(3) + AVG_0_0_LEV_21*rhou0_B0(3) +
       AVG_0_0_LEV_22*rhoE_B0(3);
 
-    max_lambda_0_00 = fmax(fabs(a_B0(3) - u0_B0(3)), fmax(fabs(a_B0(-2) -
-      u0_B0(-2)), fmax(fabs(a_B0(-1) - u0_B0(-1)), fmax(fabs(a_B0(0) -
+    max_lambda_0_00 = fmax(fabs(a_B0(-2) - u0_B0(-2)), fmax(fabs(a_B0(-1) -
+      u0_B0(-1)), fmax(fabs(a_B0(3) - u0_B0(3)), fmax(fabs(a_B0(0) -
       u0_B0(0)), fmax(fabs(a_B0(1) - u0_B0(1)), fabs(a_B0(2) -
       u0_B0(2)))))));
 
-    max_lambda_0_11 = fmax(fabs(u0_B0(2)), fmax(fabs(u0_B0(3)), fmax(fabs(u0_B0(0)),
+    max_lambda_0_11 = fmax(fabs(u0_B0(0)), fmax(fabs(u0_B0(3)), fmax(fabs(u0_B0(2)),
       fmax(fabs(u0_B0(-2)), fmax(fabs(u0_B0(-1)), fabs(u0_B0(1)))))));
 
-    max_lambda_0_22 = fmax(fabs(a_B0(-2) + u0_B0(-2)), fmax(fabs(a_B0(-1) +
-      u0_B0(-1)), fmax(fabs(a_B0(1) + u0_B0(1)), fmax(fabs(a_B0(3) +
-      u0_B0(3)), fmax(fabs(a_B0(0) + u0_B0(0)), fabs(a_B0(2) +
-      u0_B0(2)))))));
+    max_lambda_0_22 = fmax(fabs(a_B0(3) + u0_B0(3)), fmax(fabs(a_B0(0) +
+      u0_B0(0)), fmax(fabs(a_B0(-2) + u0_B0(-2)), fmax(fabs(a_B0(-1) +
+      u0_B0(-1)), fmax(fabs(a_B0(2) + u0_B0(2)), fabs(a_B0(1) +
+      u0_B0(1)))))));
 
     beta_0 = (rc1)*pow((rc0)*(CF_01 + CS_01*max_lambda_0_00) - rc0*(CF_03 + CS_03*max_lambda_0_00), 2) +
       (rc2)*pow((rc0)*(CF_01 + CS_01*max_lambda_0_00) - (CF_02 + CS_02*max_lambda_0_00) + (rc0)*(CF_03 +

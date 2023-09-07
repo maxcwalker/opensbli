@@ -59,10 +59,10 @@ void ops_par_loop_opensbliblock00Kernel003_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ rhou0_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ rho_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ rho_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ rhou0_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
   double * __restrict__ u0_B0_p = (double *)(args[2].data + base2);
@@ -83,8 +83,8 @@ void ops_par_loop_opensbliblock00Kernel003_execute(ops_kernel_descriptor *desc) 
 
   #pragma omp parallel for
   for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
-    const ACC<double> rhou0_B0(rhou0_B0_p + n_x*1);
     const ACC<double> rho_B0(rho_B0_p + n_x*1);
+    const ACC<double> rhou0_B0(rhou0_B0_p + n_x*1);
     ACC<double> u0_B0(u0_B0_p + n_x*1);
     
    u0_B0(0) = rhou0_B0(0)/rho_B0(0);

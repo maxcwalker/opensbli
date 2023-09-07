@@ -104,9 +104,9 @@ void ops_par_loop_opensbliblock00Kernel010_execute(ops_kernel_descriptor *desc) 
     ACC<double> rhoE_B0(rhoE_B0_p + n_x*1);
     ACC<double> x0_B0(x0_B0_p + n_x*1);
     
-   double u0 = 0.0;
    double p = 0.0;
    double d = 0.0;
+   double u0 = 0.0;
    x0_B0(0) = Delta0block0*idx[0];
 
    u0 = 0;

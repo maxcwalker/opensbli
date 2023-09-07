@@ -14,15 +14,15 @@ int xdim5_opensbliblock00Kernel006;
 //user function
 inline 
  void opensbliblock00Kernel006(const ptr_double wk2_B0,
-  const ptr_double wk0_B0,
   const ptr_double wk1_B0,
+  const ptr_double wk0_B0,
   ptr_double Residual1_B0,
   ptr_double Residual0_B0,
   ptr_double Residual2_B0)
 {
    OPS_ACC(Residual0_B0, 0) = -rcinv13*(-OPS_ACC(wk0_B0, -1) + OPS_ACC(wk0_B0, 0));
 
-   OPS_ACC(Residual1_B0, 0) = -rcinv13*(-OPS_ACC(wk1_B0, -1) + OPS_ACC(wk1_B0, 0));
+   OPS_ACC(Residual1_B0, 0) = -rcinv13*(OPS_ACC(wk1_B0, 0) - OPS_ACC(wk1_B0, -1));
 
    OPS_ACC(Residual2_B0, 0) = -rcinv13*(OPS_ACC(wk2_B0, 0) - OPS_ACC(wk2_B0, -1));
 

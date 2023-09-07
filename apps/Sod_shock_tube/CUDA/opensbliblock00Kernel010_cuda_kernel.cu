@@ -13,9 +13,9 @@ void opensbliblock00Kernel010_gpu(ACC<double> &rhou0_B0,
   ACC<double> &x0_B0,
   const int *idx)
 {
-   double u0 = 0.0;
    double p = 0.0;
    double d = 0.0;
+   double u0 = 0.0;
    x0_B0(0) = Delta0block0*idx[0];
 
    u0 = 0;

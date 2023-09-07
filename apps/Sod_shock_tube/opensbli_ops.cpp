@@ -56,13 +56,13 @@ void ops_par_loop_opensbliblock00Kernel003(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg );
 
-void ops_par_loop_opensbliblock00Kernel004(char const *, ops_block, int , int*,
+void ops_par_loop_opensbliblock00Kernel005(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg,
   ops_arg,
   ops_arg );
 
-void ops_par_loop_opensbliblock00Kernel002(char const *, ops_block, int , int*,
+void ops_par_loop_opensbliblock00Kernel001(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg,
   ops_arg );
@@ -167,36 +167,36 @@ int iteration_range_9_block0[] = {block0np0 - 1, block0np0 + 4}; ops_par_loop_op
 for(int stage=0; stage<=2; stage++)
 {
 int iteration_range_3_block0[] = {-3, block0np0 + 4}; ops_par_loop_opensbliblock00Kernel003("CRu0", opensbliblock00, 1, iteration_range_3_block0,
-             ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_READ),
              ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_READ),
+             ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_READ),
              ops_arg_dat(u0_B0, 1, stencil_0_00, "double", OPS_WRITE));
 
-int iteration_range_4_block0[] = {-3, block0np0 + 4}; ops_par_loop_opensbliblock00Kernel004("CRp", opensbliblock00, 1, iteration_range_4_block0,
-             ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_READ),
+int iteration_range_5_block0[] = {-3, block0np0 + 4}; ops_par_loop_opensbliblock00Kernel005("CRp", opensbliblock00, 1, iteration_range_5_block0,
              ops_arg_dat(u0_B0, 1, stencil_0_00, "double", OPS_READ),
+             ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_READ),
              ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_READ),
              ops_arg_dat(p_B0, 1, stencil_0_00, "double", OPS_WRITE));
 
-int iteration_range_2_block0[] = {-3, block0np0 + 4}; ops_par_loop_opensbliblock00Kernel002("CRa", opensbliblock00, 1, iteration_range_2_block0,
+int iteration_range_1_block0[] = {-3, block0np0 + 4}; ops_par_loop_opensbliblock00Kernel001("CRa", opensbliblock00, 1, iteration_range_1_block0,
              ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_READ),
              ops_arg_dat(p_B0, 1, stencil_0_00, "double", OPS_READ),
              ops_arg_dat(a_B0, 1, stencil_0_00, "double", OPS_WRITE));
 
 int iteration_range_0_block0[] = {-1, block0np0 + 1}; ops_par_loop_opensbliblock00Kernel000("LLFTeno_reconstruction_0_direction", opensbliblock00, 1, iteration_range_0_block0,
-             ops_arg_dat(rhou0_B0, 1, stencil_0_01, "double", OPS_READ),
-             ops_arg_dat(p_B0, 1, stencil_0_01, "double", OPS_READ),
              ops_arg_dat(a_B0, 1, stencil_0_01, "double", OPS_READ),
              ops_arg_dat(rho_B0, 1, stencil_0_01, "double", OPS_READ),
-             ops_arg_dat(u0_B0, 1, stencil_0_01, "double", OPS_READ),
              ops_arg_dat(rhoE_B0, 1, stencil_0_01, "double", OPS_READ),
+             ops_arg_dat(rhou0_B0, 1, stencil_0_01, "double", OPS_READ),
+             ops_arg_dat(u0_B0, 1, stencil_0_01, "double", OPS_READ),
+             ops_arg_dat(p_B0, 1, stencil_0_01, "double", OPS_READ),
              ops_arg_dat(wk2_B0, 1, stencil_0_00, "double", OPS_WRITE),
-             ops_arg_dat(wk0_B0, 1, stencil_0_00, "double", OPS_WRITE),
-             ops_arg_dat(wk1_B0, 1, stencil_0_00, "double", OPS_WRITE));
+             ops_arg_dat(wk1_B0, 1, stencil_0_00, "double", OPS_WRITE),
+             ops_arg_dat(wk0_B0, 1, stencil_0_00, "double", OPS_WRITE));
 
 int iteration_range_6_block0[] = {0, block0np0}; ops_par_loop_opensbliblock00Kernel006("LLFTeno Residual", opensbliblock00, 1, iteration_range_6_block0,
              ops_arg_dat(wk2_B0, 1, stencil_0_02, "double", OPS_READ),
-             ops_arg_dat(wk0_B0, 1, stencil_0_02, "double", OPS_READ),
              ops_arg_dat(wk1_B0, 1, stencil_0_02, "double", OPS_READ),
+             ops_arg_dat(wk0_B0, 1, stencil_0_02, "double", OPS_READ),
              ops_arg_dat(Residual1_B0, 1, stencil_0_00, "double", OPS_WRITE),
              ops_arg_dat(Residual0_B0, 1, stencil_0_00, "double", OPS_WRITE),
              ops_arg_dat(Residual2_B0, 1, stencil_0_00, "double", OPS_WRITE));
@@ -205,12 +205,12 @@ int iteration_range_11_block0[] = {0, block0np0}; ops_par_loop_opensbliblock00Ke
              ops_arg_dat(Residual2_B0, 1, stencil_0_00, "double", OPS_READ),
              ops_arg_dat(Residual0_B0, 1, stencil_0_00, "double", OPS_READ),
              ops_arg_dat(Residual1_B0, 1, stencil_0_00, "double", OPS_READ),
-             ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_RW),
-             ops_arg_dat(tempRK_rhou0_B0, 1, stencil_0_00, "double", OPS_RW),
-             ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_RW),
              ops_arg_dat(tempRK_rhoE_B0, 1, stencil_0_00, "double", OPS_RW),
-             ops_arg_dat(tempRK_rho_B0, 1, stencil_0_00, "double", OPS_RW),
              ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_RW),
+             ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_RW),
+             ops_arg_dat(tempRK_rhou0_B0, 1, stencil_0_00, "double", OPS_RW),
+             ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_RW),
+             ops_arg_dat(tempRK_rho_B0, 1, stencil_0_00, "double", OPS_RW),
              ops_arg_gbl(&rkB[stage], 1, "double", OPS_READ),
              ops_arg_gbl(&rkA[stage], 1, "double", OPS_READ));
 

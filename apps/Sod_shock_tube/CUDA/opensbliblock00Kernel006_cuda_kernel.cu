@@ -8,15 +8,15 @@ static int dims_opensbliblock00Kernel006_h [6][1] = {0};
 __device__
 
  void opensbliblock00Kernel006_gpu(const ACC<double> &wk2_B0,
-  const ACC<double> &wk0_B0,
   const ACC<double> &wk1_B0,
+  const ACC<double> &wk0_B0,
   ACC<double> &Residual1_B0,
   ACC<double> &Residual0_B0,
   ACC<double> &Residual2_B0)
 {
    Residual0_B0(0) = -rcinv13*(-wk0_B0(-1) + wk0_B0(0));
 
-   Residual1_B0(0) = -rcinv13*(-wk1_B0(-1) + wk1_B0(0));
+   Residual1_B0(0) = -rcinv13*(wk1_B0(0) - wk1_B0(-1));
 
    Residual2_B0(0) = -rcinv13*(wk2_B0(0) - wk2_B0(-1));
 

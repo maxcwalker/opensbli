@@ -21,12 +21,12 @@ void opensbliblock00Kernel011_c_wrapper(
   double * restrict Residual2_B0_p,
   double * restrict Residual0_B0_p,
   double * restrict Residual1_B0_p,
-  double * restrict rho_B0_p,
-  double * restrict tempRK_rhou0_B0_p,
-  double * restrict rhou0_B0_p,
   double * restrict tempRK_rhoE_B0_p,
-  double * restrict tempRK_rho_B0_p,
   double * restrict rhoE_B0_p,
+  double * restrict rhou0_B0_p,
+  double * restrict tempRK_rhou0_B0_p,
+  double * restrict rho_B0_p,
+  double * restrict tempRK_rho_B0_p,
   const double * restrict rkB,
   const double * restrict rkA,
   int x_size) {
@@ -35,12 +35,12 @@ void opensbliblock00Kernel011_c_wrapper(
     const ptr_double Residual2_B0 = { Residual2_B0_p + n_x*1};
     const ptr_double Residual0_B0 = { Residual0_B0_p + n_x*1};
     const ptr_double Residual1_B0 = { Residual1_B0_p + n_x*1};
-    ptr_double rho_B0 = { rho_B0_p + n_x*1};
-    ptr_double tempRK_rhou0_B0 = { tempRK_rhou0_B0_p + n_x*1};
-    ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
     ptr_double tempRK_rhoE_B0 = { tempRK_rhoE_B0_p + n_x*1};
-    ptr_double tempRK_rho_B0 = { tempRK_rho_B0_p + n_x*1};
     ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
+    ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
+    ptr_double tempRK_rhou0_B0 = { tempRK_rhou0_B0_p + n_x*1};
+    ptr_double rho_B0 = { rho_B0_p + n_x*1};
+    ptr_double tempRK_rho_B0 = { tempRK_rho_B0_p + n_x*1};
     
    OPS_ACC(tempRK_rho_B0, 0) = dt*OPS_ACC(Residual0_B0, 0) + rkA[0]*OPS_ACC(tempRK_rho_B0, 0);
 

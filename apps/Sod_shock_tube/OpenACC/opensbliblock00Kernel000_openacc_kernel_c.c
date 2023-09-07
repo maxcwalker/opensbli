@@ -16,84 +16,84 @@ int xdim8_opensbliblock00Kernel000;
 
 //user function
 inline 
- void opensbliblock00Kernel000(const ptr_double rhou0_B0,
-  const ptr_double p_B0,
-  const ptr_double a_B0,
+ void opensbliblock00Kernel000(const ptr_double a_B0,
   const ptr_double rho_B0,
-  const ptr_double u0_B0,
   const ptr_double rhoE_B0,
+  const ptr_double rhou0_B0,
+  const ptr_double u0_B0,
+  const ptr_double p_B0,
   ptr_double wk2_B0,
-  ptr_double wk0_B0,
-  ptr_double wk1_B0)
+  ptr_double wk1_B0,
+  ptr_double wk0_B0)
 {
-   double AVG_0_0_LEV_02 = 0.0;
-   double CS_04 = 0.0;
+   double alpha_2 = 0.0;
    double Recon_1 = 0.0;
-   double beta_2 = 0.0;
-   double CS_24 = 0.0;
-   double CF_11 = 0.0;
-   double AVG_0_0_LEV_12 = 0.0;
-   double CS_20 = 0.0;
-   double AVG_0_0_LEV_20 = 0.0;
-   double CF_15 = 0.0;
-   double CS_01 = 0.0;
-   double CF_25 = 0.0;
-   double CS_05 = 0.0;
-   double inv_omega_sum = 0.0;
-   double CF_00 = 0.0;
-   double beta_1 = 0.0;
-   double CS_03 = 0.0;
-   double max_lambda_0_00 = 0.0;
-   double CF_12 = 0.0;
-   double AVG_0_a = 0.0;
    double CS_14 = 0.0;
-   double CF_21 = 0.0;
-   double AVG_0_0_LEV_01 = 0.0;
-   double AVG_0_rho = 0.0;
-   double AVG_0_0_LEV_21 = 0.0;
-   double AVG_0_0_LEV_11 = 0.0;
-   double AVG_0_inv_rho = 0.0;
-   double CS_10 = 0.0;
-   double alpha_0 = 0.0;
-   double CF_05 = 0.0;
-   double CF_24 = 0.0;
-   double CS_15 = 0.0;
-   double CF_14 = 0.0;
-   double CF_10 = 0.0;
-   double alpha_1 = 0.0;
-   double CS_12 = 0.0;
-   double delta_2 = 0.0;
-   double Recon_0 = 0.0;
-   double CF_13 = 0.0;
-   double CS_21 = 0.0;
+   double CS_01 = 0.0;
    double CF_23 = 0.0;
-   double CS_23 = 0.0;
-   double inv_AVG_rho = 0.0;
-   double AVG_0_0_LEV_00 = 0.0;
-   double inv_alpha_sum = 0.0;
-   double AVG_0_u0 = 0.0;
-   double CS_11 = 0.0;
+   double AVG_0_0_LEV_11 = 0.0;
+   double CS_22 = 0.0;
+   double CF_11 = 0.0;
+   double AVG_0_rho = 0.0;
+   double CS_25 = 0.0;
+   double AVG_0_0_LEV_12 = 0.0;
+   double CF_15 = 0.0;
+   double AVG_0_inv_rho = 0.0;
    double beta_0 = 0.0;
-   double CS_02 = 0.0;
-   double CF_01 = 0.0;
    double CS_00 = 0.0;
-   double AVG_0_0_LEV_22 = 0.0;
    double max_lambda_0_22 = 0.0;
    double CF_02 = 0.0;
-   double CS_22 = 0.0;
-   double AVG_0_0_LEV_10 = 0.0;
-   double CF_20 = 0.0;
-   double CS_13 = 0.0;
+   double inv_AVG_rho = 0.0;
    double inv_AVG_a = 0.0;
-   double Recon_2 = 0.0;
-   double CS_25 = 0.0;
-   double delta_0 = 0.0;
-   double CF_04 = 0.0;
-   double delta_1 = 0.0;
+   double alpha_0 = 0.0;
+   double CF_01 = 0.0;
+   double Recon_0 = 0.0;
+   double CF_14 = 0.0;
+   double CS_03 = 0.0;
+   double beta_1 = 0.0;
+   double CS_24 = 0.0;
+   double AVG_0_u0 = 0.0;
+   double CF_13 = 0.0;
+   double CS_11 = 0.0;
+   double CS_04 = 0.0;
+   double inv_alpha_sum = 0.0;
    double CF_22 = 0.0;
-   double CF_03 = 0.0;
+   double CS_12 = 0.0;
+   double CS_10 = 0.0;
+   double CF_20 = 0.0;
+   double AVG_0_0_LEV_21 = 0.0;
+   double AVG_0_a = 0.0;
+   double CF_21 = 0.0;
+   double AVG_0_0_LEV_20 = 0.0;
+   double CF_00 = 0.0;
+   double AVG_0_0_LEV_02 = 0.0;
+   double AVG_0_0_LEV_00 = 0.0;
+   double AVG_0_0_LEV_01 = 0.0;
+   double max_lambda_0_00 = 0.0;
+   double CF_25 = 0.0;
+   double delta_1 = 0.0;
+   double CF_05 = 0.0;
+   double inv_omega_sum = 0.0;
+   double CS_05 = 0.0;
+   double CS_13 = 0.0;
+   double alpha_1 = 0.0;
+   double CF_04 = 0.0;
+   double Recon_2 = 0.0;
+   double CS_15 = 0.0;
+   double CF_24 = 0.0;
+   double AVG_0_0_LEV_22 = 0.0;
+   double CS_23 = 0.0;
    double max_lambda_0_11 = 0.0;
-   double alpha_2 = 0.0;
+   double CF_03 = 0.0;
+   double CS_20 = 0.0;
+   double CS_21 = 0.0;
+   double beta_2 = 0.0;
+   double delta_0 = 0.0;
+   double CF_12 = 0.0;
+   double AVG_0_0_LEV_10 = 0.0;
+   double CF_10 = 0.0;
+   double delta_2 = 0.0;
+   double CS_02 = 0.0;
    AVG_0_rho = sqrt(OPS_ACC(rho_B0, 0)*OPS_ACC(rho_B0, 1));
 
    AVG_0_inv_rho = 1.0/(sqrt(OPS_ACC(rho_B0, 1)) + sqrt(OPS_ACC(rho_B0, 0)));
@@ -254,18 +254,18 @@ inline
     CS_25 = AVG_0_0_LEV_20*OPS_ACC(rho_B0, 3) + AVG_0_0_LEV_21*OPS_ACC(rhou0_B0, 3) +
       AVG_0_0_LEV_22*OPS_ACC(rhoE_B0, 3);
 
-    max_lambda_0_00 = fmax(fabs(OPS_ACC(a_B0, 3) - OPS_ACC(u0_B0, 3)), fmax(fabs(OPS_ACC(a_B0, -2) -
-      OPS_ACC(u0_B0, -2)), fmax(fabs(OPS_ACC(a_B0, -1) - OPS_ACC(u0_B0, -1)), fmax(fabs(OPS_ACC(a_B0, 0) -
+    max_lambda_0_00 = fmax(fabs(OPS_ACC(a_B0, -2) - OPS_ACC(u0_B0, -2)), fmax(fabs(OPS_ACC(a_B0, -1) -
+      OPS_ACC(u0_B0, -1)), fmax(fabs(OPS_ACC(a_B0, 3) - OPS_ACC(u0_B0, 3)), fmax(fabs(OPS_ACC(a_B0, 0) -
       OPS_ACC(u0_B0, 0)), fmax(fabs(OPS_ACC(a_B0, 1) - OPS_ACC(u0_B0, 1)), fabs(OPS_ACC(a_B0, 2) -
       OPS_ACC(u0_B0, 2)))))));
 
-    max_lambda_0_11 = fmax(fabs(OPS_ACC(u0_B0, 2)), fmax(fabs(OPS_ACC(u0_B0, 3)), fmax(fabs(OPS_ACC(u0_B0, 0)),
+    max_lambda_0_11 = fmax(fabs(OPS_ACC(u0_B0, 0)), fmax(fabs(OPS_ACC(u0_B0, 3)), fmax(fabs(OPS_ACC(u0_B0, 2)),
       fmax(fabs(OPS_ACC(u0_B0, -2)), fmax(fabs(OPS_ACC(u0_B0, -1)), fabs(OPS_ACC(u0_B0, 1)))))));
 
-    max_lambda_0_22 = fmax(fabs(OPS_ACC(a_B0, -2) + OPS_ACC(u0_B0, -2)), fmax(fabs(OPS_ACC(a_B0, -1) +
-      OPS_ACC(u0_B0, -1)), fmax(fabs(OPS_ACC(a_B0, 1) + OPS_ACC(u0_B0, 1)), fmax(fabs(OPS_ACC(a_B0, 3) +
-      OPS_ACC(u0_B0, 3)), fmax(fabs(OPS_ACC(a_B0, 0) + OPS_ACC(u0_B0, 0)), fabs(OPS_ACC(a_B0, 2) +
-      OPS_ACC(u0_B0, 2)))))));
+    max_lambda_0_22 = fmax(fabs(OPS_ACC(a_B0, 3) + OPS_ACC(u0_B0, 3)), fmax(fabs(OPS_ACC(a_B0, 0) +
+      OPS_ACC(u0_B0, 0)), fmax(fabs(OPS_ACC(a_B0, -2) + OPS_ACC(u0_B0, -2)), fmax(fabs(OPS_ACC(a_B0, -1) +
+      OPS_ACC(u0_B0, -1)), fmax(fabs(OPS_ACC(a_B0, 2) + OPS_ACC(u0_B0, 2)), fabs(OPS_ACC(a_B0, 1) +
+      OPS_ACC(u0_B0, 1)))))));
 
     beta_0 = (rc1)*pow((rc0)*(CF_01 + CS_01*max_lambda_0_00) - rc0*(CF_03 + CS_03*max_lambda_0_00), 2) +
       (rc2)*pow((rc0)*(CF_01 + CS_01*max_lambda_0_00) - (CF_02 + CS_02*max_lambda_0_00) + (rc0)*(CF_03 +

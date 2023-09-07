@@ -66,10 +66,10 @@ void ops_par_loop_opensbliblock00Kernel006_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ wk2_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ wk0_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ wk1_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
-  double * __restrict__ wk1_B0_p = (double *)(args[2].data + base2);
+  double * __restrict__ wk0_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
   double * __restrict__ Residual1_B0_p = (double *)(args[3].data + base3);
@@ -97,15 +97,15 @@ void ops_par_loop_opensbliblock00Kernel006_execute(ops_kernel_descriptor *desc) 
   #pragma omp parallel for
   for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
     const ACC<double> wk2_B0(wk2_B0_p + n_x*1);
-    const ACC<double> wk0_B0(wk0_B0_p + n_x*1);
     const ACC<double> wk1_B0(wk1_B0_p + n_x*1);
+    const ACC<double> wk0_B0(wk0_B0_p + n_x*1);
     ACC<double> Residual1_B0(Residual1_B0_p + n_x*1);
     ACC<double> Residual0_B0(Residual0_B0_p + n_x*1);
     ACC<double> Residual2_B0(Residual2_B0_p + n_x*1);
     
    Residual0_B0(0) = -rcinv13*(-wk0_B0(-1) + wk0_B0(0));
 
-   Residual1_B0(0) = -rcinv13*(-wk1_B0(-1) + wk1_B0(0));
+   Residual1_B0(0) = -rcinv13*(wk1_B0(0) - wk1_B0(-1));
 
    Residual2_B0(0) = -rcinv13*(wk2_B0(0) - wk2_B0(-1));
 

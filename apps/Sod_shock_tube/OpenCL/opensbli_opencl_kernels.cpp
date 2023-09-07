@@ -311,12 +311,12 @@ void ops_decl_const_char(int dim, char const * type, int typeSize, char * dat, c
   }
   
 //user kernel files
+#include "opensbliblock00Kernel010_opencl_kernel.cpp"
+#include "opensbliblock00Kernel009_opencl_kernel.cpp"
+#include "opensbliblock00Kernel001_opencl_kernel.cpp"
+#include "opensbliblock00Kernel003_opencl_kernel.cpp"
+#include "opensbliblock00Kernel000_opencl_kernel.cpp"
 #include "opensbliblock00Kernel011_opencl_kernel.cpp"
 #include "opensbliblock00Kernel006_opencl_kernel.cpp"
-#include "opensbliblock00Kernel002_opencl_kernel.cpp"
+#include "opensbliblock00Kernel005_opencl_kernel.cpp"
 #include "opensbliblock00Kernel008_opencl_kernel.cpp"
-#include "opensbliblock00Kernel003_opencl_kernel.cpp"
-#include "opensbliblock00Kernel004_opencl_kernel.cpp"
-#include "opensbliblock00Kernel009_opencl_kernel.cpp"
-#include "opensbliblock00Kernel000_opencl_kernel.cpp"
-#include "opensbliblock00Kernel010_opencl_kernel.cpp"
