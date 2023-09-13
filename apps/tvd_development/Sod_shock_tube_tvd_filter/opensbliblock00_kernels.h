@@ -1,5 +1,26 @@
 #ifndef OPENSBLIBLOCK00_KERNEL_H
 #define OPENSBLIBLOCK00_KERNEL_H
+
+
+// double fmax(double a,double b,double c);
+
+// double fmax(double a,double b,double c) {
+//    double ans = 0.0;
+//    a>b ? ans = a : ans = b;
+//    c > ans ? ans = c : ans =  ans;
+//    return ans;
+// }
+
+// double sgn(double x);
+
+// double sgn(double x) {
+//    double ans = 0.0;
+//    (x<0) ? ans = -1 :((x=0) ? (ans = 0.0): (ans=1));
+//    return ans;
+// }
+
+
+
 void opensbliblock00Kernel024(double *rho_B0, double *rhou0_B0, double *rhoE_B0, double *x0_B0, const int *idx)
 {
    double p = 0.0;
@@ -817,85 +838,103 @@ double *tempRK_rho_B0, double *tempRK_rhoE_B0, double *rho_B0, double *rhou0_B0,
  void opensbliblock00Kernel028(const double *rhoE_B0, const double *p_B0, const double *rho_B0, const double *rhou0_B0,
 const double *u0_B0, const double *a_B0, double *wk0_B0, double *wk2_B0, double *wk1_B0)
 {
-   double CF_14 = 0.0;
-   double CS_14 = 0.0;
-   double CF_21 = 0.0;
-   double AVG_0_0_LEV_10 = 0.0;
-   double CF_02 = 0.0;
-   double beta_2 = 0.0;
-   double alpha_0 = 0.0;
-   double CS_04 = 0.0;
-   double CS_23 = 0.0;
-   double AVG_0_rho = 0.0;
-   double CS_01 = 0.0;
-   double AVG_0_0_LEV_01 = 0.0;
-   double CF_00 = 0.0;
-   double rj1 = 0.0;
-   double AVG_0_0_LEV_21 = 0.0;
+   
    double AVG_0_a = 0.0;
-   double inv_AVG_rho = 0.0;
-   double CS_05 = 0.0;
-   double AVG_0_0_LEV_11 = 0.0;
-   double CF_03 = 0.0;
-   double AVG_0_0_LEV_20 = 0.0;
-   double CF_20 = 0.0;
-   double CS_00 = 0.0;
-   double CS_02 = 0.0;
-   double CF_25 = 0.0;
-   double Recon_0 = 0.0;
-   double omega_0 = 0.0;
-   double beta_1 = 0.0;
-   double AVG_0_0_LEV_12 = 0.0;
-   double beta_0 = 0.0;
-   double Recon_1 = 0.0;
-   double inv_AVG_a = 0.0;
-   double inv_alpha_sum = 0.0;
-   double CF_22 = 0.0;
-   double max_lambda_0_00 = 0.0;
-   double CS_25 = 0.0;
-   double rj0 = 0.0;
-   double CS_15 = 0.0;
-   double alpha_2 = 0.0;
-   double CS_22 = 0.0;
-   double AVG_0_0_LEV_02 = 0.0;
-   double omega_1 = 0.0;
-   double AVG_0_0_LEV_22 = 0.0;
-   double omega_2 = 0.0;
    double AVG_0_u0 = 0.0;
-   double CS_13 = 0.0;
-   double CF_24 = 0.0;
-   double CS_12 = 0.0;
-   double CS_21 = 0.0;
-   double CF_23 = 0.0;
-   double CF_04 = 0.0;
-   double rj2 = 0.0;
-   double CF_13 = 0.0;
-   double CS_03 = 0.0;
-   double CS_11 = 0.0;
-   double Recon_2 = 0.0;
-   double CS_10 = 0.0;
-   double CF_15 = 0.0;
-   double CS_24 = 0.0;
-   double alpha_1 = 0.0;
-   double CF_05 = 0.0;
-   double CF_11 = 0.0;
-   double CF_01 = 0.0;
-   double max_lambda_0_11 = 0.0;
-   double CS_20 = 0.0;
+   double inv_AVG_a = 0.0;
+   // double inv_AVG_rho = 0.0;
+   // double AVG_0_rho = 0.0;
+
+
+   double AVG_0_0_LEV_10 = 0.0;
+   double AVG_0_0_LEV_01 = 0.0;
+   double AVG_0_0_LEV_21 = 0.0;
+   double AVG_0_0_LEV_12 = 0.0;
+   double AVG_0_0_LEV_22 = 0.0;
+   double AVG_0_0_LEV_02 = 0.0;
    double AVG_0_0_LEV_00 = 0.0;
-   double CF_12 = 0.0;
-   double max_lambda_0_22 = 0.0;
-   double CF_10 = 0.0;
+   double AVG_0_0_LEV_11 = 0.0;
+   double AVG_0_0_LEV_20 = 0.0;
+
+   //            NEW VARIABLES               //
    double kappa = 1.5;
-   AVG_0_a = (rc1)*(a_B0[OPS_ACC5(1)] + a_B0[OPS_ACC5(0)]);
+   double AVG_0_0_REV_00 = 0.0;
+   double AVG_0_0_REV_01 = 0.0;
+   double AVG_0_0_REV_02 = 0.0;
+   double AVG_0_0_REV_10 = 0.0;
+   double AVG_0_0_REV_11 = 0.0;
+   double AVG_0_0_REV_12 = 0.0;
+   double AVG_0_0_REV_20 = 0.0;
+   double AVG_0_0_REV_21 = 0.0;
+   double AVG_0_0_REV_22 = 0.0;
 
-   AVG_0_u0 = (rc1)*(u0_B0[OPS_ACC4(0)] + u0_B0[OPS_ACC4(1)]);
+   double ws_0 = 0.0;
+   double ws_1 = 0.0;
+   double ws_2 = 0.0;
 
+   double du_0 = 0.0;
+   double du_1 = 0.0;
+   double du_2 = 0.0;
+
+   double alpha_00 = 0.0;
+   double alpha_10 = 0.0;
+   double alpha_20 = 0.0;
+   double alpha_01 = 0.0;
+   double alpha_11 = 0.0;
+   double alpha_21 = 0.0;
+   double alpha_02 = 0.0;
+   double alpha_12 = 0.0;
+   double alpha_22 = 0.0;
+
+   double lambda = 0.0;
+   double sigma_0 = 0.0;
+   double sigma_1 = 0.0;
+   double sigma_2 = 0.0;
+
+   double S = 0.0;
+   double g_00 = 0.0;
+   double g_10 = 0.0;
+   double g_20 = 0.0;
+   double g_01 = 0.0;
+   double g_11 = 0.0;
+   double g_21 = 0.0;
+
+   double gamma_0 = 0.0;
+   double gamma_1 = 0.0;
+   double gamma_2 = 0.0;
+
+   double phi_0 = 0.0;
+   double phi_1 = 0.0;
+   double phi_2 = 0.0;
+
+   double theta_hat_00 = 0.0;
+   double theta_hat_10 = 0.0;
+   double theta_hat_20 = 0.0;
+   double theta_hat_01 = 0.0;
+   double theta_hat_11 = 0.0;
+   double theta_hat_21 = 0.0;
+   double theta_0 = 0.0;
+   double theta_1 = 0.0;
+   double theta_2 = 0.0;
+
+   double phi_star_0 = 0.0;
+   double phi_star_1 = 0.0;
+   double phi_star_2 = 0.0;
+
+   double eps = 0.00000001;
+   double delta = 0.5;
+
+
+   // To find alpha values at j-1/2 point
+   AVG_0_a = (rc1)*(a_B0[OPS_ACC5(-1)] + a_B0[OPS_ACC5(0)]);
+   // printf("AVG_0_a: %f\n",AVG_0_a);
+   AVG_0_u0 = (rc1)*(u0_B0[OPS_ACC4(-1)] + u0_B0[OPS_ACC4(0)]);
+   // printf("%f \n",a_B0[OPS_ACC5(-1)]);
    inv_AVG_a = 1.0/AVG_0_a;
 
-   inv_AVG_rho = 1.0/AVG_0_rho;
+   // inv_AVG_rho = 1.0/AVG_0_rho;
 
-    AVG_0_0_LEV_00 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
+   AVG_0_0_LEV_00 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
       2) + 2);
 
    AVG_0_0_LEV_01 = -rc1*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) + 1);
@@ -908,185 +947,234 @@ const double *u0_B0, const double *a_B0, double *wk0_B0, double *wk2_B0, double 
 
    AVG_0_0_LEV_12 = -gamma_m1*pow(inv_AVG_a, 2);
 
-    AVG_0_0_LEV_20 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
+   AVG_0_0_LEV_20 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
       2) - 2);
 
    AVG_0_0_LEV_21 = -rc1*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - 1);
 
    AVG_0_0_LEV_22 = (rc1)*gamma_m1*pow(inv_AVG_a, 2);
 
-   
-   /* ------------------------------------------- DELETED ------------------------------------------------------- //  
+      
+
+   // Finding the deltas of the conserved variables u = {rho, rho*u, rho*e}^T. calling this vector du 
+   du_0 = rho_B0[OPS_ACC2(0)] - rho_B0[OPS_ACC2(-1)];
+   du_1 = rhou0_B0[OPS_ACC3(0)] - rhou0_B0[OPS_ACC3(-1)];
+   du_2 = rhoE_B0[OPS_ACC0(0)] - rhoE_B0[OPS_ACC0(-1)];
+   // printf("%f \n",rho_B0[OPS_ACC2(-1)]);
+   // Working out the alpha which is alpha = R^-1 *(u_{i+1} - u_i)
+   alpha_00 = AVG_0_0_LEV_00*du_0 + AVG_0_0_LEV_01*du_1 + AVG_0_0_LEV_02*du_2;
+   alpha_10 = AVG_0_0_LEV_10*du_0 + AVG_0_0_LEV_11*du_1 + AVG_0_0_LEV_12*du_2;
+   alpha_20 = AVG_0_0_LEV_20*du_0 + AVG_0_0_LEV_21*du_1 + AVG_0_0_LEV_22*du_2;
+   // printf("alpha_00: %f\n",alpha_00);
+
+   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   // To find alpha values at j+1/2 point
+   AVG_0_a = (rc1)*(a_B0[OPS_ACC5(0)] + a_B0[OPS_ACC5(1)]);
+
+   AVG_0_u0 = (rc1)*(u0_B0[OPS_ACC4(0)] + u0_B0[OPS_ACC4(1)]);
+
+   inv_AVG_a = 1.0/AVG_0_a;
+
+   // inv_AVG_rho = 1.0/AVG_0_rho;
+
+   AVG_0_0_LEV_00 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
+      2) + 2);
+
+   AVG_0_0_LEV_01 = -rc1*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) + 1);
+
+   AVG_0_0_LEV_02 = (rc1)*gamma_m1*pow(inv_AVG_a, 2);
+
+   AVG_0_0_LEV_10 = -rc1*(gama*pow(AVG_0_u0, 2)*pow(inv_AVG_a, 2) - pow(AVG_0_u0, 2)*pow(inv_AVG_a, 2) - 2);
+
+   AVG_0_0_LEV_11 = gamma_m1*AVG_0_u0*pow(inv_AVG_a, 2);
+
+   AVG_0_0_LEV_12 = -gamma_m1*pow(inv_AVG_a, 2);
+
+   AVG_0_0_LEV_20 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
+      2) - 2);
+
+   AVG_0_0_LEV_21 = -rc1*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - 1);
+
+   AVG_0_0_LEV_22 = (rc1)*gamma_m1*pow(inv_AVG_a, 2);
+
+   du_0 = rho_B0[OPS_ACC2(1)] - rho_B0[OPS_ACC2(0)];
+   du_1 = rhou0_B0[OPS_ACC3(1)] - rhou0_B0[OPS_ACC3(0)];
+   du_2 = rhoE_B0[OPS_ACC0(1)] - rhoE_B0[OPS_ACC0(0)];
+
+   alpha_01 = AVG_0_0_LEV_00*du_0 + AVG_0_0_LEV_01*du_1 + AVG_0_0_LEV_02*du_2;
+   alpha_11 = AVG_0_0_LEV_10*du_0 + AVG_0_0_LEV_11*du_1 + AVG_0_0_LEV_12*du_2;
+   alpha_21 = AVG_0_0_LEV_20*du_0 + AVG_0_0_LEV_21*du_1 + AVG_0_0_LEV_22*du_2;
 
 
-   CF matrix for R^-1 * f(U) where R^-1 is the left eigenvector matrix and f(u) is the flux vector
-
-   CS matrix for R^-1 * U where U is the coserved variable vector
-
-
-   // ------------------------------------------- NEW ------------------------------------------------------- /*
-
-   /*
-   Finding the deltas of the conserved variables u = {rho, rho*u, rho*e}^T.
-   calling this vector du 
-   */
-
-   // U_j - U_j-1
-   du_00 = rho_B0[OPS_ACC2(0)] - rho_B0[OPS_ACC2(-1)];
-   du_10 = rhou0_B0[OPS_ACC3(0)] - rhou0_B0[OPS_ACC3(-1)];
-   du_20 = rhoE_B0[OPS_ACC0(0)] - rhoE_B0[OPS_ACC0(-1)];
-
-   // U_{j+1} - U_j
-   du_01 = rho_B0[OPS_ACC2(1)] - rho_B0[OPS_ACC2(0)];
-   du_11 = rhou0_B0[OPS_ACC3(1)] - rhou0_B0[OPS_ACC3(0)];
-   du_21 = rhoE_B0[OPS_ACC0(1)] - rhoE_B0[OPS_ACC0(0)];
-
-   // U_{j+2} - U_{j+1}
-   du_01 = rho_B0[OPS_ACC2(2)] - rho_B0[OPS_ACC2(1)];
-   du_11 = rhou0_B0[OPS_ACC3(2)] - rhou0_B0[OPS_ACC3(1)];
-   du_21 = rhoE_B0[OPS_ACC0(2)] - rhoE_B0[OPS_ACC0(1)];
-
-  // Working out the alpha which is alpha = R^-1 *(u_{i+1} - u_i)
-
-   // at j-1/2 point
-   alpha_00 = AVG_0_0_LEV_00*du_00 + AVG_0_0_LEV_01*du_10 + AVG_0_0_LEV_02*du_20;
-   alpha_10 = AVG_0_0_LEV_10*du_00 + AVG_0_0_LEV_11*du_10 + AVG_0_0_LEV_12*du_20;
-   alpha_20 = AVG_0_0_LEV_20*du_00 + AVG_0_0_LEV_21*du_10 + AVG_0_0_LEV_22*du_20;
-
-   // at point j+1/2
-   alpha_01 = AVG_0_0_LEV_00*du_01 + AVG_0_0_LEV_01*du_11 + AVG_0_0_LEV_02*du_21;
-   alpha_11 = AVG_0_0_LEV_10*du_01 + AVG_0_0_LEV_11*du_11 + AVG_0_0_LEV_12*du_21;
-   alpha_21 = AVG_0_0_LEV_20*du_01 + AVG_0_0_LEV_21*du_11 + AVG_0_0_LEV_22*du_21;
-
-   // at point j+3/2
-   alpha_02 = AVG_0_0_LEV_00*du_02 + AVG_0_0_LEV_01*du_12 + AVG_0_0_LEV_02*du_22;
-   alpha_12 = AVG_0_0_LEV_10*du_02 + AVG_0_0_LEV_11*du_12 + AVG_0_0_LEV_12*du_22;
-   alpha_22 = AVG_0_0_LEV_20*du_02 + AVG_0_0_LEV_21*du_12 + AVG_0_0_LEV_22*du_22;   
-
-
-   // lamdba is the time dependant variable,  lambda = dt / dx
-
-   // have to cheat a bit as I dont have access to the time and dx in this kernel. Question for David!
-   double dt = 0.0002;
-   double dx = 0.005;
-
-   lambda = dt / dx;
+   // Right Eigenvector matrix for the reconstruction later. Only R_{j+1/2} is required
+   AVG_0_0_REV_00 = 1;
+   AVG_0_0_REV_01 = 1;
+   AVG_0_0_REV_02 = 1;
+   AVG_0_0_REV_10 = AVG_0_u0-inv_AVG_a;
+   AVG_0_0_REV_11 = AVG_0_u0;
+   AVG_0_0_REV_12 = AVG_0_u0+inv_AVG_a;
+   AVG_0_0_REV_20 = pow(AVG_0_a,2) / gamma_m1 + 0.5*pow(AVG_0_u0,2) - AVG_0_u0*AVG_0_a;
+   AVG_0_0_REV_21 = 0.5*pow(AVG_0_u0,2);
+   AVG_0_0_REV_22 = pow(AVG_0_a,2)*(1/gamma_m1+ AVG_0_u0*inv_AVG_a);
 
    // 'a' values which are the characteristic wave speeds at j+1/2 going to call the vector ws
 
    ws_0 = AVG_0_u0 - AVG_0_a;
    ws_1 = AVG_0_u0;
    ws_2 = AVG_0_u0 + AVG_0_a;
+   // printf("%f \n",ws_0);
+   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   // To find alpha values at j+3/2 point
+   AVG_0_a = (rc1)*(a_B0[OPS_ACC5(1)] + a_B0[OPS_ACC5(2)]);
 
+   AVG_0_u0 = (rc1)*(u0_B0[OPS_ACC4(1)] + u0_B0[OPS_ACC4(2)]);
+
+   inv_AVG_a = 1.0/AVG_0_a;
+
+   // inv_AVG_rho = 1.0/AVG_0_rho;
+
+   AVG_0_0_LEV_00 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
+      2) + 2);
+
+   AVG_0_0_LEV_01 = -rc1*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) + 1);
+
+   AVG_0_0_LEV_02 = (rc1)*gamma_m1*pow(inv_AVG_a, 2);
+
+   AVG_0_0_LEV_10 = -rc1*(gama*pow(AVG_0_u0, 2)*pow(inv_AVG_a, 2) - pow(AVG_0_u0, 2)*pow(inv_AVG_a, 2) - 2);
+
+   AVG_0_0_LEV_11 = gamma_m1*AVG_0_u0*pow(inv_AVG_a, 2);
+
+   AVG_0_0_LEV_12 = -gamma_m1*pow(inv_AVG_a, 2);
+
+   AVG_0_0_LEV_20 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
+      2) - 2);
+
+   AVG_0_0_LEV_21 = -rc1*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - 1);
+
+   AVG_0_0_LEV_22 = (rc1)*gamma_m1*pow(inv_AVG_a, 2);
+
+   du_0 = rho_B0[OPS_ACC2(2)] - rho_B0[OPS_ACC2(1)];
+   du_1 = rhou0_B0[OPS_ACC3(2)] - rhou0_B0[OPS_ACC3(1)];
+   du_2 = rhoE_B0[OPS_ACC0(2)] - rhoE_B0[OPS_ACC0(1)];
+   
+   alpha_02 = AVG_0_0_LEV_00*du_0 + AVG_0_0_LEV_01*du_1 + AVG_0_0_LEV_02*du_2;
+   alpha_12 = AVG_0_0_LEV_10*du_0 + AVG_0_0_LEV_11*du_1 + AVG_0_0_LEV_12*du_2;
+   alpha_22 = AVG_0_0_LEV_20*du_0 + AVG_0_0_LEV_21*du_1 + AVG_0_0_LEV_22*du_2;
+   // printf("alpha_02: %f \n",alpha_02);
+
+   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+   // lamdba is the time dependant variable lambda = dt / dx
+   lambda = dt / Delta0block0;
+   // printf("%f",Delta0block0);
+   // printf("%f\n",lambda);
    // sigma values which go into the phi equation
 
-   sigma_0 = 0.5*(fabs(ws_0) - lamdba*ws_0**2);
-   sigma_1 = 0.5*(fabs(ws_1) - lamdba*ws_1**2);
-   sigma_2 = 0.5*(fabs(ws_2) - lamdba*ws_2**2);
+   // sigma from Sandham 1989
+   // sigma_0 = 0.5*(fabs(ws_0) - lambda*pow(ws_0,2));
+   // sigma_1 = 0.5*(fabs(ws_1) - lambda*pow(ws_1,2));
+   // sigma_2 = 0.5*(fabs(ws_2) - lambda*pow(ws_2,2));
 
 
+   // sigma from Yee et al 1999 (which is used in the fortran code)
+   sigma_0 = fabs(alpha_01) >= delta ? fabs(alpha_01) : (pow(alpha_01,2) + pow(delta,2)) / (2*delta);
+   sigma_1 = fabs(alpha_11) >= delta ? fabs(alpha_11) : (pow(alpha_11,2) + pow(delta,2)) / (2*delta);
+   sigma_2 = fabs(alpha_21) >= delta ? fabs(alpha_21) : (pow(alpha_21,2) + pow(delta,2)) / (2*delta);
+
+
+   // printf("sigma_0: %f\n",sigma_0);
    // g values at half node point which are the upwind limiter functions
 
    // at point j
-   S = sgn(alpha_01);
-   g_00 = S* max(0, min(2*fabs(alpha_01), S*alpha_00), min(fabs(alpha_01),2*S*alpha_00));
+   S = alpha_01 < 0 ? -1 : (alpha_01 > 0 ? 1 : 0);
+   g_00 = S*fmax(fmax(0,fmin(2*fabs(alpha_01), S*alpha_00)),fmin(fabs(alpha_01),2*S*alpha_00));
 
-   S = sgn(alpha_11);
-   g_10 = S* max(0, min(2*fabs(alpha_11), S*alpha_10), min(fabs(alpha_11),2*S*alpha_10));
+   S = alpha_11 < 0 ? -1 : (alpha_11 > 0 ? 1 : 0);
+   g_10 = S*fmax(fmax(0,fmin(2*fabs(alpha_11), S*alpha_10)),fmin(fabs(alpha_11),2*S*alpha_10));
 
-   S = sgn(alpha_21);
-   g_20 = S* max(0, min(2*fabs(alpha_21), S*alpha_20), min(fabs(alpha_21),2*S*alpha_20)); 
+   S = alpha_21 < 0 ? -1 : (alpha_21 > 0 ? 1 : 0);
+   g_20 = S*fmax(fmax(0,fmin(2*fabs(alpha_21), S*alpha_20)),fmin(fabs(alpha_21),2*S*alpha_20)); 
 
    // at points j+1
-   S = sgn(alpha_01);
-   g_01 = S* max(0, min(2*fabs(alpha_02), S*alpha_01), min(fabs(alpha_02),2*S*alpha_01));
+   S = alpha_02 < 0 ? -1 : (alpha_02 > 0 ? 1 : 0);
+   g_01 = S*fmax(fmax(0,fmin(2*fabs(alpha_02), S*alpha_01)),fmin(fabs(alpha_02),2*S*alpha_01));
 
-   S = sgn(alpha_11);
-   g_11 = S* max(0, min(2*fabs(alpha_12), S*alpha_11), min(fabs(alpha_12),2*S*alpha_11));
+   S = alpha_12 < 0 ? -1 : (alpha_12 > 0 ? 1 : 0);
+   g_11 = S*fmax(fmax(0,fmin(2*fabs(alpha_12), S*alpha_11)),fmin(fabs(alpha_12),2*S*alpha_11));
 
-   S = sgn(alpha_21);
-   g_21 = S* max(0, min(2*fabs(alpha_22), S*alpha_21), min(fabs(alpha_22),2*S*alpha_21));
-
+   S = alpha_22 < 0 ? -1 : (alpha_22 > 0 ? 1 : 0);
+   g_21 = S*fmax(fmax(0,fmin(2*fabs(alpha_22), S*alpha_21)),fmin(fabs(alpha_22),2*S*alpha_21));
+   // printf("g_21: %f\n",g_21);
 
    // gamma 
-
-   ((alpha_00 == 0) ? (
-      gamma_0 = 0
-   ));
-   ((alpha_01 != 0) ? (
-       gamma_0 = sigma_0*(g_10 - g_00) / alpha_01
-   ));
-
-   ((alpha_01 == 0) ? (
-      gamma_1 = 0
-   ));
-   ((alpha_01 != 0) ? (
-       gamma_1 = sigma_1*(g_11 - g_01) / alpha_02
-   ));
-
-   ((alpha_02 == 0) ? (
-      gamma_2 = 0
-   ));
-   ((alpha_02 != 0) ? (
-       gamma_2 = sigma_2*(g_12 - g_02) / alpha_02
-   ));
+   // printf("alpha_00 = %.25f\n",alpha_00);
+   gamma_0 = (alpha_00 == 0) ? 0 : sigma_0*alpha_01*(g_01 - g_00) / (pow(alpha_01,2)+eps);
+   gamma_1 = (alpha_01 == 0) ? 0 : sigma_1*alpha_11*(g_11 - g_10) / (pow(alpha_11,2)+eps);
+   gamma_2 = (alpha_02 == 0) ? 0 : sigma_2*alpha_21*(g_21 - g_20) / (pow(alpha_21,2)+eps);
+   
+   // printf("gamma_0: %.1f \n", gamma_0);
+   // printf("------------------------------------\n");
 
    // elements for phi_{j+1/2}
 
-   phi_0 = sigma_0*(g_01 - g_00) + (fabs(ws_0 + gamma_0) - lambda*alpha_01**2)*alpha_01
-   phi_1 = sigma_1*(g_11 - g_10) + (fabs(ws_1 + gamma_1) - lambda*alpha_11**2)*alpha_11
-   phi_2 = sigma_2*(g_21 - g_20) + (fabs(ws_2 + gamma_2) - lambda*alpha_21**2)*alpha_21
+   phi_0 = -sigma_0*(g_01 + g_00) + (fabs(ws_0 + gamma_0) - lambda*pow(ws_0,2))*alpha_01;
+   phi_1 = -sigma_1*(g_11 + g_10) + (fabs(ws_1 + gamma_1) - lambda*pow(ws_1,2))*alpha_11;
+   phi_2 = -sigma_2*(g_21 + g_20) + (fabs(ws_2 + gamma_2) - lambda*pow(ws_2,2))*alpha_21;
+   // printf("phi_0: %f \n", phi_0);
+
+   // the limiter now requires a switch to control its significance on the dissipation. The Harten switch is used as theta
+   // (eqns 2.22 and 2.23 in Yee et al. 1999)
    
 
-   // ------------------------------------------- END OF NEW ------------------------------------------------------- //
+   // thata hat at point j
+   theta_hat_00 = pow(fabs((fabs(alpha_01) - fabs(alpha_00)) / (fabs(alpha_01) + fabs(alpha_00)+eps)),2);
+   theta_hat_10 = pow(fabs((fabs(alpha_11) - fabs(alpha_10)) / (fabs(alpha_11) + fabs(alpha_10)+eps)),2);
+   theta_hat_20 = pow(fabs((fabs(alpha_21) - fabs(alpha_20)) / (fabs(alpha_21) + fabs(alpha_20)+eps)),2);
+   // printf("%f \n", theta_hat_00);
+   // theta hat at point j+1
+   theta_hat_01 = pow(fabs((fabs(alpha_02) - fabs(alpha_01)) / (fabs(alpha_02) + fabs(alpha_01)+eps)),2);
+   theta_hat_11 = pow(fabs((fabs(alpha_12) - fabs(alpha_11)) / (fabs(alpha_12) + fabs(alpha_11)+eps)),2);
+   theta_hat_21 = pow(fabs((fabs(alpha_22) - fabs(alpha_21)) / (fabs(alpha_22) + fabs(alpha_21)+eps)),2); 
+   
 
+   // theta at point j+1/2
+   theta_0 =fmax(theta_hat_00, theta_hat_01);
+   theta_1 =fmax(theta_hat_10, theta_hat_11);
+   theta_2 =fmax(theta_hat_20, theta_hat_21);
+   // printf("%f \n", theta_0);
+   // value to find he filter numerical flux
 
-   /* ------------------------------------------- DELETED ------------------------------------------------------- //  
+   // at point j+1/2
+   phi_star_0 = kappa*theta_0*phi_0;
+   phi_star_1 = kappa*theta_1*phi_1;
+   phi_star_2 = kappa*theta_2*phi_2;
+   // printf("phi_star_0: %f\n", phi_star_0);
 
-   All of the below are WENO parameters:
-   - max_lambda
-   - beta
-   - alpha
-   - omega
-   - Reconstruction
+   // creating the filter numerical flux (eq. 2.2 in Yee et al. 1999)
 
-
-   // ------------------------------------------- NEW ------------------------------------------------------- /*
-
- 
-   Recon_0 = rj0*(Recon_0 - rc21*(CF_00 - 8*CF_01 + 37*CF_02 + 37*CF_03 - 8*CF_04 + CF_05));
-
-   Recon_1 = rj1*(Recon_1 - rc21*(CF_10 - 8*CF_11 + 37*CF_12 + 37*CF_13 - 8*CF_14 + CF_15));
-
-   Recon_2 = rj2*(Recon_2 - rc21*(CF_20 - 8*CF_21 + 37*CF_22 + 37*CF_23 - 8*CF_24 + CF_25));
-
-   wk0_B0[OPS_ACC6(0)] = Recon_0 + Recon_1 + Recon_2;
-
-   wk1_B0[OPS_ACC8(0)] = AVG_0_u0*Recon_1 + Recon_0*(-AVG_0_a + AVG_0_u0) + Recon_2*(AVG_0_a + AVG_0_u0);
-
-    wk2_B0[OPS_ACC7(0)] = (rc1)*pow(AVG_0_u0, 2)*Recon_1 + Recon_0*(rcinv22*pow(AVG_0_a, 2) - AVG_0_a*AVG_0_u0 +
-      (rc1)*pow(AVG_0_u0, 2)) + Recon_2*(rcinv22*pow(AVG_0_a, 2) + AVG_0_a*AVG_0_u0 + (rc1)*pow(AVG_0_u0, 2));
+   // at i+1/2
+   wk0_B0[OPS_ACC6(0)] = 0.5*(AVG_0_0_REV_00*phi_star_0 + AVG_0_0_REV_01*phi_star_1 + AVG_0_0_REV_02*phi_star_2);
+   wk1_B0[OPS_ACC8(0)] = 0.5*(AVG_0_0_REV_10*phi_star_0 + AVG_0_0_REV_11*phi_star_1 + AVG_0_0_REV_12*phi_star_2);
+   wk2_B0[OPS_ACC7(0)] = 0.5*(AVG_0_0_REV_20*phi_star_0 + AVG_0_0_REV_21*phi_star_1 + AVG_0_0_REV_22*phi_star_2);
+   // printf("F_{i+1/2}: %f\n",wk0_B0[OPS_ACC6(0)]);
 
 }
 
+// non-linear filter application
  void opensbliblock00Kernel029(const double *wk0_B0, const double *Mach_sensor_B0, const double *wk2_B0, const double
 *wk1_B0, double *rho_B0, double *rhou0_B0, double *rhoE_B0, const int *idx)
 {
-   double Wall = 0.0;
-   double Grid_0 = 0.0;
-   Grid_0 = idx[0];
+   // Now we have the filter numerical flux, time to find the filter operator, Lf
 
-   Wall = 1;
+   rho_B0[OPS_ACC4(0)] = rho_B0[OPS_ACC4(0)] + dt*inv_0*(wk0_B0[OPS_ACC0(0)] - wk0_B0[OPS_ACC0(-1)]);
+   rhou0_B0[OPS_ACC5(0)] = rhou0_B0[OPS_ACC5(0)] + dt*inv_0*(wk1_B0[OPS_ACC3(0)] - wk1_B0[OPS_ACC3(-1)]);
+   rhoE_B0[OPS_ACC6(0)] = rhoE_B0[OPS_ACC6(0)] + dt*inv_0*(wk2_B0[OPS_ACC2(0)] - wk2_B0[OPS_ACC2(0)]);
 
-    rho_B0[OPS_ACC4(0)] = -dt*inv_0*shock_filter_control*Wall*(wk0_B0[OPS_ACC0(0)] -
-      wk0_B0[OPS_ACC0(-1)])*Mach_sensor_B0[OPS_ACC1(0)] + rho_B0[OPS_ACC4(0)];
-
-    rhou0_B0[OPS_ACC5(0)] = -dt*inv_0*shock_filter_control*Wall*(wk1_B0[OPS_ACC3(0)] -
-      wk1_B0[OPS_ACC3(-1)])*Mach_sensor_B0[OPS_ACC1(0)] + rhou0_B0[OPS_ACC5(0)];
-
-    rhoE_B0[OPS_ACC6(0)] = -dt*inv_0*shock_filter_control*Wall*(-wk2_B0[OPS_ACC2(-1)] +
-      wk2_B0[OPS_ACC2(0)])*Mach_sensor_B0[OPS_ACC1(0)] + rhoE_B0[OPS_ACC6(0)];
-
+   // printf("added flux: %f\n", wk0_B0[OPS_ACC0(-1)]);
+   // printf("rho_B0: %f\n",rho_B0[OPS_ACC4(0)]);
+   
 }
+
 
 #endif

@@ -37,20 +37,13 @@ void opensbliblock00Kernel029_c_wrapper(
     ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
     ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
     
-   double Wall = 0.0;
-   double Grid_0 = 0.0;
-   Grid_0 = idx[0];
 
-   Wall = 1;
 
-    OPS_ACC(rho_B0, 0) = -dt*inv_0*shock_filter_control*Wall*(OPS_ACC(wk0_B0, 0) -
-      OPS_ACC(wk0_B0, -1))*OPS_ACC(Mach_sensor_B0, 0) + OPS_ACC(rho_B0, 0);
+   OPS_ACC(rho_B0, 0) = OPS_ACC(rho_B0, 0) + dt*inv_0*(OPS_ACC(wk0_B0, 0) - OPS_ACC(wk0_B0, -1));
+   OPS_ACC(rhou0_B0, 0) = OPS_ACC(rhou0_B0, 0) + dt*inv_0*(OPS_ACC(wk1_B0, 0) - OPS_ACC(wk1_B0, -1));
+   OPS_ACC(rhoE_B0, 0) = OPS_ACC(rhoE_B0, 0) + dt*inv_0*(OPS_ACC(wk2_B0, 0) - OPS_ACC(wk2_B0, 0));
 
-    OPS_ACC(rhou0_B0, 0) = -dt*inv_0*shock_filter_control*Wall*(OPS_ACC(wk1_B0, 0) -
-      OPS_ACC(wk1_B0, -1))*OPS_ACC(Mach_sensor_B0, 0) + OPS_ACC(rhou0_B0, 0);
 
-    OPS_ACC(rhoE_B0, 0) = -dt*inv_0*shock_filter_control*Wall*(-OPS_ACC(wk2_B0, -1) +
-      OPS_ACC(wk2_B0, 0))*OPS_ACC(Mach_sensor_B0, 0) + OPS_ACC(rhoE_B0, 0);
 
 
   }

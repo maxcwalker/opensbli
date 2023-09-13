@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 {
 block0np0 = 200;
 Delta0block0 = 1.0/(block0np0-1);
-niter = 1; // ceil(0.2/0.0002);
+niter = 1000;//ceil(0.2/0.0002);
 double rkB[] = {1.0/3.0, 15.0/16.0, 8.0/15.0};
 double rkA[] = {0, -5.0/9.0, -153.0/128.0};
 dt = 0.0002;
@@ -145,6 +145,12 @@ double cpu_start0, elapsed_start0;
 ops_timers(&cpu_start0, &elapsed_start0);
 for(int iter=0; iter<=niter - 1; iter++)
 {
+
+if(fmod(iter+1, 1) == 0){
+    ops_printf("Iteration is %d\n", iter+1);
+    ops_NaNcheck(rho_B0);
+}
+
 int iteration_range_22_block0[] = {-3, 1};
 ops_par_loop(opensbliblock00Kernel022, "Dirichlet boundary dir0 side0", opensbliblock00, 1, iteration_range_22_block0,
 ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_WRITE),

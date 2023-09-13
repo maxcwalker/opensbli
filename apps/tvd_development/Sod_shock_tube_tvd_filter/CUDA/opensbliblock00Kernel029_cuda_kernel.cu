@@ -17,20 +17,13 @@ __device__
   ACC<double> &rhoE_B0,
   const int *idx)
 {
-   double Wall = 0.0;
-   double Grid_0 = 0.0;
-   Grid_0 = idx[0];
 
-   Wall = 1;
 
-    rho_B0(0) = -dt*inv_0*shock_filter_control*Wall*(wk0_B0(0) -
-      wk0_B0(-1))*Mach_sensor_B0(0) + rho_B0(0);
+   rho_B0(0) = rho_B0(0) + dt*inv_0*(wk0_B0(0) - wk0_B0(-1));
+   rhou0_B0(0) = rhou0_B0(0) + dt*inv_0*(wk1_B0(0) - wk1_B0(-1));
+   rhoE_B0(0) = rhoE_B0(0) + dt*inv_0*(wk2_B0(0) - wk2_B0(0));
 
-    rhou0_B0(0) = -dt*inv_0*shock_filter_control*Wall*(wk1_B0(0) -
-      wk1_B0(-1))*Mach_sensor_B0(0) + rhou0_B0(0);
 
-    rhoE_B0(0) = -dt*inv_0*shock_filter_control*Wall*(-wk2_B0(-1) +
-      wk2_B0(0))*Mach_sensor_B0(0) + rhoE_B0(0);
 
 }
 
