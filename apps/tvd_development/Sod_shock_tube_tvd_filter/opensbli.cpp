@@ -39,7 +39,7 @@ int main(int argc, char **argv)
 {
 block0np0 = 200;
 Delta0block0 = 1.0/(block0np0-1);
-niter = 1000;//ceil(0.2/0.0002);
+niter = ceil(0.2/0.0002);
 double rkB[] = {1.0/3.0, 15.0/16.0, 8.0/15.0};
 double rkA[] = {0, -5.0/9.0, -153.0/128.0};
 dt = 0.0002;

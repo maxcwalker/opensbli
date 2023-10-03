@@ -39,9 +39,10 @@ void opensbliblock00Kernel029_c_wrapper(
     
 
 
-   OPS_ACC(rho_B0, 0) = OPS_ACC(rho_B0, 0) + dt*inv_0*(OPS_ACC(wk0_B0, 0) - OPS_ACC(wk0_B0, -1));
-   OPS_ACC(rhou0_B0, 0) = OPS_ACC(rhou0_B0, 0) + dt*inv_0*(OPS_ACC(wk1_B0, 0) - OPS_ACC(wk1_B0, -1));
-   OPS_ACC(rhoE_B0, 0) = OPS_ACC(rhoE_B0, 0) + dt*inv_0*(OPS_ACC(wk2_B0, 0) - OPS_ACC(wk2_B0, 0));
+   OPS_ACC(rho_B0, 0) = OPS_ACC(rho_B0, 0) - dt*inv_0*(OPS_ACC(wk0_B0, 0) - OPS_ACC(wk0_B0, -1));
+   OPS_ACC(rhou0_B0, 0) = OPS_ACC(rhou0_B0, 0) - dt*inv_0*(OPS_ACC(wk1_B0, 0) - OPS_ACC(wk1_B0, -1));
+   OPS_ACC(rhoE_B0, 0) = OPS_ACC(rhoE_B0, 0) - dt*inv_0*(OPS_ACC(wk2_B0, 0) - OPS_ACC(wk2_B0, -1));
+
 
 
 

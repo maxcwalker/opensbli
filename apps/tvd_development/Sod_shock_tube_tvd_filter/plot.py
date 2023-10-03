@@ -36,14 +36,11 @@ class Plot(plotFunctions):
         return
 
     def line_graphs(self, x, variables, names):
-        print(variables[0])
         for i, name in enumerate(names):
             if name is not 'Exact':
                 plt.plot(x[i], variables[i], label=labels[i], color=colors[i], marker='o', linestyle='--', markevery=4)
             else:
                 plt.plot(x[i], variables[i], label=labels[i], color=colors[i])
-        # plt.axvline(x=0.635 ,color = 'b', linestyle=':', label = 'point of nan')
-        # plt.title("TVD filter: Iteration 367, kappa = 0.5")
         plt.xlabel(r'$x$', fontsize=20)
         plt.ylabel(r'$\%s$' % 'rho', fontsize=20)
         plt.legend(loc='best')

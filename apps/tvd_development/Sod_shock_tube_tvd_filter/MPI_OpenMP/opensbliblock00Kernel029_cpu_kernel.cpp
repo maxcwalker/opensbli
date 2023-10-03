@@ -121,9 +121,10 @@ void ops_par_loop_opensbliblock00Kernel029_execute(ops_kernel_descriptor *desc) 
     
 
 
-   rho_B0(0) = rho_B0(0) + dt*inv_0*(wk0_B0(0) - wk0_B0(-1));
-   rhou0_B0(0) = rhou0_B0(0) + dt*inv_0*(wk1_B0(0) - wk1_B0(-1));
-   rhoE_B0(0) = rhoE_B0(0) + dt*inv_0*(wk2_B0(0) - wk2_B0(0));
+   rho_B0(0) = rho_B0(0) - dt*inv_0*(wk0_B0(0) - wk0_B0(-1));
+   rhou0_B0(0) = rhou0_B0(0) - dt*inv_0*(wk1_B0(0) - wk1_B0(-1));
+   rhoE_B0(0) = rhoE_B0(0) - dt*inv_0*(wk2_B0(0) - wk2_B0(-1));
+
 
 
 

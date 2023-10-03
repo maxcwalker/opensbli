@@ -1,0 +1,123 @@
+#!/bin/sh
+#!!!!!!!!!! Example SLURM job script for Iridis GPU
+#!!!!!!!!!!  Modify the options in this section as appropriate 
+
+#!!!!!!!!!! sbatch directives begin here ###############################
+#!!!!!!!!!! Name of the job:
+#SBATCH -J 800x100
+
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=6 # Specify a number of CPUs **equal to** the number of GPUs requested per node
+#SBATCH -p gpu      #this is GPU partition in Iridis: 1) -p gpu (two GPU cards per node) 2) 
+#!SBATCH -p gtx1080   #this is GPU partition in Iridis: 2) -p gtx1080 (four GPU cards per node)
+#SBATCH --gres=gpu:2  # GPUs per node: 1) max 2 gpu/node if -p gpu 2) max 4 gpu/node if -p gtx1080
+#SBATCH --time=08:00:00
+
+# mail alert at start, end and abortion of execution
+#SBATCH --mail-type=ALL
+# send mail to this address
+#SBATCH --mail-user=mcww1g22@soton.ac.uk
+#!!!!!!!!!! Uncomment this to prevent the job from being requeued (e.g. if interrupted by node failure or system downtime):
+#!!!!!!!!!!SBATCH --no-requeue
+
+#!!!!!!!!!! sbatch directives end here (put any additional directives above this line)
+
+#!!!!!!!!!! Notes:
+#!!!!!!!!!! Charging is determined by GPU number*walltime. 
+
+#!!!!!!!!!! Number of nodes and tasks per node allocated by SLURM (do not change):
+numnodes=$SLURM_JOB_NUM_NODES
+numtasks=$SLURM_NTASKS
+mpi_tasks_per_node=$(echo "$SLURM_TASKS_PER_NODE" | sed -e  's/^\([0-9][0-9]*\).*$/\1/')
+#!!!!!!!!!! ############################################################
+#!!!!!!!!!! Modify the settings below to specify the application's environment, location 
+#!!!!!!!!!! and launch method:
+
+#!!!!!!!!!! Optionally modify the environment seen by the application
+#!!!!!!!!!! (note that SLURM reproduces the environment at submission irrespective of ~/.bashrc):
+#. /etc/profile.d/modules.sh                # Leave this line (enables the module command)
+module purge                                # Removes all modules still loaded
+# module load rhel8/default-amp
+
+#! Insert additional module load commands after this line if needed:
+export OPS_COMPILER=gnu
+export NV_ARCH=Tesla
+
+module load gcc/6.4.0
+module load cuda/10.0
+module load hdf5/1.10.2/gcc/parallel
+
+#! Full path to application executable: 
+#application="/home/pks1e20/openSBLI_v2/opensbli-cpc_release/apps/transitional_SBLI/build/OpenSBLI_cuda"
+application="./grid_800x100/build/OpenSBLI_mpi_cuda"
+#EXECUTABLE = "/home/pks1e20/openSBLI_v2/opensbli-cpc_release/apps/transitional_SBLI/build/OpenSBLI_mpi_cuda"
+
+#! Run options for the application:
+#options="369 768 1024 OPS_TILING OPS_TILING_MAXDEPTH=6"
+#options="OPS_FORCE_DECOMP_Y=4 OPS_FORCE_DECOMP_Z=2"
+options=""
+#options="0 0 0"
+#options="369 768 1024"
+
+#mkdir $SLURM_SUBMIT_DIR/1node_1GPU
+#! Work directory (i.e. where the job will run):
+workdir="$SLURM_SUBMIT_DIR" # The value of SLURM_SUBMIT_DIR sets workdir to the directory in which sbatch is run
+cd $workdir
+echo -e "Changed directory to `pwd`.\n"
+
+#! Are you using OpenMP (NB this is unrelated to OpenMPI)? If so increase this
+#! safe value to no more than 12:
+export OMP_NUM_THREADS=1
+
+#! Number of MPI tasks to be started by the application per node and in total (do not change):
+np=$[${numnodes}*${mpi_tasks_per_node}]
+echo "number of numnodes, mpi_tasks_per_node, nprocs: $numnodes, $mpi_tasks_per_node, $np"
+
+#! Choose this for a pure shared-memory OpenMP parallel program on a single node:
+#! (OMP_NUM_THREADS threads will be created):
+CMD="$application $options"
+
+###############################################################
+### You should not have to change anything below this line ####
+###############################################################
+
+JOBID=$SLURM_JOB_ID
+
+#! echo -e "JobID: $JOBID\n======"
+#! echo "Time: `date`"
+#! echo "Running on master node: `hostname`"
+#! echo "Current directory: `pwd`"
+
+#! if [ "$SLURM_JOB_NODELIST" ]; then
+        #! Create a machine file:
+        #! export NODEFILE=`generate_pbs_nodefile`
+        #! cat $NODEFILE | uniq > machine.file.$JOBID
+        #! echo -e "\nNodes allocated:\n================"
+        #! echo `cat machine.file.$JOBID | sed -e 's/\..*$//g'`
+#! fi
+
+#! echo -e "\nnumtasks=$numtasks, numnodes=$numnodes, mpi_tasks_per_node=$mpi_tasks_per_node (OMP_NUM_THREADS=$OMP_NUM_THREADS)"
+
+#! echo -e "\nExecuting command:\n==================\n$CMD\n"
+
+#eval  $CMD &> out.txt.$SLURM_JOB_ID
+#srun $application  &> out.txt.$SLURM_JOB_ID
+mpirun -np 6 $application  &> out.txt.$SLURM_JOB_ID
+#srun $EXECUTABLE  &> out.txt.$SLURM_JOB_ID
+#mpirun -np 2 $EXECUTABLE  &> out.txt.$SLURM_JOB_ID
+
+gpuspernode=0
+visibledevices=$CUDA_VISIBLE_DEVICES
+
+for i in $(echo $visibledevices | sed "s/,/ /g")
+do
+    gpuspernode=$(( gpuspernode + 1 ))
+done
+
+totalnumgpus=$(( gpuspernode * $SLURM_JOB_NUM_NODES ))
+echo "Total number of GPUs requested: $totalnumgpus"
+
+echo "total no of GPUs $totalnumgpus" > nodes.info.$SLURM_JOB_ID
+srun hostname >> nodes.info.$SLURM_JOB_ID
+echo $USER >> nodes.info.$SLURM_JOB_ID
+pwd >> nodes.info.$SLURM_JOB_ID

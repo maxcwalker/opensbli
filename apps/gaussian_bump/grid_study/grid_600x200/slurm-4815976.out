@@ -1,0 +1,1580 @@
+Running SLURM prolog script on indigo53.cluster.local
+===============================================================================
+Job started on Tue Sep 26 09:11:29 BST 2023
+Job ID          : 4815976
+Job name        : 600x200
+WorkDir         : /mainfs/scratch/mcww1g22/opensbli/grid_study/y_refinement_600/grid_600x200
+Command         : /mainfs/scratch/mcww1g22/opensbli/grid_study/y_refinement_600/grid_600x200/gaussian3D.slurm
+Partition       : gpu
+Num hosts       : 1
+Num cores       : 1
+Num of tasks    : 1
+Hosts allocated : indigo53
+Job Output Follows ...
+===============================================================================
+
+Modules based on Lua: Version 8.2.7  2019-11-30 09:41 -06:00
+    by Robert McLay mclay@tacc.utexas.edu
+
+module [options] sub-command [args ...]
+
+Help sub-commands:
+------------------
+  help                              prints this message
+  help                module [...]  print help message from module(s)
+
+Loading/Unloading sub-commands:
+-------------------------------
+  load | add          module [...]  load module(s)
+  try-load | try-add  module [...]  Add module(s), do not complain if not
+                                    found
+  del | unload        module [...]  Remove module(s), do not complain if not
+                                    found
+  swap | sw | switch  m1 m2         unload m1 and load m2
+  purge                             unload all modules
+  refresh                           reload aliases from current list of
+                                    modules.
+  update                            reload all currently loaded modules.
+
+Listing / Searching sub-commands:
+---------------------------------
+  list                              List loaded modules
+  list                s1 s2 ...     List loaded modules that match the
+                                    pattern
+  avail | av                        List available modules
+  avail | av          string        List available modules that contain
+                                    "string".
+  spider                            List all possible modules
+  spider              module        List all possible version of that module
+                                    file
+  spider              string        List all module that contain the
+                                    "string".
+  spider              name/version  Detailed information about that version
+                                    of the module.
+  whatis              module        Print whatis information about module
+  keyword | key       string        Search all name and whatis that contain
+                                    "string".
+
+Searching with Lmod:
+--------------------
+  All searching (spider, list, avail, keyword) support regular expressions:
+  
+
+  -r spider           '^p'          Finds all the modules that start with
+                                    `p' or `P'
+  -r spider           mpi           Finds all modules that have "mpi" in
+                                    their name.
+  -r spider           'mpi$         Finds all modules that end with "mpi" in
+                                    their name.
+
+Handling a collection of modules:
+--------------------------------
+  save | s                          Save the current list of modules to a
+                                    user defined "default" collection.
+  save | s            name          Save the current list of modules to
+                                    "name" collection.
+  reset                             The same as "restore system"
+  restore | r                       Restore modules from the user's
+                                    "default" or system default.
+  restore | r         name          Restore modules from "name" collection.
+  restore             system        Restore module state to system defaults.
+  savelist                          List of saved collections.
+  describe | mcc      name          Describe the contents of a module
+                                    collection.
+  disable             name          Disable (i.e. remove) a collection.
+
+Deprecated commands:
+--------------------
+  getdefault          [name]        load name collection of modules or
+                                    user's "default" if no name given.
+                                    ===> Use "restore" instead <====
+  setdefault          [name]        Save current list of modules to name if
+                                    given, otherwise save as the default
+                                    list for you the user.
+                                    ===> Use "save" instead. <====
+
+Miscellaneous sub-commands:
+---------------------------
+  is-loaded           modulefile    return a true status if module is loaded
+  is-avail            modulefile    return a true status if module can be
+                                    loaded
+  show                modulefile    show the commands in the module file.
+  use [-a]            path          Prepend or Append path to MODULEPATH.
+  unuse               path          remove path from MODULEPATH.
+  tablelist                         output list of active modules as a lua
+                                    table.
+
+Important Environment Variables:
+--------------------------------
+  LMOD_COLORIZE                     If defined to be "YES" then Lmod prints
+                                    properties and warning in color.
+
+    --------------------------------------------------------------------------
+
+Lmod Web Sites
+
+  Documentation:    http://lmod.readthedocs.org
+  Github:           https://github.com/TACC/Lmod
+  Sourceforge:      https://lmod.sf.net
+  TACC Homepage:    https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
+
+  To report a bug please read http://lmod.readthedocs.io/en/latest/075_bug_reporting.html
+    --------------------------------------------------------------------------
+
+
+
+Modules based on Lua: Version 8.2.7  2019-11-30 09:41 -06:00
+    by Robert McLay mclay@tacc.utexas.edu
+
+module [options] sub-command [args ...]
+
+Help sub-commands:
+------------------
+  help                              prints this message
+  help                module [...]  print help message from module(s)
+
+Loading/Unloading sub-commands:
+-------------------------------
+  load | add          module [...]  load module(s)
+  try-load | try-add  module [...]  Add module(s), do not complain if not
+                                    found
+  del | unload        module [...]  Remove module(s), do not complain if not
+                                    found
+  swap | sw | switch  m1 m2         unload m1 and load m2
+  purge                             unload all modules
+  refresh                           reload aliases from current list of
+                                    modules.
+  update                            reload all currently loaded modules.
+
+Listing / Searching sub-commands:
+---------------------------------
+  list                              List loaded modules
+  list                s1 s2 ...     List loaded modules that match the
+                                    pattern
+  avail | av                        List available modules
+  avail | av          string        List available modules that contain
+                                    "string".
+  spider                            List all possible modules
+  spider              module        List all possible version of that module
+                                    file
+  spider              string        List all module that contain the
+                                    "string".
+  spider              name/version  Detailed information about that version
+                                    of the module.
+  whatis              module        Print whatis information about module
+  keyword | key       string        Search all name and whatis that contain
+                                    "string".
+
+Searching with Lmod:
+--------------------
+  All searching (spider, list, avail, keyword) support regular expressions:
+  
+
+  -r spider           '^p'          Finds all the modules that start with
+                                    `p' or `P'
+  -r spider           mpi           Finds all modules that have "mpi" in
+                                    their name.
+  -r spider           'mpi$         Finds all modules that end with "mpi" in
+                                    their name.
+
+Handling a collection of modules:
+--------------------------------
+  save | s                          Save the current list of modules to a
+                                    user defined "default" collection.
+  save | s            name          Save the current list of modules to
+                                    "name" collection.
+  reset                             The same as "restore system"
+  restore | r                       Restore modules from the user's
+                                    "default" or system default.
+  restore | r         name          Restore modules from "name" collection.
+  restore             system        Restore module state to system defaults.
+  savelist                          List of saved collections.
+  describe | mcc      name          Describe the contents of a module
+                                    collection.
+  disable             name          Disable (i.e. remove) a collection.
+
+Deprecated commands:
+--------------------
+  getdefault          [name]        load name collection of modules or
+                                    user's "default" if no name given.
+                                    ===> Use "restore" instead <====
+  setdefault          [name]        Save current list of modules to name if
+                                    given, otherwise save as the default
+                                    list for you the user.
+                                    ===> Use "save" instead. <====
+
+Miscellaneous sub-commands:
+---------------------------
+  is-loaded           modulefile    return a true status if module is loaded
+  is-avail            modulefile    return a true status if module can be
+                                    loaded
+  show                modulefile    show the commands in the module file.
+  use [-a]            path          Prepend or Append path to MODULEPATH.
+  unuse               path          remove path from MODULEPATH.
+  tablelist                         output list of active modules as a lua
+                                    table.
+
+Important Environment Variables:
+--------------------------------
+  LMOD_COLORIZE                     If defined to be "YES" then Lmod prints
+                                    properties and warning in color.
+
+    --------------------------------------------------------------------------
+
+Lmod Web Sites
+
+  Documentation:    http://lmod.readthedocs.org
+  Github:           https://github.com/TACC/Lmod
+  Sourceforge:      https://lmod.sf.net
+  TACC Homepage:    https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
+
+  To report a bug please read http://lmod.readthedocs.io/en/latest/075_bug_reporting.html
+    --------------------------------------------------------------------------
+
+
+
+Modules based on Lua: Version 8.2.7  2019-11-30 09:41 -06:00
+    by Robert McLay mclay@tacc.utexas.edu
+
+module [options] sub-command [args ...]
+
+Help sub-commands:
+------------------
+  help                              prints this message
+  help                module [...]  print help message from module(s)
+
+Loading/Unloading sub-commands:
+-------------------------------
+  load | add          module [...]  load module(s)
+  try-load | try-add  module [...]  Add module(s), do not complain if not
+                                    found
+  del | unload        module [...]  Remove module(s), do not complain if not
+                                    found
+  swap | sw | switch  m1 m2         unload m1 and load m2
+  purge                             unload all modules
+  refresh                           reload aliases from current list of
+                                    modules.
+  update                            reload all currently loaded modules.
+
+Listing / Searching sub-commands:
+---------------------------------
+  list                              List loaded modules
+  list                s1 s2 ...     List loaded modules that match the
+                                    pattern
+  avail | av                        List available modules
+  avail | av          string        List available modules that contain
+                                    "string".
+  spider                            List all possible modules
+  spider              module        List all possible version of that module
+                                    file
+  spider              string        List all module that contain the
+                                    "string".
+  spider              name/version  Detailed information about that version
+                                    of the module.
+  whatis              module        Print whatis information about module
+  keyword | key       string        Search all name and whatis that contain
+                                    "string".
+
+Searching with Lmod:
+--------------------
+  All searching (spider, list, avail, keyword) support regular expressions:
+  
+
+  -r spider           '^p'          Finds all the modules that start with
+                                    `p' or `P'
+  -r spider           mpi           Finds all modules that have "mpi" in
+                                    their name.
+  -r spider           'mpi$         Finds all modules that end with "mpi" in
+                                    their name.
+
+Handling a collection of modules:
+--------------------------------
+  save | s                          Save the current list of modules to a
+                                    user defined "default" collection.
+  save | s            name          Save the current list of modules to
+                                    "name" collection.
+  reset                             The same as "restore system"
+  restore | r                       Restore modules from the user's
+                                    "default" or system default.
+  restore | r         name          Restore modules from "name" collection.
+  restore             system        Restore module state to system defaults.
+  savelist                          List of saved collections.
+  describe | mcc      name          Describe the contents of a module
+                                    collection.
+  disable             name          Disable (i.e. remove) a collection.
+
+Deprecated commands:
+--------------------
+  getdefault          [name]        load name collection of modules or
+                                    user's "default" if no name given.
+                                    ===> Use "restore" instead <====
+  setdefault          [name]        Save current list of modules to name if
+                                    given, otherwise save as the default
+                                    list for you the user.
+                                    ===> Use "save" instead. <====
+
+Miscellaneous sub-commands:
+---------------------------
+  is-loaded           modulefile    return a true status if module is loaded
+  is-avail            modulefile    return a true status if module can be
+                                    loaded
+  show                modulefile    show the commands in the module file.
+  use [-a]            path          Prepend or Append path to MODULEPATH.
+  unuse               path          remove path from MODULEPATH.
+  tablelist                         output list of active modules as a lua
+                                    table.
+
+Important Environment Variables:
+--------------------------------
+  LMOD_COLORIZE                     If defined to be "YES" then Lmod prints
+                                    properties and warning in color.
+
+    --------------------------------------------------------------------------
+
+Lmod Web Sites
+
+  Documentation:    http://lmod.readthedocs.org
+  Github:           https://github.com/TACC/Lmod
+  Sourceforge:      https://lmod.sf.net
+  TACC Homepage:    https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
+
+  To report a bug please read http://lmod.readthedocs.io/en/latest/075_bug_reporting.html
+    --------------------------------------------------------------------------
+
+
+
+Modules based on Lua: Version 8.2.7  2019-11-30 09:41 -06:00
+    by Robert McLay mclay@tacc.utexas.edu
+
+module [options] sub-command [args ...]
+
+Help sub-commands:
+------------------
+  help                              prints this message
+  help                module [...]  print help message from module(s)
+
+Loading/Unloading sub-commands:
+-------------------------------
+  load | add          module [...]  load module(s)
+  try-load | try-add  module [...]  Add module(s), do not complain if not
+                                    found
+  del | unload        module [...]  Remove module(s), do not complain if not
+                                    found
+  swap | sw | switch  m1 m2         unload m1 and load m2
+  purge                             unload all modules
+  refresh                           reload aliases from current list of
+                                    modules.
+  update                            reload all currently loaded modules.
+
+Listing / Searching sub-commands:
+---------------------------------
+  list                              List loaded modules
+  list                s1 s2 ...     List loaded modules that match the
+                                    pattern
+  avail | av                        List available modules
+  avail | av          string        List available modules that contain
+                                    "string".
+  spider                            List all possible modules
+  spider              module        List all possible version of that module
+                                    file
+  spider              string        List all module that contain the
+                                    "string".
+  spider              name/version  Detailed information about that version
+                                    of the module.
+  whatis              module        Print whatis information about module
+  keyword | key       string        Search all name and whatis that contain
+                                    "string".
+
+Searching with Lmod:
+--------------------
+  All searching (spider, list, avail, keyword) support regular expressions:
+  
+
+  -r spider           '^p'          Finds all the modules that start with
+                                    `p' or `P'
+  -r spider           mpi           Finds all modules that have "mpi" in
+                                    their name.
+  -r spider           'mpi$         Finds all modules that end with "mpi" in
+                                    their name.
+
+Handling a collection of modules:
+--------------------------------
+  save | s                          Save the current list of modules to a
+                                    user defined "default" collection.
+  save | s            name          Save the current list of modules to
+                                    "name" collection.
+  reset                             The same as "restore system"
+  restore | r                       Restore modules from the user's
+                                    "default" or system default.
+  restore | r         name          Restore modules from "name" collection.
+  restore             system        Restore module state to system defaults.
+  savelist                          List of saved collections.
+  describe | mcc      name          Describe the contents of a module
+                                    collection.
+  disable             name          Disable (i.e. remove) a collection.
+
+Deprecated commands:
+--------------------
+  getdefault          [name]        load name collection of modules or
+                                    user's "default" if no name given.
+                                    ===> Use "restore" instead <====
+  setdefault          [name]        Save current list of modules to name if
+                                    given, otherwise save as the default
+                                    list for you the user.
+                                    ===> Use "save" instead. <====
+
+Miscellaneous sub-commands:
+---------------------------
+  is-loaded           modulefile    return a true status if module is loaded
+  is-avail            modulefile    return a true status if module can be
+                                    loaded
+  show                modulefile    show the commands in the module file.
+  use [-a]            path          Prepend or Append path to MODULEPATH.
+  unuse               path          remove path from MODULEPATH.
+  tablelist                         output list of active modules as a lua
+                                    table.
+
+Important Environment Variables:
+--------------------------------
+  LMOD_COLORIZE                     If defined to be "YES" then Lmod prints
+                                    properties and warning in color.
+
+    --------------------------------------------------------------------------
+
+Lmod Web Sites
+
+  Documentation:    http://lmod.readthedocs.org
+  Github:           https://github.com/TACC/Lmod
+  Sourceforge:      https://lmod.sf.net
+  TACC Homepage:    https://www.tacc.utexas.edu/research-development/tacc-projects/lmod
+
+  To report a bug please read http://lmod.readthedocs.io/en/latest/075_bug_reporting.html
+    --------------------------------------------------------------------------
+
+
+Changed directory to /mainfs/scratch/mcww1g22/opensbli/grid_study/y_refinement_600/grid_600x200.
+
+Iteration is 250
+Iteration is 500
+Iteration is 750
+Iteration is 1000
+Iteration is 1250
+Iteration is 1500
+Iteration is 1750
+Iteration is 2000
+Iteration is 2250
+Iteration is 2500
+File opensbli_output_002500.h5 does not exist .... creating file
+Iteration is 2750
+Iteration is 3000
+Iteration is 3250
+Iteration is 3500
+Iteration is 3750
+Iteration is 4000
+Iteration is 4250
+Iteration is 4500
+Iteration is 4750
+Iteration is 5000
+File opensbli_output_005000.h5 does not exist .... creating file
+Iteration is 5250
+Iteration is 5500
+Iteration is 5750
+Iteration is 6000
+Iteration is 6250
+Iteration is 6500
+Iteration is 6750
+Iteration is 7000
+Iteration is 7250
+Iteration is 7500
+File opensbli_output_007500.h5 does not exist .... creating file
+Iteration is 7750
+Iteration is 8000
+Iteration is 8250
+Iteration is 8500
+Iteration is 8750
+Iteration is 9000
+Iteration is 9250
+Iteration is 9500
+Iteration is 9750
+Iteration is 10000
+File opensbli_output_010000.h5 does not exist .... creating file
+Iteration is 10250
+Iteration is 10500
+Iteration is 10750
+Iteration is 11000
+Iteration is 11250
+Iteration is 11500
+Iteration is 11750
+Iteration is 12000
+Iteration is 12250
+Iteration is 12500
+File opensbli_output_012500.h5 does not exist .... creating file
+Iteration is 12750
+Iteration is 13000
+Iteration is 13250
+Iteration is 13500
+Iteration is 13750
+Iteration is 14000
+Iteration is 14250
+Iteration is 14500
+Iteration is 14750
+Iteration is 15000
+File opensbli_output_015000.h5 does not exist .... creating file
+Iteration is 15250
+Iteration is 15500
+Iteration is 15750
+Iteration is 16000
+Iteration is 16250
+Iteration is 16500
+Iteration is 16750
+Iteration is 17000
+Iteration is 17250
+Iteration is 17500
+File opensbli_output_017500.h5 does not exist .... creating file
+Iteration is 17750
+Iteration is 18000
+Iteration is 18250
+Iteration is 18500
+Iteration is 18750
+Iteration is 19000
+Iteration is 19250
+Iteration is 19500
+Iteration is 19750
+Iteration is 20000
+File opensbli_output_020000.h5 does not exist .... creating file
+Iteration is 20250
+Iteration is 20500
+Iteration is 20750
+Iteration is 21000
+Iteration is 21250
+Iteration is 21500
+Iteration is 21750
+Iteration is 22000
+Iteration is 22250
+Iteration is 22500
+File opensbli_output_022500.h5 does not exist .... creating file
+Iteration is 22750
+Iteration is 23000
+Iteration is 23250
+Iteration is 23500
+Iteration is 23750
+Iteration is 24000
+Iteration is 24250
+Iteration is 24500
+Iteration is 24750
+Iteration is 25000
+File opensbli_output_025000.h5 does not exist .... creating file
+Iteration is 25250
+Iteration is 25500
+Iteration is 25750
+Iteration is 26000
+Iteration is 26250
+Iteration is 26500
+Iteration is 26750
+Iteration is 27000
+Iteration is 27250
+Iteration is 27500
+File opensbli_output_027500.h5 does not exist .... creating file
+Iteration is 27750
+Iteration is 28000
+Iteration is 28250
+Iteration is 28500
+Iteration is 28750
+Iteration is 29000
+Iteration is 29250
+Iteration is 29500
+Iteration is 29750
+Iteration is 30000
+File opensbli_output_030000.h5 does not exist .... creating file
+Iteration is 30250
+Iteration is 30500
+Iteration is 30750
+Iteration is 31000
+Iteration is 31250
+Iteration is 31500
+Iteration is 31750
+Iteration is 32000
+Iteration is 32250
+Iteration is 32500
+File opensbli_output_032500.h5 does not exist .... creating file
+Iteration is 32750
+Iteration is 33000
+Iteration is 33250
+Iteration is 33500
+Iteration is 33750
+Iteration is 34000
+Iteration is 34250
+Iteration is 34500
+Iteration is 34750
+Iteration is 35000
+File opensbli_output_035000.h5 does not exist .... creating file
+Iteration is 35250
+Iteration is 35500
+Iteration is 35750
+Iteration is 36000
+Iteration is 36250
+Iteration is 36500
+Iteration is 36750
+Iteration is 37000
+Iteration is 37250
+Iteration is 37500
+File opensbli_output_037500.h5 does not exist .... creating file
+Iteration is 37750
+Iteration is 38000
+Iteration is 38250
+Iteration is 38500
+Iteration is 38750
+Iteration is 39000
+Iteration is 39250
+Iteration is 39500
+Iteration is 39750
+Iteration is 40000
+File opensbli_output_040000.h5 does not exist .... creating file
+Iteration is 40250
+Iteration is 40500
+Iteration is 40750
+Iteration is 41000
+Iteration is 41250
+Iteration is 41500
+Iteration is 41750
+Iteration is 42000
+Iteration is 42250
+Iteration is 42500
+File opensbli_output_042500.h5 does not exist .... creating file
+Iteration is 42750
+Iteration is 43000
+Iteration is 43250
+Iteration is 43500
+Iteration is 43750
+Iteration is 44000
+Iteration is 44250
+Iteration is 44500
+Iteration is 44750
+Iteration is 45000
+File opensbli_output_045000.h5 does not exist .... creating file
+Iteration is 45250
+Iteration is 45500
+Iteration is 45750
+Iteration is 46000
+Iteration is 46250
+Iteration is 46500
+Iteration is 46750
+Iteration is 47000
+Iteration is 47250
+Iteration is 47500
+File opensbli_output_047500.h5 does not exist .... creating file
+Iteration is 47750
+Iteration is 48000
+Iteration is 48250
+Iteration is 48500
+Iteration is 48750
+Iteration is 49000
+Iteration is 49250
+Iteration is 49500
+Iteration is 49750
+Iteration is 50000
+File opensbli_output_050000.h5 does not exist .... creating file
+Iteration is 50250
+Iteration is 50500
+Iteration is 50750
+Iteration is 51000
+Iteration is 51250
+Iteration is 51500
+Iteration is 51750
+Iteration is 52000
+Iteration is 52250
+Iteration is 52500
+File opensbli_output_052500.h5 does not exist .... creating file
+Iteration is 52750
+Iteration is 53000
+Iteration is 53250
+Iteration is 53500
+Iteration is 53750
+Iteration is 54000
+Iteration is 54250
+Iteration is 54500
+Iteration is 54750
+Iteration is 55000
+File opensbli_output_055000.h5 does not exist .... creating file
+Iteration is 55250
+Iteration is 55500
+Iteration is 55750
+Iteration is 56000
+Iteration is 56250
+Iteration is 56500
+Iteration is 56750
+Iteration is 57000
+Iteration is 57250
+Iteration is 57500
+File opensbli_output_057500.h5 does not exist .... creating file
+Iteration is 57750
+Iteration is 58000
+Iteration is 58250
+Iteration is 58500
+Iteration is 58750
+Iteration is 59000
+Iteration is 59250
+Iteration is 59500
+Iteration is 59750
+Iteration is 60000
+File opensbli_output_060000.h5 does not exist .... creating file
+Iteration is 60250
+Iteration is 60500
+Iteration is 60750
+Iteration is 61000
+Iteration is 61250
+Iteration is 61500
+Iteration is 61750
+Iteration is 62000
+Iteration is 62250
+Iteration is 62500
+File opensbli_output_062500.h5 does not exist .... creating file
+Iteration is 62750
+Iteration is 63000
+Iteration is 63250
+Iteration is 63500
+Iteration is 63750
+Iteration is 64000
+Iteration is 64250
+Iteration is 64500
+Iteration is 64750
+Iteration is 65000
+File opensbli_output_065000.h5 does not exist .... creating file
+Iteration is 65250
+Iteration is 65500
+Iteration is 65750
+Iteration is 66000
+Iteration is 66250
+Iteration is 66500
+Iteration is 66750
+Iteration is 67000
+Iteration is 67250
+Iteration is 67500
+File opensbli_output_067500.h5 does not exist .... creating file
+Iteration is 67750
+Iteration is 68000
+Iteration is 68250
+Iteration is 68500
+Iteration is 68750
+Iteration is 69000
+Iteration is 69250
+Iteration is 69500
+Iteration is 69750
+Iteration is 70000
+File opensbli_output_070000.h5 does not exist .... creating file
+Iteration is 70250
+Iteration is 70500
+Iteration is 70750
+Iteration is 71000
+Iteration is 71250
+Iteration is 71500
+Iteration is 71750
+Iteration is 72000
+Iteration is 72250
+Iteration is 72500
+File opensbli_output_072500.h5 does not exist .... creating file
+Iteration is 72750
+Iteration is 73000
+Iteration is 73250
+Iteration is 73500
+Iteration is 73750
+Iteration is 74000
+Iteration is 74250
+Iteration is 74500
+Iteration is 74750
+Iteration is 75000
+File opensbli_output_075000.h5 does not exist .... creating file
+Iteration is 75250
+Iteration is 75500
+Iteration is 75750
+Iteration is 76000
+Iteration is 76250
+Iteration is 76500
+Iteration is 76750
+Iteration is 77000
+Iteration is 77250
+Iteration is 77500
+File opensbli_output_077500.h5 does not exist .... creating file
+Iteration is 77750
+Iteration is 78000
+Iteration is 78250
+Iteration is 78500
+Iteration is 78750
+Iteration is 79000
+Iteration is 79250
+Iteration is 79500
+Iteration is 79750
+Iteration is 80000
+File opensbli_output_080000.h5 does not exist .... creating file
+Iteration is 80250
+Iteration is 80500
+Iteration is 80750
+Iteration is 81000
+Iteration is 81250
+Iteration is 81500
+Iteration is 81750
+Iteration is 82000
+Iteration is 82250
+Iteration is 82500
+File opensbli_output_082500.h5 does not exist .... creating file
+Iteration is 82750
+Iteration is 83000
+Iteration is 83250
+Iteration is 83500
+Iteration is 83750
+Iteration is 84000
+Iteration is 84250
+Iteration is 84500
+Iteration is 84750
+Iteration is 85000
+File opensbli_output_085000.h5 does not exist .... creating file
+Iteration is 85250
+Iteration is 85500
+Iteration is 85750
+Iteration is 86000
+Iteration is 86250
+Iteration is 86500
+Iteration is 86750
+Iteration is 87000
+Iteration is 87250
+Iteration is 87500
+File opensbli_output_087500.h5 does not exist .... creating file
+Iteration is 87750
+Iteration is 88000
+Iteration is 88250
+Iteration is 88500
+Iteration is 88750
+Iteration is 89000
+Iteration is 89250
+Iteration is 89500
+Iteration is 89750
+Iteration is 90000
+File opensbli_output_090000.h5 does not exist .... creating file
+Iteration is 90250
+Iteration is 90500
+Iteration is 90750
+Iteration is 91000
+Iteration is 91250
+Iteration is 91500
+Iteration is 91750
+Iteration is 92000
+Iteration is 92250
+Iteration is 92500
+File opensbli_output_092500.h5 does not exist .... creating file
+Iteration is 92750
+Iteration is 93000
+Iteration is 93250
+Iteration is 93500
+Iteration is 93750
+Iteration is 94000
+Iteration is 94250
+Iteration is 94500
+Iteration is 94750
+Iteration is 95000
+File opensbli_output_095000.h5 does not exist .... creating file
+Iteration is 95250
+Iteration is 95500
+Iteration is 95750
+Iteration is 96000
+Iteration is 96250
+Iteration is 96500
+Iteration is 96750
+Iteration is 97000
+Iteration is 97250
+Iteration is 97500
+File opensbli_output_097500.h5 does not exist .... creating file
+Iteration is 97750
+Iteration is 98000
+Iteration is 98250
+Iteration is 98500
+Iteration is 98750
+Iteration is 99000
+Iteration is 99250
+Iteration is 99500
+Iteration is 99750
+Iteration is 100000
+File opensbli_output_100000.h5 does not exist .... creating file
+Iteration is 100250
+Iteration is 100500
+Iteration is 100750
+Iteration is 101000
+Iteration is 101250
+Iteration is 101500
+Iteration is 101750
+Iteration is 102000
+Iteration is 102250
+Iteration is 102500
+File opensbli_output_102500.h5 does not exist .... creating file
+Iteration is 102750
+Iteration is 103000
+Iteration is 103250
+Iteration is 103500
+Iteration is 103750
+Iteration is 104000
+Iteration is 104250
+Iteration is 104500
+Iteration is 104750
+Iteration is 105000
+File opensbli_output_105000.h5 does not exist .... creating file
+Iteration is 105250
+Iteration is 105500
+Iteration is 105750
+Iteration is 106000
+Iteration is 106250
+Iteration is 106500
+Iteration is 106750
+Iteration is 107000
+Iteration is 107250
+Iteration is 107500
+File opensbli_output_107500.h5 does not exist .... creating file
+Iteration is 107750
+Iteration is 108000
+Iteration is 108250
+Iteration is 108500
+Iteration is 108750
+Iteration is 109000
+Iteration is 109250
+Iteration is 109500
+Iteration is 109750
+Iteration is 110000
+File opensbli_output_110000.h5 does not exist .... creating file
+Iteration is 110250
+Iteration is 110500
+Iteration is 110750
+Iteration is 111000
+Iteration is 111250
+Iteration is 111500
+Iteration is 111750
+Iteration is 112000
+Iteration is 112250
+Iteration is 112500
+File opensbli_output_112500.h5 does not exist .... creating file
+Iteration is 112750
+Iteration is 113000
+Iteration is 113250
+Iteration is 113500
+Iteration is 113750
+Iteration is 114000
+Iteration is 114250
+Iteration is 114500
+Iteration is 114750
+Iteration is 115000
+File opensbli_output_115000.h5 does not exist .... creating file
+Iteration is 115250
+Iteration is 115500
+Iteration is 115750
+Iteration is 116000
+Iteration is 116250
+Iteration is 116500
+Iteration is 116750
+Iteration is 117000
+Iteration is 117250
+Iteration is 117500
+File opensbli_output_117500.h5 does not exist .... creating file
+Iteration is 117750
+Iteration is 118000
+Iteration is 118250
+Iteration is 118500
+Iteration is 118750
+Iteration is 119000
+Iteration is 119250
+Iteration is 119500
+Iteration is 119750
+Iteration is 120000
+File opensbli_output_120000.h5 does not exist .... creating file
+Iteration is 120250
+Iteration is 120500
+Iteration is 120750
+Iteration is 121000
+Iteration is 121250
+Iteration is 121500
+Iteration is 121750
+Iteration is 122000
+Iteration is 122250
+Iteration is 122500
+File opensbli_output_122500.h5 does not exist .... creating file
+Iteration is 122750
+Iteration is 123000
+Iteration is 123250
+Iteration is 123500
+Iteration is 123750
+Iteration is 124000
+Iteration is 124250
+Iteration is 124500
+Iteration is 124750
+Iteration is 125000
+File opensbli_output_125000.h5 does not exist .... creating file
+Iteration is 125250
+Iteration is 125500
+Iteration is 125750
+Iteration is 126000
+Iteration is 126250
+Iteration is 126500
+Iteration is 126750
+Iteration is 127000
+Iteration is 127250
+Iteration is 127500
+File opensbli_output_127500.h5 does not exist .... creating file
+Iteration is 127750
+Iteration is 128000
+Iteration is 128250
+Iteration is 128500
+Iteration is 128750
+Iteration is 129000
+Iteration is 129250
+Iteration is 129500
+Iteration is 129750
+Iteration is 130000
+File opensbli_output_130000.h5 does not exist .... creating file
+Iteration is 130250
+Iteration is 130500
+Iteration is 130750
+Iteration is 131000
+Iteration is 131250
+Iteration is 131500
+Iteration is 131750
+Iteration is 132000
+Iteration is 132250
+Iteration is 132500
+File opensbli_output_132500.h5 does not exist .... creating file
+Iteration is 132750
+Iteration is 133000
+Iteration is 133250
+Iteration is 133500
+Iteration is 133750
+Iteration is 134000
+Iteration is 134250
+Iteration is 134500
+Iteration is 134750
+Iteration is 135000
+File opensbli_output_135000.h5 does not exist .... creating file
+Iteration is 135250
+Iteration is 135500
+Iteration is 135750
+Iteration is 136000
+Iteration is 136250
+Iteration is 136500
+Iteration is 136750
+Iteration is 137000
+Iteration is 137250
+Iteration is 137500
+File opensbli_output_137500.h5 does not exist .... creating file
+Iteration is 137750
+Iteration is 138000
+Iteration is 138250
+Iteration is 138500
+Iteration is 138750
+Iteration is 139000
+Iteration is 139250
+Iteration is 139500
+Iteration is 139750
+Iteration is 140000
+File opensbli_output_140000.h5 does not exist .... creating file
+Iteration is 140250
+Iteration is 140500
+Iteration is 140750
+Iteration is 141000
+Iteration is 141250
+Iteration is 141500
+Iteration is 141750
+Iteration is 142000
+Iteration is 142250
+Iteration is 142500
+File opensbli_output_142500.h5 does not exist .... creating file
+Iteration is 142750
+Iteration is 143000
+Iteration is 143250
+Iteration is 143500
+Iteration is 143750
+Iteration is 144000
+Iteration is 144250
+Iteration is 144500
+Iteration is 144750
+Iteration is 145000
+File opensbli_output_145000.h5 does not exist .... creating file
+Iteration is 145250
+Iteration is 145500
+Iteration is 145750
+Iteration is 146000
+Iteration is 146250
+Iteration is 146500
+Iteration is 146750
+Iteration is 147000
+Iteration is 147250
+Iteration is 147500
+File opensbli_output_147500.h5 does not exist .... creating file
+Iteration is 147750
+Iteration is 148000
+Iteration is 148250
+Iteration is 148500
+Iteration is 148750
+Iteration is 149000
+Iteration is 149250
+Iteration is 149500
+Iteration is 149750
+Iteration is 150000
+File opensbli_output_150000.h5 does not exist .... creating file
+Iteration is 150250
+Iteration is 150500
+Iteration is 150750
+Iteration is 151000
+Iteration is 151250
+Iteration is 151500
+Iteration is 151750
+Iteration is 152000
+Iteration is 152250
+Iteration is 152500
+File opensbli_output_152500.h5 does not exist .... creating file
+Iteration is 152750
+Iteration is 153000
+Iteration is 153250
+Iteration is 153500
+Iteration is 153750
+Iteration is 154000
+Iteration is 154250
+Iteration is 154500
+Iteration is 154750
+Iteration is 155000
+File opensbli_output_155000.h5 does not exist .... creating file
+Iteration is 155250
+Iteration is 155500
+Iteration is 155750
+Iteration is 156000
+Iteration is 156250
+Iteration is 156500
+Iteration is 156750
+Iteration is 157000
+Iteration is 157250
+Iteration is 157500
+File opensbli_output_157500.h5 does not exist .... creating file
+Iteration is 157750
+Iteration is 158000
+Iteration is 158250
+Iteration is 158500
+Iteration is 158750
+Iteration is 159000
+Iteration is 159250
+Iteration is 159500
+Iteration is 159750
+Iteration is 160000
+File opensbli_output_160000.h5 does not exist .... creating file
+Iteration is 160250
+Iteration is 160500
+Iteration is 160750
+Iteration is 161000
+Iteration is 161250
+Iteration is 161500
+Iteration is 161750
+Iteration is 162000
+Iteration is 162250
+Iteration is 162500
+File opensbli_output_162500.h5 does not exist .... creating file
+Iteration is 162750
+Iteration is 163000
+Iteration is 163250
+Iteration is 163500
+Iteration is 163750
+Iteration is 164000
+Iteration is 164250
+Iteration is 164500
+Iteration is 164750
+Iteration is 165000
+File opensbli_output_165000.h5 does not exist .... creating file
+Iteration is 165250
+Iteration is 165500
+Iteration is 165750
+Iteration is 166000
+Iteration is 166250
+Iteration is 166500
+Iteration is 166750
+Iteration is 167000
+Iteration is 167250
+Iteration is 167500
+File opensbli_output_167500.h5 does not exist .... creating file
+Iteration is 167750
+Iteration is 168000
+Iteration is 168250
+Iteration is 168500
+Iteration is 168750
+Iteration is 169000
+Iteration is 169250
+Iteration is 169500
+Iteration is 169750
+Iteration is 170000
+File opensbli_output_170000.h5 does not exist .... creating file
+Iteration is 170250
+Iteration is 170500
+Iteration is 170750
+Iteration is 171000
+Iteration is 171250
+Iteration is 171500
+Iteration is 171750
+Iteration is 172000
+Iteration is 172250
+Iteration is 172500
+File opensbli_output_172500.h5 does not exist .... creating file
+Iteration is 172750
+Iteration is 173000
+Iteration is 173250
+Iteration is 173500
+Iteration is 173750
+Iteration is 174000
+Iteration is 174250
+Iteration is 174500
+Iteration is 174750
+Iteration is 175000
+File opensbli_output_175000.h5 does not exist .... creating file
+Iteration is 175250
+Iteration is 175500
+Iteration is 175750
+Iteration is 176000
+Iteration is 176250
+Iteration is 176500
+Iteration is 176750
+Iteration is 177000
+Iteration is 177250
+Iteration is 177500
+File opensbli_output_177500.h5 does not exist .... creating file
+Iteration is 177750
+Iteration is 178000
+Iteration is 178250
+Iteration is 178500
+Iteration is 178750
+Iteration is 179000
+Iteration is 179250
+Iteration is 179500
+Iteration is 179750
+Iteration is 180000
+File opensbli_output_180000.h5 does not exist .... creating file
+Iteration is 180250
+Iteration is 180500
+Iteration is 180750
+Iteration is 181000
+Iteration is 181250
+Iteration is 181500
+Iteration is 181750
+Iteration is 182000
+Iteration is 182250
+Iteration is 182500
+File opensbli_output_182500.h5 does not exist .... creating file
+Iteration is 182750
+Iteration is 183000
+Iteration is 183250
+Iteration is 183500
+Iteration is 183750
+Iteration is 184000
+Iteration is 184250
+Iteration is 184500
+Iteration is 184750
+Iteration is 185000
+File opensbli_output_185000.h5 does not exist .... creating file
+Iteration is 185250
+Iteration is 185500
+Iteration is 185750
+Iteration is 186000
+Iteration is 186250
+Iteration is 186500
+Iteration is 186750
+Iteration is 187000
+Iteration is 187250
+Iteration is 187500
+File opensbli_output_187500.h5 does not exist .... creating file
+Iteration is 187750
+Iteration is 188000
+Iteration is 188250
+Iteration is 188500
+Iteration is 188750
+Iteration is 189000
+Iteration is 189250
+Iteration is 189500
+Iteration is 189750
+Iteration is 190000
+File opensbli_output_190000.h5 does not exist .... creating file
+Iteration is 190250
+Iteration is 190500
+Iteration is 190750
+Iteration is 191000
+Iteration is 191250
+Iteration is 191500
+Iteration is 191750
+Iteration is 192000
+Iteration is 192250
+Iteration is 192500
+File opensbli_output_192500.h5 does not exist .... creating file
+Iteration is 192750
+Iteration is 193000
+Iteration is 193250
+Iteration is 193500
+Iteration is 193750
+Iteration is 194000
+Iteration is 194250
+Iteration is 194500
+Iteration is 194750
+Iteration is 195000
+File opensbli_output_195000.h5 does not exist .... creating file
+Iteration is 195250
+Iteration is 195500
+Iteration is 195750
+Iteration is 196000
+Iteration is 196250
+Iteration is 196500
+Iteration is 196750
+Iteration is 197000
+Iteration is 197250
+Iteration is 197500
+File opensbli_output_197500.h5 does not exist .... creating file
+Iteration is 197750
+Iteration is 198000
+Iteration is 198250
+Iteration is 198500
+Iteration is 198750
+Iteration is 199000
+Iteration is 199250
+Iteration is 199500
+Iteration is 199750
+Iteration is 200000
+File opensbli_output_200000.h5 does not exist .... creating file
+Iteration is 200250
+Iteration is 200500
+Iteration is 200750
+Iteration is 201000
+Iteration is 201250
+Iteration is 201500
+Iteration is 201750
+Iteration is 202000
+Iteration is 202250
+Iteration is 202500
+File opensbli_output_202500.h5 does not exist .... creating file
+Iteration is 202750
+Iteration is 203000
+Iteration is 203250
+Iteration is 203500
+Iteration is 203750
+Iteration is 204000
+Iteration is 204250
+Iteration is 204500
+Iteration is 204750
+Iteration is 205000
+File opensbli_output_205000.h5 does not exist .... creating file
+Iteration is 205250
+Iteration is 205500
+Iteration is 205750
+Iteration is 206000
+Iteration is 206250
+Iteration is 206500
+Iteration is 206750
+Iteration is 207000
+Iteration is 207250
+Iteration is 207500
+File opensbli_output_207500.h5 does not exist .... creating file
+Iteration is 207750
+Iteration is 208000
+Iteration is 208250
+Iteration is 208500
+Iteration is 208750
+Iteration is 209000
+Iteration is 209250
+Iteration is 209500
+Iteration is 209750
+Iteration is 210000
+File opensbli_output_210000.h5 does not exist .... creating file
+Iteration is 210250
+Iteration is 210500
+Iteration is 210750
+Iteration is 211000
+Iteration is 211250
+Iteration is 211500
+Iteration is 211750
+Iteration is 212000
+Iteration is 212250
+Iteration is 212500
+File opensbli_output_212500.h5 does not exist .... creating file
+Iteration is 212750
+Iteration is 213000
+Iteration is 213250
+Iteration is 213500
+Iteration is 213750
+Iteration is 214000
+Iteration is 214250
+Iteration is 214500
+Iteration is 214750
+Iteration is 215000
+File opensbli_output_215000.h5 does not exist .... creating file
+Iteration is 215250
+Iteration is 215500
+Iteration is 215750
+Iteration is 216000
+Iteration is 216250
+Iteration is 216500
+Iteration is 216750
+Iteration is 217000
+Iteration is 217250
+Iteration is 217500
+File opensbli_output_217500.h5 does not exist .... creating file
+Iteration is 217750
+Iteration is 218000
+Iteration is 218250
+Iteration is 218500
+Iteration is 218750
+Iteration is 219000
+Iteration is 219250
+Iteration is 219500
+Iteration is 219750
+Iteration is 220000
+File opensbli_output_220000.h5 does not exist .... creating file
+Iteration is 220250
+Iteration is 220500
+Iteration is 220750
+Iteration is 221000
+Iteration is 221250
+Iteration is 221500
+Iteration is 221750
+Iteration is 222000
+Iteration is 222250
+Iteration is 222500
+File opensbli_output_222500.h5 does not exist .... creating file
+Iteration is 222750
+Iteration is 223000
+Iteration is 223250
+Iteration is 223500
+Iteration is 223750
+Iteration is 224000
+Iteration is 224250
+Iteration is 224500
+Iteration is 224750
+Iteration is 225000
+File opensbli_output_225000.h5 does not exist .... creating file
+Iteration is 225250
+Iteration is 225500
+Iteration is 225750
+Iteration is 226000
+Iteration is 226250
+Iteration is 226500
+Iteration is 226750
+Iteration is 227000
+Iteration is 227250
+Iteration is 227500
+File opensbli_output_227500.h5 does not exist .... creating file
+Iteration is 227750
+Iteration is 228000
+Iteration is 228250
+Iteration is 228500
+Iteration is 228750
+Iteration is 229000
+Iteration is 229250
+Iteration is 229500
+Iteration is 229750
+Iteration is 230000
+File opensbli_output_230000.h5 does not exist .... creating file
+Iteration is 230250
+Iteration is 230500
+Iteration is 230750
+Iteration is 231000
+Iteration is 231250
+Iteration is 231500
+Iteration is 231750
+Iteration is 232000
+Iteration is 232250
+Iteration is 232500
+File opensbli_output_232500.h5 does not exist .... creating file
+Iteration is 232750
+Iteration is 233000
+Iteration is 233250
+Iteration is 233500
+Iteration is 233750
+Iteration is 234000
+Iteration is 234250
+Iteration is 234500
+Iteration is 234750
+Iteration is 235000
+File opensbli_output_235000.h5 does not exist .... creating file
+Iteration is 235250
+Iteration is 235500
+Iteration is 235750
+Iteration is 236000
+Iteration is 236250
+Iteration is 236500
+Iteration is 236750
+Iteration is 237000
+Iteration is 237250
+Iteration is 237500
+File opensbli_output_237500.h5 does not exist .... creating file
+Iteration is 237750
+Iteration is 238000
+Iteration is 238250
+Iteration is 238500
+Iteration is 238750
+Iteration is 239000
+Iteration is 239250
+Iteration is 239500
+Iteration is 239750
+Iteration is 240000
+File opensbli_output_240000.h5 does not exist .... creating file
+Iteration is 240250
+Iteration is 240500
+Iteration is 240750
+Iteration is 241000
+Iteration is 241250
+Iteration is 241500
+Iteration is 241750
+Iteration is 242000
+Iteration is 242250
+Iteration is 242500
+File opensbli_output_242500.h5 does not exist .... creating file
+Iteration is 242750
+Iteration is 243000
+Iteration is 243250
+Iteration is 243500
+Iteration is 243750
+Iteration is 244000
+Iteration is 244250
+Iteration is 244500
+Iteration is 244750
+Iteration is 245000
+File opensbli_output_245000.h5 does not exist .... creating file
+Iteration is 245250
+Iteration is 245500
+Iteration is 245750
+Iteration is 246000
+Iteration is 246250
+Iteration is 246500
+Iteration is 246750
+Iteration is 247000
+Iteration is 247250
+Iteration is 247500
+File opensbli_output_247500.h5 does not exist .... creating file
+Iteration is 247750
+Iteration is 248000
+Iteration is 248250
+Iteration is 248500
+Iteration is 248750
+Iteration is 249000
+Iteration is 249250
+Iteration is 249500
+Iteration is 249750
+Iteration is 250000
+File opensbli_output_250000.h5 does not exist .... creating file
+
+Timings are:
+-----------------------------------------
+Total Wall time 826.272814
+File opensbli_output.h5 does not exist .... creating file
+==============================================================================
+Running epilogue script on indigo53.
+
+Submit time  : 2023-09-26T09:06:00
+Start time   : 2023-09-26T09:11:29
+End time     : 2023-09-26T09:25:20
+Elapsed time : 00:13:51 (Timelimit=1-14:00:00)
+
+Job ID: 4815976
+Cluster: i5
+User/Group: mcww1g22/mm
+State: COMPLETED (exit code 0)
+Cores: 1
+CPU Utilized: 00:13:47
+CPU Efficiency: 99.52% of 00:13:51 core-walltime
+Job Wall-clock time: 00:13:51
+Memory Utilized: 874.03 MB
+Memory Efficiency: 21.58% of 3.96 GB
+

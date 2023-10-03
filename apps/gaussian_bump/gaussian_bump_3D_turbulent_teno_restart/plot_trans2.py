@@ -3,6 +3,7 @@ import h5py
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
 
 gama=1.4
@@ -21,7 +22,7 @@ def read_dataset(file, dataset):
 
 print('Reading data')
 #fname='opensbli_output.h5'
-fname='outputs/opensbli_output_250000.h5'
+fname='opensbli_output.h5'
 f=h5py.File(fname, 'r')
 x0dum=read_dataset(f,'x0_B0')
 x1dum=read_dataset(f,'x1_B0')
@@ -62,18 +63,28 @@ print('w range',np.amax(w),np.amin(w))
 print('p range',np.amax(p),np.amin(p))
 print('T range',np.amax(T),np.amin(T))
 #print(p[100,:])
-fig1,ax=plt.subplots()
-CS=ax.contourf(x[99,:,:],y[99,:,:],M[99,:,:],levels=100,cmap=cm.jet)
 
+fig1,ax=plt.subplots()
+CS=ax.contourf(x[99,:,:],y[99,:,:],M[99,:,:],levels=50, cmap=cm.jet)
 divider = make_axes_locatable(ax)
 cax = divider.append_axes("right", size=0.2,pad=0.1)
 cbar=fig1.colorbar(CS, cax=cax)
+cbar.set_label("Mach Number" )
 ax.set_aspect('equal')
 ax.set_ylim([0,100])
 # ax.set_aspect(1)
 # plt.show()
 #ax.set_ylim([0.0,20])
 plt.savefig('plot_Mach_teno_250000_iter.pdf')
+
+fig2, ax1 = plt.subplots()
+CS=plt.contourf(x[:,1,:], z[:,1,:], u[:,1,:],levels=50, cmap=cm.jet)
+# divider = make_axes_locatable(ax1)
+# cax = divider.append_axes("bottom", size=0.15,pad=0.2)
+cax = inset_axes(ax1, width="60%", height="20%", loc='lower center',borderpad=-3)
+cbar=fig2.colorbar(CS, orientation='horizontal', cax=cax)
+cbar.set_label("u velocity" )
+ax1.set_aspect(1)
 
 #n_levels=25
 #name= "u"
@@ -85,3 +96,5 @@ plt.savefig('plot_Mach_teno_250000_iter.pdf')
 #self.contour_local(fig, levels, "%s" % name, var)
 #plt.savefig("katzer_%s.pdf" % name, bbox_inches='tight')
 #plt.clf()
+
+plt.show()

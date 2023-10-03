@@ -1,0 +1,1 @@
+rm -rf outputs/ wall_plots.pdf wall_pressure.pdf skin_friction.pdf Gaussian_bump_contours.pdf plots_gaussian_grid_study.py residuals_grid_100x100.pdf opensbli* residual_plot.py monitor.log reductions.h Open* HIP/ CUDA/ MPI* latex_output/ defdec_data_set.h v_vel_along_wall.pdf slurm-* nodes.info* out.* CM* build/

@@ -890,6 +890,9 @@ const double *u0_B0, const double *a_B0, double *wk0_B0, double *wk2_B0, double 
    double sigma_0 = 0.0;
    double sigma_1 = 0.0;
    double sigma_2 = 0.0;
+   double sigma_3=0.0;
+   double sigma_4=0.0;
+   double sigma_5=0.0;
 
    double S = 0.0;
    double g_00 = 0.0;
@@ -921,9 +924,8 @@ const double *u0_B0, const double *a_B0, double *wk0_B0, double *wk2_B0, double 
    double phi_star_1 = 0.0;
    double phi_star_2 = 0.0;
 
-   double eps = 0.00000001;
-   double delta = 0.5;
-
+   double eps = 0.0000000001;
+   double delta = 0.5; // taken from SBLI code TVD
 
    // To find alpha values at j-1/2 point
    AVG_0_a = (rc1)*(a_B0[OPS_ACC5(-1)] + a_B0[OPS_ACC5(0)]);
@@ -931,8 +933,6 @@ const double *u0_B0, const double *a_B0, double *wk0_B0, double *wk2_B0, double 
    AVG_0_u0 = (rc1)*(u0_B0[OPS_ACC4(-1)] + u0_B0[OPS_ACC4(0)]);
    // printf("%f \n",a_B0[OPS_ACC5(-1)]);
    inv_AVG_a = 1.0/AVG_0_a;
-
-   // inv_AVG_rho = 1.0/AVG_0_rho;
 
    AVG_0_0_LEV_00 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
       2) + 2);
@@ -1065,22 +1065,17 @@ const double *u0_B0, const double *a_B0, double *wk0_B0, double *wk2_B0, double 
    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   // lamdba is the time dependant variable lambda = dt / dx
-   lambda = dt / Delta0block0;
-   // printf("%f",Delta0block0);
-   // printf("%f\n",lambda);
    // sigma values which go into the phi equation
 
-   // sigma from Sandham 1989
-   // sigma_0 = 0.5*(fabs(ws_0) - lambda*pow(ws_0,2));
-   // sigma_1 = 0.5*(fabs(ws_1) - lambda*pow(ws_1,2));
-   // sigma_2 = 0.5*(fabs(ws_2) - lambda*pow(ws_2,2));
-
+   // sigma from Yee et al 1999 (which is used in the fortran code)
+   // sigma_0 = fabs(alpha_01) >= delta ? fabs(alpha_01) : (pow(alpha_01,2) + pow(delta,2)) / (2*delta);
+   // sigma_1 = fabs(alpha_11) >= delta ? fabs(alpha_11) : (pow(alpha_11,2) + pow(delta,2)) / (2*delta);
+   // sigma_2 = fabs(alpha_21) >= delta ? fabs(alpha_21) : (pow(alpha_21,2) + pow(delta,2)) / (2*delta);
 
    // sigma from Yee et al 1999 (which is used in the fortran code)
-   sigma_0 = fabs(alpha_01) >= delta ? fabs(alpha_01) : (pow(alpha_01,2) + pow(delta,2)) / (2*delta);
-   sigma_1 = fabs(alpha_11) >= delta ? fabs(alpha_11) : (pow(alpha_11,2) + pow(delta,2)) / (2*delta);
-   sigma_2 = fabs(alpha_21) >= delta ? fabs(alpha_21) : (pow(alpha_21,2) + pow(delta,2)) / (2*delta);
+   sigma_0 = fabs(ws_0) >= delta ? fabs(ws_0) : (pow(ws_0,2) + pow(delta,2)) / (2*delta);
+   sigma_1 = fabs(ws_1) >= delta ? fabs(ws_1) : (pow(ws_1,2) + pow(delta,2)) / (2*delta);
+   sigma_2 = fabs(ws_2) >= delta ? fabs(ws_2) : (pow(ws_2,2) + pow(delta,2)) / (2*delta);
 
 
    // printf("sigma_0: %f\n",sigma_0);
@@ -1096,6 +1091,7 @@ const double *u0_B0, const double *a_B0, double *wk0_B0, double *wk2_B0, double 
    S = alpha_21 < 0 ? -1 : (alpha_21 > 0 ? 1 : 0);
    g_20 = S*fmax(fmax(0,fmin(2*fabs(alpha_21), S*alpha_20)),fmin(fabs(alpha_21),2*S*alpha_20)); 
 
+
    // at points j+1
    S = alpha_02 < 0 ? -1 : (alpha_02 > 0 ? 1 : 0);
    g_01 = S*fmax(fmax(0,fmin(2*fabs(alpha_02), S*alpha_01)),fmin(fabs(alpha_02),2*S*alpha_01));
@@ -1105,39 +1101,50 @@ const double *u0_B0, const double *a_B0, double *wk0_B0, double *wk2_B0, double 
 
    S = alpha_22 < 0 ? -1 : (alpha_22 > 0 ? 1 : 0);
    g_21 = S*fmax(fmax(0,fmin(2*fabs(alpha_22), S*alpha_21)),fmin(fabs(alpha_22),2*S*alpha_21));
+   
+   
    // printf("g_21: %f\n",g_21);
+
 
    // gamma 
    // printf("alpha_00 = %.25f\n",alpha_00);
-   gamma_0 = (alpha_00 == 0) ? 0 : sigma_0*alpha_01*(g_01 - g_00) / (pow(alpha_01,2)+eps);
-   gamma_1 = (alpha_01 == 0) ? 0 : sigma_1*alpha_11*(g_11 - g_10) / (pow(alpha_11,2)+eps);
-   gamma_2 = (alpha_02 == 0) ? 0 : sigma_2*alpha_21*(g_21 - g_20) / (pow(alpha_21,2)+eps);
-   
+   gamma_0 = (alpha_01 == 0) ? 0 : 0.5*sigma_0*alpha_01*(g_01 - g_00) / (pow(alpha_01,2)+eps);
+   gamma_1 = (alpha_11 == 0) ? 0 : 0.5*sigma_1*alpha_11*(g_11 - g_10) / (pow(alpha_11,2)+eps);
+   gamma_2 = (alpha_12 == 0) ? 0 : 0.5*sigma_2*alpha_21*(g_21 - g_20) / (pow(alpha_21,2)+eps);
+
+   // sigma as a function of gamma for the phi equation
+   sigma_3 = fabs(gamma_0) >= delta ? fabs(gamma_0) : (pow((gamma_0),2) + pow(delta,2)) / (2*delta);
+   sigma_4 = fabs(gamma_1) >= delta ? fabs(gamma_1) : (pow((gamma_1),2) + pow(delta,2)) / (2*delta);
+   sigma_5 = fabs(gamma_2) >= delta ? fabs(gamma_2) : (pow((gamma_2),2) + pow(delta,2)) / (2*delta);
+
+
    // printf("gamma_0: %.1f \n", gamma_0);
    // printf("------------------------------------\n");
 
    // elements for phi_{j+1/2}
 
-   phi_0 = -sigma_0*(g_01 + g_00) + (fabs(ws_0 + gamma_0) - lambda*pow(ws_0,2))*alpha_01;
-   phi_1 = -sigma_1*(g_11 + g_10) + (fabs(ws_1 + gamma_1) - lambda*pow(ws_1,2))*alpha_11;
-   phi_2 = -sigma_2*(g_21 + g_20) + (fabs(ws_2 + gamma_2) - lambda*pow(ws_2,2))*alpha_21;
+   // phi_0 = -sigma_0*(g_01 + g_00) + (fabs(ws_0 + gamma_0) - lambda*pow(ws_0,2))*alpha_01;
+   // phi_1 = -sigma_1*(g_11 + g_10) + (fabs(ws_1 + gamma_1) - lambda*pow(ws_1,2))*alpha_11;
+   // phi_2 = -sigma_2*(g_21 + g_20) + (fabs(ws_2 + gamma_2) - lambda*pow(ws_2,2))*alpha_21;
+
+   phi_0 = 0.5*sigma_0*(g_01 + g_00) - (sigma_3+sigma_0)*alpha_01;
+   phi_1 = 0.5*sigma_1*(g_11 + g_10) - (sigma_4+sigma_1)*alpha_11;
+   phi_2 = 0.5*sigma_2*(g_21 + g_20) - (sigma_5+sigma_2)*alpha_21;
    // printf("phi_0: %f \n", phi_0);
 
    // the limiter now requires a switch to control its significance on the dissipation. The Harten switch is used as theta
    // (eqns 2.22 and 2.23 in Yee et al. 1999)
-   
-
+   double power = 3.0;
    // thata hat at point j
-   theta_hat_00 = pow(fabs((fabs(alpha_01) - fabs(alpha_00)) / (fabs(alpha_01) + fabs(alpha_00)+eps)),2);
-   theta_hat_10 = pow(fabs((fabs(alpha_11) - fabs(alpha_10)) / (fabs(alpha_11) + fabs(alpha_10)+eps)),2);
-   theta_hat_20 = pow(fabs((fabs(alpha_21) - fabs(alpha_20)) / (fabs(alpha_21) + fabs(alpha_20)+eps)),2);
+   theta_hat_00 = pow(fabs((fabs(alpha_01) - fabs(alpha_00)) / (fabs(alpha_01) + fabs(alpha_00)+eps)),power);
+   theta_hat_10 = pow(fabs((fabs(alpha_11) - fabs(alpha_10)) / (fabs(alpha_11) + fabs(alpha_10)+eps)),power);
+   theta_hat_20 = pow(fabs((fabs(alpha_21) - fabs(alpha_20)) / (fabs(alpha_21) + fabs(alpha_20)+eps)),power);
    // printf("%f \n", theta_hat_00);
    // theta hat at point j+1
-   theta_hat_01 = pow(fabs((fabs(alpha_02) - fabs(alpha_01)) / (fabs(alpha_02) + fabs(alpha_01)+eps)),2);
-   theta_hat_11 = pow(fabs((fabs(alpha_12) - fabs(alpha_11)) / (fabs(alpha_12) + fabs(alpha_11)+eps)),2);
-   theta_hat_21 = pow(fabs((fabs(alpha_22) - fabs(alpha_21)) / (fabs(alpha_22) + fabs(alpha_21)+eps)),2); 
+   theta_hat_01 = pow(fabs((fabs(alpha_02) - fabs(alpha_01)) / (fabs(alpha_02) + fabs(alpha_01)+eps)),power);
+   theta_hat_11 = pow(fabs((fabs(alpha_12) - fabs(alpha_11)) / (fabs(alpha_12) + fabs(alpha_11)+eps)),power);
+   theta_hat_21 = pow(fabs((fabs(alpha_22) - fabs(alpha_21)) / (fabs(alpha_22) + fabs(alpha_21)+eps)),power); 
    
-
    // theta at point j+1/2
    theta_0 =fmax(theta_hat_00, theta_hat_01);
    theta_1 =fmax(theta_hat_10, theta_hat_11);
@@ -1157,7 +1164,7 @@ const double *u0_B0, const double *a_B0, double *wk0_B0, double *wk2_B0, double 
    wk0_B0[OPS_ACC6(0)] = 0.5*(AVG_0_0_REV_00*phi_star_0 + AVG_0_0_REV_01*phi_star_1 + AVG_0_0_REV_02*phi_star_2);
    wk1_B0[OPS_ACC8(0)] = 0.5*(AVG_0_0_REV_10*phi_star_0 + AVG_0_0_REV_11*phi_star_1 + AVG_0_0_REV_12*phi_star_2);
    wk2_B0[OPS_ACC7(0)] = 0.5*(AVG_0_0_REV_20*phi_star_0 + AVG_0_0_REV_21*phi_star_1 + AVG_0_0_REV_22*phi_star_2);
-   // printf("F_{i+1/2}: %f\n",wk0_B0[OPS_ACC6(0)]);
+   // printf("F_star{i+1/2}: %f\n",wk0_B0[OPS_ACC6(0)]);
 
 }
 
@@ -1167,13 +1174,14 @@ const double *u0_B0, const double *a_B0, double *wk0_B0, double *wk2_B0, double 
 {
    // Now we have the filter numerical flux, time to find the filter operator, Lf
 
-   rho_B0[OPS_ACC4(0)] = rho_B0[OPS_ACC4(0)] + dt*inv_0*(wk0_B0[OPS_ACC0(0)] - wk0_B0[OPS_ACC0(-1)]);
-   rhou0_B0[OPS_ACC5(0)] = rhou0_B0[OPS_ACC5(0)] + dt*inv_0*(wk1_B0[OPS_ACC3(0)] - wk1_B0[OPS_ACC3(-1)]);
-   rhoE_B0[OPS_ACC6(0)] = rhoE_B0[OPS_ACC6(0)] + dt*inv_0*(wk2_B0[OPS_ACC2(0)] - wk2_B0[OPS_ACC2(0)]);
+   rho_B0[OPS_ACC4(0)] = rho_B0[OPS_ACC4(0)] - dt*inv_0*(wk0_B0[OPS_ACC0(0)] - wk0_B0[OPS_ACC0(-1)]);
+   rhou0_B0[OPS_ACC5(0)] = rhou0_B0[OPS_ACC5(0)] - dt*inv_0*(wk1_B0[OPS_ACC3(0)] - wk1_B0[OPS_ACC3(-1)]);
+   rhoE_B0[OPS_ACC6(0)] = rhoE_B0[OPS_ACC6(0)] - dt*inv_0*(wk2_B0[OPS_ACC2(0)] - wk2_B0[OPS_ACC2(-1)]);
 
-   // printf("added flux: %f\n", wk0_B0[OPS_ACC0(-1)]);
+   // printf("added flux: %f\n", wk0_B0[OPS_ACC0(0)]);
    // printf("rho_B0: %f\n",rho_B0[OPS_ACC4(0)]);
-   
+   // printf("-------------------------------------------------------");
+
 }
 
 

@@ -80,30 +80,43 @@ fig2.savefig('Recirculation_zone.pdf')
 
 
 
+fig3,c1=plt.subplots()
+CS=c1.contourf(x,y,M,levels=25, cmap=cm.jet)
+divider = make_axes_locatable(c1)
+cax = divider.append_axes("right", size=0.2,pad=0.1)
+cbar=fig3.colorbar(CS, cax=cax)
+cbar.set_label("Mach Number" )
+c1.set_aspect('equal')
+c1.set_ylim([0,100])
+# ax.set_aspect(1)
+# plt.show()
+#ax.set_ylim([0.0,20])
+plt.savefig('contours_Mach2_2D.pdf')
 
-levels = 100
-fig, (ax1,ax2, ax3) = plt.subplots(3,1)
-fig.set_size_inches(18.5, 10.5)
-T = ax1.contourf(x, y, T, levels = levels, cmap=cm.jet) 
-ax1.set_title("Contours for flow over a Gaussian bump")
-plt.xlabel('x')
-ax1.set_ylabel("y")
-tbar = plt.colorbar(T, ax=ax1)
-tbar.set_label("Temperature [$^{\circ}$C]" ) #rotation= 270
 
-P = ax2.contourf(x, y, p, levels = levels, cmap=cm.jet)
-ax2.set_ylabel("y")
-Pbar = plt.colorbar(P, ax=ax2)
-Pbar.set_label("Pressure [Pa]" ) #rotation= 270
-plt.legend
+# levels = 100
+# fig, (ax1,ax2, ax3) = plt.subplots(3,1)
+# fig.set_size_inches(18.5, 10.5)
+# T = ax1.contourf(x, y, T, levels = levels, cmap=cm.jet) 
+# ax1.set_title("Contours for flow over a Gaussian bump")
+# plt.xlabel('x')
+# ax1.set_ylabel("y")
+# tbar = plt.colorbar(T, ax=ax1)
+# tbar.set_label("Temperature [$^{\circ}$C]" ) #rotation= 270
 
-U = ax3.contourf(x, y, M, levels = levels, cmap=cm.jet)
-ax3.set_ylabel("y")
-ubar = plt.colorbar(U, ax=ax3)
-ubar.set_label("Mach Number") #X_Velocity [ms$^{-1}$]
-plt.legend
-plt.style.use('classic')
-plt.savefig('Gaussian_bump_contours.pdf')
+# P = ax2.contourf(x, y, p, levels = levels, cmap=cm.jet)
+# ax2.set_ylabel("y")
+# Pbar = plt.colorbar(P, ax=ax2)
+# Pbar.set_label("Pressure [Pa]" ) #rotation= 270
+# plt.legend
+
+# U = ax3.contourf(x, y, M, levels = levels, cmap=cm.jet)
+# ax3.set_ylabel("y")
+# ubar = plt.colorbar(U, ax=ax3)
+# ubar.set_label("Mach Number") #X_Velocity [ms$^{-1}$]
+# plt.legend
+# plt.style.use('classic')
+# plt.savefig('Gaussian_bump_contours.pdf')
 
 
 

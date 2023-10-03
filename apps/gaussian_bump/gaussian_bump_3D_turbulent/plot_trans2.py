@@ -21,7 +21,7 @@ def read_dataset(file, dataset):
 
 print('Reading data')
 #fname='opensbli_output.h5'
-fname='opensbli_output_250000.h5'
+fname='opensbli_output.h5'
 f=h5py.File(fname, 'r')
 x0dum=read_dataset(f,'x0_B0')
 x1dum=read_dataset(f,'x1_B0')
@@ -63,18 +63,18 @@ print('p range',np.amax(p),np.amin(p))
 print('T range',np.amax(T),np.amin(T))
 #print(p[100,:])
 fig1,ax=plt.subplots()
-CS=ax.contourf(x[99,:,:],y[99,:,:],M[99,:,:],levels=100,cmap=cm.jet)
+CS=ax.contourf(x[99,:,:],y[99,:,:],M[99,:,:],levels=50, cmap=cm.jet)
 
 divider = make_axes_locatable(ax)
 cax = divider.append_axes("right", size=0.2,pad=0.1)
 cbar=fig1.colorbar(CS, cax=cax)
+cbar.set_label("Mach Number" )
 ax.set_aspect('equal')
 ax.set_ylim([0,100])
 # ax.set_aspect(1)
-
 # plt.show()
 #ax.set_ylim([0.0,20])
-plt.savefig('plot_rhou_weno_250000_iter.pdf')
+plt.savefig('plot_Mach_teno_250000_iter.pdf')
 
 #n_levels=25
 #name= "u"

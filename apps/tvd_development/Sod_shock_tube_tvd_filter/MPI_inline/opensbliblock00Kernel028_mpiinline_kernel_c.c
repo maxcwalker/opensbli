@@ -90,6 +90,9 @@ void opensbliblock00Kernel028_c_wrapper(
    double sigma_0 = 0.0;
    double sigma_1 = 0.0;
    double sigma_2 = 0.0;
+   double sigma_3=0.0;
+   double sigma_4=0.0;
+   double sigma_5=0.0;
 
    double S = 0.0;
    double g_00 = 0.0;
@@ -121,16 +124,14 @@ void opensbliblock00Kernel028_c_wrapper(
    double phi_star_1 = 0.0;
    double phi_star_2 = 0.0;
 
-   double eps = 0.00000001;
+   double eps = 0.0000000001;
    double delta = 0.5;
-
 
    AVG_0_a = (rc1)*(OPS_ACC(a_B0, -1) + OPS_ACC(a_B0, 0));
 
    AVG_0_u0 = (rc1)*(OPS_ACC(u0_B0, -1) + OPS_ACC(u0_B0, 0));
 
    inv_AVG_a = 1.0/AVG_0_a;
-
 
    AVG_0_0_LEV_00 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
       2) + 2);
@@ -265,9 +266,20 @@ void opensbliblock00Kernel028_c_wrapper(
 
 
 
-   sigma_0 = fabs(alpha_01) >= delta ? fabs(alpha_01) : (pow(alpha_01,2) + pow(delta,2)) / (2*delta);
-   sigma_1 = fabs(alpha_11) >= delta ? fabs(alpha_11) : (pow(alpha_11,2) + pow(delta,2)) / (2*delta);
-   sigma_2 = fabs(alpha_21) >= delta ? fabs(alpha_21) : (pow(alpha_21,2) + pow(delta,2)) / (2*delta);
+
+   sigma_0 = fabs(ws_0) >= delta ? fabs(ws_0) : (pow(ws_0,2) + pow(delta,2)) / (2*delta);
+   sigma_1 = fabs(ws_1) >= delta ? fabs(ws_1) : (pow(ws_1,2) + pow(delta,2)) / (2*delta);
+   sigma_2 = fabs(ws_2) >= delta ? fabs(ws_2) : (pow(ws_2,2) + pow(delta,2)) / (2*delta);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -275,47 +287,64 @@ void opensbliblock00Kernel028_c_wrapper(
    S = alpha_01 < 0 ? -1 : (alpha_01 > 0 ? 1 : 0);
    g_00 = S*fmax(fmax(0,fmin(2*fabs(alpha_01), S*alpha_00)),fmin(fabs(alpha_01),2*S*alpha_00));
 
-   S = alpha_11 < 0 ? -1 : (alpha_11 > 0 ? 1 : 0);
+
+      S = alpha_11 < 0 ? -1 : (alpha_11 > 0 ? 1 : 0);
    g_10 = S*fmax(fmax(0,fmin(2*fabs(alpha_11), S*alpha_10)),fmin(fabs(alpha_11),2*S*alpha_10));
+
 
    S = alpha_21 < 0 ? -1 : (alpha_21 > 0 ? 1 : 0);
    g_20 = S*fmax(fmax(0,fmin(2*fabs(alpha_21), S*alpha_20)),fmin(fabs(alpha_21),2*S*alpha_20));
 
+
+
    S = alpha_02 < 0 ? -1 : (alpha_02 > 0 ? 1 : 0);
    g_01 = S*fmax(fmax(0,fmin(2*fabs(alpha_02), S*alpha_01)),fmin(fabs(alpha_02),2*S*alpha_01));
 
+
    S = alpha_12 < 0 ? -1 : (alpha_12 > 0 ? 1 : 0);
    g_11 = S*fmax(fmax(0,fmin(2*fabs(alpha_12), S*alpha_11)),fmin(fabs(alpha_12),2*S*alpha_11));
+
 
    S = alpha_22 < 0 ? -1 : (alpha_22 > 0 ? 1 : 0);
    g_21 = S*fmax(fmax(0,fmin(2*fabs(alpha_22), S*alpha_21)),fmin(fabs(alpha_22),2*S*alpha_21));
 
 
 
-   gamma_0 = (alpha_00 == 0) ? 0 : sigma_0*alpha_01*(g_01 - g_00) / (pow(alpha_01,2)+eps);
-   gamma_1 = (alpha_01 == 0) ? 0 : sigma_1*alpha_11*(g_11 - g_10) / (pow(alpha_11,2)+eps);
-   gamma_2 = (alpha_02 == 0) ? 0 : sigma_2*alpha_21*(g_21 - g_20) / (pow(alpha_21,2)+eps);
+
+
+
+
+   gamma_0 = (alpha_01 == 0) ? 0 : 0.5*sigma_0*alpha_01*(g_01 - g_00) / (pow(alpha_01,2)+eps);
+   gamma_1 = (alpha_11 == 0) ? 0 : 0.5*sigma_1*alpha_11*(g_11 - g_10) / (pow(alpha_11,2)+eps);
+   gamma_2 = (alpha_12 == 0) ? 0 : 0.5*sigma_2*alpha_21*(g_21 - g_20) / (pow(alpha_21,2)+eps);
+
+   sigma_3 = fabs(gamma_0) >= delta ? fabs(gamma_0) : (pow((gamma_0),2) + pow(delta,2)) / (2*delta);
+   sigma_4 = fabs(gamma_1) >= delta ? fabs(gamma_1) : (pow((gamma_1),2) + pow(delta,2)) / (2*delta);
+   sigma_5 = fabs(gamma_2) >= delta ? fabs(gamma_2) : (pow((gamma_2),2) + pow(delta,2)) / (2*delta);
 
 
 
 
 
-   phi_0 = -sigma_0*(g_01 + g_00) + (fabs(ws_0 + gamma_0) - lambda*pow(ws_0,2))*alpha_01;
-   phi_1 = -sigma_1*(g_11 + g_10) + (fabs(ws_1 + gamma_1) - lambda*pow(ws_1,2))*alpha_11;
-   phi_2 = -sigma_2*(g_21 + g_20) + (fabs(ws_2 + gamma_2) - lambda*pow(ws_2,2))*alpha_21;
 
 
 
+   phi_0 = 0.5*sigma_0*(g_01 + g_00) - (sigma_3+sigma_0)*alpha_01;
+   phi_1 = 0.5*sigma_1*(g_11 + g_10) - (sigma_4+sigma_1)*alpha_11;
+   phi_2 = 0.5*sigma_2*(g_21 + g_20) - (sigma_5+sigma_2)*alpha_21;
 
 
-   theta_hat_00 = pow(fabs((fabs(alpha_01) - fabs(alpha_00)) / (fabs(alpha_01) + fabs(alpha_00)+eps)),2);
-   theta_hat_10 = pow(fabs((fabs(alpha_11) - fabs(alpha_10)) / (fabs(alpha_11) + fabs(alpha_10)+eps)),2);
-   theta_hat_20 = pow(fabs((fabs(alpha_21) - fabs(alpha_20)) / (fabs(alpha_21) + fabs(alpha_20)+eps)),2);
+
+   double power = 3.0;
+
+   theta_hat_00 = pow(fabs((fabs(alpha_01) - fabs(alpha_00)) / (fabs(alpha_01) + fabs(alpha_00)+eps)),power);
+   theta_hat_10 = pow(fabs((fabs(alpha_11) - fabs(alpha_10)) / (fabs(alpha_11) + fabs(alpha_10)+eps)),power);
+   theta_hat_20 = pow(fabs((fabs(alpha_21) - fabs(alpha_20)) / (fabs(alpha_21) + fabs(alpha_20)+eps)),power);
 
 
-   theta_hat_01 = pow(fabs((fabs(alpha_02) - fabs(alpha_01)) / (fabs(alpha_02) + fabs(alpha_01)+eps)),2);
-   theta_hat_11 = pow(fabs((fabs(alpha_12) - fabs(alpha_11)) / (fabs(alpha_12) + fabs(alpha_11)+eps)),2);
-   theta_hat_21 = pow(fabs((fabs(alpha_22) - fabs(alpha_21)) / (fabs(alpha_22) + fabs(alpha_21)+eps)),2);
+   theta_hat_01 = pow(fabs((fabs(alpha_02) - fabs(alpha_01)) / (fabs(alpha_02) + fabs(alpha_01)+eps)),power);
+   theta_hat_11 = pow(fabs((fabs(alpha_12) - fabs(alpha_11)) / (fabs(alpha_12) + fabs(alpha_11)+eps)),power);
+   theta_hat_21 = pow(fabs((fabs(alpha_22) - fabs(alpha_21)) / (fabs(alpha_22) + fabs(alpha_21)+eps)),power);
 
 
    theta_0 =fmax(theta_hat_00, theta_hat_01);

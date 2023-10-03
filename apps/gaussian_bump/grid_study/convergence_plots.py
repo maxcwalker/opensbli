@@ -40,21 +40,18 @@ Lx = 400.0
 scale = 2.31669259
 
 
-list = ['100x100', '200x100', '400x100', '600x100']
-#list = ['400x100', '400x200', '400x400']
+#list = ['100x100', '200x100', '400x100', '600x100', '800x100']
+list = ['600x100', '600x200', '600x400', '600x600']
 
 fig1, ax1 = plt.subplots(1,1)
 fig2, ax2 = plt.subplots(1,1)
 
-line_styles = ['-.', '.', '-', '-']
+line_styles = ['-.', '.', '-', '-','-']
 
 for i in range(len(list)):
 
     fname = 'grid_%s/opensbli_output.h5' % list[i]
     f, group1 = read_file(fname)
-
-    
-
 
     D11 = read_dataset(group1, "D11_B0")
     x = read_dataset(group1, "x0_B0")
