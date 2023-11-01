@@ -1,0 +1,780 @@
+#ifndef OPENSBLIBLOCK00_KERNEL_H
+#define OPENSBLIBLOCK00_KERNEL_H
+void opensbliblock00Kernel022(double *rho_B0, double *rhoE_B0, double *rhou0_B0, double *x0_B0, const int *idx)
+{
+   double p = 0.0;
+   double u0 = 0.0;
+   double d = 0.0;
+   x0_B0[OPS_ACC3(0)] = Delta0block0*idx[0];
+
+   u0 = 0;
+
+   p = ((x0_B0[OPS_ACC3(0)] < 0.5) ? (
+   1.0
+)
+: (
+   0.1
+));
+
+   d = ((x0_B0[OPS_ACC3(0)] < 0.5) ? (
+   1.0
+)
+: (
+   0.125
+));
+
+   rho_B0[OPS_ACC0(0)] = d;
+
+   rhou0_B0[OPS_ACC2(0)] = d*u0;
+
+   rhoE_B0[OPS_ACC1(0)] = 0.5*d*pow(u0, 2.0) + p/(gama - 1.0);
+
+}
+
+void opensbliblock00Kernel023(double *detJ_B0)
+{
+   detJ_B0[OPS_ACC0(-1)] = detJ_B0[OPS_ACC0(1)];
+
+   detJ_B0[OPS_ACC0(-2)] = detJ_B0[OPS_ACC0(2)];
+
+}
+
+void opensbliblock00Kernel024(double *detJ_B0)
+{
+   detJ_B0[OPS_ACC0(1)] = detJ_B0[OPS_ACC0(-1)];
+
+   detJ_B0[OPS_ACC0(2)] = detJ_B0[OPS_ACC0(-2)];
+
+}
+
+void opensbliblock00Kernel020(double *rho_B0, double *rhoE_B0, double *rhou0_B0)
+{
+   double p = 0.0;
+   double u0 = 0.0;
+   double d = 0.0;
+   d = 1.00000000000000;
+
+   u0 = 0.0;
+
+   p = 1.00000000000000;
+
+   rho_B0[OPS_ACC0(0)] = d;
+
+   rhou0_B0[OPS_ACC2(0)] = d*u0;
+
+   rhoE_B0[OPS_ACC1(0)] = 0.5*d*pow(u0, 2.0) + p/(gama - 1.0);
+
+}
+
+void opensbliblock00Kernel021(double *rho_B0, double *rhoE_B0, double *rhou0_B0)
+{
+   double p = 0.0;
+   double u0 = 0.0;
+   double d = 0.0;
+   d = 0.125000000000000;
+
+   u0 = 0.0;
+
+   p = 0.100000000000000;
+
+   rho_B0[OPS_ACC0(0)] = d;
+
+   rhou0_B0[OPS_ACC2(0)] = d*u0;
+
+   rhoE_B0[OPS_ACC1(0)] = 0.5*d*pow(u0, 2.0) + p/(gama - 1.0);
+
+}
+
+void opensbliblock00Kernel002(const double *rho_B0, const double *rhou0_B0, double *u0_B0)
+{
+   u0_B0[OPS_ACC2(0)] = rhou0_B0[OPS_ACC1(0)]/rho_B0[OPS_ACC0(0)];
+
+}
+
+void opensbliblock00Kernel001(const double *rho_B0, const double *u0_B0, const double *rhoE_B0, double *p_B0)
+{
+   p_B0[OPS_ACC3(0)] = (gama - 1)*(rhoE_B0[OPS_ACC2(0)] - rc1*rho_B0[OPS_ACC0(0)]*pow(u0_B0[OPS_ACC1(0)], 2));
+
+}
+
+ void opensbliblock00Kernel000(const double *rho_B0, const double *u0_B0, const double *rhoE_B0, const double *rhou0_B0,
+const double *p_B0, double *wk14_B0, double *wk11_B0, double *wk13_B0, double *wk12_B0)
+{
+   wk11_B0[OPS_ACC6(0)] = p_B0[OPS_ACC4(0)]*u0_B0[OPS_ACC1(0)];
+
+   wk12_B0[OPS_ACC8(0)] = rhou0_B0[OPS_ACC3(0)]*u0_B0[OPS_ACC1(0)];
+
+   wk13_B0[OPS_ACC7(0)] = rhoE_B0[OPS_ACC2(0)]*u0_B0[OPS_ACC1(0)];
+
+   wk14_B0[OPS_ACC5(0)] = rho_B0[OPS_ACC0(0)]*u0_B0[OPS_ACC1(0)];
+
+}
+
+void opensbliblock00Kernel003(const double *wk11_B0, double *wk0_B0, const int *idx)
+{
+    wk0_B0[OPS_ACC1(0)] = inv_0*((idx[0] == 0) ? (
+   -8.34657956545823e-15*wk11_B0[OPS_ACC0(4)] +
+      3.00000000000002*wk11_B0[OPS_ACC0(1)] + 1.06910315192207e-15*wk11_B0[OPS_ACC0(5)] -
+      1.50000000000003*wk11_B0[OPS_ACC0(2)] + 0.333333333333356*wk11_B0[OPS_ACC0(3)] -
+      1.83333333333334*wk11_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 1) ? (
+   0.00571369039775442*wk11_B0[OPS_ACC0(4)] +
+      0.719443173328855*wk11_B0[OPS_ACC0(1)] + 0.0394168524399447*wk11_B0[OPS_ACC0(2)] -
+      0.0658051057710389*wk11_B0[OPS_ACC0(3)] - 0.376283677513354*wk11_B0[OPS_ACC0(-1)] -
+      0.322484932882161*wk11_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 2) ? (
+   0.521455851089587*wk11_B0[OPS_ACC0(1)] -
+      0.791245592765872*wk11_B0[OPS_ACC0(-1)] - 0.0367146847001261*wk11_B0[OPS_ACC0(2)] -
+      0.00412637789557492*wk11_B0[OPS_ACC0(3)] + 0.113446470384241*wk11_B0[OPS_ACC0(-2)] +
+      0.197184333887745*wk11_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 3) ? (
+   0.652141084861241*wk11_B0[OPS_ACC0(1)] -
+      0.727822147724592*wk11_B0[OPS_ACC0(-1)] - 0.082033432844602*wk11_B0[OPS_ACC0(2)] -
+      0.00932597985049999*wk11_B0[OPS_ACC0(-3)] + 0.121937153224065*wk11_B0[OPS_ACC0(-2)] +
+      0.0451033223343881*wk11_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 1) ? (
+  
+      -3.00000000000002*wk11_B0[OPS_ACC0(-1)] + 8.34657956545823e-15*wk11_B0[OPS_ACC0(-4)] -
+      0.333333333333356*wk11_B0[OPS_ACC0(-3)] + 1.50000000000003*wk11_B0[OPS_ACC0(-2)] -
+      1.06910315192207e-15*wk11_B0[OPS_ACC0(-5)] + 1.83333333333334*wk11_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 2)
+      ? (
+   0.376283677513354*wk11_B0[OPS_ACC0(1)] - 0.719443173328855*wk11_B0[OPS_ACC0(-1)] -
+      0.00571369039775442*wk11_B0[OPS_ACC0(-4)] + 0.0658051057710389*wk11_B0[OPS_ACC0(-3)] -
+      0.0394168524399447*wk11_B0[OPS_ACC0(-2)] + 0.322484932882161*wk11_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 3) ?
+      (
+   0.791245592765872*wk11_B0[OPS_ACC0(1)] - 0.521455851089587*wk11_B0[OPS_ACC0(-1)] -
+      0.113446470384241*wk11_B0[OPS_ACC0(2)] + 0.00412637789557492*wk11_B0[OPS_ACC0(-3)] +
+      0.0367146847001261*wk11_B0[OPS_ACC0(-2)] - 0.197184333887745*wk11_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 4) ?
+      (
+   0.727822147724592*wk11_B0[OPS_ACC0(1)] - 0.652141084861241*wk11_B0[OPS_ACC0(-1)] -
+      0.121937153224065*wk11_B0[OPS_ACC0(2)] + 0.00932597985049999*wk11_B0[OPS_ACC0(3)] +
+      0.082033432844602*wk11_B0[OPS_ACC0(-2)] - 0.0451033223343881*wk11_B0[OPS_ACC0(0)]
+)
+: (
+  
+      -rc2*wk11_B0[OPS_ACC0(-1)] + (rc2)*wk11_B0[OPS_ACC0(1)] - rc3*wk11_B0[OPS_ACC0(2)] +
+      (rc3)*wk11_B0[OPS_ACC0(-2)]
+)))))))));
+
+}
+
+void opensbliblock00Kernel005(const double *rhou0_B0, double *wk1_B0, const int *idx)
+{
+    wk1_B0[OPS_ACC1(0)] = inv_0*((idx[0] == 0) ? (
+   0.333333333333356*rhou0_B0[OPS_ACC0(3)] -
+      1.50000000000003*rhou0_B0[OPS_ACC0(2)] + 1.06910315192207e-15*rhou0_B0[OPS_ACC0(5)] +
+      3.00000000000002*rhou0_B0[OPS_ACC0(1)] - 8.34657956545823e-15*rhou0_B0[OPS_ACC0(4)] -
+      1.83333333333334*rhou0_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 1) ? (
+   -0.376283677513354*rhou0_B0[OPS_ACC0(-1)] -
+      0.0658051057710389*rhou0_B0[OPS_ACC0(3)] + 0.0394168524399447*rhou0_B0[OPS_ACC0(2)] +
+      0.719443173328855*rhou0_B0[OPS_ACC0(1)] + 0.00571369039775442*rhou0_B0[OPS_ACC0(4)] -
+      0.322484932882161*rhou0_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 2) ? (
+   0.113446470384241*rhou0_B0[OPS_ACC0(-2)] -
+      0.791245592765872*rhou0_B0[OPS_ACC0(-1)] - 0.00412637789557492*rhou0_B0[OPS_ACC0(3)] -
+      0.0367146847001261*rhou0_B0[OPS_ACC0(2)] + 0.521455851089587*rhou0_B0[OPS_ACC0(1)] +
+      0.197184333887745*rhou0_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 3) ? (
+   -0.727822147724592*rhou0_B0[OPS_ACC0(-1)] +
+      0.121937153224065*rhou0_B0[OPS_ACC0(-2)] - 0.00932597985049999*rhou0_B0[OPS_ACC0(-3)] -
+      0.082033432844602*rhou0_B0[OPS_ACC0(2)] + 0.652141084861241*rhou0_B0[OPS_ACC0(1)] +
+      0.0451033223343881*rhou0_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 1) ? (
+  
+      -1.06910315192207e-15*rhou0_B0[OPS_ACC0(-5)] + 1.50000000000003*rhou0_B0[OPS_ACC0(-2)] -
+      3.00000000000002*rhou0_B0[OPS_ACC0(-1)] - 0.333333333333356*rhou0_B0[OPS_ACC0(-3)] +
+      8.34657956545823e-15*rhou0_B0[OPS_ACC0(-4)] + 1.83333333333334*rhou0_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 -
+      2) ? (
+   -0.0394168524399447*rhou0_B0[OPS_ACC0(-2)] - 0.719443173328855*rhou0_B0[OPS_ACC0(-1)] +
+      0.0658051057710389*rhou0_B0[OPS_ACC0(-3)] - 0.00571369039775442*rhou0_B0[OPS_ACC0(-4)] +
+      0.376283677513354*rhou0_B0[OPS_ACC0(1)] + 0.322484932882161*rhou0_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 3) ?
+      (
+   -0.521455851089587*rhou0_B0[OPS_ACC0(-1)] + 0.0367146847001261*rhou0_B0[OPS_ACC0(-2)] +
+      0.00412637789557492*rhou0_B0[OPS_ACC0(-3)] - 0.113446470384241*rhou0_B0[OPS_ACC0(2)] +
+      0.791245592765872*rhou0_B0[OPS_ACC0(1)] - 0.197184333887745*rhou0_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 4) ?
+      (
+   -0.652141084861241*rhou0_B0[OPS_ACC0(-1)] + 0.082033432844602*rhou0_B0[OPS_ACC0(-2)] +
+      0.00932597985049999*rhou0_B0[OPS_ACC0(3)] - 0.121937153224065*rhou0_B0[OPS_ACC0(2)] +
+      0.727822147724592*rhou0_B0[OPS_ACC0(1)] - 0.0451033223343881*rhou0_B0[OPS_ACC0(0)]
+)
+: (
+  
+      (rc3)*rhou0_B0[OPS_ACC0(-2)] - rc3*rhou0_B0[OPS_ACC0(2)] + (rc2)*rhou0_B0[OPS_ACC0(1)] -
+      rc2*rhou0_B0[OPS_ACC0(-1)]
+)))))))));
+
+}
+
+void opensbliblock00Kernel007(const double *rhoE_B0, double *wk2_B0, const int *idx)
+{
+    wk2_B0[OPS_ACC1(0)] = inv_0*((idx[0] == 0) ? (
+   0.333333333333356*rhoE_B0[OPS_ACC0(3)] -
+      1.50000000000003*rhoE_B0[OPS_ACC0(2)] + 1.06910315192207e-15*rhoE_B0[OPS_ACC0(5)] +
+      3.00000000000002*rhoE_B0[OPS_ACC0(1)] - 8.34657956545823e-15*rhoE_B0[OPS_ACC0(4)] -
+      1.83333333333334*rhoE_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 1) ? (
+   -0.376283677513354*rhoE_B0[OPS_ACC0(-1)] -
+      0.0658051057710389*rhoE_B0[OPS_ACC0(3)] + 0.0394168524399447*rhoE_B0[OPS_ACC0(2)] +
+      0.719443173328855*rhoE_B0[OPS_ACC0(1)] + 0.00571369039775442*rhoE_B0[OPS_ACC0(4)] -
+      0.322484932882161*rhoE_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 2) ? (
+   0.113446470384241*rhoE_B0[OPS_ACC0(-2)] -
+      0.791245592765872*rhoE_B0[OPS_ACC0(-1)] - 0.00412637789557492*rhoE_B0[OPS_ACC0(3)] -
+      0.0367146847001261*rhoE_B0[OPS_ACC0(2)] + 0.521455851089587*rhoE_B0[OPS_ACC0(1)] +
+      0.197184333887745*rhoE_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 3) ? (
+   0.121937153224065*rhoE_B0[OPS_ACC0(-2)] -
+      0.727822147724592*rhoE_B0[OPS_ACC0(-1)] - 0.00932597985049999*rhoE_B0[OPS_ACC0(-3)] -
+      0.082033432844602*rhoE_B0[OPS_ACC0(2)] + 0.652141084861241*rhoE_B0[OPS_ACC0(1)] +
+      0.0451033223343881*rhoE_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 1) ? (
+  
+      -1.06910315192207e-15*rhoE_B0[OPS_ACC0(-5)] + 1.50000000000003*rhoE_B0[OPS_ACC0(-2)] -
+      3.00000000000002*rhoE_B0[OPS_ACC0(-1)] - 0.333333333333356*rhoE_B0[OPS_ACC0(-3)] +
+      8.34657956545823e-15*rhoE_B0[OPS_ACC0(-4)] + 1.83333333333334*rhoE_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 2)
+      ? (
+   -0.0394168524399447*rhoE_B0[OPS_ACC0(-2)] - 0.719443173328855*rhoE_B0[OPS_ACC0(-1)] +
+      0.0658051057710389*rhoE_B0[OPS_ACC0(-3)] - 0.00571369039775442*rhoE_B0[OPS_ACC0(-4)] +
+      0.376283677513354*rhoE_B0[OPS_ACC0(1)] + 0.322484932882161*rhoE_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 3) ?
+      (
+   0.0367146847001261*rhoE_B0[OPS_ACC0(-2)] - 0.521455851089587*rhoE_B0[OPS_ACC0(-1)] +
+      0.00412637789557492*rhoE_B0[OPS_ACC0(-3)] - 0.113446470384241*rhoE_B0[OPS_ACC0(2)] +
+      0.791245592765872*rhoE_B0[OPS_ACC0(1)] - 0.197184333887745*rhoE_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 4) ?
+      (
+   0.082033432844602*rhoE_B0[OPS_ACC0(-2)] - 0.652141084861241*rhoE_B0[OPS_ACC0(-1)] +
+      0.00932597985049999*rhoE_B0[OPS_ACC0(3)] - 0.121937153224065*rhoE_B0[OPS_ACC0(2)] +
+      0.727822147724592*rhoE_B0[OPS_ACC0(1)] - 0.0451033223343881*rhoE_B0[OPS_ACC0(0)]
+)
+: (
+  
+      (rc2)*rhoE_B0[OPS_ACC0(1)] - rc3*rhoE_B0[OPS_ACC0(2)] - rc2*rhoE_B0[OPS_ACC0(-1)] +
+      (rc3)*rhoE_B0[OPS_ACC0(-2)]
+)))))))));
+
+}
+
+void opensbliblock00Kernel008(const double *wk12_B0, double *wk3_B0, const int *idx)
+{
+    wk3_B0[OPS_ACC1(0)] = inv_0*((idx[0] == 0) ? (
+   -1.50000000000003*wk12_B0[OPS_ACC0(2)] +
+      3.00000000000002*wk12_B0[OPS_ACC0(1)] + 1.06910315192207e-15*wk12_B0[OPS_ACC0(5)] -
+      1.83333333333334*wk12_B0[OPS_ACC0(0)] - 8.34657956545823e-15*wk12_B0[OPS_ACC0(4)] +
+      0.333333333333356*wk12_B0[OPS_ACC0(3)]
+)
+: ((idx[0] == 1) ? (
+   0.0394168524399447*wk12_B0[OPS_ACC0(2)] +
+      0.719443173328855*wk12_B0[OPS_ACC0(1)] - 0.376283677513354*wk12_B0[OPS_ACC0(-1)] -
+      0.322484932882161*wk12_B0[OPS_ACC0(0)] + 0.00571369039775442*wk12_B0[OPS_ACC0(4)] -
+      0.0658051057710389*wk12_B0[OPS_ACC0(3)]
+)
+: ((idx[0] == 2) ? (
+   -0.0367146847001261*wk12_B0[OPS_ACC0(2)] +
+      0.521455851089587*wk12_B0[OPS_ACC0(1)] + 0.113446470384241*wk12_B0[OPS_ACC0(-2)] -
+      0.791245592765872*wk12_B0[OPS_ACC0(-1)] + 0.197184333887745*wk12_B0[OPS_ACC0(0)] -
+      0.00412637789557492*wk12_B0[OPS_ACC0(3)]
+)
+: ((idx[0] == 3) ? (
+   -0.082033432844602*wk12_B0[OPS_ACC0(2)] +
+      0.652141084861241*wk12_B0[OPS_ACC0(1)] - 0.727822147724592*wk12_B0[OPS_ACC0(-1)] +
+      0.121937153224065*wk12_B0[OPS_ACC0(-2)] + 0.0451033223343881*wk12_B0[OPS_ACC0(0)] -
+      0.00932597985049999*wk12_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 1) ? (
+  
+      8.34657956545823e-15*wk12_B0[OPS_ACC0(-4)] - 1.06910315192207e-15*wk12_B0[OPS_ACC0(-5)] +
+      1.50000000000003*wk12_B0[OPS_ACC0(-2)] - 3.00000000000002*wk12_B0[OPS_ACC0(-1)] +
+      1.83333333333334*wk12_B0[OPS_ACC0(0)] - 0.333333333333356*wk12_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 2) ?
+      (
+   -0.00571369039775442*wk12_B0[OPS_ACC0(-4)] + 0.376283677513354*wk12_B0[OPS_ACC0(1)] -
+      0.0394168524399447*wk12_B0[OPS_ACC0(-2)] - 0.719443173328855*wk12_B0[OPS_ACC0(-1)] +
+      0.322484932882161*wk12_B0[OPS_ACC0(0)] + 0.0658051057710389*wk12_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 3) ?
+      (
+   -0.113446470384241*wk12_B0[OPS_ACC0(2)] + 0.791245592765872*wk12_B0[OPS_ACC0(1)] -
+      0.521455851089587*wk12_B0[OPS_ACC0(-1)] + 0.0367146847001261*wk12_B0[OPS_ACC0(-2)] -
+      0.197184333887745*wk12_B0[OPS_ACC0(0)] + 0.00412637789557492*wk12_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 4)
+      ? (
+   -0.121937153224065*wk12_B0[OPS_ACC0(2)] + 0.727822147724592*wk12_B0[OPS_ACC0(1)] -
+      0.652141084861241*wk12_B0[OPS_ACC0(-1)] + 0.082033432844602*wk12_B0[OPS_ACC0(-2)] -
+      0.0451033223343881*wk12_B0[OPS_ACC0(0)] + 0.00932597985049999*wk12_B0[OPS_ACC0(3)]
+)
+: (
+  
+      -rc3*wk12_B0[OPS_ACC0(2)] + (rc3)*wk12_B0[OPS_ACC0(-2)] + (rc2)*wk12_B0[OPS_ACC0(1)] -
+      rc2*wk12_B0[OPS_ACC0(-1)]
+)))))))));
+
+}
+
+void opensbliblock00Kernel009(const double *u0_B0, double *wk4_B0, const int *idx)
+{
+    wk4_B0[OPS_ACC1(0)] = inv_0*((idx[0] == 0) ? (
+   -1.83333333333334*u0_B0[OPS_ACC0(0)] -
+      8.34657956545823e-15*u0_B0[OPS_ACC0(4)] + 3.00000000000002*u0_B0[OPS_ACC0(1)] +
+      1.06910315192207e-15*u0_B0[OPS_ACC0(5)] - 1.50000000000003*u0_B0[OPS_ACC0(2)] +
+      0.333333333333356*u0_B0[OPS_ACC0(3)]
+)
+: ((idx[0] == 1) ? (
+   -0.322484932882161*u0_B0[OPS_ACC0(0)] +
+      0.00571369039775442*u0_B0[OPS_ACC0(4)] + 0.719443173328855*u0_B0[OPS_ACC0(1)] -
+      0.376283677513354*u0_B0[OPS_ACC0(-1)] + 0.0394168524399447*u0_B0[OPS_ACC0(2)] -
+      0.0658051057710389*u0_B0[OPS_ACC0(3)]
+)
+: ((idx[0] == 2) ? (
+   0.197184333887745*u0_B0[OPS_ACC0(0)] +
+      0.521455851089587*u0_B0[OPS_ACC0(1)] + 0.113446470384241*u0_B0[OPS_ACC0(-2)] -
+      0.791245592765872*u0_B0[OPS_ACC0(-1)] - 0.0367146847001261*u0_B0[OPS_ACC0(2)] -
+      0.00412637789557492*u0_B0[OPS_ACC0(3)]
+)
+: ((idx[0] == 3) ? (
+   0.0451033223343881*u0_B0[OPS_ACC0(0)] -
+      0.00932597985049999*u0_B0[OPS_ACC0(-3)] + 0.652141084861241*u0_B0[OPS_ACC0(1)] +
+      0.121937153224065*u0_B0[OPS_ACC0(-2)] - 0.727822147724592*u0_B0[OPS_ACC0(-1)] -
+      0.082033432844602*u0_B0[OPS_ACC0(2)]
+)
+: ((idx[0] == block0np0 - 1) ? (
+  
+      8.34657956545823e-15*u0_B0[OPS_ACC0(-4)] + 1.83333333333334*u0_B0[OPS_ACC0(0)] -
+      0.333333333333356*u0_B0[OPS_ACC0(-3)] + 1.50000000000003*u0_B0[OPS_ACC0(-2)] -
+      3.00000000000002*u0_B0[OPS_ACC0(-1)] - 1.06910315192207e-15*u0_B0[OPS_ACC0(-5)]
+)
+: ((idx[0] == block0np0 - 2) ?
+      (
+   -0.00571369039775442*u0_B0[OPS_ACC0(-4)] + 0.322484932882161*u0_B0[OPS_ACC0(0)] +
+      0.0658051057710389*u0_B0[OPS_ACC0(-3)] + 0.376283677513354*u0_B0[OPS_ACC0(1)] -
+      0.0394168524399447*u0_B0[OPS_ACC0(-2)] - 0.719443173328855*u0_B0[OPS_ACC0(-1)]
+)
+: ((idx[0] == block0np0 - 3) ? (
+
+        -0.197184333887745*u0_B0[OPS_ACC0(0)] + 0.00412637789557492*u0_B0[OPS_ACC0(-3)] +
+      0.791245592765872*u0_B0[OPS_ACC0(1)] + 0.0367146847001261*u0_B0[OPS_ACC0(-2)] -
+      0.521455851089587*u0_B0[OPS_ACC0(-1)] - 0.113446470384241*u0_B0[OPS_ACC0(2)]
+)
+: ((idx[0] == block0np0 - 4) ? (
+  
+      -0.0451033223343881*u0_B0[OPS_ACC0(0)] + 0.727822147724592*u0_B0[OPS_ACC0(1)] +
+      0.082033432844602*u0_B0[OPS_ACC0(-2)] - 0.652141084861241*u0_B0[OPS_ACC0(-1)] -
+      0.121937153224065*u0_B0[OPS_ACC0(2)] + 0.00932597985049999*u0_B0[OPS_ACC0(3)]
+)
+: (
+   -rc2*u0_B0[OPS_ACC0(-1)] +
+      (rc3)*u0_B0[OPS_ACC0(-2)] - rc3*u0_B0[OPS_ACC0(2)] + (rc2)*u0_B0[OPS_ACC0(1)]
+)))))))));
+
+}
+
+void opensbliblock00Kernel010(const double *wk13_B0, double *wk5_B0, const int *idx)
+{
+    wk5_B0[OPS_ACC1(0)] = inv_0*((idx[0] == 0) ? (
+   3.00000000000002*wk13_B0[OPS_ACC0(1)] -
+      8.34657956545823e-15*wk13_B0[OPS_ACC0(4)] - 1.83333333333334*wk13_B0[OPS_ACC0(0)] +
+      0.333333333333356*wk13_B0[OPS_ACC0(3)] - 1.50000000000003*wk13_B0[OPS_ACC0(2)] +
+      1.06910315192207e-15*wk13_B0[OPS_ACC0(5)]
+)
+: ((idx[0] == 1) ? (
+   0.719443173328855*wk13_B0[OPS_ACC0(1)] +
+      0.00571369039775442*wk13_B0[OPS_ACC0(4)] - 0.322484932882161*wk13_B0[OPS_ACC0(0)] -
+      0.0658051057710389*wk13_B0[OPS_ACC0(3)] + 0.0394168524399447*wk13_B0[OPS_ACC0(2)] -
+      0.376283677513354*wk13_B0[OPS_ACC0(-1)]
+)
+: ((idx[0] == 2) ? (
+   0.521455851089587*wk13_B0[OPS_ACC0(1)] +
+      0.197184333887745*wk13_B0[OPS_ACC0(0)] - 0.791245592765872*wk13_B0[OPS_ACC0(-1)] -
+      0.00412637789557492*wk13_B0[OPS_ACC0(3)] - 0.0367146847001261*wk13_B0[OPS_ACC0(2)] +
+      0.113446470384241*wk13_B0[OPS_ACC0(-2)]
+)
+: ((idx[0] == 3) ? (
+   0.652141084861241*wk13_B0[OPS_ACC0(1)] -
+      0.00932597985049999*wk13_B0[OPS_ACC0(-3)] + 0.0451033223343881*wk13_B0[OPS_ACC0(0)] +
+      0.121937153224065*wk13_B0[OPS_ACC0(-2)] - 0.082033432844602*wk13_B0[OPS_ACC0(2)] -
+      0.727822147724592*wk13_B0[OPS_ACC0(-1)]
+)
+: ((idx[0] == block0np0 - 1) ? (
+  
+      -0.333333333333356*wk13_B0[OPS_ACC0(-3)] + 1.83333333333334*wk13_B0[OPS_ACC0(0)] +
+      8.34657956545823e-15*wk13_B0[OPS_ACC0(-4)] - 3.00000000000002*wk13_B0[OPS_ACC0(-1)] -
+      1.06910315192207e-15*wk13_B0[OPS_ACC0(-5)] + 1.50000000000003*wk13_B0[OPS_ACC0(-2)]
+)
+: ((idx[0] == block0np0 - 2)
+      ? (
+   0.376283677513354*wk13_B0[OPS_ACC0(1)] + 0.0658051057710389*wk13_B0[OPS_ACC0(-3)] +
+      0.322484932882161*wk13_B0[OPS_ACC0(0)] - 0.00571369039775442*wk13_B0[OPS_ACC0(-4)] -
+      0.719443173328855*wk13_B0[OPS_ACC0(-1)] - 0.0394168524399447*wk13_B0[OPS_ACC0(-2)]
+)
+: ((idx[0] == block0np0 - 3)
+      ? (
+   0.791245592765872*wk13_B0[OPS_ACC0(1)] + 0.00412637789557492*wk13_B0[OPS_ACC0(-3)] -
+      0.197184333887745*wk13_B0[OPS_ACC0(0)] + 0.0367146847001261*wk13_B0[OPS_ACC0(-2)] -
+      0.113446470384241*wk13_B0[OPS_ACC0(2)] - 0.521455851089587*wk13_B0[OPS_ACC0(-1)]
+)
+: ((idx[0] == block0np0 - 4) ?
+      (
+   0.727822147724592*wk13_B0[OPS_ACC0(1)] - 0.0451033223343881*wk13_B0[OPS_ACC0(0)] +
+      0.082033432844602*wk13_B0[OPS_ACC0(-2)] + 0.00932597985049999*wk13_B0[OPS_ACC0(3)] -
+      0.121937153224065*wk13_B0[OPS_ACC0(2)] - 0.652141084861241*wk13_B0[OPS_ACC0(-1)]
+)
+: (
+  
+      (rc2)*wk13_B0[OPS_ACC0(1)] - rc3*wk13_B0[OPS_ACC0(2)] - rc2*wk13_B0[OPS_ACC0(-1)] +
+      (rc3)*wk13_B0[OPS_ACC0(-2)]
+)))))))));
+
+}
+
+void opensbliblock00Kernel012(const double *rho_B0, double *wk6_B0, const int *idx)
+{
+    wk6_B0[OPS_ACC1(0)] = inv_0*((idx[0] == 0) ? (
+   1.06910315192207e-15*rho_B0[OPS_ACC0(5)] -
+      1.83333333333334*rho_B0[OPS_ACC0(0)] - 8.34657956545823e-15*rho_B0[OPS_ACC0(4)] +
+      0.333333333333356*rho_B0[OPS_ACC0(3)] - 1.50000000000003*rho_B0[OPS_ACC0(2)] +
+      3.00000000000002*rho_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == 1) ? (
+   -0.376283677513354*rho_B0[OPS_ACC0(-1)] -
+      0.322484932882161*rho_B0[OPS_ACC0(0)] + 0.00571369039775442*rho_B0[OPS_ACC0(4)] -
+      0.0658051057710389*rho_B0[OPS_ACC0(3)] + 0.0394168524399447*rho_B0[OPS_ACC0(2)] +
+      0.719443173328855*rho_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == 2) ? (
+   0.113446470384241*rho_B0[OPS_ACC0(-2)] -
+      0.791245592765872*rho_B0[OPS_ACC0(-1)] + 0.197184333887745*rho_B0[OPS_ACC0(0)] -
+      0.00412637789557492*rho_B0[OPS_ACC0(3)] - 0.0367146847001261*rho_B0[OPS_ACC0(2)] +
+      0.521455851089587*rho_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == 3) ? (
+   0.121937153224065*rho_B0[OPS_ACC0(-2)] -
+      0.727822147724592*rho_B0[OPS_ACC0(-1)] + 0.0451033223343881*rho_B0[OPS_ACC0(0)] -
+      0.00932597985049999*rho_B0[OPS_ACC0(-3)] - 0.082033432844602*rho_B0[OPS_ACC0(2)] +
+      0.652141084861241*rho_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == block0np0 - 1) ? (
+   1.50000000000003*rho_B0[OPS_ACC0(-2)]
+      - 3.00000000000002*rho_B0[OPS_ACC0(-1)] + 1.83333333333334*rho_B0[OPS_ACC0(0)] -
+      0.333333333333356*rho_B0[OPS_ACC0(-3)] + 8.34657956545823e-15*rho_B0[OPS_ACC0(-4)] -
+      1.06910315192207e-15*rho_B0[OPS_ACC0(-5)]
+)
+: ((idx[0] == block0np0 - 2) ? (
+  
+      -0.0394168524399447*rho_B0[OPS_ACC0(-2)] - 0.719443173328855*rho_B0[OPS_ACC0(-1)] +
+      0.322484932882161*rho_B0[OPS_ACC0(0)] + 0.0658051057710389*rho_B0[OPS_ACC0(-3)] -
+      0.00571369039775442*rho_B0[OPS_ACC0(-4)] + 0.376283677513354*rho_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == block0np0 - 3) ?
+      (
+   0.0367146847001261*rho_B0[OPS_ACC0(-2)] - 0.521455851089587*rho_B0[OPS_ACC0(-1)] -
+      0.197184333887745*rho_B0[OPS_ACC0(0)] + 0.00412637789557492*rho_B0[OPS_ACC0(-3)] -
+      0.113446470384241*rho_B0[OPS_ACC0(2)] + 0.791245592765872*rho_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == block0np0 - 4) ? (
+ 
+       0.082033432844602*rho_B0[OPS_ACC0(-2)] - 0.652141084861241*rho_B0[OPS_ACC0(-1)] -
+      0.0451033223343881*rho_B0[OPS_ACC0(0)] + 0.00932597985049999*rho_B0[OPS_ACC0(3)] -
+      0.121937153224065*rho_B0[OPS_ACC0(2)] + 0.727822147724592*rho_B0[OPS_ACC0(1)]
+)
+: (
+   -rc2*rho_B0[OPS_ACC0(-1)] +
+      (rc3)*rho_B0[OPS_ACC0(-2)] + (rc2)*rho_B0[OPS_ACC0(1)] - rc3*rho_B0[OPS_ACC0(2)]
+)))))))));
+
+}
+
+void opensbliblock00Kernel013(const double *p_B0, double *wk7_B0, const int *idx)
+{
+    wk7_B0[OPS_ACC1(0)] = inv_0*((idx[0] == 0) ? (
+   -1.50000000000003*p_B0[OPS_ACC0(2)] +
+      0.333333333333356*p_B0[OPS_ACC0(3)] - 8.34657956545823e-15*p_B0[OPS_ACC0(4)] - 1.83333333333334*p_B0[OPS_ACC0(0)]
+      + 1.06910315192207e-15*p_B0[OPS_ACC0(5)] + 3.00000000000002*p_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == 1) ? (
+  
+      0.0394168524399447*p_B0[OPS_ACC0(2)] - 0.376283677513354*p_B0[OPS_ACC0(-1)] - 0.0658051057710389*p_B0[OPS_ACC0(3)]
+      + 0.00571369039775442*p_B0[OPS_ACC0(4)] - 0.322484932882161*p_B0[OPS_ACC0(0)] +
+      0.719443173328855*p_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == 2) ? (
+   -0.0367146847001261*p_B0[OPS_ACC0(2)] +
+      0.113446470384241*p_B0[OPS_ACC0(-2)] - 0.791245592765872*p_B0[OPS_ACC0(-1)] -
+      0.00412637789557492*p_B0[OPS_ACC0(3)] + 0.197184333887745*p_B0[OPS_ACC0(0)] +
+      0.521455851089587*p_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == 3) ? (
+   -0.082033432844602*p_B0[OPS_ACC0(2)] -
+      0.727822147724592*p_B0[OPS_ACC0(-1)] + 0.121937153224065*p_B0[OPS_ACC0(-2)] + 0.0451033223343881*p_B0[OPS_ACC0(0)]
+      + 0.652141084861241*p_B0[OPS_ACC0(1)] - 0.00932597985049999*p_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 1) ? (
+
+        1.50000000000003*p_B0[OPS_ACC0(-2)] - 3.00000000000002*p_B0[OPS_ACC0(-1)] + 1.83333333333334*p_B0[OPS_ACC0(0)] -
+      1.06910315192207e-15*p_B0[OPS_ACC0(-5)] + 8.34657956545823e-15*p_B0[OPS_ACC0(-4)] -
+      0.333333333333356*p_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 2) ? (
+   -0.0394168524399447*p_B0[OPS_ACC0(-2)]
+      - 0.719443173328855*p_B0[OPS_ACC0(-1)] + 0.322484932882161*p_B0[OPS_ACC0(0)] -
+      0.00571369039775442*p_B0[OPS_ACC0(-4)] + 0.376283677513354*p_B0[OPS_ACC0(1)] +
+      0.0658051057710389*p_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 3) ? (
+   -0.113446470384241*p_B0[OPS_ACC0(2)] -
+      0.521455851089587*p_B0[OPS_ACC0(-1)] + 0.0367146847001261*p_B0[OPS_ACC0(-2)] - 0.197184333887745*p_B0[OPS_ACC0(0)]
+      + 0.791245592765872*p_B0[OPS_ACC0(1)] + 0.00412637789557492*p_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 4) ? (
+
+        -0.121937153224065*p_B0[OPS_ACC0(2)] - 0.652141084861241*p_B0[OPS_ACC0(-1)] +
+      0.082033432844602*p_B0[OPS_ACC0(-2)] + 0.00932597985049999*p_B0[OPS_ACC0(3)] -
+      0.0451033223343881*p_B0[OPS_ACC0(0)] + 0.727822147724592*p_B0[OPS_ACC0(1)]
+)
+: (
+   (rc3)*p_B0[OPS_ACC0(-2)] -
+      rc3*p_B0[OPS_ACC0(2)] - rc2*p_B0[OPS_ACC0(-1)] + (rc2)*p_B0[OPS_ACC0(1)]
+)))))))));
+
+}
+
+void opensbliblock00Kernel015(const double *tau00_B0, double *wk8_B0, const int *idx)
+{
+    wk8_B0[OPS_ACC1(0)] = inv_0*((idx[0] == 0) ? (
+   -8.34657956545823e-15*tau00_B0[OPS_ACC0(4)] +
+      3.00000000000002*tau00_B0[OPS_ACC0(1)] + 1.06910315192207e-15*tau00_B0[OPS_ACC0(5)] -
+      1.50000000000003*tau00_B0[OPS_ACC0(2)] + 0.333333333333356*tau00_B0[OPS_ACC0(3)] -
+      1.83333333333334*tau00_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 1) ? (
+   0.00571369039775442*tau00_B0[OPS_ACC0(4)] +
+      0.719443173328855*tau00_B0[OPS_ACC0(1)] + 0.0394168524399447*tau00_B0[OPS_ACC0(2)] -
+      0.0658051057710389*tau00_B0[OPS_ACC0(3)] - 0.376283677513354*tau00_B0[OPS_ACC0(-1)] -
+      0.322484932882161*tau00_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 2) ? (
+   -0.791245592765872*tau00_B0[OPS_ACC0(-1)] +
+      0.521455851089587*tau00_B0[OPS_ACC0(1)] - 0.0367146847001261*tau00_B0[OPS_ACC0(2)] -
+      0.00412637789557492*tau00_B0[OPS_ACC0(3)] + 0.113446470384241*tau00_B0[OPS_ACC0(-2)] +
+      0.197184333887745*tau00_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == 3) ? (
+   -0.727822147724592*tau00_B0[OPS_ACC0(-1)] +
+      0.652141084861241*tau00_B0[OPS_ACC0(1)] - 0.082033432844602*tau00_B0[OPS_ACC0(2)] -
+      0.00932597985049999*tau00_B0[OPS_ACC0(-3)] + 0.121937153224065*tau00_B0[OPS_ACC0(-2)] +
+      0.0451033223343881*tau00_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 1) ? (
+  
+      -3.00000000000002*tau00_B0[OPS_ACC0(-1)] + 8.34657956545823e-15*tau00_B0[OPS_ACC0(-4)] -
+      0.333333333333356*tau00_B0[OPS_ACC0(-3)] + 1.50000000000003*tau00_B0[OPS_ACC0(-2)] -
+      1.06910315192207e-15*tau00_B0[OPS_ACC0(-5)] + 1.83333333333334*tau00_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 -
+      2) ? (
+   -0.719443173328855*tau00_B0[OPS_ACC0(-1)] + 0.376283677513354*tau00_B0[OPS_ACC0(1)] -
+      0.00571369039775442*tau00_B0[OPS_ACC0(-4)] + 0.0658051057710389*tau00_B0[OPS_ACC0(-3)] -
+      0.0394168524399447*tau00_B0[OPS_ACC0(-2)] + 0.322484932882161*tau00_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 3)
+      ? (
+   -0.521455851089587*tau00_B0[OPS_ACC0(-1)] + 0.791245592765872*tau00_B0[OPS_ACC0(1)] -
+      0.113446470384241*tau00_B0[OPS_ACC0(2)] + 0.00412637789557492*tau00_B0[OPS_ACC0(-3)] +
+      0.0367146847001261*tau00_B0[OPS_ACC0(-2)] - 0.197184333887745*tau00_B0[OPS_ACC0(0)]
+)
+: ((idx[0] == block0np0 - 4)
+      ? (
+   -0.652141084861241*tau00_B0[OPS_ACC0(-1)] + 0.727822147724592*tau00_B0[OPS_ACC0(1)] -
+      0.121937153224065*tau00_B0[OPS_ACC0(2)] + 0.00932597985049999*tau00_B0[OPS_ACC0(3)] +
+      0.082033432844602*tau00_B0[OPS_ACC0(-2)] - 0.0451033223343881*tau00_B0[OPS_ACC0(0)]
+)
+: (
+  
+      -rc2*tau00_B0[OPS_ACC0(-1)] + (rc3)*tau00_B0[OPS_ACC0(-2)] - rc3*tau00_B0[OPS_ACC0(2)] +
+      (rc2)*tau00_B0[OPS_ACC0(1)]
+)))))))));
+
+}
+
+void opensbliblock00Kernel017(const double *q0_B0, double *wk9_B0, const int *idx)
+{
+    wk9_B0[OPS_ACC1(0)] = inv_0*((idx[0] == 0) ? (
+   0.333333333333356*q0_B0[OPS_ACC0(3)] -
+      1.83333333333334*q0_B0[OPS_ACC0(0)] - 8.34657956545823e-15*q0_B0[OPS_ACC0(4)] +
+      3.00000000000002*q0_B0[OPS_ACC0(1)] + 1.06910315192207e-15*q0_B0[OPS_ACC0(5)] -
+      1.50000000000003*q0_B0[OPS_ACC0(2)]
+)
+: ((idx[0] == 1) ? (
+   -0.0658051057710389*q0_B0[OPS_ACC0(3)] -
+      0.376283677513354*q0_B0[OPS_ACC0(-1)] - 0.322484932882161*q0_B0[OPS_ACC0(0)] +
+      0.00571369039775442*q0_B0[OPS_ACC0(4)] + 0.719443173328855*q0_B0[OPS_ACC0(1)] +
+      0.0394168524399447*q0_B0[OPS_ACC0(2)]
+)
+: ((idx[0] == 2) ? (
+   -0.00412637789557492*q0_B0[OPS_ACC0(3)] +
+      0.113446470384241*q0_B0[OPS_ACC0(-2)] - 0.791245592765872*q0_B0[OPS_ACC0(-1)] +
+      0.197184333887745*q0_B0[OPS_ACC0(0)] + 0.521455851089587*q0_B0[OPS_ACC0(1)] -
+      0.0367146847001261*q0_B0[OPS_ACC0(2)]
+)
+: ((idx[0] == 3) ? (
+   0.121937153224065*q0_B0[OPS_ACC0(-2)] -
+      0.727822147724592*q0_B0[OPS_ACC0(-1)] + 0.0451033223343881*q0_B0[OPS_ACC0(0)] +
+      0.652141084861241*q0_B0[OPS_ACC0(1)] - 0.082033432844602*q0_B0[OPS_ACC0(2)] -
+      0.00932597985049999*q0_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 1) ? (
+   1.50000000000003*q0_B0[OPS_ACC0(-2)]
+      - 3.00000000000002*q0_B0[OPS_ACC0(-1)] + 1.83333333333334*q0_B0[OPS_ACC0(0)] -
+      1.06910315192207e-15*q0_B0[OPS_ACC0(-5)] + 8.34657956545823e-15*q0_B0[OPS_ACC0(-4)] -
+      0.333333333333356*q0_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 2) ? (
+  
+      -0.0394168524399447*q0_B0[OPS_ACC0(-2)] - 0.719443173328855*q0_B0[OPS_ACC0(-1)] +
+      0.322484932882161*q0_B0[OPS_ACC0(0)] + 0.376283677513354*q0_B0[OPS_ACC0(1)] -
+      0.00571369039775442*q0_B0[OPS_ACC0(-4)] + 0.0658051057710389*q0_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 3) ?
+      (
+   0.0367146847001261*q0_B0[OPS_ACC0(-2)] - 0.521455851089587*q0_B0[OPS_ACC0(-1)] -
+      0.197184333887745*q0_B0[OPS_ACC0(0)] + 0.791245592765872*q0_B0[OPS_ACC0(1)] - 0.113446470384241*q0_B0[OPS_ACC0(2)]
+      + 0.00412637789557492*q0_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 4) ? (
+  
+      0.00932597985049999*q0_B0[OPS_ACC0(3)] + 0.082033432844602*q0_B0[OPS_ACC0(-2)] -
+      0.652141084861241*q0_B0[OPS_ACC0(-1)] - 0.0451033223343881*q0_B0[OPS_ACC0(0)] +
+      0.727822147724592*q0_B0[OPS_ACC0(1)] - 0.121937153224065*q0_B0[OPS_ACC0(2)]
+)
+: (
+   (rc3)*q0_B0[OPS_ACC0(-2)] -
+      rc2*q0_B0[OPS_ACC0(-1)] + (rc2)*q0_B0[OPS_ACC0(1)] - rc3*q0_B0[OPS_ACC0(2)]
+)))))))));
+
+}
+
+void opensbliblock00Kernel018(const double *wk14_B0, double *wk10_B0, const int *idx)
+{
+    wk10_B0[OPS_ACC1(0)] = inv_0*((idx[0] == 0) ? (
+   -1.50000000000003*wk14_B0[OPS_ACC0(2)] +
+      0.333333333333356*wk14_B0[OPS_ACC0(3)] - 8.34657956545823e-15*wk14_B0[OPS_ACC0(4)] -
+      1.83333333333334*wk14_B0[OPS_ACC0(0)] + 1.06910315192207e-15*wk14_B0[OPS_ACC0(5)] +
+      3.00000000000002*wk14_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == 1) ? (
+   0.0394168524399447*wk14_B0[OPS_ACC0(2)] -
+      0.376283677513354*wk14_B0[OPS_ACC0(-1)] - 0.0658051057710389*wk14_B0[OPS_ACC0(3)] +
+      0.00571369039775442*wk14_B0[OPS_ACC0(4)] - 0.322484932882161*wk14_B0[OPS_ACC0(0)] +
+      0.719443173328855*wk14_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == 2) ? (
+   -0.0367146847001261*wk14_B0[OPS_ACC0(2)] +
+      0.113446470384241*wk14_B0[OPS_ACC0(-2)] - 0.791245592765872*wk14_B0[OPS_ACC0(-1)] -
+      0.00412637789557492*wk14_B0[OPS_ACC0(3)] + 0.197184333887745*wk14_B0[OPS_ACC0(0)] +
+      0.521455851089587*wk14_B0[OPS_ACC0(1)]
+)
+: ((idx[0] == 3) ? (
+   -0.082033432844602*wk14_B0[OPS_ACC0(2)] +
+      0.121937153224065*wk14_B0[OPS_ACC0(-2)] - 0.727822147724592*wk14_B0[OPS_ACC0(-1)] +
+      0.0451033223343881*wk14_B0[OPS_ACC0(0)] + 0.652141084861241*wk14_B0[OPS_ACC0(1)] -
+      0.00932597985049999*wk14_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 1) ? (
+  
+      1.50000000000003*wk14_B0[OPS_ACC0(-2)] - 3.00000000000002*wk14_B0[OPS_ACC0(-1)] -
+      1.06910315192207e-15*wk14_B0[OPS_ACC0(-5)] + 1.83333333333334*wk14_B0[OPS_ACC0(0)] +
+      8.34657956545823e-15*wk14_B0[OPS_ACC0(-4)] - 0.333333333333356*wk14_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 -
+      2) ? (
+   -0.0394168524399447*wk14_B0[OPS_ACC0(-2)] - 0.719443173328855*wk14_B0[OPS_ACC0(-1)] +
+      0.322484932882161*wk14_B0[OPS_ACC0(0)] - 0.00571369039775442*wk14_B0[OPS_ACC0(-4)] +
+      0.376283677513354*wk14_B0[OPS_ACC0(1)] + 0.0658051057710389*wk14_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 3) ?
+      (
+   -0.113446470384241*wk14_B0[OPS_ACC0(2)] + 0.0367146847001261*wk14_B0[OPS_ACC0(-2)] -
+      0.521455851089587*wk14_B0[OPS_ACC0(-1)] - 0.197184333887745*wk14_B0[OPS_ACC0(0)] +
+      0.791245592765872*wk14_B0[OPS_ACC0(1)] + 0.00412637789557492*wk14_B0[OPS_ACC0(-3)]
+)
+: ((idx[0] == block0np0 - 4)
+      ? (
+   -0.121937153224065*wk14_B0[OPS_ACC0(2)] + 0.082033432844602*wk14_B0[OPS_ACC0(-2)] -
+      0.652141084861241*wk14_B0[OPS_ACC0(-1)] + 0.00932597985049999*wk14_B0[OPS_ACC0(3)] -
+      0.0451033223343881*wk14_B0[OPS_ACC0(0)] + 0.727822147724592*wk14_B0[OPS_ACC0(1)]
+)
+: (
+  
+      -rc3*wk14_B0[OPS_ACC0(2)] + (rc2)*wk14_B0[OPS_ACC0(1)] - rc2*wk14_B0[OPS_ACC0(-1)] +
+      (rc3)*wk14_B0[OPS_ACC0(-2)]
+)))))))));
+
+}
+
+ void opensbliblock00Kernel019(const double *wk6_B0, const double *wk0_B0, const double *wk3_B0, const double *tau00_B0,
+const double *rho_B0, const double *wk4_B0, const double *wk7_B0, const double *wk1_B0, const double *wk2_B0, const
+double *wk5_B0, const double *wk8_B0, const double *u0_B0, const double *rhou0_B0, const double *rhoE_B0, const double
+*wk9_B0, const double *wk10_B0, double *Residual0_B0, double *Residual1_B0, double *Residual2_B0)
+{
+    Residual0_B0[OPS_ACC16(0)] = -rc1*rho_B0[OPS_ACC4(0)]*wk4_B0[OPS_ACC5(0)] -
+      rc1*u0_B0[OPS_ACC11(0)]*wk6_B0[OPS_ACC0(0)] - rc1*wk10_B0[OPS_ACC15(0)];
+
+    Residual1_B0[OPS_ACC17(0)] = -rc1*rhou0_B0[OPS_ACC12(0)]*wk4_B0[OPS_ACC5(0)] -
+      rc1*u0_B0[OPS_ACC11(0)]*wk1_B0[OPS_ACC7(0)] - rc1*wk3_B0[OPS_ACC2(0)] - wk7_B0[OPS_ACC6(0)] +
+      wk8_B0[OPS_ACC10(0)];
+
+    Residual2_B0[OPS_ACC18(0)] = -rc1*rhoE_B0[OPS_ACC13(0)]*wk4_B0[OPS_ACC5(0)] +
+      tau00_B0[OPS_ACC3(0)]*wk4_B0[OPS_ACC5(0)] - rc1*u0_B0[OPS_ACC11(0)]*wk2_B0[OPS_ACC8(0)] +
+      u0_B0[OPS_ACC11(0)]*wk8_B0[OPS_ACC10(0)] - wk0_B0[OPS_ACC1(0)] - rc1*wk5_B0[OPS_ACC9(0)] + wk9_B0[OPS_ACC14(0)];
+
+}
+
+ void opensbliblock00Kernel025(const double *Residual1_B0, const double *Residual0_B0, const double *Residual2_B0,
+double *tempRK_rhoE_B0, double *tempRK_rhou0_B0, double *rho_B0, double *rhoE_B0, double *rhou0_B0, double
+*tempRK_rho_B0, const double *rkB, const double *rkA)
+{
+   tempRK_rho_B0[OPS_ACC8(0)] = dt*Residual0_B0[OPS_ACC1(0)] + rkA[0]*tempRK_rho_B0[OPS_ACC8(0)];
+
+   rho_B0[OPS_ACC5(0)] = rkB[0]*tempRK_rho_B0[OPS_ACC8(0)] + rho_B0[OPS_ACC5(0)];
+
+   tempRK_rhou0_B0[OPS_ACC4(0)] = dt*Residual1_B0[OPS_ACC0(0)] + rkA[0]*tempRK_rhou0_B0[OPS_ACC4(0)];
+
+   rhou0_B0[OPS_ACC7(0)] = rkB[0]*tempRK_rhou0_B0[OPS_ACC4(0)] + rhou0_B0[OPS_ACC7(0)];
+
+   tempRK_rhoE_B0[OPS_ACC3(0)] = dt*Residual2_B0[OPS_ACC2(0)] + rkA[0]*tempRK_rhoE_B0[OPS_ACC3(0)];
+
+   rhoE_B0[OPS_ACC6(0)] = rkB[0]*tempRK_rhoE_B0[OPS_ACC3(0)] + rhoE_B0[OPS_ACC6(0)];
+
+}
+
+#endif
