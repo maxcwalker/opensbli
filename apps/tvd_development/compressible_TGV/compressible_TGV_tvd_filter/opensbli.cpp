@@ -25,13 +25,13 @@ double rkA[] = {0, (-5.0/9.0), (-153.0/128.0)};
 dt = 0.0005;
 write_output_file = 10000;
 HDF5_timing = 0;
-Minf = 1.25;
 gama = 1.4;
-Pr = 0.71;
+Minf = 1.25;
 Re = 1600.0;
+Pr = 0.71;
 delta_TVD = 0.500000000000000;
 eps_TVD = 1.00000000000000e-8;
-kappa_TVD=0.9;
+kappa_TVD = 0.9;
 gamma_m1 = -1 + gama;
 inv2Delta0block0 = 1.0/(Delta0block0*Delta0block0);
 inv2Delta1block0 = 1.0/(Delta1block0*Delta1block0);
@@ -145,7 +145,7 @@ ops_timers(&inner_start, &elapsed_inner_start);
 for(iter=start_iter; iter<=start_iter+niter - 1; iter++)
 {
 simulation_time = tstart + dt*((iter - start_iter)+1);
-if(fmod(iter+1, 1) == 0){
+if(fmod(iter+1, 100) == 0){
         ops_timers(&inner_end, &elapsed_inner_end);
         ops_printf("Iteration: %d. Time-step: %.3e. Simulation time: %.5f. Time/iteration: %lf.\n", iter+1, dt, simulation_time, (elapsed_inner_end - elapsed_inner_start)/100);
         fflush(stdout);
@@ -451,10 +451,10 @@ ops_arg_reduce(enstrophy_dissipation_B0, 1, "double", OPS_INC),
 ops_arg_reduce(rhom_B0, 1, "double", OPS_INC),
 ops_arg_dat(divV_B0, 1, stencil_0_00_00_00_3, "double", OPS_RW));
 
-ops_reduction_result(rhom_B0, &rhom_B0_out);
-ops_reduction_result(KE_B0, &KE_B0_out);
 ops_reduction_result(dilatation_dissipation_B0, &dilatation_dissipation_B0_out);
+ops_reduction_result(KE_B0, &KE_B0_out);
 ops_reduction_result(enstrophy_dissipation_B0, &enstrophy_dissipation_B0_out);
+ops_reduction_result(rhom_B0, &rhom_B0_out);
 }
 
 if (fmod(1 + iter,100) == 0 || iter == 0){

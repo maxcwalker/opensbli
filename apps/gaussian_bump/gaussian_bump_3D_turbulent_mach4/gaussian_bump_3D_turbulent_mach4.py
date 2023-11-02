@@ -25,7 +25,7 @@ input_dict = {
     "Re"                   : "1900.0", 
     "Twall"                : "1.95", 
     "dt"                   : "0.003", 
-    "niter"                : "200000", 
+    "niter"                : "50000", 
     "block0np0"            : "400.0", 
     "block0np1"            : "200.0",
     'block0np2'            : "100", 
@@ -43,7 +43,7 @@ input_dict = {
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
     "epsilon"              : "1.0e-30",
-    "tripA"                : "0.01",
+    "tripA"                : "0.05",
     "xts"                  : "50.0",
     "omega_0"              : "0.1",
     "omega_1"              : "0.2",
@@ -52,8 +52,8 @@ input_dict = {
     "phi_0"              : "1.571",
     "phi_1"              : "3.141",
     "phi_2"              : "4.712",
-    "b_f"                  : "0.125",
-    "beta_0"               : "0.41"
+    "b_f"                  : "0.02",
+    "beta_0"               : "0.314"
 }
 
 constants = input_dict.keys()
@@ -214,7 +214,7 @@ wall_eqns = [rhoE_wall]
 #																																			#
 #############################################################################################################################################
 
-wall_const = ['tripA', 'xts', 'dt', 'omega_0', 'omega_1', 'omega_2', 'omega_3', 'phi_0', 'phi_1', 'phi_2','k_0']
+wall_const = ['tripA', 'xts', 'dt', 'omega_0', 'omega_1', 'omega_2', 'omega_3', 'phi_0', 'phi_1', 'phi_2','k_0', 'b_f', 'beta_0']
 for con in wall_const:
     local_dict[con] = ConstantObject(con)
 
