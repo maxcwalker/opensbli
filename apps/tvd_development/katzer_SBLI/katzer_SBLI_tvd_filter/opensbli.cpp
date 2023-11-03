@@ -15,21 +15,22 @@ block0np0 = 500;
 block0np1 = 250;
 Delta0block0 = 400.0/(block0np0-1);
 Delta1block0 = 115.0/(block0np1-1);
-niter = 250000;
+niter = 25000;
 double rkB[] = {0.924574112262461, 0.287712943868770, 0.626538293270800};
 double rkA[] = {0.0, -2.91549395770192, 0.0};
 dt = 0.04;
-Twall = 1.67619431;
 Minf = 2.0;
+Twall = 1.67619431;
+write_output_file = 100;
 HDF5_timing = 0;
 RefT = 288.0;
 SuthT = 110.4;
 gama = 1.4;
-Re = 950.0;
 Pr = 0.72;
+Re = 950.0;
 delta_TVD = 0.500000000000000;
 eps_TVD = 1.00000000000000e-8;
-kappa_TVD=Input;
+kappa_TVD = 1.1;
 gamma_m1 = -1 + gama;
 Ducros_select = 0.0500000000000000;
 Lx1 = 115.0;
@@ -83,6 +84,7 @@ ops_decl_const("kappa_TVD" , 1, "double", &kappa_TVD);
 ops_decl_const("niter" , 1, "int", &niter);
 ops_decl_const("simulation_time" , 1, "double", &simulation_time);
 ops_decl_const("start_iter" , 1, "int", &start_iter);
+ops_decl_const("write_output_file" , 1, "int", &write_output_file);
 // Initializing OPS 
 ops_init(argc,argv,1);
 // Define and Declare OPS Block
@@ -173,9 +175,9 @@ ops_timers(&inner_start, &elapsed_inner_start);
 for(iter=start_iter; iter<=start_iter+niter - 1; iter++)
 {
 simulation_time = tstart + dt*((iter - start_iter)+1);
-if(fmod(iter+1, 100) == 0){
+if(fmod(iter+1, 1) == 0){
         ops_timers(&inner_end, &elapsed_inner_end);
-        ops_printf("Iteration: %d. Time-step: %.3e. Simulation time: %.5f. Time/iteration: %lf.\n", iter+1, dt, simulation_time, (elapsed_inner_end - elapsed_inner_start)/100);
+        ops_printf("Iteration: %d. Time-step: %.3e. Simulation time: %.5f. Time/iteration: %lf.\n", iter+1, dt, simulation_time, (elapsed_inner_end - elapsed_inner_start)/1);
         fflush(stdout);
         ops_NaNcheck(rho_B0);
         ops_timers(&inner_start, &elapsed_inner_start);
@@ -379,6 +381,7 @@ ops_arg_dat(p_B0, 1, stencil_0_00_00_2, "double", OPS_RW));
 
 int iteration_range_38_block0[] = {0, block0np0, 0, block0np1};
 ops_par_loop(opensbliblock00Kernel038, "UserDefinedEquations evaluation", opensbliblock00, 2, iteration_range_38_block0,
+ops_arg_dat(D11_B0, 1, stencil_0_00_00_2, "double", OPS_READ),
 ops_arg_dat(u0_B0, 1, stencil_0_44_44_18, "double", OPS_READ),
 ops_arg_dat(u1_B0, 1, stencil_0_44_44_18, "double", OPS_READ),
 ops_arg_dat(kappa_B0, 1, stencil_0_00_00_2, "double", OPS_WRITE),
@@ -438,6 +441,7 @@ ops_arg_dat(Residual3_B0, 1, stencil_0_00_00_2, "double", OPS_WRITE));
 
 int iteration_range_43_block0[] = {0, block0np0, 0, block0np1};
 ops_par_loop(opensbliblock00Kernel043, "User kernel: Non-linear TVD Filter application", opensbliblock00, 2, iteration_range_43_block0,
+ops_arg_dat(D11_B0, 1, stencil_0_00_00_2, "double", OPS_READ),
 ops_arg_dat(Residual0_B0, 1, stencil_0_00_10_3, "double", OPS_READ),
 ops_arg_dat(Residual1_B0, 1, stencil_0_00_10_3, "double", OPS_READ),
 ops_arg_dat(Residual2_B0, 1, stencil_0_00_10_3, "double", OPS_READ),
@@ -453,6 +457,10 @@ ops_arg_dat(rho_B0, 1, stencil_0_00_00_2, "double", OPS_RW),
 ops_arg_dat(rhou0_B0, 1, stencil_0_00_00_2, "double", OPS_RW),
 ops_arg_dat(rhou1_B0, 1, stencil_0_00_00_2, "double", OPS_RW),
 ops_arg_idx());
+
+if (fmod(1 + iter,write_output_file) == 0 || iter == 0){
+HDF5_IO_Write_0_opensbliblock00_dynamic(opensbliblock00, iter, rho_B0, rhou0_B0, rhou1_B0, rhoE_B0, x0_B0, x1_B0, D11_B0, HDF5_timing);
+}
 
 }
 ops_timers(&cpu_end0, &elapsed_end0);

@@ -12,6 +12,7 @@
 // global constants
 extern double Delta0block0;
 extern double Delta1block0;
+extern double Ducros_select;
 extern int HDF5_timing;
 extern double Lx1;
 extern double Minf;
@@ -23,7 +24,9 @@ extern double Twall;
 extern int block0np0;
 extern int block0np1;
 extern double by;
+extern double delta_TVD;
 extern double dt;
+extern double eps_TVD;
 extern double gama;
 extern double gamma_m1;
 extern double inv2Delta0block0;
@@ -36,15 +39,14 @@ extern double invPr;
 extern double invRe;
 extern double invRefT;
 extern double inv_gamma_m1;
-extern double inv_rfact0_block0;
-extern double inv_rfact1_block0;
+extern double invdelta_TVD;
 extern double invgama;
 extern double invgamma_m1;
+extern double kappa_TVD;
 extern int niter;
-extern double sensor_theta;
-extern double shock_filter_control;
 extern double simulation_time;
 extern int start_iter;
+extern int write_output_file;
 
 void ops_init_backend() {}
 
@@ -57,6 +59,10 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"Delta1block0")) {
     #pragma omp target enter data map(to:Delta1block0)
+  }
+  else
+  if (!strcmp(name,"Ducros_select")) {
+    #pragma omp target enter data map(to:Ducros_select)
   }
   else
   if (!strcmp(name,"HDF5_timing")) {
@@ -103,8 +109,16 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:by)
   }
   else
+  if (!strcmp(name,"delta_TVD")) {
+    #pragma omp target enter data map(to:delta_TVD)
+  }
+  else
   if (!strcmp(name,"dt")) {
     #pragma omp target enter data map(to:dt)
+  }
+  else
+  if (!strcmp(name,"eps_TVD")) {
+    #pragma omp target enter data map(to:eps_TVD)
   }
   else
   if (!strcmp(name,"gama")) {
@@ -155,12 +169,8 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:inv_gamma_m1)
   }
   else
-  if (!strcmp(name,"inv_rfact0_block0")) {
-    #pragma omp target enter data map(to:inv_rfact0_block0)
-  }
-  else
-  if (!strcmp(name,"inv_rfact1_block0")) {
-    #pragma omp target enter data map(to:inv_rfact1_block0)
+  if (!strcmp(name,"invdelta_TVD")) {
+    #pragma omp target enter data map(to:invdelta_TVD)
   }
   else
   if (!strcmp(name,"invgama")) {
@@ -171,16 +181,12 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:invgamma_m1)
   }
   else
+  if (!strcmp(name,"kappa_TVD")) {
+    #pragma omp target enter data map(to:kappa_TVD)
+  }
+  else
   if (!strcmp(name,"niter")) {
     #pragma omp target enter data map(to:niter)
-  }
-  else
-  if (!strcmp(name,"sensor_theta")) {
-    #pragma omp target enter data map(to:sensor_theta)
-  }
-  else
-  if (!strcmp(name,"shock_filter_control")) {
-    #pragma omp target enter data map(to:shock_filter_control)
   }
   else
   if (!strcmp(name,"simulation_time")) {
@@ -191,38 +197,45 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:start_iter)
   }
   else
+  if (!strcmp(name,"write_output_file")) {
+    #pragma omp target enter data map(to:write_output_file)
+  }
+  else
   {
     throw OPSException(OPS_RUNTIME_ERROR, "error: unknown const name");
   }
 }
 
 //user kernel files
-#include "opensbliblock00Kernel026_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel025_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel027_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel028_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel029_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel030_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel031_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel032_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel034_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel033_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel021_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel022_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel023_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel024_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel025_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel004_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel006_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel015_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel012_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel008_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel017_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel016_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel003_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel005_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel007_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel009_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel010_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel011_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel019_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel020_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel021_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel039_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel035_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel036_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel043_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel034_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel037_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel038_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel039_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel040_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel041_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel042_ompoffload_kernel.cpp"

@@ -19,945 +19,395 @@ int xdim11_opensbliblock00Kernel020;
 int xdim12_opensbliblock00Kernel020;
 int xdim13_opensbliblock00Kernel020;
 int xdim14_opensbliblock00Kernel020;
-int xdim15_opensbliblock00Kernel020;
 
 //user function
 inline 
  void opensbliblock00Kernel020(const ptr_double D11_B0,
-  const ptr_double H_B0,
-  const ptr_double p_B0,
+  const ptr_double SD111_B0,
+  const ptr_double T_B0,
   const
-ptr_double rho_B0,
-  const ptr_double rhou0_B0,
-  const ptr_double rhou1_B0,
+ptr_double mu_B0,
   const ptr_double u0_B0,
-  const
-ptr_double u1_B0,
+  const ptr_double u1_B0,
   const ptr_double wk0_B0,
   const ptr_double wk1_B0,
+  const ptr_double wk2_B0,
   const ptr_double wk3_B0,
   const ptr_double wk4_B0,
-  ptr_double Residual0_B0,
+  const ptr_double wk5_B0,
   ptr_double Residual1_B0,
   ptr_double Residual2_B0,
   ptr_double Residual3_B0,
   const int *idx)
 {
-   double d1_H_dx = 0.0;
-   double d1_H_dy = 0.0;
-   double d1_Hrho_dx = 0.0;
-   double d1_Hrho_dy = 0.0;
-   double d1_Hrhou0_dx = 0.0;
-   double d1_Hrhou1_dy = 0.0;
-   double d1_Hu0_dx = 0.0;
-   double d1_Hu1_dy = 0.0;
-   double d1_p_dx = 0.0;
-   double d1_p_dy = 0.0;
-   double d1_rho_dx = 0.0;
-   double d1_rho_dy = 0.0;
-   double d1_rhou0_dx = 0.0;
-   double d1_rhou0_dy = 0.0;
-   double d1_rhou0u0_dx = 0.0;
-   double d1_rhou0u1_dx = 0.0;
-   double d1_rhou1_dx = 0.0;
-   double d1_rhou1_dy = 0.0;
-   double d1_rhou1u0_dy = 0.0;
-   double d1_rhou1u1_dy = 0.0;
-   double d1_u0u0_dx = 0.0;
-   double d1_u0u1_dx = 0.0;
-   double d1_u0u1_dy = 0.0;
-   double d1_u1u1_dy = 0.0;
+   double d1_mu_dx = 0.0;
+   double d1_mu_dy = 0.0;
+   double d1_wk0_dy = 0.0;
+   double d1_wk1_dy = 0.0;
+   double d2_T_dx = 0.0;
+   double d2_T_dy = 0.0;
+   double d2_u0_dx = 0.0;
+   double d2_u0_dy = 0.0;
+   double d2_u1_dx = 0.0;
+   double d2_u1_dy = 0.0;
    if (idx[0] == 0){
 
-       d1_H_dx = (3.0*OPS_ACC(H_B0, 1,0) + 0.333333333333333*OPS_ACC(H_B0, 3,0) - 1.5*OPS_ACC(H_B0, 2,0) -
-            1.83333333333333*OPS_ACC(H_B0, 0,0))*invDelta0block0;
-
-       d1_Hrho_dx = (3.0*OPS_ACC(H_B0, 1,0)*OPS_ACC(rho_B0, 1,0) + 0.333333333333333*OPS_ACC(H_B0, 3,0)*OPS_ACC(rho_B0, 3,0) - 1.5*OPS_ACC(H_B0, 2,0)*OPS_ACC(rho_B0, 2,0) -
-            1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0))*invDelta0block0;
-
-       d1_Hrhou0_dx = (3.0*OPS_ACC(H_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) + 0.333333333333333*OPS_ACC(H_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) -
-            1.5*OPS_ACC(H_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) - 1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0))*invDelta0block0;
-
-       d1_Hu0_dx = (3.0*OPS_ACC(H_B0, 1,0)*OPS_ACC(u0_B0, 1,0) + 0.333333333333333*OPS_ACC(H_B0, 3,0)*OPS_ACC(u0_B0, 3,0) - 1.5*OPS_ACC(H_B0, 2,0)*OPS_ACC(u0_B0, 2,0) -
-            1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(u0_B0, 0,0))*invDelta0block0;
-
-       d1_p_dx = (3.0*OPS_ACC(p_B0, 1,0) + 0.333333333333333*OPS_ACC(p_B0, 3,0) - 1.5*OPS_ACC(p_B0, 2,0) -
-            1.83333333333333*OPS_ACC(p_B0, 0,0))*invDelta0block0;
-
-       d1_rho_dx = (3.0*OPS_ACC(rho_B0, 1,0) + 0.333333333333333*OPS_ACC(rho_B0, 3,0) - 1.5*OPS_ACC(rho_B0, 2,0) -
-            1.83333333333333*OPS_ACC(rho_B0, 0,0))*invDelta0block0;
-
-       d1_rhou0_dx = (3.0*OPS_ACC(rhou0_B0, 1,0) + 0.333333333333333*OPS_ACC(rhou0_B0, 3,0) - 1.5*OPS_ACC(rhou0_B0, 2,0) -
-            1.83333333333333*OPS_ACC(rhou0_B0, 0,0))*invDelta0block0;
-
-       d1_rhou0u0_dx = (3.0*OPS_ACC(u0_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) + 0.333333333333333*OPS_ACC(u0_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) -
-            1.5*OPS_ACC(u0_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) - 1.83333333333333*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0))*invDelta0block0;
-
-       d1_rhou0u1_dx = (3.0*OPS_ACC(u1_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) + 0.333333333333333*OPS_ACC(u1_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) -
-            1.5*OPS_ACC(u1_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) - 1.83333333333333*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0))*invDelta0block0;
-
-       d1_rhou1_dx = (3.0*OPS_ACC(rhou1_B0, 1,0) + 0.333333333333333*OPS_ACC(rhou1_B0, 3,0) - 1.5*OPS_ACC(rhou1_B0, 2,0) -
-            1.83333333333333*OPS_ACC(rhou1_B0, 0,0))*invDelta0block0;
-
-       d1_u0u0_dx = (3.0*(OPS_ACC(u0_B0, 1,0)*OPS_ACC(u0_B0, 1,0)) + 0.333333333333333*(OPS_ACC(u0_B0, 3,0)*OPS_ACC(u0_B0, 3,0)) -
-            1.5*(OPS_ACC(u0_B0, 2,0)*OPS_ACC(u0_B0, 2,0)) - 1.83333333333333*(OPS_ACC(u0_B0, 0,0)*OPS_ACC(u0_B0, 0,0)))*invDelta0block0;
-
-       d1_u0u1_dx = (3.0*OPS_ACC(u0_B0, 1,0)*OPS_ACC(u1_B0, 1,0) + 0.333333333333333*OPS_ACC(u0_B0, 3,0)*OPS_ACC(u1_B0, 3,0) - 1.5*OPS_ACC(u0_B0, 2,0)*OPS_ACC(u1_B0, 2,0) -
-            1.83333333333333*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0))*invDelta0block0;
+       d1_mu_dx = (3.0*OPS_ACC(mu_B0, 1,0) + 0.333333333333333*OPS_ACC(mu_B0, 3,0) - 1.5*OPS_ACC(mu_B0, 2,0) -
+            1.83333333333333*OPS_ACC(mu_B0, 0,0))*invDelta0block0;
 
    }
 
    else if (idx[0] == 1){
 
-       d1_H_dx = (0.0394168524399447*OPS_ACC(H_B0, 2,0) + 0.00571369039775442*OPS_ACC(H_B0, 4,0) + 0.719443173328855*OPS_ACC(H_B0, 1,0) -
-            0.322484932882161*OPS_ACC(H_B0, 0,0) - 0.0658051057710389*OPS_ACC(H_B0, 3,0) - 0.376283677513354*OPS_ACC(H_B0, -1,0))*invDelta0block0;
-
-       d1_Hrho_dx = (0.0394168524399447*OPS_ACC(H_B0, 2,0)*OPS_ACC(rho_B0, 2,0) + 0.00571369039775442*OPS_ACC(H_B0, 4,0)*OPS_ACC(rho_B0, 4,0) +
-            0.719443173328855*OPS_ACC(H_B0, 1,0)*OPS_ACC(rho_B0, 1,0) - 0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(H_B0, 3,0)*OPS_ACC(rho_B0, 3,0) - 0.376283677513354*OPS_ACC(H_B0, -1,0)*OPS_ACC(rho_B0, -1,0))*invDelta0block0;
-
-       d1_Hrhou0_dx = (0.0394168524399447*OPS_ACC(H_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) + 0.00571369039775442*OPS_ACC(H_B0, 4,0)*OPS_ACC(rhou0_B0, 4,0) +
-            0.719443173328855*OPS_ACC(H_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) - 0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(H_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) - 0.376283677513354*OPS_ACC(H_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_Hu0_dx = (0.0394168524399447*OPS_ACC(H_B0, 2,0)*OPS_ACC(u0_B0, 2,0) + 0.00571369039775442*OPS_ACC(H_B0, 4,0)*OPS_ACC(u0_B0, 4,0) +
-            0.719443173328855*OPS_ACC(H_B0, 1,0)*OPS_ACC(u0_B0, 1,0) - 0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(u0_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(H_B0, 3,0)*OPS_ACC(u0_B0, 3,0) - 0.376283677513354*OPS_ACC(H_B0, -1,0)*OPS_ACC(u0_B0, -1,0))*invDelta0block0;
-
-       d1_p_dx = (0.0394168524399447*OPS_ACC(p_B0, 2,0) + 0.00571369039775442*OPS_ACC(p_B0, 4,0) + 0.719443173328855*OPS_ACC(p_B0, 1,0) -
-            0.322484932882161*OPS_ACC(p_B0, 0,0) - 0.0658051057710389*OPS_ACC(p_B0, 3,0) - 0.376283677513354*OPS_ACC(p_B0, -1,0))*invDelta0block0;
-
-       d1_rho_dx = (0.0394168524399447*OPS_ACC(rho_B0, 2,0) + 0.00571369039775442*OPS_ACC(rho_B0, 4,0) + 0.719443173328855*OPS_ACC(rho_B0, 1,0) -
-            0.322484932882161*OPS_ACC(rho_B0, 0,0) - 0.0658051057710389*OPS_ACC(rho_B0, 3,0) -
-            0.376283677513354*OPS_ACC(rho_B0, -1,0))*invDelta0block0;
-
-       d1_rhou0_dx = (0.0394168524399447*OPS_ACC(rhou0_B0, 2,0) + 0.00571369039775442*OPS_ACC(rhou0_B0, 4,0) +
-            0.719443173328855*OPS_ACC(rhou0_B0, 1,0) - 0.322484932882161*OPS_ACC(rhou0_B0, 0,0) - 0.0658051057710389*OPS_ACC(rhou0_B0, 3,0) -
-            0.376283677513354*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_rhou0u0_dx = (0.0394168524399447*OPS_ACC(u0_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) + 0.00571369039775442*OPS_ACC(u0_B0, 4,0)*OPS_ACC(rhou0_B0, 4,0) +
-            0.719443173328855*OPS_ACC(u0_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) - 0.322484932882161*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(u0_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) -
-            0.376283677513354*OPS_ACC(u0_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_rhou0u1_dx = (0.0394168524399447*OPS_ACC(u1_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) + 0.00571369039775442*OPS_ACC(u1_B0, 4,0)*OPS_ACC(rhou0_B0, 4,0) +
-            0.719443173328855*OPS_ACC(u1_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) - 0.322484932882161*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(u1_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) -
-            0.376283677513354*OPS_ACC(u1_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_rhou1_dx = (0.0394168524399447*OPS_ACC(rhou1_B0, 2,0) + 0.00571369039775442*OPS_ACC(rhou1_B0, 4,0) +
-            0.719443173328855*OPS_ACC(rhou1_B0, 1,0) - 0.322484932882161*OPS_ACC(rhou1_B0, 0,0) - 0.0658051057710389*OPS_ACC(rhou1_B0, 3,0) -
-            0.376283677513354*OPS_ACC(rhou1_B0, -1,0))*invDelta0block0;
-
-       d1_u0u0_dx = (0.0394168524399447*(OPS_ACC(u0_B0, 2,0)*OPS_ACC(u0_B0, 2,0)) + 0.00571369039775442*(OPS_ACC(u0_B0, 4,0)*OPS_ACC(u0_B0, 4,0)) +
-            0.719443173328855*(OPS_ACC(u0_B0, 1,0)*OPS_ACC(u0_B0, 1,0)) - 0.322484932882161*(OPS_ACC(u0_B0, 0,0)*OPS_ACC(u0_B0, 0,0)) -
-            0.0658051057710389*(OPS_ACC(u0_B0, 3,0)*OPS_ACC(u0_B0, 3,0)) - 0.376283677513354*(OPS_ACC(u0_B0, -1,0)*OPS_ACC(u0_B0, -1,0)))*invDelta0block0;
-
-       d1_u0u1_dx = (0.0394168524399447*OPS_ACC(u0_B0, 2,0)*OPS_ACC(u1_B0, 2,0) + 0.00571369039775442*OPS_ACC(u0_B0, 4,0)*OPS_ACC(u1_B0, 4,0) +
-            0.719443173328855*OPS_ACC(u0_B0, 1,0)*OPS_ACC(u1_B0, 1,0) - 0.322484932882161*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(u0_B0, 3,0)*OPS_ACC(u1_B0, 3,0) - 0.376283677513354*OPS_ACC(u0_B0, -1,0)*OPS_ACC(u1_B0, -1,0))*invDelta0block0;
+       d1_mu_dx = (0.0394168524399447*OPS_ACC(mu_B0, 2,0) + 0.00571369039775442*OPS_ACC(mu_B0, 4,0) + 0.719443173328855*OPS_ACC(mu_B0, 1,0) -
+            0.322484932882161*OPS_ACC(mu_B0, 0,0) - 0.0658051057710389*OPS_ACC(mu_B0, 3,0) -
+            0.376283677513354*OPS_ACC(mu_B0, -1,0))*invDelta0block0;
 
    }
 
    else if (idx[0] == 2){
 
-       d1_H_dx = (0.197184333887745*OPS_ACC(H_B0, 0,0) + 0.521455851089587*OPS_ACC(H_B0, 1,0) + 0.113446470384241*OPS_ACC(H_B0, -2,0) -
-            0.00412637789557492*OPS_ACC(H_B0, 3,0) - 0.0367146847001261*OPS_ACC(H_B0, 2,0) -
-            0.791245592765872*OPS_ACC(H_B0, -1,0))*invDelta0block0;
-
-       d1_Hrho_dx = (0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) + 0.521455851089587*OPS_ACC(H_B0, 1,0)*OPS_ACC(rho_B0, 1,0) +
-            0.113446470384241*OPS_ACC(H_B0, -2,0)*OPS_ACC(rho_B0, -2,0) - 0.00412637789557492*OPS_ACC(H_B0, 3,0)*OPS_ACC(rho_B0, 3,0) -
-            0.0367146847001261*OPS_ACC(H_B0, 2,0)*OPS_ACC(rho_B0, 2,0) - 0.791245592765872*OPS_ACC(H_B0, -1,0)*OPS_ACC(rho_B0, -1,0))*invDelta0block0;
-
-       d1_Hrhou0_dx = (0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) + 0.521455851089587*OPS_ACC(H_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) +
-            0.113446470384241*OPS_ACC(H_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) - 0.00412637789557492*OPS_ACC(H_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) -
-            0.0367146847001261*OPS_ACC(H_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) - 0.791245592765872*OPS_ACC(H_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_Hu0_dx = (0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(u0_B0, 0,0) + 0.521455851089587*OPS_ACC(H_B0, 1,0)*OPS_ACC(u0_B0, 1,0) +
-            0.113446470384241*OPS_ACC(H_B0, -2,0)*OPS_ACC(u0_B0, -2,0) - 0.00412637789557492*OPS_ACC(H_B0, 3,0)*OPS_ACC(u0_B0, 3,0) -
-            0.0367146847001261*OPS_ACC(H_B0, 2,0)*OPS_ACC(u0_B0, 2,0) - 0.791245592765872*OPS_ACC(H_B0, -1,0)*OPS_ACC(u0_B0, -1,0))*invDelta0block0;
-
-       d1_p_dx = (0.197184333887745*OPS_ACC(p_B0, 0,0) + 0.521455851089587*OPS_ACC(p_B0, 1,0) + 0.113446470384241*OPS_ACC(p_B0, -2,0) -
-            0.00412637789557492*OPS_ACC(p_B0, 3,0) - 0.0367146847001261*OPS_ACC(p_B0, 2,0) -
-            0.791245592765872*OPS_ACC(p_B0, -1,0))*invDelta0block0;
-
-       d1_rho_dx = (0.197184333887745*OPS_ACC(rho_B0, 0,0) + 0.521455851089587*OPS_ACC(rho_B0, 1,0) + 0.113446470384241*OPS_ACC(rho_B0, -2,0) -
-            0.00412637789557492*OPS_ACC(rho_B0, 3,0) - 0.0367146847001261*OPS_ACC(rho_B0, 2,0) -
-            0.791245592765872*OPS_ACC(rho_B0, -1,0))*invDelta0block0;
-
-       d1_rhou0_dx = (0.197184333887745*OPS_ACC(rhou0_B0, 0,0) + 0.521455851089587*OPS_ACC(rhou0_B0, 1,0) +
-            0.113446470384241*OPS_ACC(rhou0_B0, -2,0) - 0.00412637789557492*OPS_ACC(rhou0_B0, 3,0) - 0.0367146847001261*OPS_ACC(rhou0_B0, 2,0) -
-            0.791245592765872*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_rhou0u0_dx = (0.197184333887745*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) + 0.521455851089587*OPS_ACC(u0_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) +
-            0.113446470384241*OPS_ACC(u0_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) - 0.00412637789557492*OPS_ACC(u0_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) -
-            0.0367146847001261*OPS_ACC(u0_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) -
-            0.791245592765872*OPS_ACC(u0_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_rhou0u1_dx = (0.197184333887745*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) + 0.521455851089587*OPS_ACC(u1_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) +
-            0.113446470384241*OPS_ACC(u1_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) - 0.00412637789557492*OPS_ACC(u1_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) -
-            0.0367146847001261*OPS_ACC(u1_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) -
-            0.791245592765872*OPS_ACC(u1_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_rhou1_dx = (0.197184333887745*OPS_ACC(rhou1_B0, 0,0) + 0.521455851089587*OPS_ACC(rhou1_B0, 1,0) +
-            0.113446470384241*OPS_ACC(rhou1_B0, -2,0) - 0.00412637789557492*OPS_ACC(rhou1_B0, 3,0) - 0.0367146847001261*OPS_ACC(rhou1_B0, 2,0) -
-            0.791245592765872*OPS_ACC(rhou1_B0, -1,0))*invDelta0block0;
-
-       d1_u0u0_dx = (0.197184333887745*(OPS_ACC(u0_B0, 0,0)*OPS_ACC(u0_B0, 0,0)) + 0.521455851089587*(OPS_ACC(u0_B0, 1,0)*OPS_ACC(u0_B0, 1,0)) +
-            0.113446470384241*(OPS_ACC(u0_B0, -2,0)*OPS_ACC(u0_B0, -2,0)) - 0.00412637789557492*(OPS_ACC(u0_B0, 3,0)*OPS_ACC(u0_B0, 3,0)) -
-            0.0367146847001261*(OPS_ACC(u0_B0, 2,0)*OPS_ACC(u0_B0, 2,0)) - 0.791245592765872*(OPS_ACC(u0_B0, -1,0)*OPS_ACC(u0_B0, -1,0)))*invDelta0block0;
-
-       d1_u0u1_dx = (0.197184333887745*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) + 0.521455851089587*OPS_ACC(u0_B0, 1,0)*OPS_ACC(u1_B0, 1,0) +
-            0.113446470384241*OPS_ACC(u0_B0, -2,0)*OPS_ACC(u1_B0, -2,0) - 0.00412637789557492*OPS_ACC(u0_B0, 3,0)*OPS_ACC(u1_B0, 3,0) -
-            0.0367146847001261*OPS_ACC(u0_B0, 2,0)*OPS_ACC(u1_B0, 2,0) - 0.791245592765872*OPS_ACC(u0_B0, -1,0)*OPS_ACC(u1_B0, -1,0))*invDelta0block0;
+       d1_mu_dx = (0.197184333887745*OPS_ACC(mu_B0, 0,0) + 0.521455851089587*OPS_ACC(mu_B0, 1,0) + 0.113446470384241*OPS_ACC(mu_B0, -2,0) -
+            0.00412637789557492*OPS_ACC(mu_B0, 3,0) - 0.0367146847001261*OPS_ACC(mu_B0, 2,0) -
+            0.791245592765872*OPS_ACC(mu_B0, -1,0))*invDelta0block0;
 
    }
 
    else if (idx[0] == 3){
 
-       d1_H_dx = (0.0451033223343881*OPS_ACC(H_B0, 0,0) + 0.652141084861241*OPS_ACC(H_B0, 1,0) + 0.121937153224065*OPS_ACC(H_B0, -2,0) -
-            0.00932597985049999*OPS_ACC(H_B0, -3,0) - 0.727822147724592*OPS_ACC(H_B0, -1,0) -
-            0.082033432844602*OPS_ACC(H_B0, 2,0))*invDelta0block0;
-
-       d1_Hrho_dx = (0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) + 0.652141084861241*OPS_ACC(H_B0, 1,0)*OPS_ACC(rho_B0, 1,0) +
-            0.121937153224065*OPS_ACC(H_B0, -2,0)*OPS_ACC(rho_B0, -2,0) - 0.00932597985049999*OPS_ACC(H_B0, -3,0)*OPS_ACC(rho_B0, -3,0) -
-            0.727822147724592*OPS_ACC(H_B0, -1,0)*OPS_ACC(rho_B0, -1,0) - 0.082033432844602*OPS_ACC(H_B0, 2,0)*OPS_ACC(rho_B0, 2,0))*invDelta0block0;
-
-       d1_Hrhou0_dx = (0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) + 0.652141084861241*OPS_ACC(H_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) +
-            0.121937153224065*OPS_ACC(H_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) - 0.00932597985049999*OPS_ACC(H_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0) -
-            0.727822147724592*OPS_ACC(H_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.082033432844602*OPS_ACC(H_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_Hu0_dx = (0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(u0_B0, 0,0) + 0.652141084861241*OPS_ACC(H_B0, 1,0)*OPS_ACC(u0_B0, 1,0) +
-            0.121937153224065*OPS_ACC(H_B0, -2,0)*OPS_ACC(u0_B0, -2,0) - 0.00932597985049999*OPS_ACC(H_B0, -3,0)*OPS_ACC(u0_B0, -3,0) -
-            0.727822147724592*OPS_ACC(H_B0, -1,0)*OPS_ACC(u0_B0, -1,0) - 0.082033432844602*OPS_ACC(H_B0, 2,0)*OPS_ACC(u0_B0, 2,0))*invDelta0block0;
-
-       d1_p_dx = (0.0451033223343881*OPS_ACC(p_B0, 0,0) + 0.652141084861241*OPS_ACC(p_B0, 1,0) + 0.121937153224065*OPS_ACC(p_B0, -2,0) -
-            0.00932597985049999*OPS_ACC(p_B0, -3,0) - 0.727822147724592*OPS_ACC(p_B0, -1,0) -
-            0.082033432844602*OPS_ACC(p_B0, 2,0))*invDelta0block0;
-
-       d1_rho_dx = (0.0451033223343881*OPS_ACC(rho_B0, 0,0) + 0.652141084861241*OPS_ACC(rho_B0, 1,0) + 0.121937153224065*OPS_ACC(rho_B0, -2,0) -
-            0.00932597985049999*OPS_ACC(rho_B0, -3,0) - 0.727822147724592*OPS_ACC(rho_B0, -1,0) -
-            0.082033432844602*OPS_ACC(rho_B0, 2,0))*invDelta0block0;
-
-       d1_rhou0_dx = (0.0451033223343881*OPS_ACC(rhou0_B0, 0,0) + 0.652141084861241*OPS_ACC(rhou0_B0, 1,0) +
-            0.121937153224065*OPS_ACC(rhou0_B0, -2,0) - 0.00932597985049999*OPS_ACC(rhou0_B0, -3,0) - 0.727822147724592*OPS_ACC(rhou0_B0, -1,0) -
-            0.082033432844602*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_rhou0u0_dx = (0.0451033223343881*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) + 0.652141084861241*OPS_ACC(u0_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) +
-            0.121937153224065*OPS_ACC(u0_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) - 0.00932597985049999*OPS_ACC(u0_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0) -
-            0.727822147724592*OPS_ACC(u0_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.082033432844602*OPS_ACC(u0_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_rhou0u1_dx = (0.0451033223343881*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) + 0.652141084861241*OPS_ACC(u1_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) +
-            0.121937153224065*OPS_ACC(u1_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) - 0.00932597985049999*OPS_ACC(u1_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0) -
-            0.727822147724592*OPS_ACC(u1_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.082033432844602*OPS_ACC(u1_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_rhou1_dx = (0.0451033223343881*OPS_ACC(rhou1_B0, 0,0) + 0.652141084861241*OPS_ACC(rhou1_B0, 1,0) +
-            0.121937153224065*OPS_ACC(rhou1_B0, -2,0) - 0.00932597985049999*OPS_ACC(rhou1_B0, -3,0) - 0.727822147724592*OPS_ACC(rhou1_B0, -1,0) -
-            0.082033432844602*OPS_ACC(rhou1_B0, 2,0))*invDelta0block0;
-
-       d1_u0u0_dx = (0.0451033223343881*(OPS_ACC(u0_B0, 0,0)*OPS_ACC(u0_B0, 0,0)) + 0.652141084861241*(OPS_ACC(u0_B0, 1,0)*OPS_ACC(u0_B0, 1,0)) +
-            0.121937153224065*(OPS_ACC(u0_B0, -2,0)*OPS_ACC(u0_B0, -2,0)) - 0.00932597985049999*(OPS_ACC(u0_B0, -3,0)*OPS_ACC(u0_B0, -3,0)) -
-            0.727822147724592*(OPS_ACC(u0_B0, -1,0)*OPS_ACC(u0_B0, -1,0)) - 0.082033432844602*(OPS_ACC(u0_B0, 2,0)*OPS_ACC(u0_B0, 2,0)))*invDelta0block0;
-
-       d1_u0u1_dx = (0.0451033223343881*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) + 0.652141084861241*OPS_ACC(u0_B0, 1,0)*OPS_ACC(u1_B0, 1,0) +
-            0.121937153224065*OPS_ACC(u0_B0, -2,0)*OPS_ACC(u1_B0, -2,0) - 0.00932597985049999*OPS_ACC(u0_B0, -3,0)*OPS_ACC(u1_B0, -3,0) -
-            0.727822147724592*OPS_ACC(u0_B0, -1,0)*OPS_ACC(u1_B0, -1,0) - 0.082033432844602*OPS_ACC(u0_B0, 2,0)*OPS_ACC(u1_B0, 2,0))*invDelta0block0;
+       d1_mu_dx = (0.0451033223343881*OPS_ACC(mu_B0, 0,0) + 0.652141084861241*OPS_ACC(mu_B0, 1,0) + 0.121937153224065*OPS_ACC(mu_B0, -2,0) -
+            0.00932597985049999*OPS_ACC(mu_B0, -3,0) - 0.727822147724592*OPS_ACC(mu_B0, -1,0) -
+            0.082033432844602*OPS_ACC(mu_B0, 2,0))*invDelta0block0;
 
    }
 
    else if (idx[0] == -1 + block0np0){
 
-       d1_H_dx = (1.5*OPS_ACC(H_B0, -2,0) + 1.83333333333333*OPS_ACC(H_B0, 0,0) - 3.0*OPS_ACC(H_B0, -1,0) -
-            0.333333333333333*OPS_ACC(H_B0, -3,0))*invDelta0block0;
-
-       d1_Hrho_dx = (1.5*OPS_ACC(H_B0, -2,0)*OPS_ACC(rho_B0, -2,0) + 1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) - 3.0*OPS_ACC(H_B0, -1,0)*OPS_ACC(rho_B0, -1,0)
-            - 0.333333333333333*OPS_ACC(H_B0, -3,0)*OPS_ACC(rho_B0, -3,0))*invDelta0block0;
-
-       d1_Hrhou0_dx = (1.5*OPS_ACC(H_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) + 1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            3.0*OPS_ACC(H_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.333333333333333*OPS_ACC(H_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0))*invDelta0block0;
-
-       d1_Hu0_dx = (1.5*OPS_ACC(H_B0, -2,0)*OPS_ACC(u0_B0, -2,0) + 1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(u0_B0, 0,0) - 3.0*OPS_ACC(H_B0, -1,0)*OPS_ACC(u0_B0, -1,0) -
-            0.333333333333333*OPS_ACC(H_B0, -3,0)*OPS_ACC(u0_B0, -3,0))*invDelta0block0;
-
-       d1_p_dx = (1.5*OPS_ACC(p_B0, -2,0) + 1.83333333333333*OPS_ACC(p_B0, 0,0) - 3.0*OPS_ACC(p_B0, -1,0) -
-            0.333333333333333*OPS_ACC(p_B0, -3,0))*invDelta0block0;
-
-       d1_rho_dx = (1.5*OPS_ACC(rho_B0, -2,0) + 1.83333333333333*OPS_ACC(rho_B0, 0,0) - 3.0*OPS_ACC(rho_B0, -1,0) -
-            0.333333333333333*OPS_ACC(rho_B0, -3,0))*invDelta0block0;
-
-       d1_rhou0_dx = (1.5*OPS_ACC(rhou0_B0, -2,0) + 1.83333333333333*OPS_ACC(rhou0_B0, 0,0) - 3.0*OPS_ACC(rhou0_B0, -1,0) -
-            0.333333333333333*OPS_ACC(rhou0_B0, -3,0))*invDelta0block0;
-
-       d1_rhou0u0_dx = (1.5*OPS_ACC(u0_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) + 1.83333333333333*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            3.0*OPS_ACC(u0_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.333333333333333*OPS_ACC(u0_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0))*invDelta0block0;
-
-       d1_rhou0u1_dx = (1.5*OPS_ACC(u1_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) + 1.83333333333333*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            3.0*OPS_ACC(u1_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.333333333333333*OPS_ACC(u1_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0))*invDelta0block0;
-
-       d1_rhou1_dx = (1.5*OPS_ACC(rhou1_B0, -2,0) + 1.83333333333333*OPS_ACC(rhou1_B0, 0,0) - 3.0*OPS_ACC(rhou1_B0, -1,0) -
-            0.333333333333333*OPS_ACC(rhou1_B0, -3,0))*invDelta0block0;
-
-       d1_u0u0_dx = (1.5*(OPS_ACC(u0_B0, -2,0)*OPS_ACC(u0_B0, -2,0)) + 1.83333333333333*(OPS_ACC(u0_B0, 0,0)*OPS_ACC(u0_B0, 0,0)) -
-            3.0*(OPS_ACC(u0_B0, -1,0)*OPS_ACC(u0_B0, -1,0)) - 0.333333333333333*(OPS_ACC(u0_B0, -3,0)*OPS_ACC(u0_B0, -3,0)))*invDelta0block0;
-
-       d1_u0u1_dx = (1.5*OPS_ACC(u0_B0, -2,0)*OPS_ACC(u1_B0, -2,0) + 1.83333333333333*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) - 3.0*OPS_ACC(u0_B0, -1,0)*OPS_ACC(u1_B0, -1,0)
-            - 0.333333333333333*OPS_ACC(u0_B0, -3,0)*OPS_ACC(u1_B0, -3,0))*invDelta0block0;
+       d1_mu_dx = (1.5*OPS_ACC(mu_B0, -2,0) + 1.83333333333333*OPS_ACC(mu_B0, 0,0) - 3.0*OPS_ACC(mu_B0, -1,0) -
+            0.333333333333333*OPS_ACC(mu_B0, -3,0))*invDelta0block0;
 
    }
 
    else if (idx[0] == -2 + block0np0){
 
-       d1_H_dx = (0.322484932882161*OPS_ACC(H_B0, 0,0) + 0.0658051057710389*OPS_ACC(H_B0, -3,0) + 0.376283677513354*OPS_ACC(H_B0, 1,0) -
-            0.0394168524399447*OPS_ACC(H_B0, -2,0) - 0.00571369039775442*OPS_ACC(H_B0, -4,0) -
-            0.719443173328855*OPS_ACC(H_B0, -1,0))*invDelta0block0;
-
-       d1_Hrho_dx = (0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) + 0.0658051057710389*OPS_ACC(H_B0, -3,0)*OPS_ACC(rho_B0, -3,0) +
-            0.376283677513354*OPS_ACC(H_B0, 1,0)*OPS_ACC(rho_B0, 1,0) - 0.0394168524399447*OPS_ACC(H_B0, -2,0)*OPS_ACC(rho_B0, -2,0) -
-            0.00571369039775442*OPS_ACC(H_B0, -4,0)*OPS_ACC(rho_B0, -4,0) - 0.719443173328855*OPS_ACC(H_B0, -1,0)*OPS_ACC(rho_B0, -1,0))*invDelta0block0;
-
-       d1_Hrhou0_dx = (0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) + 0.0658051057710389*OPS_ACC(H_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0) +
-            0.376283677513354*OPS_ACC(H_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) - 0.0394168524399447*OPS_ACC(H_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) -
-            0.00571369039775442*OPS_ACC(H_B0, -4,0)*OPS_ACC(rhou0_B0, -4,0) -
-            0.719443173328855*OPS_ACC(H_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_Hu0_dx = (0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(u0_B0, 0,0) + 0.0658051057710389*OPS_ACC(H_B0, -3,0)*OPS_ACC(u0_B0, -3,0) +
-            0.376283677513354*OPS_ACC(H_B0, 1,0)*OPS_ACC(u0_B0, 1,0) - 0.0394168524399447*OPS_ACC(H_B0, -2,0)*OPS_ACC(u0_B0, -2,0) -
-            0.00571369039775442*OPS_ACC(H_B0, -4,0)*OPS_ACC(u0_B0, -4,0) - 0.719443173328855*OPS_ACC(H_B0, -1,0)*OPS_ACC(u0_B0, -1,0))*invDelta0block0;
-
-       d1_p_dx = (0.322484932882161*OPS_ACC(p_B0, 0,0) + 0.0658051057710389*OPS_ACC(p_B0, -3,0) + 0.376283677513354*OPS_ACC(p_B0, 1,0) -
-            0.0394168524399447*OPS_ACC(p_B0, -2,0) - 0.00571369039775442*OPS_ACC(p_B0, -4,0) -
-            0.719443173328855*OPS_ACC(p_B0, -1,0))*invDelta0block0;
-
-       d1_rho_dx = (0.322484932882161*OPS_ACC(rho_B0, 0,0) + 0.0658051057710389*OPS_ACC(rho_B0, -3,0) + 0.376283677513354*OPS_ACC(rho_B0, 1,0) -
-            0.0394168524399447*OPS_ACC(rho_B0, -2,0) - 0.00571369039775442*OPS_ACC(rho_B0, -4,0) -
-            0.719443173328855*OPS_ACC(rho_B0, -1,0))*invDelta0block0;
-
-       d1_rhou0_dx = (0.322484932882161*OPS_ACC(rhou0_B0, 0,0) + 0.0658051057710389*OPS_ACC(rhou0_B0, -3,0) +
-            0.376283677513354*OPS_ACC(rhou0_B0, 1,0) - 0.0394168524399447*OPS_ACC(rhou0_B0, -2,0) - 0.00571369039775442*OPS_ACC(rhou0_B0, -4,0) -
-            0.719443173328855*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_rhou0u0_dx = (0.322484932882161*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) + 0.0658051057710389*OPS_ACC(u0_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0) +
-            0.376283677513354*OPS_ACC(u0_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) - 0.0394168524399447*OPS_ACC(u0_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) -
-            0.00571369039775442*OPS_ACC(u0_B0, -4,0)*OPS_ACC(rhou0_B0, -4,0) -
-            0.719443173328855*OPS_ACC(u0_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_rhou0u1_dx = (0.322484932882161*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) + 0.0658051057710389*OPS_ACC(u1_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0) +
-            0.376283677513354*OPS_ACC(u1_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) - 0.0394168524399447*OPS_ACC(u1_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) -
-            0.00571369039775442*OPS_ACC(u1_B0, -4,0)*OPS_ACC(rhou0_B0, -4,0) -
-            0.719443173328855*OPS_ACC(u1_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0))*invDelta0block0;
-
-       d1_rhou1_dx = (0.322484932882161*OPS_ACC(rhou1_B0, 0,0) + 0.0658051057710389*OPS_ACC(rhou1_B0, -3,0) +
-            0.376283677513354*OPS_ACC(rhou1_B0, 1,0) - 0.0394168524399447*OPS_ACC(rhou1_B0, -2,0) - 0.00571369039775442*OPS_ACC(rhou1_B0, -4,0) -
-            0.719443173328855*OPS_ACC(rhou1_B0, -1,0))*invDelta0block0;
-
-       d1_u0u0_dx = (0.322484932882161*(OPS_ACC(u0_B0, 0,0)*OPS_ACC(u0_B0, 0,0)) + 0.0658051057710389*(OPS_ACC(u0_B0, -3,0)*OPS_ACC(u0_B0, -3,0)) +
-            0.376283677513354*(OPS_ACC(u0_B0, 1,0)*OPS_ACC(u0_B0, 1,0)) - 0.0394168524399447*(OPS_ACC(u0_B0, -2,0)*OPS_ACC(u0_B0, -2,0)) -
-            0.00571369039775442*(OPS_ACC(u0_B0, -4,0)*OPS_ACC(u0_B0, -4,0)) -
-            0.719443173328855*(OPS_ACC(u0_B0, -1,0)*OPS_ACC(u0_B0, -1,0)))*invDelta0block0;
-
-       d1_u0u1_dx = (0.322484932882161*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) + 0.0658051057710389*OPS_ACC(u0_B0, -3,0)*OPS_ACC(u1_B0, -3,0) +
-            0.376283677513354*OPS_ACC(u0_B0, 1,0)*OPS_ACC(u1_B0, 1,0) - 0.0394168524399447*OPS_ACC(u0_B0, -2,0)*OPS_ACC(u1_B0, -2,0) -
-            0.00571369039775442*OPS_ACC(u0_B0, -4,0)*OPS_ACC(u1_B0, -4,0) - 0.719443173328855*OPS_ACC(u0_B0, -1,0)*OPS_ACC(u1_B0, -1,0))*invDelta0block0;
+       d1_mu_dx = (0.322484932882161*OPS_ACC(mu_B0, 0,0) + 0.0658051057710389*OPS_ACC(mu_B0, -3,0) + 0.376283677513354*OPS_ACC(mu_B0, 1,0) -
+            0.0394168524399447*OPS_ACC(mu_B0, -2,0) - 0.00571369039775442*OPS_ACC(mu_B0, -4,0) -
+            0.719443173328855*OPS_ACC(mu_B0, -1,0))*invDelta0block0;
 
    }
 
    else if (idx[0] == -3 + block0np0){
 
-       d1_H_dx = (0.00412637789557492*OPS_ACC(H_B0, -3,0) + 0.0367146847001261*OPS_ACC(H_B0, -2,0) + 0.791245592765872*OPS_ACC(H_B0, 1,0) -
-            0.197184333887745*OPS_ACC(H_B0, 0,0) - 0.521455851089587*OPS_ACC(H_B0, -1,0) - 0.113446470384241*OPS_ACC(H_B0, 2,0))*invDelta0block0;
-
-       d1_Hrho_dx = (0.00412637789557492*OPS_ACC(H_B0, -3,0)*OPS_ACC(rho_B0, -3,0) + 0.0367146847001261*OPS_ACC(H_B0, -2,0)*OPS_ACC(rho_B0, -2,0) +
-            0.791245592765872*OPS_ACC(H_B0, 1,0)*OPS_ACC(rho_B0, 1,0) - 0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) -
-            0.521455851089587*OPS_ACC(H_B0, -1,0)*OPS_ACC(rho_B0, -1,0) - 0.113446470384241*OPS_ACC(H_B0, 2,0)*OPS_ACC(rho_B0, 2,0))*invDelta0block0;
-
-       d1_Hrhou0_dx = (0.00412637789557492*OPS_ACC(H_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0) + 0.0367146847001261*OPS_ACC(H_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) +
-            0.791245592765872*OPS_ACC(H_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) - 0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            0.521455851089587*OPS_ACC(H_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.113446470384241*OPS_ACC(H_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_Hu0_dx = (0.00412637789557492*OPS_ACC(H_B0, -3,0)*OPS_ACC(u0_B0, -3,0) + 0.0367146847001261*OPS_ACC(H_B0, -2,0)*OPS_ACC(u0_B0, -2,0) +
-            0.791245592765872*OPS_ACC(H_B0, 1,0)*OPS_ACC(u0_B0, 1,0) - 0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(u0_B0, 0,0) -
-            0.521455851089587*OPS_ACC(H_B0, -1,0)*OPS_ACC(u0_B0, -1,0) - 0.113446470384241*OPS_ACC(H_B0, 2,0)*OPS_ACC(u0_B0, 2,0))*invDelta0block0;
-
-       d1_p_dx = (0.00412637789557492*OPS_ACC(p_B0, -3,0) + 0.0367146847001261*OPS_ACC(p_B0, -2,0) + 0.791245592765872*OPS_ACC(p_B0, 1,0) -
-            0.197184333887745*OPS_ACC(p_B0, 0,0) - 0.521455851089587*OPS_ACC(p_B0, -1,0) - 0.113446470384241*OPS_ACC(p_B0, 2,0))*invDelta0block0;
-
-       d1_rho_dx = (0.00412637789557492*OPS_ACC(rho_B0, -3,0) + 0.0367146847001261*OPS_ACC(rho_B0, -2,0) + 0.791245592765872*OPS_ACC(rho_B0, 1,0) -
-            0.197184333887745*OPS_ACC(rho_B0, 0,0) - 0.521455851089587*OPS_ACC(rho_B0, -1,0) -
-            0.113446470384241*OPS_ACC(rho_B0, 2,0))*invDelta0block0;
-
-       d1_rhou0_dx = (0.00412637789557492*OPS_ACC(rhou0_B0, -3,0) + 0.0367146847001261*OPS_ACC(rhou0_B0, -2,0) +
-            0.791245592765872*OPS_ACC(rhou0_B0, 1,0) - 0.197184333887745*OPS_ACC(rhou0_B0, 0,0) - 0.521455851089587*OPS_ACC(rhou0_B0, -1,0) -
-            0.113446470384241*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_rhou0u0_dx = (0.00412637789557492*OPS_ACC(u0_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0) + 0.0367146847001261*OPS_ACC(u0_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) +
-            0.791245592765872*OPS_ACC(u0_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) - 0.197184333887745*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            0.521455851089587*OPS_ACC(u0_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.113446470384241*OPS_ACC(u0_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_rhou0u1_dx = (0.00412637789557492*OPS_ACC(u1_B0, -3,0)*OPS_ACC(rhou0_B0, -3,0) + 0.0367146847001261*OPS_ACC(u1_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) +
-            0.791245592765872*OPS_ACC(u1_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) - 0.197184333887745*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            0.521455851089587*OPS_ACC(u1_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.113446470384241*OPS_ACC(u1_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_rhou1_dx = (0.00412637789557492*OPS_ACC(rhou1_B0, -3,0) + 0.0367146847001261*OPS_ACC(rhou1_B0, -2,0) +
-            0.791245592765872*OPS_ACC(rhou1_B0, 1,0) - 0.197184333887745*OPS_ACC(rhou1_B0, 0,0) - 0.521455851089587*OPS_ACC(rhou1_B0, -1,0) -
-            0.113446470384241*OPS_ACC(rhou1_B0, 2,0))*invDelta0block0;
-
-       d1_u0u0_dx = (0.00412637789557492*(OPS_ACC(u0_B0, -3,0)*OPS_ACC(u0_B0, -3,0)) + 0.0367146847001261*(OPS_ACC(u0_B0, -2,0)*OPS_ACC(u0_B0, -2,0)) +
-            0.791245592765872*(OPS_ACC(u0_B0, 1,0)*OPS_ACC(u0_B0, 1,0)) - 0.197184333887745*(OPS_ACC(u0_B0, 0,0)*OPS_ACC(u0_B0, 0,0)) -
-            0.521455851089587*(OPS_ACC(u0_B0, -1,0)*OPS_ACC(u0_B0, -1,0)) - 0.113446470384241*(OPS_ACC(u0_B0, 2,0)*OPS_ACC(u0_B0, 2,0)))*invDelta0block0;
-
-       d1_u0u1_dx = (0.00412637789557492*OPS_ACC(u0_B0, -3,0)*OPS_ACC(u1_B0, -3,0) + 0.0367146847001261*OPS_ACC(u0_B0, -2,0)*OPS_ACC(u1_B0, -2,0) +
-            0.791245592765872*OPS_ACC(u0_B0, 1,0)*OPS_ACC(u1_B0, 1,0) - 0.197184333887745*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) -
-            0.521455851089587*OPS_ACC(u0_B0, -1,0)*OPS_ACC(u1_B0, -1,0) - 0.113446470384241*OPS_ACC(u0_B0, 2,0)*OPS_ACC(u1_B0, 2,0))*invDelta0block0;
+       d1_mu_dx = (0.00412637789557492*OPS_ACC(mu_B0, -3,0) + 0.0367146847001261*OPS_ACC(mu_B0, -2,0) + 0.791245592765872*OPS_ACC(mu_B0, 1,0) -
+            0.197184333887745*OPS_ACC(mu_B0, 0,0) - 0.521455851089587*OPS_ACC(mu_B0, -1,0) -
+            0.113446470384241*OPS_ACC(mu_B0, 2,0))*invDelta0block0;
 
    }
 
    else if (idx[0] == -4 + block0np0){
 
-       d1_H_dx = (0.00932597985049999*OPS_ACC(H_B0, 3,0) + 0.727822147724592*OPS_ACC(H_B0, 1,0) + 0.082033432844602*OPS_ACC(H_B0, -2,0) -
-            0.0451033223343881*OPS_ACC(H_B0, 0,0) - 0.652141084861241*OPS_ACC(H_B0, -1,0) - 0.121937153224065*OPS_ACC(H_B0, 2,0))*invDelta0block0;
-
-       d1_Hrho_dx = (0.00932597985049999*OPS_ACC(H_B0, 3,0)*OPS_ACC(rho_B0, 3,0) + 0.727822147724592*OPS_ACC(H_B0, 1,0)*OPS_ACC(rho_B0, 1,0) +
-            0.082033432844602*OPS_ACC(H_B0, -2,0)*OPS_ACC(rho_B0, -2,0) - 0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) -
-            0.652141084861241*OPS_ACC(H_B0, -1,0)*OPS_ACC(rho_B0, -1,0) - 0.121937153224065*OPS_ACC(H_B0, 2,0)*OPS_ACC(rho_B0, 2,0))*invDelta0block0;
-
-       d1_Hrhou0_dx = (0.00932597985049999*OPS_ACC(H_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) + 0.727822147724592*OPS_ACC(H_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) +
-            0.082033432844602*OPS_ACC(H_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) - 0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            0.652141084861241*OPS_ACC(H_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.121937153224065*OPS_ACC(H_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_Hu0_dx = (0.00932597985049999*OPS_ACC(H_B0, 3,0)*OPS_ACC(u0_B0, 3,0) + 0.727822147724592*OPS_ACC(H_B0, 1,0)*OPS_ACC(u0_B0, 1,0) +
-            0.082033432844602*OPS_ACC(H_B0, -2,0)*OPS_ACC(u0_B0, -2,0) - 0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(u0_B0, 0,0) -
-            0.652141084861241*OPS_ACC(H_B0, -1,0)*OPS_ACC(u0_B0, -1,0) - 0.121937153224065*OPS_ACC(H_B0, 2,0)*OPS_ACC(u0_B0, 2,0))*invDelta0block0;
-
-       d1_p_dx = (0.00932597985049999*OPS_ACC(p_B0, 3,0) + 0.727822147724592*OPS_ACC(p_B0, 1,0) + 0.082033432844602*OPS_ACC(p_B0, -2,0) -
-            0.0451033223343881*OPS_ACC(p_B0, 0,0) - 0.652141084861241*OPS_ACC(p_B0, -1,0) - 0.121937153224065*OPS_ACC(p_B0, 2,0))*invDelta0block0;
-
-       d1_rho_dx = (0.00932597985049999*OPS_ACC(rho_B0, 3,0) + 0.727822147724592*OPS_ACC(rho_B0, 1,0) + 0.082033432844602*OPS_ACC(rho_B0, -2,0) -
-            0.0451033223343881*OPS_ACC(rho_B0, 0,0) - 0.652141084861241*OPS_ACC(rho_B0, -1,0) -
-            0.121937153224065*OPS_ACC(rho_B0, 2,0))*invDelta0block0;
-
-       d1_rhou0_dx = (0.00932597985049999*OPS_ACC(rhou0_B0, 3,0) + 0.727822147724592*OPS_ACC(rhou0_B0, 1,0) +
-            0.082033432844602*OPS_ACC(rhou0_B0, -2,0) - 0.0451033223343881*OPS_ACC(rhou0_B0, 0,0) - 0.652141084861241*OPS_ACC(rhou0_B0, -1,0) -
-            0.121937153224065*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_rhou0u0_dx = (0.00932597985049999*OPS_ACC(u0_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) + 0.727822147724592*OPS_ACC(u0_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) +
-            0.082033432844602*OPS_ACC(u0_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) - 0.0451033223343881*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            0.652141084861241*OPS_ACC(u0_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.121937153224065*OPS_ACC(u0_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_rhou0u1_dx = (0.00932597985049999*OPS_ACC(u1_B0, 3,0)*OPS_ACC(rhou0_B0, 3,0) + 0.727822147724592*OPS_ACC(u1_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0) +
-            0.082033432844602*OPS_ACC(u1_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) - 0.0451033223343881*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-            0.652141084861241*OPS_ACC(u1_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - 0.121937153224065*OPS_ACC(u1_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0))*invDelta0block0;
-
-       d1_rhou1_dx = (0.00932597985049999*OPS_ACC(rhou1_B0, 3,0) + 0.727822147724592*OPS_ACC(rhou1_B0, 1,0) +
-            0.082033432844602*OPS_ACC(rhou1_B0, -2,0) - 0.0451033223343881*OPS_ACC(rhou1_B0, 0,0) - 0.652141084861241*OPS_ACC(rhou1_B0, -1,0) -
-            0.121937153224065*OPS_ACC(rhou1_B0, 2,0))*invDelta0block0;
-
-       d1_u0u0_dx = (0.00932597985049999*(OPS_ACC(u0_B0, 3,0)*OPS_ACC(u0_B0, 3,0)) + 0.727822147724592*(OPS_ACC(u0_B0, 1,0)*OPS_ACC(u0_B0, 1,0)) +
-            0.082033432844602*(OPS_ACC(u0_B0, -2,0)*OPS_ACC(u0_B0, -2,0)) - 0.0451033223343881*(OPS_ACC(u0_B0, 0,0)*OPS_ACC(u0_B0, 0,0)) -
-            0.652141084861241*(OPS_ACC(u0_B0, -1,0)*OPS_ACC(u0_B0, -1,0)) - 0.121937153224065*(OPS_ACC(u0_B0, 2,0)*OPS_ACC(u0_B0, 2,0)))*invDelta0block0;
-
-       d1_u0u1_dx = (0.00932597985049999*OPS_ACC(u0_B0, 3,0)*OPS_ACC(u1_B0, 3,0) + 0.727822147724592*OPS_ACC(u0_B0, 1,0)*OPS_ACC(u1_B0, 1,0) +
-            0.082033432844602*OPS_ACC(u0_B0, -2,0)*OPS_ACC(u1_B0, -2,0) - 0.0451033223343881*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) -
-            0.652141084861241*OPS_ACC(u0_B0, -1,0)*OPS_ACC(u1_B0, -1,0) - 0.121937153224065*OPS_ACC(u0_B0, 2,0)*OPS_ACC(u1_B0, 2,0))*invDelta0block0;
+       d1_mu_dx = (0.00932597985049999*OPS_ACC(mu_B0, 3,0) + 0.727822147724592*OPS_ACC(mu_B0, 1,0) + 0.082033432844602*OPS_ACC(mu_B0, -2,0) -
+            0.0451033223343881*OPS_ACC(mu_B0, 0,0) - 0.652141084861241*OPS_ACC(mu_B0, -1,0) -
+            0.121937153224065*OPS_ACC(mu_B0, 2,0))*invDelta0block0;
 
    }
 
    else{
 
-       d1_H_dx = (-(2.0/3.0)*OPS_ACC(H_B0, -1,0) - (1.0/12.0)*OPS_ACC(H_B0, 2,0) + ((1.0/12.0))*OPS_ACC(H_B0, -2,0) +
-            ((2.0/3.0))*OPS_ACC(H_B0, 1,0))*invDelta0block0;
+       d1_mu_dx = (-(2.0/3.0)*OPS_ACC(mu_B0, -1,0) - (1.0/12.0)*OPS_ACC(mu_B0, 2,0) + ((1.0/12.0))*OPS_ACC(mu_B0, -2,0) +
+            ((2.0/3.0))*OPS_ACC(mu_B0, 1,0))*invDelta0block0;
 
-       d1_Hrho_dx = (-(2.0/3.0)*OPS_ACC(H_B0, -1,0)*OPS_ACC(rho_B0, -1,0) - (1.0/12.0)*OPS_ACC(H_B0, 2,0)*OPS_ACC(rho_B0, 2,0) +
-            ((1.0/12.0))*OPS_ACC(H_B0, -2,0)*OPS_ACC(rho_B0, -2,0) + ((2.0/3.0))*OPS_ACC(H_B0, 1,0)*OPS_ACC(rho_B0, 1,0))*invDelta0block0;
+   }
 
-       d1_Hrhou0_dx = (-(2.0/3.0)*OPS_ACC(H_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - (1.0/12.0)*OPS_ACC(H_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) +
-            ((1.0/12.0))*OPS_ACC(H_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) + ((2.0/3.0))*OPS_ACC(H_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0))*invDelta0block0;
+   if (idx[0] == 0){
 
-       d1_Hu0_dx = (-(2.0/3.0)*OPS_ACC(H_B0, -1,0)*OPS_ACC(u0_B0, -1,0) - (1.0/12.0)*OPS_ACC(H_B0, 2,0)*OPS_ACC(u0_B0, 2,0) +
-            ((1.0/12.0))*OPS_ACC(H_B0, -2,0)*OPS_ACC(u0_B0, -2,0) + ((2.0/3.0))*OPS_ACC(H_B0, 1,0)*OPS_ACC(u0_B0, 1,0))*invDelta0block0;
+       d2_T_dx = (-(26.0/3.0)*OPS_ACC(T_B0, 1,0) - (14.0/3.0)*OPS_ACC(T_B0, 3,0) + ((11.0/12.0))*OPS_ACC(T_B0, 4,0) + ((19.0/2.0))*OPS_ACC(T_B0, 2,0) +
+            ((35.0/12.0))*OPS_ACC(T_B0, 0,0))*inv2Delta0block0;
 
-       d1_p_dx = (-(2.0/3.0)*OPS_ACC(p_B0, -1,0) - (1.0/12.0)*OPS_ACC(p_B0, 2,0) + ((1.0/12.0))*OPS_ACC(p_B0, -2,0) +
-            ((2.0/3.0))*OPS_ACC(p_B0, 1,0))*invDelta0block0;
+       d2_u0_dx = (-(26.0/3.0)*OPS_ACC(u0_B0, 1,0) - (14.0/3.0)*OPS_ACC(u0_B0, 3,0) + ((11.0/12.0))*OPS_ACC(u0_B0, 4,0) + ((19.0/2.0))*OPS_ACC(u0_B0, 2,0) +
+            ((35.0/12.0))*OPS_ACC(u0_B0, 0,0))*inv2Delta0block0;
 
-       d1_rho_dx = (-(2.0/3.0)*OPS_ACC(rho_B0, -1,0) - (1.0/12.0)*OPS_ACC(rho_B0, 2,0) + ((1.0/12.0))*OPS_ACC(rho_B0, -2,0) +
-            ((2.0/3.0))*OPS_ACC(rho_B0, 1,0))*invDelta0block0;
+       d2_u1_dx = (-(26.0/3.0)*OPS_ACC(u1_B0, 1,0) - (14.0/3.0)*OPS_ACC(u1_B0, 3,0) + ((11.0/12.0))*OPS_ACC(u1_B0, 4,0) + ((19.0/2.0))*OPS_ACC(u1_B0, 2,0) +
+            ((35.0/12.0))*OPS_ACC(u1_B0, 0,0))*inv2Delta0block0;
 
-       d1_rhou0_dx = (-(2.0/3.0)*OPS_ACC(rhou0_B0, -1,0) - (1.0/12.0)*OPS_ACC(rhou0_B0, 2,0) + ((1.0/12.0))*OPS_ACC(rhou0_B0, -2,0) +
-            ((2.0/3.0))*OPS_ACC(rhou0_B0, 1,0))*invDelta0block0;
+   }
 
-       d1_rhou0u0_dx = (-(2.0/3.0)*OPS_ACC(u0_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - (1.0/12.0)*OPS_ACC(u0_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) +
-            ((1.0/12.0))*OPS_ACC(u0_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) + ((2.0/3.0))*OPS_ACC(u0_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0))*invDelta0block0;
+   else if (idx[0] == 1){
 
-       d1_rhou0u1_dx = (-(2.0/3.0)*OPS_ACC(u1_B0, -1,0)*OPS_ACC(rhou0_B0, -1,0) - (1.0/12.0)*OPS_ACC(u1_B0, 2,0)*OPS_ACC(rhou0_B0, 2,0) +
-            ((1.0/12.0))*OPS_ACC(u1_B0, -2,0)*OPS_ACC(rhou0_B0, -2,0) + ((2.0/3.0))*OPS_ACC(u1_B0, 1,0)*OPS_ACC(rhou0_B0, 1,0))*invDelta0block0;
+       d2_T_dx = (((1.0/2.0))*OPS_ACC(T_B0, 1,0) - (5.0/3.0)*OPS_ACC(T_B0, 0,0) - (1.0/12.0)*OPS_ACC(T_B0, 3,0) + ((1.0/3.0))*OPS_ACC(T_B0, 2,0) +
+            ((11.0/12.0))*OPS_ACC(T_B0, -1,0))*inv2Delta0block0;
 
-       d1_rhou1_dx = (-(2.0/3.0)*OPS_ACC(rhou1_B0, -1,0) - (1.0/12.0)*OPS_ACC(rhou1_B0, 2,0) + ((1.0/12.0))*OPS_ACC(rhou1_B0, -2,0) +
-            ((2.0/3.0))*OPS_ACC(rhou1_B0, 1,0))*invDelta0block0;
+       d2_u0_dx = (((1.0/2.0))*OPS_ACC(u0_B0, 1,0) - (5.0/3.0)*OPS_ACC(u0_B0, 0,0) - (1.0/12.0)*OPS_ACC(u0_B0, 3,0) + ((1.0/3.0))*OPS_ACC(u0_B0, 2,0) +
+            ((11.0/12.0))*OPS_ACC(u0_B0, -1,0))*inv2Delta0block0;
 
-       d1_u0u0_dx = (-(2.0/3.0)*(OPS_ACC(u0_B0, -1,0)*OPS_ACC(u0_B0, -1,0)) - (1.0/12.0)*(OPS_ACC(u0_B0, 2,0)*OPS_ACC(u0_B0, 2,0)) +
-            ((1.0/12.0))*(OPS_ACC(u0_B0, -2,0)*OPS_ACC(u0_B0, -2,0)) + ((2.0/3.0))*(OPS_ACC(u0_B0, 1,0)*OPS_ACC(u0_B0, 1,0)))*invDelta0block0;
+       d2_u1_dx = (((1.0/2.0))*OPS_ACC(u1_B0, 1,0) - (5.0/3.0)*OPS_ACC(u1_B0, 0,0) - (1.0/12.0)*OPS_ACC(u1_B0, 3,0) + ((1.0/3.0))*OPS_ACC(u1_B0, 2,0) +
+            ((11.0/12.0))*OPS_ACC(u1_B0, -1,0))*inv2Delta0block0;
 
-       d1_u0u1_dx = (-(2.0/3.0)*OPS_ACC(u0_B0, -1,0)*OPS_ACC(u1_B0, -1,0) - (1.0/12.0)*OPS_ACC(u0_B0, 2,0)*OPS_ACC(u1_B0, 2,0) +
-            ((1.0/12.0))*OPS_ACC(u0_B0, -2,0)*OPS_ACC(u1_B0, -2,0) + ((2.0/3.0))*OPS_ACC(u0_B0, 1,0)*OPS_ACC(u1_B0, 1,0))*invDelta0block0;
+   }
+
+   else if (idx[0] == -1 + block0np0){
+
+       d2_T_dx = (-(26.0/3.0)*OPS_ACC(T_B0, -1,0) - (14.0/3.0)*OPS_ACC(T_B0, -3,0) + ((11.0/12.0))*OPS_ACC(T_B0, -4,0) + ((19.0/2.0))*OPS_ACC(T_B0, -2,0) +
+            ((35.0/12.0))*OPS_ACC(T_B0, 0,0))*inv2Delta0block0;
+
+       d2_u0_dx = (-(26.0/3.0)*OPS_ACC(u0_B0, -1,0) - (14.0/3.0)*OPS_ACC(u0_B0, -3,0) + ((11.0/12.0))*OPS_ACC(u0_B0, -4,0) +
+            ((19.0/2.0))*OPS_ACC(u0_B0, -2,0) + ((35.0/12.0))*OPS_ACC(u0_B0, 0,0))*inv2Delta0block0;
+
+       d2_u1_dx = (-(26.0/3.0)*OPS_ACC(u1_B0, -1,0) - (14.0/3.0)*OPS_ACC(u1_B0, -3,0) + ((11.0/12.0))*OPS_ACC(u1_B0, -4,0) +
+            ((19.0/2.0))*OPS_ACC(u1_B0, -2,0) + ((35.0/12.0))*OPS_ACC(u1_B0, 0,0))*inv2Delta0block0;
+
+   }
+
+   else if (idx[0] == -2 + block0np0){
+
+       d2_T_dx = (((1.0/2.0))*OPS_ACC(T_B0, -1,0) - (5.0/3.0)*OPS_ACC(T_B0, 0,0) - (1.0/12.0)*OPS_ACC(T_B0, -3,0) + ((1.0/3.0))*OPS_ACC(T_B0, -2,0) +
+            ((11.0/12.0))*OPS_ACC(T_B0, 1,0))*inv2Delta0block0;
+
+       d2_u0_dx = (((1.0/2.0))*OPS_ACC(u0_B0, -1,0) - (5.0/3.0)*OPS_ACC(u0_B0, 0,0) - (1.0/12.0)*OPS_ACC(u0_B0, -3,0) + ((1.0/3.0))*OPS_ACC(u0_B0, -2,0) +
+            ((11.0/12.0))*OPS_ACC(u0_B0, 1,0))*inv2Delta0block0;
+
+       d2_u1_dx = (((1.0/2.0))*OPS_ACC(u1_B0, -1,0) - (5.0/3.0)*OPS_ACC(u1_B0, 0,0) - (1.0/12.0)*OPS_ACC(u1_B0, -3,0) + ((1.0/3.0))*OPS_ACC(u1_B0, -2,0) +
+            ((11.0/12.0))*OPS_ACC(u1_B0, 1,0))*inv2Delta0block0;
+
+   }
+
+   else{
+
+       d2_T_dx = (-(5.0/2.0)*OPS_ACC(T_B0, 0,0) - (1.0/12.0)*OPS_ACC(T_B0, -2,0) - (1.0/12.0)*OPS_ACC(T_B0, 2,0) + ((4.0/3.0))*OPS_ACC(T_B0, 1,0) +
+            ((4.0/3.0))*OPS_ACC(T_B0, -1,0))*inv2Delta0block0;
+
+       d2_u0_dx = (-(5.0/2.0)*OPS_ACC(u0_B0, 0,0) - (1.0/12.0)*OPS_ACC(u0_B0, -2,0) - (1.0/12.0)*OPS_ACC(u0_B0, 2,0) + ((4.0/3.0))*OPS_ACC(u0_B0, 1,0) +
+            ((4.0/3.0))*OPS_ACC(u0_B0, -1,0))*inv2Delta0block0;
+
+       d2_u1_dx = (-(5.0/2.0)*OPS_ACC(u1_B0, 0,0) - (1.0/12.0)*OPS_ACC(u1_B0, -2,0) - (1.0/12.0)*OPS_ACC(u1_B0, 2,0) + ((4.0/3.0))*OPS_ACC(u1_B0, 1,0) +
+            ((4.0/3.0))*OPS_ACC(u1_B0, -1,0))*inv2Delta0block0;
 
    }
 
    if (idx[1] == 0){
 
-       d1_H_dy = (3.0*OPS_ACC(H_B0, 0,1) + 0.333333333333333*OPS_ACC(H_B0, 0,3) - 1.5*OPS_ACC(H_B0, 0,2) -
-            1.83333333333333*OPS_ACC(H_B0, 0,0))*invDelta1block0;
+       d1_mu_dy = (3.0*OPS_ACC(mu_B0, 0,1) + 0.333333333333333*OPS_ACC(mu_B0, 0,3) - 1.5*OPS_ACC(mu_B0, 0,2) -
+            1.83333333333333*OPS_ACC(mu_B0, 0,0))*invDelta1block0;
 
-       d1_Hrho_dy = (3.0*OPS_ACC(H_B0, 0,1)*OPS_ACC(rho_B0, 0,1) + 0.333333333333333*OPS_ACC(H_B0, 0,3)*OPS_ACC(rho_B0, 0,3) - 1.5*OPS_ACC(H_B0, 0,2)*OPS_ACC(rho_B0, 0,2) -
-            1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0))*invDelta1block0;
+       d1_wk0_dy = (3.0*OPS_ACC(wk0_B0, 0,1) + 0.333333333333333*OPS_ACC(wk0_B0, 0,3) - 1.5*OPS_ACC(wk0_B0, 0,2) -
+            1.83333333333333*OPS_ACC(wk0_B0, 0,0))*invDelta1block0;
 
-       d1_Hrhou1_dy = (3.0*OPS_ACC(H_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) + 0.333333333333333*OPS_ACC(H_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) -
-            1.5*OPS_ACC(H_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) - 1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0))*invDelta1block0;
-
-       d1_Hu1_dy = (3.0*OPS_ACC(H_B0, 0,1)*OPS_ACC(u1_B0, 0,1) + 0.333333333333333*OPS_ACC(H_B0, 0,3)*OPS_ACC(u1_B0, 0,3) - 1.5*OPS_ACC(H_B0, 0,2)*OPS_ACC(u1_B0, 0,2) -
-            1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(u1_B0, 0,0))*invDelta1block0;
-
-       d1_p_dy = (3.0*OPS_ACC(p_B0, 0,1) + 0.333333333333333*OPS_ACC(p_B0, 0,3) - 1.5*OPS_ACC(p_B0, 0,2) -
-            1.83333333333333*OPS_ACC(p_B0, 0,0))*invDelta1block0;
-
-       d1_rho_dy = (3.0*OPS_ACC(rho_B0, 0,1) + 0.333333333333333*OPS_ACC(rho_B0, 0,3) - 1.5*OPS_ACC(rho_B0, 0,2) -
-            1.83333333333333*OPS_ACC(rho_B0, 0,0))*invDelta1block0;
-
-       d1_rhou0_dy = (3.0*OPS_ACC(rhou0_B0, 0,1) + 0.333333333333333*OPS_ACC(rhou0_B0, 0,3) - 1.5*OPS_ACC(rhou0_B0, 0,2) -
-            1.83333333333333*OPS_ACC(rhou0_B0, 0,0))*invDelta1block0;
-
-       d1_rhou1_dy = (3.0*OPS_ACC(rhou1_B0, 0,1) + 0.333333333333333*OPS_ACC(rhou1_B0, 0,3) - 1.5*OPS_ACC(rhou1_B0, 0,2) -
-            1.83333333333333*OPS_ACC(rhou1_B0, 0,0))*invDelta1block0;
-
-       d1_rhou1u0_dy = (3.0*OPS_ACC(u0_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) + 0.333333333333333*OPS_ACC(u0_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) -
-            1.5*OPS_ACC(u0_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) - 1.83333333333333*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0))*invDelta1block0;
-
-       d1_rhou1u1_dy = (3.0*OPS_ACC(u1_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) + 0.333333333333333*OPS_ACC(u1_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) -
-            1.5*OPS_ACC(u1_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) - 1.83333333333333*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0))*invDelta1block0;
-
-       d1_u0u1_dy = (3.0*OPS_ACC(u0_B0, 0,1)*OPS_ACC(u1_B0, 0,1) + 0.333333333333333*OPS_ACC(u0_B0, 0,3)*OPS_ACC(u1_B0, 0,3) - 1.5*OPS_ACC(u0_B0, 0,2)*OPS_ACC(u1_B0, 0,2) -
-            1.83333333333333*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0))*invDelta1block0;
-
-       d1_u1u1_dy = (3.0*(OPS_ACC(u1_B0, 0,1)*OPS_ACC(u1_B0, 0,1)) + 0.333333333333333*(OPS_ACC(u1_B0, 0,3)*OPS_ACC(u1_B0, 0,3)) -
-            1.5*(OPS_ACC(u1_B0, 0,2)*OPS_ACC(u1_B0, 0,2)) - 1.83333333333333*(OPS_ACC(u1_B0, 0,0)*OPS_ACC(u1_B0, 0,0)))*invDelta1block0;
+       d1_wk1_dy = (3.0*OPS_ACC(wk1_B0, 0,1) + 0.333333333333333*OPS_ACC(wk1_B0, 0,3) - 1.5*OPS_ACC(wk1_B0, 0,2) -
+            1.83333333333333*OPS_ACC(wk1_B0, 0,0))*invDelta1block0;
 
    }
 
    else if (idx[1] == 1){
 
-       d1_H_dy = (0.0394168524399447*OPS_ACC(H_B0, 0,2) + 0.00571369039775442*OPS_ACC(H_B0, 0,4) + 0.719443173328855*OPS_ACC(H_B0, 0,1) -
-            0.322484932882161*OPS_ACC(H_B0, 0,0) - 0.0658051057710389*OPS_ACC(H_B0, 0,3) - 0.376283677513354*OPS_ACC(H_B0, 0,-1))*invDelta1block0;
+       d1_mu_dy = (0.0394168524399447*OPS_ACC(mu_B0, 0,2) + 0.00571369039775442*OPS_ACC(mu_B0, 0,4) + 0.719443173328855*OPS_ACC(mu_B0, 0,1) -
+            0.322484932882161*OPS_ACC(mu_B0, 0,0) - 0.0658051057710389*OPS_ACC(mu_B0, 0,3) -
+            0.376283677513354*OPS_ACC(mu_B0, 0,-1))*invDelta1block0;
 
-       d1_Hrho_dy = (0.0394168524399447*OPS_ACC(H_B0, 0,2)*OPS_ACC(rho_B0, 0,2) + 0.00571369039775442*OPS_ACC(H_B0, 0,4)*OPS_ACC(rho_B0, 0,4) +
-            0.719443173328855*OPS_ACC(H_B0, 0,1)*OPS_ACC(rho_B0, 0,1) - 0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(H_B0, 0,3)*OPS_ACC(rho_B0, 0,3) - 0.376283677513354*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rho_B0, 0,-1))*invDelta1block0;
+       d1_wk0_dy = (0.0394168524399447*OPS_ACC(wk0_B0, 0,2) + 0.00571369039775442*OPS_ACC(wk0_B0, 0,4) + 0.719443173328855*OPS_ACC(wk0_B0, 0,1) -
+            0.322484932882161*OPS_ACC(wk0_B0, 0,0) - 0.0658051057710389*OPS_ACC(wk0_B0, 0,3) -
+            0.376283677513354*OPS_ACC(wk0_B0, 0,-1))*invDelta1block0;
 
-       d1_Hrhou1_dy = (0.0394168524399447*OPS_ACC(H_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) + 0.00571369039775442*OPS_ACC(H_B0, 0,4)*OPS_ACC(rhou1_B0, 0,4) +
-            0.719443173328855*OPS_ACC(H_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) - 0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(H_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) - 0.376283677513354*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_Hu1_dy = (0.0394168524399447*OPS_ACC(H_B0, 0,2)*OPS_ACC(u1_B0, 0,2) + 0.00571369039775442*OPS_ACC(H_B0, 0,4)*OPS_ACC(u1_B0, 0,4) +
-            0.719443173328855*OPS_ACC(H_B0, 0,1)*OPS_ACC(u1_B0, 0,1) - 0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(u1_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(H_B0, 0,3)*OPS_ACC(u1_B0, 0,3) - 0.376283677513354*OPS_ACC(H_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1))*invDelta1block0;
-
-       d1_p_dy = (0.0394168524399447*OPS_ACC(p_B0, 0,2) + 0.00571369039775442*OPS_ACC(p_B0, 0,4) + 0.719443173328855*OPS_ACC(p_B0, 0,1) -
-            0.322484932882161*OPS_ACC(p_B0, 0,0) - 0.0658051057710389*OPS_ACC(p_B0, 0,3) - 0.376283677513354*OPS_ACC(p_B0, 0,-1))*invDelta1block0;
-
-       d1_rho_dy = (0.0394168524399447*OPS_ACC(rho_B0, 0,2) + 0.00571369039775442*OPS_ACC(rho_B0, 0,4) + 0.719443173328855*OPS_ACC(rho_B0, 0,1) -
-            0.322484932882161*OPS_ACC(rho_B0, 0,0) - 0.0658051057710389*OPS_ACC(rho_B0, 0,3) -
-            0.376283677513354*OPS_ACC(rho_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou0_dy = (0.0394168524399447*OPS_ACC(rhou0_B0, 0,2) + 0.00571369039775442*OPS_ACC(rhou0_B0, 0,4) +
-            0.719443173328855*OPS_ACC(rhou0_B0, 0,1) - 0.322484932882161*OPS_ACC(rhou0_B0, 0,0) - 0.0658051057710389*OPS_ACC(rhou0_B0, 0,3) -
-            0.376283677513354*OPS_ACC(rhou0_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou1_dy = (0.0394168524399447*OPS_ACC(rhou1_B0, 0,2) + 0.00571369039775442*OPS_ACC(rhou1_B0, 0,4) +
-            0.719443173328855*OPS_ACC(rhou1_B0, 0,1) - 0.322484932882161*OPS_ACC(rhou1_B0, 0,0) - 0.0658051057710389*OPS_ACC(rhou1_B0, 0,3) -
-            0.376283677513354*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou1u0_dy = (0.0394168524399447*OPS_ACC(u0_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) + 0.00571369039775442*OPS_ACC(u0_B0, 0,4)*OPS_ACC(rhou1_B0, 0,4) +
-            0.719443173328855*OPS_ACC(u0_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) - 0.322484932882161*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(u0_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) -
-            0.376283677513354*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou1u1_dy = (0.0394168524399447*OPS_ACC(u1_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) + 0.00571369039775442*OPS_ACC(u1_B0, 0,4)*OPS_ACC(rhou1_B0, 0,4) +
-            0.719443173328855*OPS_ACC(u1_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) - 0.322484932882161*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(u1_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) -
-            0.376283677513354*OPS_ACC(u1_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_u0u1_dy = (0.0394168524399447*OPS_ACC(u0_B0, 0,2)*OPS_ACC(u1_B0, 0,2) + 0.00571369039775442*OPS_ACC(u0_B0, 0,4)*OPS_ACC(u1_B0, 0,4) +
-            0.719443173328855*OPS_ACC(u0_B0, 0,1)*OPS_ACC(u1_B0, 0,1) - 0.322484932882161*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) -
-            0.0658051057710389*OPS_ACC(u0_B0, 0,3)*OPS_ACC(u1_B0, 0,3) - 0.376283677513354*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1))*invDelta1block0;
-
-       d1_u1u1_dy = (0.0394168524399447*(OPS_ACC(u1_B0, 0,2)*OPS_ACC(u1_B0, 0,2)) + 0.00571369039775442*(OPS_ACC(u1_B0, 0,4)*OPS_ACC(u1_B0, 0,4)) +
-            0.719443173328855*(OPS_ACC(u1_B0, 0,1)*OPS_ACC(u1_B0, 0,1)) - 0.322484932882161*(OPS_ACC(u1_B0, 0,0)*OPS_ACC(u1_B0, 0,0)) -
-            0.0658051057710389*(OPS_ACC(u1_B0, 0,3)*OPS_ACC(u1_B0, 0,3)) - 0.376283677513354*(OPS_ACC(u1_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1)))*invDelta1block0;
+       d1_wk1_dy = (0.0394168524399447*OPS_ACC(wk1_B0, 0,2) + 0.00571369039775442*OPS_ACC(wk1_B0, 0,4) + 0.719443173328855*OPS_ACC(wk1_B0, 0,1) -
+            0.322484932882161*OPS_ACC(wk1_B0, 0,0) - 0.0658051057710389*OPS_ACC(wk1_B0, 0,3) -
+            0.376283677513354*OPS_ACC(wk1_B0, 0,-1))*invDelta1block0;
 
    }
 
    else if (idx[1] == 2){
 
-       d1_H_dy = (0.197184333887745*OPS_ACC(H_B0, 0,0) + 0.521455851089587*OPS_ACC(H_B0, 0,1) + 0.113446470384241*OPS_ACC(H_B0, 0,-2) -
-            0.00412637789557492*OPS_ACC(H_B0, 0,3) - 0.0367146847001261*OPS_ACC(H_B0, 0,2) -
-            0.791245592765872*OPS_ACC(H_B0, 0,-1))*invDelta1block0;
+       d1_mu_dy = (0.197184333887745*OPS_ACC(mu_B0, 0,0) + 0.521455851089587*OPS_ACC(mu_B0, 0,1) + 0.113446470384241*OPS_ACC(mu_B0, 0,-2) -
+            0.00412637789557492*OPS_ACC(mu_B0, 0,3) - 0.0367146847001261*OPS_ACC(mu_B0, 0,2) -
+            0.791245592765872*OPS_ACC(mu_B0, 0,-1))*invDelta1block0;
 
-       d1_Hrho_dy = (0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) + 0.521455851089587*OPS_ACC(H_B0, 0,1)*OPS_ACC(rho_B0, 0,1) +
-            0.113446470384241*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rho_B0, 0,-2) - 0.00412637789557492*OPS_ACC(H_B0, 0,3)*OPS_ACC(rho_B0, 0,3) -
-            0.0367146847001261*OPS_ACC(H_B0, 0,2)*OPS_ACC(rho_B0, 0,2) - 0.791245592765872*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rho_B0, 0,-1))*invDelta1block0;
+       d1_wk0_dy = (0.197184333887745*OPS_ACC(wk0_B0, 0,0) + 0.521455851089587*OPS_ACC(wk0_B0, 0,1) + 0.113446470384241*OPS_ACC(wk0_B0, 0,-2) -
+            0.00412637789557492*OPS_ACC(wk0_B0, 0,3) - 0.0367146847001261*OPS_ACC(wk0_B0, 0,2) -
+            0.791245592765872*OPS_ACC(wk0_B0, 0,-1))*invDelta1block0;
 
-       d1_Hrhou1_dy = (0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) + 0.521455851089587*OPS_ACC(H_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) +
-            0.113446470384241*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) - 0.00412637789557492*OPS_ACC(H_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) -
-            0.0367146847001261*OPS_ACC(H_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) - 0.791245592765872*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_Hu1_dy = (0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(u1_B0, 0,0) + 0.521455851089587*OPS_ACC(H_B0, 0,1)*OPS_ACC(u1_B0, 0,1) +
-            0.113446470384241*OPS_ACC(H_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) - 0.00412637789557492*OPS_ACC(H_B0, 0,3)*OPS_ACC(u1_B0, 0,3) -
-            0.0367146847001261*OPS_ACC(H_B0, 0,2)*OPS_ACC(u1_B0, 0,2) - 0.791245592765872*OPS_ACC(H_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1))*invDelta1block0;
-
-       d1_p_dy = (0.197184333887745*OPS_ACC(p_B0, 0,0) + 0.521455851089587*OPS_ACC(p_B0, 0,1) + 0.113446470384241*OPS_ACC(p_B0, 0,-2) -
-            0.00412637789557492*OPS_ACC(p_B0, 0,3) - 0.0367146847001261*OPS_ACC(p_B0, 0,2) -
-            0.791245592765872*OPS_ACC(p_B0, 0,-1))*invDelta1block0;
-
-       d1_rho_dy = (0.197184333887745*OPS_ACC(rho_B0, 0,0) + 0.521455851089587*OPS_ACC(rho_B0, 0,1) + 0.113446470384241*OPS_ACC(rho_B0, 0,-2) -
-            0.00412637789557492*OPS_ACC(rho_B0, 0,3) - 0.0367146847001261*OPS_ACC(rho_B0, 0,2) -
-            0.791245592765872*OPS_ACC(rho_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou0_dy = (0.197184333887745*OPS_ACC(rhou0_B0, 0,0) + 0.521455851089587*OPS_ACC(rhou0_B0, 0,1) +
-            0.113446470384241*OPS_ACC(rhou0_B0, 0,-2) - 0.00412637789557492*OPS_ACC(rhou0_B0, 0,3) - 0.0367146847001261*OPS_ACC(rhou0_B0, 0,2) -
-            0.791245592765872*OPS_ACC(rhou0_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou1_dy = (0.197184333887745*OPS_ACC(rhou1_B0, 0,0) + 0.521455851089587*OPS_ACC(rhou1_B0, 0,1) +
-            0.113446470384241*OPS_ACC(rhou1_B0, 0,-2) - 0.00412637789557492*OPS_ACC(rhou1_B0, 0,3) - 0.0367146847001261*OPS_ACC(rhou1_B0, 0,2) -
-            0.791245592765872*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou1u0_dy = (0.197184333887745*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) + 0.521455851089587*OPS_ACC(u0_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) +
-            0.113446470384241*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) - 0.00412637789557492*OPS_ACC(u0_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) -
-            0.0367146847001261*OPS_ACC(u0_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) -
-            0.791245592765872*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou1u1_dy = (0.197184333887745*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) + 0.521455851089587*OPS_ACC(u1_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) +
-            0.113446470384241*OPS_ACC(u1_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) - 0.00412637789557492*OPS_ACC(u1_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) -
-            0.0367146847001261*OPS_ACC(u1_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) -
-            0.791245592765872*OPS_ACC(u1_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_u0u1_dy = (0.197184333887745*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) + 0.521455851089587*OPS_ACC(u0_B0, 0,1)*OPS_ACC(u1_B0, 0,1) +
-            0.113446470384241*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) - 0.00412637789557492*OPS_ACC(u0_B0, 0,3)*OPS_ACC(u1_B0, 0,3) -
-            0.0367146847001261*OPS_ACC(u0_B0, 0,2)*OPS_ACC(u1_B0, 0,2) - 0.791245592765872*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1))*invDelta1block0;
-
-       d1_u1u1_dy = (0.197184333887745*(OPS_ACC(u1_B0, 0,0)*OPS_ACC(u1_B0, 0,0)) + 0.521455851089587*(OPS_ACC(u1_B0, 0,1)*OPS_ACC(u1_B0, 0,1)) +
-            0.113446470384241*(OPS_ACC(u1_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2)) - 0.00412637789557492*(OPS_ACC(u1_B0, 0,3)*OPS_ACC(u1_B0, 0,3)) -
-            0.0367146847001261*(OPS_ACC(u1_B0, 0,2)*OPS_ACC(u1_B0, 0,2)) - 0.791245592765872*(OPS_ACC(u1_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1)))*invDelta1block0;
+       d1_wk1_dy = (0.197184333887745*OPS_ACC(wk1_B0, 0,0) + 0.521455851089587*OPS_ACC(wk1_B0, 0,1) + 0.113446470384241*OPS_ACC(wk1_B0, 0,-2) -
+            0.00412637789557492*OPS_ACC(wk1_B0, 0,3) - 0.0367146847001261*OPS_ACC(wk1_B0, 0,2) -
+            0.791245592765872*OPS_ACC(wk1_B0, 0,-1))*invDelta1block0;
 
    }
 
    else if (idx[1] == 3){
 
-       d1_H_dy = (0.0451033223343881*OPS_ACC(H_B0, 0,0) + 0.652141084861241*OPS_ACC(H_B0, 0,1) + 0.121937153224065*OPS_ACC(H_B0, 0,-2) -
-            0.00932597985049999*OPS_ACC(H_B0, 0,-3) - 0.727822147724592*OPS_ACC(H_B0, 0,-1) -
-            0.082033432844602*OPS_ACC(H_B0, 0,2))*invDelta1block0;
+       d1_mu_dy = (0.0451033223343881*OPS_ACC(mu_B0, 0,0) + 0.652141084861241*OPS_ACC(mu_B0, 0,1) + 0.121937153224065*OPS_ACC(mu_B0, 0,-2) -
+            0.00932597985049999*OPS_ACC(mu_B0, 0,-3) - 0.727822147724592*OPS_ACC(mu_B0, 0,-1) -
+            0.082033432844602*OPS_ACC(mu_B0, 0,2))*invDelta1block0;
 
-       d1_Hrho_dy = (0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) + 0.652141084861241*OPS_ACC(H_B0, 0,1)*OPS_ACC(rho_B0, 0,1) +
-            0.121937153224065*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rho_B0, 0,-2) - 0.00932597985049999*OPS_ACC(H_B0, 0,-3)*OPS_ACC(rho_B0, 0,-3) -
-            0.727822147724592*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rho_B0, 0,-1) - 0.082033432844602*OPS_ACC(H_B0, 0,2)*OPS_ACC(rho_B0, 0,2))*invDelta1block0;
+       d1_wk0_dy = (0.0451033223343881*OPS_ACC(wk0_B0, 0,0) + 0.652141084861241*OPS_ACC(wk0_B0, 0,1) + 0.121937153224065*OPS_ACC(wk0_B0, 0,-2) -
+            0.00932597985049999*OPS_ACC(wk0_B0, 0,-3) - 0.727822147724592*OPS_ACC(wk0_B0, 0,-1) -
+            0.082033432844602*OPS_ACC(wk0_B0, 0,2))*invDelta1block0;
 
-       d1_Hrhou1_dy = (0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) + 0.652141084861241*OPS_ACC(H_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) +
-            0.121937153224065*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) - 0.00932597985049999*OPS_ACC(H_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3) -
-            0.727822147724592*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.082033432844602*OPS_ACC(H_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_Hu1_dy = (0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(u1_B0, 0,0) + 0.652141084861241*OPS_ACC(H_B0, 0,1)*OPS_ACC(u1_B0, 0,1) +
-            0.121937153224065*OPS_ACC(H_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) - 0.00932597985049999*OPS_ACC(H_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3) -
-            0.727822147724592*OPS_ACC(H_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1) - 0.082033432844602*OPS_ACC(H_B0, 0,2)*OPS_ACC(u1_B0, 0,2))*invDelta1block0;
-
-       d1_p_dy = (0.0451033223343881*OPS_ACC(p_B0, 0,0) + 0.652141084861241*OPS_ACC(p_B0, 0,1) + 0.121937153224065*OPS_ACC(p_B0, 0,-2) -
-            0.00932597985049999*OPS_ACC(p_B0, 0,-3) - 0.727822147724592*OPS_ACC(p_B0, 0,-1) -
-            0.082033432844602*OPS_ACC(p_B0, 0,2))*invDelta1block0;
-
-       d1_rho_dy = (0.0451033223343881*OPS_ACC(rho_B0, 0,0) + 0.652141084861241*OPS_ACC(rho_B0, 0,1) + 0.121937153224065*OPS_ACC(rho_B0, 0,-2) -
-            0.00932597985049999*OPS_ACC(rho_B0, 0,-3) - 0.727822147724592*OPS_ACC(rho_B0, 0,-1) -
-            0.082033432844602*OPS_ACC(rho_B0, 0,2))*invDelta1block0;
-
-       d1_rhou0_dy = (0.0451033223343881*OPS_ACC(rhou0_B0, 0,0) + 0.652141084861241*OPS_ACC(rhou0_B0, 0,1) +
-            0.121937153224065*OPS_ACC(rhou0_B0, 0,-2) - 0.00932597985049999*OPS_ACC(rhou0_B0, 0,-3) - 0.727822147724592*OPS_ACC(rhou0_B0, 0,-1) -
-            0.082033432844602*OPS_ACC(rhou0_B0, 0,2))*invDelta1block0;
-
-       d1_rhou1_dy = (0.0451033223343881*OPS_ACC(rhou1_B0, 0,0) + 0.652141084861241*OPS_ACC(rhou1_B0, 0,1) +
-            0.121937153224065*OPS_ACC(rhou1_B0, 0,-2) - 0.00932597985049999*OPS_ACC(rhou1_B0, 0,-3) - 0.727822147724592*OPS_ACC(rhou1_B0, 0,-1) -
-            0.082033432844602*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_rhou1u0_dy = (0.0451033223343881*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) + 0.652141084861241*OPS_ACC(u0_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) +
-            0.121937153224065*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) - 0.00932597985049999*OPS_ACC(u0_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3) -
-            0.727822147724592*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.082033432844602*OPS_ACC(u0_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_rhou1u1_dy = (0.0451033223343881*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) + 0.652141084861241*OPS_ACC(u1_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) +
-            0.121937153224065*OPS_ACC(u1_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) - 0.00932597985049999*OPS_ACC(u1_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3) -
-            0.727822147724592*OPS_ACC(u1_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.082033432844602*OPS_ACC(u1_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_u0u1_dy = (0.0451033223343881*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) + 0.652141084861241*OPS_ACC(u0_B0, 0,1)*OPS_ACC(u1_B0, 0,1) +
-            0.121937153224065*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) - 0.00932597985049999*OPS_ACC(u0_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3) -
-            0.727822147724592*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1) - 0.082033432844602*OPS_ACC(u0_B0, 0,2)*OPS_ACC(u1_B0, 0,2))*invDelta1block0;
-
-       d1_u1u1_dy = (0.0451033223343881*(OPS_ACC(u1_B0, 0,0)*OPS_ACC(u1_B0, 0,0)) + 0.652141084861241*(OPS_ACC(u1_B0, 0,1)*OPS_ACC(u1_B0, 0,1)) +
-            0.121937153224065*(OPS_ACC(u1_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2)) - 0.00932597985049999*(OPS_ACC(u1_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3)) -
-            0.727822147724592*(OPS_ACC(u1_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1)) - 0.082033432844602*(OPS_ACC(u1_B0, 0,2)*OPS_ACC(u1_B0, 0,2)))*invDelta1block0;
+       d1_wk1_dy = (0.0451033223343881*OPS_ACC(wk1_B0, 0,0) + 0.652141084861241*OPS_ACC(wk1_B0, 0,1) + 0.121937153224065*OPS_ACC(wk1_B0, 0,-2) -
+            0.00932597985049999*OPS_ACC(wk1_B0, 0,-3) - 0.727822147724592*OPS_ACC(wk1_B0, 0,-1) -
+            0.082033432844602*OPS_ACC(wk1_B0, 0,2))*invDelta1block0;
 
    }
 
    else if (idx[1] == -1 + block0np1){
 
-       d1_H_dy = (1.5*OPS_ACC(H_B0, 0,-2) + 1.83333333333333*OPS_ACC(H_B0, 0,0) - 3.0*OPS_ACC(H_B0, 0,-1) -
-            0.333333333333333*OPS_ACC(H_B0, 0,-3))*invDelta1block0;
+       d1_mu_dy = (1.5*OPS_ACC(mu_B0, 0,-2) + 1.83333333333333*OPS_ACC(mu_B0, 0,0) - 3.0*OPS_ACC(mu_B0, 0,-1) -
+            0.333333333333333*OPS_ACC(mu_B0, 0,-3))*invDelta1block0;
 
-       d1_Hrho_dy = (1.5*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rho_B0, 0,-2) + 1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) - 3.0*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rho_B0, 0,-1)
-            - 0.333333333333333*OPS_ACC(H_B0, 0,-3)*OPS_ACC(rho_B0, 0,-3))*invDelta1block0;
+       d1_wk0_dy = (1.5*OPS_ACC(wk0_B0, 0,-2) + 1.83333333333333*OPS_ACC(wk0_B0, 0,0) - 3.0*OPS_ACC(wk0_B0, 0,-1) -
+            0.333333333333333*OPS_ACC(wk0_B0, 0,-3))*invDelta1block0;
 
-       d1_Hrhou1_dy = (1.5*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) + 1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            3.0*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.333333333333333*OPS_ACC(H_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3))*invDelta1block0;
-
-       d1_Hu1_dy = (1.5*OPS_ACC(H_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) + 1.83333333333333*OPS_ACC(H_B0, 0,0)*OPS_ACC(u1_B0, 0,0) - 3.0*OPS_ACC(H_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1) -
-            0.333333333333333*OPS_ACC(H_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3))*invDelta1block0;
-
-       d1_p_dy = (1.5*OPS_ACC(p_B0, 0,-2) + 1.83333333333333*OPS_ACC(p_B0, 0,0) - 3.0*OPS_ACC(p_B0, 0,-1) -
-            0.333333333333333*OPS_ACC(p_B0, 0,-3))*invDelta1block0;
-
-       d1_rho_dy = (1.5*OPS_ACC(rho_B0, 0,-2) + 1.83333333333333*OPS_ACC(rho_B0, 0,0) - 3.0*OPS_ACC(rho_B0, 0,-1) -
-            0.333333333333333*OPS_ACC(rho_B0, 0,-3))*invDelta1block0;
-
-       d1_rhou0_dy = (1.5*OPS_ACC(rhou0_B0, 0,-2) + 1.83333333333333*OPS_ACC(rhou0_B0, 0,0) - 3.0*OPS_ACC(rhou0_B0, 0,-1) -
-            0.333333333333333*OPS_ACC(rhou0_B0, 0,-3))*invDelta1block0;
-
-       d1_rhou1_dy = (1.5*OPS_ACC(rhou1_B0, 0,-2) + 1.83333333333333*OPS_ACC(rhou1_B0, 0,0) - 3.0*OPS_ACC(rhou1_B0, 0,-1) -
-            0.333333333333333*OPS_ACC(rhou1_B0, 0,-3))*invDelta1block0;
-
-       d1_rhou1u0_dy = (1.5*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) + 1.83333333333333*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            3.0*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.333333333333333*OPS_ACC(u0_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3))*invDelta1block0;
-
-       d1_rhou1u1_dy = (1.5*OPS_ACC(u1_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) + 1.83333333333333*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            3.0*OPS_ACC(u1_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.333333333333333*OPS_ACC(u1_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3))*invDelta1block0;
-
-       d1_u0u1_dy = (1.5*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) + 1.83333333333333*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) - 3.0*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1)
-            - 0.333333333333333*OPS_ACC(u0_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3))*invDelta1block0;
-
-       d1_u1u1_dy = (1.5*(OPS_ACC(u1_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2)) + 1.83333333333333*(OPS_ACC(u1_B0, 0,0)*OPS_ACC(u1_B0, 0,0)) -
-            3.0*(OPS_ACC(u1_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1)) - 0.333333333333333*(OPS_ACC(u1_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3)))*invDelta1block0;
+       d1_wk1_dy = (1.5*OPS_ACC(wk1_B0, 0,-2) + 1.83333333333333*OPS_ACC(wk1_B0, 0,0) - 3.0*OPS_ACC(wk1_B0, 0,-1) -
+            0.333333333333333*OPS_ACC(wk1_B0, 0,-3))*invDelta1block0;
 
    }
 
    else if (idx[1] == -2 + block0np1){
 
-       d1_H_dy = (0.322484932882161*OPS_ACC(H_B0, 0,0) + 0.0658051057710389*OPS_ACC(H_B0, 0,-3) + 0.376283677513354*OPS_ACC(H_B0, 0,1) -
-            0.0394168524399447*OPS_ACC(H_B0, 0,-2) - 0.00571369039775442*OPS_ACC(H_B0, 0,-4) -
-            0.719443173328855*OPS_ACC(H_B0, 0,-1))*invDelta1block0;
+       d1_mu_dy = (0.322484932882161*OPS_ACC(mu_B0, 0,0) + 0.0658051057710389*OPS_ACC(mu_B0, 0,-3) + 0.376283677513354*OPS_ACC(mu_B0, 0,1) -
+            0.0394168524399447*OPS_ACC(mu_B0, 0,-2) - 0.00571369039775442*OPS_ACC(mu_B0, 0,-4) -
+            0.719443173328855*OPS_ACC(mu_B0, 0,-1))*invDelta1block0;
 
-       d1_Hrho_dy = (0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) + 0.0658051057710389*OPS_ACC(H_B0, 0,-3)*OPS_ACC(rho_B0, 0,-3) +
-            0.376283677513354*OPS_ACC(H_B0, 0,1)*OPS_ACC(rho_B0, 0,1) - 0.0394168524399447*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rho_B0, 0,-2) -
-            0.00571369039775442*OPS_ACC(H_B0, 0,-4)*OPS_ACC(rho_B0, 0,-4) - 0.719443173328855*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rho_B0, 0,-1))*invDelta1block0;
+       d1_wk0_dy = (0.322484932882161*OPS_ACC(wk0_B0, 0,0) + 0.0658051057710389*OPS_ACC(wk0_B0, 0,-3) + 0.376283677513354*OPS_ACC(wk0_B0, 0,1) -
+            0.0394168524399447*OPS_ACC(wk0_B0, 0,-2) - 0.00571369039775442*OPS_ACC(wk0_B0, 0,-4) -
+            0.719443173328855*OPS_ACC(wk0_B0, 0,-1))*invDelta1block0;
 
-       d1_Hrhou1_dy = (0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) + 0.0658051057710389*OPS_ACC(H_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3) +
-            0.376283677513354*OPS_ACC(H_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) - 0.0394168524399447*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) -
-            0.00571369039775442*OPS_ACC(H_B0, 0,-4)*OPS_ACC(rhou1_B0, 0,-4) -
-            0.719443173328855*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_Hu1_dy = (0.322484932882161*OPS_ACC(H_B0, 0,0)*OPS_ACC(u1_B0, 0,0) + 0.0658051057710389*OPS_ACC(H_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3) +
-            0.376283677513354*OPS_ACC(H_B0, 0,1)*OPS_ACC(u1_B0, 0,1) - 0.0394168524399447*OPS_ACC(H_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) -
-            0.00571369039775442*OPS_ACC(H_B0, 0,-4)*OPS_ACC(u1_B0, 0,-4) - 0.719443173328855*OPS_ACC(H_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1))*invDelta1block0;
-
-       d1_p_dy = (0.322484932882161*OPS_ACC(p_B0, 0,0) + 0.0658051057710389*OPS_ACC(p_B0, 0,-3) + 0.376283677513354*OPS_ACC(p_B0, 0,1) -
-            0.0394168524399447*OPS_ACC(p_B0, 0,-2) - 0.00571369039775442*OPS_ACC(p_B0, 0,-4) -
-            0.719443173328855*OPS_ACC(p_B0, 0,-1))*invDelta1block0;
-
-       d1_rho_dy = (0.322484932882161*OPS_ACC(rho_B0, 0,0) + 0.0658051057710389*OPS_ACC(rho_B0, 0,-3) + 0.376283677513354*OPS_ACC(rho_B0, 0,1) -
-            0.0394168524399447*OPS_ACC(rho_B0, 0,-2) - 0.00571369039775442*OPS_ACC(rho_B0, 0,-4) -
-            0.719443173328855*OPS_ACC(rho_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou0_dy = (0.322484932882161*OPS_ACC(rhou0_B0, 0,0) + 0.0658051057710389*OPS_ACC(rhou0_B0, 0,-3) +
-            0.376283677513354*OPS_ACC(rhou0_B0, 0,1) - 0.0394168524399447*OPS_ACC(rhou0_B0, 0,-2) - 0.00571369039775442*OPS_ACC(rhou0_B0, 0,-4) -
-            0.719443173328855*OPS_ACC(rhou0_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou1_dy = (0.322484932882161*OPS_ACC(rhou1_B0, 0,0) + 0.0658051057710389*OPS_ACC(rhou1_B0, 0,-3) +
-            0.376283677513354*OPS_ACC(rhou1_B0, 0,1) - 0.0394168524399447*OPS_ACC(rhou1_B0, 0,-2) - 0.00571369039775442*OPS_ACC(rhou1_B0, 0,-4) -
-            0.719443173328855*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou1u0_dy = (0.322484932882161*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) + 0.0658051057710389*OPS_ACC(u0_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3) +
-            0.376283677513354*OPS_ACC(u0_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) - 0.0394168524399447*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) -
-            0.00571369039775442*OPS_ACC(u0_B0, 0,-4)*OPS_ACC(rhou1_B0, 0,-4) -
-            0.719443173328855*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_rhou1u1_dy = (0.322484932882161*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) + 0.0658051057710389*OPS_ACC(u1_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3) +
-            0.376283677513354*OPS_ACC(u1_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) - 0.0394168524399447*OPS_ACC(u1_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) -
-            0.00571369039775442*OPS_ACC(u1_B0, 0,-4)*OPS_ACC(rhou1_B0, 0,-4) -
-            0.719443173328855*OPS_ACC(u1_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1))*invDelta1block0;
-
-       d1_u0u1_dy = (0.322484932882161*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) + 0.0658051057710389*OPS_ACC(u0_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3) +
-            0.376283677513354*OPS_ACC(u0_B0, 0,1)*OPS_ACC(u1_B0, 0,1) - 0.0394168524399447*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) -
-            0.00571369039775442*OPS_ACC(u0_B0, 0,-4)*OPS_ACC(u1_B0, 0,-4) - 0.719443173328855*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1))*invDelta1block0;
-
-       d1_u1u1_dy = (0.322484932882161*(OPS_ACC(u1_B0, 0,0)*OPS_ACC(u1_B0, 0,0)) + 0.0658051057710389*(OPS_ACC(u1_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3)) +
-            0.376283677513354*(OPS_ACC(u1_B0, 0,1)*OPS_ACC(u1_B0, 0,1)) - 0.0394168524399447*(OPS_ACC(u1_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2)) -
-            0.00571369039775442*(OPS_ACC(u1_B0, 0,-4)*OPS_ACC(u1_B0, 0,-4)) -
-            0.719443173328855*(OPS_ACC(u1_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1)))*invDelta1block0;
+       d1_wk1_dy = (0.322484932882161*OPS_ACC(wk1_B0, 0,0) + 0.0658051057710389*OPS_ACC(wk1_B0, 0,-3) + 0.376283677513354*OPS_ACC(wk1_B0, 0,1) -
+            0.0394168524399447*OPS_ACC(wk1_B0, 0,-2) - 0.00571369039775442*OPS_ACC(wk1_B0, 0,-4) -
+            0.719443173328855*OPS_ACC(wk1_B0, 0,-1))*invDelta1block0;
 
    }
 
    else if (idx[1] == -3 + block0np1){
 
-       d1_H_dy = (0.00412637789557492*OPS_ACC(H_B0, 0,-3) + 0.0367146847001261*OPS_ACC(H_B0, 0,-2) + 0.791245592765872*OPS_ACC(H_B0, 0,1) -
-            0.197184333887745*OPS_ACC(H_B0, 0,0) - 0.521455851089587*OPS_ACC(H_B0, 0,-1) - 0.113446470384241*OPS_ACC(H_B0, 0,2))*invDelta1block0;
+       d1_mu_dy = (0.00412637789557492*OPS_ACC(mu_B0, 0,-3) + 0.0367146847001261*OPS_ACC(mu_B0, 0,-2) + 0.791245592765872*OPS_ACC(mu_B0, 0,1) -
+            0.197184333887745*OPS_ACC(mu_B0, 0,0) - 0.521455851089587*OPS_ACC(mu_B0, 0,-1) -
+            0.113446470384241*OPS_ACC(mu_B0, 0,2))*invDelta1block0;
 
-       d1_Hrho_dy = (0.00412637789557492*OPS_ACC(H_B0, 0,-3)*OPS_ACC(rho_B0, 0,-3) + 0.0367146847001261*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rho_B0, 0,-2) +
-            0.791245592765872*OPS_ACC(H_B0, 0,1)*OPS_ACC(rho_B0, 0,1) - 0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) -
-            0.521455851089587*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rho_B0, 0,-1) - 0.113446470384241*OPS_ACC(H_B0, 0,2)*OPS_ACC(rho_B0, 0,2))*invDelta1block0;
+       d1_wk0_dy = (0.00412637789557492*OPS_ACC(wk0_B0, 0,-3) + 0.0367146847001261*OPS_ACC(wk0_B0, 0,-2) + 0.791245592765872*OPS_ACC(wk0_B0, 0,1) -
+            0.197184333887745*OPS_ACC(wk0_B0, 0,0) - 0.521455851089587*OPS_ACC(wk0_B0, 0,-1) -
+            0.113446470384241*OPS_ACC(wk0_B0, 0,2))*invDelta1block0;
 
-       d1_Hrhou1_dy = (0.00412637789557492*OPS_ACC(H_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3) + 0.0367146847001261*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) +
-            0.791245592765872*OPS_ACC(H_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) - 0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            0.521455851089587*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.113446470384241*OPS_ACC(H_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_Hu1_dy = (0.00412637789557492*OPS_ACC(H_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3) + 0.0367146847001261*OPS_ACC(H_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) +
-            0.791245592765872*OPS_ACC(H_B0, 0,1)*OPS_ACC(u1_B0, 0,1) - 0.197184333887745*OPS_ACC(H_B0, 0,0)*OPS_ACC(u1_B0, 0,0) -
-            0.521455851089587*OPS_ACC(H_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1) - 0.113446470384241*OPS_ACC(H_B0, 0,2)*OPS_ACC(u1_B0, 0,2))*invDelta1block0;
-
-       d1_p_dy = (0.00412637789557492*OPS_ACC(p_B0, 0,-3) + 0.0367146847001261*OPS_ACC(p_B0, 0,-2) + 0.791245592765872*OPS_ACC(p_B0, 0,1) -
-            0.197184333887745*OPS_ACC(p_B0, 0,0) - 0.521455851089587*OPS_ACC(p_B0, 0,-1) - 0.113446470384241*OPS_ACC(p_B0, 0,2))*invDelta1block0;
-
-       d1_rho_dy = (0.00412637789557492*OPS_ACC(rho_B0, 0,-3) + 0.0367146847001261*OPS_ACC(rho_B0, 0,-2) + 0.791245592765872*OPS_ACC(rho_B0, 0,1) -
-            0.197184333887745*OPS_ACC(rho_B0, 0,0) - 0.521455851089587*OPS_ACC(rho_B0, 0,-1) -
-            0.113446470384241*OPS_ACC(rho_B0, 0,2))*invDelta1block0;
-
-       d1_rhou0_dy = (0.00412637789557492*OPS_ACC(rhou0_B0, 0,-3) + 0.0367146847001261*OPS_ACC(rhou0_B0, 0,-2) +
-            0.791245592765872*OPS_ACC(rhou0_B0, 0,1) - 0.197184333887745*OPS_ACC(rhou0_B0, 0,0) - 0.521455851089587*OPS_ACC(rhou0_B0, 0,-1) -
-            0.113446470384241*OPS_ACC(rhou0_B0, 0,2))*invDelta1block0;
-
-       d1_rhou1_dy = (0.00412637789557492*OPS_ACC(rhou1_B0, 0,-3) + 0.0367146847001261*OPS_ACC(rhou1_B0, 0,-2) +
-            0.791245592765872*OPS_ACC(rhou1_B0, 0,1) - 0.197184333887745*OPS_ACC(rhou1_B0, 0,0) - 0.521455851089587*OPS_ACC(rhou1_B0, 0,-1) -
-            0.113446470384241*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_rhou1u0_dy = (0.00412637789557492*OPS_ACC(u0_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3) + 0.0367146847001261*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) +
-            0.791245592765872*OPS_ACC(u0_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) - 0.197184333887745*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            0.521455851089587*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.113446470384241*OPS_ACC(u0_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_rhou1u1_dy = (0.00412637789557492*OPS_ACC(u1_B0, 0,-3)*OPS_ACC(rhou1_B0, 0,-3) + 0.0367146847001261*OPS_ACC(u1_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) +
-            0.791245592765872*OPS_ACC(u1_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) - 0.197184333887745*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            0.521455851089587*OPS_ACC(u1_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.113446470384241*OPS_ACC(u1_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_u0u1_dy = (0.00412637789557492*OPS_ACC(u0_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3) + 0.0367146847001261*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) +
-            0.791245592765872*OPS_ACC(u0_B0, 0,1)*OPS_ACC(u1_B0, 0,1) - 0.197184333887745*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) -
-            0.521455851089587*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1) - 0.113446470384241*OPS_ACC(u0_B0, 0,2)*OPS_ACC(u1_B0, 0,2))*invDelta1block0;
-
-       d1_u1u1_dy = (0.00412637789557492*(OPS_ACC(u1_B0, 0,-3)*OPS_ACC(u1_B0, 0,-3)) + 0.0367146847001261*(OPS_ACC(u1_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2)) +
-            0.791245592765872*(OPS_ACC(u1_B0, 0,1)*OPS_ACC(u1_B0, 0,1)) - 0.197184333887745*(OPS_ACC(u1_B0, 0,0)*OPS_ACC(u1_B0, 0,0)) -
-            0.521455851089587*(OPS_ACC(u1_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1)) - 0.113446470384241*(OPS_ACC(u1_B0, 0,2)*OPS_ACC(u1_B0, 0,2)))*invDelta1block0;
+       d1_wk1_dy = (0.00412637789557492*OPS_ACC(wk1_B0, 0,-3) + 0.0367146847001261*OPS_ACC(wk1_B0, 0,-2) + 0.791245592765872*OPS_ACC(wk1_B0, 0,1) -
+            0.197184333887745*OPS_ACC(wk1_B0, 0,0) - 0.521455851089587*OPS_ACC(wk1_B0, 0,-1) -
+            0.113446470384241*OPS_ACC(wk1_B0, 0,2))*invDelta1block0;
 
    }
 
    else if (idx[1] == -4 + block0np1){
 
-       d1_H_dy = (0.00932597985049999*OPS_ACC(H_B0, 0,3) + 0.727822147724592*OPS_ACC(H_B0, 0,1) + 0.082033432844602*OPS_ACC(H_B0, 0,-2) -
-            0.0451033223343881*OPS_ACC(H_B0, 0,0) - 0.652141084861241*OPS_ACC(H_B0, 0,-1) - 0.121937153224065*OPS_ACC(H_B0, 0,2))*invDelta1block0;
+       d1_mu_dy = (0.00932597985049999*OPS_ACC(mu_B0, 0,3) + 0.727822147724592*OPS_ACC(mu_B0, 0,1) + 0.082033432844602*OPS_ACC(mu_B0, 0,-2) -
+            0.0451033223343881*OPS_ACC(mu_B0, 0,0) - 0.652141084861241*OPS_ACC(mu_B0, 0,-1) -
+            0.121937153224065*OPS_ACC(mu_B0, 0,2))*invDelta1block0;
 
-       d1_Hrho_dy = (0.00932597985049999*OPS_ACC(H_B0, 0,3)*OPS_ACC(rho_B0, 0,3) + 0.727822147724592*OPS_ACC(H_B0, 0,1)*OPS_ACC(rho_B0, 0,1) +
-            0.082033432844602*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rho_B0, 0,-2) - 0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) -
-            0.652141084861241*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rho_B0, 0,-1) - 0.121937153224065*OPS_ACC(H_B0, 0,2)*OPS_ACC(rho_B0, 0,2))*invDelta1block0;
+       d1_wk0_dy = (0.00932597985049999*OPS_ACC(wk0_B0, 0,3) + 0.727822147724592*OPS_ACC(wk0_B0, 0,1) + 0.082033432844602*OPS_ACC(wk0_B0, 0,-2) -
+            0.0451033223343881*OPS_ACC(wk0_B0, 0,0) - 0.652141084861241*OPS_ACC(wk0_B0, 0,-1) -
+            0.121937153224065*OPS_ACC(wk0_B0, 0,2))*invDelta1block0;
 
-       d1_Hrhou1_dy = (0.00932597985049999*OPS_ACC(H_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) + 0.727822147724592*OPS_ACC(H_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) +
-            0.082033432844602*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) - 0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            0.652141084861241*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.121937153224065*OPS_ACC(H_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_Hu1_dy = (0.00932597985049999*OPS_ACC(H_B0, 0,3)*OPS_ACC(u1_B0, 0,3) + 0.727822147724592*OPS_ACC(H_B0, 0,1)*OPS_ACC(u1_B0, 0,1) +
-            0.082033432844602*OPS_ACC(H_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) - 0.0451033223343881*OPS_ACC(H_B0, 0,0)*OPS_ACC(u1_B0, 0,0) -
-            0.652141084861241*OPS_ACC(H_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1) - 0.121937153224065*OPS_ACC(H_B0, 0,2)*OPS_ACC(u1_B0, 0,2))*invDelta1block0;
-
-       d1_p_dy = (0.00932597985049999*OPS_ACC(p_B0, 0,3) + 0.727822147724592*OPS_ACC(p_B0, 0,1) + 0.082033432844602*OPS_ACC(p_B0, 0,-2) -
-            0.0451033223343881*OPS_ACC(p_B0, 0,0) - 0.652141084861241*OPS_ACC(p_B0, 0,-1) - 0.121937153224065*OPS_ACC(p_B0, 0,2))*invDelta1block0;
-
-       d1_rho_dy = (0.00932597985049999*OPS_ACC(rho_B0, 0,3) + 0.727822147724592*OPS_ACC(rho_B0, 0,1) + 0.082033432844602*OPS_ACC(rho_B0, 0,-2) -
-            0.0451033223343881*OPS_ACC(rho_B0, 0,0) - 0.652141084861241*OPS_ACC(rho_B0, 0,-1) -
-            0.121937153224065*OPS_ACC(rho_B0, 0,2))*invDelta1block0;
-
-       d1_rhou0_dy = (0.00932597985049999*OPS_ACC(rhou0_B0, 0,3) + 0.727822147724592*OPS_ACC(rhou0_B0, 0,1) +
-            0.082033432844602*OPS_ACC(rhou0_B0, 0,-2) - 0.0451033223343881*OPS_ACC(rhou0_B0, 0,0) - 0.652141084861241*OPS_ACC(rhou0_B0, 0,-1) -
-            0.121937153224065*OPS_ACC(rhou0_B0, 0,2))*invDelta1block0;
-
-       d1_rhou1_dy = (0.00932597985049999*OPS_ACC(rhou1_B0, 0,3) + 0.727822147724592*OPS_ACC(rhou1_B0, 0,1) +
-            0.082033432844602*OPS_ACC(rhou1_B0, 0,-2) - 0.0451033223343881*OPS_ACC(rhou1_B0, 0,0) - 0.652141084861241*OPS_ACC(rhou1_B0, 0,-1) -
-            0.121937153224065*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_rhou1u0_dy = (0.00932597985049999*OPS_ACC(u0_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) + 0.727822147724592*OPS_ACC(u0_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) +
-            0.082033432844602*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) - 0.0451033223343881*OPS_ACC(u0_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            0.652141084861241*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.121937153224065*OPS_ACC(u0_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_rhou1u1_dy = (0.00932597985049999*OPS_ACC(u1_B0, 0,3)*OPS_ACC(rhou1_B0, 0,3) + 0.727822147724592*OPS_ACC(u1_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1) +
-            0.082033432844602*OPS_ACC(u1_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) - 0.0451033223343881*OPS_ACC(u1_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-            0.652141084861241*OPS_ACC(u1_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - 0.121937153224065*OPS_ACC(u1_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2))*invDelta1block0;
-
-       d1_u0u1_dy = (0.00932597985049999*OPS_ACC(u0_B0, 0,3)*OPS_ACC(u1_B0, 0,3) + 0.727822147724592*OPS_ACC(u0_B0, 0,1)*OPS_ACC(u1_B0, 0,1) +
-            0.082033432844602*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) - 0.0451033223343881*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0) -
-            0.652141084861241*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1) - 0.121937153224065*OPS_ACC(u0_B0, 0,2)*OPS_ACC(u1_B0, 0,2))*invDelta1block0;
-
-       d1_u1u1_dy = (0.00932597985049999*(OPS_ACC(u1_B0, 0,3)*OPS_ACC(u1_B0, 0,3)) + 0.727822147724592*(OPS_ACC(u1_B0, 0,1)*OPS_ACC(u1_B0, 0,1)) +
-            0.082033432844602*(OPS_ACC(u1_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2)) - 0.0451033223343881*(OPS_ACC(u1_B0, 0,0)*OPS_ACC(u1_B0, 0,0)) -
-            0.652141084861241*(OPS_ACC(u1_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1)) - 0.121937153224065*(OPS_ACC(u1_B0, 0,2)*OPS_ACC(u1_B0, 0,2)))*invDelta1block0;
+       d1_wk1_dy = (0.00932597985049999*OPS_ACC(wk1_B0, 0,3) + 0.727822147724592*OPS_ACC(wk1_B0, 0,1) + 0.082033432844602*OPS_ACC(wk1_B0, 0,-2) -
+            0.0451033223343881*OPS_ACC(wk1_B0, 0,0) - 0.652141084861241*OPS_ACC(wk1_B0, 0,-1) -
+            0.121937153224065*OPS_ACC(wk1_B0, 0,2))*invDelta1block0;
 
    }
 
    else{
 
-       d1_H_dy = (-(2.0/3.0)*OPS_ACC(H_B0, 0,-1) - (1.0/12.0)*OPS_ACC(H_B0, 0,2) + ((1.0/12.0))*OPS_ACC(H_B0, 0,-2) +
-            ((2.0/3.0))*OPS_ACC(H_B0, 0,1))*invDelta1block0;
+       d1_mu_dy = (-(2.0/3.0)*OPS_ACC(mu_B0, 0,-1) - (1.0/12.0)*OPS_ACC(mu_B0, 0,2) + ((1.0/12.0))*OPS_ACC(mu_B0, 0,-2) +
+            ((2.0/3.0))*OPS_ACC(mu_B0, 0,1))*invDelta1block0;
 
-       d1_Hrho_dy = (-(2.0/3.0)*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rho_B0, 0,-1) - (1.0/12.0)*OPS_ACC(H_B0, 0,2)*OPS_ACC(rho_B0, 0,2) +
-            ((1.0/12.0))*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rho_B0, 0,-2) + ((2.0/3.0))*OPS_ACC(H_B0, 0,1)*OPS_ACC(rho_B0, 0,1))*invDelta1block0;
+       d1_wk0_dy = (-(2.0/3.0)*OPS_ACC(wk0_B0, 0,-1) - (1.0/12.0)*OPS_ACC(wk0_B0, 0,2) + ((1.0/12.0))*OPS_ACC(wk0_B0, 0,-2) +
+            ((2.0/3.0))*OPS_ACC(wk0_B0, 0,1))*invDelta1block0;
 
-       d1_Hrhou1_dy = (-(2.0/3.0)*OPS_ACC(H_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - (1.0/12.0)*OPS_ACC(H_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) +
-            ((1.0/12.0))*OPS_ACC(H_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) + ((2.0/3.0))*OPS_ACC(H_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1))*invDelta1block0;
-
-       d1_Hu1_dy = (-(2.0/3.0)*OPS_ACC(H_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1) - (1.0/12.0)*OPS_ACC(H_B0, 0,2)*OPS_ACC(u1_B0, 0,2) +
-            ((1.0/12.0))*OPS_ACC(H_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) + ((2.0/3.0))*OPS_ACC(H_B0, 0,1)*OPS_ACC(u1_B0, 0,1))*invDelta1block0;
-
-       d1_p_dy = (-(2.0/3.0)*OPS_ACC(p_B0, 0,-1) - (1.0/12.0)*OPS_ACC(p_B0, 0,2) + ((1.0/12.0))*OPS_ACC(p_B0, 0,-2) +
-            ((2.0/3.0))*OPS_ACC(p_B0, 0,1))*invDelta1block0;
-
-       d1_rho_dy = (-(2.0/3.0)*OPS_ACC(rho_B0, 0,-1) - (1.0/12.0)*OPS_ACC(rho_B0, 0,2) + ((1.0/12.0))*OPS_ACC(rho_B0, 0,-2) +
-            ((2.0/3.0))*OPS_ACC(rho_B0, 0,1))*invDelta1block0;
-
-       d1_rhou0_dy = (-(2.0/3.0)*OPS_ACC(rhou0_B0, 0,-1) - (1.0/12.0)*OPS_ACC(rhou0_B0, 0,2) + ((1.0/12.0))*OPS_ACC(rhou0_B0, 0,-2) +
-            ((2.0/3.0))*OPS_ACC(rhou0_B0, 0,1))*invDelta1block0;
-
-       d1_rhou1_dy = (-(2.0/3.0)*OPS_ACC(rhou1_B0, 0,-1) - (1.0/12.0)*OPS_ACC(rhou1_B0, 0,2) + ((1.0/12.0))*OPS_ACC(rhou1_B0, 0,-2) +
-            ((2.0/3.0))*OPS_ACC(rhou1_B0, 0,1))*invDelta1block0;
-
-       d1_rhou1u0_dy = (-(2.0/3.0)*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - (1.0/12.0)*OPS_ACC(u0_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) +
-            ((1.0/12.0))*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) + ((2.0/3.0))*OPS_ACC(u0_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1))*invDelta1block0;
-
-       d1_rhou1u1_dy = (-(2.0/3.0)*OPS_ACC(u1_B0, 0,-1)*OPS_ACC(rhou1_B0, 0,-1) - (1.0/12.0)*OPS_ACC(u1_B0, 0,2)*OPS_ACC(rhou1_B0, 0,2) +
-            ((1.0/12.0))*OPS_ACC(u1_B0, 0,-2)*OPS_ACC(rhou1_B0, 0,-2) + ((2.0/3.0))*OPS_ACC(u1_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1))*invDelta1block0;
-
-       d1_u0u1_dy = (-(2.0/3.0)*OPS_ACC(u0_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1) - (1.0/12.0)*OPS_ACC(u0_B0, 0,2)*OPS_ACC(u1_B0, 0,2) +
-            ((1.0/12.0))*OPS_ACC(u0_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2) + ((2.0/3.0))*OPS_ACC(u0_B0, 0,1)*OPS_ACC(u1_B0, 0,1))*invDelta1block0;
-
-       d1_u1u1_dy = (-(2.0/3.0)*(OPS_ACC(u1_B0, 0,-1)*OPS_ACC(u1_B0, 0,-1)) - (1.0/12.0)*(OPS_ACC(u1_B0, 0,2)*OPS_ACC(u1_B0, 0,2)) +
-            ((1.0/12.0))*(OPS_ACC(u1_B0, 0,-2)*OPS_ACC(u1_B0, 0,-2)) + ((2.0/3.0))*(OPS_ACC(u1_B0, 0,1)*OPS_ACC(u1_B0, 0,1)))*invDelta1block0;
+       d1_wk1_dy = (-(2.0/3.0)*OPS_ACC(wk1_B0, 0,-1) - (1.0/12.0)*OPS_ACC(wk1_B0, 0,2) + ((1.0/12.0))*OPS_ACC(wk1_B0, 0,-2) +
+            ((2.0/3.0))*OPS_ACC(wk1_B0, 0,1))*invDelta1block0;
 
    }
 
-    OPS_ACC(Residual0_B0, 0,0) = -(1.0/2.0)*d1_rhou0_dx - (1.0/2.0)*(OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) + OPS_ACC(wk0_B0, 0,0))*OPS_ACC(rho_B0, 0,0) -
-      (1.0/2.0)*OPS_ACC(u0_B0, 0,0)*d1_rho_dx - (1.0/2.0)*OPS_ACC(D11_B0, 0,0)*d1_rhou1_dy - (1.0/2.0)*OPS_ACC(u1_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*d1_rho_dy;
+   if (idx[1] == 0){
 
-    OPS_ACC(Residual1_B0, 0,0) = -d1_p_dx - (1.0/4.0)*d1_rhou0u0_dx - (1.0/2.0)*OPS_ACC(u0_B0, 0,0)*d1_rhou0_dx -
-      (1.0/2.0)*OPS_ACC(wk0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) - (1.0/4.0)*(OPS_ACC(u0_B0, 0,0)*OPS_ACC(u0_B0, 0,0))*d1_rho_dx -
-      (1.0/4.0)*OPS_ACC(D11_B0, 0,0)*d1_rhou1u0_dy - (1.0/4.0)*OPS_ACC(rho_B0, 0,0)*d1_u0u0_dx -
-      (1.0/4.0)*OPS_ACC(u0_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*d1_rhou1_dy - (1.0/4.0)*OPS_ACC(u1_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*d1_rhou0_dy -
-      (1.0/4.0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(rho_B0, 0,0)*d1_u0u1_dy - (1.0/4.0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0) -
-      (1.0/4.0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) - (1.0/4.0)*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*d1_rho_dy;
+       d2_T_dy = (-(26.0/3.0)*OPS_ACC(T_B0, 0,1) - (14.0/3.0)*OPS_ACC(T_B0, 0,3) + ((11.0/12.0))*OPS_ACC(T_B0, 0,4) + ((19.0/2.0))*OPS_ACC(T_B0, 0,2) +
+            ((35.0/12.0))*OPS_ACC(T_B0, 0,0))*inv2Delta1block0;
 
-    OPS_ACC(Residual2_B0, 0,0) = -(1.0/4.0)*d1_rhou0u1_dx - OPS_ACC(D11_B0, 0,0)*d1_p_dy - (1.0/4.0)*(OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(wk0_B0, 0,0))*OPS_ACC(rhou1_B0, 0,0) - (1.0/4.0)*(OPS_ACC(D11_B0, 0,0)*d1_rhou1_dy + d1_rhou0_dx)*OPS_ACC(u1_B0, 0,0) -
-      (1.0/4.0)*(OPS_ACC(D11_B0, 0,0)*d1_u1u1_dy + d1_u0u1_dx)*OPS_ACC(rho_B0, 0,0) - (1.0/4.0)*OPS_ACC(u0_B0, 0,0)*d1_rhou1_dx -
-      (1.0/4.0)*OPS_ACC(D11_B0, 0,0)*d1_rhou1u1_dy - (1.0/4.0)*OPS_ACC(wk1_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0) -
-      (1.0/4.0)*(OPS_ACC(u1_B0, 0,0)*OPS_ACC(u1_B0, 0,0))*OPS_ACC(D11_B0, 0,0)*d1_rho_dy - (1.0/4.0)*OPS_ACC(u0_B0, 0,0)*OPS_ACC(u1_B0, 0,0)*d1_rho_dx -
-      (1.0/4.0)*OPS_ACC(u1_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*d1_rhou1_dy - (1.0/4.0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0);
+       d2_u0_dy = (-(26.0/3.0)*OPS_ACC(u0_B0, 0,1) - (14.0/3.0)*OPS_ACC(u0_B0, 0,3) + ((11.0/12.0))*OPS_ACC(u0_B0, 0,4) + ((19.0/2.0))*OPS_ACC(u0_B0, 0,2) +
+            ((35.0/12.0))*OPS_ACC(u0_B0, 0,0))*inv2Delta1block0;
 
-    OPS_ACC(Residual3_B0, 0,0) = -(1.0/4.0)*d1_Hrhou0_dx - (1.0/4.0)*(OPS_ACC(D11_B0, 0,0)*d1_Hu1_dy + d1_Hu0_dx)*OPS_ACC(rho_B0, 0,0) -
-      (1.0/4.0)*(OPS_ACC(D11_B0, 0,0)*d1_rhou1_dy + d1_rhou0_dx)*OPS_ACC(H_B0, 0,0) - (1.0/4.0)*OPS_ACC(u0_B0, 0,0)*d1_Hrho_dx -
-      (1.0/4.0)*OPS_ACC(D11_B0, 0,0)*d1_Hrhou1_dy - (1.0/4.0)*OPS_ACC(rhou0_B0, 0,0)*d1_H_dx - (1.0/4.0)*(OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) +
-      OPS_ACC(wk0_B0, 0,0))*OPS_ACC(H_B0, 0,0)*OPS_ACC(rho_B0, 0,0) - (1.0/4.0)*OPS_ACC(H_B0, 0,0)*OPS_ACC(u0_B0, 0,0)*d1_rho_dx -
-      (1.0/4.0)*OPS_ACC(u1_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*d1_Hrho_dy - (1.0/4.0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0)*d1_H_dy -
-      (1.0/4.0)*OPS_ACC(H_B0, 0,0)*OPS_ACC(u1_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*d1_rho_dy;
+       d2_u1_dy = (-(26.0/3.0)*OPS_ACC(u1_B0, 0,1) - (14.0/3.0)*OPS_ACC(u1_B0, 0,3) + ((11.0/12.0))*OPS_ACC(u1_B0, 0,4) + ((19.0/2.0))*OPS_ACC(u1_B0, 0,2) +
+            ((35.0/12.0))*OPS_ACC(u1_B0, 0,0))*inv2Delta1block0;
+
+   }
+
+   else if (idx[1] == 1){
+
+       d2_T_dy = (((1.0/2.0))*OPS_ACC(T_B0, 0,1) - (5.0/3.0)*OPS_ACC(T_B0, 0,0) - (1.0/12.0)*OPS_ACC(T_B0, 0,3) + ((1.0/3.0))*OPS_ACC(T_B0, 0,2) +
+            ((11.0/12.0))*OPS_ACC(T_B0, 0,-1))*inv2Delta1block0;
+
+       d2_u0_dy = (((1.0/2.0))*OPS_ACC(u0_B0, 0,1) - (5.0/3.0)*OPS_ACC(u0_B0, 0,0) - (1.0/12.0)*OPS_ACC(u0_B0, 0,3) + ((1.0/3.0))*OPS_ACC(u0_B0, 0,2) +
+            ((11.0/12.0))*OPS_ACC(u0_B0, 0,-1))*inv2Delta1block0;
+
+       d2_u1_dy = (((1.0/2.0))*OPS_ACC(u1_B0, 0,1) - (5.0/3.0)*OPS_ACC(u1_B0, 0,0) - (1.0/12.0)*OPS_ACC(u1_B0, 0,3) + ((1.0/3.0))*OPS_ACC(u1_B0, 0,2) +
+            ((11.0/12.0))*OPS_ACC(u1_B0, 0,-1))*inv2Delta1block0;
+
+   }
+
+   else if (idx[1] == -1 + block0np1){
+
+       d2_T_dy = (-(26.0/3.0)*OPS_ACC(T_B0, 0,-1) - (14.0/3.0)*OPS_ACC(T_B0, 0,-3) + ((11.0/12.0))*OPS_ACC(T_B0, 0,-4) + ((19.0/2.0))*OPS_ACC(T_B0, 0,-2) +
+            ((35.0/12.0))*OPS_ACC(T_B0, 0,0))*inv2Delta1block0;
+
+       d2_u0_dy = (-(26.0/3.0)*OPS_ACC(u0_B0, 0,-1) - (14.0/3.0)*OPS_ACC(u0_B0, 0,-3) + ((11.0/12.0))*OPS_ACC(u0_B0, 0,-4) +
+            ((19.0/2.0))*OPS_ACC(u0_B0, 0,-2) + ((35.0/12.0))*OPS_ACC(u0_B0, 0,0))*inv2Delta1block0;
+
+       d2_u1_dy = (-(26.0/3.0)*OPS_ACC(u1_B0, 0,-1) - (14.0/3.0)*OPS_ACC(u1_B0, 0,-3) + ((11.0/12.0))*OPS_ACC(u1_B0, 0,-4) +
+            ((19.0/2.0))*OPS_ACC(u1_B0, 0,-2) + ((35.0/12.0))*OPS_ACC(u1_B0, 0,0))*inv2Delta1block0;
+
+   }
+
+   else if (idx[1] == -2 + block0np1){
+
+       d2_T_dy = (((1.0/2.0))*OPS_ACC(T_B0, 0,-1) - (5.0/3.0)*OPS_ACC(T_B0, 0,0) - (1.0/12.0)*OPS_ACC(T_B0, 0,-3) + ((1.0/3.0))*OPS_ACC(T_B0, 0,-2) +
+            ((11.0/12.0))*OPS_ACC(T_B0, 0,1))*inv2Delta1block0;
+
+       d2_u0_dy = (((1.0/2.0))*OPS_ACC(u0_B0, 0,-1) - (5.0/3.0)*OPS_ACC(u0_B0, 0,0) - (1.0/12.0)*OPS_ACC(u0_B0, 0,-3) + ((1.0/3.0))*OPS_ACC(u0_B0, 0,-2) +
+            ((11.0/12.0))*OPS_ACC(u0_B0, 0,1))*inv2Delta1block0;
+
+       d2_u1_dy = (((1.0/2.0))*OPS_ACC(u1_B0, 0,-1) - (5.0/3.0)*OPS_ACC(u1_B0, 0,0) - (1.0/12.0)*OPS_ACC(u1_B0, 0,-3) + ((1.0/3.0))*OPS_ACC(u1_B0, 0,-2) +
+            ((11.0/12.0))*OPS_ACC(u1_B0, 0,1))*inv2Delta1block0;
+
+   }
+
+   else{
+
+       d2_T_dy = (-(5.0/2.0)*OPS_ACC(T_B0, 0,0) - (1.0/12.0)*OPS_ACC(T_B0, 0,-2) - (1.0/12.0)*OPS_ACC(T_B0, 0,2) + ((4.0/3.0))*OPS_ACC(T_B0, 0,1) +
+            ((4.0/3.0))*OPS_ACC(T_B0, 0,-1))*inv2Delta1block0;
+
+       d2_u0_dy = (-(5.0/2.0)*OPS_ACC(u0_B0, 0,0) - (1.0/12.0)*OPS_ACC(u0_B0, 0,-2) - (1.0/12.0)*OPS_ACC(u0_B0, 0,2) + ((4.0/3.0))*OPS_ACC(u0_B0, 0,1) +
+            ((4.0/3.0))*OPS_ACC(u0_B0, 0,-1))*inv2Delta1block0;
+
+       d2_u1_dy = (-(5.0/2.0)*OPS_ACC(u1_B0, 0,0) - (1.0/12.0)*OPS_ACC(u1_B0, 0,-2) - (1.0/12.0)*OPS_ACC(u1_B0, 0,2) + ((4.0/3.0))*OPS_ACC(u1_B0, 0,1) +
+            ((4.0/3.0))*OPS_ACC(u1_B0, 0,-1))*inv2Delta1block0;
+
+   }
+
+    OPS_ACC(Residual1_B0, 0,0) = -(2.0/3.0)*(-2*OPS_ACC(wk0_B0, 0,0) + OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0))*invRe*d1_mu_dx + ((1.0/3.0))*(4*d2_u0_dx +
+      OPS_ACC(D11_B0, 0,0)*d1_wk1_dy + 3*(OPS_ACC(D11_B0, 0,0)*OPS_ACC(D11_B0, 0,0))*d2_u0_dy +
+      3*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0)*OPS_ACC(SD111_B0, 0,0))*invRe*OPS_ACC(mu_B0, 0,0) + (OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0) +
+      OPS_ACC(wk1_B0, 0,0))*invRe*OPS_ACC(D11_B0, 0,0)*d1_mu_dy + OPS_ACC(Residual1_B0, 0,0);
+
+    OPS_ACC(Residual2_B0, 0,0) = (OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0) + OPS_ACC(wk1_B0, 0,0))*invRe*d1_mu_dx + ((1.0/3.0))*(3*d2_u1_dx +
+      OPS_ACC(D11_B0, 0,0)*d1_wk0_dy + 4*(OPS_ACC(D11_B0, 0,0)*OPS_ACC(D11_B0, 0,0))*d2_u1_dy +
+      4*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0)*OPS_ACC(SD111_B0, 0,0))*invRe*OPS_ACC(mu_B0, 0,0) + ((2.0/3.0))*(-OPS_ACC(wk0_B0, 0,0) +
+      2*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0))*invRe*OPS_ACC(D11_B0, 0,0)*d1_mu_dy + OPS_ACC(Residual2_B0, 0,0);
+
+    OPS_ACC(Residual3_B0, 0,0) = (OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0) + OPS_ACC(wk1_B0, 0,0))*invRe*OPS_ACC(mu_B0, 0,0)*OPS_ACC(wk1_B0, 0,0) + (OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0)
+      + OPS_ACC(wk1_B0, 0,0))*invRe*OPS_ACC(u1_B0, 0,0)*d1_mu_dx - (2.0/3.0)*(-2*OPS_ACC(wk0_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0))*invRe*OPS_ACC(mu_B0, 0,0)*OPS_ACC(wk0_B0, 0,0) - (2.0/3.0)*(-2*OPS_ACC(wk0_B0, 0,0) +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0))*invRe*OPS_ACC(u0_B0, 0,0)*d1_mu_dx + ((1.0/3.0))*(3*d2_u1_dx + OPS_ACC(D11_B0, 0,0)*d1_wk0_dy +
+      4*(OPS_ACC(D11_B0, 0,0)*OPS_ACC(D11_B0, 0,0))*d2_u1_dy + 4*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0)*OPS_ACC(SD111_B0, 0,0))*invRe*OPS_ACC(mu_B0, 0,0)*OPS_ACC(u1_B0, 0,0) +
+      ((1.0/3.0))*(4*d2_u0_dx + OPS_ACC(D11_B0, 0,0)*d1_wk1_dy + 3*(OPS_ACC(D11_B0, 0,0)*OPS_ACC(D11_B0, 0,0))*d2_u0_dy +
+      3*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0)*OPS_ACC(SD111_B0, 0,0))*invRe*OPS_ACC(mu_B0, 0,0)*OPS_ACC(u0_B0, 0,0) + (OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0) +
+      OPS_ACC(wk1_B0, 0,0))*invRe*OPS_ACC(mu_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0) + (OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk3_B0, 0,0) +
+      OPS_ACC(wk1_B0, 0,0))*invRe*OPS_ACC(u0_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*d1_mu_dy + ((2.0/3.0))*(-OPS_ACC(wk0_B0, 0,0) +
+      2*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0))*invRe*OPS_ACC(mu_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0) + ((2.0/3.0))*(-OPS_ACC(wk0_B0, 0,0) +
+      2*OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk4_B0, 0,0))*invRe*OPS_ACC(u1_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*d1_mu_dy + ((OPS_ACC(D11_B0, 0,0)*OPS_ACC(D11_B0, 0,0))*d2_T_dy +
+      OPS_ACC(D11_B0, 0,0)*OPS_ACC(wk5_B0, 0,0)*OPS_ACC(SD111_B0, 0,0) + d2_T_dx)*invPr*invRe*inv2Minf*inv_gamma_m1*OPS_ACC(mu_B0, 0,0) +
+      invPr*invRe*inv2Minf*inv_gamma_m1*OPS_ACC(wk2_B0, 0,0)*d1_mu_dx +
+      (OPS_ACC(D11_B0, 0,0)*OPS_ACC(D11_B0, 0,0))*invPr*invRe*inv2Minf*inv_gamma_m1*OPS_ACC(wk5_B0, 0,0)*d1_mu_dy + OPS_ACC(Residual3_B0, 0,0);
 
 }
 
@@ -978,12 +428,11 @@ void opensbliblock00Kernel020_c_wrapper(
   double *p_a12,
   double *p_a13,
   double *p_a14,
-  double *p_a15,
-  int *p_a16,
+  int *p_a15,
   int arg_idx0, int arg_idx1,
   int x_size, int y_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4,p_a5,p_a6,p_a7,p_a8,p_a9,p_a10,p_a11,p_a12,p_a13,p_a14,p_a15)
+  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4,p_a5,p_a6,p_a7,p_a8,p_a9,p_a10,p_a11,p_a12,p_a13,p_a14)
   #pragma acc loop
   #endif
   for ( int n_y=0; n_y<y_size; n_y++ ){
@@ -1007,17 +456,10 @@ void opensbliblock00Kernel020_c_wrapper(
       ptr_double ptr12 = {  p_a12 + n_x*1*1 + n_y*xdim12_opensbliblock00Kernel020*1*1, xdim12_opensbliblock00Kernel020};
       ptr_double ptr13 = {  p_a13 + n_x*1*1 + n_y*xdim13_opensbliblock00Kernel020*1*1, xdim13_opensbliblock00Kernel020};
       ptr_double ptr14 = {  p_a14 + n_x*1*1 + n_y*xdim14_opensbliblock00Kernel020*1*1, xdim14_opensbliblock00Kernel020};
-      ptr_double ptr15 = {  p_a15 + n_x*1*1 + n_y*xdim15_opensbliblock00Kernel020*1*1, xdim15_opensbliblock00Kernel020};
-      opensbliblock00Kernel020( ptr0,
-          ptr1,ptr2,
-          ptr3,ptr4,
-          ptr5,ptr6,
-          ptr7,ptr8,
-          ptr9,ptr10,
-          ptr11,ptr12,
-          ptr13,ptr14,
-          ptr15,arg_idx );
-
+      opensbliblock00Kernel020( ptr0, ptr1, ptr2, ptr3,
+           ptr4, ptr5, ptr6, ptr7,
+           ptr8, ptr9, ptr10, ptr11,
+           ptr12, ptr13, ptr14,arg_idx);
     }
   }
 }

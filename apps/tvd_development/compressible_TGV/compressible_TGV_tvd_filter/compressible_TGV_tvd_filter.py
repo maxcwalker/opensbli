@@ -11,9 +11,9 @@ simulation_parameters = {
 'Pr'        :   '0.71',
 'dt'        :   '0.0005',
 'niter'     :   '40000',
-'block0np0'     :   '64',
-'block0np1'     :   '64',
-'block0np2'     :   '64',
+'block0np0'     :   '256',
+'block0np1'     :   '256',
+'block0np2'     :   '256',
 'Delta0block0'      :   '2*M_PI/block0np0',
 'Delta1block0'      :   '2*M_PI/block0np1',
 'Delta2block0'      :   '2*M_PI/block0np2',
@@ -28,7 +28,7 @@ simulation_parameters = {
 'lambda0_TVD'       : 'dt/Delta0block0',
 'lambda1_TVD'       : 'dt/Delta1block0',
 'lambda2_TVD'       : 'dt/Delta2block0',
-'kappa_TVD'       : '0.9',
+'kappa_TVD'       : '0.3',
 }
 
 # Number of dimensions of the system to be solved
@@ -208,7 +208,7 @@ post.add_equations([vortx, vorty, vortz, dil])
 # Evaluate reduction quantities required for dissipation measures
 rhom, KE, eps_D, eps_S = ReductionSum('rhom'), ReductionSum('KE'), ReductionSum('dilatation_dissipation'), ReductionSum('enstrophy_dissipation')
 rho_eqn = OpenSBLIEq(rhom, rhom + DataObject('rho'))
-ke_eqn = OpenSBLIEq(KE, KE + 0.5*DataObject('rho')*sum([u**2 for u in vel]))
+ke_eqn = OpenSBLIEq(KE, (KE + 0.5*DataObject('rho')*sum([u**2 for u in vel])))
 dilatation_eqn = OpenSBLIEq(eps_D, eps_D + Rational(4,3)*DataObject('mu')*divV**2)
 enstrophy_eqn = OpenSBLIEq(eps_S, eps_S + DataObject('mu')*(wx**2 + wy**2 + wz**2))
 post.add_equations([rho_eqn, ke_eqn, dilatation_eqn, enstrophy_eqn])

@@ -27,12 +27,12 @@ void ops_par_loop_opensbliblock00Kernel023_execute(ops_kernel_descriptor *desc) 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,4,range,8)) return;
+  if (!ops_checkpointing_before(args,4,range,9)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,8,"opensbliblock00Kernel023");
-    block->instance->OPS_kernels[8].count++;
+    ops_timing_realloc(block->instance,9,"opensbliblock00Kernel023");
+    block->instance->OPS_kernels[9].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -85,7 +85,7 @@ void ops_par_loop_opensbliblock00Kernel023_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[8].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[9].mpi_time += __t1-__t2;
   }
 
   int start_0 = start[0];
@@ -95,6 +95,11 @@ void ops_par_loop_opensbliblock00Kernel023_execute(ops_kernel_descriptor *desc) 
   if ((end[0]-start[0])>0 && (end[1]-start[1])>0) {
     block->instance->sycl_instance->queue->submit([&](cl::sycl::handler &cgh) {
 
+      auto Minf_sycl = (*Minf_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto Twall_sycl = (*Twall_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto gama_sycl = (*gama_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto inv2Minf_sycl = (*inv2Minf_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto inv_gamma_m1_sycl = (*inv_gamma_m1_p).template get_access<cl::sycl::access::mode::read>(cgh);
 
       cgh.parallel_for<class opensbliblock00Kernel023_kernel>(cl::sycl::nd_range<2>(cl::sycl::range<2>(
            ((end[1]-start[1]-1)/block->instance->OPS_block_size_y+1)*block->instance->OPS_block_size_y,
@@ -105,8 +110,8 @@ void ops_par_loop_opensbliblock00Kernel023_execute(ops_kernel_descriptor *desc) 
              ))
       , [=](cl::sycl::nd_item<2> item
       ) [[intel::kernel_args_restrict]] {
-        int n_y = item.get_global_id()[0]+start_1;
-        int n_x = item.get_global_id()[1]+start_0;
+        int n_y = item.get_global_id(0)+start_1;
+        int n_x = item.get_global_id(1)+start_0;
         ACC<double> rhoE_B0(xdim0_opensbliblock00Kernel023, &rhoE_B0_p[0] + base0 + n_x*1 + n_y * xdim0_opensbliblock00Kernel023*1);
         ACC<double> rho_B0(xdim1_opensbliblock00Kernel023, &rho_B0_p[0] + base1 + n_x*1 + n_y * xdim1_opensbliblock00Kernel023*1);
         ACC<double> rhou0_B0(xdim2_opensbliblock00Kernel023, &rhou0_B0_p[0] + base2 + n_x*1 + n_y * xdim2_opensbliblock00Kernel023*1);
@@ -114,45 +119,69 @@ void ops_par_loop_opensbliblock00Kernel023_execute(ops_kernel_descriptor *desc) 
         //USER CODE
         if (n_x < end_0 && n_y < end_1) {
           
-   rho_B0(0,0) = rho_B0(-1,0);
+   double Pwall = 0.0;
+   double T1 = 0.0;
+   double T2 = 0.0;
+   double T_above = 0.0;
+   double rho_halo_1 = 0.0;
+   double rho_halo_2 = 0.0;
+   double u01 = 0.0;
+   double u02 = 0.0;
+   double u11 = 0.0;
+   double u12 = 0.0;
+   rhou0_B0(0,0) = 0.0;
 
-   rhou0_B0(0,0) = rhou0_B0(-1,0);
+   rhou1_B0(0,0) = 0.0;
 
-   rhou1_B0(0,0) = rhou1_B0(-1,0);
+   rhoE_B0(0,0) = Twall_sycl[0]*inv2Minf_sycl[0]*rho_B0(0,0)/(gama_sycl[0]*(-1.0 + gama_sycl[0]));
 
-   rhoE_B0(0,0) = rhoE_B0(-1,0);
+    Pwall = (-1 + gama_sycl[0])*(-(((1.0/2.0))*(rhou0_B0(0,0)*rhou0_B0(0,0)) +
+      ((1.0/2.0))*(rhou1_B0(0,0)*rhou1_B0(0,0)))/rho_B0(0,0) + rhoE_B0(0,0));
 
-   rho_B0(1,0) = rho_B0(-1,0);
+   u01 = rhou0_B0(0,1)/rho_B0(0,1);
 
-   rhou0_B0(1,0) = rhou0_B0(-1,0);
+   u02 = rhou0_B0(0,2)/rho_B0(0,2);
 
-   rhou1_B0(1,0) = rhou1_B0(-1,0);
+   u11 = rhou1_B0(0,1)/rho_B0(0,1);
 
-   rhoE_B0(1,0) = rhoE_B0(-1,0);
+   u12 = rhou1_B0(0,2)/rho_B0(0,2);
 
-   rho_B0(2,0) = rho_B0(-1,0);
+    T_above = (Minf_sycl[0]*Minf_sycl[0])*(-1 + gama_sycl[0])*(-(((1.0/2.0))*(rhou0_B0(0,1)*rhou0_B0(0,1)) +
+      ((1.0/2.0))*(rhou1_B0(0,1)*rhou1_B0(0,1)))/rho_B0(0,1) + rhoE_B0(0,1))*gama_sycl[0]/rho_B0(0,1);
 
-   rhou0_B0(2,0) = rhou0_B0(-1,0);
+   T1 = -T_above + 2*Twall_sycl[0];
 
-   rhou1_B0(2,0) = rhou1_B0(-1,0);
+   rho_halo_1 = (Minf_sycl[0]*Minf_sycl[0])*gama_sycl[0]*Pwall/T1;
 
-   rhoE_B0(2,0) = rhoE_B0(-1,0);
+   rho_B0(0,-1) = rho_halo_1;
 
-   rho_B0(3,0) = rho_B0(-1,0);
+   rhou0_B0(0,-1) = -rho_halo_1*u01;
 
-   rhou0_B0(3,0) = rhou0_B0(-1,0);
+   rhou1_B0(0,-1) = -rho_halo_1*u11;
 
-   rhou1_B0(3,0) = rhou1_B0(-1,0);
+   rhoE_B0(0,-1) = inv_gamma_m1_sycl[0]*Pwall + ((1.0/2.0))*((u01*u01) + (u11*u11))*rho_halo_1;
 
-   rhoE_B0(3,0) = rhoE_B0(-1,0);
+   T2 = -2*T_above + 3*Twall_sycl[0];
 
-   rho_B0(4,0) = rho_B0(-1,0);
+   rho_halo_1 = (Minf_sycl[0]*Minf_sycl[0])*gama_sycl[0]*Pwall/T1;
 
-   rhou0_B0(4,0) = rhou0_B0(-1,0);
+   rho_B0(0,-1) = rho_halo_1;
 
-   rhou1_B0(4,0) = rhou1_B0(-1,0);
+   rho_halo_2 = (Minf_sycl[0]*Minf_sycl[0])*gama_sycl[0]*Pwall/T2;
 
-   rhoE_B0(4,0) = rhoE_B0(-1,0);
+   rho_B0(0,-2) = rho_halo_2;
+
+   rhou0_B0(0,-1) = -rho_halo_1*u01;
+
+   rhou1_B0(0,-1) = -rho_halo_1*u11;
+
+   rhou0_B0(0,-2) = -rho_halo_2*u02;
+
+   rhou1_B0(0,-2) = -rho_halo_2*u12;
+
+   rhoE_B0(0,-1) = inv_gamma_m1_sycl[0]*Pwall + ((1.0/2.0))*((u01*u01) + (u11*u11))*rho_halo_1;
+
+   rhoE_B0(0,-2) = inv_gamma_m1_sycl[0]*Pwall + ((1.0/2.0))*((u02*u02) + (u12*u12))*rho_halo_2;
 
 
         }
@@ -162,7 +191,7 @@ void ops_par_loop_opensbliblock00Kernel023_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     block->instance->sycl_instance->queue->wait();
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[8].time += __t2-__t1;
+    block->instance->OPS_kernels[9].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_device(args, 4);
@@ -175,11 +204,11 @@ void ops_par_loop_opensbliblock00Kernel023_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[8].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[8].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[8].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[8].transfer += ops_compute_transfer(dim, start, end, &arg2);
-    block->instance->OPS_kernels[8].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[9].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg3);
   }
 }
 
@@ -192,9 +221,9 @@ void ops_par_loop_opensbliblock00Kernel023(char const *name, ops_block block, in
   desc->block = block;
   desc->dim = dim;
   desc->device = 1;
-  desc->index = 8;
+  desc->index = 9;
   desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 8;
+  desc->hash = ((desc->hash << 5) + desc->hash) + 9;
   for ( int i=0; i<4; i++ ){
     desc->range[i] = range[i];
     desc->orig_range[i] = range[i];
@@ -212,7 +241,7 @@ void ops_par_loop_opensbliblock00Kernel023(char const *name, ops_block block, in
   desc->hash = ((desc->hash << 5) + desc->hash) + arg3.dat->index;
   desc->function = ops_par_loop_opensbliblock00Kernel023_execute;
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,8,"opensbliblock00Kernel023");
+    ops_timing_realloc(block->instance,9,"opensbliblock00Kernel023");
   }
   ops_enqueue_kernel(desc);
 }

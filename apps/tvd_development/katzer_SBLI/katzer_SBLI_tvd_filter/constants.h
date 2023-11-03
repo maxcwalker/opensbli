@@ -39,3 +39,4 @@ double kappa_TVD;
 int niter;
 double simulation_time;
 int start_iter;
+int write_output_file;

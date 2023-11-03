@@ -43,7 +43,7 @@ input_dict = {
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
     "epsilon"              : "1.0e-30",
-    "tripA"                : "0.05",
+    "tripA"                : "0.2",
     "xts"                  : "50.0",
     "omega_0"              : "0.1",
     "omega_1"              : "0.2",

@@ -217,9 +217,9 @@ void ops_par_loop_opensbliblock00Kernel001_execute(ops_kernel_descriptor *desc) 
              ))
       , [=](cl::sycl::nd_item<3> item
       ) [[intel::kernel_args_restrict]] {
-        int n_z = item.get_global_id()[0]+start_2;
-        int n_y = item.get_global_id()[1]+start_1;
-        int n_x = item.get_global_id()[2]+start_0;
+        int n_z = item.get_global_id(0)+start_2;
+        int n_y = item.get_global_id(1)+start_1;
+        int n_x = item.get_global_id(2)+start_0;
         const ACC<double> D10_B0(xdim0_opensbliblock00Kernel001, ydim0_opensbliblock00Kernel001, &D10_B0_p[0] + base0 + n_x*1 + n_y * xdim0_opensbliblock00Kernel001*1 + n_z * xdim0_opensbliblock00Kernel001 * ydim0_opensbliblock00Kernel001*1);
         const ACC<double> D11_B0(xdim1_opensbliblock00Kernel001, ydim1_opensbliblock00Kernel001, &D11_B0_p[0] + base1 + n_x*1 + n_y * xdim1_opensbliblock00Kernel001*1 + n_z * xdim1_opensbliblock00Kernel001 * ydim1_opensbliblock00Kernel001*1);
         const ACC<double> U1_B0(xdim2_opensbliblock00Kernel001, ydim2_opensbliblock00Kernel001, &U1_B0_p[0] + base2 + n_x*1 + n_y * xdim2_opensbliblock00Kernel001*1 + n_z * xdim2_opensbliblock00Kernel001 * ydim2_opensbliblock00Kernel001*1);
@@ -379,11 +379,11 @@ void ops_par_loop_opensbliblock00Kernel001_execute(ops_kernel_descriptor *desc) 
       rhoE_B0(0,0,0))/cl::sycl::sqrt(rho_B0(0,0,0)) + (p_B0(0,1,0) +
       rhoE_B0(0,1,0))/cl::sycl::sqrt(rho_B0(0,1,0)))*AVG_1_inv_rho)*gamma_m1_sycl[0]);
 
-   AVG_1_D10 = ((1.0/2.0))*(D10_B0(0,0,0) + D10_B0(0,1,0));
+   AVG_1_D11 = ((1.0/2.0))*(D11_B0(0,0,0) + D11_B0(0,1,0));
 
    AVG_1_detJ = ((1.0/2.0))*(detJ_B0(0,0,0) + detJ_B0(0,1,0));
 
-   AVG_1_D11 = ((1.0/2.0))*(D11_B0(0,0,0) + D11_B0(0,1,0));
+   AVG_1_D10 = ((1.0/2.0))*(D10_B0(0,0,0) + D10_B0(0,1,0));
 
    inv_AVG_a = 1.0/(AVG_1_a);
 
@@ -700,12 +700,12 @@ void ops_par_loop_opensbliblock00Kernel001_execute(ops_kernel_descriptor *desc) 
       (D11_B0(0,0,0)*D11_B0(0,0,0))*(detJ_B0(0,0,0)*detJ_B0(0,0,0)))*a_B0(0,0,0) +
       u0_B0(0,0,0)*D10_B0(0,0,0)*detJ_B0(0,0,0) + u1_B0(0,0,0)*D11_B0(0,0,0)*detJ_B0(0,0,0)));
 
-    max_lambda_44 = shock_filter_control_sycl[0]*cl::sycl::fmax(cl::sycl::fabs(-cl::sycl::sqrt((D10_B0(0,0,0)*D10_B0(0,0,0))*(detJ_B0(0,0,0)*detJ_B0(0,0,0)) +
-      (D11_B0(0,0,0)*D11_B0(0,0,0))*(detJ_B0(0,0,0)*detJ_B0(0,0,0)))*a_B0(0,0,0) +
-      u0_B0(0,0,0)*D10_B0(0,0,0)*detJ_B0(0,0,0) + u1_B0(0,0,0)*D11_B0(0,0,0)*detJ_B0(0,0,0)),
-      cl::sycl::fabs(-cl::sycl::sqrt((D10_B0(0,1,0)*D10_B0(0,1,0))*(detJ_B0(0,1,0)*detJ_B0(0,1,0)) +
+    max_lambda_44 = shock_filter_control_sycl[0]*cl::sycl::fmax(cl::sycl::fabs(-cl::sycl::sqrt((D10_B0(0,1,0)*D10_B0(0,1,0))*(detJ_B0(0,1,0)*detJ_B0(0,1,0)) +
       (D11_B0(0,1,0)*D11_B0(0,1,0))*(detJ_B0(0,1,0)*detJ_B0(0,1,0)))*a_B0(0,1,0) +
-      u0_B0(0,1,0)*D10_B0(0,1,0)*detJ_B0(0,1,0) + u1_B0(0,1,0)*D11_B0(0,1,0)*detJ_B0(0,1,0)));
+      u0_B0(0,1,0)*D10_B0(0,1,0)*detJ_B0(0,1,0) + u1_B0(0,1,0)*D11_B0(0,1,0)*detJ_B0(0,1,0)),
+      cl::sycl::fabs(-cl::sycl::sqrt((D10_B0(0,0,0)*D10_B0(0,0,0))*(detJ_B0(0,0,0)*detJ_B0(0,0,0)) +
+      (D11_B0(0,0,0)*D11_B0(0,0,0))*(detJ_B0(0,0,0)*detJ_B0(0,0,0)))*a_B0(0,0,0) +
+      u0_B0(0,0,0)*D10_B0(0,0,0)*detJ_B0(0,0,0) + u1_B0(0,0,0)*D11_B0(0,0,0)*detJ_B0(0,0,0)));
 
     beta_0_sycl[0] = ((1.0/4.0))*((((1.0/2.0))*(CS_01*max_lambda_00 + CF_01) - (1.0/2.0)*(CS_03*max_lambda_00 +
       CF_03))*(((1.0/2.0))*(CS_01*max_lambda_00 + CF_01) - (1.0/2.0)*(CS_03*max_lambda_00 + CF_03))) +

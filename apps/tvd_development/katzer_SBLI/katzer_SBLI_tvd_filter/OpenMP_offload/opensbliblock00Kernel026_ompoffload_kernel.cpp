@@ -7,8 +7,7 @@
 // host stub function
 #ifndef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel026(char const *name, ops_block block, int dim, int* range,
- ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
- ops_arg arg4, ops_arg arg5, ops_arg arg6) {
+ ops_arg arg0, ops_arg arg1) {
 #else
 void ops_par_loop_opensbliblock00Kernel026_execute(ops_kernel_descriptor *desc) {
   ops_block block = desc->block;
@@ -16,27 +15,22 @@ void ops_par_loop_opensbliblock00Kernel026_execute(ops_kernel_descriptor *desc) 
   int *range = desc->range;
   ops_arg arg0 = desc->args[0];
   ops_arg arg1 = desc->args[1];
-  ops_arg arg2 = desc->args[2];
-  ops_arg arg3 = desc->args[3];
-  ops_arg arg4 = desc->args[4];
-  ops_arg arg5 = desc->args[5];
-  ops_arg arg6 = desc->args[6];
   #endif
 
   //Timing
   double __t1,__t2,__c1,__c2;
 
-  ops_arg args[7] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6};
+  ops_arg args[2] = { arg0, arg1};
 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,7,range,0)) return;
+  if (!ops_checkpointing_before(args,2,range,3)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,0,"opensbliblock00Kernel026");
-    block->instance->OPS_kernels[0].count++;
+    ops_timing_realloc(block->instance,3,"opensbliblock00Kernel026");
+    block->instance->OPS_kernels[3].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -48,13 +42,15 @@ void ops_par_loop_opensbliblock00Kernel026_execute(ops_kernel_descriptor *desc) 
   //compute locally allocated range for the sub-block
   int start[2];
   int end[2];
+  #if defined(OPS_MPI) && !defined(OPS_LAZY)
   int arg_idx[2];
+  #endif
   #if defined(OPS_LAZY) || !defined(OPS_MPI)
   for ( int n=0; n<2; n++ ){
     start[n] = range[2*n];end[n] = range[2*n+1];
   }
   #else
-  if (compute_ranges(args, 7,block, range, start, end, arg_idx) < 0) return;
+  if (compute_ranges(args, 2,block, range, start, end, arg_idx) < 0) return;
   #endif
 
   int start0 = start[0];
@@ -62,227 +58,75 @@ void ops_par_loop_opensbliblock00Kernel026_execute(ops_kernel_descriptor *desc) 
   int start1 = start[1];
   int end1 = end[1];
 
-  #if defined(OPS_MPI)
-  #if defined(OPS_LAZY)
-  sub_block_list sb = OPS_sub_block_list[block->index];
-  arg_idx[0] = sb->decomp_disp[0];
-  arg_idx[1] = sb->decomp_disp[1];
-  #else
-  arg_idx[0] -= start[0];
-  arg_idx[1] -= start[1];
-  #endif
-  #else //OPS_MPI
-  arg_idx[0] = 0;
-  arg_idx[1] = 0;
-  #endif //OPS_MPI
 
   //initialize global variable with the dimension of dats
   int xdim0_opensbliblock00Kernel026 = args[0].dat->size[0];
   int xdim1_opensbliblock00Kernel026 = args[1].dat->size[0];
-  int xdim2_opensbliblock00Kernel026 = args[2].dat->size[0];
-  int xdim3_opensbliblock00Kernel026 = args[3].dat->size[0];
-  int xdim4_opensbliblock00Kernel026 = args[4].dat->size[0];
-  int xdim5_opensbliblock00Kernel026 = args[5].dat->size[0];
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ rhoE_B0_p = (double *)(args[0].data_d + base0);
+  double * __restrict__ D11_B0_p = (double *)(args[0].data_d + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ rho_B0_p = (double *)(args[1].data_d + base1);
-
-  int base2 = args[2].dat->base_offset;
-  double * __restrict__ rhou0_B0_p = (double *)(args[2].data_d + base2);
-
-  int base3 = args[3].dat->base_offset;
-  double * __restrict__ rhou1_B0_p = (double *)(args[3].data_d + base3);
-
-  int base4 = args[4].dat->base_offset;
-  double * __restrict__ x0_B0_p = (double *)(args[4].data_d + base4);
-
-  int base5 = args[5].dat->base_offset;
-  double * __restrict__ x1_B0_p = (double *)(args[5].data_d + base5);
-
+  double * __restrict__ detJ_B0_p = (double *)(args[1].data_d + base1);
 
 
 
   #ifndef OPS_LAZY
   //Halo Exchanges
-  ops_H_D_exchanges_device(args, 7);
-  ops_halo_exchanges(args,7,range);
-  ops_H_D_exchanges_device(args, 7);
+  ops_H_D_exchanges_device(args, 2);
+  ops_halo_exchanges(args,2,range);
+  ops_H_D_exchanges_device(args, 2);
   #endif
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[0].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[3].mpi_time += __t1-__t2;
   }
 
   #pragma omp target teams distribute parallel for collapse(2)
   for ( int n_y=start1; n_y<end1; n_y++ ){
     for ( int n_x=start0; n_x<end0; n_x++ ){
-      int idx[] = {arg_idx[0]+n_x, arg_idx[1]+n_y};
-      ACC<double> rhoE_B0(xdim0_opensbliblock00Kernel026, rhoE_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel026*1);
-      ACC<double> rho_B0(xdim1_opensbliblock00Kernel026, rho_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel026*1);
-      ACC<double> rhou0_B0(xdim2_opensbliblock00Kernel026, rhou0_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel026*1);
-      ACC<double> rhou1_B0(xdim3_opensbliblock00Kernel026, rhou1_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel026*1);
-      ACC<double> x0_B0(xdim4_opensbliblock00Kernel026, x0_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel026*1);
-      ACC<double> x1_B0(xdim5_opensbliblock00Kernel026, x1_B0_p + n_x*1 + n_y * xdim5_opensbliblock00Kernel026*1);
+      ACC<double> D11_B0(xdim0_opensbliblock00Kernel026, D11_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel026*1);
+      ACC<double> detJ_B0(xdim1_opensbliblock00Kernel026, detJ_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel026*1);
       
-   double T = 0.0;
-   double rho = 0.0;
-   double rhou0 = 0.0;
-   double rhou1 = 0.0;
-   x0_B0(0,0) = Delta0block0*idx[0];
+   D11_B0(1,0) = D11_B0(-1,0);
 
-   x1_B0(0,0) = Lx1*sinh(by*invLx1*Delta1block0*idx[1])/sinh(by);
+   detJ_B0(1,0) = detJ_B0(-1,0);
 
-    rhou0 = ((x1_B0(0,0) < 3.47434743474347) ? (
-   -9.41967207151553e-7 + 0.000613828400710496*pow(x1_B0(0,0), 16) +
-      3.37722054657068*pow(x1_B0(0,0), 9) + 8.56002881776995e-18*pow(x1_B0(0,0), 41) +
-      3.23932608424406e-7*pow(x1_B0(0,0), 22) + 1.94024691559566e-8*pow(x1_B0(0,0), 24) +
-      1.04940578786992e-12*pow(x1_B0(0,0), 32) + 4.91129010741448*pow(x1_B0(0,0), 7) +
-      1.24982177727222*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)) + 5.56132977621397e-22*pow(x1_B0(0,0),
-      48) + 0.000176987525519087*pow(x1_B0(0,0), 17) + 1.24222622336016e-7*pow(x1_B0(0,0), 23) +
-      0.137515271370201*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)) + 2.3555492777611e-22*pow(x1_B0(0,0), 50) +
-      0.0357543185172109*pow(x1_B0(0,0), 11) + 5.37598576202624e-16*pow(x1_B0(0,0), 38) +
-      1.76772429782625e-11*pow(x1_B0(0,0), 30) + 2.86638559964255e-16*pow(x1_B0(0,0), 39) +
-      1.89469495194353e-11*pow(x1_B0(0,0), 29) + 1.76715088906924e-20*pow(x1_B0(0,0), 47) +
-      7.78516249047705e-17*pow(x1_B0(0,0), 40) + 0.0952129739882658*pow(x1_B0(0,0), 12) +
-      4.27794832987129e-20*pow(x1_B0(0,0), 46) + 5.89366906826062e-12*pow(x1_B0(0,0), 31) + 0.423487432074122*x1_B0(0,0)
-      - 9.50677069522702e-15*pow(x1_B0(0,0), 36) -
-      3.05403724529565*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)) -
-      6.1354732571988e-6*pow(x1_B0(0,0), 18) - 1.62564132709003e-5*pow(x1_B0(0,0), 19) -
-      0.000526665419777598*pow(x1_B0(0,0), 15) - 2.65168942457028e-9*pow(x1_B0(0,0), 26) -
-      1.19128651698976e-10*pow(x1_B0(0,0), 28) - 0.00843666727267235*pow(x1_B0(0,0), 14) -
-      2.00935744152354e-21*pow(x1_B0(0,0), 49) - 5.1654697631693*pow(x1_B0(0,0), 8) -
-      5.69010318695979e-19*pow(x1_B0(0,0), 44) - 6.17393007973971e-16*pow(x1_B0(0,0), 37) -
-      4.1822231440021e-14*pow(x1_B0(0,0), 35) - 0.00594411137351235*pow(x1_B0(0,0), 13) -
-      8.29563232382128e-10*pow(x1_B0(0,0), 27) - 1.10429555878606e-7*pow(x1_B0(0,0), 21) -
-      3.04089545826647e-20*pow(x1_B0(0,0), 45) - 1.15749221486844*pow(x1_B0(0,0), 10) -
-      4.43734433122466e-6*pow(x1_B0(0,0), 20) - 2.10089699572831e-18*pow(x1_B0(0,0), 43) -
-      3.79864274570734e-14*pow(x1_B0(0,0), 33) - 0.340808475086283*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)) -
-      2.75186414593423e-9*pow(x1_B0(0,0), 25) - 1.03685516151979e-13*pow(x1_B0(0,0), 34) -
-      3.20005903751066e-18*pow(x1_B0(0,0), 42) - 0.00379046822573778*(x1_B0(0,0)*x1_B0(0,0))
-)
-: (
+   D11_B0(2,0) = D11_B0(-2,0);
 
-      0.999999408078923
-));
-
-    rhou1 = ((x1_B0(0,0) < 3.47434743474347) ? (
-   -3.82450180851277e-8 + 6.186794363468e-6*pow(x1_B0(0,0), 16) +
-      1.25484845288117e-14*pow(x1_B0(0,0), 32) + 2.24954058629723e-6*pow(x1_B0(0,0), 17) +
-      4.14968990285729e-6*x1_B0(0,0) + 0.00117421078362464*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)) +
-      0.00122012071977175*pow(x1_B0(0,0), 12) + 7.95670170515972e-14*pow(x1_B0(0,0), 29) +
-      1.61679245607276e-13*pow(x1_B0(0,0), 30) + 3.31890292562878e-16*pow(x1_B0(0,0), 33) +
-      0.024436212767697*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)) + 7.69181334189621e-24*pow(x1_B0(0,0),
-      48) + 2.1576554647756e-24*pow(x1_B0(0,0), 50) + 0.0824513961294015*pow(x1_B0(0,0), 7) +
-      1.70508557930283e-22*pow(x1_B0(0,0), 47) + 1.06166392982356e-19*pow(x1_B0(0,0), 41) +
-      6.20640928953035e-8*pow(x1_B0(0,0), 18) + 6.10502841760137e-14*pow(x1_B0(0,0), 31) +
-      0.00108918117998653*(x1_B0(0,0)*x1_B0(0,0)) + 2.61425094167977e-10*pow(x1_B0(0,0), 24) +
-      4.2441030519992e-18*pow(x1_B0(0,0), 38) + 1.35337138459532e-9*pow(x1_B0(0,0), 23) +
-      0.0478146724255516*pow(x1_B0(0,0), 9) + 2.89302203645917e-9*pow(x1_B0(0,0), 22) +
-      2.69802948259641e-18*pow(x1_B0(0,0), 39) + 3.81787677195739e-22*pow(x1_B0(0,0), 46) +
-      7.95413538795197e-19*pow(x1_B0(0,0), 40) - 8.90831291175122e-16*pow(x1_B0(0,0), 34) -
-      5.701951447644e-21*pow(x1_B0(0,0), 44) - 8.98719899571629e-12*pow(x1_B0(0,0), 27) -
-      0.0798999852889223*pow(x1_B0(0,0), 8) - 1.89236971654899e-23*pow(x1_B0(0,0), 49) -
-      1.95832488013046e-20*pow(x1_B0(0,0), 43) - 1.02493206120451e-17*pow(x1_B0(0,0), 37) -
-      1.03415796927838e-11*pow(x1_B0(0,0), 25) - 1.58893176488887e-12*pow(x1_B0(0,0), 28) -
-      0.0554884389398171*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)) -
-      4.10569601727487e-16*pow(x1_B0(0,0), 35) - 0.0144728051769681*pow(x1_B0(0,0), 10) -
-      4.2602950246167e-22*pow(x1_B0(0,0), 45) - 4.20732843390409e-9*pow(x1_B0(0,0), 21) -
-      1.63186840482375e-7*pow(x1_B0(0,0), 19) - 0.000174695037124041*pow(x1_B0(0,0), 11) -
-      1.13934957271094e-5*pow(x1_B0(0,0), 15) - 1.22892507043693e-5*pow(x1_B0(0,0), 13) -
-      0.000100760511123402*pow(x1_B0(0,0), 14) - 0.00654597240521947*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)) -
-      2.49618557647004e-11*pow(x1_B0(0,0), 26) - 5.39312821816524e-8*pow(x1_B0(0,0), 20) -
-      2.46383361869256e-20*pow(x1_B0(0,0), 42) - 1.03115993611505e-16*pow(x1_B0(0,0), 36)
-)
-: (
-
-      0.00564964364741575
-));
-
-    T = ((x1_B0(0,0) < 3.47434743474347) ? (
-   1.67619323517671 + 0.000546556514231602*pow(x1_B0(0,0), 14) +
-      2.84082766458035e-14*pow(x1_B0(0,0), 33) + 9.62144378408451e-10*pow(x1_B0(0,0), 25) +
-      0.0513779963692559*pow(x1_B0(0,0), 10) + 0.00248793100317704*pow(x1_B0(0,0), 13) +
-      7.52115337522613e-20*pow(x1_B0(0,0), 44) + 6.59237386827232e-19*pow(x1_B0(0,0), 42) +
-      8.91073005719208e-11*pow(x1_B0(0,0), 27) +
-      0.274555059341105*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)) + 1.01293721678769e-15*pow(x1_B0(0,0),
-      36) + 5.85606755194866e-15*pow(x1_B0(0,0), 35) + 2.00313598822224e-22*pow(x1_B0(0,0), 45) +
-      0.486109994170276*pow(x1_B0(0,0), 7) + 0.016295290641699*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)) +
-      2.68015550395405e-7*pow(x1_B0(0,0), 20) + 2.20028500618131e-6*pow(x1_B0(0,0), 19) + 7.47704449521701e-5*x1_B0(0,0)
-      + 0.0387069194356651*pow(x1_B0(0,0), 9) + 1.86796743416999e-14*pow(x1_B0(0,0), 34) +
-      5.26405704077908e-6*pow(x1_B0(0,0), 18) + 3.02359004140933e-22*pow(x1_B0(0,0), 49) +
-      3.24393929242347e-19*pow(x1_B0(0,0), 43) + 2.76991168496541e-12*pow(x1_B0(0,0), 28) +
-      4.12951994238752e-10*pow(x1_B0(0,0), 26) - 2.53606686749876e-21*pow(x1_B0(0,0), 47) -
-      4.86363354044092e-19*pow(x1_B0(0,0), 41) - 0.284700199848964*pow(x1_B0(0,0), 8) -
-      2.8876553711809e-12*pow(x1_B0(0,0), 30) - 4.86888191265591e-17*pow(x1_B0(0,0), 37) -
-      7.11708893366916e-21*pow(x1_B0(0,0), 46) - 8.18097963380289e-5*pow(x1_B0(0,0), 16) -
-      4.36436982884742e-17*pow(x1_B0(0,0), 39) - 9.40870600134967e-8*pow(x1_B0(0,0), 21) -
-      1.30815868835258e-8*pow(x1_B0(0,0), 23) - 6.87033316645359e-6*pow(x1_B0(0,0), 17) -
-      5.63174875122123e-8*pow(x1_B0(0,0), 22) - 1.08161915263698e-16*pow(x1_B0(0,0), 38) -
-      7.07249669257882e-24*pow(x1_B0(0,0), 48) - 0.291761620917306*(x1_B0(0,0)*x1_B0(0,0)) -
-      0.000150182995287043*pow(x1_B0(0,0), 15) - 7.36876583429846e-14*pow(x1_B0(0,0), 32) -
-      3.19671297599922e-10*pow(x1_B0(0,0), 24) - 3.73061876952194e-23*pow(x1_B0(0,0), 50) -
-      9.84138178764639e-18*pow(x1_B0(0,0), 40) - 0.0233427405115097*pow(x1_B0(0,0), 11) -
-      7.2458403897293e-13*pow(x1_B0(0,0), 31) - 0.00313487325891606*pow(x1_B0(0,0), 12) -
-      0.10530401015664*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)) - 6.23242767688354e-12*pow(x1_B0(0,0), 29) -
-      0.4425160760866*(x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0)*x1_B0(0,0))
-)
-: (
-   1.00000058834432
-));
-
-   rho = 1.0/T;
-
-   rho_B0(0,0) = rho;
-
-   rhou0_B0(0,0) = rhou0;
-
-   rhou1_B0(0,0) = rhou1;
-
-   rhoE_B0(0,0) = (0.5*(rhou0*rhou0) + 0.5*(rhou1*rhou1))/rho + invgama*inv2Minf*inv_gamma_m1*T*rho;
+   detJ_B0(2,0) = detJ_B0(-2,0);
 
 
     }
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[0].time += __t2-__t1;
+    block->instance->OPS_kernels[3].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
-  ops_set_dirtybit_device(args, 7);
+  ops_set_dirtybit_device(args, 2);
   ops_set_halo_dirtybit3(&args[0],range);
   ops_set_halo_dirtybit3(&args[1],range);
-  ops_set_halo_dirtybit3(&args[2],range);
-  ops_set_halo_dirtybit3(&args[3],range);
-  ops_set_halo_dirtybit3(&args[4],range);
-  ops_set_halo_dirtybit3(&args[5],range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[0].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[0].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[0].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[0].transfer += ops_compute_transfer(dim, start, end, &arg2);
-    block->instance->OPS_kernels[0].transfer += ops_compute_transfer(dim, start, end, &arg3);
-    block->instance->OPS_kernels[0].transfer += ops_compute_transfer(dim, start, end, &arg4);
-    block->instance->OPS_kernels[0].transfer += ops_compute_transfer(dim, start, end, &arg5);
+    block->instance->OPS_kernels[3].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[3].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[3].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel026(char const *name, ops_block block, int dim, int* range,
- ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
- ops_arg arg4, ops_arg arg5, ops_arg arg6) {
-  ops_arg args[7] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6 };
+ ops_arg arg0, ops_arg arg1) {
+  ops_arg args[2] = { arg0, arg1 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 7, 0, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel026_execute);
+  create_kerneldesc_and_enque(name, args, 2, 3, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel026_execute);
 }
 #endif

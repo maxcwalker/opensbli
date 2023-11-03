@@ -12,21 +12,13 @@ inline
 void opensbliblock00Kernel030(ptr_double D11_B0,
   ptr_double detJ_B0)
 {
-   OPS_ACC(D11_B0, 1,0) = OPS_ACC(D11_B0, -1,0);
+   OPS_ACC(D11_B0, 0,-1) = OPS_ACC(D11_B0, 0,1);
 
-   OPS_ACC(detJ_B0, 1,0) = OPS_ACC(detJ_B0, -1,0);
+   OPS_ACC(detJ_B0, 0,-1) = OPS_ACC(detJ_B0, 0,1);
 
-   OPS_ACC(D11_B0, 2,0) = OPS_ACC(D11_B0, -2,0);
+   OPS_ACC(D11_B0, 0,-2) = OPS_ACC(D11_B0, 0,2);
 
-   OPS_ACC(detJ_B0, 2,0) = OPS_ACC(detJ_B0, -2,0);
-
-   OPS_ACC(D11_B0, 3,0) = OPS_ACC(D11_B0, -3,0);
-
-   OPS_ACC(detJ_B0, 3,0) = OPS_ACC(detJ_B0, -3,0);
-
-   OPS_ACC(D11_B0, 4,0) = OPS_ACC(D11_B0, -4,0);
-
-   OPS_ACC(detJ_B0, 4,0) = OPS_ACC(detJ_B0, -4,0);
+   OPS_ACC(detJ_B0, 0,-2) = OPS_ACC(detJ_B0, 0,2);
 
 }
 
@@ -46,9 +38,7 @@ void opensbliblock00Kernel030_c_wrapper(
     for ( int n_x=0; n_x<x_size; n_x++ ){
       ptr_double ptr0 = {  p_a0 + n_x*1*1 + n_y*xdim0_opensbliblock00Kernel030*1*1, xdim0_opensbliblock00Kernel030};
       ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel030*1*1, xdim1_opensbliblock00Kernel030};
-      opensbliblock00Kernel030( ptr0,
-          ptr1 );
-
+      opensbliblock00Kernel030( ptr0, ptr1);
     }
   }
 }

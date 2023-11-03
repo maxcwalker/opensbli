@@ -181,9 +181,9 @@ void ops_par_loop_opensbliblock00Kernel070_execute(ops_kernel_descriptor *desc) 
              ))
       , [=](cl::sycl::nd_item<3> item
       ) [[intel::kernel_args_restrict]] {
-        int n_z = item.get_global_id()[0]+start_2;
-        int n_y = item.get_global_id()[1]+start_1;
-        int n_x = item.get_global_id()[2]+start_0;
+        int n_z = item.get_global_id(0)+start_2;
+        int n_y = item.get_global_id(1)+start_1;
+        int n_x = item.get_global_id(2)+start_0;
         int idx[] = {arg_idx_0+n_x, arg_idx_1+n_y, arg_idx_2+n_z};
         const ACC<double> x0_B0(xdim0_opensbliblock00Kernel070, ydim0_opensbliblock00Kernel070, &x0_B0_p[0] + base0 + n_x*1 + n_y * xdim0_opensbliblock00Kernel070*1 + n_z * xdim0_opensbliblock00Kernel070 * ydim0_opensbliblock00Kernel070*1);
         const ACC<double> x1_B0(xdim1_opensbliblock00Kernel070, ydim1_opensbliblock00Kernel070, &x1_B0_p[0] + base1 + n_x*1 + n_y * xdim1_opensbliblock00Kernel070*1 + n_z * xdim1_opensbliblock00Kernel070 * ydim1_opensbliblock00Kernel070*1);
@@ -203,28 +203,18 @@ void ops_par_loop_opensbliblock00Kernel070_execute(ops_kernel_descriptor *desc) 
    double d1_x0_dy = 0.0;
    double d1_x1_dx = 0.0;
    double d1_x1_dy = 0.0;
-    d1_x0_dx = invDelta0block0_sycl[0]*((idx[0] == 0) ? (
-   -3*x0_B0(2,0,0) + 4*x0_B0(1,0,0) - (25.0/12.0)*x0_B0(0,0,0) -
-      (1.0/4.0)*x0_B0(4,0,0) + ((4.0/3.0))*x0_B0(3,0,0)
+    d1_x0_dy = invDelta1block0_sycl[0]*((idx[1] == 0) ? (
+   -3*x0_B0(0,2,0) + 4*x0_B0(0,1,0) - (25.0/12.0)*x0_B0(0,0,0) -
+      (1.0/4.0)*x0_B0(0,4,0) + ((4.0/3.0))*x0_B0(0,3,0)
 )
-: ((idx[0] == 1) ? (
+: ((idx[1] == 1) ? (
    -(5.0/6.0)*x0_B0(0,0,0) -
-      (1.0/2.0)*x0_B0(2,0,0) - (1.0/4.0)*x0_B0(-1,0,0) + ((1.0/12.0))*x0_B0(3,0,0) + ((3.0/2.0))*x0_B0(1,0,0)
-)
-:
-      ((idx[0] == -1 + block0np0_sycl[0]) ? (
-   -4*x0_B0(-1,0,0) + 3*x0_B0(-2,0,0) - (4.0/3.0)*x0_B0(-3,0,0) +
-      ((1.0/4.0))*x0_B0(-4,0,0) + ((25.0/12.0))*x0_B0(0,0,0)
-)
-: ((idx[0] == -2 + block0np0_sycl[0]) ? (
-
-      ((1.0/2.0))*x0_B0(-2,0,0) - (3.0/2.0)*x0_B0(-1,0,0) - (1.0/12.0)*x0_B0(-3,0,0) + ((1.0/4.0))*x0_B0(1,0,0) +
-      ((5.0/6.0))*x0_B0(0,0,0)
+      (1.0/2.0)*x0_B0(0,2,0) - (1.0/4.0)*x0_B0(0,-1,0) + ((1.0/12.0))*x0_B0(0,3,0) + ((3.0/2.0))*x0_B0(0,1,0)
 )
 : (
-   -(2.0/3.0)*x0_B0(-1,0,0) - (1.0/12.0)*x0_B0(2,0,0) + ((1.0/12.0))*x0_B0(-2,0,0)
-      + ((2.0/3.0))*x0_B0(1,0,0)
-)))));
+
+      -(2.0/3.0)*x0_B0(0,-1,0) - (1.0/12.0)*x0_B0(0,2,0) + ((1.0/12.0))*x0_B0(0,-2,0) + ((2.0/3.0))*x0_B0(0,1,0)
+)));
 
     d1_x1_dx = invDelta0block0_sycl[0]*((idx[0] == 0) ? (
    -3*x1_B0(2,0,0) + 4*x1_B0(1,0,0) - (25.0/12.0)*x1_B0(0,0,0) -
@@ -249,6 +239,29 @@ void ops_par_loop_opensbliblock00Kernel070_execute(ops_kernel_descriptor *desc) 
       + ((2.0/3.0))*x1_B0(1,0,0)
 )))));
 
+    d1_x0_dx = invDelta0block0_sycl[0]*((idx[0] == 0) ? (
+   -3*x0_B0(2,0,0) + 4*x0_B0(1,0,0) - (25.0/12.0)*x0_B0(0,0,0) -
+      (1.0/4.0)*x0_B0(4,0,0) + ((4.0/3.0))*x0_B0(3,0,0)
+)
+: ((idx[0] == 1) ? (
+   -(5.0/6.0)*x0_B0(0,0,0) -
+      (1.0/2.0)*x0_B0(2,0,0) - (1.0/4.0)*x0_B0(-1,0,0) + ((1.0/12.0))*x0_B0(3,0,0) + ((3.0/2.0))*x0_B0(1,0,0)
+)
+:
+      ((idx[0] == -1 + block0np0_sycl[0]) ? (
+   -4*x0_B0(-1,0,0) + 3*x0_B0(-2,0,0) - (4.0/3.0)*x0_B0(-3,0,0) +
+      ((1.0/4.0))*x0_B0(-4,0,0) + ((25.0/12.0))*x0_B0(0,0,0)
+)
+: ((idx[0] == -2 + block0np0_sycl[0]) ? (
+
+      ((1.0/2.0))*x0_B0(-2,0,0) - (3.0/2.0)*x0_B0(-1,0,0) - (1.0/12.0)*x0_B0(-3,0,0) + ((1.0/4.0))*x0_B0(1,0,0) +
+      ((5.0/6.0))*x0_B0(0,0,0)
+)
+: (
+   -(2.0/3.0)*x0_B0(-1,0,0) - (1.0/12.0)*x0_B0(2,0,0) + ((1.0/12.0))*x0_B0(-2,0,0)
+      + ((2.0/3.0))*x0_B0(1,0,0)
+)))));
+
     d1_x1_dy = invDelta1block0_sycl[0]*((idx[1] == 0) ? (
    -3*x1_B0(0,2,0) + 4*x1_B0(0,1,0) - (25.0/12.0)*x1_B0(0,0,0) -
       (1.0/4.0)*x1_B0(0,4,0) + ((4.0/3.0))*x1_B0(0,3,0)
@@ -260,19 +273,6 @@ void ops_par_loop_opensbliblock00Kernel070_execute(ops_kernel_descriptor *desc) 
 : (
 
       -(2.0/3.0)*x1_B0(0,-1,0) - (1.0/12.0)*x1_B0(0,2,0) + ((1.0/12.0))*x1_B0(0,-2,0) + ((2.0/3.0))*x1_B0(0,1,0)
-)));
-
-    d1_x0_dy = invDelta1block0_sycl[0]*((idx[1] == 0) ? (
-   -3*x0_B0(0,2,0) + 4*x0_B0(0,1,0) - (25.0/12.0)*x0_B0(0,0,0) -
-      (1.0/4.0)*x0_B0(0,4,0) + ((4.0/3.0))*x0_B0(0,3,0)
-)
-: ((idx[1] == 1) ? (
-   -(5.0/6.0)*x0_B0(0,0,0) -
-      (1.0/2.0)*x0_B0(0,2,0) - (1.0/4.0)*x0_B0(0,-1,0) + ((1.0/12.0))*x0_B0(0,3,0) + ((3.0/2.0))*x0_B0(0,1,0)
-)
-: (
-
-      -(2.0/3.0)*x0_B0(0,-1,0) - (1.0/12.0)*x0_B0(0,2,0) + ((1.0/12.0))*x0_B0(0,-2,0) + ((2.0/3.0))*x0_B0(0,1,0)
 )));
 
    wk0_B0(0,0,0) = d1_x0_dx;

@@ -17,6 +17,8 @@ class plotFunctions(object):
         ax1 = fig.add_subplot(1, 1, 1, aspect='equal')
         ax1.set_xlabel(r"$x_0$", fontsize=20)
         ax1.set_ylabel(r"$x_1$", fontsize=20)
+        # ax1.set_xlim([0, 5])
+        # ax1.set_ylim([0, 5])
         CS = ax1.contourf(self.x, self.y, variable, levels=levels0, cmap=cm.jet)
         divider = make_axes_locatable(ax1)
         cax1 = divider.append_axes("right", size="5%", pad=0.05)
@@ -73,7 +75,7 @@ class KatzerPlot(plotFunctions):
         return x, y
 
     def extract_metrics(self):
-        fname = 'opensbli_output.h5'
+        fname = 'opensbli_output_000900.h5'
         f, group1 = self.read_file(fname)
         D11 = self.read_dataset(group1, "D11_B0")
         return D11
@@ -175,7 +177,7 @@ class KatzerPlot(plotFunctions):
         f.close()
 
 
-fname = "opensbli_output.h5"
+fname = "opensbli_output_000900.h5"
 n_contour_levels = 25
 directory = './simulation_plots/'
 

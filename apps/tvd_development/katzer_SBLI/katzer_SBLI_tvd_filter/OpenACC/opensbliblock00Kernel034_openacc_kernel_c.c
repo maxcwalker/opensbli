@@ -6,60 +6,40 @@
 
 int xdim0_opensbliblock00Kernel034;
 int xdim1_opensbliblock00Kernel034;
+int xdim2_opensbliblock00Kernel034;
+int xdim3_opensbliblock00Kernel034;
+int xdim4_opensbliblock00Kernel034;
+int xdim5_opensbliblock00Kernel034;
+int xdim6_opensbliblock00Kernel034;
+int xdim7_opensbliblock00Kernel034;
+int xdim8_opensbliblock00Kernel034;
 
 //user function
 inline 
-void opensbliblock00Kernel034(const ptr_double D11_B0,
-  ptr_double SD111_B0,
-  const int *idx)
+ void opensbliblock00Kernel034(const ptr_double rhoE_B0,
+  const ptr_double rho_B0,
+  const ptr_double rhou0_B0,
+  const
+ptr_double rhou1_B0,
+  ptr_double a_B0,
+  ptr_double kappa_B0,
+  ptr_double u0_B0,
+  ptr_double u1_B0,
+  ptr_double p_B0)
 {
-   double d1_D11_dy = 0.0;
-    d1_D11_dy = invDelta1block0*((idx[1] == 0) ? (
-   3.0*OPS_ACC(D11_B0, 0,1) + 0.333333333333333*OPS_ACC(D11_B0, 0,3) - 1.5*OPS_ACC(D11_B0, 0,2)
-      - 1.83333333333333*OPS_ACC(D11_B0, 0,0)
-)
-: ((idx[1] == 1) ? (
-   0.0394168524399447*OPS_ACC(D11_B0, 0,2) +
-      0.00571369039775442*OPS_ACC(D11_B0, 0,4) + 0.719443173328855*OPS_ACC(D11_B0, 0,1) - 0.322484932882161*OPS_ACC(D11_B0, 0,0) -
-      0.0658051057710389*OPS_ACC(D11_B0, 0,3) - 0.376283677513354*OPS_ACC(D11_B0, 0,-1)
-)
-: ((idx[1] == 2) ? (
+   double inv_rho = 0.0;
+   OPS_ACC(kappa_B0, 0,0) = 1;
 
-      0.197184333887745*OPS_ACC(D11_B0, 0,0) + 0.521455851089587*OPS_ACC(D11_B0, 0,1) + 0.113446470384241*OPS_ACC(D11_B0, 0,-2) -
-      0.00412637789557492*OPS_ACC(D11_B0, 0,3) - 0.0367146847001261*OPS_ACC(D11_B0, 0,2) - 0.791245592765872*OPS_ACC(D11_B0, 0,-1)
-)
-: ((idx[1] ==
-      3) ? (
-   0.0451033223343881*OPS_ACC(D11_B0, 0,0) + 0.652141084861241*OPS_ACC(D11_B0, 0,1) + 0.121937153224065*OPS_ACC(D11_B0, 0,-2) -
-      0.00932597985049999*OPS_ACC(D11_B0, 0,-3) - 0.727822147724592*OPS_ACC(D11_B0, 0,-1) - 0.082033432844602*OPS_ACC(D11_B0, 0,2)
-)
-: ((idx[1] ==
-      -1 + block0np1) ? (
-   1.5*OPS_ACC(D11_B0, 0,-2) + 1.83333333333333*OPS_ACC(D11_B0, 0,0) - 3.0*OPS_ACC(D11_B0, 0,-1) -
-      0.333333333333333*OPS_ACC(D11_B0, 0,-3)
-)
-: ((idx[1] == -2 + block0np1) ? (
-   0.322484932882161*OPS_ACC(D11_B0, 0,0) +
-      0.0658051057710389*OPS_ACC(D11_B0, 0,-3) + 0.376283677513354*OPS_ACC(D11_B0, 0,1) - 0.0394168524399447*OPS_ACC(D11_B0, 0,-2) -
-      0.00571369039775442*OPS_ACC(D11_B0, 0,-4) - 0.719443173328855*OPS_ACC(D11_B0, 0,-1)
-)
-: ((idx[1] == -3 + block0np1) ? (
+   inv_rho = 1.0/OPS_ACC(rho_B0, 0,0);
 
-      0.00412637789557492*OPS_ACC(D11_B0, 0,-3) + 0.0367146847001261*OPS_ACC(D11_B0, 0,-2) + 0.791245592765872*OPS_ACC(D11_B0, 0,1) -
-      0.197184333887745*OPS_ACC(D11_B0, 0,0) - 0.521455851089587*OPS_ACC(D11_B0, 0,-1) - 0.113446470384241*OPS_ACC(D11_B0, 0,2)
-)
-: ((idx[1] == -4
-      + block0np1) ? (
-   0.00932597985049999*OPS_ACC(D11_B0, 0,3) + 0.727822147724592*OPS_ACC(D11_B0, 0,1) +
-      0.082033432844602*OPS_ACC(D11_B0, 0,-2) - 0.0451033223343881*OPS_ACC(D11_B0, 0,0) - 0.652141084861241*OPS_ACC(D11_B0, 0,-1) -
-      0.121937153224065*OPS_ACC(D11_B0, 0,2)
-)
-: (
-   -(2.0/3.0)*OPS_ACC(D11_B0, 0,-1) - (1.0/12.0)*OPS_ACC(D11_B0, 0,2) +
-      ((1.0/12.0))*OPS_ACC(D11_B0, 0,-2) + ((2.0/3.0))*OPS_ACC(D11_B0, 0,1)
-)))))))));
+   OPS_ACC(u0_B0, 0,0) = OPS_ACC(rhou0_B0, 0,0)*inv_rho;
 
-   OPS_ACC(SD111_B0, 0,0) = d1_D11_dy;
+   OPS_ACC(u1_B0, 0,0) = OPS_ACC(rhou1_B0, 0,0)*inv_rho;
+
+    OPS_ACC(p_B0, 0,0) = (-1 + gama)*(-(0.5*(OPS_ACC(rhou0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0)) + 0.5*(OPS_ACC(rhou1_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0)))*inv_rho +
+      OPS_ACC(rhoE_B0, 0,0));
+
+   OPS_ACC(a_B0, 0,0) = sqrt(gama*OPS_ACC(p_B0, 0,0)*inv_rho);
 
 }
 
@@ -67,11 +47,16 @@ void opensbliblock00Kernel034(const ptr_double D11_B0,
 void opensbliblock00Kernel034_c_wrapper(
   double *p_a0,
   double *p_a1,
-  int *p_a2,
-  int arg_idx0, int arg_idx1,
+  double *p_a2,
+  double *p_a3,
+  double *p_a4,
+  double *p_a5,
+  double *p_a6,
+  double *p_a7,
+  double *p_a8,
   int x_size, int y_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1)
+  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4,p_a5,p_a6,p_a7,p_a8)
   #pragma acc loop
   #endif
   for ( int n_y=0; n_y<y_size; n_y++ ){
@@ -79,12 +64,18 @@ void opensbliblock00Kernel034_c_wrapper(
     #pragma acc loop
     #endif
     for ( int n_x=0; n_x<x_size; n_x++ ){
-      int arg_idx[] = {arg_idx0+n_x, arg_idx1+n_y};
       const ptr_double ptr0 = {  p_a0 + n_x*1*1 + n_y*xdim0_opensbliblock00Kernel034*1*1, xdim0_opensbliblock00Kernel034};
-      ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel034*1*1, xdim1_opensbliblock00Kernel034};
-      opensbliblock00Kernel034( ptr0,
-          ptr1,arg_idx );
-
+      const ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel034*1*1, xdim1_opensbliblock00Kernel034};
+      const ptr_double ptr2 = {  p_a2 + n_x*1*1 + n_y*xdim2_opensbliblock00Kernel034*1*1, xdim2_opensbliblock00Kernel034};
+      const ptr_double ptr3 = {  p_a3 + n_x*1*1 + n_y*xdim3_opensbliblock00Kernel034*1*1, xdim3_opensbliblock00Kernel034};
+      ptr_double ptr4 = {  p_a4 + n_x*1*1 + n_y*xdim4_opensbliblock00Kernel034*1*1, xdim4_opensbliblock00Kernel034};
+      ptr_double ptr5 = {  p_a5 + n_x*1*1 + n_y*xdim5_opensbliblock00Kernel034*1*1, xdim5_opensbliblock00Kernel034};
+      ptr_double ptr6 = {  p_a6 + n_x*1*1 + n_y*xdim6_opensbliblock00Kernel034*1*1, xdim6_opensbliblock00Kernel034};
+      ptr_double ptr7 = {  p_a7 + n_x*1*1 + n_y*xdim7_opensbliblock00Kernel034*1*1, xdim7_opensbliblock00Kernel034};
+      ptr_double ptr8 = {  p_a8 + n_x*1*1 + n_y*xdim8_opensbliblock00Kernel034*1*1, xdim8_opensbliblock00Kernel034};
+      opensbliblock00Kernel034( ptr0, ptr1, ptr2, ptr3,
+           ptr4, ptr5, ptr6, ptr7,
+           ptr8);
     }
   }
 }

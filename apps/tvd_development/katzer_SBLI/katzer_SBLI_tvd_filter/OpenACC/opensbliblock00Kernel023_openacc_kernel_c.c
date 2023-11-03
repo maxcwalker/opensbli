@@ -16,45 +16,69 @@ void opensbliblock00Kernel023(ptr_double rhoE_B0,
   ptr_double rhou0_B0,
   ptr_double rhou1_B0)
 {
-   OPS_ACC(rho_B0, 0,0) = OPS_ACC(rho_B0, -1,0);
+   double Pwall = 0.0;
+   double T1 = 0.0;
+   double T2 = 0.0;
+   double T_above = 0.0;
+   double rho_halo_1 = 0.0;
+   double rho_halo_2 = 0.0;
+   double u01 = 0.0;
+   double u02 = 0.0;
+   double u11 = 0.0;
+   double u12 = 0.0;
+   OPS_ACC(rhou0_B0, 0,0) = 0.0;
 
-   OPS_ACC(rhou0_B0, 0,0) = OPS_ACC(rhou0_B0, -1,0);
+   OPS_ACC(rhou1_B0, 0,0) = 0.0;
 
-   OPS_ACC(rhou1_B0, 0,0) = OPS_ACC(rhou1_B0, -1,0);
+   OPS_ACC(rhoE_B0, 0,0) = Twall*inv2Minf*OPS_ACC(rho_B0, 0,0)/(gama*(-1.0 + gama));
 
-   OPS_ACC(rhoE_B0, 0,0) = OPS_ACC(rhoE_B0, -1,0);
+    Pwall = (-1 + gama)*(-(((1.0/2.0))*(OPS_ACC(rhou0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0)) +
+      ((1.0/2.0))*(OPS_ACC(rhou1_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0)))/OPS_ACC(rho_B0, 0,0) + OPS_ACC(rhoE_B0, 0,0));
 
-   OPS_ACC(rho_B0, 1,0) = OPS_ACC(rho_B0, -1,0);
+   u01 = OPS_ACC(rhou0_B0, 0,1)/OPS_ACC(rho_B0, 0,1);
 
-   OPS_ACC(rhou0_B0, 1,0) = OPS_ACC(rhou0_B0, -1,0);
+   u02 = OPS_ACC(rhou0_B0, 0,2)/OPS_ACC(rho_B0, 0,2);
 
-   OPS_ACC(rhou1_B0, 1,0) = OPS_ACC(rhou1_B0, -1,0);
+   u11 = OPS_ACC(rhou1_B0, 0,1)/OPS_ACC(rho_B0, 0,1);
 
-   OPS_ACC(rhoE_B0, 1,0) = OPS_ACC(rhoE_B0, -1,0);
+   u12 = OPS_ACC(rhou1_B0, 0,2)/OPS_ACC(rho_B0, 0,2);
 
-   OPS_ACC(rho_B0, 2,0) = OPS_ACC(rho_B0, -1,0);
+    T_above = (Minf*Minf)*(-1 + gama)*(-(((1.0/2.0))*(OPS_ACC(rhou0_B0, 0,1)*OPS_ACC(rhou0_B0, 0,1)) +
+      ((1.0/2.0))*(OPS_ACC(rhou1_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1)))/OPS_ACC(rho_B0, 0,1) + OPS_ACC(rhoE_B0, 0,1))*gama/OPS_ACC(rho_B0, 0,1);
 
-   OPS_ACC(rhou0_B0, 2,0) = OPS_ACC(rhou0_B0, -1,0);
+   T1 = -T_above + 2*Twall;
 
-   OPS_ACC(rhou1_B0, 2,0) = OPS_ACC(rhou1_B0, -1,0);
+   rho_halo_1 = (Minf*Minf)*gama*Pwall/T1;
 
-   OPS_ACC(rhoE_B0, 2,0) = OPS_ACC(rhoE_B0, -1,0);
+   OPS_ACC(rho_B0, 0,-1) = rho_halo_1;
 
-   OPS_ACC(rho_B0, 3,0) = OPS_ACC(rho_B0, -1,0);
+   OPS_ACC(rhou0_B0, 0,-1) = -rho_halo_1*u01;
 
-   OPS_ACC(rhou0_B0, 3,0) = OPS_ACC(rhou0_B0, -1,0);
+   OPS_ACC(rhou1_B0, 0,-1) = -rho_halo_1*u11;
 
-   OPS_ACC(rhou1_B0, 3,0) = OPS_ACC(rhou1_B0, -1,0);
+   OPS_ACC(rhoE_B0, 0,-1) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u01*u01) + (u11*u11))*rho_halo_1;
 
-   OPS_ACC(rhoE_B0, 3,0) = OPS_ACC(rhoE_B0, -1,0);
+   T2 = -2*T_above + 3*Twall;
 
-   OPS_ACC(rho_B0, 4,0) = OPS_ACC(rho_B0, -1,0);
+   rho_halo_1 = (Minf*Minf)*gama*Pwall/T1;
 
-   OPS_ACC(rhou0_B0, 4,0) = OPS_ACC(rhou0_B0, -1,0);
+   OPS_ACC(rho_B0, 0,-1) = rho_halo_1;
 
-   OPS_ACC(rhou1_B0, 4,0) = OPS_ACC(rhou1_B0, -1,0);
+   rho_halo_2 = (Minf*Minf)*gama*Pwall/T2;
 
-   OPS_ACC(rhoE_B0, 4,0) = OPS_ACC(rhoE_B0, -1,0);
+   OPS_ACC(rho_B0, 0,-2) = rho_halo_2;
+
+   OPS_ACC(rhou0_B0, 0,-1) = -rho_halo_1*u01;
+
+   OPS_ACC(rhou1_B0, 0,-1) = -rho_halo_1*u11;
+
+   OPS_ACC(rhou0_B0, 0,-2) = -rho_halo_2*u02;
+
+   OPS_ACC(rhou1_B0, 0,-2) = -rho_halo_2*u12;
+
+   OPS_ACC(rhoE_B0, 0,-1) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u01*u01) + (u11*u11))*rho_halo_1;
+
+   OPS_ACC(rhoE_B0, 0,-2) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u02*u02) + (u12*u12))*rho_halo_2;
 
 }
 
@@ -78,10 +102,7 @@ void opensbliblock00Kernel023_c_wrapper(
       ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel023*1*1, xdim1_opensbliblock00Kernel023};
       ptr_double ptr2 = {  p_a2 + n_x*1*1 + n_y*xdim2_opensbliblock00Kernel023*1*1, xdim2_opensbliblock00Kernel023};
       ptr_double ptr3 = {  p_a3 + n_x*1*1 + n_y*xdim3_opensbliblock00Kernel023*1*1, xdim3_opensbliblock00Kernel023};
-      opensbliblock00Kernel023( ptr0,
-          ptr1,ptr2,
-          ptr3 );
-
+      opensbliblock00Kernel023( ptr0, ptr1, ptr2, ptr3);
     }
   }
 }

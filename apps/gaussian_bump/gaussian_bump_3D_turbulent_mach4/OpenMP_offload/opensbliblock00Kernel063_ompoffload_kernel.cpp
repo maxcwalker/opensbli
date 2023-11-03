@@ -176,7 +176,7 @@ void ops_par_loop_opensbliblock00Kernel063_execute(ops_kernel_descriptor *desc) 
    double u24 = 0.0;
     rhou1_B0(0,0,0) = (sin(dt*omega_0* *iter) + sin(dt*omega_1* *iter + phi_0) + sin(dt*omega_2* *iter + phi_1) +
       sin(dt*omega_3* *iter + phi_2))*tripA*rho_B0(0,0,0)*exp(-((-xts + x0_B0(0,0,0))*(-xts +
-      x0_B0(0,0,0)))*k_0)*sin(beta_0*x2_B0(0,0,0));
+      x0_B0(0,0,0)))*b_f)*sin(beta_0*x2_B0(0,0,0));
 
    rhou0_B0(0,0,0) = 0.0;
 

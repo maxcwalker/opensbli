@@ -27,12 +27,12 @@ void ops_par_loop_opensbliblock00Kernel022_execute(ops_kernel_descriptor *desc) 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,4,range,7)) return;
+  if (!ops_checkpointing_before(args,4,range,8)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,7,"opensbliblock00Kernel022");
-    block->instance->OPS_kernels[7].count++;
+    ops_timing_realloc(block->instance,8,"opensbliblock00Kernel022");
+    block->instance->OPS_kernels[8].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -91,7 +91,7 @@ void ops_par_loop_opensbliblock00Kernel022_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[7].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[8].mpi_time += __t1-__t2;
   }
 
   #pragma omp target teams distribute parallel for collapse(2)
@@ -102,83 +102,36 @@ void ops_par_loop_opensbliblock00Kernel022_execute(ops_kernel_descriptor *desc) 
       ACC<double> rhou0_B0(xdim2_opensbliblock00Kernel022, rhou0_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel022*1);
       ACC<double> rhou1_B0(xdim3_opensbliblock00Kernel022, rhou1_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel022*1);
       
-   double ab = 0.0;
-   double pb = 0.0;
-   double rhob = 0.0;
-   double ub0 = 0.0;
-   double ub1 = 0.0;
-   rhob = rho_B0(0,0);
+   rho_B0(0,0) = rho_B0(-1,0);
 
-   ub0 = fabs(rhou0_B0(0,0)/rho_B0(0,0));
+   rhou0_B0(0,0) = rhou0_B0(-1,0);
 
-   ub1 = fabs(rhou1_B0(0,0)/rho_B0(0,0));
+   rhou1_B0(0,0) = rhou1_B0(-1,0);
 
-   pb = (-1 + gama)*(-0.5*((ub0*ub0) + (ub1*ub1))*rhob + rhoE_B0(0,0));
+   rhoE_B0(0,0) = rhoE_B0(-1,0);
 
-   ab = sqrt(gama*pb/rhob);
+   rho_B0(1,0) = rho_B0(-1,0);
 
-   rho_B0(0,0) = ((ub0 >= ab) ? (
-   rho_B0(-1,0)
-)
-: (
-   rho_B0(0,0)
-));
+   rhou0_B0(1,0) = rhou0_B0(-1,0);
 
-   rhou0_B0(0,0) = ((ub0 >= ab) ? (
-   rhou0_B0(-1,0)
-)
-: (
-   rhou0_B0(0,0)
-));
+   rhou1_B0(1,0) = rhou1_B0(-1,0);
 
-   rhou1_B0(0,0) = ((ub0 >= ab) ? (
-   rhou1_B0(-1,0)
-)
-: (
-   rhou1_B0(0,0)
-));
+   rhoE_B0(1,0) = rhoE_B0(-1,0);
 
-   rhoE_B0(0,0) = ((ub0 >= ab) ? (
-   rhoE_B0(-1,0)
-)
-: (
-   rhoE_B0(0,0)
-));
+   rho_B0(2,0) = rho_B0(-1,0);
 
-   rhoE_B0(-1,0) = ((ub0 >= ab) ? (
-   rhoE_B0(-1,0)
-)
-: (
-   rhoE_B0(0,0)
-));
+   rhou0_B0(2,0) = rhou0_B0(-1,0);
 
-   rhoE_B0(-2,0) = ((ub0 >= ab) ? (
-   rhoE_B0(-2,0)
-)
-: (
-   rhoE_B0(0,0)
-));
+   rhou1_B0(2,0) = rhou1_B0(-1,0);
 
-   rhoE_B0(-3,0) = ((ub0 >= ab) ? (
-   rhoE_B0(-3,0)
-)
-: (
-   rhoE_B0(0,0)
-));
-
-   rhoE_B0(-4,0) = ((ub0 >= ab) ? (
-   rhoE_B0(-4,0)
-)
-: (
-   rhoE_B0(0,0)
-));
+   rhoE_B0(2,0) = rhoE_B0(-1,0);
 
 
     }
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[7].time += __t2-__t1;
+    block->instance->OPS_kernels[8].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_device(args, 4);
@@ -191,11 +144,11 @@ void ops_par_loop_opensbliblock00Kernel022_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[7].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[7].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[7].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[7].transfer += ops_compute_transfer(dim, start, end, &arg2);
-    block->instance->OPS_kernels[7].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[8].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[8].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[8].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[8].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[8].transfer += ops_compute_transfer(dim, start, end, &arg3);
   }
 }
 
@@ -206,6 +159,6 @@ void ops_par_loop_opensbliblock00Kernel022(char const *name, ops_block block, in
   ops_arg args[4] = { arg0, arg1, arg2, arg3 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 4, 7, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel022_execute);
+  create_kerneldesc_and_enque(name, args, 4, 8, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel022_execute);
 }
 #endif

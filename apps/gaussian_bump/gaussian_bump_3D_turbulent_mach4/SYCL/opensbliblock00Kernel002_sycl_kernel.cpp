@@ -205,9 +205,9 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
              ))
       , [=](cl::sycl::nd_item<3> item
       ) [[intel::kernel_args_restrict]] {
-        int n_z = item.get_global_id()[0]+start_2;
-        int n_y = item.get_global_id()[1]+start_1;
-        int n_x = item.get_global_id()[2]+start_0;
+        int n_z = item.get_global_id(0)+start_2;
+        int n_y = item.get_global_id(1)+start_1;
+        int n_x = item.get_global_id(2)+start_0;
         const ACC<double> U2_B0(xdim0_opensbliblock00Kernel002, ydim0_opensbliblock00Kernel002, &U2_B0_p[0] + base0 + n_x*1 + n_y * xdim0_opensbliblock00Kernel002*1 + n_z * xdim0_opensbliblock00Kernel002 * ydim0_opensbliblock00Kernel002*1);
         const ACC<double> a_B0(xdim1_opensbliblock00Kernel002, ydim1_opensbliblock00Kernel002, &a_B0_p[0] + base1 + n_x*1 + n_y * xdim1_opensbliblock00Kernel002*1 + n_z * xdim1_opensbliblock00Kernel002 * ydim1_opensbliblock00Kernel002*1);
         const ACC<double> detJ_B0(xdim2_opensbliblock00Kernel002, ydim2_opensbliblock00Kernel002, &detJ_B0_p[0] + base2 + n_x*1 + n_y * xdim2_opensbliblock00Kernel002*1 + n_z * xdim2_opensbliblock00Kernel002 * ydim2_opensbliblock00Kernel002*1);

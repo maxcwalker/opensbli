@@ -102,9 +102,9 @@ void ops_par_loop_opensbliblock00Kernel046_execute(ops_kernel_descriptor *desc) 
              ))
       , [=](cl::sycl::nd_item<3> item
       ) [[intel::kernel_args_restrict]] {
-        int n_z = item.get_global_id()[0]+start_2;
-        int n_y = item.get_global_id()[1]+start_1;
-        int n_x = item.get_global_id()[2]+start_0;
+        int n_z = item.get_global_id(0)+start_2;
+        int n_y = item.get_global_id(1)+start_1;
+        int n_x = item.get_global_id(2)+start_0;
         const ACC<double> u2_B0(xdim0_opensbliblock00Kernel046, ydim0_opensbliblock00Kernel046, &u2_B0_p[0] + base0 + n_x*1 + n_y * xdim0_opensbliblock00Kernel046*1 + n_z * xdim0_opensbliblock00Kernel046 * ydim0_opensbliblock00Kernel046*1);
         ACC<double> wk10_B0(xdim1_opensbliblock00Kernel046, ydim1_opensbliblock00Kernel046, &wk10_B0_p[0] + base1 + n_x*1 + n_y * xdim1_opensbliblock00Kernel046*1 + n_z * xdim1_opensbliblock00Kernel046 * ydim1_opensbliblock00Kernel046*1);
         //USER CODE

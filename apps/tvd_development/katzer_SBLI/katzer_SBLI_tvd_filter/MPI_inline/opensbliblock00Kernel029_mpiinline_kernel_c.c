@@ -20,21 +20,13 @@ void opensbliblock00Kernel029_c_wrapper(
       ptr_double D11_B0 = { D11_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel029*1, xdim0_opensbliblock00Kernel029};
       ptr_double detJ_B0 = { detJ_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel029*1, xdim1_opensbliblock00Kernel029};
       
-   OPS_ACC(D11_B0, -1,0) = OPS_ACC(D11_B0, 1,0);
+   OPS_ACC(D11_B0, 1,0) = OPS_ACC(D11_B0, -1,0);
 
-   OPS_ACC(detJ_B0, -1,0) = OPS_ACC(detJ_B0, 1,0);
+   OPS_ACC(detJ_B0, 1,0) = OPS_ACC(detJ_B0, -1,0);
 
-   OPS_ACC(D11_B0, -2,0) = OPS_ACC(D11_B0, 2,0);
+   OPS_ACC(D11_B0, 2,0) = OPS_ACC(D11_B0, -2,0);
 
-   OPS_ACC(detJ_B0, -2,0) = OPS_ACC(detJ_B0, 2,0);
-
-   OPS_ACC(D11_B0, -3,0) = OPS_ACC(D11_B0, 3,0);
-
-   OPS_ACC(detJ_B0, -3,0) = OPS_ACC(detJ_B0, 3,0);
-
-   OPS_ACC(D11_B0, -4,0) = OPS_ACC(D11_B0, 4,0);
-
-   OPS_ACC(detJ_B0, -4,0) = OPS_ACC(detJ_B0, 4,0);
+   OPS_ACC(detJ_B0, 2,0) = OPS_ACC(detJ_B0, -2,0);
 
 
     }

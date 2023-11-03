@@ -25,12 +25,12 @@ void ops_par_loop_opensbliblock00Kernel029_execute(ops_kernel_descriptor *desc) 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,2,range,2)) return;
+  if (!ops_checkpointing_before(args,2,range,3)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,2,"opensbliblock00Kernel029");
-    block->instance->OPS_kernels[2].count++;
+    ops_timing_realloc(block->instance,3,"opensbliblock00Kernel029");
+    block->instance->OPS_kernels[3].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -52,6 +52,7 @@ void ops_par_loop_opensbliblock00Kernel029_execute(ops_kernel_descriptor *desc) 
   #else
   if (compute_ranges(args, 2,block, range, start, end, arg_idx) < 0) return;
   #endif
+
 
 
   //initialize global variable with the dimension of dats
@@ -76,7 +77,7 @@ void ops_par_loop_opensbliblock00Kernel029_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[2].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[3].mpi_time += __t1-__t2;
   }
 
   #pragma omp parallel for
@@ -95,28 +96,20 @@ void ops_par_loop_opensbliblock00Kernel029_execute(ops_kernel_descriptor *desc) 
       ACC<double> D11_B0(xdim0_opensbliblock00Kernel029, D11_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel029*1);
       ACC<double> detJ_B0(xdim1_opensbliblock00Kernel029, detJ_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel029*1);
       
-   D11_B0(-1,0) = D11_B0(1,0);
+   D11_B0(1,0) = D11_B0(-1,0);
 
-   detJ_B0(-1,0) = detJ_B0(1,0);
+   detJ_B0(1,0) = detJ_B0(-1,0);
 
-   D11_B0(-2,0) = D11_B0(2,0);
+   D11_B0(2,0) = D11_B0(-2,0);
 
-   detJ_B0(-2,0) = detJ_B0(2,0);
-
-   D11_B0(-3,0) = D11_B0(3,0);
-
-   detJ_B0(-3,0) = detJ_B0(3,0);
-
-   D11_B0(-4,0) = D11_B0(4,0);
-
-   detJ_B0(-4,0) = detJ_B0(4,0);
+   detJ_B0(2,0) = detJ_B0(-2,0);
 
 
     }
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[2].time += __t2-__t1;
+    block->instance->OPS_kernels[3].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_host(args, 2);
@@ -127,9 +120,9 @@ void ops_par_loop_opensbliblock00Kernel029_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[2].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[2].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[2].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[3].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[3].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[3].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
@@ -137,29 +130,9 @@ void ops_par_loop_opensbliblock00Kernel029_execute(ops_kernel_descriptor *desc) 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel029(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1) {
-  ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
-  desc->name = name;
-  desc->block = block;
-  desc->dim = dim;
-  desc->device = 0;
-  desc->index = 2;
-  desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 2;
-  for ( int i=0; i<4; i++ ){
-    desc->range[i] = range[i];
-    desc->orig_range[i] = range[i];
-    desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
-  }
-  desc->nargs = 2;
-  desc->args = (ops_arg*)ops_malloc(2*sizeof(ops_arg));
-  desc->args[0] = arg0;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
-  desc->args[1] = arg1;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
-  desc->function = ops_par_loop_opensbliblock00Kernel029_execute;
-  if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,2,"opensbliblock00Kernel029");
-  }
-  ops_enqueue_kernel(desc);
+  ops_arg args[2] = { arg0, arg1 };
+
+  //create kernel descriptor and pass it to ops_enqueue_kernel
+  create_kerneldesc_and_enque(name, args, 2, 3, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel029_execute);
 }
 #endif

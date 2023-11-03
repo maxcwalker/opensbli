@@ -25,6 +25,7 @@ extern double TENO_CT;
 extern double Twall;
 extern double a;
 extern double b;
+extern double b_f;
 extern double beta_0;
 extern int block0np0;
 extern int block0np1;
@@ -48,7 +49,6 @@ extern double invRefT;
 extern double inv_gamma_m1;
 extern double invgama;
 extern double invgamma_m1;
-extern double k_0;
 extern int niter;
 extern double omega_0;
 extern double omega_1;
@@ -127,6 +127,10 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"b")) {
     #pragma omp target enter data map(to:b)
+  }
+  else
+  if (!strcmp(name,"b_f")) {
+    #pragma omp target enter data map(to:b_f)
   }
   else
   if (!strcmp(name,"beta_0")) {
@@ -221,10 +225,6 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:invgamma_m1)
   }
   else
-  if (!strcmp(name,"k_0")) {
-    #pragma omp target enter data map(to:k_0)
-  }
-  else
   if (!strcmp(name,"niter")) {
     #pragma omp target enter data map(to:niter)
   }
@@ -298,15 +298,15 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel062_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel063_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel064_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel003_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel005_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel006_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel007_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel008_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel013_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel012_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel010_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel014_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel018_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel020_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel012_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel025_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel009_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel028_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel022_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel000_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel001_ompoffload_kernel.cpp"

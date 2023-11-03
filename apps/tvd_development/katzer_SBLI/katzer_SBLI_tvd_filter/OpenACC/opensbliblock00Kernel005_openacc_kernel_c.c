@@ -103,9 +103,7 @@ void opensbliblock00Kernel005_c_wrapper(
       int arg_idx[] = {arg_idx0+n_x, arg_idx1+n_y};
       const ptr_double ptr0 = {  p_a0 + n_x*1*1 + n_y*xdim0_opensbliblock00Kernel005*1*1, xdim0_opensbliblock00Kernel005};
       ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel005*1*1, xdim1_opensbliblock00Kernel005};
-      opensbliblock00Kernel005( ptr0,
-          ptr1,arg_idx );
-
+      opensbliblock00Kernel005( ptr0, ptr1,arg_idx);
     }
   }
 }

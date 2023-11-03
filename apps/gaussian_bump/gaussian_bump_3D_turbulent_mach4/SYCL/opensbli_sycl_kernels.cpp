@@ -43,6 +43,8 @@ cl::sycl::buffer<double,1> *a_p=nullptr;
 extern double a;
 cl::sycl::buffer<double,1> *b_p=nullptr;
 extern double b;
+cl::sycl::buffer<double,1> *b_f_p=nullptr;
+extern double b_f;
 cl::sycl::buffer<double,1> *beta_0_p=nullptr;
 extern double beta_0;
 cl::sycl::buffer<int,1> *block0np0_p=nullptr;
@@ -89,8 +91,6 @@ cl::sycl::buffer<double,1> *invgama_p=nullptr;
 extern double invgama;
 cl::sycl::buffer<double,1> *invgamma_m1_p=nullptr;
 extern double invgamma_m1;
-cl::sycl::buffer<double,1> *k_0_p=nullptr;
-extern double k_0;
 cl::sycl::buffer<int,1> *niter_p=nullptr;
 extern int niter;
 cl::sycl::buffer<double,1> *omega_0_p=nullptr;
@@ -238,6 +238,14 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
   if (!strcmp(name,"b")) {
     if (b_p == nullptr) b_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
     auto accessor = (*b_p).get_access<cl::sycl::access::mode::write>();
+    for ( int d=0; d<dim; d++ ){
+      accessor[d] = ((double*)dat)[d];
+    }
+  }
+  else
+  if (!strcmp(name,"b_f")) {
+    if (b_f_p == nullptr) b_f_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
+    auto accessor = (*b_f_p).get_access<cl::sycl::access::mode::write>();
     for ( int d=0; d<dim; d++ ){
       accessor[d] = ((double*)dat)[d];
     }
@@ -427,14 +435,6 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     }
   }
   else
-  if (!strcmp(name,"k_0")) {
-    if (k_0_p == nullptr) k_0_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
-    auto accessor = (*k_0_p).get_access<cl::sycl::access::mode::write>();
-    for ( int d=0; d<dim; d++ ){
-      accessor[d] = ((double*)dat)[d];
-    }
-  }
-  else
   if (!strcmp(name,"niter")) {
     if (niter_p == nullptr) niter_p = new cl::sycl::buffer<int,1>(cl::sycl::range<1>(dim));
     auto accessor = (*niter_p).get_access<cl::sycl::access::mode::write>();
@@ -564,15 +564,15 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
 #include "opensbliblock00Kernel062_sycl_kernel.cpp"
 #include "opensbliblock00Kernel063_sycl_kernel.cpp"
 #include "opensbliblock00Kernel064_sycl_kernel.cpp"
+#include "opensbliblock00Kernel003_sycl_kernel.cpp"
 #include "opensbliblock00Kernel005_sycl_kernel.cpp"
-#include "opensbliblock00Kernel006_sycl_kernel.cpp"
-#include "opensbliblock00Kernel007_sycl_kernel.cpp"
-#include "opensbliblock00Kernel008_sycl_kernel.cpp"
-#include "opensbliblock00Kernel013_sycl_kernel.cpp"
+#include "opensbliblock00Kernel012_sycl_kernel.cpp"
+#include "opensbliblock00Kernel010_sycl_kernel.cpp"
+#include "opensbliblock00Kernel014_sycl_kernel.cpp"
 #include "opensbliblock00Kernel018_sycl_kernel.cpp"
 #include "opensbliblock00Kernel020_sycl_kernel.cpp"
-#include "opensbliblock00Kernel012_sycl_kernel.cpp"
-#include "opensbliblock00Kernel025_sycl_kernel.cpp"
+#include "opensbliblock00Kernel009_sycl_kernel.cpp"
+#include "opensbliblock00Kernel028_sycl_kernel.cpp"
 #include "opensbliblock00Kernel022_sycl_kernel.cpp"
 #include "opensbliblock00Kernel000_sycl_kernel.cpp"
 #include "opensbliblock00Kernel001_sycl_kernel.cpp"

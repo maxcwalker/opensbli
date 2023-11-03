@@ -26,76 +26,29 @@ void opensbliblock00Kernel022_c_wrapper(
       ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel022*1, xdim2_opensbliblock00Kernel022};
       ptr_double rhou1_B0 = { rhou1_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel022*1, xdim3_opensbliblock00Kernel022};
       
-   double ab = 0.0;
-   double pb = 0.0;
-   double rhob = 0.0;
-   double ub0 = 0.0;
-   double ub1 = 0.0;
-   rhob = OPS_ACC(rho_B0, 0,0);
+   OPS_ACC(rho_B0, 0,0) = OPS_ACC(rho_B0, -1,0);
 
-   ub0 = fabs(OPS_ACC(rhou0_B0, 0,0)/OPS_ACC(rho_B0, 0,0));
+   OPS_ACC(rhou0_B0, 0,0) = OPS_ACC(rhou0_B0, -1,0);
 
-   ub1 = fabs(OPS_ACC(rhou1_B0, 0,0)/OPS_ACC(rho_B0, 0,0));
+   OPS_ACC(rhou1_B0, 0,0) = OPS_ACC(rhou1_B0, -1,0);
 
-   pb = (-1 + gama)*(-0.5*((ub0*ub0) + (ub1*ub1))*rhob + OPS_ACC(rhoE_B0, 0,0));
+   OPS_ACC(rhoE_B0, 0,0) = OPS_ACC(rhoE_B0, -1,0);
 
-   ab = sqrt(gama*pb/rhob);
+   OPS_ACC(rho_B0, 1,0) = OPS_ACC(rho_B0, -1,0);
 
-   OPS_ACC(rho_B0, 0,0) = ((ub0 >= ab) ? (
-   OPS_ACC(rho_B0, -1,0)
-)
-: (
-   OPS_ACC(rho_B0, 0,0)
-));
+   OPS_ACC(rhou0_B0, 1,0) = OPS_ACC(rhou0_B0, -1,0);
 
-   OPS_ACC(rhou0_B0, 0,0) = ((ub0 >= ab) ? (
-   OPS_ACC(rhou0_B0, -1,0)
-)
-: (
-   OPS_ACC(rhou0_B0, 0,0)
-));
+   OPS_ACC(rhou1_B0, 1,0) = OPS_ACC(rhou1_B0, -1,0);
 
-   OPS_ACC(rhou1_B0, 0,0) = ((ub0 >= ab) ? (
-   OPS_ACC(rhou1_B0, -1,0)
-)
-: (
-   OPS_ACC(rhou1_B0, 0,0)
-));
+   OPS_ACC(rhoE_B0, 1,0) = OPS_ACC(rhoE_B0, -1,0);
 
-   OPS_ACC(rhoE_B0, 0,0) = ((ub0 >= ab) ? (
-   OPS_ACC(rhoE_B0, -1,0)
-)
-: (
-   OPS_ACC(rhoE_B0, 0,0)
-));
+   OPS_ACC(rho_B0, 2,0) = OPS_ACC(rho_B0, -1,0);
 
-   OPS_ACC(rhoE_B0, -1,0) = ((ub0 >= ab) ? (
-   OPS_ACC(rhoE_B0, -1,0)
-)
-: (
-   OPS_ACC(rhoE_B0, 0,0)
-));
+   OPS_ACC(rhou0_B0, 2,0) = OPS_ACC(rhou0_B0, -1,0);
 
-   OPS_ACC(rhoE_B0, -2,0) = ((ub0 >= ab) ? (
-   OPS_ACC(rhoE_B0, -2,0)
-)
-: (
-   OPS_ACC(rhoE_B0, 0,0)
-));
+   OPS_ACC(rhou1_B0, 2,0) = OPS_ACC(rhou1_B0, -1,0);
 
-   OPS_ACC(rhoE_B0, -3,0) = ((ub0 >= ab) ? (
-   OPS_ACC(rhoE_B0, -3,0)
-)
-: (
-   OPS_ACC(rhoE_B0, 0,0)
-));
-
-   OPS_ACC(rhoE_B0, -4,0) = ((ub0 >= ab) ? (
-   OPS_ACC(rhoE_B0, -4,0)
-)
-: (
-   OPS_ACC(rhoE_B0, 0,0)
-));
+   OPS_ACC(rhoE_B0, 2,0) = OPS_ACC(rhoE_B0, -1,0);
 
 
     }

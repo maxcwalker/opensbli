@@ -331,9 +331,9 @@ void ops_par_loop_opensbliblock00Kernel056_execute(ops_kernel_descriptor *desc) 
              ))
       , [=](cl::sycl::nd_item<3> item
       ) [[intel::kernel_args_restrict]] {
-        int n_z = item.get_global_id()[0]+start_2;
-        int n_y = item.get_global_id()[1]+start_1;
-        int n_x = item.get_global_id()[2]+start_0;
+        int n_z = item.get_global_id(0)+start_2;
+        int n_y = item.get_global_id(1)+start_1;
+        int n_x = item.get_global_id(2)+start_0;
         int idx[] = {arg_idx_0+n_x, arg_idx_1+n_y, arg_idx_2+n_z};
         const ACC<double> D00_B0(xdim0_opensbliblock00Kernel056, ydim0_opensbliblock00Kernel056, &D00_B0_p[0] + base0 + n_x*1 + n_y * xdim0_opensbliblock00Kernel056*1 + n_z * xdim0_opensbliblock00Kernel056 * ydim0_opensbliblock00Kernel056*1);
         const ACC<double> D01_B0(xdim1_opensbliblock00Kernel056, ydim1_opensbliblock00Kernel056, &D01_B0_p[0] + base1 + n_x*1 + n_y * xdim1_opensbliblock00Kernel056*1 + n_z * xdim1_opensbliblock00Kernel056 * ydim1_opensbliblock00Kernel056*1);
@@ -621,24 +621,24 @@ void ops_par_loop_opensbliblock00Kernel056_execute(ops_kernel_descriptor *desc) 
 
    d1_mu_dz = -(1.0/12.0)*(-mu_B0(0,0,-2) - 8*mu_B0(0,0,1) + 8*mu_B0(0,0,-1) + mu_B0(0,0,2))*invDelta2block0_sycl[0];
 
-    d2_u0_dz = ((1.0/12.0))*(-u0_B0(0,0,-2) - u0_B0(0,0,2) - 30*u0_B0(0,0,0) + 16*u0_B0(0,0,1) +
-      16*u0_B0(0,0,-1))*inv2Delta2block0_sycl[0];
+    d2_u0_dz = -(1.0/12.0)*(-16*u0_B0(0,0,1) - 16*u0_B0(0,0,-1) + 30*u0_B0(0,0,0) + u0_B0(0,0,-2) +
+      u0_B0(0,0,2))*inv2Delta2block0_sycl[0];
 
-    d2_u1_dz = -(1.0/12.0)*(-16*u1_B0(0,0,1) - 16*u1_B0(0,0,-1) + 30*u1_B0(0,0,0) + u1_B0(0,0,-2) +
-      u1_B0(0,0,2))*inv2Delta2block0_sycl[0];
+    d2_u1_dz = ((1.0/12.0))*(-u1_B0(0,0,-2) - u1_B0(0,0,2) - 30*u1_B0(0,0,0) + 16*u1_B0(0,0,1) +
+      16*u1_B0(0,0,-1))*inv2Delta2block0_sycl[0];
 
     d2_u2_dz = -(1.0/12.0)*(-16*u2_B0(0,0,1) - 16*u2_B0(0,0,-1) + 30*u2_B0(0,0,0) + u2_B0(0,0,-2) +
       u2_B0(0,0,2))*inv2Delta2block0_sycl[0];
 
-   d1_wk0_dz = ((1.0/12.0))*(-wk0_B0(0,0,2) - 8*wk0_B0(0,0,-1) + 8*wk0_B0(0,0,1) + wk0_B0(0,0,-2))*invDelta2block0_sycl[0];
+   d1_wk0_dz = -(1.0/12.0)*(-wk0_B0(0,0,-2) - 8*wk0_B0(0,0,1) + 8*wk0_B0(0,0,-1) + wk0_B0(0,0,2))*invDelta2block0_sycl[0];
 
    d1_wk1_dz = -(1.0/12.0)*(-wk1_B0(0,0,-2) - 8*wk1_B0(0,0,1) + 8*wk1_B0(0,0,-1) + wk1_B0(0,0,2))*invDelta2block0_sycl[0];
 
-   d1_wk2_dz = ((1.0/12.0))*(-wk2_B0(0,0,2) - 8*wk2_B0(0,0,-1) + 8*wk2_B0(0,0,1) + wk2_B0(0,0,-2))*invDelta2block0_sycl[0];
+   d1_wk2_dz = -(1.0/12.0)*(-wk2_B0(0,0,-2) - 8*wk2_B0(0,0,1) + 8*wk2_B0(0,0,-1) + wk2_B0(0,0,2))*invDelta2block0_sycl[0];
 
    d1_wk4_dz = ((1.0/12.0))*(-wk4_B0(0,0,2) - 8*wk4_B0(0,0,-1) + 8*wk4_B0(0,0,1) + wk4_B0(0,0,-2))*invDelta2block0_sycl[0];
 
-   d1_wk5_dz = ((1.0/12.0))*(-wk5_B0(0,0,2) - 8*wk5_B0(0,0,-1) + 8*wk5_B0(0,0,1) + wk5_B0(0,0,-2))*invDelta2block0_sycl[0];
+   d1_wk5_dz = -(1.0/12.0)*(-wk5_B0(0,0,-2) - 8*wk5_B0(0,0,1) + 8*wk5_B0(0,0,-1) + wk5_B0(0,0,2))*invDelta2block0_sycl[0];
 
    d1_wk6_dz = -(1.0/12.0)*(-wk6_B0(0,0,-2) - 8*wk6_B0(0,0,1) + 8*wk6_B0(0,0,-1) + wk6_B0(0,0,2))*invDelta2block0_sycl[0];
 

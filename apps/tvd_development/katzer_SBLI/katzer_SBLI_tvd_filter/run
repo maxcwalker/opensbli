@@ -1,0 +1,5 @@
+rm -rf *.h *.cpp *.h5
+python katzer_SBLI_tvd_filter.py
+make clean
+make opensbli_seq
+./opensbli_seq

@@ -127,12 +127,12 @@ void ops_par_loop_opensbliblock00Kernel063_execute(ops_kernel_descriptor *desc) 
 
       auto Minf_sycl = (*Minf_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto Twall_sycl = (*Twall_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto b_f_sycl = (*b_f_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto beta_0_sycl = (*beta_0_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto dt_sycl = (*dt_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto gama_sycl = (*gama_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto inv2Minf_sycl = (*inv2Minf_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto inv_gamma_m1_sycl = (*inv_gamma_m1_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto k_0_sycl = (*k_0_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto omega_0_sycl = (*omega_0_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto omega_1_sycl = (*omega_1_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto omega_2_sycl = (*omega_2_p).template get_access<cl::sycl::access::mode::read>(cgh);
@@ -154,9 +154,9 @@ void ops_par_loop_opensbliblock00Kernel063_execute(ops_kernel_descriptor *desc) 
              ))
       , [=](cl::sycl::nd_item<3> item
       ) [[intel::kernel_args_restrict]] {
-        int n_z = item.get_global_id()[0]+start_2;
-        int n_y = item.get_global_id()[1]+start_1;
-        int n_x = item.get_global_id()[2]+start_0;
+        int n_z = item.get_global_id(0)+start_2;
+        int n_y = item.get_global_id(1)+start_1;
+        int n_x = item.get_global_id(2)+start_0;
         const ACC<double> x0_B0(xdim1_opensbliblock00Kernel063, ydim1_opensbliblock00Kernel063, &x0_B0_p[0] + base1 + n_x*1 + n_y * xdim1_opensbliblock00Kernel063*1 + n_z * xdim1_opensbliblock00Kernel063 * ydim1_opensbliblock00Kernel063*1);
         const ACC<double> x2_B0(xdim2_opensbliblock00Kernel063, ydim2_opensbliblock00Kernel063, &x2_B0_p[0] + base2 + n_x*1 + n_y * xdim2_opensbliblock00Kernel063*1 + n_z * xdim2_opensbliblock00Kernel063 * ydim2_opensbliblock00Kernel063*1);
         ACC<double> rhoE_B0(xdim3_opensbliblock00Kernel063, ydim3_opensbliblock00Kernel063, &rhoE_B0_p[0] + base3 + n_x*1 + n_y * xdim3_opensbliblock00Kernel063*1 + n_z * xdim3_opensbliblock00Kernel063 * ydim3_opensbliblock00Kernel063*1);
@@ -192,7 +192,7 @@ void ops_par_loop_opensbliblock00Kernel063_execute(ops_kernel_descriptor *desc) 
    double u24 = 0.0;
     rhou1_B0(0,0,0) = (cl::sycl::sin(dt_sycl[0]*omega_0_sycl[0]* *iter) + cl::sycl::sin(dt_sycl[0]*omega_1_sycl[0]* *iter + phi_0_sycl[0]) + cl::sycl::sin(dt_sycl[0]*omega_2_sycl[0]* *iter + phi_1_sycl[0]) +
       cl::sycl::sin(dt_sycl[0]*omega_3_sycl[0]* *iter + phi_2_sycl[0]))*tripA_sycl[0]*rho_B0(0,0,0)*cl::sycl::exp(-((-xts_sycl[0] + x0_B0(0,0,0))*(-xts_sycl[0] +
-      x0_B0(0,0,0)))*k_0_sycl[0])*cl::sycl::sin(beta_0_sycl[0]*x2_B0(0,0,0));
+      x0_B0(0,0,0)))*b_f_sycl[0])*cl::sycl::sin(beta_0_sycl[0]*x2_B0(0,0,0));
 
    rhou0_B0(0,0,0) = 0.0;
 

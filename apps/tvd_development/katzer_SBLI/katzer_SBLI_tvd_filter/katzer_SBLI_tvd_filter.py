@@ -11,7 +11,7 @@ simulation_parameters = {
 'Re'        :   '950.0',
 'Twall'     :   '1.67619431',
 'dt'        :   '0.04',
-'niter'     :   '250000',
+'niter'     :   '25000',
 'block0np0'     :   '500',
 'block0np1'     :   '250',
 'Delta0block0'      :   '400.0/(block0np0-1)',
@@ -29,20 +29,21 @@ simulation_parameters = {
 'lambda1_TVD'       : 'dt/Delta1block0',
 'inv_rfact0_block0' : '1.0/Delta0block0',
 'inv_rfact1_block0' : '1.0/Delta1block0',
+'kappa_TVD' : '1.1',
 }
 
 ndim = 2
 # Direct application of shock-capturing scheme, otherwise central scheme with filter-step example
 weno = False
 teno = False
-TVD = True
+TVD = False
 # Instatiate equation classes
 eq = EinsteinEquation()
 constants = ["Re", "Pr", "gama", "Minf", "SuthT", "RefT"]
 # Define the problem
 if weno or teno:
     if weno:
-        sc1 = "**{\'scheme\':\'Weno\'}"
+        sc1 = "**{\'scheme\':\'Central\'}"
     else:
         sc1 = "**{\'scheme\':\'Teno\'}"
     # Define the compresible Navier-Stokes equations in Einstein notation.
@@ -100,18 +101,18 @@ simulation_eq.apply_metrics(metriceq)
 store_sensor = True
 # Spatial scheme
 schemes = {}
-if weno:
-    Avg = SimpleAverage([0, 1])
-    # LF = LFWeno(order=7, formulation='Z', averaging=Avg, flux_type='LLF')
-    LF = HLLCWeno(order=5, formulation='Z', averaging=Avg, flux_type='HLLC-LM')
-    # Add to schemes
-    schemes[LF.name] = LF
-elif teno:
-    Avg = SimpleAverage([0, 1])
-    # LF = LFTeno(order=5, averaging=Avg, flux_type='LLF')
-    LF = HLLCTeno(order=6, averaging=Avg, flux_type='HLLC-LM')
-    # Add to schemes
-    schemes[LF.name] = LF   
+# if weno:
+#     Avg = SimpleAverage([0, 1])
+#     # LF = LFWeno(order=7, formulation='Z', averaging=Avg, flux_type='LLF')
+#     LF = HLLCWeno(order=5, formulation='Z', averaging=Avg, flux_type='HLLC-LM')
+#     # Add to schemes
+#     schemes[LF.name] = LF
+# elif teno:
+#     Avg = SimpleAverage([0, 1])
+#     # LF = LFTeno(order=5, averaging=Avg, flux_type='LLF')
+#     LF = HLLCTeno(order=6, averaging=Avg, flux_type='HLLC-LM')
+#     # Add to schemes
+#     schemes[LF.name] = LF   
 # Central scheme 
 fns = 'u0 u1 T'
 cent = StoreSome(4, fns)
@@ -158,6 +159,7 @@ rhoE = parse_expr("Eq(DataObject(rhoE), Piecewise((1.0590824, (x0)>40.0), (0.946
 
 upper_eqns = [x_loc, rho, rhou0, rhou1, rhoE]
 boundaries[direction][side] = DirichletBC(direction, side, upper_eqns)
+# boundaries[direction][side] = ZeroGradientOutletBC(1, 1)
 
 block.set_block_boundaries(boundaries)
 
@@ -176,7 +178,7 @@ coordinate_evaluation = [gridx0, gridx1]
 initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)
 
 kwargs = {'iotype': "Write"}
-h5 = iohdf5(**kwargs)
+h5 = iohdf5(save_every=100, **kwargs)
 h5.add_arrays(simulation_eq.time_advance_arrays)
 h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('D11')]) #, DataObject('kappa'), DataObject('WENO_filter')
 block.setio(h5)
@@ -184,13 +186,13 @@ block.setio(h5)
 # Set equations on the block and discretise
 block.set_equations([constituent, simulation_eq, initial, metriceq])
 # WENO/TVD filter if not using direct application of WENO/TENO
-if not weno and not teno:
-    if TVD:
-        TVD_filter = TVDFilter(block, airfoil=False, optimize=True)
-        block.set_equations(TVD_filter.equation_classes)
-    else:
-        WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, metrics=metriceq)
-        block.set_equations(WF.equation_classes)  
+# if not weno and not teno:
+#     if TVD:
+# TVD_filter = TVDFilter(block, airfoil=False, optimize=True, metrics=metriceq)
+# block.set_equations(TVD_filter.equation_classes)
+#     else:
+WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, metrics=metriceq)
+block.set_equations(WF.equation_classes)  
 
 
 block.discretise()
@@ -200,4 +202,4 @@ SimulationDataType.set_datatype(Double)
 OPSC(alg)
 # Add the simulation constants to the OPS C code
 substitute_simulation_parameters(simulation_parameters.keys(), simulation_parameters.values())
-print_iteration_ops(NaN_check='rho')
+print_iteration_ops(every=1,NaN_check='rho')
