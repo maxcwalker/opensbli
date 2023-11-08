@@ -144,13 +144,13 @@ void opensbliblock00Kernel040_c_wrapper(
    double ws_lambda_11 = 0.0;
    double ws_lambda_22 = 0.0;
    double ws_lambda_33 = 0.0;
-   AVG_0_u1 = ((1.0/2.0))*(OPS_ACC(u1_B0, 0,0) + OPS_ACC(u1_B0, -1,0));
-
-   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0,0) + OPS_ACC(a_B0, -1,0));
-
    AVG_0_rho = ((1.0/2.0))*(OPS_ACC(rho_B0, 0,0) + OPS_ACC(rho_B0, -1,0));
 
+   AVG_0_u1 = ((1.0/2.0))*(OPS_ACC(u1_B0, 0,0) + OPS_ACC(u1_B0, -1,0));
+
    AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0,0) + OPS_ACC(u0_B0, -1,0));
+
+   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0,0) + OPS_ACC(a_B0, -1,0));
 
    AVG_0_detJ = ((1.0/2.0))*(OPS_ACC(detJ_B0, 0,0) + OPS_ACC(detJ_B0, 1,0));
 
@@ -201,13 +201,13 @@ void opensbliblock00Kernel040_c_wrapper(
     alpha_30 = (-OPS_ACC(rho_B0, -1,0) + OPS_ACC(rho_B0, 0,0))*AVG_0_0_LEV_30 + (-OPS_ACC(rhoE_B0, -1,0) + OPS_ACC(rhoE_B0, 0,0))*AVG_0_0_LEV_33 +
       (-OPS_ACC(rhou0_B0, -1,0) + OPS_ACC(rhou0_B0, 0,0))*AVG_0_0_LEV_31 + (-OPS_ACC(rhou1_B0, -1,0) + OPS_ACC(rhou1_B0, 0,0))*AVG_0_0_LEV_32;
 
-   AVG_0_u1 = ((1.0/2.0))*(OPS_ACC(u1_B0, 0,0) + OPS_ACC(u1_B0, 1,0));
-
-   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0,0) + OPS_ACC(a_B0, 1,0));
-
    AVG_0_rho = ((1.0/2.0))*(OPS_ACC(rho_B0, 0,0) + OPS_ACC(rho_B0, 1,0));
 
+   AVG_0_u1 = ((1.0/2.0))*(OPS_ACC(u1_B0, 0,0) + OPS_ACC(u1_B0, 1,0));
+
    AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0,0) + OPS_ACC(u0_B0, 1,0));
+
+   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0,0) + OPS_ACC(a_B0, 1,0));
 
    AVG_0_detJ = ((1.0/2.0))*(OPS_ACC(detJ_B0, 0,0) + OPS_ACC(detJ_B0, 1,0));
 
@@ -296,13 +296,13 @@ void opensbliblock00Kernel040_c_wrapper(
     AVG_0_REV_33 = 0.707106781186547*(((AVG_0_a*AVG_0_a) + ((1.0/2.0))*((AVG_0_u0*AVG_0_u0) +
       (AVG_0_u1*AVG_0_u1))*gamma_m1)*invgamma_m1 - AVG_0_a*AVG_0_u0)*AVG_0_rho*inv_AVG_a;
 
-   AVG_0_u1 = ((1.0/2.0))*(OPS_ACC(u1_B0, 1,0) + OPS_ACC(u1_B0, 2,0));
-
-   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 1,0) + OPS_ACC(a_B0, 2,0));
-
    AVG_0_rho = ((1.0/2.0))*(OPS_ACC(rho_B0, 1,0) + OPS_ACC(rho_B0, 2,0));
 
+   AVG_0_u1 = ((1.0/2.0))*(OPS_ACC(u1_B0, 1,0) + OPS_ACC(u1_B0, 2,0));
+
    AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 1,0) + OPS_ACC(u0_B0, 2,0));
+
+   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 1,0) + OPS_ACC(a_B0, 2,0));
 
    AVG_0_detJ = ((1.0/2.0))*(OPS_ACC(detJ_B0, 0,0) + OPS_ACC(detJ_B0, 1,0));
 

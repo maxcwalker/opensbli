@@ -25,15 +25,6 @@ int base[] = {0, 0};
 double* value = NULL;
 detJ_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "detJ_B0");
 }
-ops_dat H_B0;
-{
-int halo_p[] = {5, 5};
-int halo_m[] = {-5, -5};
-int size[] = {block0np0, block0np1};
-int base[] = {0, 0};
-double* value = NULL;
-H_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "H_B0");
-}
 ops_dat kappa_B0;
 {
 int halo_p[] = {5, 5};

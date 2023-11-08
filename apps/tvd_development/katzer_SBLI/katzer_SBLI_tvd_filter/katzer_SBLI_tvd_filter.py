@@ -29,12 +29,12 @@ simulation_parameters = {
 'lambda1_TVD'       : 'dt/Delta1block0',
 'inv_rfact0_block0' : '1.0/Delta0block0',
 'inv_rfact1_block0' : '1.0/Delta1block0',
-'kappa_TVD' : '1.1',
+'kappa_TVD' : '1.2',
 }
 
 ndim = 2
 # Direct application of shock-capturing scheme, otherwise central scheme with filter-step example
-weno = False
+weno = True
 teno = False
 TVD = False
 # Instatiate equation classes
@@ -178,7 +178,7 @@ coordinate_evaluation = [gridx0, gridx1]
 initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)
 
 kwargs = {'iotype': "Write"}
-h5 = iohdf5(save_every=100, **kwargs)
+h5 = iohdf5(save_every=2500, **kwargs)
 h5.add_arrays(simulation_eq.time_advance_arrays)
 h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('D11')]) #, DataObject('kappa'), DataObject('WENO_filter')
 block.setio(h5)
@@ -188,11 +188,11 @@ block.set_equations([constituent, simulation_eq, initial, metriceq])
 # WENO/TVD filter if not using direct application of WENO/TENO
 # if not weno and not teno:
 #     if TVD:
-# TVD_filter = TVDFilter(block, airfoil=False, optimize=True, metrics=metriceq)
-# block.set_equations(TVD_filter.equation_classes)
+TVD_filter = TVDFilter(block, airfoil=False, optimize=True, metrics=metriceq)
+block.set_equations(TVD_filter.equation_classes)
 #     else:
-WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, metrics=metriceq)
-block.set_equations(WF.equation_classes)  
+# WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, metrics=metriceq)
+# block.set_equations(WF.equation_classes)  
 
 
 block.discretise()
@@ -202,4 +202,4 @@ SimulationDataType.set_datatype(Double)
 OPSC(alg)
 # Add the simulation constants to the OPS C code
 substitute_simulation_parameters(simulation_parameters.keys(), simulation_parameters.values())
-print_iteration_ops(every=1,NaN_check='rho')
+print_iteration_ops(every=100,NaN_check='rho')

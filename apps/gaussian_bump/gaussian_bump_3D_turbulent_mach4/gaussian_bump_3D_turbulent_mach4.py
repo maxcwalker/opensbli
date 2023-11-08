@@ -22,10 +22,10 @@ input_dict = {
     "gama"                 : "1.4", 
     "Minf"                 : "4.0", 
     "Pr"                   : "0.72", 
-    "Re"                   : "1900.0", 
-    "Twall"                : "1.95", 
+    "Re"                   : "4000.0", 
+    "Twall"                : "1.37", 
     "dt"                   : "0.003", 
-    "niter"                : "50000", 
+    "niter"                : "250000", 
     "block0np0"            : "400.0", 
     "block0np1"            : "200.0",
     'block0np2'            : "100", 
@@ -33,7 +33,7 @@ input_dict = {
     "Delta1block0"         : "115.0/(block0np1-1)",
     "Delta2block0"         : "20.0/(block0np2-1)",
     "SuthT"                : "110.4",
-    "RefT"                 : "307.0",
+    "RefT"                 : "439.0",
     "eps"                  : "1e-15",
     "TENO_CT"              : "1e-5",
     "L"                    : "400.0",
@@ -43,17 +43,17 @@ input_dict = {
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
     "epsilon"              : "1.0e-30",
-    "tripA"                : "0.2",
+    "tripA"                : "0.05",
     "xts"                  : "50.0",
     "omega_0"              : "0.1",
-    "omega_1"              : "0.2",
+    "omega_1"              : "0.2", 
     "omega_2"              : "0.4",
-    "omega_3"              : "0.8",
-    "phi_0"              : "1.571",
-    "phi_1"              : "3.141",
-    "phi_2"              : "4.712",
-    "b_f"                  : "0.02",
-    "beta_0"               : "0.314"
+    "omega_3"              : "1.0", 
+    "phi_0"                : "1.571",
+    "phi_1"                : "3.141",
+    "phi_2"                : "4.712",
+    "b_f"                  : "0.002", # was 0.02
+    "beta_0"               : "0.628" #was 0.31
 }
 
 constants = input_dict.keys()

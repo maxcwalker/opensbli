@@ -225,7 +225,7 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel024_hip_kernel.cpp"
 #include "opensbliblock00Kernel004_hip_kernel.cpp"
 #include "opensbliblock00Kernel006_hip_kernel.cpp"
-#include "opensbliblock00Kernel012_hip_kernel.cpp"
+#include "opensbliblock00Kernel013_hip_kernel.cpp"
 #include "opensbliblock00Kernel008_hip_kernel.cpp"
 #include "opensbliblock00Kernel016_hip_kernel.cpp"
 #include "opensbliblock00Kernel003_hip_kernel.cpp"

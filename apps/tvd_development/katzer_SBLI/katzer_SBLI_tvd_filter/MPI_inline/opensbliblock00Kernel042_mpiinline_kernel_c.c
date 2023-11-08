@@ -76,8 +76,8 @@ void opensbliblock00Kernel042_c_wrapper(
    1
 ));
 
-    OPS_ACC(TVD_filter_B0, 0,0) = ((fmax(OPS_ACC(kappa_B0, 0,2), fmax(OPS_ACC(kappa_B0, 0,0), fmax(OPS_ACC(kappa_B0, 0,-1), fmax(OPS_ACC(kappa_B0, 2,0),
-      fmax(OPS_ACC(kappa_B0, 0,1), fmax(OPS_ACC(kappa_B0, -1,0), OPS_ACC(kappa_B0, 1,0))))))) >= Ducros_select) ? (
+    OPS_ACC(TVD_filter_B0, 0,0) = ((fmax(OPS_ACC(kappa_B0, 0,0), fmax(OPS_ACC(kappa_B0, 0,2), fmax(OPS_ACC(kappa_B0, 0,-1), fmax(OPS_ACC(kappa_B0, 0,1),
+      fmax(OPS_ACC(kappa_B0, 2,0), fmax(OPS_ACC(kappa_B0, 1,0), OPS_ACC(kappa_B0, -1,0))))))) >= Ducros_select) ? (
    1
 )
 : (

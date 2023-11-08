@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+import matplotlib.ticker as tkr
 
 
 gama=1.4
@@ -64,26 +65,42 @@ print('T range',np.amax(T),np.amin(T))
 #print(p[100,:])
 
 fig1,ax=plt.subplots()
-CS=ax.contourf(x[50,:,:],y[50,:,:],M[50,:,:],levels=50, cmap=cm.jet)
+CS=ax.contourf(x[50,:,:],y[50,:,:],u[50,:,:],levels=50, cmap=cm.jet)
 divider = make_axes_locatable(ax)
 cax = divider.append_axes("right", size=0.2,pad=0.1)
 cbar=fig1.colorbar(CS, cax=cax)
-cbar.set_label("Mach Number" )
+# cbar.set_label("Mach Number" )
+cbar.set_label("u velocity" )
 ax.set_aspect('equal')
 ax.set_ylim([0,100])
 # ax.set_aspect(1)
 # plt.show()
 #ax.set_ylim([0.0,20])
-plt.savefig('plot_Mach_teno_250000_iter.pdf')
+plt.savefig('contour.pdf')
 
 fig2, ax1 = plt.subplots()
-U=plt.contourf(x[:,1,:], z[:,1,:], u[:,1,:],levels=25, cmap=cm.jet)
+U=plt.contourf(x[:,1,:], z[:,1,:], v[:,1,:],levels=25, cmap=cm.jet)
 cax1 = inset_axes(ax1, width="90%", height="20%", loc='lower center',borderpad=-3)
-ubar=fig2.colorbar(U, orientation='horizontal', cax=cax1)
-ubar.set_label("u velocity" )
+ubar=fig2.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
+ubar.set_label("v velocity" )
 ax1.set_aspect(1)
 fig2.savefig("wall_u_vel_contours.pdf")
 
+fig3, ax2 = plt.subplots()
+ax2.plot(z[:,0,50], v[:,0,50])
+# ax2.text(1, 1.5, '20% amplitude',
+#     verticalalignment='bottom', horizontalalignment='right',
+#     transform=ax.transAxes,
+#     color='black')
+ax2.annotate(f'v={v[0, 0, 50]:.2f}', (z[0, 0, 50], v[0, 0, 50]), xytext=(20, -30),
+            textcoords='offset points', arrowprops=dict(arrowstyle="->"))
+ax2.annotate(f'v={v[99, 0, 50]:.2f}', (z[99, 0, 50], v[99, 0, 50]), xytext=(-30, 30),
+            textcoords='offset points', arrowprops=dict(arrowstyle="->"))
+ax2.set_xlabel(r'along z axis')
+ax2.set_ylabel(r'v velocity')
+ax2.set_title(r'v velocity along z axis at forcing strip location')
+ax2.grid()
+fig3.savefig('v_vel_forcing.pdf',bbox_inches='tight')
 #n_levels=25
 #name= "u"
 #min_val = np.min(u)
@@ -94,5 +111,6 @@ fig2.savefig("wall_u_vel_contours.pdf")
 #self.contour_local(fig, levels, "%s" % name, var)
 #plt.savefig("katzer_%s.pdf" % name, bbox_inches='tight')
 #plt.clf()
+
 
 plt.show()

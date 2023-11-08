@@ -18,7 +18,7 @@
 #include "opensbliblock00Kernel024_mpiinline_kernel_c.c"
 #include "opensbliblock00Kernel004_mpiinline_kernel_c.c"
 #include "opensbliblock00Kernel006_mpiinline_kernel_c.c"
-#include "opensbliblock00Kernel012_mpiinline_kernel_c.c"
+#include "opensbliblock00Kernel013_mpiinline_kernel_c.c"
 #include "opensbliblock00Kernel008_mpiinline_kernel_c.c"
 #include "opensbliblock00Kernel016_mpiinline_kernel_c.c"
 #include "opensbliblock00Kernel003_mpiinline_kernel_c.c"

@@ -20,7 +20,7 @@
 #include "opensbliblock00Kernel024_openacc_kernel_c.c"
 #include "opensbliblock00Kernel004_openacc_kernel_c.c"
 #include "opensbliblock00Kernel006_openacc_kernel_c.c"
-#include "opensbliblock00Kernel012_openacc_kernel_c.c"
+#include "opensbliblock00Kernel013_openacc_kernel_c.c"
 #include "opensbliblock00Kernel008_openacc_kernel_c.c"
 #include "opensbliblock00Kernel016_openacc_kernel_c.c"
 #include "opensbliblock00Kernel003_openacc_kernel_c.c"

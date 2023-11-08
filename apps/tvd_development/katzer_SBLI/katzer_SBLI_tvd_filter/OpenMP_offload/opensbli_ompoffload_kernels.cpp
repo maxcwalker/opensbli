@@ -220,7 +220,7 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel024_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel004_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel006_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel012_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel013_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel008_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel016_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel003_ompoffload_kernel.cpp"

@@ -406,7 +406,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
 #include "opensbliblock00Kernel024_sycl_kernel.cpp"
 #include "opensbliblock00Kernel004_sycl_kernel.cpp"
 #include "opensbliblock00Kernel006_sycl_kernel.cpp"
-#include "opensbliblock00Kernel012_sycl_kernel.cpp"
+#include "opensbliblock00Kernel013_sycl_kernel.cpp"
 #include "opensbliblock00Kernel008_sycl_kernel.cpp"
 #include "opensbliblock00Kernel016_sycl_kernel.cpp"
 #include "opensbliblock00Kernel003_sycl_kernel.cpp"

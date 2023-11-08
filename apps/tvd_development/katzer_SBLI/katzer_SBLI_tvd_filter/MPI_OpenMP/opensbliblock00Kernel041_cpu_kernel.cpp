@@ -252,13 +252,13 @@ void ops_par_loop_opensbliblock00Kernel041_execute(ops_kernel_descriptor *desc) 
    double ws_lambda_11 = 0.0;
    double ws_lambda_22 = 0.0;
    double ws_lambda_33 = 0.0;
-   AVG_1_u1 = ((1.0/2.0))*(u1_B0(0,0) + u1_B0(0,-1));
-
-   AVG_1_a = ((1.0/2.0))*(a_B0(0,0) + a_B0(0,-1));
-
    AVG_1_rho = ((1.0/2.0))*(rho_B0(0,0) + rho_B0(0,-1));
 
+   AVG_1_u1 = ((1.0/2.0))*(u1_B0(0,0) + u1_B0(0,-1));
+
    AVG_1_u0 = ((1.0/2.0))*(u0_B0(0,0) + u0_B0(0,-1));
+
+   AVG_1_a = ((1.0/2.0))*(a_B0(0,0) + a_B0(0,-1));
 
    AVG_1_detJ = ((1.0/2.0))*(detJ_B0(0,0) + detJ_B0(0,1));
 
@@ -309,13 +309,13 @@ void ops_par_loop_opensbliblock00Kernel041_execute(ops_kernel_descriptor *desc) 
     alpha_30 = (-rho_B0(0,-1) + rho_B0(0,0))*AVG_1_1_LEV_30 + (-rhoE_B0(0,-1) + rhoE_B0(0,0))*AVG_1_1_LEV_33 +
       (-rhou0_B0(0,-1) + rhou0_B0(0,0))*AVG_1_1_LEV_31 + (-rhou1_B0(0,-1) + rhou1_B0(0,0))*AVG_1_1_LEV_32;
 
-   AVG_1_u1 = ((1.0/2.0))*(u1_B0(0,0) + u1_B0(0,1));
-
-   AVG_1_a = ((1.0/2.0))*(a_B0(0,0) + a_B0(0,1));
-
    AVG_1_rho = ((1.0/2.0))*(rho_B0(0,0) + rho_B0(0,1));
 
+   AVG_1_u1 = ((1.0/2.0))*(u1_B0(0,0) + u1_B0(0,1));
+
    AVG_1_u0 = ((1.0/2.0))*(u0_B0(0,0) + u0_B0(0,1));
+
+   AVG_1_a = ((1.0/2.0))*(a_B0(0,0) + a_B0(0,1));
 
    AVG_1_detJ = ((1.0/2.0))*(detJ_B0(0,0) + detJ_B0(0,1));
 
@@ -404,13 +404,13 @@ void ops_par_loop_opensbliblock00Kernel041_execute(ops_kernel_descriptor *desc) 
     AVG_1_REV_33 = 0.707106781186547*(((AVG_1_a*AVG_1_a) + ((1.0/2.0))*((AVG_1_u0*AVG_1_u0) +
       (AVG_1_u1*AVG_1_u1))*gamma_m1)*invgamma_m1 - AVG_1_a*AVG_1_u1)*AVG_1_rho*inv_AVG_a;
 
-   AVG_1_u1 = ((1.0/2.0))*(u1_B0(0,1) + u1_B0(0,2));
-
-   AVG_1_a = ((1.0/2.0))*(a_B0(0,1) + a_B0(0,2));
-
    AVG_1_rho = ((1.0/2.0))*(rho_B0(0,1) + rho_B0(0,2));
 
+   AVG_1_u1 = ((1.0/2.0))*(u1_B0(0,1) + u1_B0(0,2));
+
    AVG_1_u0 = ((1.0/2.0))*(u0_B0(0,1) + u0_B0(0,2));
+
+   AVG_1_a = ((1.0/2.0))*(a_B0(0,1) + a_B0(0,2));
 
    AVG_1_detJ = ((1.0/2.0))*(detJ_B0(0,0) + detJ_B0(0,1));
 

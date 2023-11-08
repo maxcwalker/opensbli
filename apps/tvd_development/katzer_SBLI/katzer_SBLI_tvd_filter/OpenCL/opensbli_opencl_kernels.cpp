@@ -503,7 +503,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
 #include "opensbliblock00Kernel024_opencl_kernel.cpp"
 #include "opensbliblock00Kernel004_opencl_kernel.cpp"
 #include "opensbliblock00Kernel006_opencl_kernel.cpp"
-#include "opensbliblock00Kernel012_opencl_kernel.cpp"
+#include "opensbliblock00Kernel013_opencl_kernel.cpp"
 #include "opensbliblock00Kernel008_opencl_kernel.cpp"
 #include "opensbliblock00Kernel016_opencl_kernel.cpp"
 #include "opensbliblock00Kernel003_opencl_kernel.cpp"

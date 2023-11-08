@@ -85,7 +85,7 @@ void ops_par_loop_opensbliblock00Kernel006(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg );
 
-void ops_par_loop_opensbliblock00Kernel012(char const *, ops_block, int , int*,
+void ops_par_loop_opensbliblock00Kernel013(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg,
   ops_arg,
@@ -281,20 +281,20 @@ double rkA[] = {0.0, -2.91549395770192, 0.0};
 dt = 0.04;
 Twall = 1.67619431;
 Minf = 2.0;
-write_output_file = 100;
+write_output_file = 2500;
 HDF5_timing = 0;
+SuthT = 110.4;
 gama = 1.4;
 RefT = 288.0;
-SuthT = 110.4;
-Re = 950.0;
 Pr = 0.72;
+Re = 950.0;
 delta_TVD = 0.500000000000000;
 eps_TVD = 1.00000000000000e-8;
-kappa_TVD = 1.1;
+kappa_TVD = 1.2;
 gamma_m1 = -1 + gama;
 Ducros_select = 0.0500000000000000;
-Lx1 = 115.0;
 by = 5.0;
+Lx1 = 115.0;
 inv2Delta0block0 = 1.0/(Delta0block0*Delta0block0);
 inv2Delta1block0 = 1.0/(Delta1block0*Delta1block0);
 inv2Minf = 1.0/(Minf*Minf);
@@ -436,9 +436,9 @@ ops_timers(&inner_start, &elapsed_inner_start);
 for(iter=start_iter; iter<=start_iter+niter - 1; iter++)
 {
 simulation_time = tstart + dt*((iter - start_iter)+1);
-if(fmod(iter+1, 1) == 0){
+if(fmod(iter+1, 100) == 0){
         ops_timers(&inner_end, &elapsed_inner_end);
-        ops_printf("Iteration: %d. Time-step: %.3e. Simulation time: %.5f. Time/iteration: %lf.\n", iter+1, dt, simulation_time, (elapsed_inner_end - elapsed_inner_start)/1);
+        ops_printf("Iteration: %d. Time-step: %.3e. Simulation time: %.5f. Time/iteration: %lf.\n", iter+1, dt, simulation_time, (elapsed_inner_end - elapsed_inner_start)/100);
         fflush(stdout);
         ops_NaNcheck(rho_B0);
         ops_timers(&inner_start, &elapsed_inner_start);
@@ -487,8 +487,8 @@ ops_par_loop_opensbliblock00Kernel006("CRu1_B0", opensbliblock00, 2, iteration_r
              ops_arg_dat(rhou1_B0, 1, stencil_0_00_00_2, "double", OPS_READ),
              ops_arg_dat(u1_B0, 1, stencil_0_00_00_2, "double", OPS_WRITE));
 
-int iteration_range_12_block0[] = {-2, block0np0 + 2, -2, block0np1 + 2};
-ops_par_loop_opensbliblock00Kernel012("CRp_B0", opensbliblock00, 2, iteration_range_12_block0,
+int iteration_range_13_block0[] = {-2, block0np0 + 2, -2, block0np1 + 2};
+ops_par_loop_opensbliblock00Kernel013("CRp_B0", opensbliblock00, 2, iteration_range_13_block0,
              ops_arg_dat(rhoE_B0, 1, stencil_0_00_00_2, "double", OPS_READ),
              ops_arg_dat(rho_B0, 1, stencil_0_00_00_2, "double", OPS_READ),
              ops_arg_dat(u0_B0, 1, stencil_0_00_00_2, "double", OPS_READ),

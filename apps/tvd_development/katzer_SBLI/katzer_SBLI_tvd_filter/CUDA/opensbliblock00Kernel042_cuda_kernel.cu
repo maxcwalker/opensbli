@@ -42,8 +42,8 @@ ACC<double> &wk0_B0,
    1
 ));
 
-    TVD_filter_B0(0,0) = ((fmax(kappa_B0(0,2), fmax(kappa_B0(0,0), fmax(kappa_B0(0,-1), fmax(kappa_B0(2,0),
-      fmax(kappa_B0(0,1), fmax(kappa_B0(-1,0), kappa_B0(1,0))))))) >= Ducros_select) ? (
+    TVD_filter_B0(0,0) = ((fmax(kappa_B0(0,0), fmax(kappa_B0(0,2), fmax(kappa_B0(0,-1), fmax(kappa_B0(0,1),
+      fmax(kappa_B0(2,0), fmax(kappa_B0(1,0), kappa_B0(-1,0))))))) >= Ducros_select) ? (
    1
 )
 : (

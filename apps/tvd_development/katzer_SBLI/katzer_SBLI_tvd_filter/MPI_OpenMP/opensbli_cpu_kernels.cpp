@@ -64,7 +64,7 @@ void ops_init_backend() {}
 #include "opensbliblock00Kernel024_cpu_kernel.cpp"
 #include "opensbliblock00Kernel004_cpu_kernel.cpp"
 #include "opensbliblock00Kernel006_cpu_kernel.cpp"
-#include "opensbliblock00Kernel012_cpu_kernel.cpp"
+#include "opensbliblock00Kernel013_cpu_kernel.cpp"
 #include "opensbliblock00Kernel008_cpu_kernel.cpp"
 #include "opensbliblock00Kernel016_cpu_kernel.cpp"
 #include "opensbliblock00Kernel003_cpu_kernel.cpp"
