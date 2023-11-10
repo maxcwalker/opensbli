@@ -159,7 +159,7 @@ class KatzerPlot(plotFunctions):
         self.x, self.y = self.extract_coordinates()
         rho, u, v, rhoE, p, T, M, mu = self.extract_flow_variables(group1)
         variables = [rho, u, v, rhoE, p, M, T, mu]
-        names = ["rho", "u", "v", "rho E", "P", "M", "T", "mu"]
+        names = ["rho", "u", "v", "rhoE", "P", "M", "T", "mu"]
 
         # Contour plots
         for var, name in zip(variables, names):

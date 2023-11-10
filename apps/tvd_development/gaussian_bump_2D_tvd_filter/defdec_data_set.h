@@ -7,6 +7,33 @@ int base[] = {0, 0};
 double* value = NULL;
 a_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "a_B0");
 }
+ops_dat D00_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+D00_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "D00_B0");
+}
+ops_dat D01_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+D01_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "D01_B0");
+}
+ops_dat D10_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+D10_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "D10_B0");
+}
 ops_dat D11_B0;
 {
 int halo_p[] = {5, 5};
@@ -24,6 +51,15 @@ int size[] = {block0np0, block0np1};
 int base[] = {0, 0};
 double* value = NULL;
 detJ_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "detJ_B0");
+}
+ops_dat kappa_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+kappa_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "kappa_B0");
 }
 ops_dat mu_B0;
 {
@@ -171,6 +207,69 @@ int base[] = {0, 0};
 double* value = NULL;
 rhou1_RKold_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou1_RKold_B0");
 }
+ops_dat SD000_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+SD000_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "SD000_B0");
+}
+ops_dat SD001_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+SD001_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "SD001_B0");
+}
+ops_dat SD010_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+SD010_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "SD010_B0");
+}
+ops_dat SD011_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+SD011_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "SD011_B0");
+}
+ops_dat SD100_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+SD100_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "SD100_B0");
+}
+ops_dat SD101_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+SD101_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "SD101_B0");
+}
+ops_dat SD110_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+SD110_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "SD110_B0");
+}
 ops_dat SD111_B0;
 {
 int halo_p[] = {5, 5};
@@ -188,6 +287,15 @@ int size[] = {block0np0, block0np1};
 int base[] = {0, 0};
 double* value = NULL;
 T_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "T_B0");
+}
+ops_dat TVD_filter_B0;
+{
+int halo_p[] = {5, 5};
+int halo_m[] = {-5, -5};
+int size[] = {block0np0, block0np1};
+int base[] = {0, 0};
+double* value = NULL;
+TVD_filter_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "TVD_filter_B0");
 }
 ops_dat u0_B0;
 {

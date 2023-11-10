@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 from opensbli import *
 import copy
-# from opensbli.utilities.katzer_init import Initialise_Katzer
-from opensbli.utilities.flat_init import Initialise_Flatplate
-
+from opensbli.utilities.katzer_init import Initialise_Katzer
+# from opensbli.utilities.flat_init import Initialise_Flatplate
 from opensbli.utilities.helperfunctions import substitute_simulation_parameters
 
 simulation_parameters = {
@@ -11,9 +10,9 @@ simulation_parameters = {
 'Minf'      :   '2.0',
 'Pr'        :   '0.72',
 'Re'        :   '950.0',
-'Twall'     :   '1.67619431',
+'Twall'     :   '2.2',
 'dt'        :   '0.04',
-'niter'     :   '25000',
+'niter'     :   '250000',
 'block0np0'     :   '500',
 'block0np1'     :   '250',
 'Delta0block0'      :   '400.0/(block0np0-1)',
@@ -31,38 +30,17 @@ simulation_parameters = {
 'lambda1_TVD'       : 'dt/Delta1block0',
 'inv_rfact0_block0' : '1.0/Delta0block0',
 'inv_rfact1_block0' : '1.0/Delta1block0',
-'kappa_TVD' : '1.2',
+'kappa_TVD' : '0.1',
 }
 
 ndim = 2
-# Direct application of shock-capturing scheme, otherwise central scheme with filter-step example
-weno = True
-teno = False
-TVD = False
 # Instatiate equation classes
 eq = EinsteinEquation()
 constants = ["Re", "Pr", "gama", "Minf", "SuthT", "RefT"]
-# Define the problem
-if weno or teno:
-    if weno:
-        sc1 = "**{\'scheme\':\'Central\'}"
-    else:
-        sc1 = "**{\'scheme\':\'Teno\'}"
-    # Define the compresible Navier-Stokes equations in Einstein notation.
-    mass = "Eq(Der(rho,t), - Conservative(rhou_j,x_j,%s))" % sc1
-    momentum = "Eq(Der(rhou_i,t) , -Conservative(rhou_i*u_j + KD(_i,_j)*p,x_j , %s) + Der(tau_i_j,x_j) )" % sc1
-    energy = "Eq(Der(rhoE,t), - Conservative((p+rhoE)*u_j,x_j, %s) - Der(q_j,x_j) + Der(u_i*tau_i_j ,x_j) )" % sc1
-    stress_tensor = "Eq(tau_i_j, (mu/Re)*(Der(u_i,x_j)+ Der(u_j,x_i) - (2/3)* KD(_i,_j)* Der(u_k,x_k)))"
-    heat_flux = "Eq(q_j, (-mu/((gama-1)*Minf*Minf*Pr*Re))*Der(T,x_j))"
-    # Substitutions
-    substitutions = [stress_tensor, heat_flux]
-    mass = eq.expand(mass, ndim, "x", substitutions, constants)
-    momentum = eq.expand(momentum, ndim, "x", substitutions, constants)
-    energy = eq.expand(energy, ndim, "x", substitutions, constants)
-else:
-    NS = NS_Split('Feiereisen', ndim, constants, coordinate_symbol="x", conservative=True, viscosity='dynamic', energy_formulation='enthalpy', debug=False)
-    mass, momentum, energy = NS.mass, NS.momentum, NS.energy
 
+# Define the problem
+NS = NS_Split('Feiereisen', ndim, constants, coordinate_symbol="x", conservative=True, viscosity='dynamic', energy_formulation='enthalpy', debug=False)
+mass, momentum, energy = NS.mass, NS.momentum, NS.energy
 
 # Expand the simulation equations, for this create a simulation equations class
 simulation_eq = SimulationEquations()
@@ -79,6 +57,7 @@ viscosity = "Eq(mu, (T**(1.5)*(1.0+SuthT/RefT)/(T+SuthT/RefT)))"
 
 constituent_eqns = [velocity, pressure, speed_of_sound, temperature, viscosity]
 constituent = ConstituentRelations()
+
 # Expand the constituent relations
 for i, CR in enumerate(constituent_eqns):
     constituent_eqns[i] = eq.expand(CR, ndim, "x", [], constants)
@@ -95,27 +74,8 @@ metriceq.generate_transformations(ndim, "x", [(False, False), (True, False)], 2)
 # Grid is stretched normal to the wall
 simulation_eq.apply_metrics(metriceq)
 
-# Adaptive TENO with modified Ducros sensor
-# SS = ShockSensor()
-# shock_sensor, sensor_array = SS.ducros_equations(block, coordinate_symbol, metriceq)
-# Add shock Ducros sensor to constituent relations
-# constituent.add_equations(shock_sensor)
-store_sensor = True
 # Spatial scheme
 schemes = {}
-# if weno:
-#     Avg = SimpleAverage([0, 1])
-#     # LF = LFWeno(order=7, formulation='Z', averaging=Avg, flux_type='LLF')
-#     LF = HLLCWeno(order=5, formulation='Z', averaging=Avg, flux_type='HLLC-LM')
-#     # Add to schemes
-#     schemes[LF.name] = LF
-# elif teno:
-#     Avg = SimpleAverage([0, 1])
-#     # LF = LFTeno(order=5, averaging=Avg, flux_type='LLF')
-#     LF = HLLCTeno(order=6, averaging=Avg, flux_type='HLLC-LM')
-#     # Add to schemes
-#     schemes[LF.name] = LF   
-# Central scheme 
 fns = 'u0 u1 T'
 cent = StoreSome(4, fns)
 schemes[cent.name] = cent
@@ -136,7 +96,8 @@ boundaries = [[0, 0] for t in range(ndim)]
 # Left pressure extrapolation at x= 0, inlet conditions
 direction = 0
 side = 0
-boundaries[direction][side] = InletPressureExtrapolateBC(direction, side)
+# boundaries[direction][side] = InletPressureExtrapolateBC(direction, side)
+boundaries[direction][side] = InletTransferBC(0, 0, scheme=ReducedAccess())
 # Right extrapolation at outlet
 direction = 0
 side = 1
@@ -154,10 +115,10 @@ boundaries[direction][side] = IsothermalWallBC(direction, 0, wall_eqns)
 # Top dirichlet shock generator condition
 direction = 1
 side = 1
-rho = parse_expr("Eq(DataObject(rho), Piecewise((1.129734572, (x0)>450.0), (1.00000596004, True)))", local_dict=local_dict)
-rhou0 = parse_expr("Eq(DataObject(rhou0), Piecewise((1.0921171, (x0)>450.0), (1.00000268202, True)))", local_dict=local_dict)
-rhou1 = parse_expr("Eq(DataObject(rhou1), Piecewise((-0.058866065, (x0)>450.0), (0.00565001630205, True)))", local_dict=local_dict)
-rhoE = parse_expr("Eq(DataObject(rhoE), Piecewise((1.0590824, (x0)>450.0), (0.94644428042, True)))", local_dict=local_dict)
+rho = parse_expr("Eq(DataObject(rho), Piecewise((1.129734572, (x0)>40.0), (1.00000596004, True)))", local_dict=local_dict)
+rhou0 = parse_expr("Eq(DataObject(rhou0), Piecewise((1.0921171, (x0)>40.0), (1.00000268202, True)))", local_dict=local_dict)
+rhou1 = parse_expr("Eq(DataObject(rhou1), Piecewise((-0.058866065, (x0)>40.0), (0.00565001630205, True)))", local_dict=local_dict)
+rhoE = parse_expr("Eq(DataObject(rhoE), Piecewise((1.0590824, (x0)>40.0), (0.94644428042, True)))", local_dict=local_dict)
 
 upper_eqns = [x_loc, rho, rhou0, rhou1, rhoE]
 boundaries[direction][side] = DirichletBC(direction, side, upper_eqns)
@@ -177,27 +138,26 @@ for con in grid_const:
 gridx0 = parse_expr("Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])", local_dict=local_dict)
 gridx1 = parse_expr("Eq(DataObject(x1), Lx1*sinh(by*block.deltas[1]*block.grid_indexes[1]/Lx1)/sinh(by))", local_dict=local_dict)
 coordinate_evaluation = [gridx0, gridx1]
-# initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)
-initial = Initialise_Flatplate(polynomial_directions, n_poly_coefficients, Re, xMach, Tinf, coordinate_evaluations=coordinate_evaluation)
+initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)
+# initial = Initialise_Flatplate(polynomial_directions, n_poly_coefficients, Re, xMach, Tinf, coordinate_evaluations=coordinate_evaluation)
 
 
 kwargs = {'iotype': "Write"}
-h5 = iohdf5(save_every=10, **kwargs)
+h5 = iohdf5(save_every= 2500, **kwargs)
 h5.add_arrays(simulation_eq.time_advance_arrays)
 h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('D11')]) #, DataObject('kappa'), DataObject('WENO_filter')
 block.setio(h5)
 
 # Set equations on the block and discretise
 block.set_equations([constituent, simulation_eq, initial, metriceq])
-# WENO/TVD filter if not using direct application of WENO/TENO
-# if not weno and not teno:
-#     if TVD:
+
+# Filter application
+
 # TVD_filter = TVDFilter(block, airfoil=False, optimize=True, metrics=metriceq)
 # block.set_equations(TVD_filter.equation_classes)
-#     else:
-# WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, metrics=metriceq)
-# block.set_equations(WF.equation_classes)  
 
+WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, metrics=metriceq)
+block.set_equations(WF.equation_classes)  
 
 block.discretise()
 
@@ -206,4 +166,4 @@ SimulationDataType.set_datatype(Double)
 OPSC(alg)
 # Add the simulation constants to the OPS C code
 substitute_simulation_parameters(simulation_parameters.keys(), simulation_parameters.values())
-print_iteration_ops(every=10,NaN_check='rho')
+print_iteration_ops(every=100,NaN_check='rho')

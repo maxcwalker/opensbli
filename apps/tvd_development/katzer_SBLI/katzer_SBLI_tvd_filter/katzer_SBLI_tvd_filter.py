@@ -94,25 +94,25 @@ metriceq.generate_transformations(ndim, "x", [(False, False), (True, False)], 2)
 simulation_eq.apply_metrics(metriceq)
 
 # Adaptive TENO with modified Ducros sensor
-# SS = ShockSensor()
-# shock_sensor, sensor_array = SS.ducros_equations(block, coordinate_symbol, metriceq)
+SS = ShockSensor()
+shock_sensor, sensor_array = SS.ducros_equations(block, coordinate_symbol, metriceq)
 # Add shock Ducros sensor to constituent relations
 # constituent.add_equations(shock_sensor)
 store_sensor = True
 # Spatial scheme
 schemes = {}
-# if weno:
-#     Avg = SimpleAverage([0, 1])
-#     # LF = LFWeno(order=7, formulation='Z', averaging=Avg, flux_type='LLF')
-#     LF = HLLCWeno(order=5, formulation='Z', averaging=Avg, flux_type='HLLC-LM')
-#     # Add to schemes
-#     schemes[LF.name] = LF
-# elif teno:
-#     Avg = SimpleAverage([0, 1])
-#     # LF = LFTeno(order=5, averaging=Avg, flux_type='LLF')
-#     LF = HLLCTeno(order=6, averaging=Avg, flux_type='HLLC-LM')
-#     # Add to schemes
-#     schemes[LF.name] = LF   
+if weno:
+    Avg = SimpleAverage([0, 1])
+    # LF = LFWeno(order=7, formulation='Z', averaging=Avg, flux_type='LLF')
+    LF = HLLCWeno(order=5, formulation='Z', averaging=Avg, flux_type='HLLC-LM')
+    # Add to schemes
+    schemes[LF.name] = LF
+elif teno:
+    Avg = SimpleAverage([0, 1])
+    # LF = LFTeno(order=5, averaging=Avg, flux_type='LLF')
+    LF = HLLCTeno(order=6, averaging=Avg, flux_type='HLLC-LM')
+    # Add to schemes
+    schemes[LF.name] = LF   
 # Central scheme 
 fns = 'u0 u1 T'
 cent = StoreSome(4, fns)
@@ -191,8 +191,8 @@ block.set_equations([constituent, simulation_eq, initial, metriceq])
 TVD_filter = TVDFilter(block, airfoil=False, optimize=True, metrics=metriceq)
 block.set_equations(TVD_filter.equation_classes)
 #     else:
-# WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, metrics=metriceq)
-# block.set_equations(WF.equation_classes)  
+WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, metrics=metriceq)
+block.set_equations(WF.equation_classes)  
 
 
 block.discretise()

@@ -36,7 +36,7 @@ def strip_halos(fname, output_name):
 
     opensbli_file = h5py.File(fname, 'r')
     block_name1 = list(opensbli_file.keys())[0]
-    group_block =  opensbli_file[block_name1]
+    group_block =  opensbli_file['opensbliblock00']
     output_opensbli = h5py.File(output_name, 'w')
 
     for key in group_block.keys():
