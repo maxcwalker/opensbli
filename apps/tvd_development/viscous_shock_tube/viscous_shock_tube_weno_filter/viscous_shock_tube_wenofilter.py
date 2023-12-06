@@ -13,7 +13,7 @@ simulation_parameters = {
 'Pr'        :   '0.73',
 'Re'        :   '200.0',
 'dt'        :   '0.000005',
-'niter'     :   '200000',
+'niter'     :   '2000',
 'block0np0'     :   '500',
 'block0np1'     :   '250',
 'Delta0block0'      :   '1.0/(block0np0-1)',

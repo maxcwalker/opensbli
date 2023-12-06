@@ -12,13 +12,14 @@ int xdim4_opensbliblock00Kernel014;
 
 //user function
 inline 
- void opensbliblock00Kernel014(const ptr_double D11_B0,
-  const ptr_double u1_B0,
-  const ptr_double D10_B0,
+ void opensbliblock00Kernel014(const ptr_double D10_B0,
+  const ptr_double D11_B0,
   const ptr_double u0_B0,
+  const
+ptr_double u1_B0,
   ptr_double U1_B0)
 {
-   OPS_ACC(U1_B0, 0,0) = OPS_ACC(D10_B0, 0,0)*OPS_ACC(u0_B0, 0,0) + OPS_ACC(D11_B0, 0,0)*OPS_ACC(u1_B0, 0,0);
+   OPS_ACC(U1_B0, 0,0) = OPS_ACC(u0_B0, 0,0)*OPS_ACC(D10_B0, 0,0) + OPS_ACC(u1_B0, 0,0)*OPS_ACC(D11_B0, 0,0);
 
 }
 
@@ -44,10 +45,8 @@ void opensbliblock00Kernel014_c_wrapper(
       const ptr_double ptr2 = {  p_a2 + n_x*1*1 + n_y*xdim2_opensbliblock00Kernel014*1*1, xdim2_opensbliblock00Kernel014};
       const ptr_double ptr3 = {  p_a3 + n_x*1*1 + n_y*xdim3_opensbliblock00Kernel014*1*1, xdim3_opensbliblock00Kernel014};
       ptr_double ptr4 = {  p_a4 + n_x*1*1 + n_y*xdim4_opensbliblock00Kernel014*1*1, xdim4_opensbliblock00Kernel014};
-      opensbliblock00Kernel014( ptr0,
-          ptr1,ptr2,
-          ptr3,ptr4 );
-
+      opensbliblock00Kernel014( ptr0, ptr1, ptr2, ptr3,
+           ptr4);
     }
   }
 }

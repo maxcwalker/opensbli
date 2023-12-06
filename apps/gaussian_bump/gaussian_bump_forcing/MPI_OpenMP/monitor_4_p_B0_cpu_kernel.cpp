@@ -54,6 +54,7 @@ void ops_par_loop_monitor_4_p_B0_execute(ops_kernel_descriptor *desc) {
   #endif
 
 
+
   //initialize global variable with the dimension of dats
   int xdim0_monitor_4_p_B0 = args[0].dat->size[0];
 
@@ -126,28 +127,9 @@ void ops_par_loop_monitor_4_p_B0_execute(ops_kernel_descriptor *desc) {
 #ifdef OPS_LAZY
 void ops_par_loop_monitor_4_p_B0(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1) {
-  ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
-  desc->name = name;
-  desc->block = block;
-  desc->dim = dim;
-  desc->device = 0;
-  desc->index = 34;
-  desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 34;
-  for ( int i=0; i<4; i++ ){
-    desc->range[i] = range[i];
-    desc->orig_range[i] = range[i];
-    desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
-  }
-  desc->nargs = 2;
-  desc->args = (ops_arg*)ops_malloc(2*sizeof(ops_arg));
-  desc->args[0] = arg0;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
-  desc->args[1] = arg1;
-  desc->function = ops_par_loop_monitor_4_p_B0_execute;
-  if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,34,"monitor_4_p_B0");
-  }
-  ops_enqueue_kernel(desc);
+  ops_arg args[2] = { arg0, arg1 };
+
+  //create kernel descriptor and pass it to ops_enqueue_kernel
+  create_kerneldesc_and_enque(name, args, 2, 34, dim, 0, range, block, ops_par_loop_monitor_4_p_B0_execute);
 }
 #endif

@@ -13,9 +13,9 @@ int main(int argc, char **argv)
 // Set restart to 1 to restart the simulation from HDF5 file
 restart = 0;
 // User defined constant values
-block0np0 = 256;
-block0np1 = 256;
-block0np2 = 256;
+block0np0 = 64;
+block0np1 = 64;
+block0np2 = 64;
 Delta0block0 = 2*M_PI/block0np0;
 Delta1block0 = 2*M_PI/block0np1;
 Delta2block0 = 2*M_PI/block0np2;
@@ -31,7 +31,7 @@ Re = 1600.0;
 Pr = 0.71;
 delta_TVD = 0.500000000000000;
 eps_TVD = 1.00000000000000e-8;
-kappa_TVD = 0.3;
+kappa_TVD = 0.05;
 gamma_m1 = -1 + gama;
 inv2Delta0block0 = 1.0/(Delta0block0*Delta0block0);
 inv2Delta1block0 = 1.0/(Delta1block0*Delta1block0);
@@ -85,14 +85,14 @@ ops_block opensbliblock00 = ops_decl_block(3, "opensbliblock00");
 // Define and declare stencils
 #include "stencils.h"
 // Define and declare OPS reduction handles
-double rhom_B0_out = 0.0;
-ops_reduction rhom_B0 = ops_decl_reduction_handle(sizeof(double), "double", "reduction_rhom_B0");
-double KE_B0_out = 0.0;
-ops_reduction KE_B0 = ops_decl_reduction_handle(sizeof(double), "double", "reduction_KE_B0");
 double enstrophy_dissipation_B0_out = 0.0;
 ops_reduction enstrophy_dissipation_B0 = ops_decl_reduction_handle(sizeof(double), "double", "reduction_enstrophy_dissipation_B0");
+double KE_B0_out = 0.0;
+ops_reduction KE_B0 = ops_decl_reduction_handle(sizeof(double), "double", "reduction_KE_B0");
 double dilatation_dissipation_B0_out = 0.0;
 ops_reduction dilatation_dissipation_B0 = ops_decl_reduction_handle(sizeof(double), "double", "reduction_dilatation_dissipation_B0");
+double rhom_B0_out = 0.0;
+ops_reduction rhom_B0 = ops_decl_reduction_handle(sizeof(double), "double", "reduction_rhom_B0");
 #include "bc_exchanges.h"
 // Init OPS partition
 double partition_start0, elapsed_partition_start0, partition_end0, elapsed_partition_end0;
@@ -451,10 +451,10 @@ ops_arg_reduce(enstrophy_dissipation_B0, 1, "double", OPS_INC),
 ops_arg_reduce(rhom_B0, 1, "double", OPS_INC),
 ops_arg_dat(divV_B0, 1, stencil_0_00_00_00_3, "double", OPS_RW));
 
-ops_reduction_result(dilatation_dissipation_B0, &dilatation_dissipation_B0_out);
-ops_reduction_result(rhom_B0, &rhom_B0_out);
 ops_reduction_result(KE_B0, &KE_B0_out);
 ops_reduction_result(enstrophy_dissipation_B0, &enstrophy_dissipation_B0_out);
+ops_reduction_result(dilatation_dissipation_B0, &dilatation_dissipation_B0_out);
+ops_reduction_result(rhom_B0, &rhom_B0_out);
 }
 
 if (fmod(1 + iter,100) == 0 || iter == 0){

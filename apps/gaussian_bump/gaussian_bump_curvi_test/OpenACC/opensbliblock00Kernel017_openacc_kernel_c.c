@@ -20,31 +20,32 @@ int xdim12_opensbliblock00Kernel017;
 
 //user function
 inline 
- void opensbliblock00Kernel017(const ptr_double wk6_B0,
-  const ptr_double wk4_B0,
-  const ptr_double wk5_B0,
-  const ptr_double wk3_B0,
+ void opensbliblock00Kernel017(const ptr_double detJ_B0,
   const ptr_double wk0_B0,
   const ptr_double wk1_B0,
-  const ptr_double detJ_B0,
+  const
+ptr_double wk2_B0,
+  const ptr_double wk3_B0,
+  const ptr_double wk4_B0,
+  const ptr_double wk5_B0,
+  const ptr_double wk6_B0,
   const ptr_double wk7_B0,
-  const ptr_double wk2_B0,
-  ptr_double Residual3_B0,
   ptr_double Residual0_B0,
+  ptr_double Residual1_B0,
   ptr_double Residual2_B0,
-  ptr_double Residual1_B0)
+  ptr_double Residual3_B0)
 {
-    OPS_ACC(Residual0_B0, 0,0) = -(inv_1*(-OPS_ACC(wk0_B0, -1,0) + OPS_ACC(wk0_B0, 0,0)) +
-      inv_2*(OPS_ACC(wk4_B0, 0,0) - OPS_ACC(wk4_B0, 0,-1)))/OPS_ACC(detJ_B0, 0,0);
+    OPS_ACC(Residual0_B0, 0,0) = -((-OPS_ACC(wk0_B0, -1,0) + OPS_ACC(wk0_B0, 0,0))*invDelta0block0 + (-OPS_ACC(wk4_B0, 0,-1) +
+      OPS_ACC(wk4_B0, 0,0))*invDelta1block0)/OPS_ACC(detJ_B0, 0,0);
 
-    OPS_ACC(Residual1_B0, 0,0) = -(inv_1*(OPS_ACC(wk1_B0, 0,0) - OPS_ACC(wk1_B0, -1,0)) +
-      inv_2*(-OPS_ACC(wk5_B0, 0,-1) + OPS_ACC(wk5_B0, 0,0)))/OPS_ACC(detJ_B0, 0,0);
+    OPS_ACC(Residual1_B0, 0,0) = -((-OPS_ACC(wk1_B0, -1,0) + OPS_ACC(wk1_B0, 0,0))*invDelta0block0 + (-OPS_ACC(wk5_B0, 0,-1) +
+      OPS_ACC(wk5_B0, 0,0))*invDelta1block0)/OPS_ACC(detJ_B0, 0,0);
 
-    OPS_ACC(Residual2_B0, 0,0) = -(inv_1*(OPS_ACC(wk2_B0, 0,0) - OPS_ACC(wk2_B0, -1,0)) +
-      inv_2*(-OPS_ACC(wk6_B0, 0,-1) + OPS_ACC(wk6_B0, 0,0)))/OPS_ACC(detJ_B0, 0,0);
+    OPS_ACC(Residual2_B0, 0,0) = -((-OPS_ACC(wk2_B0, -1,0) + OPS_ACC(wk2_B0, 0,0))*invDelta0block0 + (-OPS_ACC(wk6_B0, 0,-1) +
+      OPS_ACC(wk6_B0, 0,0))*invDelta1block0)/OPS_ACC(detJ_B0, 0,0);
 
-    OPS_ACC(Residual3_B0, 0,0) = -(inv_1*(OPS_ACC(wk3_B0, 0,0) - OPS_ACC(wk3_B0, -1,0)) +
-      inv_2*(-OPS_ACC(wk7_B0, 0,-1) + OPS_ACC(wk7_B0, 0,0)))/OPS_ACC(detJ_B0, 0,0);
+    OPS_ACC(Residual3_B0, 0,0) = -((-OPS_ACC(wk3_B0, -1,0) + OPS_ACC(wk3_B0, 0,0))*invDelta0block0 + (-OPS_ACC(wk7_B0, 0,-1) +
+      OPS_ACC(wk7_B0, 0,0))*invDelta1block0)/OPS_ACC(detJ_B0, 0,0);
 
 }
 
@@ -86,14 +87,10 @@ void opensbliblock00Kernel017_c_wrapper(
       ptr_double ptr10 = {  p_a10 + n_x*1*1 + n_y*xdim10_opensbliblock00Kernel017*1*1, xdim10_opensbliblock00Kernel017};
       ptr_double ptr11 = {  p_a11 + n_x*1*1 + n_y*xdim11_opensbliblock00Kernel017*1*1, xdim11_opensbliblock00Kernel017};
       ptr_double ptr12 = {  p_a12 + n_x*1*1 + n_y*xdim12_opensbliblock00Kernel017*1*1, xdim12_opensbliblock00Kernel017};
-      opensbliblock00Kernel017( ptr0,
-          ptr1,ptr2,
-          ptr3,ptr4,
-          ptr5,ptr6,
-          ptr7,ptr8,
-          ptr9,ptr10,
-          ptr11,ptr12 );
-
+      opensbliblock00Kernel017( ptr0, ptr1, ptr2, ptr3,
+           ptr4, ptr5, ptr6, ptr7,
+           ptr8, ptr9, ptr10, ptr11,
+           ptr12);
     }
   }
 }

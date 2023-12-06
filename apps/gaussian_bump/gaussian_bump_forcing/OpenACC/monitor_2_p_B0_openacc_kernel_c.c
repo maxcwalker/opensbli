@@ -29,9 +29,7 @@ void monitor_2_p_B0_c_wrapper(
     #endif
     for ( int n_x=0; n_x<x_size; n_x++ ){
       const ptr_double ptr0 = {  p_a0 + n_x*1*1 + n_y*xdim0_monitor_2_p_B0*1*1, xdim0_monitor_2_p_B0};
-      monitor_2_p_B0( ptr0,
-           &p_a1_0 );
-
+      monitor_2_p_B0( ptr0, &p_a1_0);
     }
   }
   p_a1[0] = p_a1_0;

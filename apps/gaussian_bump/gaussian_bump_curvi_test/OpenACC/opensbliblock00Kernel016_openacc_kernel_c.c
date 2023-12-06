@@ -7,14 +7,19 @@
 int xdim0_opensbliblock00Kernel016;
 int xdim1_opensbliblock00Kernel016;
 int xdim2_opensbliblock00Kernel016;
+int xdim3_opensbliblock00Kernel016;
+int xdim4_opensbliblock00Kernel016;
 
 //user function
 inline 
-void opensbliblock00Kernel016(const ptr_double rho_B0,
-  const ptr_double p_B0,
-  ptr_double a_B0)
+ void opensbliblock00Kernel016(const ptr_double D10_B0,
+  const ptr_double D11_B0,
+  const ptr_double u0_B0,
+  const
+ptr_double u1_B0,
+  ptr_double U1_B0)
 {
-   OPS_ACC(a_B0, 0,0) = sqrt(gama*OPS_ACC(p_B0, 0,0)/OPS_ACC(rho_B0, 0,0));
+   OPS_ACC(U1_B0, 0,0) = OPS_ACC(u0_B0, 0,0)*OPS_ACC(D10_B0, 0,0) + OPS_ACC(u1_B0, 0,0)*OPS_ACC(D11_B0, 0,0);
 
 }
 
@@ -23,9 +28,11 @@ void opensbliblock00Kernel016_c_wrapper(
   double *p_a0,
   double *p_a1,
   double *p_a2,
+  double *p_a3,
+  double *p_a4,
   int x_size, int y_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2)
+  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4)
   #pragma acc loop
   #endif
   for ( int n_y=0; n_y<y_size; n_y++ ){
@@ -35,10 +42,11 @@ void opensbliblock00Kernel016_c_wrapper(
     for ( int n_x=0; n_x<x_size; n_x++ ){
       const ptr_double ptr0 = {  p_a0 + n_x*1*1 + n_y*xdim0_opensbliblock00Kernel016*1*1, xdim0_opensbliblock00Kernel016};
       const ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel016*1*1, xdim1_opensbliblock00Kernel016};
-      ptr_double ptr2 = {  p_a2 + n_x*1*1 + n_y*xdim2_opensbliblock00Kernel016*1*1, xdim2_opensbliblock00Kernel016};
-      opensbliblock00Kernel016( ptr0,
-          ptr1,ptr2 );
-
+      const ptr_double ptr2 = {  p_a2 + n_x*1*1 + n_y*xdim2_opensbliblock00Kernel016*1*1, xdim2_opensbliblock00Kernel016};
+      const ptr_double ptr3 = {  p_a3 + n_x*1*1 + n_y*xdim3_opensbliblock00Kernel016*1*1, xdim3_opensbliblock00Kernel016};
+      ptr_double ptr4 = {  p_a4 + n_x*1*1 + n_y*xdim4_opensbliblock00Kernel016*1*1, xdim4_opensbliblock00Kernel016};
+      opensbliblock00Kernel016( ptr0, ptr1, ptr2, ptr3,
+           ptr4);
     }
   }
 }

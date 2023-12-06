@@ -55,6 +55,7 @@ void ops_par_loop_opensbliblock00Kernel004_execute(ops_kernel_descriptor *desc) 
   #endif
 
 
+
   //initialize global variable with the dimension of dats
   int xdim0_opensbliblock00Kernel004 = args[0].dat->size[0];
   int xdim1_opensbliblock00Kernel004 = args[1].dat->size[0];
@@ -129,31 +130,9 @@ void ops_par_loop_opensbliblock00Kernel004_execute(ops_kernel_descriptor *desc) 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel004(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2) {
-  ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
-  desc->name = name;
-  desc->block = block;
-  desc->dim = dim;
-  desc->device = 0;
-  desc->index = 11;
-  desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 11;
-  for ( int i=0; i<4; i++ ){
-    desc->range[i] = range[i];
-    desc->orig_range[i] = range[i];
-    desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
-  }
-  desc->nargs = 3;
-  desc->args = (ops_arg*)ops_malloc(3*sizeof(ops_arg));
-  desc->args[0] = arg0;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
-  desc->args[1] = arg1;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
-  desc->args[2] = arg2;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg2.dat->index;
-  desc->function = ops_par_loop_opensbliblock00Kernel004_execute;
-  if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,11,"opensbliblock00Kernel004");
-  }
-  ops_enqueue_kernel(desc);
+  ops_arg args[3] = { arg0, arg1, arg2 };
+
+  //create kernel descriptor and pass it to ops_enqueue_kernel
+  create_kerneldesc_and_enque(name, args, 3, 11, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel004_execute);
 }
 #endif

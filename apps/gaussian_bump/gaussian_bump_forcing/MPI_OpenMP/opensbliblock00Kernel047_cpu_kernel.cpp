@@ -59,31 +59,32 @@ void ops_par_loop_opensbliblock00Kernel047_execute(ops_kernel_descriptor *desc) 
   #endif
 
 
+
   //initialize global variable with the dimension of dats
-  int xdim0_opensbliblock00Kernel047 = args[0].dat->size[0];
   int xdim1_opensbliblock00Kernel047 = args[1].dat->size[0];
   int xdim2_opensbliblock00Kernel047 = args[2].dat->size[0];
   int xdim3_opensbliblock00Kernel047 = args[3].dat->size[0];
   int xdim4_opensbliblock00Kernel047 = args[4].dat->size[0];
+  int xdim5_opensbliblock00Kernel047 = args[5].dat->size[0];
 
   //set up initial pointers and exchange halos if necessary
-  int base0 = args[0].dat->base_offset;
-  double * __restrict__ x0_B0_p = (double *)(args[0].data + base0);
+  int * __restrict__ iter = (int *)args[0].data;
+
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ rhou0_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ x0_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
-  double * __restrict__ rhou1_B0_p = (double *)(args[2].data + base2);
+  double * __restrict__ rhoE_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ rhoE_B0_p = (double *)(args[3].data + base3);
+  double * __restrict__ rho_B0_p = (double *)(args[3].data + base3);
 
   int base4 = args[4].dat->base_offset;
-  double * __restrict__ rho_B0_p = (double *)(args[4].data + base4);
+  double * __restrict__ rhou0_B0_p = (double *)(args[4].data + base4);
 
-  int * __restrict__ iter = (int *)args[5].data;
-
+  int base5 = args[5].dat->base_offset;
+  double * __restrict__ rhou1_B0_p = (double *)(args[5].data + base5);
 
 
 
@@ -112,35 +113,38 @@ void ops_par_loop_opensbliblock00Kernel047_execute(ops_kernel_descriptor *desc) 
     #pragma simd
     #endif
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
-      const ACC<double> x0_B0(xdim0_opensbliblock00Kernel047, x0_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel047*1);
-      ACC<double> rhou0_B0(xdim1_opensbliblock00Kernel047, rhou0_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel047*1);
-      ACC<double> rhou1_B0(xdim2_opensbliblock00Kernel047, rhou1_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel047*1);
-      ACC<double> rhoE_B0(xdim3_opensbliblock00Kernel047, rhoE_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel047*1);
-      ACC<double> rho_B0(xdim4_opensbliblock00Kernel047, rho_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel047*1);
+      const ACC<double> x0_B0(xdim1_opensbliblock00Kernel047, x0_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel047*1);
+      ACC<double> rhoE_B0(xdim2_opensbliblock00Kernel047, rhoE_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel047*1);
+      ACC<double> rho_B0(xdim3_opensbliblock00Kernel047, rho_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel047*1);
+      ACC<double> rhou0_B0(xdim4_opensbliblock00Kernel047, rhou0_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel047*1);
+      ACC<double> rhou1_B0(xdim5_opensbliblock00Kernel047, rhou1_B0_p + n_x*1 + n_y * xdim5_opensbliblock00Kernel047*1);
       
-   double T_above = 0.0;
    double Pwall = 0.0;
-   double u03 = 0.0;
-   double u11 = 0.0;
-   double rho_halo_3 = 0.0;
-   double T2 = 0.0;
-   double rho_halo_1 = 0.0;
-   double u13 = 0.0;
-   double rho_halo_2 = 0.0;
-   double u02 = 0.0;
-   double T3 = 0.0;
-   double u01 = 0.0;
    double T1 = 0.0;
+   double T2 = 0.0;
+   double T3 = 0.0;
+   double T4 = 0.0;
+   double T_above = 0.0;
+   double rho_halo_1 = 0.0;
+   double rho_halo_2 = 0.0;
+   double rho_halo_3 = 0.0;
+   double rho_halo_4 = 0.0;
+   double u01 = 0.0;
+   double u02 = 0.0;
+   double u03 = 0.0;
+   double u04 = 0.0;
+   double u11 = 0.0;
    double u12 = 0.0;
-    rhou1_B0(0,0) = tripA*exp(-k_0*pow(-xts + x0_B0(0,0), 2))*sin(dt*omega_0*
-      *iter)*rho_B0(0,0);
+   double u13 = 0.0;
+   double u14 = 0.0;
+   rhou1_B0(0,0) = tripA*rho_B0(0,0)*exp(-((-xts + x0_B0(0,0))*(-xts + x0_B0(0,0)))*k_0)*sin(dt*omega_0* *iter);
 
    rhou0_B0(0,0) = 0.0;
 
-   rhoE_B0(0,0) = Twall*rcinv15*rho_B0(0,0)/(gama*(gama - 1.0));
+   rhoE_B0(0,0) = Twall*inv2Minf*rho_B0(0,0)/(gama*(-1.0 + gama));
 
-    Pwall = (gama - 1)*(-((rc7)*pow(rhou0_B0(0,0), 2) + (rc7)*pow(rhou1_B0(0,0),
-      2))/rho_B0(0,0) + rhoE_B0(0,0));
+    Pwall = (-1 + gama)*(-(((1.0/2.0))*(rhou0_B0(0,0)*rhou0_B0(0,0)) +
+      ((1.0/2.0))*(rhou1_B0(0,0)*rhou1_B0(0,0)))/rho_B0(0,0) + rhoE_B0(0,0));
 
    u01 = rhou0_B0(0,1)/rho_B0(0,1);
 
@@ -148,32 +152,42 @@ void ops_par_loop_opensbliblock00Kernel047_execute(ops_kernel_descriptor *desc) 
 
    u03 = rhou0_B0(0,3)/rho_B0(0,3);
 
+   u04 = rhou0_B0(0,4)/rho_B0(0,4);
+
    u11 = rhou1_B0(0,1)/rho_B0(0,1);
 
    u12 = rhou1_B0(0,2)/rho_B0(0,2);
 
    u13 = rhou1_B0(0,3)/rho_B0(0,3);
 
-    T_above = pow(Minf, 2)*gama*(gama - 1)*(-((rc7)*pow(rhou0_B0(0,1), 2) + (rc7)*pow(rhou1_B0(0,1),
-      2))/rho_B0(0,1) + rhoE_B0(0,1))/rho_B0(0,1);
+   u14 = rhou1_B0(0,4)/rho_B0(0,4);
 
-   T1 = 2*Twall - T_above;
+    T_above = (Minf*Minf)*(-1 + gama)*(-(((1.0/2.0))*(rhou0_B0(0,1)*rhou0_B0(0,1)) +
+      ((1.0/2.0))*(rhou1_B0(0,1)*rhou1_B0(0,1)))/rho_B0(0,1) + rhoE_B0(0,1))*gama/rho_B0(0,1);
 
-   T2 = 3*Twall - 2*T_above;
+   T1 = -T_above + 2*Twall;
 
-   T3 = 4*Twall - 3*T_above;
+   T2 = -2*T_above + 3*Twall;
 
-   rho_halo_1 = pow(Minf, 2)*gama*Pwall/T1;
+   T3 = -3*T_above + 4*Twall;
+
+   T4 = -4*T_above + 5*Twall;
+
+   rho_halo_1 = (Minf*Minf)*gama*Pwall/T1;
 
    rho_B0(0,-1) = rho_halo_1;
 
-   rho_halo_2 = pow(Minf, 2)*gama*Pwall/T2;
+   rho_halo_2 = (Minf*Minf)*gama*Pwall/T2;
 
    rho_B0(0,-2) = rho_halo_2;
 
-   rho_halo_3 = pow(Minf, 2)*gama*Pwall/T3;
+   rho_halo_3 = (Minf*Minf)*gama*Pwall/T3;
 
    rho_B0(0,-3) = rho_halo_3;
+
+   rho_halo_4 = (Minf*Minf)*gama*Pwall/T4;
+
+   rho_B0(0,-4) = rho_halo_4;
 
    rhou0_B0(0,-1) = -rho_halo_1*u01;
 
@@ -187,11 +201,17 @@ void ops_par_loop_opensbliblock00Kernel047_execute(ops_kernel_descriptor *desc) 
 
    rhou1_B0(0,-3) = -rho_halo_3*u13;
 
-   rhoE_B0(0,-1) = rcinv10*Pwall + (rc7)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   rhou0_B0(0,-4) = -rho_halo_4*u04;
 
-   rhoE_B0(0,-2) = rcinv10*Pwall + (rc7)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
+   rhou1_B0(0,-4) = -rho_halo_4*u14;
 
-   rhoE_B0(0,-3) = rcinv10*Pwall + (rc7)*rho_halo_3*(pow(u03, 2) + pow(u13, 2));
+   rhoE_B0(0,-1) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u01*u01) + (u11*u11))*rho_halo_1;
+
+   rhoE_B0(0,-2) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u02*u02) + (u12*u12))*rho_halo_2;
+
+   rhoE_B0(0,-3) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u03*u03) + (u13*u13))*rho_halo_3;
+
+   rhoE_B0(0,-4) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u04*u04) + (u14*u14))*rho_halo_4;
 
 
     }
@@ -202,21 +222,21 @@ void ops_par_loop_opensbliblock00Kernel047_execute(ops_kernel_descriptor *desc) 
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_host(args, 6);
-  ops_set_halo_dirtybit3(&args[1],range);
   ops_set_halo_dirtybit3(&args[2],range);
   ops_set_halo_dirtybit3(&args[3],range);
   ops_set_halo_dirtybit3(&args[4],range);
+  ops_set_halo_dirtybit3(&args[5],range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
     block->instance->OPS_kernels[9].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg0);
     block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg1);
     block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg2);
     block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg3);
     block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg5);
   }
 }
 
@@ -225,39 +245,9 @@ void ops_par_loop_opensbliblock00Kernel047_execute(ops_kernel_descriptor *desc) 
 void ops_par_loop_opensbliblock00Kernel047(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
  ops_arg arg4, ops_arg arg5) {
-  ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
-  desc->name = name;
-  desc->block = block;
-  desc->dim = dim;
-  desc->device = 0;
-  desc->index = 9;
-  desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 9;
-  for ( int i=0; i<4; i++ ){
-    desc->range[i] = range[i];
-    desc->orig_range[i] = range[i];
-    desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
-  }
-  desc->nargs = 6;
-  desc->args = (ops_arg*)ops_malloc(6*sizeof(ops_arg));
-  desc->args[0] = arg0;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
-  desc->args[1] = arg1;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
-  desc->args[2] = arg2;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg2.dat->index;
-  desc->args[3] = arg3;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg3.dat->index;
-  desc->args[4] = arg4;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg4.dat->index;
-  desc->args[5] = arg5;
-  char *tmp = (char*)ops_malloc(1*sizeof(int));
-  memcpy(tmp, arg5.data,1*sizeof(int));
-  desc->args[5].data = tmp;
-  desc->function = ops_par_loop_opensbliblock00Kernel047_execute;
-  if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,9,"opensbliblock00Kernel047");
-  }
-  ops_enqueue_kernel(desc);
+  ops_arg args[6] = { arg0, arg1, arg2, arg3, arg4, arg5 };
+
+  //create kernel descriptor and pass it to ops_enqueue_kernel
+  create_kerneldesc_and_enque(name, args, 6, 9, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel047_execute);
 }
 #endif

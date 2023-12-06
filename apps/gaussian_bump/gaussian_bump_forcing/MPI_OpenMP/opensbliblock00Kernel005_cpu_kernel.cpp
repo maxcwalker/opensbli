@@ -58,6 +58,7 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
   #endif
 
 
+
   //initialize global variable with the dimension of dats
   int xdim0_opensbliblock00Kernel005 = args[0].dat->size[0];
   int xdim1_opensbliblock00Kernel005 = args[1].dat->size[0];
@@ -67,16 +68,16 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ rho_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ rhoE_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ u1_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ rho_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
   double * __restrict__ u0_B0_p = (double *)(args[2].data + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ rhoE_B0_p = (double *)(args[3].data + base3);
+  double * __restrict__ u1_B0_p = (double *)(args[3].data + base3);
 
   int base4 = args[4].dat->base_offset;
   double * __restrict__ p_B0_p = (double *)(args[4].data + base4);
@@ -108,14 +109,14 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
     #pragma simd
     #endif
     for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
-      const ACC<double> rho_B0(xdim0_opensbliblock00Kernel005, rho_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel005*1);
-      const ACC<double> u1_B0(xdim1_opensbliblock00Kernel005, u1_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel005*1);
+      const ACC<double> rhoE_B0(xdim0_opensbliblock00Kernel005, rhoE_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel005*1);
+      const ACC<double> rho_B0(xdim1_opensbliblock00Kernel005, rho_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel005*1);
       const ACC<double> u0_B0(xdim2_opensbliblock00Kernel005, u0_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel005*1);
-      const ACC<double> rhoE_B0(xdim3_opensbliblock00Kernel005, rhoE_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel005*1);
+      const ACC<double> u1_B0(xdim3_opensbliblock00Kernel005, u1_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel005*1);
       ACC<double> p_B0(xdim4_opensbliblock00Kernel005, p_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel005*1);
       
-    p_B0(0,0) = (gama - 1)*(rhoE_B0(0,0) - rc7*rho_B0(0,0)*pow(u0_B0(0,0), 2) -
-      rc7*rho_B0(0,0)*pow(u1_B0(0,0), 2));
+    p_B0(0,0) = (-1 + gama)*(-(1.0/2.0)*(u0_B0(0,0)*u0_B0(0,0))*rho_B0(0,0) -
+      (1.0/2.0)*(u1_B0(0,0)*u1_B0(0,0))*rho_B0(0,0) + rhoE_B0(0,0));
 
 
     }
@@ -146,35 +147,9 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
 void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
  ops_arg arg4) {
-  ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
-  desc->name = name;
-  desc->block = block;
-  desc->dim = dim;
-  desc->device = 0;
-  desc->index = 13;
-  desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 13;
-  for ( int i=0; i<4; i++ ){
-    desc->range[i] = range[i];
-    desc->orig_range[i] = range[i];
-    desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
-  }
-  desc->nargs = 5;
-  desc->args = (ops_arg*)ops_malloc(5*sizeof(ops_arg));
-  desc->args[0] = arg0;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
-  desc->args[1] = arg1;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
-  desc->args[2] = arg2;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg2.dat->index;
-  desc->args[3] = arg3;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg3.dat->index;
-  desc->args[4] = arg4;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg4.dat->index;
-  desc->function = ops_par_loop_opensbliblock00Kernel005_execute;
-  if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,13,"opensbliblock00Kernel005");
-  }
-  ops_enqueue_kernel(desc);
+  ops_arg args[5] = { arg0, arg1, arg2, arg3, arg4 };
+
+  //create kernel descriptor and pass it to ops_enqueue_kernel
+  create_kerneldesc_and_enque(name, args, 5, 13, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel005_execute);
 }
 #endif

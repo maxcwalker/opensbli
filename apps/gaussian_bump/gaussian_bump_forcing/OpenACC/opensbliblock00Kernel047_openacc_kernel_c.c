@@ -4,44 +4,47 @@
 
 #define OPS_GPU
 
-int xdim0_opensbliblock00Kernel047;
 int xdim1_opensbliblock00Kernel047;
 int xdim2_opensbliblock00Kernel047;
 int xdim3_opensbliblock00Kernel047;
 int xdim4_opensbliblock00Kernel047;
+int xdim5_opensbliblock00Kernel047;
 
 //user function
 inline 
- void opensbliblock00Kernel047(const ptr_double x0_B0,
-  ptr_double rhou0_B0,
-  ptr_double rhou1_B0,
+ void opensbliblock00Kernel047(const int *iter,
+  const ptr_double x0_B0,
   ptr_double rhoE_B0,
   ptr_double rho_B0,
-  const int *iter)
+  ptr_double rhou0_B0,
+  ptr_double rhou1_B0)
 {
-   double T_above = 0.0;
    double Pwall = 0.0;
-   double u03 = 0.0;
-   double u11 = 0.0;
-   double rho_halo_3 = 0.0;
-   double T2 = 0.0;
-   double rho_halo_1 = 0.0;
-   double u13 = 0.0;
-   double rho_halo_2 = 0.0;
-   double u02 = 0.0;
-   double T3 = 0.0;
-   double u01 = 0.0;
    double T1 = 0.0;
+   double T2 = 0.0;
+   double T3 = 0.0;
+   double T4 = 0.0;
+   double T_above = 0.0;
+   double rho_halo_1 = 0.0;
+   double rho_halo_2 = 0.0;
+   double rho_halo_3 = 0.0;
+   double rho_halo_4 = 0.0;
+   double u01 = 0.0;
+   double u02 = 0.0;
+   double u03 = 0.0;
+   double u04 = 0.0;
+   double u11 = 0.0;
    double u12 = 0.0;
-    OPS_ACC(rhou1_B0, 0,0) = tripA*exp(-k_0*pow(-xts + OPS_ACC(x0_B0, 0,0), 2))*sin(dt*omega_0*
-      *iter)*OPS_ACC(rho_B0, 0,0);
+   double u13 = 0.0;
+   double u14 = 0.0;
+   OPS_ACC(rhou1_B0, 0,0) = tripA*OPS_ACC(rho_B0, 0,0)*exp(-((-xts + OPS_ACC(x0_B0, 0,0))*(-xts + OPS_ACC(x0_B0, 0,0)))*k_0)*sin(dt*omega_0* *iter);
 
    OPS_ACC(rhou0_B0, 0,0) = 0.0;
 
-   OPS_ACC(rhoE_B0, 0,0) = Twall*rcinv15*OPS_ACC(rho_B0, 0,0)/(gama*(gama - 1.0));
+   OPS_ACC(rhoE_B0, 0,0) = Twall*inv2Minf*OPS_ACC(rho_B0, 0,0)/(gama*(-1.0 + gama));
 
-    Pwall = (gama - 1)*(-((rc7)*pow(OPS_ACC(rhou0_B0, 0,0), 2) + (rc7)*pow(OPS_ACC(rhou1_B0, 0,0),
-      2))/OPS_ACC(rho_B0, 0,0) + OPS_ACC(rhoE_B0, 0,0));
+    Pwall = (-1 + gama)*(-(((1.0/2.0))*(OPS_ACC(rhou0_B0, 0,0)*OPS_ACC(rhou0_B0, 0,0)) +
+      ((1.0/2.0))*(OPS_ACC(rhou1_B0, 0,0)*OPS_ACC(rhou1_B0, 0,0)))/OPS_ACC(rho_B0, 0,0) + OPS_ACC(rhoE_B0, 0,0));
 
    u01 = OPS_ACC(rhou0_B0, 0,1)/OPS_ACC(rho_B0, 0,1);
 
@@ -49,32 +52,42 @@ inline
 
    u03 = OPS_ACC(rhou0_B0, 0,3)/OPS_ACC(rho_B0, 0,3);
 
+   u04 = OPS_ACC(rhou0_B0, 0,4)/OPS_ACC(rho_B0, 0,4);
+
    u11 = OPS_ACC(rhou1_B0, 0,1)/OPS_ACC(rho_B0, 0,1);
 
    u12 = OPS_ACC(rhou1_B0, 0,2)/OPS_ACC(rho_B0, 0,2);
 
    u13 = OPS_ACC(rhou1_B0, 0,3)/OPS_ACC(rho_B0, 0,3);
 
-    T_above = pow(Minf, 2)*gama*(gama - 1)*(-((rc7)*pow(OPS_ACC(rhou0_B0, 0,1), 2) + (rc7)*pow(OPS_ACC(rhou1_B0, 0,1),
-      2))/OPS_ACC(rho_B0, 0,1) + OPS_ACC(rhoE_B0, 0,1))/OPS_ACC(rho_B0, 0,1);
+   u14 = OPS_ACC(rhou1_B0, 0,4)/OPS_ACC(rho_B0, 0,4);
 
-   T1 = 2*Twall - T_above;
+    T_above = (Minf*Minf)*(-1 + gama)*(-(((1.0/2.0))*(OPS_ACC(rhou0_B0, 0,1)*OPS_ACC(rhou0_B0, 0,1)) +
+      ((1.0/2.0))*(OPS_ACC(rhou1_B0, 0,1)*OPS_ACC(rhou1_B0, 0,1)))/OPS_ACC(rho_B0, 0,1) + OPS_ACC(rhoE_B0, 0,1))*gama/OPS_ACC(rho_B0, 0,1);
 
-   T2 = 3*Twall - 2*T_above;
+   T1 = -T_above + 2*Twall;
 
-   T3 = 4*Twall - 3*T_above;
+   T2 = -2*T_above + 3*Twall;
 
-   rho_halo_1 = pow(Minf, 2)*gama*Pwall/T1;
+   T3 = -3*T_above + 4*Twall;
+
+   T4 = -4*T_above + 5*Twall;
+
+   rho_halo_1 = (Minf*Minf)*gama*Pwall/T1;
 
    OPS_ACC(rho_B0, 0,-1) = rho_halo_1;
 
-   rho_halo_2 = pow(Minf, 2)*gama*Pwall/T2;
+   rho_halo_2 = (Minf*Minf)*gama*Pwall/T2;
 
    OPS_ACC(rho_B0, 0,-2) = rho_halo_2;
 
-   rho_halo_3 = pow(Minf, 2)*gama*Pwall/T3;
+   rho_halo_3 = (Minf*Minf)*gama*Pwall/T3;
 
    OPS_ACC(rho_B0, 0,-3) = rho_halo_3;
+
+   rho_halo_4 = (Minf*Minf)*gama*Pwall/T4;
+
+   OPS_ACC(rho_B0, 0,-4) = rho_halo_4;
 
    OPS_ACC(rhou0_B0, 0,-1) = -rho_halo_1*u01;
 
@@ -88,25 +101,31 @@ inline
 
    OPS_ACC(rhou1_B0, 0,-3) = -rho_halo_3*u13;
 
-   OPS_ACC(rhoE_B0, 0,-1) = rcinv10*Pwall + (rc7)*rho_halo_1*(pow(u01, 2) + pow(u11, 2));
+   OPS_ACC(rhou0_B0, 0,-4) = -rho_halo_4*u04;
 
-   OPS_ACC(rhoE_B0, 0,-2) = rcinv10*Pwall + (rc7)*rho_halo_2*(pow(u02, 2) + pow(u12, 2));
+   OPS_ACC(rhou1_B0, 0,-4) = -rho_halo_4*u14;
 
-   OPS_ACC(rhoE_B0, 0,-3) = rcinv10*Pwall + (rc7)*rho_halo_3*(pow(u03, 2) + pow(u13, 2));
+   OPS_ACC(rhoE_B0, 0,-1) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u01*u01) + (u11*u11))*rho_halo_1;
+
+   OPS_ACC(rhoE_B0, 0,-2) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u02*u02) + (u12*u12))*rho_halo_2;
+
+   OPS_ACC(rhoE_B0, 0,-3) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u03*u03) + (u13*u13))*rho_halo_3;
+
+   OPS_ACC(rhoE_B0, 0,-4) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u04*u04) + (u14*u14))*rho_halo_4;
 
 }
 
 
 void opensbliblock00Kernel047_c_wrapper(
-  double *p_a0,
+  int p_a0,
   double *p_a1,
   double *p_a2,
   double *p_a3,
   double *p_a4,
-  int p_a5,
+  double *p_a5,
   int x_size, int y_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4)
+  #pragma acc parallel deviceptr(p_a1,p_a2,p_a3,p_a4,p_a5)
   #pragma acc loop
   #endif
   for ( int n_y=0; n_y<y_size; n_y++ ){
@@ -114,16 +133,13 @@ void opensbliblock00Kernel047_c_wrapper(
     #pragma acc loop
     #endif
     for ( int n_x=0; n_x<x_size; n_x++ ){
-      const ptr_double ptr0 = {  p_a0 + n_x*1*1 + n_y*xdim0_opensbliblock00Kernel047*1*1, xdim0_opensbliblock00Kernel047};
-      ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel047*1*1, xdim1_opensbliblock00Kernel047};
+      const ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel047*1*1, xdim1_opensbliblock00Kernel047};
       ptr_double ptr2 = {  p_a2 + n_x*1*1 + n_y*xdim2_opensbliblock00Kernel047*1*1, xdim2_opensbliblock00Kernel047};
       ptr_double ptr3 = {  p_a3 + n_x*1*1 + n_y*xdim3_opensbliblock00Kernel047*1*1, xdim3_opensbliblock00Kernel047};
       ptr_double ptr4 = {  p_a4 + n_x*1*1 + n_y*xdim4_opensbliblock00Kernel047*1*1, xdim4_opensbliblock00Kernel047};
-      opensbliblock00Kernel047( ptr0,
-          ptr1,ptr2,
-          ptr3,ptr4,
-           &p_a5 );
-
+      ptr_double ptr5 = {  p_a5 + n_x*1*1 + n_y*xdim5_opensbliblock00Kernel047*1*1, xdim5_opensbliblock00Kernel047};
+      opensbliblock00Kernel047( &p_a0, ptr1, ptr2, ptr3,
+           ptr4, ptr5);
     }
   }
 }

@@ -13,8 +13,8 @@ def extract_data(path, delimiter):
 
 input_names = ['64', '128', '256', '384']
 # input_names = ['768']
-colors = ['b', 'g', 'r', 'm', 'k', 'c', 'k', 'y']
-linestyles = ['-', '-','-','-','-','-','--', '-']
+colors = ['b', 'g', 'r', 'm', 'k', 'c', 'k', 'y', 'orange']
+linestyles = ['-', '-','-','-','-','-','-', '-', '-']
 data = []
 for name in input_names:
     output = extract_data('./OpenSBLI_WF5_N%s_M125_Re1600.dat' % name, delimiter=' ')
@@ -32,9 +32,17 @@ output = extract_data('./OpenSBLI_TVD_kappa0.3.dat', delimiter=',')
 data.append([output, 'TVD filter 0.3', ])
 input_names += ['TVD filter 0.3']
 
+output = extract_data('./OpenSBLI_TVD_kappa0.02.dat', delimiter=',')
+data.append([output, 'TVD filter 0.02', ])
+input_names += ['TVD filter 0.02']
+
 output = extract_data('./OpenSBLI_TVD_kappa0.3_256cubed.dat', delimiter=',')
 data.append([output, 'TVD filter 0.3', ])
 input_names += ['TVD filter 0.3 256cubed']
+
+# output = extract_data('./OpenSBLI_TVD_kappa0.9_256cubed.dat', delimiter=',')
+# data.append([output, 'TVD filter 0.9', ])
+# input_names += ['TVD filter 0.9 256cubed']
 
 # KE plot
 plt.clf()
@@ -49,8 +57,12 @@ for i, name in enumerate(input_names):
         label = r'TVD filter (kappa=0.9): $64^3$'
     elif name == 'TVD filter 0.3':
         label = r'TVD filter (kappa=0.3): $64^3$'
+    elif name == 'TVD filter 0.02':
+        label = r'TVD filter (kappa=0.02): $64^3$'
     elif name == 'TVD filter 0.3 256cubed':
         label = r'TVD filter (kappa=0.3): $256^3$'
+    # elif name == 'TVD filter 0.9 256cubed':
+    #     label = r'TVD filter (kappa=0.9): $256^3$'
     else:
         label = r'WENO5-filter: $%s^3$' % name
     ax.plot(data[i][0][:,0], data[i][0][:,1], color=colors[i], linestyle = linestyles[i], linewidth=1.5, label=label)
@@ -88,8 +100,12 @@ for i, name in enumerate(input_names):
         label = r'TVD filter (kappa=0.9): $64^3$'
     elif name == 'TVD filter 0.3':
         label = r'TVD filter (kappa=0.3): $64^3$'
+    elif name == 'TVD filter 0.02':
+        label = r'TVD filter (kappa=0.02): $64^3$'
     elif name == 'TVD filter 0.3 256cubed':
         label = r'TVD filter (kappa=0.3): $256^3$'
+    # elif name == 'TVD filter 0.9 256cubed':
+    #     label = r'TVD filter (kappa=0.9): $256^3$'
     else:
         label = r'WENO5-filter: $%s^3$' % name
     axins.plot(data[i][0][:,0], data[i][0][:,2], color=colors[i], linewidth=1.5,linestyle = linestyles[i], label=label)
@@ -127,8 +143,12 @@ for i, name in enumerate(input_names):
         label = r'TVD filter (kappa=0.9): $64^3$'
     elif name == 'TVD filter 0.3':
         label = r'TVD filter (kappa=0.3): $64^3$'
+    elif name == 'TVD filter 0.02':
+        label = r'TVD filter (kappa=0.02): $64^3$'
     elif name == 'TVD filter 0.3 256cubed':
         label = r'TVD filter (kappa=0.3): $256^3$'
+    # elif name == 'TVD filter 0.9 256cubed':
+    #     label = r'TVD filter (kappa=0.9): $256^3$'
     else:
         label = r'WENO5-filter: $%s^3$' % name
     plt.plot(data[i][0][:,0], data[i][0][:,3], color=colors[i], linestyle = linestyles[i], linewidth=1.5, label=label)
@@ -148,8 +168,12 @@ for i, name in enumerate(input_names):
         label = r'TVD filter (kappa=0.9): $64^3$'
     elif name == 'TVD filter 0.3':
         label = r'TVD filter (kappa=0.3): $64^3$'
+    elif name == 'TVD filter 0.02':
+        label = r'TVD filter (kappa=0.02): $64^3$'
     elif name == 'TVD filter 0.3 256cubed':
         label = r'TVD filter (kappa=0.3): $256^3$'
+    # elif name == 'TVD filter 0.9 256cubed':
+        # label = r'TVD filter (kappa=0.9): $256^3$'
     else:
         label = r'WENO5-filter: $%s^3$' % name
     plt.plot(data[i][0][:,0], data[i][0][:,2]+data[i][0][:,3], color=colors[i], linestyle = linestyles[i], linewidth=1.5, label=label)

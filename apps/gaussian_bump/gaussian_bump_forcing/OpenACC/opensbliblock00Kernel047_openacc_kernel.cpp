@@ -4,8 +4,6 @@
 
 #define OPS_GPU
 
-extern int xdim0_opensbliblock00Kernel047;
-int xdim0_opensbliblock00Kernel047_h = -1;
 extern int xdim1_opensbliblock00Kernel047;
 int xdim1_opensbliblock00Kernel047_h = -1;
 extern int xdim2_opensbliblock00Kernel047;
@@ -14,17 +12,19 @@ extern int xdim3_opensbliblock00Kernel047;
 int xdim3_opensbliblock00Kernel047_h = -1;
 extern int xdim4_opensbliblock00Kernel047;
 int xdim4_opensbliblock00Kernel047_h = -1;
+extern int xdim5_opensbliblock00Kernel047;
+int xdim5_opensbliblock00Kernel047_h = -1;
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 void opensbliblock00Kernel047_c_wrapper(
-  double *p_a0,
+  int p_a0,
   double *p_a1,
   double *p_a2,
   double *p_a3,
   double *p_a4,
-  int p_a5,
+  double *p_a5,
   int x_size, int y_size);
 
 #ifdef __cplusplus
@@ -33,7 +33,8 @@ void opensbliblock00Kernel047_c_wrapper(
 
 // host stub function
 void ops_par_loop_opensbliblock00Kernel047(char const *name, ops_block block, int dim, int* range,
- ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3, ops_arg arg4, ops_arg arg5) {
+ ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
+ ops_arg arg4, ops_arg arg5) {
 
   //Timing
   double t1,t2,c1,c2;
@@ -54,9 +55,6 @@ void ops_par_loop_opensbliblock00Kernel047(char const *name, ops_block block, in
 
   int start[2];
   int end[2];
-  #ifdef OPS_MPI
-  sub_block_list sb = OPS_sub_block_list[block->index];
-  #endif //OPS_MPI
 
   int arg_idx[2];
   int arg_idx_base[2];
@@ -72,24 +70,15 @@ void ops_par_loop_opensbliblock00Kernel047(char const *name, ops_block block, in
     arg_idx_base[n] = arg_idx[n];
   }
 
-  int dat0 = args[0].dat->elem_size;
   int dat1 = args[1].dat->elem_size;
   int dat2 = args[2].dat->elem_size;
   int dat3 = args[3].dat->elem_size;
   int dat4 = args[4].dat->elem_size;
+  int dat5 = args[5].dat->elem_size;
 
 
   //set up initial pointers
-  long long int base0 = args[0].dat->base_offset + (long long int)(block->instance->OPS_soa ? args[0].dat->type_size : args[0].dat->elem_size) * start[0] * args[0].stencil->stride[0];
-  base0 = base0 + (long long int)(block->instance->OPS_soa ? args[0].dat->type_size : args[0].dat->elem_size) *
-    args[0].dat->size[0] *
-    start[1] * args[0].stencil->stride[1];
-  #ifdef OPS_GPU
-  double *p_a0 = (double *)((char *)args[0].data_d + base0);
-  #else
-  double *p_a0 = (double *)((char *)args[0].data + base0);
-  #endif
-
+  int *p_a0 = (int *)args[0].data;
   long long int base1 = args[1].dat->base_offset + (long long int)(block->instance->OPS_soa ? args[1].dat->type_size : args[1].dat->elem_size) * start[0] * args[1].stencil->stride[0];
   base1 = base1 + (long long int)(block->instance->OPS_soa ? args[1].dat->type_size : args[1].dat->elem_size) *
     args[1].dat->size[0] *
@@ -130,20 +119,27 @@ void ops_par_loop_opensbliblock00Kernel047(char const *name, ops_block block, in
   double *p_a4 = (double *)((char *)args[4].data + base4);
   #endif
 
-  int *p_a5 = (int *)args[5].data;
+  long long int base5 = args[5].dat->base_offset + (long long int)(block->instance->OPS_soa ? args[5].dat->type_size : args[5].dat->elem_size) * start[0] * args[5].stencil->stride[0];
+  base5 = base5 + (long long int)(block->instance->OPS_soa ? args[5].dat->type_size : args[5].dat->elem_size) *
+    args[5].dat->size[0] *
+    start[1] * args[5].stencil->stride[1];
+  #ifdef OPS_GPU
+  double *p_a5 = (double *)((char *)args[5].data_d + base5);
+  #else
+  double *p_a5 = (double *)((char *)args[5].data + base5);
+  #endif
+
 
   int x_size = MAX(0,end[0]-start[0]);
   int y_size = MAX(0,end[1]-start[1]);
 
   //initialize global variable with the dimension of dats
-  int xdim0 = args[0].dat->size[0];
   int xdim1 = args[1].dat->size[0];
   int xdim2 = args[2].dat->size[0];
   int xdim3 = args[3].dat->size[0];
   int xdim4 = args[4].dat->size[0];
-  if (xdim0 != xdim0_opensbliblock00Kernel047_h || xdim1 != xdim1_opensbliblock00Kernel047_h || xdim2 != xdim2_opensbliblock00Kernel047_h || xdim3 != xdim3_opensbliblock00Kernel047_h || xdim4 != xdim4_opensbliblock00Kernel047_h) {
-    xdim0_opensbliblock00Kernel047 = xdim0;
-    xdim0_opensbliblock00Kernel047_h = xdim0;
+  int xdim5 = args[5].dat->size[0];
+  if (xdim1 != xdim1_opensbliblock00Kernel047_h || xdim2 != xdim2_opensbliblock00Kernel047_h || xdim3 != xdim3_opensbliblock00Kernel047_h || xdim4 != xdim4_opensbliblock00Kernel047_h || xdim5 != xdim5_opensbliblock00Kernel047_h) {
     xdim1_opensbliblock00Kernel047 = xdim1;
     xdim1_opensbliblock00Kernel047_h = xdim1;
     xdim2_opensbliblock00Kernel047 = xdim2;
@@ -152,6 +148,8 @@ void ops_par_loop_opensbliblock00Kernel047(char const *name, ops_block block, in
     xdim3_opensbliblock00Kernel047_h = xdim3;
     xdim4_opensbliblock00Kernel047 = xdim4;
     xdim4_opensbliblock00Kernel047_h = xdim4;
+    xdim5_opensbliblock00Kernel047 = xdim5;
+    xdim5_opensbliblock00Kernel047_h = xdim5;
   }
 
   //Halo Exchanges
@@ -174,12 +172,12 @@ void ops_par_loop_opensbliblock00Kernel047(char const *name, ops_block block, in
   }
 
   opensbliblock00Kernel047_c_wrapper(
-    p_a0,
+    *p_a0,
     p_a1,
     p_a2,
     p_a3,
     p_a4,
-    *p_a5,
+    p_a5,
     x_size, y_size);
 
   if (block->instance->OPS_diags > 1) {
@@ -191,19 +189,19 @@ void ops_par_loop_opensbliblock00Kernel047(char const *name, ops_block block, in
   #else
   ops_set_dirtybit_host(args, 6);
   #endif
-  ops_set_halo_dirtybit3(&args[1],range);
   ops_set_halo_dirtybit3(&args[2],range);
   ops_set_halo_dirtybit3(&args[3],range);
   ops_set_halo_dirtybit3(&args[4],range);
+  ops_set_halo_dirtybit3(&args[5],range);
 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
     block->instance->OPS_kernels[9].mpi_time += t2-t1;
-    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg0);
     block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg1);
     block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg2);
     block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg3);
     block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg5);
   }
 }

@@ -54,7 +54,7 @@
           clSafeCall( ret );
 
           // Build the program
-          char buildOpts[255*14];
+          char buildOpts[512*14];
           char* pPath = NULL;
           pPath = getenv ("OPS_INSTALL_PATH");
           if (pPath!=NULL)
@@ -101,8 +101,9 @@
 // host stub function
 void ops_par_loop_opensbliblock00Kernel062(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
- ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7, ops_arg arg8,
- ops_arg arg9, ops_arg arg10, ops_arg arg11, ops_arg arg12, ops_arg arg13) {
+ ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
+ ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
+ ops_arg arg12, ops_arg arg13) {
 
   //Timing
   double t1,t2,c1,c2;
@@ -173,8 +174,8 @@ void ops_par_loop_opensbliblock00Kernel062(char const *name, ops_block block, in
   xdim0,xdim1,xdim2,xdim3,xdim4,xdim5,xdim6,xdim7,xdim8,xdim9,xdim10,xdim11);
 
   //set up OpenCL thread blocks
-  size_t globalWorkSize[3] = {((x_size-1)/block->instance->OPS_block_size_x+ 1)*block->instance->OPS_block_size_x, ((y_size-1)/block->instance->OPS_block_size_y + 1)*block->instance->OPS_block_size_y, 1};
-  size_t localWorkSize[3] =  {block->instance->OPS_block_size_x,block->instance->OPS_block_size_y,block->instance->OPS_block_size_z};
+  size_t globalWorkSize[3] = {static_cast<size_t>(((x_size-1)/block->instance->OPS_block_size_x+ 1)*block->instance->OPS_block_size_x), static_cast<size_t>(((y_size-1)/block->instance->OPS_block_size_y + 1)*block->instance->OPS_block_size_y), static_cast<size_t>(1)};
+  size_t localWorkSize[3] =  {static_cast<size_t>(block->instance->OPS_block_size_x),static_cast<size_t>(block->instance->OPS_block_size_y),static_cast<size_t>(block->instance->OPS_block_size_z)};
 
 
 

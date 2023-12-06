@@ -9,33 +9,30 @@ int xdim1_opensbliblock00Kernel035;
 
 //user function
 inline 
-void opensbliblock00Kernel035(const ptr_double T_B0,
-  ptr_double wk7_B0,
+void opensbliblock00Kernel035(const ptr_double u1_B0,
+  ptr_double wk4_B0,
   const int *idx)
 {
-    OPS_ACC(wk7_B0, 0,0) = inv_0*((idx[0] == 0) ? (
-   -rc37*OPS_ACC(T_B0, 3,0) - rc36*OPS_ACC(T_B0, 1,0) +
-      (rc34)*OPS_ACC(T_B0, 4,0) + (rc39)*OPS_ACC(T_B0, 2,0) + (rc38)*OPS_ACC(T_B0, 0,0)
-)
-: ((idx[0] == 1) ? (
+   if (idx[1] == 0){
 
-      -rc16*OPS_ACC(T_B0, 3,0) + (rc34)*OPS_ACC(T_B0, -1,0) + (rc7)*OPS_ACC(T_B0, 1,0) + (rc26)*OPS_ACC(T_B0, 2,0) -
-      rc21*OPS_ACC(T_B0, 0,0)
-)
-: ((idx[0] == block0np0 - 1) ? (
-   -rc36*OPS_ACC(T_B0, -1,0) +
-      (rc34)*OPS_ACC(T_B0, -4,0) + (rc38)*OPS_ACC(T_B0, 0,0) - rc37*OPS_ACC(T_B0, -3,0) +
-      (rc39)*OPS_ACC(T_B0, -2,0)
-)
-: ((idx[0] == block0np0 - 2) ? (
-   (rc7)*OPS_ACC(T_B0, -1,0) +
-      (rc34)*OPS_ACC(T_B0, 1,0) + (rc26)*OPS_ACC(T_B0, -2,0) - rc16*OPS_ACC(T_B0, -3,0) -
-      rc21*OPS_ACC(T_B0, 0,0)
-)
-: (
-   -rc16*OPS_ACC(T_B0, -2,0) + (rc13)*OPS_ACC(T_B0, 1,0) +
-      (rc13)*OPS_ACC(T_B0, -1,0) - rc16*OPS_ACC(T_B0, 2,0) - rc40*OPS_ACC(T_B0, 0,0)
-)))));
+       OPS_ACC(wk4_B0, 0,0) = (-3*OPS_ACC(u1_B0, 0,2) + 4*OPS_ACC(u1_B0, 0,1) - (25.0/12.0)*OPS_ACC(u1_B0, 0,0) - (1.0/4.0)*OPS_ACC(u1_B0, 0,4) +
+            ((4.0/3.0))*OPS_ACC(u1_B0, 0,3))*invDelta1block0;
+
+   }
+
+   else if (idx[1] == 1){
+
+       OPS_ACC(wk4_B0, 0,0) = (-(5.0/6.0)*OPS_ACC(u1_B0, 0,0) - (1.0/2.0)*OPS_ACC(u1_B0, 0,2) - (1.0/4.0)*OPS_ACC(u1_B0, 0,-1) + ((1.0/12.0))*OPS_ACC(u1_B0, 0,3) +
+            ((3.0/2.0))*OPS_ACC(u1_B0, 0,1))*invDelta1block0;
+
+   }
+
+   else{
+
+       OPS_ACC(wk4_B0, 0,0) = (-(2.0/3.0)*OPS_ACC(u1_B0, 0,-1) - (1.0/12.0)*OPS_ACC(u1_B0, 0,2) + ((1.0/12.0))*OPS_ACC(u1_B0, 0,-2) +
+            ((2.0/3.0))*OPS_ACC(u1_B0, 0,1))*invDelta1block0;
+
+   }
 
 }
 
@@ -58,9 +55,7 @@ void opensbliblock00Kernel035_c_wrapper(
       int arg_idx[] = {arg_idx0+n_x, arg_idx1+n_y};
       const ptr_double ptr0 = {  p_a0 + n_x*1*1 + n_y*xdim0_opensbliblock00Kernel035*1*1, xdim0_opensbliblock00Kernel035};
       ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel035*1*1, xdim1_opensbliblock00Kernel035};
-      opensbliblock00Kernel035( ptr0,
-          ptr1,arg_idx );
-
+      opensbliblock00Kernel035( ptr0, ptr1,arg_idx);
     }
   }
 }

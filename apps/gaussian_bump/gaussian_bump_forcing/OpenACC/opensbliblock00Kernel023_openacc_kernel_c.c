@@ -12,7 +12,7 @@ inline
 void opensbliblock00Kernel023(const ptr_double T_B0,
   ptr_double mu_B0)
 {
-   OPS_ACC(mu_B0, 0,0) = (SuthT*rcinv19 + 1.0)*pow(OPS_ACC(T_B0, 0,0), 1.5)/(SuthT*rcinv19 + OPS_ACC(T_B0, 0,0));
+   OPS_ACC(mu_B0, 0,0) = OPS_ACC(T_B0, 0,0)*sqrt(OPS_ACC(T_B0, 0,0))*(1.0 + SuthT*invRefT)/(SuthT*invRefT + OPS_ACC(T_B0, 0,0));
 
 }
 
@@ -32,9 +32,7 @@ void opensbliblock00Kernel023_c_wrapper(
     for ( int n_x=0; n_x<x_size; n_x++ ){
       const ptr_double ptr0 = {  p_a0 + n_x*1*1 + n_y*xdim0_opensbliblock00Kernel023*1*1, xdim0_opensbliblock00Kernel023};
       ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel023*1*1, xdim1_opensbliblock00Kernel023};
-      opensbliblock00Kernel023( ptr0,
-          ptr1 );
-
+      opensbliblock00Kernel023( ptr0, ptr1);
     }
   }
 }

@@ -40,7 +40,7 @@ input_dict = {
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
     "epsilon"              : "1.0e-30",
-    "tripA"                : "0.01",
+    "tripA"                : "0.0",
     "xts"                  : "50.0",
     "omega_0"              : "0.1",
     "k_0"                  : "0.02"
@@ -147,9 +147,9 @@ weno_order = 5
 # averaging procedure to be used for the eigen system evaluation
 Avg = SimpleAverage([0, 1])
 # LLF scheme
-LLF = LLFWeno(weno_order, formulation='Z', averaging=Avg)
+LF = LFWeno(weno_order, formulation='Z', averaging=Avg)
 # add to schemes
-schemes[LLF.name] = LLF
+schemes[LF.name] = LF
 
 fns = 'u0 u1 T'
 cent = StoreSome(4, fns)
@@ -297,4 +297,4 @@ SimulationDataType.set_datatype(Double)
 OPSC(alg)
 
 substitute_simulation_parameters(constants, values)
-print_iteration_ops(NaN_check='rho_B0')
+print_iteration_ops(every = 1,NaN_check='rho_B0')

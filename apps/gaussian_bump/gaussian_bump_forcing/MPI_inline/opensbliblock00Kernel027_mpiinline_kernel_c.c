@@ -23,7 +23,7 @@ void opensbliblock00Kernel027_c_wrapper(
       const ptr_double rho_B0 = { rho_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel027*1, xdim1_opensbliblock00Kernel027};
       ptr_double T_B0 = { T_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel027*1, xdim2_opensbliblock00Kernel027};
       
-   OPS_ACC(T_B0, 0,0) = pow(Minf, 2)*gama*OPS_ACC(p_B0, 0,0)/OPS_ACC(rho_B0, 0,0);
+   OPS_ACC(T_B0, 0,0) = (Minf*Minf)*gama*OPS_ACC(p_B0, 0,0)/OPS_ACC(rho_B0, 0,0);
 
 
     }

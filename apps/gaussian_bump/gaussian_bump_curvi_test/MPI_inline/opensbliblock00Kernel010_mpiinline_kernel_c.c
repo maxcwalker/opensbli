@@ -29,7 +29,7 @@ void opensbliblock00Kernel010_c_wrapper(
       const ptr_double u1_B0 = { u1_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel010*1, xdim3_opensbliblock00Kernel010};
       ptr_double U0_B0 = { U0_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel010*1, xdim4_opensbliblock00Kernel010};
       
-   OPS_ACC(U0_B0, 0,0) = OPS_ACC(D00_B0, 0,0)*OPS_ACC(u0_B0, 0,0) + OPS_ACC(D01_B0, 0,0)*OPS_ACC(u1_B0, 0,0);
+   OPS_ACC(U0_B0, 0,0) = OPS_ACC(u0_B0, 0,0)*OPS_ACC(D00_B0, 0,0) + OPS_ACC(u1_B0, 0,0)*OPS_ACC(D01_B0, 0,0);
 
 
     }

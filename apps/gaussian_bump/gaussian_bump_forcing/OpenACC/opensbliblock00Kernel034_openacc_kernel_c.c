@@ -9,23 +9,30 @@ int xdim1_opensbliblock00Kernel034;
 
 //user function
 inline 
-void opensbliblock00Kernel034(const ptr_double T_B0,
-  ptr_double wk4_B0,
+void opensbliblock00Kernel034(const ptr_double u0_B0,
+  ptr_double wk3_B0,
   const int *idx)
 {
-    OPS_ACC(wk4_B0, 0,0) = ((idx[1] == 0) ? (
-   inv_0*(-rc11*OPS_ACC(T_B0, 0,0) - rc12*OPS_ACC(T_B0, 0,4) +
-      4*OPS_ACC(T_B0, 0,1) - 3*OPS_ACC(T_B0, 0,2) + (rc13)*OPS_ACC(T_B0, 0,3))
-)
-: ((idx[1] == 1) ? (
+   if (idx[1] == 0){
 
-      (rc14)*inv_0*(-10*OPS_ACC(T_B0, 0,0) + 18*OPS_ACC(T_B0, 0,1) - 3*OPS_ACC(T_B0, 0,-1) - 6*OPS_ACC(T_B0, 0,2) +
-      OPS_ACC(T_B0, 0,3))
-)
-: (
-   (rc14)*inv_0*(-8*OPS_ACC(T_B0, 0,-1) - OPS_ACC(T_B0, 0,2) + OPS_ACC(T_B0, 0,-2) +
-      8*OPS_ACC(T_B0, 0,1))
-)));
+       OPS_ACC(wk3_B0, 0,0) = (-3*OPS_ACC(u0_B0, 0,2) + 4*OPS_ACC(u0_B0, 0,1) - (25.0/12.0)*OPS_ACC(u0_B0, 0,0) - (1.0/4.0)*OPS_ACC(u0_B0, 0,4) +
+            ((4.0/3.0))*OPS_ACC(u0_B0, 0,3))*invDelta1block0;
+
+   }
+
+   else if (idx[1] == 1){
+
+       OPS_ACC(wk3_B0, 0,0) = (-(5.0/6.0)*OPS_ACC(u0_B0, 0,0) - (1.0/2.0)*OPS_ACC(u0_B0, 0,2) - (1.0/4.0)*OPS_ACC(u0_B0, 0,-1) + ((1.0/12.0))*OPS_ACC(u0_B0, 0,3) +
+            ((3.0/2.0))*OPS_ACC(u0_B0, 0,1))*invDelta1block0;
+
+   }
+
+   else{
+
+       OPS_ACC(wk3_B0, 0,0) = (-(2.0/3.0)*OPS_ACC(u0_B0, 0,-1) - (1.0/12.0)*OPS_ACC(u0_B0, 0,2) + ((1.0/12.0))*OPS_ACC(u0_B0, 0,-2) +
+            ((2.0/3.0))*OPS_ACC(u0_B0, 0,1))*invDelta1block0;
+
+   }
 
 }
 
@@ -48,9 +55,7 @@ void opensbliblock00Kernel034_c_wrapper(
       int arg_idx[] = {arg_idx0+n_x, arg_idx1+n_y};
       const ptr_double ptr0 = {  p_a0 + n_x*1*1 + n_y*xdim0_opensbliblock00Kernel034*1*1, xdim0_opensbliblock00Kernel034};
       ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel034*1*1, xdim1_opensbliblock00Kernel034};
-      opensbliblock00Kernel034( ptr0,
-          ptr1,arg_idx );
-
+      opensbliblock00Kernel034( ptr0, ptr1,arg_idx);
     }
   }
 }

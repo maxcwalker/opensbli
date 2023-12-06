@@ -11,9 +11,9 @@ simulation_parameters = {
 'Pr'        :   '0.71',
 'dt'        :   '0.0005',
 'niter'     :   '40000',
-'block0np0'     :   '256',
-'block0np1'     :   '256',
-'block0np2'     :   '256',
+'block0np0'     :   '64',
+'block0np1'     :   '64',
+'block0np2'     :   '64',
 'Delta0block0'      :   '2*M_PI/block0np0',
 'Delta1block0'      :   '2*M_PI/block0np1',
 'Delta2block0'      :   '2*M_PI/block0np2',
@@ -28,7 +28,7 @@ simulation_parameters = {
 'lambda0_TVD'       : 'dt/Delta0block0',
 'lambda1_TVD'       : 'dt/Delta1block0',
 'lambda2_TVD'       : 'dt/Delta2block0',
-'kappa_TVD'       : '0.3',
+'kappa_TVD'       : '0.05',
 }
 
 # Number of dimensions of the system to be solved

@@ -22,9 +22,9 @@ input_dict = {
     "Minf"                 : "2.0", 
     "Pr"                   : "0.72",
     "Re"                   : "950.0",
-    "Twall"                : "1.68",
+    "Twall"                : "1.67619431",
     "dt"                   : "0.001", 
-    "niter"                : "250000", 
+    "niter"                : "1000000", 
     "block0np0"            : "600.0", 
     "block0np1"            : "400.0",    
     "Delta0block0"         : "400.0/(block0np0-1)",
@@ -40,7 +40,7 @@ input_dict = {
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
     "epsilon"              : "1.0e-30",
-    "kappa_TVD"            : "0.3",
+    "kappa_TVD"            : "0.1",
 }
 constants = input_dict.keys()
 values = input_dict.values()
@@ -157,7 +157,7 @@ block.set_block_boundaries(boundaries)
 
 # Perform initial condition
 # Reynolds number, Mach number and free-stream temperature for the initial profile
-Re, xMach, Tinf = 950.0, 0.85, 288.0
+Re, xMach, Tinf = 950.0, 2.0, 288.0
 ## Ensure the grid size passed to the initialisation routine matches the grid sizes used in the simulation parameters
 polynomial_directions = [(False, DataObject('x0')), (True, DataObject('x1'))]
 n_poly_coefficients = 50

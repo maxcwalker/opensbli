@@ -76,12 +76,12 @@ tbar.set_label("Temperature [$^{\circ}$C]" ) #rotation= 270
 P = ax2.contourf(x, y, p, levels = levels,  cmap=cm.jet)
 ax2.set_ylabel("y")
 ax2.set_aspect(1)
-ax2.set_ylim([0, 5])
-ax2.set_xlim([0, 5])
+# ax2.set_ylim([0, 5])
+# ax2.set_xlim([0, 5])
 Pbar = plt.colorbar(P, ax=ax2)
 Pbar.set_label("Pressure [Pa]" ) #rotation= 270
 plt.legend
-
+plt.show()
 U = ax3.contourf(x, y, M, levels = levels, cmap=cm.jet)
 ax3.set_ylabel("y")
 ax3.set_aspect(1)

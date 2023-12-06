@@ -22,11 +22,11 @@ input_dict = {
     "Minf"                 : "2.0", 
     "Pr"                   : "0.72",
     "Re"                   : "950.0",
-    "Twall"                : "1.68",
+    "Twall"                : "1.67619431",
     "dt"                   : "0.001", 
-    "niter"                : "0", 
-    "block0np0"            : "600.0", 
-    "block0np1"            : "400.0",    
+    "niter"                : "250000", 
+    "block0np0"            : "600", 
+    "block0np1"            : "400",    
     "Delta0block0"         : "400.0/(block0np0-1)",
     "Delta1block0"         : "115.0/(block0np1-1)",
     "SuthT"                : "110.4",
@@ -59,7 +59,7 @@ metriceq.generate_transformations(ndim, coordinate_symbol, [(True, True), (True,
 
 # Define the compresible Navier-Stokes equations in Einstein notation.
 
-sc1 = "**{\'scheme\':\'Central\'}"
+sc1 = "**{\'scheme\':\'Weno\'}"
 a = "Conservative(detJ * rho*U_j,xi_j,%s)" % sc1
 mass = "Eq(Der(rho,t), - %s/detJ)" % (a)
 a = "Conservative(detJ * (rhou_i*U_j + p*D_j_i), xi_j , %s)" % sc1
@@ -138,18 +138,18 @@ coordinate_symbol = "x"
 #############################################################################################################################################
 
 schemes = {}
-# weno_order = 5
-# # averaging procedure to be used for the eigen system evaluation
-# Avg = SimpleAverage([0, 1])
-# # LLF scheme
-# LF = LFWeno(weno_order, formulation='Z', averaging=Avg)
-# # add to schemes
-# schemes[LF.name] = LF
+weno_order = 5
+# averaging procedure to be used for the eigen system evaluation
+Avg = SimpleAverage([0, 1])
+# LLF scheme
+LF = LFWeno(weno_order, formulation='Z', averaging=Avg)
+# add to schemes
+schemes[LF.name] = LF
 
 fns = 'u0 u1 T'
 cent = StoreSome(4, fns)
 
-cent = Central(4)
+# cent = Central(4)
 schemes[cent.name] = cent
 # RungeKutta scheme for temporal discretisation and add to the schemes dictionary
 rk = RungeKuttaLS(3)
@@ -164,7 +164,6 @@ schemes[rk.name] = rk
 # Set the discretisation schemes to be used (a python dictionary)
 block = SimulationBlock(ndim, block_number=0)
 block.set_discretisation_schemes(schemes)
-
 
 local_dict = {"block": block, "GridVariable": GridVariable, "DataObject": DataObject}
 x_loc = parse_expr("Eq(GridVariable(x0), block.deltas[0]*block.grid_indexes[0])", local_dict=local_dict)
@@ -210,7 +209,7 @@ block.set_block_boundaries(boundaries)
 
 # Perform initial condition
 # Reynolds number, Mach number and free-stream temperature for the initial profile
-Re, xMach, Tinf = 950.0, 0.85, 288.0
+Re, xMach, Tinf = 950.0, 2.0, 288.0
 ## Ensure the grid size passed to the initialisation routine matches the grid sizes used in the simulation parameters
 polynomial_directions = [(False, DataObject('x0')), (True, DataObject('x1'))]
 n_poly_coefficients = 50
@@ -243,4 +242,4 @@ SimulationDataType.set_datatype(Double)
 OPSC(alg)
 
 substitute_simulation_parameters(constants, values)
-print_iteration_ops(NaN_check='rho_B0')
+print_iteration_ops(every=100, NaN_check='rho_B0')

@@ -6,13 +6,15 @@
 
 int xdim0_opensbliblock00Kernel019;
 int xdim1_opensbliblock00Kernel019;
+int xdim2_opensbliblock00Kernel019;
 
 //user function
 inline 
-void opensbliblock00Kernel019(const ptr_double T_B0,
-  ptr_double mu_B0)
+void opensbliblock00Kernel019(const ptr_double p_B0,
+  const ptr_double rho_B0,
+  ptr_double T_B0)
 {
-   OPS_ACC(mu_B0, 0,0) = (SuthT*rcinv19 + 1.0)*pow(OPS_ACC(T_B0, 0,0), 1.5)/(SuthT*rcinv19 + OPS_ACC(T_B0, 0,0));
+   OPS_ACC(T_B0, 0,0) = (Minf*Minf)*gama*OPS_ACC(p_B0, 0,0)/OPS_ACC(rho_B0, 0,0);
 
 }
 
@@ -20,9 +22,10 @@ void opensbliblock00Kernel019(const ptr_double T_B0,
 void opensbliblock00Kernel019_c_wrapper(
   double *p_a0,
   double *p_a1,
+  double *p_a2,
   int x_size, int y_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1)
+  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2)
   #pragma acc loop
   #endif
   for ( int n_y=0; n_y<y_size; n_y++ ){
@@ -31,10 +34,9 @@ void opensbliblock00Kernel019_c_wrapper(
     #endif
     for ( int n_x=0; n_x<x_size; n_x++ ){
       const ptr_double ptr0 = {  p_a0 + n_x*1*1 + n_y*xdim0_opensbliblock00Kernel019*1*1, xdim0_opensbliblock00Kernel019};
-      ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel019*1*1, xdim1_opensbliblock00Kernel019};
-      opensbliblock00Kernel019( ptr0,
-          ptr1 );
-
+      const ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel019*1*1, xdim1_opensbliblock00Kernel019};
+      ptr_double ptr2 = {  p_a2 + n_x*1*1 + n_y*xdim2_opensbliblock00Kernel019*1*1, xdim2_opensbliblock00Kernel019};
+      opensbliblock00Kernel019( ptr0, ptr1, ptr2);
     }
   }
 }

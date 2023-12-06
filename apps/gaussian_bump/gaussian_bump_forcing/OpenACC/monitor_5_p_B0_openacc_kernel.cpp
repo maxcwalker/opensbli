@@ -42,9 +42,6 @@ void ops_par_loop_monitor_5_p_B0(char const *name, ops_block block, int dim, int
 
   int start[2];
   int end[2];
-  #ifdef OPS_MPI
-  sub_block_list sb = OPS_sub_block_list[block->index];
-  #endif //OPS_MPI
 
   int arg_idx[2];
   int arg_idx_base[2];

@@ -10,22 +10,29 @@ int xdim1_opensbliblock00Kernel034;
 //user function
 inline 
 void opensbliblock00Kernel034(const ptr_double u0_B0,
-  ptr_double wk6_B0,
+  ptr_double wk3_B0,
   const int *idx)
 {
-    OPS_ACC(wk6_B0, 0,0) = inv_2*((idx[1] == 0) ? (
-   (rc13)*OPS_ACC(u0_B0, 0,3) - 3*OPS_ACC(u0_B0, 0,2) +
-      4*OPS_ACC(u0_B0, 0,1) - rc12*OPS_ACC(u0_B0, 0,0) - rc11*OPS_ACC(u0_B0, 0,4)
-)
-: ((idx[1] == 1) ? (
+   if (idx[1] == 0){
 
-      (rc16)*OPS_ACC(u0_B0, 0,3) - rc7*OPS_ACC(u0_B0, 0,2) + (rc14)*OPS_ACC(u0_B0, 0,1) - rc15*OPS_ACC(u0_B0, 0,0) -
-      rc11*OPS_ACC(u0_B0, 0,-1)
-)
-: (
-   -rc16*OPS_ACC(u0_B0, 0,2) + (rc17)*OPS_ACC(u0_B0, 0,1) -
-      rc17*OPS_ACC(u0_B0, 0,-1) + (rc16)*OPS_ACC(u0_B0, 0,-2)
-)));
+       OPS_ACC(wk3_B0, 0,0) = (-3*OPS_ACC(u0_B0, 0,2) + 4*OPS_ACC(u0_B0, 0,1) - (25.0/12.0)*OPS_ACC(u0_B0, 0,0) - (1.0/4.0)*OPS_ACC(u0_B0, 0,4) +
+            ((4.0/3.0))*OPS_ACC(u0_B0, 0,3))*invDelta1block0;
+
+   }
+
+   else if (idx[1] == 1){
+
+       OPS_ACC(wk3_B0, 0,0) = (-(5.0/6.0)*OPS_ACC(u0_B0, 0,0) - (1.0/2.0)*OPS_ACC(u0_B0, 0,2) - (1.0/4.0)*OPS_ACC(u0_B0, 0,-1) + ((1.0/12.0))*OPS_ACC(u0_B0, 0,3) +
+            ((3.0/2.0))*OPS_ACC(u0_B0, 0,1))*invDelta1block0;
+
+   }
+
+   else{
+
+       OPS_ACC(wk3_B0, 0,0) = (-(2.0/3.0)*OPS_ACC(u0_B0, 0,-1) - (1.0/12.0)*OPS_ACC(u0_B0, 0,2) + ((1.0/12.0))*OPS_ACC(u0_B0, 0,-2) +
+            ((2.0/3.0))*OPS_ACC(u0_B0, 0,1))*invDelta1block0;
+
+   }
 
 }
 
@@ -48,9 +55,7 @@ void opensbliblock00Kernel034_c_wrapper(
       int arg_idx[] = {arg_idx0+n_x, arg_idx1+n_y};
       const ptr_double ptr0 = {  p_a0 + n_x*1*1 + n_y*xdim0_opensbliblock00Kernel034*1*1, xdim0_opensbliblock00Kernel034};
       ptr_double ptr1 = {  p_a1 + n_x*1*1 + n_y*xdim1_opensbliblock00Kernel034*1*1, xdim1_opensbliblock00Kernel034};
-      opensbliblock00Kernel034( ptr0,
-          ptr1,arg_idx );
-
+      opensbliblock00Kernel034( ptr0, ptr1,arg_idx);
     }
   }
 }

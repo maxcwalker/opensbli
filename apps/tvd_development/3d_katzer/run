@@ -1,0 +1,9 @@
+rm -rf *.h *.cpp *.h5
+python $1
+make clean
+make opensbli_seq
+./opensbli_seq
+rm -rf outputs/*
+mv *.h5 outputs/
+python paraview_timeseries_v3.py
+paraview read.xdmf

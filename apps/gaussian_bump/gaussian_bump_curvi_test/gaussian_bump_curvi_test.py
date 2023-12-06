@@ -19,7 +19,7 @@ from sympy import sin, cos, sinh, tanh, exp, pi, log
 
 input_dict = {
     "gama"                 : "1.4",
-    "Minf"                 : "0.85", 
+    "Minf"                 : "2.0", 
     "Pr"                   : "0.72",
     "Re"                   : "950.0",
     "Twall"                : "1.68",
@@ -142,14 +142,14 @@ weno_order = 5
 # averaging procedure to be used for the eigen system evaluation
 Avg = SimpleAverage([0, 1])
 # LLF scheme
-LLF = LLFWeno(weno_order, formulation='Z', averaging=Avg)
+LF = LFWeno(weno_order, formulation='Z', averaging=Avg)
 # add to schemes
-schemes[LLF.name] = LLF
+schemes[LF.name] = LF
 
 fns = 'u0 u1 T'
 cent = StoreSome(4, fns)
 
-cent = Central(4)
+# cent = Central(4)
 schemes[cent.name] = cent
 # RungeKutta scheme for temporal discretisation and add to the schemes dictionary
 rk = RungeKuttaLS(3)
@@ -210,7 +210,7 @@ block.set_block_boundaries(boundaries)
 
 # Perform initial condition
 # Reynolds number, Mach number and free-stream temperature for the initial profile
-Re, xMach, Tinf = 950.0, 0.85, 288.0
+Re, xMach, Tinf = 950.0, 2.5, 288.0
 ## Ensure the grid size passed to the initialisation routine matches the grid sizes used in the simulation parameters
 polynomial_directions = [(False, DataObject('x0')), (True, DataObject('x1'))]
 n_poly_coefficients = 50
@@ -243,4 +243,4 @@ SimulationDataType.set_datatype(Double)
 OPSC(alg)
 
 substitute_simulation_parameters(constants, values)
-print_iteration_ops(NaN_check='rho_B0')
+print_iteration_ops(every = 1 , NaN_check='rho_B0')

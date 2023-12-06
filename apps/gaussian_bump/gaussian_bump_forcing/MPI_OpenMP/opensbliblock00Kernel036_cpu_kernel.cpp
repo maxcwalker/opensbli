@@ -52,6 +52,7 @@ void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) 
   if (compute_ranges(args, 3,block, range, start, end, arg_idx) < 0) return;
   #endif
 
+
   #if defined(OPS_MPI)
   #if defined(OPS_LAZY)
   sub_block_list sb = OPS_sub_block_list[block->index];
@@ -109,29 +110,26 @@ void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) 
       const ACC<double> T_B0(xdim0_opensbliblock00Kernel036, T_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel036*1);
       ACC<double> wk5_B0(xdim1_opensbliblock00Kernel036, wk5_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel036*1);
       
-    wk5_B0(0,0) = ((idx[0] == 0) ? (
-   inv_1*((rc13)*T_B0(3,0) - rc11*T_B0(0,0) +
-      4*T_B0(1,0) - rc12*T_B0(4,0) - 3*T_B0(2,0))
-)
-: ((idx[0] == 1) ? (
+   if (idx[1] == 0){
 
-      (rc14)*inv_1*(T_B0(3,0) - 10*T_B0(0,0) + 18*T_B0(1,0) - 3*T_B0(-1,0) -
-      6*T_B0(2,0))
-)
-: ((idx[0] == block0np0 - 1) ? (
-   inv_1*((rc11)*T_B0(0,0) -
-      4*T_B0(-1,0) + 3*T_B0(-2,0) + (rc12)*T_B0(-4,0) - rc13*T_B0(-3,0))
-)
-:
-      ((idx[0] == block0np0 - 2) ? (
-   (rc14)*inv_1*(10*T_B0(0,0) + 3*T_B0(1,0) -
-      18*T_B0(-1,0) + 6*T_B0(-2,0) - T_B0(-3,0))
-)
-: (
+       wk5_B0(0,0) = (-3*T_B0(0,2) + 4*T_B0(0,1) - (25.0/12.0)*T_B0(0,0) - (1.0/4.0)*T_B0(0,4) +
+            ((4.0/3.0))*T_B0(0,3))*invDelta1block0;
 
-      (rc14)*inv_1*(-8*T_B0(-1,0) + 8*T_B0(1,0) - T_B0(2,0) +
-      T_B0(-2,0))
-)))));
+   }
+
+   else if (idx[1] == 1){
+
+       wk5_B0(0,0) = (-(5.0/6.0)*T_B0(0,0) - (1.0/2.0)*T_B0(0,2) - (1.0/4.0)*T_B0(0,-1) + ((1.0/12.0))*T_B0(0,3) +
+            ((3.0/2.0))*T_B0(0,1))*invDelta1block0;
+
+   }
+
+   else{
+
+       wk5_B0(0,0) = (-(2.0/3.0)*T_B0(0,-1) - (1.0/12.0)*T_B0(0,2) + ((1.0/12.0))*T_B0(0,-2) +
+            ((2.0/3.0))*T_B0(0,1))*invDelta1block0;
+
+   }
 
 
     }
@@ -158,30 +156,9 @@ void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel036(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2) {
-  ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
-  desc->name = name;
-  desc->block = block;
-  desc->dim = dim;
-  desc->device = 0;
-  desc->index = 27;
-  desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 27;
-  for ( int i=0; i<4; i++ ){
-    desc->range[i] = range[i];
-    desc->orig_range[i] = range[i];
-    desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
-  }
-  desc->nargs = 3;
-  desc->args = (ops_arg*)ops_malloc(3*sizeof(ops_arg));
-  desc->args[0] = arg0;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
-  desc->args[1] = arg1;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
-  desc->args[2] = arg2;
-  desc->function = ops_par_loop_opensbliblock00Kernel036_execute;
-  if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,27,"opensbliblock00Kernel036");
-  }
-  ops_enqueue_kernel(desc);
+  ops_arg args[3] = { arg0, arg1, arg2 };
+
+  //create kernel descriptor and pass it to ops_enqueue_kernel
+  create_kerneldesc_and_enque(name, args, 3, 27, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel036_execute);
 }
 #endif
