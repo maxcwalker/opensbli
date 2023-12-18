@@ -33,9 +33,9 @@ periodicBC_direction2_side1_76_block0 = ops_decl_halo_group(5,grp);
 // Boundary condition exchange code on opensbliblock00 direction 2 left
 ops_halo_group periodicBC_direction2_side0_65_block0 ;
 {
-int halo_iter[] = {block0np0 + 8, block0np1 + 8, 4};
-int from_base[] = {-4, -4, 0};
-int to_base[] = {-4, -4, block0np2};
+int halo_iter[] = {block0np0 + 2, block0np1 + 2, 1};
+int from_base[] = {-1, -1, 0};
+int to_base[] = {-1, -1, block0np2};
 int from_dir[] = {1, 2, 3};
 int to_dir[] = {1, 2, 3};
 ops_halo halo0 = ops_decl_halo(rho_B0, rho_B0, halo_iter, from_base, to_base, from_dir, to_dir);
@@ -49,9 +49,9 @@ periodicBC_direction2_side0_65_block0 = ops_decl_halo_group(5,grp);
 // Boundary condition exchange code on opensbliblock00 direction 2 right
 ops_halo_group periodicBC_direction2_side1_66_block0 ;
 {
-int halo_iter[] = {block0np0 + 8, block0np1 + 8, 4};
-int from_base[] = {-4, -4, block0np2 - 4};
-int to_base[] = {-4, -4, -4};
+int halo_iter[] = {block0np0 + 2, block0np1 + 2, 1};
+int from_base[] = {-1, -1, block0np2 - 1};
+int to_base[] = {-1, -1, -1};
 int from_dir[] = {1, 2, 3};
 int to_dir[] = {1, 2, 3};
 ops_halo halo0 = ops_decl_halo(rho_B0, rho_B0, halo_iter, from_base, to_base, from_dir, to_dir);

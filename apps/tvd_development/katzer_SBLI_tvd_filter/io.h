@@ -1,6 +1,7 @@
 void write_constants(const char* filename){
 ops_write_const_hdf5("Delta0block0", 1, "double", (char*)&Delta0block0, filename);
 ops_write_const_hdf5("Delta1block0", 1, "double", (char*)&Delta1block0, filename);
+ops_write_const_hdf5("Ducros_check", 1, "double", (char*)&Ducros_check, filename);
 ops_write_const_hdf5("Ducros_select", 1, "double", (char*)&Ducros_select, filename);
 ops_write_const_hdf5("HDF5_timing", 1, "int", (char*)&HDF5_timing, filename);
 ops_write_const_hdf5("Lx1", 1, "double", (char*)&Lx1, filename);

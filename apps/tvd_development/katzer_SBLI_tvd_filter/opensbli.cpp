@@ -23,15 +23,16 @@ Minf = 2.0;
 Twall = 1.67619431;
 write_output_file = 10000;
 HDF5_timing = 0;
+SuthT = 110.4;
 gama = 1.4;
 RefT = 288.0;
-SuthT = 110.4;
 Pr = 0.72;
 Re = 950.0;
 delta_TVD = 0.500000000000000;
 eps_TVD = 1.00000000000000e-8;
-kappa_TVD = 1.50000000000000;
+kappa_TVD = 0.1;
 gamma_m1 = -1 + gama;
+Ducros_check = 0.0500000000000000;
 Ducros_select = 0.0500000000000000;
 Lx1 = 115.0;
 by = 5.0;
@@ -50,6 +51,7 @@ invgama = 1.0/(gama);
 invgamma_m1 = 1.0/(gamma_m1);
 ops_decl_const("Delta0block0" , 1, "double", &Delta0block0);
 ops_decl_const("Delta1block0" , 1, "double", &Delta1block0);
+ops_decl_const("Ducros_check" , 1, "double", &Ducros_check);
 ops_decl_const("Ducros_select" , 1, "double", &Ducros_select);
 ops_decl_const("HDF5_timing" , 1, "int", &HDF5_timing);
 ops_decl_const("Lx1" , 1, "double", &Lx1);
@@ -413,6 +415,7 @@ int iteration_range_41_block0[] = {-1, block0np0 + 1, 0, block0np1};
 ops_par_loop(opensbliblock00Kernel041, "User kernel: TVD reconstruction direction 0", opensbliblock00, 2, iteration_range_41_block0,
 ops_arg_dat(a_B0, 1, stencil_0_12_00_5, "double", OPS_READ),
 ops_arg_dat(detJ_B0, 1, stencil_0_01_00_3, "double", OPS_READ),
+ops_arg_dat(kappa_B0, 1, stencil_0_32_00_7, "double", OPS_READ),
 ops_arg_dat(rhoE_B0, 1, stencil_0_12_00_5, "double", OPS_READ),
 ops_arg_dat(rho_B0, 1, stencil_0_12_00_5, "double", OPS_READ),
 ops_arg_dat(rhou0_B0, 1, stencil_0_12_00_5, "double", OPS_READ),
@@ -428,6 +431,7 @@ int iteration_range_42_block0[] = {0, block0np0, -1, block0np1 + 1};
 ops_par_loop(opensbliblock00Kernel042, "User kernel: TVD reconstruction direction 1", opensbliblock00, 2, iteration_range_42_block0,
 ops_arg_dat(a_B0, 1, stencil_0_00_12_5, "double", OPS_READ),
 ops_arg_dat(detJ_B0, 1, stencil_0_00_01_3, "double", OPS_READ),
+ops_arg_dat(kappa_B0, 1, stencil_0_00_32_7, "double", OPS_READ),
 ops_arg_dat(rhoE_B0, 1, stencil_0_00_12_5, "double", OPS_READ),
 ops_arg_dat(rho_B0, 1, stencil_0_00_12_5, "double", OPS_READ),
 ops_arg_dat(rhou0_B0, 1, stencil_0_00_12_5, "double", OPS_READ),

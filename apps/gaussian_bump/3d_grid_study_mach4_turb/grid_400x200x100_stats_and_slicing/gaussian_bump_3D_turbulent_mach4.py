@@ -290,27 +290,23 @@ coordinate_evaluation = [gridx0, gridx1, gridx2]
 # initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)
 initial = Initialise_Flatplate(polynomial_directions, n_poly_coefficients, Re, xMach, Tinf, Twall,coordinate_evaluations=coordinate_evaluation)
 
-
-
 #############################################################################################################################################
 #																																			#
 # Data i/o 																																	#
 #																																			#
 #############################################################################################################################################
 
-
 #   Stats    #
 if stats:
     # Create the statistics equations, this shows another way of writing the equations
     from airfoil_stats import favre_averaged_stats
-    stat_equation_classes, stats_arrays = favre_averaged_stats(ndim, q_vector, conservative=conservative)
+    stat_equation_classes, stats_arrays = favre_averaged_stats(ndim, q_vector, conservative=True)
 else:
     stat_equation_classes, stats_arrays = [], []
 
-
 # Set the IO class to write out arrays
 h5 = iohdf5(save_every=50000, **{'iotype': "Write"})
-h5.add_arrays(q_vector)
+h5.add_arrays(q_vector+[DataObject('x0'), DataObject('x1'), DataObject('x2')])
 # h5.add_arrays([DataObject('kappa')]) # shock sensor array
 # Read grid file
 h5_read = iohdf5(**{'iotype': "Read"})
@@ -323,7 +319,7 @@ metrics_hdf5 = iohdf5(arrays=metriceq.grid_der_wks, **{'position': "init", 'ioty
 block.setio([h5, h5_read, stats_hdf5, metrics_hdf5])
 
 # Set equations on the block and discretise
-block.set_equations([constituent, simulation_eq, initial, metriceq])
+block.set_equations([constituent, simulation_eq, initial, metriceq] + stat_equation_classes)
 
 ##################################################################################################################																															
 #         Slicing																																																																	
@@ -340,7 +336,6 @@ slices = [(q_vector, 1, 1)] # conserved variables, plan view, j=1
 slices += [(q_vector, 2, 'block0np2/2')] # q vector, x-y, z=Lz/2 plane
 slices_hdf5.add_slices(slices)
 block.setio([grid_slice_hdf5, slices_hdf5])
-
 
 block.discretise()
 

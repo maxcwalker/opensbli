@@ -17,27 +17,27 @@ block0np2 = 100;
 Delta0block0 = 400.0/(block0np0-1);
 Delta1block0 = 115.0/(block0np1-1);
 Delta2block0 = 20.0/(block0np1-1);
-niter = 20000;
+niter = 250000;
 double rkB[] = {(1.0/3.0), (15.0/16.0), (8.0/15.0)};
 double rkA[] = {0, (-5.0/9.0), (-153.0/128.0)};
 dt = 0.02;
-Minf = 2.0;
 Twall = 1.67619431;
-write_output_file = 1000;
+Minf = 2.0;
+write_output_file = 50000;
 HDF5_timing = 0;
-gama = 1.4;
 RefT = 288.0;
+gama = 1.4;
 SuthT = 110.4;
-Pr = 0.72;
 Re = 950.0;
+Pr = 0.72;
 shock_filter_control = 1.00000000000000;
 gamma_m1 = -1 + gama;
 Ducros_check = 0.0500000000000000;
 Ducros_select = 0.0500000000000000;
 sensor_theta = 0.500000000000000;
+inv_rfact0_block0 = 1.0/Delta0block0;
 inv_rfact2_block0 = 1.0/Delta2block0;
 inv_rfact1_block0 = 1.0/Delta1block0;
-inv_rfact0_block0 = 1.0/Delta0block0;
 Lx1 = 115.0;
 by = 5.0;
 inv2Delta0block0 = 1.0/(Delta0block0*Delta0block0);
@@ -221,9 +221,9 @@ ops_timers(&inner_start, &elapsed_inner_start);
 for(iter=start_iter; iter<=start_iter+niter - 1; iter++)
 {
 simulation_time = tstart + dt*((iter - start_iter)+1);
-if(fmod(iter+1, 100) == 0){
+if(fmod(iter+1, 1000) == 0){
         ops_timers(&inner_end, &elapsed_inner_end);
-        ops_printf("Iteration: %d. Time-step: %.3e. Simulation time: %.5f. Time/iteration: %lf.\n", iter+1, dt, simulation_time, (elapsed_inner_end - elapsed_inner_start)/100);
+        ops_printf("Iteration: %d. Time-step: %.3e. Simulation time: %.5f. Time/iteration: %lf.\n", iter+1, dt, simulation_time, (elapsed_inner_end - elapsed_inner_start)/1000);
         fflush(stdout);
         ops_NaNcheck(rho_B0);
         ops_timers(&inner_start, &elapsed_inner_start);

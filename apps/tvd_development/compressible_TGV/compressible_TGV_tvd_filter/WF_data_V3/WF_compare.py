@@ -11,38 +11,42 @@ def extract_data(path, delimiter):
     return data
 
 
-input_names = ['64', '128', '256', '384']
+input_names = ['64', '256']
 # input_names = ['768']
-colors = ['b', 'g', 'r', 'm', 'k', 'c', 'k', 'y', 'orange']
-linestyles = ['-', '-','-','-','-','-','-', '-', '-']
+colors = ['b', 'g', 'y', 'pink', 'k', 'c', 'k','purple']
+linestyles = ['-', '-','-','-','-','-','-', '-', '-', '-']
 data = []
 for name in input_names:
     output = extract_data('./OpenSBLI_WF5_N%s_M125_Re1600.dat' % name, delimiter=' ')
     data.append([output, name])
 
-output = extract_data('./OpenSBLI_reference2048_M125_Re1600.dat', delimiter=' ')
-data.append([output, 'Reference'])
-input_names += ['Reference']
+# output = extract_data('./OpenSBLI_TVD_kappa0.1.dat', delimiter=',')
+# data.append([output, 'TVD filter 0.1', ])
+# input_names += ['TVD filter 0.1']
 
-output = extract_data('./OpenSBLI_TVD_kappa0.9.dat', delimiter=',')
-data.append([output, 'TVD filter 0.9', ])
-input_names += ['TVD filter 0.9']
+# output = extract_data('./OpenSBLI_TVD_kappa0.2_optimize.dat', delimiter=',')
+# data.append([output, 'TVD filter 0.2 optimize', ])
+# input_names += ['TVD filter 0.2 optimize']
 
-output = extract_data('./OpenSBLI_TVD_kappa0.3.dat', delimiter=',')
-data.append([output, 'TVD filter 0.3', ])
-input_names += ['TVD filter 0.3']
+output = extract_data('./OpenSBLI_TVD_kappa0.1_optimize.dat', delimiter=',')
+data.append([output, 'TVD filter 0.1', ])
+input_names += ['TVD filter 0.1']
 
-output = extract_data('./OpenSBLI_TVD_kappa0.02.dat', delimiter=',')
-data.append([output, 'TVD filter 0.02', ])
-input_names += ['TVD filter 0.02']
+# output = extract_data('./OpenSBLI_TVD_kappa0.1_256cubed.dat', delimiter=',')
+# data.append([output, 'TVD filter 0.1', ])
+# input_names += ['TVD filter 0.1 256cubed']
 
-output = extract_data('./OpenSBLI_TVD_kappa0.3_256cubed.dat', delimiter=',')
-data.append([output, 'TVD filter 0.3', ])
-input_names += ['TVD filter 0.3 256cubed']
+output = extract_data('./OpenSBLI_TVD_kappa0.1_256_cubed_optimize.dat', delimiter=',')
+data.append([output, 'TVD filter 0.1 256cubed', ])
+input_names += ['TVD filter 0.1 256cubed']
 
 # output = extract_data('./OpenSBLI_TVD_kappa0.9_256cubed.dat', delimiter=',')
 # data.append([output, 'TVD filter 0.9', ])
 # input_names += ['TVD filter 0.9 256cubed']
+
+output = extract_data('./OpenSBLI_reference2048_M125_Re1600.dat', delimiter=' ')
+data.append([output, 'Reference'])
+input_names += ['Reference']
 
 # KE plot
 plt.clf()
@@ -55,12 +59,18 @@ for i, name in enumerate(input_names):
         label = r'Reference: $2048^3$'
     elif name == 'TVD filter 0.9':
         label = r'TVD filter (kappa=0.9): $64^3$'
-    elif name == 'TVD filter 0.3':
-        label = r'TVD filter (kappa=0.3): $64^3$'
+    elif name == 'TVD filter 0.1':
+        label = r'TVD filter (kappa=0.1): $64^3$'
     elif name == 'TVD filter 0.02':
         label = r'TVD filter (kappa=0.02): $64^3$'
-    elif name == 'TVD filter 0.3 256cubed':
-        label = r'TVD filter (kappa=0.3): $256^3$'
+    elif name == 'TVD filter 0.2 optimize':
+        label = r'TVD filter (kappa=0.2): $64^3$ optimized'
+    elif name == 'TVD filter 0.1 optimize':
+        label = r'TVD filter (kappa=0.1): $64^3$ optimized'
+    elif name == 'TVD filter 0.1 256cubed':
+        label = r'TVD filter (kappa=0.1): $256^3$'
+    elif name == 'TVD filter 0.1 256cubed optimize':
+        label = r'TVD filter (kappa=0.1): $256^3$ optimized'
     # elif name == 'TVD filter 0.9 256cubed':
     #     label = r'TVD filter (kappa=0.9): $256^3$'
     else:
@@ -98,12 +108,18 @@ for i, name in enumerate(input_names):
         label = r'Reference: $2048^3$'
     elif name == 'TVD filter 0.9':
         label = r'TVD filter (kappa=0.9): $64^3$'
-    elif name == 'TVD filter 0.3':
-        label = r'TVD filter (kappa=0.3): $64^3$'
+    elif name == 'TVD filter 0.1':
+        label = r'TVD filter (kappa=0.1): $64^3$'
     elif name == 'TVD filter 0.02':
         label = r'TVD filter (kappa=0.02): $64^3$'
-    elif name == 'TVD filter 0.3 256cubed':
-        label = r'TVD filter (kappa=0.3): $256^3$'
+    elif name == 'TVD filter 0.2 optimize':
+        label = r'TVD filter (kappa=0.2): $64^3$ optimized'
+    elif name == 'TVD filter 0.1 optimize':
+        label = r'TVD filter (kappa=0.1): $64^3$ optimized'
+    elif name == 'TVD filter 0.1 256cubed':
+        label = r'TVD filter (kappa=0.1): $256^3$'
+    elif name == 'TVD filter 0.1 256cubed optimize':
+        label = r'TVD filter (kappa=0.1): $256^3$ optimized'
     # elif name == 'TVD filter 0.9 256cubed':
     #     label = r'TVD filter (kappa=0.9): $256^3$'
     else:
@@ -131,22 +147,24 @@ plt.clf()
 
 
 
-
-
-
-
 # Dilatational plot
 for i, name in enumerate(input_names):
     if name == 'Reference':
         label = r'Reference: $2048^3$'
     elif name == 'TVD filter 0.9':
         label = r'TVD filter (kappa=0.9): $64^3$'
-    elif name == 'TVD filter 0.3':
-        label = r'TVD filter (kappa=0.3): $64^3$'
+    elif name == 'TVD filter 0.1':
+        label = r'TVD filter (kappa=0.1): $64^3$'
     elif name == 'TVD filter 0.02':
         label = r'TVD filter (kappa=0.02): $64^3$'
-    elif name == 'TVD filter 0.3 256cubed':
-        label = r'TVD filter (kappa=0.3): $256^3$'
+    elif name == 'TVD filter 0.2 optimize':
+        label = r'TVD filter (kappa=0.2): $64^3$ optimized'
+    elif name == 'TVD filter 0.1 optimize':
+        label = r'TVD filter (kappa=0.1): $64^3$ optimized'
+    elif name == 'TVD filter 0.1 256cubed':
+        label = r'TVD filter (kappa=0.1): $256^3$'
+    elif name == 'TVD filter 0.1 256cubed optimize':
+        label = r'TVD filter (kappa=0.1): $256^3$ optimized'
     # elif name == 'TVD filter 0.9 256cubed':
     #     label = r'TVD filter (kappa=0.9): $256^3$'
     else:
@@ -166,12 +184,18 @@ for i, name in enumerate(input_names):
         label = r'Reference: $2048^3$'
     elif name == 'TVD filter 0.9':
         label = r'TVD filter (kappa=0.9): $64^3$'
-    elif name == 'TVD filter 0.3':
-        label = r'TVD filter (kappa=0.3): $64^3$'
+    elif name == 'TVD filter 0.1':
+        label = r'TVD filter (kappa=0.1): $64^3$'
     elif name == 'TVD filter 0.02':
         label = r'TVD filter (kappa=0.02): $64^3$'
-    elif name == 'TVD filter 0.3 256cubed':
-        label = r'TVD filter (kappa=0.3): $256^3$'
+    elif name == 'TVD filter 0.2 optimize':
+        label = r'TVD filter (kappa=0.2): $64^3$ optimized'
+    elif name == 'TVD filter 0.1 optimize':
+        label = r'TVD filter (kappa=0.1): $64^3$ optimized'
+    elif name == 'TVD filter 0.1 256cubed':
+        label = r'TVD filter (kappa=0.1): $256^3$'
+    elif name == 'TVD filter 0.1 256cubed optimize':
+        label = r'TVD filter (kappa=0.1): $256^3$ optimized'
     # elif name == 'TVD filter 0.9 256cubed':
         # label = r'TVD filter (kappa=0.9): $256^3$'
     else:

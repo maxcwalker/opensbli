@@ -30,7 +30,7 @@ simulation_parameters = {
 'lambda1_TVD'       : 'dt/Delta1block0',
 'inv_rfact0_block0' : '1.0/Delta0block0',
 'inv_rfact1_block0' : '1.0/Delta1block0',
-'kappa_TVD' : '0.9',
+'kappa_TVD' : '0.1',
 }
 
 ndim = 2

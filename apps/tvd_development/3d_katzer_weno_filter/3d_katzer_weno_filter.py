@@ -25,7 +25,7 @@ input_dict = {
 'Re'        :   '950.0',
 'Twall'     :   '1.67619431',
 'dt'        :   '0.02',
-'niter'     :   '20000',
+'niter'     :   '250000',
 'block0np0'     :   '400',
 'block0np1'     :   '200',
 'block0np2'     :   '100',
@@ -194,7 +194,7 @@ initial = Initialise_Flatplate(polynomial_directions, n_poly_coefficients, Re, x
 #############################################################################################################################################
 
 kwargs = {'iotype': "Write"}
-h5 = iohdf5(save_every=1000, **kwargs)
+h5 = iohdf5(save_every=50000, **kwargs)
 h5.add_arrays(simulation_eq.time_advance_arrays)
 h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('x2'), DataObject('D11')])
 h5.add_arrays([DataObject('p')]) # save pressure
@@ -216,4 +216,4 @@ SimulationDataType.set_datatype(Double)
 OPSC(alg)
 
 substitute_simulation_parameters(constants, values)
-print_iteration_ops(every=100, NaN_check='rho_B0')
+print_iteration_ops(every=1000, NaN_check='rho_B0')

@@ -218,8 +218,10 @@ block.set_equations([copy.deepcopy(constituent), copy.deepcopy(simulation_eq), i
 # WENO/TVD filter if not using direct application of WENO/TENO
 if not weno and not teno:
     if TVD:
-        WF = TVDFilter(block, airfoil=False)
+        WF = TVDFilter(block, airfoil=False, optimize=False, metrics=None)
         block.set_equations(WF.equation_classes)
+        # apply filter
+
     else:
         WF = WENOFilter(block, order=3, formulation='Z', flux_type='LLF', airfoil=False, metrics=None, optimize=True)
         block.set_equations(WF.equation_classes)  

@@ -5,6 +5,7 @@ int stage;
 double tstart;
 double Delta0block0;
 double Delta1block0;
+double Ducros_check;
 double Ducros_select;
 int HDF5_timing;
 double Lx1;
