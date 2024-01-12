@@ -1,5 +1,0 @@
-rm -rf *.h *.cpp *.h5
-python $1
-make clean
-make opensbli_seq
-./opensbli_seq

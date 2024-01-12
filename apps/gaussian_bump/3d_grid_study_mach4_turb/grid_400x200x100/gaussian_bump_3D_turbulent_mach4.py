@@ -5,6 +5,7 @@
 # author. 
 # university of southampton
 # --------------------------------------------------------------------------------------------------------------------------------------------
+
 from opensbli import *
 import copy
 # from opensbli.utilities.katzer_init import Initialise_Katzer
@@ -19,12 +20,12 @@ from sympy import sin, cos, sinh, tanh, exp, pi, log
 #############################################################################################################################################
 
 input_dict = {
-    "gama"                 : "1.4", 
-    "Minf"                 : "4.0", 
+    "gama"                 : "1.4",
+    "Minf"                 : "4.0",
     "Pr"                   : "0.72", 
     "Re"                   : "4000.0", 
     "Twall"                : "1.37", 
-    "dt"                   : "0.0015", 
+    "dt"                   : "0.003", 
     "niter"                : "500000", 
     "block0np0"            : "400", 
     "block0np1"            : "200",
@@ -73,7 +74,6 @@ metriceq = MetricsEquation()
 metriceq.generate_transformations(ndim, coordinate_symbol, [(True, True), (True, True),(False,False)], 2)
 
 # Define the compresible Navier-Stokes equations in Einstein notation.
-
 sc1 = "**{\'scheme\':\'Teno\'}"
 a = "Conservative(detJ * rho*U_j,xi_j,%s)" % sc1
 mass = "Eq(Der(rho,t), - %s/detJ)" % (a)
@@ -89,6 +89,7 @@ heat_flux = "Eq(q_j, (-mu/((gama-1)*Minf*Minf*Pr*Re))*Der(T,x_j))"
 # Substitutions
 substitutions = [stress_tensor, heat_flux]
 constants_var = ["Re", "Pr", "gama", "Minf", "SuthT", "RefT"]
+
 # Formulas for the variables used in the equations
 velocity = "Eq(u_i, rhou_i/rho)"
 pressure = "Eq(p, (gama-1)*(rhoE - rho*(1/2)*(KD(_i,_j)*u_i*u_j)))"

@@ -113,7 +113,7 @@ class Plot(plotFunctions):
         return
 
 # default_colourmap = 
-labels = ['OpenSBLI', 'Reference']
+labels = ['TVD filter', 'Reference']
 colors = ['k', 'r']
 Re = 200
 # directory = "./Re%d/" % Re

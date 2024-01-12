@@ -131,7 +131,7 @@ class KatzerPlot(plotFunctions):
         ax = fig.add_subplot(111)
         ax.plot(x, ref_cf, color='r', linestyle='--', marker='o', markevery=15, markersize=5, label='Reference')
 
-        ax.plot(self.x[1, :], Cf, color='k', label='OpenSBLI')
+        ax.plot(self.x[1, :], Cf, color='k', label='TVD filter')
         ax.axhline(y=0.0, linestyle='--', color='k')
 
         ax.set_xlabel(r'$x_0$', fontsize=20)
@@ -144,7 +144,7 @@ class KatzerPlot(plotFunctions):
         fig.clf()
 
         plt.plot(x, ref_p, color='r', linestyle='--', marker='o', markevery=15, markersize=5, label='Reference')
-        plt.plot(self.x[1, :], P[0, :]/P[0, 0], color='k', label="OpenSBLI")
+        plt.plot(self.x[1, :], P[0, :]/P[0, 0], color='k', label="TVD filter")
         # linestyle='', marker='o',markevery=10)
         plt.xlabel(r'$x_0$', fontsize=20)
         plt.xlim(-10)

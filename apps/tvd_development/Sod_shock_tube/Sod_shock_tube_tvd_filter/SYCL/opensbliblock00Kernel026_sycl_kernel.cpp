@@ -85,7 +85,7 @@ void ops_par_loop_opensbliblock00Kernel026_execute(ops_kernel_descriptor *desc) 
              ))
       , [=](cl::sycl::nd_item<1> item
       ) [[intel::kernel_args_restrict]] {
-        int n_x = item.get_global_id()[0]+start_0;
+        int n_x = item.get_global_id(0)+start_0;
         ACC<double> detJ_B0(&detJ_B0_p[0] + base0 + n_x*1);
         //USER CODE
         if (n_x < end_0) {

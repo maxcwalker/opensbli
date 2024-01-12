@@ -50,9 +50,6 @@ void ops_par_loop_opensbliblock00Kernel013(char const *name, ops_block block, in
 
   int start[1];
   int end[1];
-  #ifdef OPS_MPI
-  sub_block_list sb = OPS_sub_block_list[block->index];
-  #endif //OPS_MPI
 
   int arg_idx[1];
   int arg_idx_base[1];

@@ -62,11 +62,8 @@ void opensbliblock00Kernel002_c_wrapper(
     ptr_double ptr6 = {  p_a6 + n_x*1*1 };
     ptr_double ptr7 = {  p_a7 + n_x*1*1 };
     ptr_double ptr8 = {  p_a8 + n_x*1*1 };
-    opensbliblock00Kernel002( ptr0,
-          ptr1,ptr2,
-          ptr3,ptr4,
-          ptr5,ptr6,
-          ptr7,ptr8 );
-
+    opensbliblock00Kernel002( ptr0, ptr1, ptr2, ptr3,
+           ptr4, ptr5, ptr6, ptr7,
+           ptr8);
   }
 }

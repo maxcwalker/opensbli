@@ -43,35 +43,7 @@ ops_write_const_hdf5("xts", 1, "double", (char*)&xts, filename);
 ops_write_const_hdf5("iter", 1, "int", (char*)&iter, filename);
 }
 
-void HDF5_IO_Write_3_opensbliblock00(ops_block& opensbliblock00, ops_dat& wk0_B0, ops_dat& wk1_B0, ops_dat& wk3_B0, ops_dat& wk4_B0, ops_dat& detJ_B0, ops_dat& D00_B0, ops_dat& D01_B0, ops_dat& D10_B0, ops_dat& D11_B0, int HDF5_timing){
-double cpu_start0, elapsed_start0;
-if (HDF5_timing == 1){
-ops_timers(&cpu_start0, &elapsed_start0);
-}
-// Writing OPS datasets
-ops_fetch_block_hdf5_file(opensbliblock00, "metrics.h5");
-ops_fetch_dat_hdf5_file(wk0_B0, "metrics.h5");
-ops_fetch_dat_hdf5_file(wk1_B0, "metrics.h5");
-ops_fetch_dat_hdf5_file(wk3_B0, "metrics.h5");
-ops_fetch_dat_hdf5_file(wk4_B0, "metrics.h5");
-ops_fetch_dat_hdf5_file(detJ_B0, "metrics.h5");
-ops_fetch_dat_hdf5_file(D00_B0, "metrics.h5");
-ops_fetch_dat_hdf5_file(D01_B0, "metrics.h5");
-ops_fetch_dat_hdf5_file(D10_B0, "metrics.h5");
-ops_fetch_dat_hdf5_file(D11_B0, "metrics.h5");
-// Writing simulation constants
-write_constants("metrics.h5");
-if (HDF5_timing == 1){
-double cpu_end0, elapsed_end0;
-ops_timers(&cpu_end0, &elapsed_end0);
-ops_printf("-----------------------------------------\n");
-ops_printf("Time to write HDF5 file: %s: %lf\n", "metrics.h5", elapsed_end0-elapsed_start0);
-ops_printf("-----------------------------------------\n");
-fflush(stdout);
-}
-}
-
-void HDF5_IO_Write_0_opensbliblock00_dynamic(ops_block& opensbliblock00, int iter, ops_dat& rho_B0, ops_dat& rhou0_B0, ops_dat& rhou1_B0, ops_dat& rhou2_B0, ops_dat& rhoE_B0, ops_dat& x0_B0, ops_dat& x1_B0, ops_dat& x2_B0, int HDF5_timing){
+void HDF5_IO_Write_0_opensbliblock00_dynamic(ops_block& opensbliblock00, int iter, ops_dat& x0_B0, ops_dat& x1_B0, ops_dat& x2_B0, ops_dat& rho_B0, ops_dat& rhou0_B0, ops_dat& rhou1_B0, ops_dat& rhou2_B0, ops_dat& rhoE_B0, int HDF5_timing){
 double cpu_start0, elapsed_start0;
 if (HDF5_timing == 1){
 ops_timers(&cpu_start0, &elapsed_start0);
@@ -80,14 +52,14 @@ ops_timers(&cpu_start0, &elapsed_start0);
 char name0[80];
 sprintf(name0, "opensbli_output_%06d.h5", iter + 1);
 ops_fetch_block_hdf5_file(opensbliblock00, name0);
+ops_fetch_dat_hdf5_file(x0_B0, name0);
+ops_fetch_dat_hdf5_file(x1_B0, name0);
+ops_fetch_dat_hdf5_file(x2_B0, name0);
 ops_fetch_dat_hdf5_file(rho_B0, name0);
 ops_fetch_dat_hdf5_file(rhou0_B0, name0);
 ops_fetch_dat_hdf5_file(rhou1_B0, name0);
 ops_fetch_dat_hdf5_file(rhou2_B0, name0);
 ops_fetch_dat_hdf5_file(rhoE_B0, name0);
-ops_fetch_dat_hdf5_file(x0_B0, name0);
-ops_fetch_dat_hdf5_file(x1_B0, name0);
-ops_fetch_dat_hdf5_file(x2_B0, name0);
 // Writing simulation constants
 write_constants(name0);
 if (HDF5_timing == 1){
@@ -100,7 +72,7 @@ fflush(stdout);
 }
 }
 
-void HDF5_IO_Write_0_opensbliblock00(ops_block& opensbliblock00, ops_dat& rho_B0, ops_dat& rhou0_B0, ops_dat& rhou1_B0, ops_dat& rhou2_B0, ops_dat& rhoE_B0, ops_dat& x0_B0, ops_dat& x1_B0, ops_dat& x2_B0, int HDF5_timing){
+void HDF5_IO_Write_0_opensbliblock00(ops_block& opensbliblock00, ops_dat& x0_B0, ops_dat& x1_B0, ops_dat& x2_B0, ops_dat& rho_B0, ops_dat& rhou0_B0, ops_dat& rhou1_B0, ops_dat& rhou2_B0, ops_dat& rhoE_B0, int HDF5_timing){
 double cpu_start0, elapsed_start0;
 if (HDF5_timing == 1){
 ops_timers(&cpu_start0, &elapsed_start0);
@@ -109,14 +81,14 @@ ops_timers(&cpu_start0, &elapsed_start0);
 char name0[80];
 sprintf(name0, "opensbli_output.h5");
 ops_fetch_block_hdf5_file(opensbliblock00, name0);
+ops_fetch_dat_hdf5_file(x0_B0, name0);
+ops_fetch_dat_hdf5_file(x1_B0, name0);
+ops_fetch_dat_hdf5_file(x2_B0, name0);
 ops_fetch_dat_hdf5_file(rho_B0, name0);
 ops_fetch_dat_hdf5_file(rhou0_B0, name0);
 ops_fetch_dat_hdf5_file(rhou1_B0, name0);
 ops_fetch_dat_hdf5_file(rhou2_B0, name0);
 ops_fetch_dat_hdf5_file(rhoE_B0, name0);
-ops_fetch_dat_hdf5_file(x0_B0, name0);
-ops_fetch_dat_hdf5_file(x1_B0, name0);
-ops_fetch_dat_hdf5_file(x2_B0, name0);
 // Writing simulation constants
 write_constants(name0);
 if (HDF5_timing == 1){
@@ -129,7 +101,7 @@ fflush(stdout);
 }
 }
 
-void HDF5_IO_Write_2_opensbliblock00(ops_block& opensbliblock00, ops_dat& rhomean_B0, ops_dat& rhou0mean_B0, ops_dat& rhou1mean_B0, ops_dat& rhou2mean_B0, ops_dat& E_mean_B0, ops_dat& rhou0u0mean_B0, ops_dat& rhou0u1mean_B0, ops_dat& rhou1u1mean_B0, ops_dat& rhou0u2mean_B0, ops_dat& rhou1u2mean_B0, ops_dat& rhou2u2mean_B0, int HDF5_timing){
+void HDF5_IO_Write_1_opensbliblock00(ops_block& opensbliblock00, ops_dat& rhomean_B0, ops_dat& rhou0mean_B0, ops_dat& rhou1mean_B0, ops_dat& rhou2mean_B0, ops_dat& E_mean_B0, ops_dat& rhou0u0mean_B0, ops_dat& rhou0u1mean_B0, ops_dat& rhou1u1mean_B0, ops_dat& rhou0u2mean_B0, ops_dat& rhou1u2mean_B0, ops_dat& rhou2u2mean_B0, int HDF5_timing){
 double cpu_start0, elapsed_start0;
 if (HDF5_timing == 1){
 ops_timers(&cpu_start0, &elapsed_start0);

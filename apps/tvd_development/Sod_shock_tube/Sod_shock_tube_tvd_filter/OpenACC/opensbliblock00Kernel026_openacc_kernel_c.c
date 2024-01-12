@@ -30,7 +30,6 @@ void opensbliblock00Kernel026_c_wrapper(
   #endif
   for ( int n_x=0; n_x<x_size; n_x++ ){
     ptr_double ptr0 = {  p_a0 + n_x*1*1 };
-    opensbliblock00Kernel026( ptr0 );
-
+    opensbliblock00Kernel026( ptr0);
   }
 }

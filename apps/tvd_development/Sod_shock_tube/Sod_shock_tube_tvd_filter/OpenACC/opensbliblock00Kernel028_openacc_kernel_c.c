@@ -33,6 +33,7 @@ inline
 
 
 
+
    double AVG_0_0_LEV_10 = 0.0;
    double AVG_0_0_LEV_01 = 0.0;
    double AVG_0_0_LEV_21 = 0.0;
@@ -42,6 +43,7 @@ inline
    double AVG_0_0_LEV_00 = 0.0;
    double AVG_0_0_LEV_11 = 0.0;
    double AVG_0_0_LEV_20 = 0.0;
+
 
    double kappa = 1.5;
    double AVG_0_0_REV_00 = 0.0;
@@ -113,6 +115,7 @@ inline
    double eps = 0.0000000001;
    double delta = 0.5;
 
+
    AVG_0_a = (rc1)*(OPS_ACC(a_B0, -1) + OPS_ACC(a_B0, 0));
 
    AVG_0_u0 = (rc1)*(OPS_ACC(u0_B0, -1) + OPS_ACC(u0_B0, 0));
@@ -140,6 +143,8 @@ inline
    AVG_0_0_LEV_22 = (rc1)*gamma_m1*pow(inv_AVG_a, 2);
 
 
+
+
    du_0 = OPS_ACC(rho_B0, 0) - OPS_ACC(rho_B0, -1);
    du_1 = OPS_ACC(rhou0_B0, 0) - OPS_ACC(rhou0_B0, -1);
    du_2 = OPS_ACC(rhoE_B0, 0) - OPS_ACC(rhoE_B0, -1);
@@ -151,11 +156,13 @@ inline
 
 
 
+
    AVG_0_a = (rc1)*(OPS_ACC(a_B0, 0) + OPS_ACC(a_B0, 1));
 
    AVG_0_u0 = (rc1)*(OPS_ACC(u0_B0, 0) + OPS_ACC(u0_B0, 1));
 
    inv_AVG_a = 1.0/AVG_0_a;
+
 
 
    AVG_0_0_LEV_00 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
@@ -187,6 +194,7 @@ inline
    alpha_21 = AVG_0_0_LEV_20*du_0 + AVG_0_0_LEV_21*du_1 + AVG_0_0_LEV_22*du_2;
 
 
+
    AVG_0_0_REV_00 = 1;
    AVG_0_0_REV_01 = 1;
    AVG_0_0_REV_02 = 1;
@@ -196,6 +204,7 @@ inline
    AVG_0_0_REV_20 = pow(AVG_0_a,2) / gamma_m1 + 0.5*pow(AVG_0_u0,2) - AVG_0_u0*AVG_0_a;
    AVG_0_0_REV_21 = 0.5*pow(AVG_0_u0,2);
    AVG_0_0_REV_22 = pow(AVG_0_a,2)*(1/gamma_m1+ AVG_0_u0*inv_AVG_a);
+
 
 
    ws_0 = AVG_0_u0 - AVG_0_a;
@@ -209,6 +218,7 @@ inline
    AVG_0_u0 = (rc1)*(OPS_ACC(u0_B0, 1) + OPS_ACC(u0_B0, 2));
 
    inv_AVG_a = 1.0/AVG_0_a;
+
 
 
    AVG_0_0_LEV_00 = (rc4)*AVG_0_u0*inv_AVG_a*(gama*AVG_0_a*AVG_0_u0*pow(inv_AVG_a, 2) - AVG_0_a*AVG_0_u0*pow(inv_AVG_a,
@@ -242,8 +252,6 @@ inline
 
 
 
-   lambda = dt / Delta0block0;
-
 
 
 
@@ -262,21 +270,11 @@ inline
 
 
 
-
-
-
-
-
-
-
-
    S = alpha_01 < 0 ? -1 : (alpha_01 > 0 ? 1 : 0);
    g_00 = S*fmax(fmax(0,fmin(2*fabs(alpha_01), S*alpha_00)),fmin(fabs(alpha_01),2*S*alpha_00));
 
-
-      S = alpha_11 < 0 ? -1 : (alpha_11 > 0 ? 1 : 0);
+   S = alpha_11 < 0 ? -1 : (alpha_11 > 0 ? 1 : 0);
    g_10 = S*fmax(fmax(0,fmin(2*fabs(alpha_11), S*alpha_10)),fmin(fabs(alpha_11),2*S*alpha_10));
-
 
    S = alpha_21 < 0 ? -1 : (alpha_21 > 0 ? 1 : 0);
    g_20 = S*fmax(fmax(0,fmin(2*fabs(alpha_21), S*alpha_20)),fmin(fabs(alpha_21),2*S*alpha_20));
@@ -286,10 +284,8 @@ inline
    S = alpha_02 < 0 ? -1 : (alpha_02 > 0 ? 1 : 0);
    g_01 = S*fmax(fmax(0,fmin(2*fabs(alpha_02), S*alpha_01)),fmin(fabs(alpha_02),2*S*alpha_01));
 
-
    S = alpha_12 < 0 ? -1 : (alpha_12 > 0 ? 1 : 0);
    g_11 = S*fmax(fmax(0,fmin(2*fabs(alpha_12), S*alpha_11)),fmin(fabs(alpha_12),2*S*alpha_11));
-
 
    S = alpha_22 < 0 ? -1 : (alpha_22 > 0 ? 1 : 0);
    g_21 = S*fmax(fmax(0,fmin(2*fabs(alpha_22), S*alpha_21)),fmin(fabs(alpha_22),2*S*alpha_21));
@@ -304,6 +300,7 @@ inline
    gamma_1 = (alpha_11 == 0) ? 0 : 0.5*sigma_1*alpha_11*(g_11 - g_10) / (pow(alpha_11,2)+eps);
    gamma_2 = (alpha_12 == 0) ? 0 : 0.5*sigma_2*alpha_21*(g_21 - g_20) / (pow(alpha_21,2)+eps);
 
+
    sigma_3 = fabs(gamma_0) >= delta ? fabs(gamma_0) : (pow((gamma_0),2) + pow(delta,2)) / (2*delta);
    sigma_4 = fabs(gamma_1) >= delta ? fabs(gamma_1) : (pow((gamma_1),2) + pow(delta,2)) / (2*delta);
    sigma_5 = fabs(gamma_2) >= delta ? fabs(gamma_2) : (pow((gamma_2),2) + pow(delta,2)) / (2*delta);
@@ -315,9 +312,13 @@ inline
 
 
 
+
+
+
    phi_0 = 0.5*sigma_0*(g_01 + g_00) - (sigma_3+sigma_0)*alpha_01;
    phi_1 = 0.5*sigma_1*(g_11 + g_10) - (sigma_4+sigma_1)*alpha_11;
    phi_2 = 0.5*sigma_2*(g_21 + g_20) - (sigma_5+sigma_2)*alpha_21;
+
 
 
 
@@ -339,9 +340,12 @@ inline
 
 
 
+
    phi_star_0 = kappa*theta_0*phi_0;
    phi_star_1 = kappa*theta_1*phi_1;
    phi_star_2 = kappa*theta_2*phi_2;
+
+
 
 
 
@@ -378,11 +382,8 @@ void opensbliblock00Kernel028_c_wrapper(
     ptr_double ptr6 = {  p_a6 + n_x*1*1 };
     ptr_double ptr7 = {  p_a7 + n_x*1*1 };
     ptr_double ptr8 = {  p_a8 + n_x*1*1 };
-    opensbliblock00Kernel028( ptr0,
-          ptr1,ptr2,
-          ptr3,ptr4,
-          ptr5,ptr6,
-          ptr7,ptr8 );
-
+    opensbliblock00Kernel028( ptr0, ptr1, ptr2, ptr3,
+           ptr4, ptr5, ptr6, ptr7,
+           ptr8);
   }
 }

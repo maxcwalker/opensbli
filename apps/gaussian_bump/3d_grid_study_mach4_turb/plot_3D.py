@@ -233,13 +233,13 @@ class plots_3D(plotFunctions):
 
         Rex,St_rey_ana,St_acc = self.St_Rex(Cf, mu,rho,u,T)
         fig1, ax1 = plt.subplots()
-        ax1.plot(Rex, St_rey_ana,label='Reynolds Analogy \nStanton Number')
-        ax1.plot(Rex, St_acc,label='Stanton Number\nEquation')
+        # ax1.plot(Rex, St_rey_ana,label='Reynolds Analogy \nStanton Number')
+        ax1.plot(Rex, St_acc,color='k',label='Stanton Number\nEquation')
         ax1.set_xlabel(r'$Re_x$', fontsize=20)
         ax1.set_ylabel(r'$St$', fontsize=20)
         # ax1.set_ylim([-0.2,3])
         ax1.set_xlim([min(Rex),max(Rex)])
-        ax1.legend(loc='best')
+        # ax1.legend(loc='best')
         ax1.set_title('Reynolds number vs Stanton number', fontsize=15)
         fig1.savefig(directory+'Rex_St.pdf', bbox_inches='tight')
 

@@ -50,7 +50,7 @@ Ly = 115.0
 Lx = 400.0
 scale = 4.959043
 
-list = ['400x200x100','600x200x100', '1000x200x100']
+list = ['400x200x100','1000x200x100', '1000x200x200']
 # list = ['1000x200x100', '1000x200x200']
 fig1, ax1 = plt.subplots(1,1)
 fig2, ax2 = plt.subplots(1,1)
@@ -86,35 +86,52 @@ for i in range(len(list)):
     Ly = Ly
     delta = Ly/(ny-1.0)
     D11 = D11[0, 0:6, :]
-    var = u[0, 0:6, :]
+
+    rows, cols = len(u[0,0,:]), len(u[0,:,0])
+    u_avg = np.array([[0.0]*cols]*rows)
+    for m in range(len(u[0,0,:])):
+        for n in range(len(u[0,:,0])):
+            u_avg[m,n] = np.mean(u[:,n,m])
+    u_avg = np.transpose(u_avg)
+
+    var = u_avg[0:6, :]
     coeffs = numpy.array([-1.83333333333334, 3.00000000000002, -1.50000000000003, 0.333333333333356, -8.34617916606957e-15, 1.06910884386911e-15])
     coeffs = coeffs.reshape([6, 1])
     dudy = sum(D11*var*coeffs)/delta
-
     mu = (T**1.5*(1.0+SuthT/RefT)/(T+SuthT/RefT))
 
-    mu_wall = mu[0, 0, :]
+    rows, cols = len(mu[0,0,:]), len(mu[0,:,0])
+    mu_avg = np.array([[0.0]*cols]*rows)
+    for m in range(len(mu[0,0,:])):
+        for n in range(len(mu[0,:,0])):
+            mu_avg[m,n] = np.mean(mu[:,n,m])
+    mu_avg = np.transpose(mu_avg)
+
+    mu_wall = mu_avg[0, :]
     tau_wall = dudy*mu_wall
     Cf = tau_wall/(0.5*Re)
+
+    rows, cols = len(p[0,0,:]), len(p[0,:,0])
+    p_avg = np.array([[0.0]*cols]*rows)
+    for m in range(len(p[0,0,:])):
+        for n in range(len(p[0,:,0])):
+            p_avg[m,n] = np.mean(p[:,n,m])
+    p_avg = np.transpose(p_avg)    
 
 
     ax1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = 'grid_%s' % list[i],color=line_colours[i],linewidth=1)
     axins1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = 'grid_%s' % list[i],color=line_colours[i],linewidth=1)
 
-
-    ax2.plot(x[0, 1, :], p[0, 0, :]/p[0, 0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i])
-    axins2.plot(x[0, 1, :], p[0, 0, :]/p[0, 0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i])
-
-
+    ax2.plot(x[0, 1, :], p_avg[0, :]/p_avg[0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i])
+    axins2.plot(x[0, 1, :], p_avg[0, :]/p_avg[0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i])
 
 
 mark_inset(ax1, axins1, loc1=1, loc2=4, fc="none", ec="0.5")
-x1, x2, y1, y2 = 190, 210, 0.0025, 0.0028 # specify the limits
+x1, x2, y1, y2 = 190, 210, 0.0023, 0.0026 # specify the limits
 axins1.set_xlim(x1, x2) # apply the x-limits
 axins1.set_ylim(y1, y2) # apply the y-limits 
 axins1.set_xticks([])
 axins1.set_yticks([])
-
 
 mark_inset(ax2, axins2, loc1=1, loc2=4, fc="none", ec="0.5")
 x1, x2, y1, y2 = 185, 195, 2.4, 2.5 # specify the limits
@@ -127,7 +144,7 @@ axins2.set_yticks([])
 ax1.axhline(y=0.0, linestyle='--', color='black')
 ax1.set_xlabel(r'$x_0$', fontsize=20)
 ax1.set_ylabel(r'$C_f$', fontsize=20)
-ax1.set_title('Skin friction')
+# ax1.set_title('Skin friction')
 ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
 ax1.legend(loc='upper right')
 ax1.grid()
@@ -135,7 +152,7 @@ fig1.savefig(directory+'skin_friction.pdf',bbox_inches='tight')
 
 ax2.set_xlabel(r'$x_0$', fontsize=20)
 ax2.set_ylabel(r'$\frac{P_w}{P_1}$', fontsize=22)
-ax2.set_title('Normalised wall pressure')
+# ax2.set_title('Normalised wall pressure')
 ax2.legend(loc='best')
 ax2.grid()
 fig2.savefig(directory+"wall_pressure.pdf",bbox_inches='tight') 

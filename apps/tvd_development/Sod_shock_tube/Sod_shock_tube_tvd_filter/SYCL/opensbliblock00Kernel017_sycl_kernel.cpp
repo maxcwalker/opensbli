@@ -104,7 +104,7 @@ void ops_par_loop_opensbliblock00Kernel017_execute(ops_kernel_descriptor *desc) 
              ))
       , [=](cl::sycl::nd_item<1> item
       ) [[intel::kernel_args_restrict]] {
-        int n_x = item.get_global_id()[0]+start_0;
+        int n_x = item.get_global_id(0)+start_0;
         int idx[] = {arg_idx_0+n_x};
         const ACC<double> rhou0_B0(&rhou0_B0_p[0] + base0 + n_x*1);
         ACC<double> wk11_B0(&wk11_B0_p[0] + base1 + n_x*1);

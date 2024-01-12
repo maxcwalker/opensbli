@@ -24,8 +24,8 @@ input_dict = {
 'Pr'        :   '0.72',
 'Re'        :   '950.0',
 'Twall'     :   '1.67619431',
-'dt'        :   '0.02',
-'niter'     :   '250000',
+'dt'        :   '0.03',
+'niter'     :   '200000',
 'block0np0'     :   '400',
 'block0np1'     :   '200',
 'block0np2'     :   '100',
@@ -103,7 +103,6 @@ schemes[cent.name] = cent
 rk = RungeKuttaLS(3)
 schemes[rk.name] = rk
 
-
 #############################################################################################################################################
 #																																			#
 # Boundary conditions																														#
@@ -149,8 +148,6 @@ direction = 1
 side = 1
 boundaries[direction][side] = ZeroGradientOutletBC(1, 1)
 
-
-
 # spanwise periodic BC
 direction = 2
 for side in [0,1]:
@@ -158,6 +155,59 @@ for side in [0,1]:
 
 block.set_block_boundaries(boundaries)
 
+# Monitor points
+# arrays = ['p', 'p', 'p', 'p', 'p', 'p', 'p']
+# #arrays = ['rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0']
+# arrays = [block.location_dataset('%s' % dset) for dset in arrays]
+# indices = [(178, 45), (178, 72), (178, 96), (178, 118), (178, 139), (178, 160), (178, 176)]
+# SM = SimulationMonitor(arrays, indices, block, print_frequency=100, fp_precision=12, output_file='monitor.log')
+
+#############################################################################################################################################
+#																																			#
+# Grid and intial conditions																												#
+#																																			#
+#############################################################################################################################################
+
+# Reynolds number, Mach number and free-stream temperature for the initial profile
+Re, xMach, Tinf = 950.0, 2.0, 288.0
+## Ensure the grid size passed to the initialisation routine matches the grid sizes used in the simulation parameters
+polynomial_directions = [(False, DataObject('x0')), (True, DataObject('x1')), (False, DataObject('x2'))]
+n_poly_coefficients = 50
+grid_const = ["Lx1", "by"]
+for con in grid_const:
+    local_dict[con] = ConstantObject(con)
+gridx0 = parse_expr("Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])", local_dict=local_dict)
+gridx1 = parse_expr("Eq(DataObject(x1), Lx1*sinh(by*block.deltas[1]*block.grid_indexes[1]/Lx1)/sinh(by))", local_dict=local_dict)
+gridx2 = parse_expr("Eq(DataObject(x2), block.deltas[2]*block.grid_indexes[2])", local_dict=local_dict)
+coordinate_evaluation = [gridx0, gridx1, gridx2]
+# initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)
+initial = Initialise_Flatplate(polynomial_directions, n_poly_coefficients, Re, xMach, Tinf, coordinate_evaluations=coordinate_evaluation)
+
+#############################################################################################################################################
+#																																			#
+# Data i/o 																																	#
+#																																			#
+#############################################################################################################################################
+
+kwargs = {'iotype': "Write"}
+h5 = iohdf5(save_every=10000, **kwargs)
+h5.add_arrays(simulation_eq.time_advance_arrays)
+h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('x2'), DataObject('D11')])
+h5.add_arrays([DataObject('p')]) # save pressure
+h5.add_arrays([DataObject('kappa')]) # shock sensor array
+block.setio(h5)
+
+# Set equations on the block and discretise
+block.set_equations([constituent, simulation_eq, initial, metriceq])
+
+# apply filter 
+TVD_filter = TVDFilter(block, airfoil=False, optimize=True, metrics=metriceq)
+block.set_equations(TVD_filter.equation_classes)
+
+# WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, optimize=True)
+# block.set_equations(WF.equation_classes) 
+
+block.discretise()
 # Add some full [-5,5] halo swaps over the periodic directions only when the filter is called
 def create_exchange_calls_codes(block, dsets):
     kernels = []
@@ -176,62 +226,9 @@ for no, eq in enumerate(block.list_of_equation_classes):
         if eq.full_swap:
             eq.Kernels += filter_swaps
 
-
-# Monitor points
-# arrays = ['p', 'p', 'p', 'p', 'p', 'p', 'p']
-# #arrays = ['rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0']
-# arrays = [block.location_dataset('%s' % dset) for dset in arrays]
-# indices = [(178, 45), (178, 72), (178, 96), (178, 118), (178, 139), (178, 160), (178, 176)]
-# SM = SimulationMonitor(arrays, indices, block, print_frequency=100, fp_precision=12, output_file='monitor.log')
-
-#############################################################################################################################################
-#																																			#
-# Grid and intial conditions																												#
-#																																			#
-#############################################################################################################################################
-
-# Perform initial condition
-# Reynolds number, Mach number and free-stream temperature for the initial profile
-Re, xMach, Tinf = 950.0, 2.0, 288.0
-## Ensure the grid size passed to the initialisation routine matches the grid sizes used in the simulation parameters
-polynomial_directions = [(False, DataObject('x0')), (True, DataObject('x1')), (False, DataObject('x2'))]
-n_poly_coefficients = 50
-grid_const = ["Lx1", "by"]
-for con in grid_const:
-    local_dict[con] = ConstantObject(con)
-gridx0 = parse_expr("Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])", local_dict=local_dict)
-gridx1 = parse_expr("Eq(DataObject(x1), Lx1*sinh(by*block.deltas[1]*block.grid_indexes[1]/Lx1)/sinh(by))", local_dict=local_dict)
-gridx2 = parse_expr("Eq(DataObject(x2), block.deltas[2]*block.grid_indexes[2])", local_dict=local_dict)
-coordinate_evaluation = [gridx0, gridx1, gridx2]
-# initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)
-initial = Initialise_Flatplate(polynomial_directions, n_poly_coefficients, Re, xMach, Tinf, coordinate_evaluations=coordinate_evaluation)
-#############################################################################################################################################
-#																																			#
-# Data i/o 																																	#
-#																																			#
-#############################################################################################################################################
-
-kwargs = {'iotype': "Write"}
-h5 = iohdf5(save_every=1000, **kwargs)
-h5.add_arrays(simulation_eq.time_advance_arrays)
-h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('x2'), DataObject('D11')])
-h5.add_arrays([DataObject('p')]) # save pressure
-block.setio(h5)
-
-# Set equations on the block and discretise
-block.set_equations([constituent, simulation_eq, initial, metriceq])
-# apply filter 
-TVD_filter = TVDFilter(block, airfoil=False, optimize=True, metrics=metriceq)
-block.set_equations(TVD_filter.equation_classes)
-
-# WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, optimize=True)
-# block.set_equations(WF.equation_classes) 
-
-block.discretise()
-
 alg = TraditionalAlgorithmRK(block)
 SimulationDataType.set_datatype(Double)
 OPSC(alg)
 
 substitute_simulation_parameters(constants, values)
-print_iteration_ops(every=100, NaN_check='rho_B0')
+print_iteration_ops(every=5000, NaN_check='rho_B0')

@@ -24,7 +24,7 @@ input_dict = {
     "Pr"                   : "0.72", 
     "Re"                   : "4000.0", 
     "Twall"                : "1.37", 
-    "dt"                   : "0.001", 
+    "dt"                   : "0.003", 
     "niter"                : "750000", 
     "block0np0"            : "1000", 
     "block0np1"            : "200",
@@ -168,7 +168,6 @@ schemes[cent.name] = cent
 rk = RungeKuttaLS(3)
 schemes[rk.name] = rk
 
-
 #############################################################################################################################################
 #																																			#
 # Boundary conditions																														#
@@ -299,7 +298,7 @@ initial = Initialise_Flatplate(polynomial_directions, n_poly_coefficients, Re, x
 #############################################################################################################################################
 
 kwargs = {'iotype': "Write"}
-h5 = iohdf5(save_every=5000, **kwargs)
+h5 = iohdf5(save_every=150000, **kwargs)
 h5.add_arrays(simulation_eq.time_advance_arrays)
 h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('x2'), DataObject('D11')])
 h5.add_arrays([DataObject('p')]) # save pressure
@@ -314,4 +313,4 @@ SimulationDataType.set_datatype(Double)
 OPSC(alg)
 
 substitute_simulation_parameters(constants, values)
-print_iteration_ops(every=1000, NaN_check='rho_B0')
+print_iteration_ops(every=10000, NaN_check='rho_B0')

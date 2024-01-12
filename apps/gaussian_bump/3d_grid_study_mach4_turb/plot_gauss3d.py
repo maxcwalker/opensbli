@@ -31,7 +31,7 @@ try:
     fname = sys.argv[1]
 except:
     fname='opensbli_output.h5'
-directory = './other_plots/'
+directory = './simulation_plots/'
 
 if not os.path.exists(directory):
     os.makedirs(directory)
@@ -66,7 +66,7 @@ p=(gama-1.0)*rho*e
 T=e*Mref**2*gama*(gama-1.0)
 
 a = np.sqrt(1.4*p/rho)
-M = np.sqrt(u**2 + v**2)/a
+M = np.sqrt(u**2 + v**2 +w**2)/a
 
 # note that the first array index is y, the second x (python convention)
 print('Array size for plotting',rho.shape)
@@ -86,78 +86,78 @@ print('T range',np.amax(T),np.amin(T))
 #                                                                                                 #
 ###################################################################################################
 
-# z_idx = [2,5,6,10,12,13,15]
-# y1, y2, x1, x2 = 0, 60, 140, 180
+z_idx = [2,5,6,10,12,13,15]
+y1, y2, x1, x2 = 0, 60, 140, 180
 
-# for idx in z_idx:
-#     fig1,ax=plt.subplots()
-#     axins1 = zoomed_inset_axes(ax, 7,loc='lower center',bbox_to_anchor=(200,45))
-#     CS=ax.contourf(x[idx,:,:],y[idx,:,:],u[idx,:,:],levels=25, cmap=cm.jet)
+for idx in z_idx:
+    fig1,ax=plt.subplots()
+    # axins1 = zoomed_inset_axes(ax, 7,loc='lower center',bbox_to_anchor=(200,45))
+    CS=ax.contourf(x[idx,:,:],y[idx,:,:],u[idx,:,:],levels=50, cmap=cm.jet)
 
-#     xp1,xp2 = int(len(x[0,0,:])/Lx *x1), int(len(x[0,0,:])/Lx *x2)
-#     try:
-#         U = axins1.contourf(x[idx,:,:], y[idx,:,:], u[idx,:,:],levels=list(np.linspace(np.min(u[idx,y1:y2,xp1:xp2]), 0, 5)) + list(np.linspace(np.max(u[idx,y1:y2,xp1:xp2])/20,np.max(u[idx,y1:y2,x1:x2]),25)) , cmap=cm.jet) #
-#         axins1.contour(x[idx,:,:], y[idx,:,:], u[idx,:,:],levels=[0],colors='black')
-#     except:
-#         U = axins1.contourf(x[idx,:,:], y[idx,:,:], u[idx,:,:],levels= np.linspace(np.min(u[idx,y1:y2,x1:x2]), np.max(u[idx,y1:y2,x1:x2]),40), cmap=cm.jet) #
-
-
-#     divider = make_axes_locatable(ax)
-#     cax1 = divider.append_axes("right", size=0.2,pad=0.1)
-#     cbar=fig1.colorbar(CS, cax=cax1)
-#     cbar.set_label(r"u velocity [main plot]", fontsize=7 )
-#     cbar.ax.tick_params(labelsize=5)
-
-#     mark_inset(ax, axins1, loc1=1, loc2=2, fc="none", ec="0.5")
-#     axins1.set_xlim(x[idx,0,xp1],x[idx,0,xp2]) # apply the x-limits 
-#     axins1.set_ylim(y[idx,y1,0],y[idx,y2,0]) # apply the y-limits 
-#     axins1.tick_params(axis='both', which='major', labelsize=5)
-#     ax.tick_params(axis='both', which='major', labelsize=7)
-#     ax.set_aspect('equal')
-#     cax = inset_axes(axins1, width="90%", height=0.1, loc='lower center',borderpad=-3)
-#     ubar=fig1.colorbar(U, orientation='horizontal', cax=cax, format=tkr.FormatStrFormatter('%.2g'))
-#     ubar.set_label(r"u velocity [zoomed plot]", fontsize=7 )
-#     ubar.ax.tick_params(labelsize=5)
-#     plt.savefig(directory+'contour_z%d.pdf' % idx,bbox_inches='tight')
+    xp1,xp2 = int(len(x[0,0,:])/Lx *x1), int(len(x[0,0,:])/Lx *x2)
+    # try:
+        # U = axins1.contourf(x[idx,:,:], y[idx,:,:], u[idx,:,:],levels=list(np.linspace(np.min(u[idx,y1:y2,xp1:xp2]), 0, 5)) + list(np.linspace(np.max(u[idx,y1:y2,xp1:xp2])/20,np.max(u[idx,y1:y2,x1:x2]),25)) , cmap=cm.jet) #
+        # axins1.contour(x[idx,:,:], y[idx,:,:], u[idx,:,:],levels=[0],colors='black')
+    # except:
+        # U = axins1.contourf(x[idx,:,:], y[idx,:,:], u[idx,:,:],levels= np.linspace(np.min(u[idx,y1:y2,x1:x2]), np.max(u[idx,y1:y2,x1:x2]),40), cmap=cm.jet) #
 
 
-# ###################################################################################################
-# #                                                                                                 #
-# #                plan contours with zoomed inset of separation region                             #
-# #                                                                                                 #
-# ###################################################################################################
+    divider = make_axes_locatable(ax)
+    cax1 = divider.append_axes("right", size=0.2,pad=0.1)
+    cbar=fig1.colorbar(CS, cax=cax1)
+    cbar.set_label(r"u velocity [main plot]", fontsize=7 )
+    cbar.ax.tick_params(labelsize=5)
 
-# y_idx=[1,20,40,60]
-# for idx in y_idx:
-#     ## plan view slice at y_idx point
-#     fig2, ax1 = plt.subplots()
-#     axins1 = zoomed_inset_axes(ax1, 2,loc='upper center',bbox_to_anchor=(200,240))
-#     emphasis_level = 0
-#     ax1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:], levels=100, cmap=cm.jet) #
-#     xp1,xp2 = int(len(x[0,0,:])/Lx *100), int(len(x[0,0,:])/Lx *200)
-#     try:
-#         U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels= list(np.linspace(np.min(u[:,idx,xp1:xp2]), 0, 5))+list(np.linspace(0.001,np.max(u[0,idx,xp1:xp2]),25)), cmap=cm.jet)
-#         recirc=axins1.contour(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels=[0],colors='black',markersize=0.1)
-#         print('yes')
-#     except:
-#         U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels= list(np.linspace(np.min(u[:,idx,xp1:xp2]), np.max(u[:,idx,xp1:xp2]), 30)), cmap=cm.jet)
-#         print('no')
-#     # plt.clabel(recirc, inline = False,fontsize=8)
-#     cax1 = inset_axes(ax1, width="60%", height="30%", loc='lower center',borderpad=-3)
-#     ubar=fig2.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
-#     ubar.ax.tick_params(labelsize=5)
-#     ubar.set_label("u velocity [zoomed axes]" ,fontsize=5)
-#     ax1.set_aspect(1)
+    # mark_inset(ax, axins1, loc1=1, loc2=2, fc="none", ec="0.5")
+    # axins1.set_xlim(x[idx,0,xp1],x[idx,0,xp2]) # apply the x-limits 
+    # axins1.set_ylim(y[idx,y1,0],y[idx,y2,0]) # apply the y-limits 
+    # axins1.tick_params(axis='both', which='major', labelsize=5)
+    # ax.tick_params(axis='both', which='major', labelsize=7)
+    ax.set_aspect('equal')
+    # cax = inset_axes(axins1, width="90%", height=0.1, loc='lower center',borderpad=-3)
+    # ubar=fig1.colorbar(U, orientation='horizontal', cax=cax, format=tkr.FormatStrFormatter('%.2g'))
+    # ubar.set_label(r"u velocity [zoomed plot]", fontsize=7 )
+    # ubar.ax.tick_params(labelsize=5)
 
-#     mark_inset(ax1, axins1, loc1=3, loc2=4, fc="none", ec="0.5")
-#     x1, x2 = 100, 200
+    plt.savefig(directory+'contour_z%d_nozoom.pdf' % idx,bbox_inches='tight')
 
-#     axins1.set_xlim(100,200) # apply the x-limits 
-#     axins1.tick_params(axis='both', which='major', labelsize=5)
-#     ax1.tick_params(axis='both', which='major', labelsize=5)
+###################################################################################################
+#                                                                                                 #
+#                plan contours with zoomed inset of separation region                             #
+#                                                                                                 #
+###################################################################################################
 
-#     fig2.savefig(directory+"wall_u_vel_contours_y%d.pdf" % idx, bbox_inches='tight')
+y_idx=[1,20,40,60]
+for idx in y_idx:
+    ## plan view slice at y_idx point
+    fig2, ax1 = plt.subplots()
+    axins1 = zoomed_inset_axes(ax1, 2,loc='upper center',bbox_to_anchor=(200,240))
+    emphasis_level = 0
+    ax1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:], levels=100, cmap=cm.jet) #
+    xp1,xp2 = int(len(x[0,0,:])/Lx *100), int(len(x[0,0,:])/Lx *200)
+    try:
+        U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels= list(np.linspace(np.min(u[:,idx,xp1:xp2]), 0, 5))+list(np.linspace(0.001,np.max(u[0,idx,xp1:xp2]),25)), cmap=cm.jet)
+        recirc=axins1.contour(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels=[0],colors='black')
+        print('yes')
+    except:
+        U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels= list(np.linspace(np.min(u[:,idx,xp1:xp2]), np.max(u[:,idx,xp1:xp2]), 30)), cmap=cm.jet)
+        print('no')
+    # plt.clabel(recirc, inline = False,fontsize=8)
+    cax1 = inset_axes(ax1, width="60%", height="30%", loc='lower center',borderpad=-3)
+    ubar=fig2.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
+    ubar.ax.tick_params(labelsize=5)
+    ubar.set_label("u velocity [zoomed axes]" ,fontsize=5)
+    ax1.set_aspect(1)
 
+    mark_inset(ax1, axins1, loc1=3, loc2=4, fc="none", ec="0.5")
+    x1, x2 = 100, 200
+
+    axins1.set_xlim(100,200) # apply the x-limits 
+    axins1.tick_params(axis='both', which='major', labelsize=5)
+    ax1.tick_params(axis='both', which='major', labelsize=5)
+    # ax1.set_title('contours at y index %d'%idx)
+
+    fig2.savefig(directory+"wall_u_vel_contours_y%d.pdf" % idx, bbox_inches='tight')
 
 ###################################################################################################
 #                                                                                                 #
@@ -172,7 +172,8 @@ for idx in x_idx:
     fig3, ax1 = plt.subplots()
     # axins1 = zoomed_inset_axes(ax1, 2,loc='upper center',bbox_to_anchor=(200,240))
     x_loc = int(len(x[0,0,:])/Lx * idx)
-    U=ax1.contourf(z[:,:,x_loc], y[:,:,x_loc], u[:,:,x_loc], levels=25, cmap=cm.jet) #
+    vel = np.sqrt(w[:,:,x_loc]**2 + v[:,:,x_loc]**2 )
+    U=ax1.contourf(z[:,:,x_loc], y[:,:,x_loc], vel, levels=25, cmap=cm.jet) #
 
     cax1 = inset_axes(ax1, width="50%", height="10%", loc='lower center',borderpad=-4)
     ubar=fig3.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
@@ -180,7 +181,7 @@ for idx in x_idx:
     ubar.set_label("u velocity" ,fontsize=5)
 
     nth =2
-    ax1.quiver(z[::nth,::nth,x_loc],y[::nth,::nth,x_loc],w[::nth,::nth,x_loc],v[::nth,::nth,x_loc],length=0.5)
+    ax1.quiver(z[::nth,::nth,x_loc],y[::nth,::nth,x_loc],w[::nth,::nth,x_loc],v[::nth,::nth,x_loc],pivot='mid',scale=25,units='width')
     
     ax1.set_ylim(y[0,0,x_loc],y[0,0,x_loc]+3)
     ax1.set_xlabel(r'z',fontsize=6)
@@ -194,8 +195,6 @@ for idx in x_idx:
     # ax1.tick_params(axis='both', which='major', labelsize=5)
 
     fig3.savefig(directory+"z-y_plane_x%d.pdf" % idx, bbox_inches='tight')
-
-
 
 
 

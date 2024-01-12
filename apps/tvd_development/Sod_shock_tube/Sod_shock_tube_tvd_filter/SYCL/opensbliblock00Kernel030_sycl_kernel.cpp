@@ -130,7 +130,7 @@ void ops_par_loop_opensbliblock00Kernel030_execute(ops_kernel_descriptor *desc) 
              ))
       , [=](cl::sycl::nd_item<1> item
       ) [[intel::kernel_args_restrict]] {
-        int n_x = item.get_global_id()[0]+start_0;
+        int n_x = item.get_global_id(0)+start_0;
         const ACC<double> Residual1_B0(&Residual1_B0_p[0] + base0 + n_x*1);
         const ACC<double> Residual2_B0(&Residual2_B0_p[0] + base1 + n_x*1);
         const ACC<double> Residual0_B0(&Residual0_B0_p[0] + base2 + n_x*1);

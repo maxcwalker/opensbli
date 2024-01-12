@@ -41,11 +41,8 @@ double* __restrict arg7,
 double* __restrict arg8,
 int size0 ){
 
-  //Make sure constants are not optimized out
-  if (size0==-1) dims_opensbliblock00Kernel002[0][0]=0;
 
-
-  int idx_x = hipBlockDim_x * hipBlockIdx_x + hipThreadIdx_x;
+  int idx_x = blockDim.x * blockIdx.x + threadIdx.x;
 
   arg0 += idx_x * 1*1;
   arg1 += idx_x * 1*1;
@@ -67,8 +64,9 @@ int size0 ){
     ACC<double> argp6(arg6);
     ACC<double> argp7(arg7);
     ACC<double> argp8(arg8);
-    opensbliblock00Kernel002_gpu(argp0, argp1, argp2, argp3,
-                   argp4, argp5, argp6, argp7, argp8);
+    opensbliblock00Kernel002_gpu(
+     argp0, argp1, argp2, argp3, argp4,
+     argp5, argp6, argp7, argp8);
   }
 
 }
@@ -77,7 +75,8 @@ int size0 ){
 #ifndef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel002(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
- ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7, ops_arg arg8) {
+ ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
+ ops_arg arg8) {
 #else
 void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) {
   int dim = desc->dim;
@@ -115,20 +114,18 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
   //compute locally allocated range for the sub-block
   int start[1];
   int end[1];
-  #if OPS_MPI && !OPS_LAZY
-  sub_block_list sb = OPS_sub_block_list[block->index];
-  #endif //OPS_MPI
 
   #ifdef OPS_MPI
   int arg_idx[1];
   #endif
-  #ifdef OPS_MPI
-  if (compute_ranges(args, 9,block, range, start, end, arg_idx) < 0) return;
-  #else //OPS_MPI
+  #if defined(OPS_LAZY) || !defined(OPS_MPI)
   for ( int n=0; n<1; n++ ){
     start[n] = range[2*n];end[n] = range[2*n+1];
   }
+  #else
+  if (compute_ranges(args, 9,block, range, start, end, arg_idx) < 0) return;
   #endif
+
   int xdim0 = args[0].dat->size[0];
   int xdim1 = args[1].dat->size[0];
   int xdim2 = args[2].dat->size[0];
@@ -149,7 +146,7 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
     dims_opensbliblock00Kernel002_h[6][0] = xdim6;
     dims_opensbliblock00Kernel002_h[7][0] = xdim7;
     dims_opensbliblock00Kernel002_h[8][0] = xdim8;
-    hipSafeCall(block->instance->ostream(), hipMemcpyToSymbol(HIP_SYMBOL(dims_opensbliblock00Kernel002), dims_opensbliblock00Kernel002_h, sizeof(dims_opensbliblock00Kernel002)));
+    hipSafeCall(block->instance->ostream(), hipMemcpyToSymbol( dims_opensbliblock00Kernel002, dims_opensbliblock00Kernel002_h, sizeof(dims_opensbliblock00Kernel002)));
   }
 
 
@@ -224,11 +221,13 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
 
   //call kernel wrapper function, passing in pointers to data
   if (x_size > 0)
-    hipLaunchKernelGGL(ops_opensbliblock00Kernel002,grid ,tblock ,0 ,0 , (double *)p_a[0], (double *)p_a[1],
-         (double *)p_a[2], (double *)p_a[3],
-         (double *)p_a[4], (double *)p_a[5],
-         (double *)p_a[6], (double *)p_a[7],
-         (double *)p_a[8],x_size);
+    ops_opensbliblock00Kernel002<<<grid, tblock >>> ( 
+     (double *)p_a[0], (double *)p_a[1],
+     (double *)p_a[2], (double *)p_a[3],
+     (double *)p_a[4], (double *)p_a[5],
+     (double *)p_a[6], (double *)p_a[7],
+     (double *)p_a[8],
+    x_size);
 
   hipSafeCall(block->instance->ostream(), hipGetLastError());
 
@@ -264,44 +263,12 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel002(char const *name, ops_block block, int dim, int* range,
- ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3, ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7, ops_arg arg8) {
-  ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
-  desc->name = name;
-  desc->block = block;
-  desc->dim = dim;
-  desc->device = 1;
-  desc->index = 7;
-  desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 7;
-  for ( int i=0; i<2; i++ ){
-    desc->range[i] = range[i];
-    desc->orig_range[i] = range[i];
-    desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
-  }
-  desc->nargs = 9;
-  desc->args = (ops_arg*)malloc(9*sizeof(ops_arg));
-  desc->args[0] = arg0;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
-  desc->args[1] = arg1;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
-  desc->args[2] = arg2;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg2.dat->index;
-  desc->args[3] = arg3;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg3.dat->index;
-  desc->args[4] = arg4;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg4.dat->index;
-  desc->args[5] = arg5;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg5.dat->index;
-  desc->args[6] = arg6;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg6.dat->index;
-  desc->args[7] = arg7;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg7.dat->index;
-  desc->args[8] = arg8;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg8.dat->index;
-  desc->function = ops_par_loop_opensbliblock00Kernel002_execute;
-  if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,7,"opensbliblock00Kernel002");
-  }
-  ops_enqueue_kernel(desc);
+ ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
+ ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
+ ops_arg arg8) {
+  ops_arg args[9] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8 };
+
+  //create kernel descriptor and pass it to ops_enqueue_kernel
+  create_kerneldesc_and_enque(name, args, 9, 7, dim, 1, range, block, ops_par_loop_opensbliblock00Kernel002_execute);
 }
 #endif

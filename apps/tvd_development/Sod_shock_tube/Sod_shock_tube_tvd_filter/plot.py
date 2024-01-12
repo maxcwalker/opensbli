@@ -67,7 +67,7 @@ class Plot(plotFunctions):
         self.line_graphs(x_vars, variables, names)
         return
 
-labels = ['OpenSBLI', 'Exact']
+labels = ['TVD filter', 'Exact']
 colors = ['r', 'k']
 
 directory = './'
