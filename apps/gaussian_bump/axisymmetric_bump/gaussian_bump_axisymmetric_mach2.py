@@ -24,29 +24,30 @@ input_dict = {
     "Re"                   : "950.0", 
     "Twall"                : "1.68", 
     "dt"                   : "0.003", 
-    "niter"                : "100", 
-    "block0np0"            : "200.0", 
-    "block0np1"            : "100.0",
-    'block0np2'            : "100", 
+    "niter"                : "200000", 
+    "block0np0"            : "600", 
+    "block0np1"            : "200",
+    'block0np2'            : "200", 
     "Delta0block0"         : "400.0/(block0np0-1)",
     "Delta1block0"         : "115.0/(block0np1-1)",
-    "Delta2block0"         : "20.0/(block0np2-1)",
+    "Delta2block0"         : "100.0/(block0np2-1)",
     "SuthT"                : "110.4",
     "RefT"                 : "288.0",
     "eps"                  : "1e-15",
     "TENO_CT"              : "1e-5",
     "L"                    : "400.0",
     "H"                    : "115.0",
+    "W"                    : "100.0", 
     "a"                    : "20.0", # larger values create a wider and smoother bump
     "b"                    : "5.0",
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
     "epsilon"              : "1.0e-30",
-    "tripA"                : "0.01",
+    "tripA"                : "0.0",
     "xts"                  : "50.0",
     "omega_0"              : "0.1",
     "k_0"                  : "0.02",
-    "beta_0"               : "0.41"
+    "beta_0"               : "0.12566370614359174"
 }
 
 constants = input_dict.keys()
@@ -63,7 +64,7 @@ ndim = 3
 coordinate_symbol = "x"
 # added metric class to genenerate curvilinear transformation
 metriceq = MetricsEquation()
-metriceq.generate_transformations(ndim, coordinate_symbol, [(True, True), (True, True),(False,False)], 2)
+metriceq.generate_transformations(ndim, coordinate_symbol, [(True, True), (True, True),(True,True)], 2)
 
 # Define the compresible Navier-Stokes equations in Einstein notation.
 
@@ -133,8 +134,6 @@ for i, CR in enumerate(constituent_eqns):
 for eqn in base_eqns:
     simulation_eq.add_equations(eqn)
 
-print(simulation_eq.equations[0])
-exit()
 
 for eqn in constituent_eqns:
     constituent.add_equations(eqn)
@@ -153,7 +152,7 @@ weno_order = 5
 # averaging procedure to be used for the eigen system evaluation
 Avg = SimpleAverage([0, 1])
 # LLF scheme
-LLF = LLFWeno(weno_order, formulation='Z', averaging=Avg)
+LLF = LFWeno(weno_order, formulation='Z', averaging=Avg)
 # add to schemes
 schemes[LLF.name] = LLF
 
@@ -248,22 +247,20 @@ boundaries[direction][side] = ForcingStripBC(direction, side,  wall_normal_veloc
 # Top dirichlet shock generator condition
 direction = 1
 side = 1
-
 boundaries[direction][side] = ZeroGradientOutletBC(1, 1)
 
 direction = 2
 for side in [0,1]:
     boundaries[direction][side] = PeriodicBC(direction, side)
 
-
 block.set_block_boundaries(boundaries)
 
-# Monitor points
-arrays = ['p', 'p', 'p', 'p', 'p', 'p', 'p']
-#arrays = ['rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0']
-arrays = [block.location_dataset('%s' % dset) for dset in arrays]
-indices = [(178, 45), (178, 72), (178, 96), (178, 118), (178, 139), (178, 160), (178, 176)]
-SM = SimulationMonitor(arrays, indices, block, print_frequency=100, fp_precision=12, output_file='monitor.log')
+# # Monitor points
+# arrays = ['p', 'p', 'p', 'p', 'p', 'p', 'p']
+# #arrays = ['rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0']
+# arrays = [block.location_dataset('%s' % dset) for dset in arrays]
+# indices = [(178, 45), (178, 72), (178, 96), (178, 118), (178, 139), (178, 160), (178, 176)]
+# SM = SimulationMonitor(arrays, indices, block, print_frequency=100, fp_precision=12, output_file='monitor.log')
 
 #############################################################################################################################################
 #																																			#
@@ -277,12 +274,12 @@ Re, xMach, Tinf = 950.0, 2.0, 288.0
 ## Ensure the grid size passed to the initialisation routine matches the grid sizes used in the simulation parameters
 polynomial_directions = [(False, DataObject('x0')), (True, DataObject('x1')), (False, DataObject('x2'))]
 n_poly_coefficients = 50
-grid_const = ["L", "H", "a", "b"]
+grid_const = ["L", "H", "W", "a", "b"]
 for con in grid_const:
     local_dict[con] = ConstantObject(con)
 gridx0 = parse_expr("Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])", local_dict=local_dict)
-gridx1 = parse_expr("Eq(DataObject(x1), H/20*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2) + (H - H/20*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2))*sinh(b*block.deltas[1]*block.grid_indexes[1]/H)/sinh(b))", local_dict=local_dict)
-gridx2 = parse_expr("Eq(DataObject(x1), H/20*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2) + (H - H/20*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2))*sinh(b*block.deltas[1]*block.grid_indexes[1]/H)/sinh(b))", local_dict=local_dict)
+gridx1 = parse_expr("Eq(DataObject(x1), H/20*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2)*exp(-((block.deltas[2]*block.grid_indexes[2]-W/2)/a)**2) + (H - H/20*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2)*exp(-((block.deltas[2]*block.grid_indexes[2]-W/2)/a)**2)) * sinh(b*block.deltas[1]*block.grid_indexes[1]/H)/sinh(b))", local_dict=local_dict)
+gridx2 = parse_expr("Eq(DataObject(x2), block.deltas[2]*block.grid_indexes[2])", local_dict=local_dict)
 
 coordinate_evaluation = [gridx0, gridx1, gridx2]
 initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)
@@ -294,7 +291,7 @@ initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMa
 #############################################################################################################################################
 
 kwargs = {'iotype': "Write"}
-h5 = iohdf5(save_every=2500, **kwargs)
+h5 = iohdf5(save_every=25000, **kwargs)
 h5.add_arrays(simulation_eq.time_advance_arrays)
 h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('x2'), DataObject('D11')])
 h5.add_arrays([DataObject('p')]) # save pressure
@@ -309,4 +306,4 @@ SimulationDataType.set_datatype(Double)
 OPSC(alg)
 
 substitute_simulation_parameters(constants, values)
-print_iteration_ops(every=25, NaN_check='rho_B0')
+print_iteration_ops(every=2000, NaN_check='rho_B0')

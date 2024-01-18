@@ -18,7 +18,7 @@ class plotFunctions(object):
         ax1.set_ylabel(r"$x_1$", fontsize=20)
         # ax1.set_xlim([0, 0.1])
         # ax1.set_ylim([0, 0.1])
-        CS = ax1.contourf(self.x[0,:,:], self.y[0,:,:], variable[0,:,:], levels=levels0, cmap=cm.jet)
+        CS = ax1.contourf(self.x[50,:,:], self.y[50,:,:], variable[50,:,:], levels=levels0, cmap=cm.jet)
         divider = make_axes_locatable(ax1)
         cax1 = divider.append_axes("right", size="5%", pad=0.05)
         ticks_at = numpy.linspace(levels0[0], levels0[-1], 10)

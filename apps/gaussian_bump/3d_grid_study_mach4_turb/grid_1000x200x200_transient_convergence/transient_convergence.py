@@ -50,7 +50,7 @@ Ly = 115.0
 Lx = 400.0
 scale = 4.959043
 
-list = ['100000','200000', '300000', '400000', '500000', '600000','700000','800000']
+list = ['100000','200000', '300000', '400000', '500000', '600000','700000','800000','900000','1000000']
 fig1, ax1 = plt.subplots(1,1)
 # fig2, ax2 = plt.subplots(1,1)
 line_styles = []
@@ -59,8 +59,8 @@ line_styles = []
 for i in range(len(list)):
     line_styles.append('-')
 
-line_colours = ['k','b', 'orange','y','c','r','green','pink']
-axins1 = zoomed_inset_axes(ax1, 5, loc=2)
+line_colours = ['k','b', 'orange','y','c','r','green','pink','slategray','lime']
+axins1 = zoomed_inset_axes(ax1, 3, loc=2)
 # axins2 = zoomed_inset_axes(ax2, 10, loc=2)
 
 for i in range(len(list)):

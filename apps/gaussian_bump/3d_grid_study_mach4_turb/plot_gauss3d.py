@@ -11,10 +11,7 @@ from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 
 
-gama=1.4
-Mref=1.5  # needs changing here whenever M changes - better to read it from the file
-Lx=400.0
-print('Check: Mach number = ',Mref)
+
 
 def read_dataset(file, dataset):
     group = file["opensbliblock00"]
@@ -37,23 +34,36 @@ if not os.path.exists(directory):
     os.makedirs(directory)
 
 f=h5py.File(fname, 'r')
+gama = f["gama"].value
+Mref= f["Minf"].value
+Lx = f["L"].value
+
+
+Nx = f["block0np0"].value
+Ny = f["block0np1"].value
+Nz = f["block0np2"].value
+
+
+
+
+
 x0dum=read_dataset(f,'x0_B0')
 x1dum=read_dataset(f,'x1_B0')
 x2dum=read_dataset(f,'x2_B0')
 rdum=read_dataset(f, 'rho_B0')
-print(rdum)
+# print(rdum)
 rudum=read_dataset(f, 'rhou0_B0')
 rvdum=read_dataset(f, 'rhou1_B0')
 rwdum=read_dataset(f, 'rhou2_B0')
 rEdum=read_dataset(f, 'rhoE_B0')
 
-print('Setting flowfield arrays')
+# print('Setting flowfield arrays')
 x=x0dum[2:-2,2:-2]
 y=x1dum[2:-2,2:-2]
 z=x2dum[2:-2,2:-2]
 rho=rdum[2:-2,2:-2]
-print('rho = ')
-print(rho)
+# print('rho = ')
+# print(rho)
 rhou=rudum[2:-2,2:-2]
 rhov=rvdum[2:-2,2:-2]
 rhow=rwdum[2:-2,2:-2]
@@ -67,17 +77,17 @@ T=e*Mref**2*gama*(gama-1.0)
 
 a = np.sqrt(1.4*p/rho)
 M = np.sqrt(u**2 + v**2 +w**2)/a
-
+print("niter: " + str(f["niter"].value))
 # note that the first array index is y, the second x (python convention)
-print('Array size for plotting',rho.shape)
-print('Array size for plotting',x.shape)
-print('x range',x[5,:,:])#,x[0,-1,:])
-#print('y range',y[0,0],y[-1,0])
-print('u range',np.amax(u),np.amin(u))
-print('v range',np.amax(v),np.amin(v))
-print('w range',np.amax(w),np.amin(w))
-print('p range',np.amax(p),np.amin(p))
-print('T range',np.amax(T),np.amin(T))
+# print('Array size for plotting',rho.shape)
+# print('Array size for plotting',x.shape)
+# print('x range',x[5,:,:])#,x[0,-1,:])
+# #print('y range',y[0,0],y[-1,0])
+# print('u range',np.amax(u),np.amin(u))
+# print('v range',np.amax(v),np.amin(v))
+# print('w range',np.amax(w),np.amin(w))
+# print('p range',np.amax(p),np.amin(p))
+# print('T range',np.amax(T),np.amin(T))
 #print(p[100,:])
 
 ###################################################################################################
@@ -86,7 +96,9 @@ print('T range',np.amax(T),np.amin(T))
 #                                                                                                 #
 ###################################################################################################
 
-z_idx = [2,5,6,10,12,13,15]
+z_idx = [int(Nz/2)]
+
+# z_idx = [2,5,6,10,12,13,15]
 y1, y2, x1, x2 = 0, 60, 140, 180
 
 for idx in z_idx:
@@ -165,7 +177,7 @@ for idx in y_idx:
 #                                                                                                 #
 ###################################################################################################
 
-x_idx=[170,175,180,185,190,195,350]
+x_idx=[170,175,180,185,190,195,200,210,220,350]
 
 for idx in x_idx:
     ## plan view slice at y_idx point
@@ -180,10 +192,10 @@ for idx in x_idx:
     ubar.ax.tick_params(labelsize=5)
     ubar.set_label("u velocity" ,fontsize=5)
 
-    nth =2
+    nth =3
     ax1.quiver(z[::nth,::nth,x_loc],y[::nth,::nth,x_loc],w[::nth,::nth,x_loc],v[::nth,::nth,x_loc],pivot='mid',scale=25,units='width')
     
-    ax1.set_ylim(y[0,0,x_loc],y[0,0,x_loc]+3)
+    ax1.set_ylim(y[0,0,x_loc],y[0,0,x_loc]+50)
     ax1.set_xlabel(r'z',fontsize=6)
     ax1.set_ylabel(r'y',fontsize=6)
     ax1.set_aspect('equal')

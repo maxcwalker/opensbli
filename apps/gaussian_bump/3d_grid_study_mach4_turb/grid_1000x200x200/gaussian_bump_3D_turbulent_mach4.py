@@ -111,6 +111,7 @@ visc_energy = metriceq.apply_transformation(visc_energy)
 # create an optional substitutions dictionary, this will be used to modify the equations when parsed
 optional_subs_dict = metriceq.metric_subs
 eq.optional_subs_dict = optional_subs_dict
+
 metric_vel = "Eq(U_i, D_i_j*u_j)"
 
 # Create SimulationEquations and Constituent relations, add the expanded equations
@@ -162,7 +163,6 @@ schemes[LF.name] = LF
 
 fns = 'u0 u1 u2 T'
 cent = StoreSome(4, fns)
-
 schemes[cent.name] = cent
 # RungeKutta scheme for temporal discretisation and add to the schemes dictionary
 rk = RungeKuttaLS(3)
