@@ -40,18 +40,28 @@ def read_dataset(group, dataset):
             raise NotImplementedError("")
         return read_data
 
-
 # values
-Minf = 4.0
-Re = 4000.0
-RefT = 439.0
-SuthT = 110.4
-Ly = 115.0
-Lx = 400.0
-scale = 4.959043
 
-list = ['100000','200000', '300000', '400000', '500000', '600000','700000','800000','900000','1000000']
+
+list = ['000001','100000', '200000', '300000', '400000', '500000', '600000', '700000', '742000']
+
+f=h5py.File('opensbli_output_%s.h5' % list[0], 'r')
+gama = f["gama"].value
+Minf= f["Minf"].value
+Re = f["Re"].value
+dt = f["dt"].value
+Lx = f["L"].value
+SuthT = f["SuthT"].value
+RefT = f["RefT"].value
+Nx = f["block0np0"].value
+Ny = f["block0np1"].value
+Nz = f["block0np2"].value
+H = f["H"].value
+niter = f['niter'].value
+print('iterations: ',niter)
+
 fig1, ax1 = plt.subplots(1,1)
+fig2, ax2 = plt.subplots(1,1)
 # fig2, ax2 = plt.subplots(1,1)
 line_styles = []
 # line_styles = ['-', '-', '-', '-','-','-','-','-','-']
@@ -59,9 +69,13 @@ line_styles = []
 for i in range(len(list)):
     line_styles.append('-')
 
-line_colours = ['k','b', 'orange','y','c','r','green','pink','slategray','lime']
+line_colours = ['k','b', 'orange','y','c','r','green','pink','slategray','lime','chocolate','k']
 axins1 = zoomed_inset_axes(ax1, 3, loc=2)
-# axins2 = zoomed_inset_axes(ax2, 10, loc=2)
+axins2 = zoomed_inset_axes(ax1, 3, loc=3)
+axins3 = zoomed_inset_axes(ax1, 3, loc=4)
+
+TF = 3.75 # Initial through flows
+time, Cf_mid  = [], []
 
 for i in range(len(list)):
 
@@ -86,7 +100,7 @@ for i in range(len(list)):
     T = 1.4*(Minf**2)*p/rho
 
     ny = numpy.size(y[0,:, 0])
-    Ly = Ly
+    Ly = H
     delta = Ly/(ny-1.0)
     D11 = D11[0, 0:6, :]
 
@@ -96,7 +110,7 @@ for i in range(len(list)):
         for n in range(len(u[0,:,0])):
             u_avg[m,n] = np.mean(u[:,n,m])
     u_avg = np.transpose(u_avg)
-
+    
     var = u_avg[0:6, :]
     coeffs = numpy.array([-1.83333333333334, 3.00000000000002, -1.50000000000003, 0.333333333333356, -8.34617916606957e-15, 1.06910884386911e-15])
     coeffs = coeffs.reshape([6, 1])
@@ -114,27 +128,43 @@ for i in range(len(list)):
     tau_wall = dudy*mu_wall
     Cf = tau_wall/(0.5*Re)
 
-    # rows, cols = len(p[0,0,:]), len(p[0,:,0])
-    # p_avg = np.array([[0.0]*cols]*rows)
-    # for m in range(len(p[0,0,:])):
-    #     for n in range(len(p[0,:,0])):
-    #         p_avg[m,n] = np.mean(p[:,n,m])
-    # p_avg = np.transpose(p_avg)    
 
-
-    ax1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%s iterations' % list[i],color=line_colours[i],linewidth=1)
-    axins1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%s iterations' % list[i],color=line_colours[i],linewidth=1)
+    ax1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
+    axins1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
+    axins2.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
+    axins3.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
+    
+    time.append(float(list[i])*float(dt))
+    Cf_mid.append(Cf[int(Nx/2)])
+    print('time ', time)
+    print('cf ', Cf[int(Nx/2)])
+    # print('x location: ',x[0,0,int(Ny/2)])
 
     # ax2.plot(x[0, 1, :], p_avg[0, :]/p_avg[0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i])
     # axins2.plot(x[0, 1, :], p_avg[0, :]/p_avg[0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i])
-
+    TF += 2.5
 
 mark_inset(ax1, axins1, loc1=1, loc2=4, fc="none", ec="0.5")
-x1, x2, y1, y2 = 190, 210, 0.00215, 0.0026 # specify the limits
+mark_inset(ax1, axins2, loc1=1, loc2=4, fc="none", ec="0.5")
+mark_inset(ax1, axins3, loc1=2, loc2=3, fc="none", ec="0.5")
+x1, x2, y1, y2 = 190, 210, 0.0017, 0.0021 # specify the limits
 axins1.set_xlim(x1, x2) # apply the x-limits
 axins1.set_ylim(y1, y2) # apply the y-limits 
 axins1.set_xticks([])
 axins1.set_yticks([])
+
+x1, x2, y1, y2 = 80, 105, - 0.0001, 0.0001 # specify the limits
+axins2.set_xlim(x1, x2) # apply the x-limits
+axins2.set_ylim(y1, y2) # apply the y-limits 
+axins2.set_xticks([])
+axins2.set_yticks([])
+
+
+x1, x2, y1, y2 = 210, 250, -0.0003, 0.0001 # specify the limits
+axins3.set_xlim(x1, x2) # apply the x-limits
+axins3.set_ylim(y1, y2) # apply the y-limits 
+axins3.set_xticks([])
+axins3.set_yticks([])
 
 # mark_inset(ax2, axins2, loc1=1, loc2=4, fc="none", ec="0.5")
 # x1, x2, y1, y2 = 185, 195, 2.4, 2.5 # specify the limits
@@ -149,9 +179,15 @@ ax1.set_xlabel(r'$x_0$', fontsize=20)
 ax1.set_ylabel(r'$C_f$', fontsize=20)
 # ax1.set_title('Skin friction')
 ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-ax1.legend(loc='lower right')
+ax1.legend(loc='upper right',title='Throught flows')
 ax1.grid()
 fig1.savefig(directory+'skin_friction.pdf',bbox_inches='tight')
+
+
+print(time)
+print(Cf_mid)
+ax2.plot(time, Cf_mid)
+fig2.savefig('peak_Cf_overTime.pdf')
 
 # ax2.set_xlabel(r'$x_0$', fontsize=20)
 # ax2.set_ylabel(r'$\frac{P_w}{P_1}$', fontsize=22)

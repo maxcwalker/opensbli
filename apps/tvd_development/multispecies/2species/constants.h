@@ -1,0 +1,23 @@
+// Declaration of global constants
+int restart;
+int iter;
+int stage;
+double tstart;
+double Delta0block0;
+int HDF5_timing;
+int block0np0;
+double delta_TVD;
+double dt;
+double eps_TVD;
+double gama;
+double gamma_m1;
+double inv2gamma_m1;
+double invDelta0block0;
+double invdelta_TVD;
+double invgama;
+double invgamma_m1;
+double kappa_TVD;
+int niter;
+double simulation_time;
+int start_iter;
+int write_output_file;

@@ -8,29 +8,31 @@
 #include "io.h"
 int main(int argc, char **argv) 
 {
+// Initializing OPS 
+ops_init(argc,argv,1);
 // Set restart to 1 to restart the simulation from HDF5 file
 restart = 0;
 // User defined constant values
-block0np0 = 500;
+block0np0 = 1000;
 block0np1 = 250;
 Delta0block0 = 400.0/(block0np0-1);
 Delta1block0 = 115.0/(block0np1-1);
-niter = 100;
+niter = 2500000;
 double rkB[] = {0.924574112262461, 0.287712943868770, 0.626538293270800};
 double rkA[] = {0.0, -2.91549395770192, 0.0};
 dt = 0.04;
-Minf = 2.0;
 Twall = 1.67619431;
+Minf = 2.0;
 write_output_file = 10000;
 HDF5_timing = 0;
-SuthT = 110.4;
-gama = 1.4;
 RefT = 288.0;
+gama = 1.4;
+SuthT = 110.4;
 Pr = 0.72;
 Re = 950.0;
 delta_TVD = 0.500000000000000;
 eps_TVD = 1.00000000000000e-8;
-kappa_TVD = 0.1;
+kappa_TVD = 0.2;
 gamma_m1 = -1 + gama;
 Ducros_check = 0.0500000000000000;
 Ducros_select = 0.0500000000000000;
@@ -87,8 +89,6 @@ ops_decl_const("niter" , 1, "int", &niter);
 ops_decl_const("simulation_time" , 1, "double", &simulation_time);
 ops_decl_const("start_iter" , 1, "int", &start_iter);
 ops_decl_const("write_output_file" , 1, "int", &write_output_file);
-// Initializing OPS 
-ops_init(argc,argv,1);
 // Define and Declare OPS Block
 ops_block opensbliblock00 = ops_decl_block(2, "opensbliblock00");
 #include "defdec_data_set.h"
@@ -376,7 +376,6 @@ ops_arg_dat(rho_B0, 1, stencil_0_00_00_2, "double", OPS_READ),
 ops_arg_dat(rhou0_B0, 1, stencil_0_00_00_2, "double", OPS_READ),
 ops_arg_dat(rhou1_B0, 1, stencil_0_00_00_2, "double", OPS_READ),
 ops_arg_dat(a_B0, 1, stencil_0_00_00_2, "double", OPS_WRITE),
-ops_arg_dat(kappa_B0, 1, stencil_0_00_00_2, "double", OPS_WRITE),
 ops_arg_dat(u0_B0, 1, stencil_0_00_00_2, "double", OPS_WRITE),
 ops_arg_dat(u1_B0, 1, stencil_0_00_00_2, "double", OPS_WRITE),
 ops_arg_dat(p_B0, 1, stencil_0_00_00_2, "double", OPS_RW));
@@ -450,7 +449,7 @@ ops_arg_dat(Residual0_B0, 1, stencil_0_00_10_3, "double", OPS_READ),
 ops_arg_dat(Residual1_B0, 1, stencil_0_00_10_3, "double", OPS_READ),
 ops_arg_dat(Residual2_B0, 1, stencil_0_00_10_3, "double", OPS_READ),
 ops_arg_dat(Residual3_B0, 1, stencil_0_00_10_3, "double", OPS_READ),
-ops_arg_dat(kappa_B0, 1, stencil_0_12_12_8, "double", OPS_READ),
+ops_arg_dat(kappa_B0, 1, stencil_0_11_11_6, "double", OPS_READ),
 ops_arg_dat(wk0_B0, 1, stencil_0_10_00_3, "double", OPS_READ),
 ops_arg_dat(wk1_B0, 1, stencil_0_10_00_3, "double", OPS_READ),
 ops_arg_dat(wk2_B0, 1, stencil_0_10_00_3, "double", OPS_READ),

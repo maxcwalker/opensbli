@@ -1,0 +1,8 @@
+rm -rf *.h *.cpp *.h5
+python $1
+make clean
+make opensbli_seq
+./opensbli_seq
+rm -rf simulation_plots
+python plot.py
+xdg-open simulation_plots/wall_pressure.pdf

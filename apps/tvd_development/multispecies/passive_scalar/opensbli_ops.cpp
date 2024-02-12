@@ -13,21 +13,21 @@ void ops_init_backend();
 // ops_par_loop declarations
 //
 
-void ops_par_loop_opensbliblock00Kernel015(char const *, ops_block, int , int*,
+void ops_par_loop_opensbliblock00Kernel016(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg,
-  ops_arg,
-  ops_arg,
-  ops_arg,
-  ops_arg );
-
-void ops_par_loop_opensbliblock00Kernel013(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg,
   ops_arg,
   ops_arg );
 
 void ops_par_loop_opensbliblock00Kernel014(char const *, ops_block, int , int*,
+  ops_arg,
+  ops_arg,
+  ops_arg,
+  ops_arg );
+
+void ops_par_loop_opensbliblock00Kernel015(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg,
   ops_arg,
@@ -49,7 +49,9 @@ void ops_par_loop_opensbliblock00Kernel006(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg );
 
-void ops_par_loop_opensbliblock00Kernel012(char const *, ops_block, int , int*,
+void ops_par_loop_opensbliblock00Kernel013(char const *, ops_block, int , int*,
+  ops_arg,
+  ops_arg,
   ops_arg,
   ops_arg,
   ops_arg,
@@ -61,7 +63,10 @@ void ops_par_loop_opensbliblock00Kernel012(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg );
 
-void ops_par_loop_opensbliblock00Kernel016(char const *, ops_block, int , int*,
+void ops_par_loop_opensbliblock00Kernel017(char const *, ops_block, int , int*,
+  ops_arg,
+  ops_arg,
+  ops_arg,
   ops_arg,
   ops_arg,
   ops_arg,
@@ -132,7 +137,7 @@ dt = 0.0002;
 HDF5_timing = 0;
 delta_TVD = 0.500000000000000;
 eps_TVD = 1.00000000000000e-8;
-kappa_TVD = 1.50000000000000;
+kappa_TVD = 1.5;
 gama = 1.4;
 gamma_m1 = -1 + gama;
 invDelta0block0 = 1.0/(Delta0block0);
@@ -187,8 +192,8 @@ start_iter = 0;
 tstart = simulation_time;
 
 if (restart == 0){
-int iteration_range_15_block0[] = {-5, block0np0 + 5};
-ops_par_loop_opensbliblock00Kernel015("Grid_based_initialisation0", opensbliblock00, 1, iteration_range_15_block0,
+int iteration_range_16_block0[] = {-5, block0np0 + 5};
+ops_par_loop_opensbliblock00Kernel016("Grid_based_initialisation0", opensbliblock00, 1, iteration_range_16_block0,
              ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(rhof_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
@@ -214,15 +219,15 @@ if(fmod(iter+1, 1) == 0){
         ops_timers(&inner_start, &elapsed_inner_start);
 }
 
-int iteration_range_13_block0[] = {-2, 1};
-ops_par_loop_opensbliblock00Kernel013("Dirichlet boundary dir0 side0", opensbliblock00, 1, iteration_range_13_block0,
+int iteration_range_14_block0[] = {-2, 1};
+ops_par_loop_opensbliblock00Kernel014("Dirichlet boundary dir0 side0", opensbliblock00, 1, iteration_range_14_block0,
              ops_arg_dat(x0_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
-int iteration_range_14_block0[] = {block0np0 - 1, block0np0 + 2};
-ops_par_loop_opensbliblock00Kernel014("Dirichlet boundary dir0 side1", opensbliblock00, 1, iteration_range_14_block0,
+int iteration_range_15_block0[] = {block0np0 - 1, block0np0 + 2};
+ops_par_loop_opensbliblock00Kernel015("Dirichlet boundary dir0 side1", opensbliblock00, 1, iteration_range_15_block0,
              ops_arg_dat(x0_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
@@ -249,42 +254,47 @@ ops_par_loop_opensbliblock00Kernel006("Derivative evaluation CD u0_B0 x0 ", open
              ops_arg_dat(wk0_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_idx());
 
-int iteration_range_12_block0[] = {0, block0np0};
-ops_par_loop_opensbliblock00Kernel012("Convective terms", opensbliblock00, 1, iteration_range_12_block0,
+int iteration_range_13_block0[] = {0, block0np0};
+ops_par_loop_opensbliblock00Kernel013("Convective terms", opensbliblock00, 1, iteration_range_13_block0,
              ops_arg_dat(p_B0, 1, stencil_0_44_1, "double", OPS_READ),
              ops_arg_dat(rhoE_B0, 1, stencil_0_44_1, "double", OPS_READ),
              ops_arg_dat(rho_B0, 1, stencil_0_44_1, "double", OPS_READ),
+             ops_arg_dat(rhof_B0, 1, stencil_0_44_1, "double", OPS_READ),
              ops_arg_dat(rhou0_B0, 1, stencil_0_44_1, "double", OPS_READ),
              ops_arg_dat(u0_B0, 1, stencil_0_44_1, "double", OPS_READ),
              ops_arg_dat(wk0_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(Residual0_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(Residual1_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(Residual2_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+             ops_arg_dat(Residual3_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_idx());
 
-int iteration_range_16_block0[] = {0, block0np0};
-ops_par_loop_opensbliblock00Kernel016("Temporal solution advancement", opensbliblock00, 1, iteration_range_16_block0,
+int iteration_range_17_block0[] = {0, block0np0};
+ops_par_loop_opensbliblock00Kernel017("Temporal solution advancement", opensbliblock00, 1, iteration_range_17_block0,
              ops_arg_dat(Residual0_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(Residual1_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(Residual2_B0, 1, stencil_0_00_1, "double", OPS_READ),
+             ops_arg_dat(Residual3_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_RW),
              ops_arg_dat(rhoE_RKold_B0, 1, stencil_0_00_1, "double", OPS_RW),
              ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_RW),
              ops_arg_dat(rho_RKold_B0, 1, stencil_0_00_1, "double", OPS_RW),
+             ops_arg_dat(rhof_B0, 1, stencil_0_00_1, "double", OPS_RW),
+             ops_arg_dat(rhof_RKold_B0, 1, stencil_0_00_1, "double", OPS_RW),
              ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_RW),
              ops_arg_dat(rhou0_RKold_B0, 1, stencil_0_00_1, "double", OPS_RW),
              ops_arg_gbl(&rkA[stage], 1, "double", OPS_READ),
              ops_arg_gbl(&rkB[stage], 1, "double", OPS_READ));
 
-int iteration_range_13_block0[] = {-2, 1};
-ops_par_loop_opensbliblock00Kernel013("Dirichlet boundary dir0 side0", opensbliblock00, 1, iteration_range_13_block0,
+int iteration_range_14_block0[] = {-2, 1};
+ops_par_loop_opensbliblock00Kernel014("Dirichlet boundary dir0 side0", opensbliblock00, 1, iteration_range_14_block0,
              ops_arg_dat(x0_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
-int iteration_range_14_block0[] = {block0np0 - 1, block0np0 + 2};
-ops_par_loop_opensbliblock00Kernel014("Dirichlet boundary dir0 side1", opensbliblock00, 1, iteration_range_14_block0,
+int iteration_range_15_block0[] = {block0np0 - 1, block0np0 + 2};
+ops_par_loop_opensbliblock00Kernel015("Dirichlet boundary dir0 side1", opensbliblock00, 1, iteration_range_15_block0,
              ops_arg_dat(x0_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
@@ -339,7 +349,7 @@ ops_printf("\nTimings are:\n");
 ops_printf("-----------------------------------------\n");
 ops_printf("Total Wall time %lf\n",elapsed_end0-elapsed_start0);
 
-HDF5_IO_Write_0_opensbliblock00(opensbliblock00, rho_B0, rhou0_B0, rhoE_B0, x0_B0, HDF5_timing);
+HDF5_IO_Write_0_opensbliblock00(opensbliblock00, rho_B0, rhou0_B0, rhoE_B0, rhof_B0, x0_B0, HDF5_timing);
 ops_exit();
 
 }

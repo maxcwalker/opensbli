@@ -11,10 +11,17 @@ from matplotlib.colors import Normalize
 
 class plotFunctions(object):
     def __init__(self):
+        f=h5py.File(sys.argv[1], 'r')
+        self.gama = f["gama"].value
+        self.Mref= f["Minf"].value
+        self.Lx = f["L"].value
+        self.Nx = f["block0np0"].value
+        self.Ny = f["block0np1"].value
+        self.Nz = f["block0np2"].value
         return
 
     def contour_local(self, fig, levels0, label, variable):
-
+        
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
 
@@ -23,11 +30,12 @@ class plotFunctions(object):
         ax.set_ylabel(r"$x_2$", fontsize=15)
         ax.set_zlabel(r"$x_1$", fontsize=15)
         x1, x2 = 150,250
+        x1,x2= int(len(variable[0,0,:])/self.Lx *x1), int(len(variable[0,0,:])/self.Lx *x2)
         # Set plot limits
         # ax.set_xlim([x, 250])
         ax.set_zlim([0, 20])
 
-        i = 60
+        i = 20
         
         # Create a ScalarMappable to map colors
         norm = Normalize(variable[:, i, x1:x2].min(), variable[:, i, x1:x2].max())

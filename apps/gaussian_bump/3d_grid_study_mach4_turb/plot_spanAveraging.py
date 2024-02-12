@@ -171,7 +171,7 @@ def St_Rex(mu,T):
 def compute_heat_flux(T,mu):
     dTdy = compute_wall_derivative(T,D11)
     mu_wall = mu[0, :]
-    q = (mu_wall/(0.4*self.Minf**2*self.Pr*self.Re)*dTdy)
+    q = (mu_wall/(0.4*Mref**2*Pr*Re)*dTdy)
     return q
 
 ##  averaging mu
@@ -180,7 +180,6 @@ for i in range(len(mu[0,0,:])):
     for j in range(len(mu[0,:,0])):
         avg_var[i,j] = np.mean(mu[:,j,i])
 mu = np.transpose(avg_var)
-
 
 Rex, St_acc = St_Rex(mu,T)
 fig1, ax1 = plt.subplots()
@@ -193,8 +192,6 @@ ax1.set_xlim([min(Rex),max(Rex)])
 # ax1.legend(loc='best')
 # ax1.set_title('Reynolds number vs Stanton number', fontsize=15)
 fig1.savefig(directory+'Rex_St.pdf', bbox_inches='tight')
-
-
 
 
 q = compute_heat_flux(T,mu)

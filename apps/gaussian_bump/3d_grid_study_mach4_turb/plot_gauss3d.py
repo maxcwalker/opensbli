@@ -37,15 +37,11 @@ f=h5py.File(fname, 'r')
 gama = f["gama"].value
 Mref= f["Minf"].value
 Lx = f["L"].value
-
-
 Nx = f["block0np0"].value
 Ny = f["block0np1"].value
 Nz = f["block0np2"].value
-
-
-
-
+niter = f['niter'].value
+print('iterations: ',niter)
 
 x0dum=read_dataset(f,'x0_B0')
 x1dum=read_dataset(f,'x1_B0')
@@ -77,7 +73,7 @@ T=e*Mref**2*gama*(gama-1.0)
 
 a = np.sqrt(1.4*p/rho)
 M = np.sqrt(u**2 + v**2 +w**2)/a
-print("niter: " + str(f["niter"].value))
+
 # note that the first array index is y, the second x (python convention)
 # print('Array size for plotting',rho.shape)
 # print('Array size for plotting',x.shape)
@@ -104,7 +100,7 @@ y1, y2, x1, x2 = 0, 60, 140, 180
 for idx in z_idx:
     fig1,ax=plt.subplots()
     # axins1 = zoomed_inset_axes(ax, 7,loc='lower center',bbox_to_anchor=(200,45))
-    CS=ax.contourf(x[idx,:,:],y[idx,:,:],u[idx,:,:],levels=50, cmap=cm.jet)
+    CS=ax.contourf(x[idx,:,:],y[idx,:,:],u[idx,:,:],levels=np.linspace(np.min(u[idx,:,:]), np.max(u[idx,:,:]),50), cmap=cm.jet)
 
     xp1,xp2 = int(len(x[0,0,:])/Lx *x1), int(len(x[0,0,:])/Lx *x2)
     # try:
@@ -112,7 +108,6 @@ for idx in z_idx:
         # axins1.contour(x[idx,:,:], y[idx,:,:], u[idx,:,:],levels=[0],colors='black')
     # except:
         # U = axins1.contourf(x[idx,:,:], y[idx,:,:], u[idx,:,:],levels= np.linspace(np.min(u[idx,y1:y2,x1:x2]), np.max(u[idx,y1:y2,x1:x2]),40), cmap=cm.jet) #
-
 
     divider = make_axes_locatable(ax)
     cax1 = divider.append_axes("right", size=0.2,pad=0.1)
@@ -126,6 +121,8 @@ for idx in z_idx:
     # axins1.tick_params(axis='both', which='major', labelsize=5)
     # ax.tick_params(axis='both', which='major', labelsize=7)
     ax.set_aspect('equal')
+    # ax.set_xlim([160,200])
+    # ax.set_ylim([0,10])
     # cax = inset_axes(axins1, width="90%", height=0.1, loc='lower center',borderpad=-3)
     # ubar=fig1.colorbar(U, orientation='horizontal', cax=cax, format=tkr.FormatStrFormatter('%.2g'))
     # ubar.set_label(r"u velocity [zoomed plot]", fontsize=7 )
@@ -140,32 +137,54 @@ for idx in z_idx:
 ###################################################################################################
 
 y_idx=[1,20,40,60]
+zoom =True
+
 for idx in y_idx:
     ## plan view slice at y_idx point
     fig2, ax1 = plt.subplots()
-    axins1 = zoomed_inset_axes(ax1, 2,loc='upper center',bbox_to_anchor=(200,240))
+
+    if zoom:
+        axins1 = zoomed_inset_axes(ax1, 2,loc='upper center',bbox_to_anchor=(200,240))
+    else:
+        pass
+
     emphasis_level = 0
-    ax1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:], levels=100, cmap=cm.jet) #
+    U = ax1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:], levels=np.linspace(np.min(u[:,idx,:]), np.max(u[:,idx,:]),50), cmap=cm.jet) #
+
+    #finding the index for locations 100 and 200
     xp1,xp2 = int(len(x[0,0,:])/Lx *100), int(len(x[0,0,:])/Lx *200)
-    try:
-        U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels= list(np.linspace(np.min(u[:,idx,xp1:xp2]), 0, 5))+list(np.linspace(0.001,np.max(u[0,idx,xp1:xp2]),25)), cmap=cm.jet)
-        recirc=axins1.contour(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels=[0],colors='black')
-        print('yes')
-    except:
-        U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels= list(np.linspace(np.min(u[:,idx,xp1:xp2]), np.max(u[:,idx,xp1:xp2]), 30)), cmap=cm.jet)
-        print('no')
+    if zoom:
+        try:
+            U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:], levels= list(np.linspace(np.min(u[:,idx,xp1:xp2]), 0, 5))+list(np.linspace(0.001,np.max(u[:,idx,xp1:xp2]),25)), cmap=cm.jet)
+            # recirc=ax1.contour(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels=[0],colors='black')
+            print('yes')
+        except:
+            U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels= list(np.linspace(np.min(u[:,idx,xp1-20:xp2+20]), np.max(u[:,idx,xp1:xp2]), 30)), cmap=cm.jet)
+            print('no')
+        cax1 = inset_axes(ax1, width="60%", height="30%", loc='lower center',borderpad=-3)
+        ubar=fig2.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
+        ubar.ax.tick_params(labelsize=5)
+        ubar.set_label("u velocity [zoomed axes]" ,fontsize=5)
+        ax1.set_aspect(1)
+
+        mark_inset(ax1, axins1, loc1=3, loc2=4, fc="none", ec="0.5")
+        x1, x2 = 100, 200
+
+        axins1.set_xlim(x1,x2) # apply the x-limits 
+        axins1.tick_params(axis='both', which='major', labelsize=5)
+    else:
+        cax1 = inset_axes(ax1, width="60%", height="30%", loc='lower center',borderpad=-3)
+        ubar=fig2.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
+        ubar.ax.tick_params(labelsize=5)
+        ubar.set_label("u velocity" ,fontsize=5)
+        ax1.set_aspect('equal')
+
+
+        
+
     # plt.clabel(recirc, inline = False,fontsize=8)
-    cax1 = inset_axes(ax1, width="60%", height="30%", loc='lower center',borderpad=-3)
-    ubar=fig2.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
-    ubar.ax.tick_params(labelsize=5)
-    ubar.set_label("u velocity [zoomed axes]" ,fontsize=5)
-    ax1.set_aspect(1)
 
-    mark_inset(ax1, axins1, loc1=3, loc2=4, fc="none", ec="0.5")
-    x1, x2 = 100, 200
 
-    axins1.set_xlim(100,200) # apply the x-limits 
-    axins1.tick_params(axis='both', which='major', labelsize=5)
     ax1.tick_params(axis='both', which='major', labelsize=5)
     # ax1.set_title('contours at y index %d'%idx)
 
@@ -195,7 +214,7 @@ for idx in x_idx:
     nth =3
     ax1.quiver(z[::nth,::nth,x_loc],y[::nth,::nth,x_loc],w[::nth,::nth,x_loc],v[::nth,::nth,x_loc],pivot='mid',scale=25,units='width')
     
-    ax1.set_ylim(y[0,0,x_loc],y[0,0,x_loc]+50)
+    ax1.set_ylim(y[0,0,x_loc],y[0,0,x_loc]+3)
     ax1.set_xlabel(r'z',fontsize=6)
     ax1.set_ylabel(r'y',fontsize=6)
     ax1.set_aspect('equal')
@@ -208,13 +227,7 @@ for idx in x_idx:
 
     fig3.savefig(directory+"z-y_plane_x%d.pdf" % idx, bbox_inches='tight')
 
-
-
 #####################################################################################################
-
-
-# plt.show()
-
 
 # fig3, ax2 = plt.subplots()
 # ax2.plot(z[:,0,50], v[:,0,50])
@@ -275,7 +288,6 @@ for i in u[0,:,195]:
         break
 print('points in BL = %d' % count)
 
-
 # fig4,ax4 = plt.subplots()
 # ax4.plot(u[0,:,195],y[0,:,195]-y[0,0,195],marker='.',markersize=0.2,color='k')
 # ax4.set_ylim([0,16])
@@ -293,5 +305,5 @@ for index in indexes:
 
 
 # print(np.linspace(np.min(u[0,150:170,0:10]), np.max(u[0,150:170,0:10]),40))
-print(np.max(u[0,150:170,0:10]))
+# print(np.max(u[0,150:170,0:10]))
 # plt.show()

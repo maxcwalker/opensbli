@@ -30,24 +30,28 @@ if weno or teno:
     momentum = "Eq(Der(rhou_i,t) , -%s  )" % (a)
     a = "Conservative((p+rhoE)*u_j,x_j, %s)" % sc1
     energy = "Eq(Der(rhoE,t), - %s  )" % (a)
+    # Added passive scalar equation here for filter methods
+    ps = "Eq(Der(rhof,t), -Conservative(u_j*rhof, x_j, %s))" % sc1
+    
     mass = eq.expand(mass, ndim, coordinate_symbol, substitutions, constants)
     momentum = eq.expand(momentum, ndim, coordinate_symbol, substitutions, constants)
     energy = eq.expand(energy, ndim, coordinate_symbol, substitutions, constants)
-else:
-    # advection of the scalar quantity
-    # advection =  "Eq(Der(rhof,t), -Conservative(u_j*rhof,x_j))"
-    # adv_diff = eq.expand(ndim, coordinate_symbol, substitutions, constants)
+    ps = eq.expand(ps, ndim, coordinate_symbol, substitutions, constants)
 
+else:
     # adv_diff = eq.expand(advection, ndim, coordinate_symbol, substitutions, constants)
     NS = NS_Split('Feiereisen', ndim, constants, coordinate_symbol=coordinate_symbol, conservative=conservative, viscosity='inviscid', energy_formulation='enthalpy', debug=False)
     mass, momentum, energy = NS.mass, NS.momentum, NS.energy
-
+    ps =  "Eq(Der(rhof,t), -Conservative(u_j*rhof,x_j))"
+    ps = eq.expand(ps, ndim, coordinate_symbol, substitutions, constants)
 # Expand the simulation equations, for this create a simulation equations class
 simulation_eq = SimulationEquations()
 simulation_eq.add_equations(mass)
 simulation_eq.add_equations(momentum)
 simulation_eq.add_equations(energy)
-# simulation_eq.add_equations(adv_diff)
+simulation_eq.add_equations(ps)
+
+
 
 # Constituent relations
 if conservative:
@@ -74,14 +78,13 @@ constituent.add_equations(eqns)
 # constituent.add_equations(eqns)
 
 block = SimulationBlock(ndim, block_number=0)
-
 # Initial conditions
 initial = GridBasedInitialisation()
 x0 = "Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])"
 d = "Eq(GridVariable(d), Piecewise((1.0, DataObject(x0) < 0.5), (0.125, True)))"
 p = "Eq(GridVariable(p), Piecewise((1.0, DataObject(x0) < 0.5), (0.10, True)))"
 u0 = "Eq(GridVariable(u0), Piecewise((0.0, DataObject(x0) < 0.5),(0, True)))"
-f = "Eq(GridVariable(f), Piecewise((1.0, DataObject(x0) < 0.5),(0, True)))"
+f = "Eq(GridVariable(f), Piecewise((1.0, DataObject(x0) < 0.5),(0.2, True)))"
 rho = "Eq(DataObject(rho), d)"
 rhou0 = "Eq(DataObject(rhou0), d*u0)"
 rhoE = "Eq(DataObject(rhoE), p/(gama-1.0) + 0.5* d *(u0**2.0))"
@@ -141,7 +144,7 @@ block.setio(copy.deepcopy(h5))
 TVD = True
 if not weno and not teno:
     if TVD:
-        TVD_filter = TVDFilter(block, airfoil=False, optimize=False, passive_scalar=True)
+        TVD_filter = TVDFilter(block, airfoil=False, optimize=False, species='passive_scalar')
         block.set_equations(TVD_filter.equation_classes)
     else:
         WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, optimize=False)
@@ -155,7 +158,7 @@ alg = TraditionalAlgorithmRK(block)
 SimulationDataType.set_datatype(Double)
 OPSC(alg)
 
-constants = ['gama', 'dt', 'niter', 'block0np0', 'Delta0block0', 'eps', 'inv_rfact0_block0', 'lambda0_TVD', 'TENO_CT','alpha','f']
-values = ['1.4', '0.0002', 'ceil(0.2/0.0002)', '200', '1.0/(block0np0-1)', '1.0e-16', '1.0/Delta0block0', 'dt/Delta0block0', '1.0e-5', '1.0', '1.0']
+constants = ['gama', 'dt', 'niter', 'block0np0', 'Delta0block0', 'eps', 'inv_rfact0_block0', 'lambda0_TVD', 'TENO_CT','alpha', 'f', 'kappa_TVD']
+values = ['1.4', '0.0002', 'ceil(0.2/0.0002)', '200', '1.0/(block0np0-1)', '1.0e-16', '1.0/Delta0block0', 'dt/Delta0block0', '1.0e-5', '1.0','1.0', '1.5']
 substitute_simulation_parameters(constants, values)
 print_iteration_ops(every=1, NaN_check='rho')

@@ -1,0 +1,107 @@
+-----------------------------------------
+ MPI partition and reading input file time: 0.000000
+ -----------------------------------------
+[1;32mOpenSBLI is starting from the initial condition.
+[0mFile opensbli_output_000001.h5 does not exist .... creating file
+Const dataset Delta0block0 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset Delta1block0 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset Delta2block0 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset H not found in file opensbli_output_000001.h5 ... creating const
+Const dataset HDF5_timing not found in file opensbli_output_000001.h5 ... creating const
+Const dataset L not found in file opensbli_output_000001.h5 ... creating const
+Const dataset Minf not found in file opensbli_output_000001.h5 ... creating const
+Const dataset Pr not found in file opensbli_output_000001.h5 ... creating const
+Const dataset Re not found in file opensbli_output_000001.h5 ... creating const
+Const dataset RefT not found in file opensbli_output_000001.h5 ... creating const
+Const dataset SuthT not found in file opensbli_output_000001.h5 ... creating const
+Const dataset TENO_CT not found in file opensbli_output_000001.h5 ... creating const
+Const dataset Twall not found in file opensbli_output_000001.h5 ... creating const
+Const dataset a not found in file opensbli_output_000001.h5 ... creating const
+Const dataset b not found in file opensbli_output_000001.h5 ... creating const
+Const dataset b_f not found in file opensbli_output_000001.h5 ... creating const
+Const dataset beta_0 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset block0np0 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset block0np1 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset block0np2 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset dt not found in file opensbli_output_000001.h5 ... creating const
+Const dataset eps not found in file opensbli_output_000001.h5 ... creating const
+Const dataset gama not found in file opensbli_output_000001.h5 ... creating const
+Const dataset gamma_m1 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset niter not found in file opensbli_output_000001.h5 ... creating const
+Const dataset omega_0 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset omega_1 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset omega_2 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset omega_3 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset phi_0 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset phi_1 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset phi_2 not found in file opensbli_output_000001.h5 ... creating const
+Const dataset shock_filter_control not found in file opensbli_output_000001.h5 ... creating const
+Const dataset simulation_time not found in file opensbli_output_000001.h5 ... creating const
+Const dataset start_iter not found in file opensbli_output_000001.h5 ... creating const
+Const dataset tripA not found in file opensbli_output_000001.h5 ... creating const
+Const dataset write_output_file not found in file opensbli_output_000001.h5 ... creating const
+Const dataset xts not found in file opensbli_output_000001.h5 ... creating const
+Const dataset iter not found in file opensbli_output_000001.h5 ... creating const
+Iteration: 10000. Time-step: 1.000e-02. Simulation time: 100.00000. Time/iteration: 0.369054.
+Iteration: 20000. Time-step: 1.000e-02. Simulation time: 200.00000. Time/iteration: 0.369645.
+Iteration: 30000. Time-step: 1.000e-02. Simulation time: 300.00000. Time/iteration: 0.369748.
+Iteration: 40000. Time-step: 1.000e-02. Simulation time: 400.00000. Time/iteration: 0.369920.
+Iteration: 50000. Time-step: 1.000e-02. Simulation time: 500.00000. Time/iteration: 0.370104.
+Iteration: 60000. Time-step: 1.000e-02. Simulation time: 600.00000. Time/iteration: 0.370002.
+Iteration: 70000. Time-step: 1.000e-02. Simulation time: 700.00000. Time/iteration: 0.370182.
+Iteration: 80000. Time-step: 1.000e-02. Simulation time: 800.00000. Time/iteration: 0.370135.
+Iteration: 90000. Time-step: 1.000e-02. Simulation time: 900.00000. Time/iteration: 0.370136.
+Iteration: 100000. Time-step: 1.000e-02. Simulation time: 1000.00000. Time/iteration: 0.370145.
+Iteration: 110000. Time-step: 1.000e-02. Simulation time: 1100.00000. Time/iteration: 0.370070.
+Iteration: 120000. Time-step: 1.000e-02. Simulation time: 1200.00000. Time/iteration: 0.370233.
+Iteration: 130000. Time-step: 1.000e-02. Simulation time: 1300.00000. Time/iteration: 0.370169.
+Iteration: 140000. Time-step: 1.000e-02. Simulation time: 1400.00000. Time/iteration: 0.370127.
+Iteration: 150000. Time-step: 1.000e-02. Simulation time: 1500.00000. Time/iteration: 0.370094.
+File opensbli_output_150000.h5 does not exist .... creating file
+Const dataset Delta0block0 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset Delta1block0 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset Delta2block0 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset H not found in file opensbli_output_150000.h5 ... creating const
+Const dataset HDF5_timing not found in file opensbli_output_150000.h5 ... creating const
+Const dataset L not found in file opensbli_output_150000.h5 ... creating const
+Const dataset Minf not found in file opensbli_output_150000.h5 ... creating const
+Const dataset Pr not found in file opensbli_output_150000.h5 ... creating const
+Const dataset Re not found in file opensbli_output_150000.h5 ... creating const
+Const dataset RefT not found in file opensbli_output_150000.h5 ... creating const
+Const dataset SuthT not found in file opensbli_output_150000.h5 ... creating const
+Const dataset TENO_CT not found in file opensbli_output_150000.h5 ... creating const
+Const dataset Twall not found in file opensbli_output_150000.h5 ... creating const
+Const dataset a not found in file opensbli_output_150000.h5 ... creating const
+Const dataset b not found in file opensbli_output_150000.h5 ... creating const
+Const dataset b_f not found in file opensbli_output_150000.h5 ... creating const
+Const dataset beta_0 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset block0np0 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset block0np1 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset block0np2 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset dt not found in file opensbli_output_150000.h5 ... creating const
+Const dataset eps not found in file opensbli_output_150000.h5 ... creating const
+Const dataset gama not found in file opensbli_output_150000.h5 ... creating const
+Const dataset gamma_m1 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset niter not found in file opensbli_output_150000.h5 ... creating const
+Const dataset omega_0 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset omega_1 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset omega_2 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset omega_3 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset phi_0 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset phi_1 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset phi_2 not found in file opensbli_output_150000.h5 ... creating const
+Const dataset shock_filter_control not found in file opensbli_output_150000.h5 ... creating const
+Const dataset simulation_time not found in file opensbli_output_150000.h5 ... creating const
+Const dataset start_iter not found in file opensbli_output_150000.h5 ... creating const
+Const dataset tripA not found in file opensbli_output_150000.h5 ... creating const
+Const dataset write_output_file not found in file opensbli_output_150000.h5 ... creating const
+Const dataset xts not found in file opensbli_output_150000.h5 ... creating const
+Const dataset iter not found in file opensbli_output_150000.h5 ... creating const
+Iteration: 160000. Time-step: 1.000e-02. Simulation time: 1600.00000. Time/iteration: 0.370745.
+Iteration: 170000. Time-step: 1.000e-02. Simulation time: 1700.00000. Time/iteration: 0.370235.
+Iteration: 180000. Time-step: 1.000e-02. Simulation time: 1800.00000. Time/iteration: 0.370388.
+Iteration: 190000. Time-step: 1.000e-02. Simulation time: 1900.00000. Time/iteration: 0.370400.
+Iteration: 200000. Time-step: 1.000e-02. Simulation time: 2000.00000. Time/iteration: 0.370187.
+Iteration: 210000. Time-step: 1.000e-02. Simulation time: 2100.00000. Time/iteration: 0.370390.
+Iteration: 220000. Time-step: 1.000e-02. Simulation time: 2200.00000. Time/iteration: 0.370348.
+Iteration: 230000. Time-step: 1.000e-02. Simulation time: 2300.00000. Time/iteration: 0.370288.

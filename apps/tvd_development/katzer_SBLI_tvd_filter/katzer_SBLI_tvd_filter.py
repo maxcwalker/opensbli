@@ -12,8 +12,8 @@ simulation_parameters = {
 'Re'        :   '950.0',
 'Twall'     :   '1.67619431',
 'dt'        :   '0.04',
-'niter'     :   '100',
-'block0np0'     :   '500',
+'niter'     :   '2500000',
+'block0np0'     :   '1000',
 'block0np1'     :   '250',
 'Delta0block0'      :   '400.0/(block0np0-1)',
 'Delta1block0'      :   '115.0/(block0np1-1)',
@@ -30,7 +30,7 @@ simulation_parameters = {
 'lambda1_TVD'       : 'dt/Delta1block0',
 'inv_rfact0_block0' : '1.0/Delta0block0',
 'inv_rfact1_block0' : '1.0/Delta1block0',
-'kappa_TVD' : '0.1',
+'kappa_TVD' : '0.2',
 }
 
 ndim = 2
