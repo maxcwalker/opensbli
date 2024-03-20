@@ -40,7 +40,7 @@ void opensbliblock00Kernel016_c_wrapper(
    double u0 = 0.0;
    OPS_ACC(x0_B0, 0) = Delta0block0*idx[0];
 
-   u0 = 0;
+   u0 = 0.0;
 
    p = ((OPS_ACC(x0_B0, 0) < 0.5) ? (
    1.0
@@ -53,21 +53,21 @@ void opensbliblock00Kernel016_c_wrapper(
    1.0
 )
 : (
-   0.0
+   0.125
 ));
 
    dN2 = ((OPS_ACC(x0_B0, 0) < 0.5) ? (
-   0.0
+   0.125
 )
 : (
    1.0
 ));
 
+   OPS_ACC(rho_B0, 0) = dN + dN2;
+
    OPS_ACC(rhoN_B0, 0) = dN;
 
    OPS_ACC(rhoN2_B0, 0) = dN2;
-
-   OPS_ACC(rho_B0, 0) = dN + dN2;
 
    OPS_ACC(rhou0_B0, 0) = u0*(dN + dN2);
 

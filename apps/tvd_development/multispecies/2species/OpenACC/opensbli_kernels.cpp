@@ -78,10 +78,6 @@ int size, char *dat, char const *name){
     start_iter = *(int*)dat;
   }
   else
-  if (!strcmp(name,"write_output_file")) {
-    write_output_file = *(int*)dat;
-  }
-  else
   {
     throw OPSException(OPS_RUNTIME_ERROR, "error: unknown const name");
   }

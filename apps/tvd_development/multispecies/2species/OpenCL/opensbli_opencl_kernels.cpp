@@ -29,7 +29,6 @@ extern double kappa_TVD;
 extern int niter;
 extern double simulation_time;
 extern int start_iter;
-extern int write_output_file;
 
 
 void ops_init_backend() {}
@@ -39,8 +38,8 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
   ops_execute(instance);
   cl_int ret = 0;
   if (instance->opencl_instance->OPS_opencl_core.constant == NULL) {
-    instance->opencl_instance->OPS_opencl_core.constant = (cl_mem*) malloc((18)*sizeof(cl_mem));
-    for ( int i=0; i<18; i++ ){
+    instance->opencl_instance->OPS_opencl_core.constant = (cl_mem*) malloc((17)*sizeof(cl_mem));
+    for ( int i=0; i<17; i++ ){
       instance->opencl_instance->OPS_opencl_core.constant[i] = NULL;
     }
   }
@@ -227,17 +226,6 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     }
     //Write the new constant to the memory of the device
     clSafeCall( clEnqueueWriteBuffer(instance->opencl_instance->OPS_opencl_core.command_queue, instance->opencl_instance->OPS_opencl_core.constant[16], CL_TRUE, 0, dim*typeSize, (void*) dat, 0, NULL, NULL) );
-    clSafeCall( clFlush(instance->opencl_instance->OPS_opencl_core.command_queue) );
-    clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
-  }
-  else
-  if (!strcmp(name,"write_output_file")) {
-    if (instance->opencl_instance->OPS_opencl_core.constant[17] == NULL) {
-      instance->opencl_instance->OPS_opencl_core.constant[17] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
-      clSafeCall( ret );
-    }
-    //Write the new constant to the memory of the device
-    clSafeCall( clEnqueueWriteBuffer(instance->opencl_instance->OPS_opencl_core.command_queue, instance->opencl_instance->OPS_opencl_core.constant[17], CL_TRUE, 0, dim*typeSize, (void*) dat, 0, NULL, NULL) );
     clSafeCall( clFlush(instance->opencl_instance->OPS_opencl_core.command_queue) );
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }

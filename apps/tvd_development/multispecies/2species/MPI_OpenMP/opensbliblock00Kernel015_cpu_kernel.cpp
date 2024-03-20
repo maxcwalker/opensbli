@@ -97,7 +97,7 @@ void ops_par_loop_opensbliblock00Kernel015_execute(ops_kernel_descriptor *desc) 
    double dN2 = 0.0;
    double p = 0.0;
    double u0 = 0.0;
-   dN = 0.0;
+   dN = 0.125000000000000;
 
    dN2 = 1.00000000000000;
 

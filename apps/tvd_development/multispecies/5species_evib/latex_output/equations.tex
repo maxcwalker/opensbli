@@ -1,0 +1,118 @@
+\documentclass{article}
+\title{Einstein Expansion of the simulation equations}
+\author{Satya P Jammy \& OpenSBLI developers team}
+\date{\today}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{breqn}
+\begin{document}
+\maketitle
+\noindent Simulation equations
+\\\begin{dmath}\left. \frac{d}{d t} rhoO \right|_{{Temporal }} = - \frac{\frac{d}{d x0} u0}{2} \,.\, rhoO - \frac{\frac{d}{d x0} rhoO}{2} \,.\, u0 + wdotO - \frac{1}{2} \,.\, \frac{\partial}{\partial x0}\left(rhoO \,.\, u0\right) + \frac{mu \,.\, 
+\frac{d^{2}}{d x0^{2}}  yO}{Re \,.\, Sc} + \frac{\frac{d}{d x0} mu \,.\, \frac{d}{d x0} yO}{Re \,.\, Sc}\end{dmath}
+
+\begin{dmath}\left. \frac{d}{d t} rhoO2 \right|_{{Temporal }} = - \frac{\frac{d}{d x0} u0}{2} \,.\, rhoO2 - \frac{\frac{d}{d x0} rhoO2}{2} \,.\, u0 + wdotO2 - \frac{1}{2} \,.\, \frac{\partial}{\partial x0}\left(rhoO2 \,.\, u0\right) + \frac{mu \,.\, 
+\frac{d^{2}}{d x0^{2}}  yO2}{Re \,.\, Sc} + \frac{\frac{d}{d x0} mu \,.\, \frac{d}{d x0} yO2}{Re \,.\, Sc}\end{dmath}
+
+\begin{dmath}\left. \frac{d}{d t} rhoN \right|_{{Temporal }} = - \frac{\frac{d}{d x0} u0}{2} \,.\, rhoN - \frac{\frac{d}{d x0} rhoN}{2} \,.\, u0 + wdotN - \frac{1}{2} \,.\, \frac{\partial}{\partial x0}\left(rhoN \,.\, u0\right) + \frac{mu \,.\, 
+\frac{d^{2}}{d x0^{2}}  yN}{Re \,.\, Sc} + \frac{\frac{d}{d x0} mu \,.\, \frac{d}{d x0} yN}{Re \,.\, Sc}\end{dmath}
+
+\begin{dmath}\left. \frac{d}{d t} rhoN2 \right|_{{Temporal }} = - \frac{\frac{d}{d x0} u0}{2} \,.\, rhoN2 - \frac{\frac{d}{d x0} rhoN2}{2} \,.\, u0 + wdotN2 - \frac{1}{2} \,.\, \frac{\partial}{\partial x0}\left(rhoN2 \,.\, u0\right) + \frac{mu \,.\, 
+\frac{d^{2}}{d x0^{2}}  yN2}{Re \,.\, Sc} + \frac{\frac{d}{d x0} mu \,.\, \frac{d}{d x0} yN2}{Re \,.\, Sc}\end{dmath}
+
+\begin{dmath}\left. \frac{d}{d t} rhoNO \right|_{{Temporal }} = - \frac{\frac{d}{d x0} u0}{2} \,.\, rhoNO - \frac{\frac{d}{d x0} rhoNO}{2} \,.\, u0 + wdotNO - \frac{1}{2} \,.\, \frac{\partial}{\partial x0}\left(rhoNO \,.\, u0\right) + \frac{mu \,.\, 
+\frac{d^{2}}{d x0^{2}}  yNO}{Re \,.\, Sc} + \frac{\frac{d}{d x0} mu \,.\, \frac{d}{d x0} yNO}{Re \,.\, Sc}\end{dmath}
+
+\begin{dmath}\left. \frac{d}{d t} rhou0 \right|_{{Temporal }} = - \frac{\frac{d}{d x0} u0}{2} \,.\, rhou0 - \frac{\frac{d}{d x0} rhou0}{2} \,.\, u0 - \frac{d}{d x0} p - \frac{1}{2} \,.\, \frac{\partial}{\partial x0}\left(rhou0 \,.\, u0\right) + 
+\frac{4 \,.\, mu \,.\, \frac{d^{2}}{d x0^{2}}  u0}{3 \,.\, Re} + \frac{4 \,.\, \frac{d}{d x0} mu \,.\, \frac{d}{d x0} u0}{3 \,.\, Re}\end{dmath}
+
+\begin{dmath}\left. \frac{d}{d t} rhoev \right|_{{Temporal }} = evN2 \,.\, wdotN2 + evNO \,.\, wdotNO + evO2 \,.\, wdotO2 + \frac{9.86923266716013 \cdot 10^{-5} \,.\, p}{\frac{rhoO2}{MO2} + \frac{rhoNO}{MNO} + \frac{rhoN2}{MN2}} \,.\, 
+\left(\frac{rhoO2}{MO2 \,.\, ptauO2} + \frac{rhoNO}{MNO \,.\, ptauNO} + \frac{rhoN2}{MN2 \,.\, ptauN2}\right) \,.\, \left(eveqN2 \,.\, rhoN2 + eveqNO \,.\, rhoNO + eveqO2 \,.\, rhoO2 - rhoev\right) - \frac{\frac{d}{d x0} u0}{2} \,.\, rhoev - 
+\frac{\frac{d}{d x0} rhoev}{2} \,.\, u0 - \frac{1}{2} \,.\, \frac{\partial}{\partial x0}\left(rhoev \,.\, u0\right) + \frac{\frac{d^{2}}{d x0^{2}}  Tv}{Re} \,.\, kappav + \frac{\frac{d}{d x0} Tv}{Re} \,.\, \frac{d}{d x0} kappav + \frac{mu}{Re \,.\, 
+Sc} \,.\, \left(evN2 \,.\, \frac{d^{2}}{d x0^{2}}  yN2 + evNO \,.\, \frac{d^{2}}{d x0^{2}}  yNO + evO2 \,.\, \frac{d^{2}}{d x0^{2}}  yO2 + \frac{d}{d x0} evN2 \,.\, \frac{d}{d x0} yN2 + \frac{d}{d x0} evNO \,.\, \frac{d}{d x0} yNO + \frac{d}{d x0} 
+evO2 \,.\, \frac{d}{d x0} yO2\right) + \frac{\frac{d}{d x0} mu}{Re \,.\, Sc} \,.\, \left(evN2 \,.\, \frac{d}{d x0} yN2 + evNO \,.\, \frac{d}{d x0} yNO + evO2 \,.\, \frac{d}{d x0} yO2\right)\end{dmath}
+
+\begin{dmath}\left. \frac{d}{d t} rhoE \right|_{{Temporal }} = - \frac{\frac{d}{d x0} u0}{2} \,.\, rhoE - \frac{\frac{d}{d x0} rhoE}{2} \,.\, u0 - \frac{\partial}{\partial x0}\left(p \,.\, u0\right) - \frac{1}{2} \,.\, \frac{\partial}{\partial 
+x0}\left(rhoE \,.\, u0\right) + \frac{Rhat \,.\, T \,.\, mu}{Re \,.\, Sc} \,.\, \left(\frac{3.5}{MO2} \,.\, \frac{d^{2}}{d x0^{2}}  yO2 + \frac{2.5}{MO} \,.\, \frac{d^{2}}{d x0^{2}}  yO + \frac{3.5}{MNO} \,.\, \frac{d^{2}}{d x0^{2}}  YNO + 
+\frac{3.5}{MN2} \,.\, \frac{d^{2}}{d x0^{2}}  YN2 + \frac{2.5}{MN} \,.\, \frac{d^{2}}{d x0^{2}}  yN\right) + \frac{Rhat \,.\, T \,.\, \frac{d}{d x0} mu}{Re \,.\, Sc} \,.\, \left(\frac{3.5}{MO2} \,.\, \frac{d}{d x0} yO2 + \frac{2.5}{MO} \,.\, 
+\frac{d}{d x0} yO + \frac{3.5}{MNO} \,.\, \frac{d}{d x0} YNO + \frac{3.5}{MN2} \,.\, \frac{d}{d x0} YN2 + \frac{2.5}{MN} \,.\, \frac{d}{d x0} yN\right) + \frac{Rhat \,.\, mu \,.\, \frac{d}{d x0} T}{Re \,.\, Sc} \,.\, \left(\frac{3.5}{MO2} \,.\, 
+\frac{d}{d x0} yO2 + \frac{2.5}{MO} \,.\, \frac{d}{d x0} yO + \frac{3.5}{MNO} \,.\, \frac{d}{d x0} YNO + \frac{3.5}{MN2} \,.\, \frac{d}{d x0} YN2 + \frac{2.5}{MN} \,.\, \frac{d}{d x0} yN\right) + \frac{\frac{d^{2}}{d x0^{2}}  T}{Re} \,.\, kappa + 
+\frac{\frac{d^{2}}{d x0^{2}}  Tv}{Re} \,.\, kappav + \frac{4 \,.\, mu \,.\, u0 \,.\, \frac{d^{2}}{d x0^{2}}  u0}{3 \,.\, Re} + \frac{4 \,.\, mu \,.\, \left(\frac{d}{d x0} u0 \right)^{2}}{3 \,.\, Re} + \frac{4 \,.\, \frac{d}{d x0} mu \,.\, \frac{d}{d 
+x0} u0}{3 \,.\, Re} \,.\, u0 + \frac{\frac{d}{d x0} T}{Re} \,.\, \frac{d}{d x0} kappa + \frac{\frac{d}{d x0} Tv}{Re} \,.\, \frac{d}{d x0} kappav + \frac{4186800.0 \,.\, mu}{Re \,.\, Sc} \,.\, \left(\frac{\frac{d^{2}}{d x0^{2}}  YO}{MO} \,.\, dhO + 
+\frac{\frac{d^{2}}{d x0^{2}}  YNO}{MNO} \,.\, dhNO + \frac{\frac{d^{2}}{d x0^{2}}  YN}{MN} \,.\, dhN\right) + \frac{mu}{Re \,.\, Sc} \,.\, \left(evN2 \,.\, \frac{d^{2}}{d x0^{2}}  yN2 + evNO \,.\, \frac{d^{2}}{d x0^{2}}  yNO + evO2 \,.\, 
+\frac{d^{2}}{d x0^{2}}  yO2 + \frac{d}{d x0} evN2 \,.\, \frac{d}{d x0} yN2 + \frac{d}{d x0} evNO \,.\, \frac{d}{d x0} yNO + \frac{d}{d x0} evO2 \,.\, \frac{d}{d x0} yO2\right) + \frac{\frac{d}{d x0} mu}{Re \,.\, Sc} \,.\, \left(evN2 \,.\, \frac{d}{d 
+x0} yN2 + evNO \,.\, \frac{d}{d x0} yNO + evO2 \,.\, \frac{d}{d x0} yO2\right) + \frac{4186800.0 \,.\, \frac{d}{d x0} mu}{Re \,.\, Sc} \,.\, \left(\frac{\frac{d}{d x0} YO}{MO} \,.\, dhO + \frac{\frac{d}{d x0} YNO}{MNO} \,.\, dhNO + \frac{\frac{d}{d 
+x0} YN}{MN} \,.\, dhN\right)\end{dmath}
+
+\noindent Constituent relations
+\\\begin{dmath}u0 = \frac{rhou0}{rhoN + rhoN2 + rhoNO + rhoO + rhoO2}\end{dmath}
+
+\begin{dmath}p = Rhat \,.\, T \,.\, \left(\frac{rhoO2}{MO2} + \frac{rhoO}{MO} + \frac{rhoNO}{MNO} + \frac{rhoN2}{MN2} + \frac{rhoN}{MN}\right)\end{dmath}
+
+\begin{dmath}a = \left(\frac{gama \,.\, p}{rhoN + rhoN2 + rhoNO + rhoO + rhoO2} \right)^{0.5}\end{dmath}
+
+\begin{dmath}T = \frac{rhoE - rhoev - 0.5 \,.\, \left(u0 \right)^{2} \,.\, \left(rhoN + rhoN2 + rhoNO + rhoO + rhoO2\right) - \frac{4186800.0 \,.\, dhO}{MO} \,.\, rhoO - \frac{4186800.0 \,.\, dhNO}{MNO} \,.\, rhoNO - \frac{4186800.0 \,.\, dhN}{MN} 
+\,.\, rhoN}{Rhat \,.\, \left(\frac{2.5 \,.\, rhoO2}{MO2} + \frac{1.5 \,.\, rhoO}{MO} + \frac{2.5 \,.\, rhoNO}{MNO} + \frac{2.5 \,.\, rhoN2}{MN2} + \frac{1.5 \,.\, rhoN}{MN}\right)}\end{dmath}
+
+\begin{dmath}f = \frac{rhof}{rhoN + rhoN2 + rhoNO + rhoO + rhoO2}\end{dmath}
+
+\begin{dmath}mu = \left(1.0 - e^{- 0.010568 \,.\, T}\right) \,.\, \left(1.34007484243992 \cdot 10^{-6} \,.\, \left(T \right)^{0.021823 \,.\, \log{\left (T \right )} + 0.34357} \,.\, \left(yN2 + yNO + yO2\right) + 8.0133632789385 \cdot 10^{-7} \,.\, 
+\left(T \right)^{0.022652 \,.\, \log{\left (T \right )} + 0.342509} \,.\, \left(yN + yO\right)\right)\end{dmath}
+
+\begin{dmath}kappa = \left(1.0 - e^{- 0.010568 \,.\, T}\right) \,.\, \left(0.00188950552784029 \,.\, \left(T \right)^{0.021823 \,.\, \log{\left (T \right )} + 0.34357} \,.\, \left(yN2 + yNO + yO2\right) + 0.00177095328464541 \,.\, \left(T 
+\right)^{0.022652 \,.\, \log{\left (T \right )} + 0.342509} \,.\, \left(yN + yO\right)\right)\end{dmath}
+
+\begin{dmath}kappav = \left(1.0 - e^{- 0.010568 \,.\, T}\right) \,.\, \left(0.000384199457327525 \,.\, \left(T \right)^{0.021823 \,.\, \log{\left (T \right )} + 0.34357} \,.\, \left(yN2 + yNO + yO2\right) + 0.000416374355973645 \,.\, \left(T 
+\right)^{0.022652 \,.\, \log{\left (T \right )} + 0.342509} \,.\, \left(yN + yO\right)\right)\end{dmath}
+
+\begin{dmath}yO = \frac{rhoO}{MO \,.\, \left(\frac{rhoO2}{MO2} + \frac{rhoO}{MO} + \frac{rhoNO}{MNO} + \frac{rhoN2}{MN2} + \frac{rhoN}{MN}\right)}\end{dmath}
+
+\begin{dmath}yO2 = \frac{rhoO2}{MO2 \,.\, \left(\frac{rhoO2}{MO2} + \frac{rhoO}{MO} + \frac{rhoNO}{MNO} + \frac{rhoN2}{MN2} + \frac{rhoN}{MN}\right)}\end{dmath}
+
+\begin{dmath}yN = \frac{rhoN}{MN \,.\, \left(\frac{rhoO2}{MO2} + \frac{rhoO}{MO} + \frac{rhoNO}{MNO} + \frac{rhoN2}{MN2} + \frac{rhoN}{MN}\right)}\end{dmath}
+
+\begin{dmath}yN2 = \frac{rhoN2}{MN2 \,.\, \left(\frac{rhoO2}{MO2} + \frac{rhoO}{MO} + \frac{rhoNO}{MNO} + \frac{rhoN2}{MN2} + \frac{rhoN}{MN}\right)}\end{dmath}
+
+\begin{dmath}yNO = \frac{rhoNO}{MNO \,.\, \left(\frac{rhoO2}{MO2} + \frac{rhoO}{MO} + \frac{rhoNO}{MNO} + \frac{rhoN2}{MN2} + \frac{rhoN}{MN}\right)}\end{dmath}
+
+\begin{dmath}eveqO2 = \frac{Rhat \,.\, thetavO2}{MO2 \,.\, \left(e^{\frac{thetavO2}{T}} - 1.0\right)}\end{dmath}
+
+\begin{dmath}eveqN2 = \frac{Rhat \,.\, thetavN2}{MN2 \,.\, \left(e^{\frac{thetavN2}{T}} - 1.0\right)}\end{dmath}
+
+\begin{dmath}eveqNO = \frac{Rhat \,.\, thetavNO}{MNO \,.\, \left(e^{\frac{thetavNO}{T}} - 1.0\right)}\end{dmath}
+
+\begin{dmath}evO2 = \frac{Rhat \,.\, thetavO2}{MO2 \,.\, \left(e^{\frac{thetavO2}{Tv}} - 1.0\right)}\end{dmath}
+
+\begin{dmath}evN2 = \frac{Rhat \,.\, thetavN2}{MN2 \,.\, \left(e^{\frac{thetavN2}{Tv}} - 1.0\right)}\end{dmath}
+
+\begin{dmath}evNO = \frac{Rhat \,.\, thetavNO}{MNO \,.\, \left(e^{\frac{thetavNO}{Tv}} - 1.0\right)}\end{dmath}
+
+\begin{dmath}ptauO2 = \frac{1}{\frac{rhoO2}{MO2} + \frac{rhoO}{MO} + \frac{rhoNO}{MNO} + \frac{rhoN2}{MN2} + \frac{rhoN}{MN}} \,.\, \left(\frac{2.08725734681668 \cdot 10^{-10}}{MO2} \,.\, rhoO2 \,.\, e^{\frac{129.0}{\left(T 
+\right)^{0.333333333333333}}} + \frac{3.03420950194169 \cdot 10^{-10}}{MO} \,.\, rhoO \,.\, e^{\frac{129.0}{\left(T \right)^{0.333333333333333}}} + \frac{2.14180928034488 \cdot 10^{-10}}{MNO} \,.\, rhoNO \,.\, e^{\frac{129.0}{\left(T 
+\right)^{0.333333333333333}}} + \frac{2.22632207449373 \cdot 10^{-10}}{MN2} \,.\, rhoN2 \,.\, e^{\frac{129.0}{\left(T \right)^{0.333333333333333}}} + \frac{3.27838502246041 \cdot 10^{-10}}{MN} \,.\, rhoN \,.\, e^{\frac{129.0}{\left(T 
+\right)^{0.333333333333333}}}\right)\end{dmath}
+
+\begin{dmath}ptauN2 = \frac{1}{\frac{rhoO2}{MO2} + \frac{rhoO}{MO} + \frac{rhoNO}{MNO} + \frac{rhoN2}{MN2} + \frac{rhoN}{MN}} \,.\, \left(\frac{1.51958310305852 \cdot 10^{-11}}{MO2} \,.\, rhoO2 \,.\, e^{\frac{220.0}{\left(T 
+\right)^{0.333333333333333}}} + \frac{2.75229751516092 \cdot 10^{-11}}{MO} \,.\, rhoO \,.\, e^{\frac{220.0}{\left(T \right)^{0.333333333333333}}} + \frac{1.58793752948278 \cdot 10^{-11}}{MNO} \,.\, rhoNO \,.\, e^{\frac{220.0}{\left(T 
+\right)^{0.333333333333333}}} + \frac{1.69627729418406 \cdot 10^{-11}}{MN2} \,.\, rhoN2 \,.\, e^{\frac{220.0}{\left(T \right)^{0.333333333333333}}} + \frac{3.14066959164866 \cdot 10^{-11}}{MN} \,.\, rhoN \,.\, e^{\frac{220.0}{\left(T 
+\right)^{0.333333333333333}}}\right)\end{dmath}
+
+\begin{dmath}ptauNO = \frac{1}{\frac{rhoO2}{MO2} + \frac{rhoO}{MO} + \frac{rhoNO}{MNO} + \frac{rhoN2}{MN2} + \frac{rhoN}{MN}} \,.\, \left(\frac{6.69952094392908 \cdot 10^{-11}}{MO2} \,.\, rhoO2 \,.\, e^{\frac{168.0}{\left(T 
+\right)^{0.333333333333333}}} + \frac{1.07234831431176 \cdot 10^{-10}}{MO} \,.\, rhoO \,.\, e^{\frac{168.0}{\left(T \right)^{0.333333333333333}}} + \frac{7.04583049652578 \cdot 10^{-11}}{MNO} \,.\, rhoNO \,.\, e^{\frac{168.0}{\left(T 
+\right)^{0.333333333333333}}} + \frac{7.28659255329465 \cdot 10^{-11}}{MN2} \,.\, rhoN2 \,.\, e^{\frac{168.0}{\left(T \right)^{0.333333333333333}}} + \frac{1.18607665290378 \cdot 10^{-10}}{MN} \,.\, rhoN \,.\, e^{\frac{168.0}{\left(T 
+\right)^{0.333333333333333}}}\right)\end{dmath}
+
+\begin{dmath}Tv = \frac{\frac{thetavO2 \,.\, rhoO2}{MO2} + \frac{thetavNO \,.\, rhoNO}{MNO} + \frac{thetavN2 \,.\, rhoN2}{MN2}}{\left(\frac{rhoO2}{MO2} + \frac{rhoNO}{MNO} + \frac{rhoN2}{MN2}\right) \,.\, \log{\left (\frac{Rhat}{rhoev} \,.\, 
+\left(\frac{thetavO2 \,.\, rhoO2}{MO2} + \frac{thetavNO \,.\, rhoNO}{MNO} + \frac{thetavN2 \,.\, rhoN2}{MN2}\right) + 1.0 \right )}}\end{dmath}
+
+\begin{dmath}rhoN = cN \,.\, rhoref\end{dmath}
+
+\begin{dmath}rhoN2 = cN2 \,.\, rhoref\end{dmath}
+
+\begin{dmath}rhoO = cO \,.\, rhoref\end{dmath}
+
+\begin{dmath}rhoO2 = cO2 \,.\, rhoref\end{dmath}
+
+\begin{dmath}rhoNO = cNO \,.\, rhoref\end{dmath}
+
+\end{document}

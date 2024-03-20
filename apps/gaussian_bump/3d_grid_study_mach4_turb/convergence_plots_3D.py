@@ -50,7 +50,7 @@ Ly = 115.0
 Lx = 400.0
 scale = 4.959043
 
-list = ['400x200x100','1000x200x100', '1000x200x200']
+list = ['400x200x100','1000x200x100', '1000x200x200','1000x300x200']
 # list = ['1000x200x100', '1000x200x200']
 fig1, ax1 = plt.subplots(1,1)
 fig2, ax2 = plt.subplots(1,1)
@@ -58,7 +58,7 @@ fig2, ax2 = plt.subplots(1,1)
 line_styles = ['-', '-', '-', '-','-']
 line_colours = ['k','b', 'orange','y']
 axins1 = zoomed_inset_axes(ax1, 5, loc=2)
-axins2 = zoomed_inset_axes(ax2, 10, loc=2)
+axins2 = zoomed_inset_axes(ax2, 5, loc=2)
 
 for i in range(len(list)):
 
@@ -122,8 +122,8 @@ for i in range(len(list)):
     ax1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = 'grid_%s' % list[i],color=line_colours[i],linewidth=1)
     axins1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = 'grid_%s' % list[i],color=line_colours[i],linewidth=1)
 
-    ax2.plot(x[0, 1, :], p_avg[0, :]/p_avg[0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i])
-    axins2.plot(x[0, 1, :], p_avg[0, :]/p_avg[0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i])
+    ax2.plot(x[0, 1, :], p_avg[0, :]/p_avg[0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i],linewidth=1)
+    axins2.plot(x[0, 1, :], p_avg[0, :]/p_avg[0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i],linewidth=1)
 
 
 mark_inset(ax1, axins1, loc1=1, loc2=4, fc="none", ec="0.5")
@@ -134,7 +134,7 @@ axins1.set_xticks([])
 axins1.set_yticks([])
 
 mark_inset(ax2, axins2, loc1=1, loc2=4, fc="none", ec="0.5")
-x1, x2, y1, y2 = 185, 195, 2.4, 2.5 # specify the limits
+x1, x2, y1, y2 = 185, 200, 1.65,1.81 # specify the limits
 axins2.set_xlim(x1, x2) # apply the x-limits
 axins2.set_ylim(y1, y2) # apply the y-limits 
 axins2.set_xticks([])
@@ -157,4 +157,4 @@ ax2.legend(loc='best')
 ax2.grid()
 fig2.savefig(directory+"wall_pressure.pdf",bbox_inches='tight') 
 
-plt.show()
+# plt.show()

@@ -27,7 +27,6 @@ extern double kappa_TVD;
 extern int niter;
 extern double simulation_time;
 extern int start_iter;
-extern int write_output_file;
 
 void ops_init_backend() {}
 
@@ -100,10 +99,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"start_iter")) {
     #pragma omp target enter data map(to:start_iter)
-  }
-  else
-  if (!strcmp(name,"write_output_file")) {
-    #pragma omp target enter data map(to:write_output_file)
   }
   else
   {

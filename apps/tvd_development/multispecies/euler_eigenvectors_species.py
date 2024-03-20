@@ -5,9 +5,9 @@ from sympy import *
 from sympy import init_printing
 init_printing(use_latex=True)
 
-rho=Symbol('rho'); u0=Symbol('u0'); p=Symbol('p'); gama=Symbol('gama'); asq=Symbol('asq'); a=Symbol('a')
-f=Symbol('f'); rhoN2=Symbol('rhoN2'); rhoN=Symbol('rhoN'); ev=Symbol('ev')
-MN2=Symbol('MN2'); MN=Symbol('MN'); gamaf=Symbol('gamaf'); af=Symbol('af')
+rho=Symbol('rho'); u0=Symbol('u'); p=Symbol('p'); gama=Symbol('gama'); asq=Symbol('asq'); a=Symbol('a')
+f=Symbol('f'); rhoN2=Symbol('rhoN2'); rhoN=Symbol('rhoN'); ev=Symbol('ev'); rhoO=Symbol('rhoO');rhoO2=Symbol('rhoO2'); rhoNO=Symbol('rhoNO')
+MN2=Symbol('MN2'); MN=Symbol('MN'); gamaf=Symbol('gama'); af=Symbol('a')
 
 # using pressure as varaiable
 
@@ -41,9 +41,9 @@ MN2=Symbol('MN2'); MN=Symbol('MN'); gamaf=Symbol('gamaf'); af=Symbol('af')
 # F=Matrix([rho*u0,rho*u0**2+rho*a**2/gama,u0*(rho*a**2/(gama-1.0)+0.5*rho*u0**2),rho*u0*f])
 
 # with 2 species (N2 and N)
-Q=Matrix([rhoN,rhoN2,(rhoN2+rhoN)*u0,(rhoN2+rhoN)*a**2/gama/(gama-1.0)+0.5*(rhoN2+rhoN)*u0**2])
-U=Matrix([rhoN,rhoN2,u0,a])
-F=Matrix([rhoN*u0,rhoN2*u0,(rhoN2+rhoN)*u0**2+(rhoN2+rhoN)*a**2/gama,u0*((rhoN2+rhoN)*a**2/(gama-1.0)+0.5*(rhoN2+rhoN)*u0**2)])
+# Q=Matrix([rhoN,rhoN2,(rhoN2+rhoN)*u0,(rhoN2+rhoN)*a**2/gama/(gama-1.0)+0.5*(rhoN2+rhoN)*u0**2])
+# U=Matrix([rhoN,rhoN2,u0,a])
+# F=Matrix([rhoN*u0,rhoN2*u0,(rhoN2+rhoN)*u0**2+(rhoN2+rhoN)*a**2/gama,u0*((rhoN2+rhoN)*a**2/(gama-1.0)+0.5*(rhoN2+rhoN)*u0**2)])
 
 # *** with 2 species (N2 and N) and a separate ev equation 
 # uses frozen flow gama and sound speed, such that gamaf=cpf/cvf,
@@ -52,9 +52,19 @@ F=Matrix([rhoN*u0,rhoN2*u0,(rhoN2+rhoN)*u0**2+(rhoN2+rhoN)*a**2/gama,u0*((rhoN2+
 # Mhat is defined from rho/Mhat=sum_s(rho_s/M_s)
 # rho*cpf=sum_s(rho_s*cp_s)
 
-# Q=Matrix([rhoN2,rhoN,(rhoN2+rhoN)*u0,(rhoN2+rhoN)*ev,(rhoN2+rhoN)*(ev+af**2/(gamaf*(gamaf-1.0))+0.5*u0**2)])
-# U=Matrix([rhoN2,rhoN,u0,ev,af])
-# F=Matrix([rhoN2*u0,rhoN*u0,(rhoN2+rhoN)*u0**2+(rhoN2+rhoN)*af**2/gamaf,u0*(rhoN2+rhoN)*ev,u0*((rhoN2+rhoN)*(ev+af**2/(gamaf*(gamaf-1.0))+0.5*u0**2))+u0*(rhoN2+rhoN)*af**2/gamaf])
+Q=Matrix([rhoN2,rhoN,rho*u0,rho*ev,rho*(ev+a**2/(gama*(gama-1))+0.5*u0**2)])
+U=Matrix([rhoN2,rhoN,u0,ev,a])
+F=Matrix([rhoN2*u0,rhoN*u0,rho*u0**2+rho*a**2/gama,u0*rho*ev,u0*(rho*(ev+a**2/(gama*(gama-1))+0.5*u0**2))+u0*rho*a**2/gama])
+
+
+
+
+
+# 5 species test
+# Q=Matrix([rhoO, rhoO2, rhoNO, rhoN2,rhoN,(rhoO+rhoO2+rhoNO+rhoN2+rhoN)*u0,(rhoO+rhoO2+rhoNO+rhoN2+rhoN)*ev,(rhoO+rhoO2+rhoNO+rhoN2+rhoN)*(ev+af**2/(gamaf*(gamaf-1.0))+0.5*u0**2)])
+# U=Matrix([rhoO, rhoO2, rhoNO, rhoN2,rhoN,u0,ev,af])
+# F=Matrix([rhoO*u0, rhoO2*u0, rhoNO*u0, rhoN2*u0,rhoN*u0,(rhoO+rhoO2+rhoNO+rhoN2+rhoN)*u0**2+(rhoO+rhoO2+rhoNO+rhoN2+rhoN)*af**2/gamaf,u0*(rhoO+rhoO2+rhoNO+rhoN2+rhoN)*ev,u0*((rhoO+rhoO2+rhoNO+rhoN2+rhoN)*(ev+af**2/(gamaf*(gamaf-1.0))+0.5*u0**2))+u0*(rhoO+rhoO2+rhoNO+rhoN2+rhoN)*af**2/gamaf])
+
 
 #############################################################################################
 #############################################################################################
@@ -67,6 +77,8 @@ A_Q=dFdU*dUdQ
 A_v = simplify(dUdQ*(A_Q*dQdU))
 S, ev = A_v.diagonalize()
 
+
+
 #For the standard Euler equations
 # S = S/(a*rho)
 S = S
@@ -74,14 +86,21 @@ S_inv = S.inv()
 
 LEV = simplify(S_inv*dUdQ)
 REV = simplify(dQdU*S)
+REV = simplify(REV)
+
 # REV, ev = A.diagonalize()
 # REV = REV
 # LEV = REV.inv(method='ADJ')
 # LEV = simplify(LEV)
 
-I = REV*LEV
-I = simplify(I)
+# I = REV*LEV
+# I = simplify(I)
 
+eigval_qty = sqrt(len(ev))
+
+# for i in range(eigval_qty):
+#     eig_vect = REV(i)
+#     print(eig_vect)
 
 # LEV = LEV.subs(rho*a**2/gama/(gama-1.0)+0.5*rho*u0**2, H)
 print(REV)

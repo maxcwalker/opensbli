@@ -43,7 +43,8 @@ def read_dataset(group, dataset):
 # values
 
 
-list = ['000001','100000', '200000', '300000', '400000', '500000', '600000', '700000', '742000']
+list = ['000001','100000', '200000', '300000', '400000', '500000', '600000', '700000', '800000', '900000', '1000000', '1100000', '1200000', '1300000', '1400000']
+plot_list =  ['500000', '600000', '700000', '800000', '900000', '1000000', '1100000', '1200000', '1300000', '1400000']
 
 f=h5py.File('opensbli_output_%s.h5' % list[0], 'r')
 gama = f["gama"].value
@@ -69,16 +70,19 @@ line_styles = []
 for i in range(len(list)):
     line_styles.append('-')
 
-line_colours = ['k','b', 'orange','y','c','r','green','pink','slategray','lime','chocolate','k']
+line_colours = ['k','b', 'orange','y','c','r','green','pink','slategray','lime','chocolate','k','b','orange','y']
 axins1 = zoomed_inset_axes(ax1, 3, loc=2)
 axins2 = zoomed_inset_axes(ax1, 3, loc=3)
 axins3 = zoomed_inset_axes(ax1, 3, loc=4)
 
-TF = 3.75 # Initial through flows
+# TF = 3.75 # Initial through flows
 time, Cf_mid  = [], []
 
-for i in range(len(list)):
 
+
+TF = int(plot_list[0])*0.01/400.0 + 3.75 
+for i in range(len(list)):
+    print('Through flow: ', TF)
     fname = 'opensbli_output_%s.h5' % list[i]
     f, group1 = read_file(fname)
 
@@ -128,21 +132,17 @@ for i in range(len(list)):
     tau_wall = dudy*mu_wall
     Cf = tau_wall/(0.5*Re)
 
-
-    ax1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
-    axins1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
-    axins2.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
-    axins3.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
-    
+    if list[i] in plot_list:
+        ax1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
+        axins1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
+        axins2.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
+        axins3.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
+        TF += 2.5
     time.append(float(list[i])*float(dt))
     Cf_mid.append(Cf[int(Nx/2)])
     print('time ', time)
     print('cf ', Cf[int(Nx/2)])
-    # print('x location: ',x[0,0,int(Ny/2)])
 
-    # ax2.plot(x[0, 1, :], p_avg[0, :]/p_avg[0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i])
-    # axins2.plot(x[0, 1, :], p_avg[0, :]/p_avg[0, 0], '%s'%line_styles[i],color=line_colours[i], label='grid_%s' % list[i])
-    TF += 2.5
 
 mark_inset(ax1, axins1, loc1=1, loc2=4, fc="none", ec="0.5")
 mark_inset(ax1, axins2, loc1=1, loc2=4, fc="none", ec="0.5")

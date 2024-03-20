@@ -47,8 +47,6 @@ cl::sycl::buffer<double,1> *simulation_time_p=nullptr;
 extern double simulation_time;
 cl::sycl::buffer<int,1> *start_iter_p=nullptr;
 extern int start_iter;
-cl::sycl::buffer<int,1> *write_output_file_p=nullptr;
-extern int write_output_file;
 
 void ops_init_backend() {}
 
@@ -184,14 +182,6 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
   if (!strcmp(name,"start_iter")) {
     if (start_iter_p == nullptr) start_iter_p = new cl::sycl::buffer<int,1>(cl::sycl::range<1>(dim));
     auto accessor = (*start_iter_p).get_access<cl::sycl::access::mode::write>();
-    for ( int d=0; d<dim; d++ ){
-      accessor[d] = ((int*)dat)[d];
-    }
-  }
-  else
-  if (!strcmp(name,"write_output_file")) {
-    if (write_output_file_p == nullptr) write_output_file_p = new cl::sycl::buffer<int,1>(cl::sycl::range<1>(dim));
-    auto accessor = (*write_output_file_p).get_access<cl::sycl::access::mode::write>();
     for ( int d=0; d<dim; d++ ){
       accessor[d] = ((int*)dat)[d];
     }

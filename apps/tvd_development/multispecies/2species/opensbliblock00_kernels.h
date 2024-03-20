@@ -9,7 +9,7 @@ ACC<double> &rhou0_B0, ACC<double> &x0_B0, const int *idx)
    double u0 = 0.0;
    x0_B0(0) = Delta0block0*idx[0];
 
-   u0 = 0;
+   u0 = 0.0;
 
    p = ((x0_B0(0) < 0.5) ? (
    1.0
@@ -22,21 +22,21 @@ ACC<double> &rhou0_B0, ACC<double> &x0_B0, const int *idx)
    1.0
 )
 : (
-   0.0
+   0.125
 ));
 
    dN2 = ((x0_B0(0) < 0.5) ? (
-   0.0
+   0.125
 )
 : (
    1.0
 ));
 
+   rho_B0(0) = dN + dN2;
+
    rhoN_B0(0) = dN;
 
    rhoN2_B0(0) = dN2;
-
-   rho_B0(0) = dN + dN2;
 
    rhou0_B0(0) = u0*(dN + dN2);
 
@@ -53,7 +53,7 @@ ACC<double> &rhou0_B0, ACC<double> &x0_B0, const int *idx)
    double u0 = 0.0;
    dN = 1.00000000000000;
 
-   dN2 = 0.0;
+   dN2 = 0.125000000000000;
 
    u0 = 0.0;
 
@@ -76,7 +76,7 @@ ACC<double> &rhou0_B0, ACC<double> &x0_B0, const int *idx)
    double dN2 = 0.0;
    double p = 0.0;
    double u0 = 0.0;
-   dN = 0.0;
+   dN = 0.125000000000000;
 
    dN2 = 1.00000000000000;
 
@@ -521,11 +521,11 @@ ACC<double> &wk2_B0, ACC<double> &wk3_B0)
    double ws_lambda_33 = 0.0;
    AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(-1));
 
-   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(-1));
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(-1));
 
    AVG_0_a = ((1.0/2.0))*(a_B0(0) + a_B0(-1));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(-1));
+   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(-1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -586,11 +586,11 @@ ACC<double> &wk2_B0, ACC<double> &wk3_B0)
 
    AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(1));
 
-   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(1));
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(1));
 
    AVG_0_a = ((1.0/2.0))*(a_B0(0) + a_B0(1));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(1));
+   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -657,41 +657,41 @@ ACC<double> &wk2_B0, ACC<double> &wk3_B0)
 
    ws_lambda_33 = AVG_0_a + AVG_0_u0;
 
-   AVG_0_REV_00 = -1.00000000000000;
+   AVG_0_REV_00 = -1;
 
-   AVG_0_REV_01 = (-2.0*AVG_0_rhoN - 2.0*AVG_0_rhoN2)*inv_AVG_a;
+   AVG_0_REV_01 = -2*(AVG_0_rhoN + AVG_0_rhoN2)*inv_AVG_a;
 
-   AVG_0_REV_02 = 2.0*invgamma_m1*AVG_0_rhoN*inv_AVG_a;
+   AVG_0_REV_02 = 2*invgamma_m1*AVG_0_rhoN*inv_AVG_a;
 
-   AVG_0_REV_03 = 2.0*invgamma_m1*AVG_0_rhoN*inv_AVG_a;
+   AVG_0_REV_03 = 2*invgamma_m1*AVG_0_rhoN*inv_AVG_a;
 
-   AVG_0_REV_10 = 1.00000000000000;
+   AVG_0_REV_10 = 1;
 
-   AVG_0_REV_12 = 2.0*invgamma_m1*AVG_0_rhoN2*inv_AVG_a;
+   AVG_0_REV_12 = 2*invgamma_m1*AVG_0_rhoN2*inv_AVG_a;
 
-   AVG_0_REV_13 = 2.0*invgamma_m1*AVG_0_rhoN2*inv_AVG_a;
+   AVG_0_REV_13 = 2*invgamma_m1*AVG_0_rhoN2*inv_AVG_a;
 
-   AVG_0_REV_21 = -2.0*(AVG_0_rhoN + AVG_0_rhoN2)*AVG_0_u0*inv_AVG_a;
+   AVG_0_REV_21 = -2*(AVG_0_rhoN + AVG_0_rhoN2)*AVG_0_u0*inv_AVG_a;
 
-   AVG_0_REV_22 = 2.0*(-AVG_0_a + AVG_0_u0)*(AVG_0_rhoN + AVG_0_rhoN2)*invgamma_m1*inv_AVG_a;
+   AVG_0_REV_22 = 2*(-AVG_0_a + AVG_0_u0)*(AVG_0_rhoN + AVG_0_rhoN2)*invgamma_m1*inv_AVG_a;
 
-   AVG_0_REV_23 = 2.0*(AVG_0_a + AVG_0_u0)*(AVG_0_rhoN + AVG_0_rhoN2)*invgamma_m1*inv_AVG_a;
+   AVG_0_REV_23 = 2*(AVG_0_a + AVG_0_u0)*(AVG_0_rhoN + AVG_0_rhoN2)*invgamma_m1*inv_AVG_a;
 
-   AVG_0_REV_31 = -1.0*(AVG_0_u0*AVG_0_u0)*(AVG_0_rhoN + AVG_0_rhoN2)*inv_AVG_a;
+   AVG_0_REV_31 = -(AVG_0_u0*AVG_0_u0)*(AVG_0_rhoN + AVG_0_rhoN2)*inv_AVG_a;
 
-    AVG_0_REV_32 = (AVG_0_rhoN + AVG_0_rhoN2)*(2.0*(AVG_0_a*AVG_0_a) + 2.0*(AVG_0_a*AVG_0_a)*gamma_m1 +
-      1.0*(AVG_0_u0*AVG_0_u0)*gama*gamma_m1 - 2.0*gama*gamma_m1*AVG_0_a*AVG_0_u0)*invgama*inv2gamma_m1*inv_AVG_a;
+    AVG_0_REV_32 = (AVG_0_rhoN + AVG_0_rhoN2)*(2*(AVG_0_a*AVG_0_a) + 2*(AVG_0_a*AVG_0_a)*gamma_m1 +
+      1.0*(AVG_0_u0*AVG_0_u0)*gama*gamma_m1 - 2*gama*gamma_m1*AVG_0_a*AVG_0_u0)*invgama*inv2gamma_m1*inv_AVG_a;
 
     AVG_0_REV_33 = (AVG_0_rhoN + AVG_0_rhoN2)*(2.0*(AVG_0_a*AVG_0_a) + 2.0*(AVG_0_a*AVG_0_a)*gamma_m1 +
       1.0*(AVG_0_u0*AVG_0_u0)*gama*gamma_m1 + 2.0*gama*gamma_m1*AVG_0_a*AVG_0_u0)*invgama*inv2gamma_m1*inv_AVG_a;
 
    AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(1) + rhoN_B0(2));
 
-   AVG_0_u0 = ((1.0/2.0))*(u0_B0(1) + u0_B0(2));
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(1) + rhoN2_B0(2));
 
    AVG_0_a = ((1.0/2.0))*(a_B0(1) + a_B0(2));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(1) + rhoN2_B0(2));
+   AVG_0_u0 = ((1.0/2.0))*(u0_B0(1) + u0_B0(2));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 

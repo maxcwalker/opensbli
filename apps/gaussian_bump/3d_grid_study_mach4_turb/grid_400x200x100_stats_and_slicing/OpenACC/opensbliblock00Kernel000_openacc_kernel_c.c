@@ -203,9 +203,9 @@ ptr_double a_B0,
       OPS_ACC(rhoE_B0, 0,0,0))/sqrt(OPS_ACC(rho_B0, 0,0,0)) + (OPS_ACC(p_B0, 1,0,0) +
       OPS_ACC(rhoE_B0, 1,0,0))/sqrt(OPS_ACC(rho_B0, 1,0,0)))*AVG_0_inv_rho)*gamma_m1);
 
-   AVG_0_detJ = ((1.0/2.0))*(OPS_ACC(detJ_B0, 0,0,0) + OPS_ACC(detJ_B0, 1,0,0));
-
    AVG_0_D00 = ((1.0/2.0))*(OPS_ACC(D00_B0, 0,0,0) + OPS_ACC(D00_B0, 1,0,0));
+
+   AVG_0_detJ = ((1.0/2.0))*(OPS_ACC(detJ_B0, 0,0,0) + OPS_ACC(detJ_B0, 1,0,0));
 
    AVG_0_D01 = ((1.0/2.0))*(OPS_ACC(D01_B0, 0,0,0) + OPS_ACC(D01_B0, 1,0,0));
 
@@ -509,27 +509,27 @@ ptr_double a_B0,
     CS_45 = OPS_ACC(rho_B0, 3,0,0)*AVG_0_0_LEV_40 + OPS_ACC(rhoE_B0, 3,0,0)*AVG_0_0_LEV_44 + OPS_ACC(rhou0_B0, 3,0,0)*AVG_0_0_LEV_41 +
       OPS_ACC(rhou1_B0, 3,0,0)*AVG_0_0_LEV_42 + OPS_ACC(rhou2_B0, 3,0,0)*AVG_0_0_LEV_43;
 
-    max_lambda_00 = shock_filter_control*fmax(fabs(OPS_ACC(u0_B0, 1,0,0)*OPS_ACC(D00_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0) +
-      OPS_ACC(u1_B0, 1,0,0)*OPS_ACC(D01_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)), fabs(OPS_ACC(u0_B0, 0,0,0)*OPS_ACC(D00_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0) +
-      OPS_ACC(u1_B0, 0,0,0)*OPS_ACC(D01_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)));
+    max_lambda_00 = shock_filter_control*fmax(fabs(OPS_ACC(u0_B0, 0,0,0)*OPS_ACC(D00_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0) +
+      OPS_ACC(u1_B0, 0,0,0)*OPS_ACC(D01_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)), fabs(OPS_ACC(u0_B0, 1,0,0)*OPS_ACC(D00_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0) +
+      OPS_ACC(u1_B0, 1,0,0)*OPS_ACC(D01_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)));
 
    max_lambda_11 = max_lambda_00;
 
    max_lambda_22 = max_lambda_00;
 
-    max_lambda_33 = shock_filter_control*fmax(fabs(sqrt((OPS_ACC(D00_B0, 1,0,0)*OPS_ACC(D00_B0, 1,0,0))*(OPS_ACC(detJ_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)) +
-      (OPS_ACC(D01_B0, 1,0,0)*OPS_ACC(D01_B0, 1,0,0))*(OPS_ACC(detJ_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)))*OPS_ACC(a_B0, 1,0,0) +
-      OPS_ACC(u0_B0, 1,0,0)*OPS_ACC(D00_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0) + OPS_ACC(u1_B0, 1,0,0)*OPS_ACC(D01_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)),
-      fabs(sqrt((OPS_ACC(D00_B0, 0,0,0)*OPS_ACC(D00_B0, 0,0,0))*(OPS_ACC(detJ_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)) +
+    max_lambda_33 = shock_filter_control*fmax(fabs(sqrt((OPS_ACC(D00_B0, 0,0,0)*OPS_ACC(D00_B0, 0,0,0))*(OPS_ACC(detJ_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)) +
       (OPS_ACC(D01_B0, 0,0,0)*OPS_ACC(D01_B0, 0,0,0))*(OPS_ACC(detJ_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)))*OPS_ACC(a_B0, 0,0,0) +
-      OPS_ACC(u0_B0, 0,0,0)*OPS_ACC(D00_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0) + OPS_ACC(u1_B0, 0,0,0)*OPS_ACC(D01_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)));
+      OPS_ACC(u0_B0, 0,0,0)*OPS_ACC(D00_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0) + OPS_ACC(u1_B0, 0,0,0)*OPS_ACC(D01_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)),
+      fabs(sqrt((OPS_ACC(D00_B0, 1,0,0)*OPS_ACC(D00_B0, 1,0,0))*(OPS_ACC(detJ_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)) +
+      (OPS_ACC(D01_B0, 1,0,0)*OPS_ACC(D01_B0, 1,0,0))*(OPS_ACC(detJ_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)))*OPS_ACC(a_B0, 1,0,0) +
+      OPS_ACC(u0_B0, 1,0,0)*OPS_ACC(D00_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0) + OPS_ACC(u1_B0, 1,0,0)*OPS_ACC(D01_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)));
 
-    max_lambda_44 = shock_filter_control*fmax(fabs(-sqrt((OPS_ACC(D00_B0, 1,0,0)*OPS_ACC(D00_B0, 1,0,0))*(OPS_ACC(detJ_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)) +
-      (OPS_ACC(D01_B0, 1,0,0)*OPS_ACC(D01_B0, 1,0,0))*(OPS_ACC(detJ_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)))*OPS_ACC(a_B0, 1,0,0) +
-      OPS_ACC(u0_B0, 1,0,0)*OPS_ACC(D00_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0) + OPS_ACC(u1_B0, 1,0,0)*OPS_ACC(D01_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)),
-      fabs(-sqrt((OPS_ACC(D00_B0, 0,0,0)*OPS_ACC(D00_B0, 0,0,0))*(OPS_ACC(detJ_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)) +
+    max_lambda_44 = shock_filter_control*fmax(fabs(-sqrt((OPS_ACC(D00_B0, 0,0,0)*OPS_ACC(D00_B0, 0,0,0))*(OPS_ACC(detJ_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)) +
       (OPS_ACC(D01_B0, 0,0,0)*OPS_ACC(D01_B0, 0,0,0))*(OPS_ACC(detJ_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)))*OPS_ACC(a_B0, 0,0,0) +
-      OPS_ACC(u0_B0, 0,0,0)*OPS_ACC(D00_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0) + OPS_ACC(u1_B0, 0,0,0)*OPS_ACC(D01_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)));
+      OPS_ACC(u0_B0, 0,0,0)*OPS_ACC(D00_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0) + OPS_ACC(u1_B0, 0,0,0)*OPS_ACC(D01_B0, 0,0,0)*OPS_ACC(detJ_B0, 0,0,0)),
+      fabs(-sqrt((OPS_ACC(D00_B0, 1,0,0)*OPS_ACC(D00_B0, 1,0,0))*(OPS_ACC(detJ_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)) +
+      (OPS_ACC(D01_B0, 1,0,0)*OPS_ACC(D01_B0, 1,0,0))*(OPS_ACC(detJ_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)))*OPS_ACC(a_B0, 1,0,0) +
+      OPS_ACC(u0_B0, 1,0,0)*OPS_ACC(D00_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0) + OPS_ACC(u1_B0, 1,0,0)*OPS_ACC(D01_B0, 1,0,0)*OPS_ACC(detJ_B0, 1,0,0)));
 
     beta_0 = ((1.0/4.0))*((((1.0/2.0))*(CS_01*max_lambda_00 + CF_01) - (1.0/2.0)*(CS_03*max_lambda_00 +
       CF_03))*(((1.0/2.0))*(CS_01*max_lambda_00 + CF_01) - (1.0/2.0)*(CS_03*max_lambda_00 + CF_03))) +

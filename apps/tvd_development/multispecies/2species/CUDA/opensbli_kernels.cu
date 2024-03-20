@@ -32,7 +32,6 @@ __constant__ double kappa_TVD;
 __constant__ int niter;
 __constant__ double simulation_time;
 __constant__ int start_iter;
-__constant__ int write_output_file;
 
 void ops_init_backend() {}
 
@@ -105,10 +104,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"start_iter")) {
     cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(start_iter, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"write_output_file")) {
-    cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(write_output_file, dat, dim*size));
   }
   else
   {

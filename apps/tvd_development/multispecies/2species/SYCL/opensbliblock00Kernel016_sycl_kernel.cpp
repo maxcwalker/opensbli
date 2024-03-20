@@ -137,7 +137,7 @@ void ops_par_loop_opensbliblock00Kernel016_execute(ops_kernel_descriptor *desc) 
    double u0 = 0.0;
    x0_B0(0) = Delta0block0_sycl[0]*idx[0];
 
-   u0 = 0;
+   u0 = 0.0;
 
    p = ((x0_B0(0) < 0.5) ? (
    1.0
@@ -150,21 +150,21 @@ void ops_par_loop_opensbliblock00Kernel016_execute(ops_kernel_descriptor *desc) 
    1.0
 )
 : (
-   0.0
+   0.125
 ));
 
    dN2 = ((x0_B0(0) < 0.5) ? (
-   0.0
+   0.125
 )
 : (
    1.0
 ));
 
+   rho_B0(0) = dN + dN2;
+
    rhoN_B0(0) = dN;
 
    rhoN2_B0(0) = dN2;
-
-   rho_B0(0) = dN + dN2;
 
    rhou0_B0(0) = u0*(dN + dN2);
 

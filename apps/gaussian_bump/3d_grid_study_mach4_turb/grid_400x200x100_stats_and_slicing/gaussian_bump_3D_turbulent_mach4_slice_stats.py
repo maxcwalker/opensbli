@@ -26,8 +26,8 @@ input_dict = {
     "Re"                   : "4000.0", 
     "Twall"                : "1.37", 
     "dt"                   : "0.003", 
-    "niter"                : "5", 
-    "stat_frequency"       : "1",
+    "niter"                : "5000", 
+    "stat_frequency"       : "100",
     "block0np0"            : "400", 
     "block0np1"            : "200",
     'block0np2'            : "100", 
@@ -45,7 +45,7 @@ input_dict = {
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
     "epsilon"              : "1.0e-30",
-    "tripA"                : "0.05",
+    "tripA"                : "0.0",
     "xts"                  : "50.0",
     "omega_0"              : "0.1",
     "omega_1"              : "0.2", 
@@ -181,8 +181,6 @@ schemes[rk.name] = rk
 # Set the discretisation schemes to be used (a python dictionary)
 block = SimulationBlock(ndim, block_number=0)
 block.set_discretisation_schemes(schemes)
-
-
 
 local_dict = {"block": block, "GridVariable": GridVariable, "DataObject": DataObject}
 x_loc = parse_expr("Eq(GridVariable(x0), block.deltas[0]*block.grid_indexes[0])", local_dict=local_dict)

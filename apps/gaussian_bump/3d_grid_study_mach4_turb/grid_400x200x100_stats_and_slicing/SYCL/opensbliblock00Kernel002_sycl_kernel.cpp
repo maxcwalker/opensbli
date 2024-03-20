@@ -601,14 +601,14 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
     CS_45 = rho_B0(0,0,3)*AVG_2_2_LEV_40 + rhoE_B0(0,0,3)*AVG_2_2_LEV_44 + rhou0_B0(0,0,3)*AVG_2_2_LEV_41 +
       rhou1_B0(0,0,3)*AVG_2_2_LEV_42 + rhou2_B0(0,0,3)*AVG_2_2_LEV_43;
 
-   max_lambda_00 = shock_filter_control_sycl[0]*cl::sycl::fmax(cl::sycl::fabs(u2_B0(0,0,1)*detJ_B0(0,0,1)), cl::sycl::fabs(u2_B0(0,0,0)*detJ_B0(0,0,0)));
+   max_lambda_00 = shock_filter_control_sycl[0]*cl::sycl::fmax(cl::sycl::fabs(u2_B0(0,0,0)*detJ_B0(0,0,0)), cl::sycl::fabs(u2_B0(0,0,1)*detJ_B0(0,0,1)));
 
    max_lambda_11 = max_lambda_00;
 
    max_lambda_22 = max_lambda_00;
 
-    max_lambda_33 = shock_filter_control_sycl[0]*cl::sycl::fmax(cl::sycl::fabs(a_B0(0,0,0)*detJ_B0(0,0,0) + u2_B0(0,0,0)*detJ_B0(0,0,0)),
-      cl::sycl::fabs(a_B0(0,0,1)*detJ_B0(0,0,1) + u2_B0(0,0,1)*detJ_B0(0,0,1)));
+    max_lambda_33 = shock_filter_control_sycl[0]*cl::sycl::fmax(cl::sycl::fabs(a_B0(0,0,1)*detJ_B0(0,0,1) + u2_B0(0,0,1)*detJ_B0(0,0,1)),
+      cl::sycl::fabs(a_B0(0,0,0)*detJ_B0(0,0,0) + u2_B0(0,0,0)*detJ_B0(0,0,0)));
 
     max_lambda_44 = shock_filter_control_sycl[0]*cl::sycl::fmax(cl::sycl::fabs(a_B0(0,0,0)*detJ_B0(0,0,0) - u2_B0(0,0,0)*detJ_B0(0,0,0)),
       cl::sycl::fabs(a_B0(0,0,1)*detJ_B0(0,0,1) - u2_B0(0,0,1)*detJ_B0(0,0,1)));

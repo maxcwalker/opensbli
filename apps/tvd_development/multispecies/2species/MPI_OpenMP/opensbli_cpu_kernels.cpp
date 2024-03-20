@@ -27,7 +27,6 @@ extern double kappa_TVD;
 extern int niter;
 extern double simulation_time;
 extern int start_iter;
-extern int write_output_file;
 
 void ops_init_backend() {}
 

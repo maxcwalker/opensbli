@@ -19,7 +19,6 @@ niter = ceil(0.2/0.0002);
 double rkB[] = {0.924574112262461, 0.287712943868770, 0.626538293270800};
 double rkA[] = {0.0, -2.91549395770192, 0.0};
 dt = 0.0002;
-write_output_file = 500;
 HDF5_timing = 0;
 delta_TVD = 0.500000000000000;
 eps_TVD = 1.00000000000000e-8;
@@ -48,7 +47,6 @@ ops_decl_const("kappa_TVD" , 1, "double", &kappa_TVD);
 ops_decl_const("niter" , 1, "int", &niter);
 ops_decl_const("simulation_time" , 1, "double", &simulation_time);
 ops_decl_const("start_iter" , 1, "int", &start_iter);
-ops_decl_const("write_output_file" , 1, "int", &write_output_file);
 // Define and Declare OPS Block
 ops_block opensbliblock00 = ops_decl_block(1, "opensbliblock00");
 #include "defdec_data_set.h"
@@ -220,10 +218,6 @@ ops_arg_dat(rhoN2_B0, 1, stencil_0_00_1, "double", OPS_RW),
 ops_arg_dat(rhoN_B0, 1, stencil_0_00_1, "double", OPS_RW),
 ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_RW),
 ops_arg_idx());
-
-if (fmod(1 + iter,write_output_file) == 0 || iter == 0){
-HDF5_IO_Write_0_opensbliblock00_dynamic(opensbliblock00, iter, rhoN_B0, rhoN2_B0, rhou0_B0, rhoE_B0, x0_B0, HDF5_timing);
-}
 
 }
 ops_timers(&cpu_end0, &elapsed_end0);

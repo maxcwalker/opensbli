@@ -31,7 +31,7 @@ void opensbliblock00Kernel014_c_wrapper(
    double u0 = 0.0;
    dN = 1.00000000000000;
 
-   dN2 = 0.0;
+   dN2 = 0.125000000000000;
 
    u0 = 0.0;
 
