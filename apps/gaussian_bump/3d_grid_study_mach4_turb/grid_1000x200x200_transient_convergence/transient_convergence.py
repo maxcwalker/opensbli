@@ -43,8 +43,8 @@ def read_dataset(group, dataset):
 # values
 
 
-list = ['000001','100000', '200000', '300000', '400000', '500000', '600000', '700000', '800000', '900000', '1000000', '1100000', '1200000', '1300000', '1400000']
-plot_list =  ['500000', '600000', '700000', '800000', '900000', '1000000', '1100000', '1200000', '1300000', '1400000']
+list = ['000001','100000', '200000', '300000', '400000', '500000', '600000', '700000', '800000', '900000', '1000000', '1100000', '1200000', '1300000', '1400000', '1500000', '1600000', '1700000']
+plot_list =  ['500000', '600000', '700000', '800000', '900000', '1000000', '1100000', '1200000', '1300000', '1400000', '1500000', '1600000', '1700000']
 
 f=h5py.File('opensbli_output_%s.h5' % list[0], 'r')
 gama = f["gama"].value
@@ -63,6 +63,7 @@ print('iterations: ',niter)
 
 fig1, ax1 = plt.subplots(1,1)
 fig2, ax2 = plt.subplots(1,1)
+
 # fig2, ax2 = plt.subplots(1,1)
 line_styles = []
 # line_styles = ['-', '-', '-', '-','-','-','-','-','-']
@@ -70,13 +71,13 @@ line_styles = []
 for i in range(len(list)):
     line_styles.append('-')
 
-line_colours = ['k','b', 'orange','y','c','r','green','pink','slategray','lime','chocolate','k','b','orange','y']
+line_colours = ['k','k','k','k','k','k','b', 'orange','y','c','r','green','pink','slategray','lime','chocolate','k','b','orange','y']
 axins1 = zoomed_inset_axes(ax1, 3, loc=2)
 axins2 = zoomed_inset_axes(ax1, 3, loc=3)
 axins3 = zoomed_inset_axes(ax1, 3, loc=4)
 
 # TF = 3.75 # Initial through flows
-time, Cf_mid  = [], []
+time, Cf_mid,Cf_350  = [], [], []
 
 
 
@@ -140,6 +141,7 @@ for i in range(len(list)):
         TF += 2.5
     time.append(float(list[i])*float(dt))
     Cf_mid.append(Cf[int(Nx/2)])
+    Cf_350.append(Cf[int(7*Nx/8)])
     print('time ', time)
     print('cf ', Cf[int(Nx/2)])
 
@@ -186,14 +188,15 @@ fig1.savefig(directory+'skin_friction.pdf',bbox_inches='tight')
 
 print(time)
 print(Cf_mid)
-ax2.plot(time, Cf_mid)
+ax2.plot(time, Cf_mid, color='k',label ='peak Cf')
+ax2.plot(time, Cf_350, color='b',label='Cf at x=350')
+ax2.set_ylabel('Cf')
+ax2.set_xlabel('Time')
+ax2.legend()
+ax2.grid()
 fig2.savefig('peak_Cf_overTime.pdf')
 
-# ax2.set_xlabel(r'$x_0$', fontsize=20)
-# ax2.set_ylabel(r'$\frac{P_w}{P_1}$', fontsize=22)
-# # ax2.set_title('Normalised wall pressure')
-# ax2.legend(loc='best')
-# ax2.grid()
-# fig2.savefig(directory+"wall_pressure.pdf",bbox_inches='tight') 
+
+
 
 plt.show()

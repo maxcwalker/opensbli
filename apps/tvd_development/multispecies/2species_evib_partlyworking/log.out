@@ -1,0 +1,7 @@
+-----------------------------------------
+ MPI partition and reading input file time: 0.000000
+ -----------------------------------------
+[1;32mOpenSBLI is starting from the initial condition.
+[0mIteration: 1. Time-step: 2.000e-04. Simulation time: 0.00020. Time/iteration: 0.000000.
+Iteration: 2. Time-step: 2.000e-04. Simulation time: 0.00040. Time/iteration: 0.000127.
+Error: NaN detected at element 5

@@ -216,21 +216,25 @@ ops_par_loop(opensbliblock00Kernel003, "User kernel: Zero the work arrays", open
 ops_arg_dat(wk0_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_dat(wk1_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_dat(wk2_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
-ops_arg_dat(wk3_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
+ops_arg_dat(wk3_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(wk4_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
 int iteration_range_4_block0[] = {-1, block0np0 + 1};
 ops_par_loop(opensbliblock00Kernel004, "User kernel: TVD reconstruction direction 0", opensbliblock00, 1, iteration_range_4_block0,
-ops_arg_dat(A_B0, 1, stencil_0_12_1, "double", OPS_READ),
 ops_arg_dat(a_B0, 1, stencil_0_12_1, "double", OPS_READ),
+ops_arg_dat(ev_B0, 1, stencil_0_12_1, "double", OPS_READ),
 ops_arg_dat(rhoE_B0, 1, stencil_0_12_1, "double", OPS_READ),
 ops_arg_dat(rhoN2_B0, 1, stencil_0_12_1, "double", OPS_READ),
 ops_arg_dat(rhoN_B0, 1, stencil_0_12_1, "double", OPS_READ),
+ops_arg_dat(rhoev_B0, 1, stencil_0_12_1, "double", OPS_READ),
 ops_arg_dat(rhou0_B0, 1, stencil_0_12_1, "double", OPS_READ),
 ops_arg_dat(u0_B0, 1, stencil_0_12_1, "double", OPS_READ),
+ops_arg_dat(u_B0, 1, stencil_0_12_1, "double", OPS_READ),
 ops_arg_dat(wk0_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_dat(wk1_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_dat(wk2_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
-ops_arg_dat(wk3_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
+ops_arg_dat(wk3_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(wk4_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
 int iteration_range_5_block0[] = {0, block0np0};
 ops_par_loop(opensbliblock00Kernel005, "User kernel: Non-linear TVD Filter application", opensbliblock00, 1, iteration_range_5_block0,
@@ -238,9 +242,11 @@ ops_arg_dat(wk0_B0, 1, stencil_0_10_1, "double", OPS_READ),
 ops_arg_dat(wk1_B0, 1, stencil_0_10_1, "double", OPS_READ),
 ops_arg_dat(wk2_B0, 1, stencil_0_10_1, "double", OPS_READ),
 ops_arg_dat(wk3_B0, 1, stencil_0_10_1, "double", OPS_READ),
+ops_arg_dat(wk4_B0, 1, stencil_0_10_1, "double", OPS_READ),
 ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_RW),
 ops_arg_dat(rhoN2_B0, 1, stencil_0_00_1, "double", OPS_RW),
 ops_arg_dat(rhoN_B0, 1, stencil_0_00_1, "double", OPS_RW),
+ops_arg_dat(rhoev_B0, 1, stencil_0_00_1, "double", OPS_RW),
 ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_RW),
 ops_arg_idx());
 

@@ -135,7 +135,7 @@ h5.add_arrays([DataObject('p')])
 
 block.setio(copy.deepcopy(h5))
 
-TVD_filter = TVDFilter(block, airfoil=False, optimize=False, species = 'N N2')
+TVD_filter = TVDFilter(block, airfoil=False, optimize=False, species = '2_species_ev')
 block.set_equations(TVD_filter.equation_classes)
 
 

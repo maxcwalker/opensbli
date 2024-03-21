@@ -52,9 +52,9 @@ MN2=Symbol('MN2'); MN=Symbol('MN'); gamaf=Symbol('gama'); af=Symbol('a')
 # Mhat is defined from rho/Mhat=sum_s(rho_s/M_s)
 # rho*cpf=sum_s(rho_s*cp_s)
 
-Q=Matrix([rhoN2,rhoN,rho*u0,rho*ev,rho*(ev+a**2/(gama*(gama-1))+0.5*u0**2)])
+Q=Matrix([rhoN2,rhoN,(rhoN+rhoN2)*u0,(rhoN+rhoN2)*ev,(rhoN+rhoN2)*(ev+a**2/(gama*(gama-1))+0.5*u0**2)])
 U=Matrix([rhoN2,rhoN,u0,ev,a])
-F=Matrix([rhoN2*u0,rhoN*u0,rho*u0**2+rho*a**2/gama,u0*rho*ev,u0*(rho*(ev+a**2/(gama*(gama-1))+0.5*u0**2))+u0*rho*a**2/gama])
+F=Matrix([rhoN2*u0,rhoN*u0,(rhoN+rhoN2)*u0**2+(rhoN+rhoN2)*a**2/gama,u0*(rhoN+rhoN2)*ev,u0*((rhoN+rhoN2)*(ev+a**2/(gama*(gama-1))+0.5*u0**2))+u0*(rhoN+rhoN2)*a**2/gama])
 
 
 
