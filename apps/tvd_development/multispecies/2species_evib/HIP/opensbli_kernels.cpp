@@ -16,6 +16,7 @@
 // global constants
 __constant__ double Delta0block0;
 __constant__ int HDF5_timing;
+__constant__ double Lref;
 __constant__ double MN;
 __constant__ double MN2;
 __constant__ double Re;
@@ -39,12 +40,14 @@ __constant__ double invRhat;
 __constant__ double invdelta_TVD;
 __constant__ double invgama;
 __constant__ double invgamma_m1;
+__constant__ double invuref;
 __constant__ double kappa;
 __constant__ double kappa_TVD;
 __constant__ int niter;
 __constant__ double simulation_time;
 __constant__ int start_iter;
 __constant__ double thetavN2;
+__constant__ double uref;
 
 void ops_init_backend() {}
 
@@ -57,6 +60,10 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"HDF5_timing")) {
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(HDF5_timing), dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"Lref")) {
+    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Lref), dat, dim*size));
   }
   else
   if (!strcmp(name,"MN")) {
@@ -151,6 +158,10 @@ int size, char *dat, char const *name){
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(invgamma_m1), dat, dim*size));
   }
   else
+  if (!strcmp(name,"invuref")) {
+    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(invuref), dat, dim*size));
+  }
+  else
   if (!strcmp(name,"kappa")) {
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(kappa), dat, dim*size));
   }
@@ -175,6 +186,10 @@ int size, char *dat, char const *name){
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(thetavN2), dat, dim*size));
   }
   else
+  if (!strcmp(name,"uref")) {
+    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(uref), dat, dim*size));
+  }
+  else
   {
     throw OPSException(OPS_RUNTIME_ERROR, "error: unknown const name");
   }
@@ -185,9 +200,9 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel022_hip_kernel.cpp"
 #include "opensbliblock00Kernel020_hip_kernel.cpp"
 #include "opensbliblock00Kernel021_hip_kernel.cpp"
-#include "opensbliblock00Kernel009_hip_kernel.cpp"
+#include "opensbliblock00Kernel010_hip_kernel.cpp"
 #include "opensbliblock00Kernel015_hip_kernel.cpp"
-#include "opensbliblock00Kernel008_hip_kernel.cpp"
+#include "opensbliblock00Kernel009_hip_kernel.cpp"
 #include "opensbliblock00Kernel018_hip_kernel.cpp"
 #include "opensbliblock00Kernel019_hip_kernel.cpp"
 #include "opensbliblock00Kernel006_hip_kernel.cpp"

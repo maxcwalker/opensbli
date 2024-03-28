@@ -17,6 +17,7 @@
 // global constants
 __constant__ double Delta0block0;
 __constant__ int HDF5_timing;
+__constant__ double Lref;
 __constant__ double MN;
 __constant__ double MN2;
 __constant__ double Re;
@@ -40,12 +41,14 @@ __constant__ double invRhat;
 __constant__ double invdelta_TVD;
 __constant__ double invgama;
 __constant__ double invgamma_m1;
+__constant__ double invuref;
 __constant__ double kappa;
 __constant__ double kappa_TVD;
 __constant__ int niter;
 __constant__ double simulation_time;
 __constant__ int start_iter;
 __constant__ double thetavN2;
+__constant__ double uref;
 
 void ops_init_backend() {}
 
@@ -58,6 +61,10 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"HDF5_timing")) {
     cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(HDF5_timing, dat, dim*size));
+  }
+  else
+  if (!strcmp(name,"Lref")) {
+    cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(Lref, dat, dim*size));
   }
   else
   if (!strcmp(name,"MN")) {
@@ -152,6 +159,10 @@ int size, char *dat, char const *name){
     cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(invgamma_m1, dat, dim*size));
   }
   else
+  if (!strcmp(name,"invuref")) {
+    cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(invuref, dat, dim*size));
+  }
+  else
   if (!strcmp(name,"kappa")) {
     cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(kappa, dat, dim*size));
   }
@@ -176,6 +187,10 @@ int size, char *dat, char const *name){
     cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(thetavN2, dat, dim*size));
   }
   else
+  if (!strcmp(name,"uref")) {
+    cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(uref, dat, dim*size));
+  }
+  else
   {
     throw OPSException(OPS_RUNTIME_ERROR, "error: unknown const name");
   }
@@ -186,9 +201,9 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel022_cuda_kernel.cu"
 #include "opensbliblock00Kernel020_cuda_kernel.cu"
 #include "opensbliblock00Kernel021_cuda_kernel.cu"
-#include "opensbliblock00Kernel009_cuda_kernel.cu"
+#include "opensbliblock00Kernel010_cuda_kernel.cu"
 #include "opensbliblock00Kernel015_cuda_kernel.cu"
-#include "opensbliblock00Kernel008_cuda_kernel.cu"
+#include "opensbliblock00Kernel009_cuda_kernel.cu"
 #include "opensbliblock00Kernel018_cuda_kernel.cu"
 #include "opensbliblock00Kernel019_cuda_kernel.cu"
 #include "opensbliblock00Kernel006_cuda_kernel.cu"

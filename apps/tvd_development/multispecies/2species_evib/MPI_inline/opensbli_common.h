@@ -16,6 +16,7 @@
 // global constants
 extern double Delta0block0;
 extern int HDF5_timing;
+extern double Lref;
 extern double MN;
 extern double MN2;
 extern double Re;
@@ -39,9 +40,11 @@ extern double invRhat;
 extern double invdelta_TVD;
 extern double invgama;
 extern double invgamma_m1;
+extern double invuref;
 extern double kappa;
 extern double kappa_TVD;
 extern int niter;
 extern double simulation_time;
 extern int start_iter;
 extern double thetavN2;
+extern double uref;

@@ -33,18 +33,29 @@ directory = './simulation_plots/'
 if not os.path.exists(directory):
     os.makedirs(directory)
 
+
 f=h5py.File(fname, 'r')
-gama = f["gama"].value
-Mref= f["Minf"].value
-Lx = f["L"].value
-Nx = f["block0np0"].value
-Ny = f["block0np1"].value
-Nz = f["block0np2"].value
-niter = f['niter'].value
-print('iterations: ',niter)
+try:
+    gama = f["gama"].value
+    Mref= f["Minf"].value
+    Lx = f["L"].value
+    Nx = f["block0np0"].value
+    Ny = f["block0np1"].value
+    Nz = f["block0np2"].value
+    niter = f['niter'].value
+    print('iterations: ',niter)
+except:
+    print("Using set grid variables")
+    gama = 1.4
+    Mref= 4.0
+    Lx = 400.0
+    Nx = 1500.0
+    Ny = 200.0
+    Nz = 200.0
 
 x0dum=read_dataset(f,'x0_B0')
 x1dum=read_dataset(f,'x1_B0')
+
 x2dum=read_dataset(f,'x2_B0')
 rdum=read_dataset(f, 'rho_B0')
 # print(rdum)
@@ -58,12 +69,35 @@ x=x0dum[2:-2,2:-2]
 y=x1dum[2:-2,2:-2]
 z=x2dum[2:-2,2:-2]
 rho=rdum[2:-2,2:-2]
-# print('rho = ')
-# print(rho)
 rhou=rudum[2:-2,2:-2]
 rhov=rvdum[2:-2,2:-2]
 rhow=rwdum[2:-2,2:-2]
 rhoE=rEdum[2:-2,2:-2]
+
+x=x0dum
+y=x1dum
+z=x2dum
+rho=rdum
+rhou=rudum
+rhov=rvdum
+rhow=rwdum
+rhoE=rEdum
+
+u=rhou/rho
+v=rhov/rho
+w=rhow/rho
+e=rhoE/rho-0.5*(u**2+v**2+w**2)
+p=(gama-1.0)*rho*e
+T=e*Mref**2*gama*(gama-1.0)
+
+x=x0dum
+y=x1dum
+z=x2dum
+rho=rdum
+rhou=rudum
+rhov=rvdum
+rhow=rwdum
+rhoE=rEdum
 u=rhou/rho
 v=rhov/rho
 w=rhow/rho
@@ -93,6 +127,7 @@ M = np.sqrt(u**2 + v**2 +w**2)/a
 ###################################################################################################
 
 z_idx = [int(Nz/2)]
+print("z_idx", z_idx)
 
 # z_idx = [2,5,6,10,12,13,15]
 y1, y2, x1, x2 = 0, 60, 140, 180
@@ -101,7 +136,7 @@ for idx in z_idx:
     fig1,ax=plt.subplots()
     # axins1 = zoomed_inset_axes(ax, 7,loc='lower center',bbox_to_anchor=(200,45))
     CS=ax.contourf(x[idx,:,:],y[idx,:,:],u[idx,:,:],levels=np.linspace(np.min(u[idx,:,:]), np.max(u[idx,:,:]),50), cmap=cm.jet)
-
+    print(u[idx,:,:])
     xp1,xp2 = int(len(x[0,0,:])/Lx *x1), int(len(x[0,0,:])/Lx *x2)
     # try:
         # U = axins1.contourf(x[idx,:,:], y[idx,:,:], u[idx,:,:],levels=list(np.linspace(np.min(u[idx,y1:y2,xp1:xp2]), 0, 5)) + list(np.linspace(np.max(u[idx,y1:y2,xp1:xp2])/20,np.max(u[idx,y1:y2,x1:x2]),25)) , cmap=cm.jet) #
@@ -111,7 +146,7 @@ for idx in z_idx:
 
     divider = make_axes_locatable(ax)
     cax1 = divider.append_axes("right", size=0.2,pad=0.1)
-    cbar=fig1.colorbar(CS, cax=cax1)
+    cbar=fig1.colorbar(CS, cax=cax1, )
     cbar.set_label(r"u velocity [main plot]", fontsize=7 )
     cbar.ax.tick_params(labelsize=5)
 
@@ -303,7 +338,10 @@ indexes = [1,20,40,60]
 for index in indexes:
     print('index: %d is at height y=%.2f' % (index, y[0,index,0]))
 
-
+fig5 ,ax5 = plt.subplots(1)
+ax5.scatter(x0dum[100,:,:],x1dum[100,:,:])
+ax5.set_aspect('equal')
+fig5.savefig("x_y_plot.pdf")
 # print(np.linspace(np.min(u[0,150:170,0:10]), np.max(u[0,150:170,0:10]),40))
 # print(np.max(u[0,150:170,0:10]))
 # plt.show()

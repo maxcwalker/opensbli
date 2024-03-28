@@ -66,7 +66,6 @@ simulation_eq.add_equations(momentum)
 simulation_eq.add_equations(evib)
 simulation_eq.add_equations(energy)
 
-# density = "Eq(rho, rhoN + rhoN2)"
 pressure = "Eq(p, (gama-1)*(rhoE - (1/2)*(rhoN+rhoN2)*(KD(_i,_j)*u_i*u_j)))"
 velocity = "Eq(u_i, rhou_i/(rhoN + rhoN2))"
 enthalpy = "Eq(H, (rhoE + p) / (rhoN + rhoN2))"

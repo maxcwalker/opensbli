@@ -145,7 +145,7 @@ void ops_par_loop_opensbliblock00Kernel021_execute(ops_kernel_descriptor *desc) 
 
    evN2 = Rhat_sycl[0]*thetavN2_sycl[0]/(MN2_sycl[0]*(-1.0 + cl::sycl::exp(thetavN2_sycl[0]/T0)));
 
-   rhoev_B0(0) = cN2_sycl[0]*evN2*r;
+   rhoev_B0(0) = 1.00000000000000e-7;
 
    rhoE_B0(0) = (u0*u0)*(0.5*cN_sycl[0]*r + 0.5*cN2_sycl[0]*r) + p0*(1.5*cN_sycl[0]*r/MN_sycl[0] + 2.5*cN2_sycl[0]*r/MN2_sycl[0])/(cN_sycl[0]*r/MN_sycl[0] + cN2_sycl[0]*r/MN2_sycl[0]);
 

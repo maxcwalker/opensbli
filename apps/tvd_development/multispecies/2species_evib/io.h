@@ -1,6 +1,7 @@
 void write_constants(const char* filename){
 ops_write_const_hdf5("Delta0block0", 1, "double", (char*)&Delta0block0, filename);
 ops_write_const_hdf5("HDF5_timing", 1, "int", (char*)&HDF5_timing, filename);
+ops_write_const_hdf5("Lref", 1, "double", (char*)&Lref, filename);
 ops_write_const_hdf5("MN", 1, "double", (char*)&MN, filename);
 ops_write_const_hdf5("MN2", 1, "double", (char*)&MN2, filename);
 ops_write_const_hdf5("Re", 1, "double", (char*)&Re, filename);
@@ -20,6 +21,7 @@ ops_write_const_hdf5("niter", 1, "int", (char*)&niter, filename);
 ops_write_const_hdf5("simulation_time", 1, "double", (char*)&simulation_time, filename);
 ops_write_const_hdf5("start_iter", 1, "int", (char*)&start_iter, filename);
 ops_write_const_hdf5("thetavN2", 1, "double", (char*)&thetavN2, filename);
+ops_write_const_hdf5("uref", 1, "double", (char*)&uref, filename);
 ops_write_const_hdf5("iter", 1, "int", (char*)&iter, filename);
 }
 

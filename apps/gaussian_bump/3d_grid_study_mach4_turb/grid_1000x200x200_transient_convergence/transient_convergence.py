@@ -44,7 +44,7 @@ def read_dataset(group, dataset):
 
 
 list = ['000001','100000', '200000', '300000', '400000', '500000', '600000', '700000', '800000', '900000', '1000000', '1100000', '1200000', '1300000', '1400000', '1500000', '1600000', '1700000']
-plot_list =  ['500000', '600000', '700000', '800000', '900000', '1000000', '1100000', '1200000', '1300000', '1400000', '1500000', '1600000', '1700000']
+plot_list =  ['800000', '900000', '1000000', '1100000', '1200000', '1300000', '1400000', '1500000', '1600000', '1700000']
 
 f=h5py.File('opensbli_output_%s.h5' % list[0], 'r')
 gama = f["gama"].value
@@ -81,7 +81,7 @@ time, Cf_mid,Cf_350  = [], [], []
 
 
 
-TF = int(plot_list[0])*0.01/400.0 + 3.75 
+TF = (int(plot_list[0])-700000)*0.005/400.0 + 17.5 
 for i in range(len(list)):
     print('Through flow: ', TF)
     fname = 'opensbli_output_%s.h5' % list[i]
@@ -96,6 +96,7 @@ for i in range(len(list)):
     rhov = read_dataset(group1, "rhou1_B0")
     rhow = read_dataset(group1, "rhou2_B0")
     rhoE = read_dataset(group1, "rhoE_B0")
+    dt = f["dt"].value
     u = rhou/rho
     v = rhov/rho
     w = rhow/rho
@@ -138,8 +139,12 @@ for i in range(len(list)):
         axins1.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
         axins2.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
         axins3.plot(x[0, 1, :], Cf, '%s'%line_styles[i],label = '%.2f' % TF,color=line_colours[i],linewidth=1)
-        TF += 2.5
-    time.append(float(list[i])*float(dt))
+        TF += 1.25
+    
+    if int(list[i]) <=700000: 
+        time.append(float(list[i])*float(dt))
+    else:
+        time.append(7000 + (float(list[i])-700000)*float(dt))
     Cf_mid.append(Cf[int(Nx/2)])
     Cf_350.append(Cf[int(7*Nx/8)])
     print('time ', time)

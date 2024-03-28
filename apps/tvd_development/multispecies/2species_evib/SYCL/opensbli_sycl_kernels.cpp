@@ -17,6 +17,8 @@ cl::sycl::buffer<double,1> *Delta0block0_p=nullptr;
 extern double Delta0block0;
 cl::sycl::buffer<int,1> *HDF5_timing_p=nullptr;
 extern int HDF5_timing;
+cl::sycl::buffer<double,1> *Lref_p=nullptr;
+extern double Lref;
 cl::sycl::buffer<double,1> *MN_p=nullptr;
 extern double MN;
 cl::sycl::buffer<double,1> *MN2_p=nullptr;
@@ -63,6 +65,8 @@ cl::sycl::buffer<double,1> *invgama_p=nullptr;
 extern double invgama;
 cl::sycl::buffer<double,1> *invgamma_m1_p=nullptr;
 extern double invgamma_m1;
+cl::sycl::buffer<double,1> *invuref_p=nullptr;
+extern double invuref;
 cl::sycl::buffer<double,1> *kappa_p=nullptr;
 extern double kappa;
 cl::sycl::buffer<double,1> *kappa_TVD_p=nullptr;
@@ -75,6 +79,8 @@ cl::sycl::buffer<int,1> *start_iter_p=nullptr;
 extern int start_iter;
 cl::sycl::buffer<double,1> *thetavN2_p=nullptr;
 extern double thetavN2;
+cl::sycl::buffer<double,1> *uref_p=nullptr;
+extern double uref;
 
 void ops_init_backend() {}
 
@@ -92,6 +98,14 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     auto accessor = (*HDF5_timing_p).get_access<cl::sycl::access::mode::write>();
     for ( int d=0; d<dim; d++ ){
       accessor[d] = ((int*)dat)[d];
+    }
+  }
+  else
+  if (!strcmp(name,"Lref")) {
+    if (Lref_p == nullptr) Lref_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
+    auto accessor = (*Lref_p).get_access<cl::sycl::access::mode::write>();
+    for ( int d=0; d<dim; d++ ){
+      accessor[d] = ((double*)dat)[d];
     }
   }
   else
@@ -279,6 +293,14 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     }
   }
   else
+  if (!strcmp(name,"invuref")) {
+    if (invuref_p == nullptr) invuref_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
+    auto accessor = (*invuref_p).get_access<cl::sycl::access::mode::write>();
+    for ( int d=0; d<dim; d++ ){
+      accessor[d] = ((double*)dat)[d];
+    }
+  }
+  else
   if (!strcmp(name,"kappa")) {
     if (kappa_p == nullptr) kappa_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
     auto accessor = (*kappa_p).get_access<cl::sycl::access::mode::write>();
@@ -327,6 +349,14 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     }
   }
   else
+  if (!strcmp(name,"uref")) {
+    if (uref_p == nullptr) uref_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
+    auto accessor = (*uref_p).get_access<cl::sycl::access::mode::write>();
+    for ( int d=0; d<dim; d++ ){
+      accessor[d] = ((double*)dat)[d];
+    }
+  }
+  else
   {
     throw OPSException(OPS_RUNTIME_ERROR, "error: unknown const name");
   }
@@ -336,9 +366,9 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
 #include "opensbliblock00Kernel022_sycl_kernel.cpp"
 #include "opensbliblock00Kernel020_sycl_kernel.cpp"
 #include "opensbliblock00Kernel021_sycl_kernel.cpp"
-#include "opensbliblock00Kernel009_sycl_kernel.cpp"
+#include "opensbliblock00Kernel010_sycl_kernel.cpp"
 #include "opensbliblock00Kernel015_sycl_kernel.cpp"
-#include "opensbliblock00Kernel008_sycl_kernel.cpp"
+#include "opensbliblock00Kernel009_sycl_kernel.cpp"
 #include "opensbliblock00Kernel018_sycl_kernel.cpp"
 #include "opensbliblock00Kernel019_sycl_kernel.cpp"
 #include "opensbliblock00Kernel006_sycl_kernel.cpp"

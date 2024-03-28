@@ -21,7 +21,7 @@ input_dict = {
     "eps"                  : "1.0e-16",
     "inv_rfact0_block0"  : "1.0/Delta0block0",
     "lambda0_TVD"          : "dt/Delta0block0", 
-    "kappa_TVD"           : "0.3",
+    "kappa_TVD"           : "1.5",
     "MN"                   : "14.0",    
     "MN2"                  : "28.0",
     "dhN"                   : "112.951",
@@ -29,9 +29,10 @@ input_dict = {
     "cN2"                   : "0.95",
     "thetavN2"             : "3390.0",
     "Rhat"                 : "8314.3",
-    "u_r"                  : "340",
-    "L_r"                  : "1.0",
-    "rho_r"                : "1.225",
+    "uref"                  : "340",
+    "Lref"                  : "1.0",
+    "Tref"                    : "600",
+    "rhoref"                : "1.225",
     "p_r"                  : "101325.0",
     "kappa"                 : "1.4", #completely made up! Just for testing
 }
@@ -60,11 +61,10 @@ energy = "Eq(Der(rhoE,t), - Conservative((p+rhoE)*u_j,x_j) - Der(q_j,x_j))"
 heat_flux = "Eq(q_j, -(kappa/Re)*Der(T,x_j))"
 evibration = "Eq(ev, rhoev/rho)"
 molesum = "Eq(ysum, rhoN/MN+rhoN2/MN2)"
-timeconst = "Eq(tau, (rhoN2/MN2)*101325.0/(p*(rhoN2/(MN2*ptauN2))))"
-hformation = "Eq(dhf, 0.000001*(dhN*rhoN/MN))"
+timeconst = "Eq(tau, uref/Lref * (rhoN2/MN2)*101325.0/(p*(rhoN2/(MN2*ptauN2))))"
+hformation = "Eq(dhf, 0.00000001*(dhN*rhoN/MN))"
 
 substitutions = [heat_flux, timeconst, evibration, molesum, hformation]
-
 # Expand the simulation equations, for this create a simulation equations class
 massN = eq.expand(massN, ndim, coordinate_symbol, substitutions, constants)
 massN2 = eq.expand(massN2, ndim, coordinate_symbol, substitutions, constants)
@@ -86,12 +86,12 @@ velocity = "Eq(u_i, rhou_i/(rhoN + rhoN2))"
 temperature = "Eq(T, (rhoE - dhf - (rhoN + rhoN2)*(1./2.)*(KD(_i,_j)*u_i*u_j))/(Rhat*((rhoN/MN)+(rhoN2/MN2))))"
 speed_of_sound = "Eq(a, (gama*p/(rhoN + rhoN2))**0.5)"
 timefactorN2 = "Eq(ptauN2, (rhoN/MN*exp(220.0*(T**(-1.0/3.0)-0.0262)-18.42)+rhoN2/MN2*exp(220.0*(T**(-1.0/3.0)-0.0290)-18.42))/ysum)" 
-evequilN2 = "Eq(eveqN2, thetavN2*Rhat/(MN2*(exp(thetavN2/T)-1.0)))"
+evequilN2 = "Eq(eveqN2, 1/uref**2 * thetavN2*Rhat/(MN2*(exp(thetavN2/T)-1.0)))"
 evN2 = "Eq(evN2, thetavN2*Rhat/(MN2*(exp(thetavN2/T)-1.0)))"
 consts = "Eq(consts, cN + cN2)" # This is just to declare constants that arent called in the CR and so wont be recognised in the initialisation
 
 constituent = ConstituentRelations()
-constituent_eqns = [velocity, pressure, temperature, timefactorN2, evequilN2, evN2, consts] 
+constituent_eqns = [velocity, pressure, temperature, timefactorN2, evequilN2, consts] 
 for i, CR in enumerate(constituent_eqns):
     constituent_eqns[i] = eq.expand(CR, ndim, coordinate_symbol, substitutions, constants)
 for eqn in constituent_eqns:
@@ -120,7 +120,7 @@ rhoN = "Eq(DataObject(rhoN), r*cN)"
 T = "Eq(GridVariable(T0), p0 / (r*Rhat))"
 evN2 = "Eq(GridVariable(evN2), thetavN2*Rhat/(MN2*(exp(thetavN2/T0)-1.0)))"
 
-rhoev = "Eq(DataObject(rhoev), r*cN2*evN2)"
+rhoev = "Eq(DataObject(rhoev), 0.0000001)"
 rhou0 = "Eq(DataObject(rhou0), r*u0)"
 rhoE = "Eq(DataObject(rhoE), p0*(3.0/2.0*(r*cN/MN)+5.0/2.0*(r*cN2/MN2))/(r*cN/MN+r*cN2/MN2)+ 0.5*(r*cN + r*cN2)*(u0**2))"
 

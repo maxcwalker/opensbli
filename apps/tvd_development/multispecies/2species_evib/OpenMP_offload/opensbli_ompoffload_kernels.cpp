@@ -12,6 +12,7 @@
 // global constants
 extern double Delta0block0;
 extern int HDF5_timing;
+extern double Lref;
 extern double MN;
 extern double MN2;
 extern double Re;
@@ -35,12 +36,14 @@ extern double invRhat;
 extern double invdelta_TVD;
 extern double invgama;
 extern double invgamma_m1;
+extern double invuref;
 extern double kappa;
 extern double kappa_TVD;
 extern int niter;
 extern double simulation_time;
 extern int start_iter;
 extern double thetavN2;
+extern double uref;
 
 void ops_init_backend() {}
 
@@ -53,6 +56,10 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"HDF5_timing")) {
     #pragma omp target enter data map(to:HDF5_timing)
+  }
+  else
+  if (!strcmp(name,"Lref")) {
+    #pragma omp target enter data map(to:Lref)
   }
   else
   if (!strcmp(name,"MN")) {
@@ -147,6 +154,10 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:invgamma_m1)
   }
   else
+  if (!strcmp(name,"invuref")) {
+    #pragma omp target enter data map(to:invuref)
+  }
+  else
   if (!strcmp(name,"kappa")) {
     #pragma omp target enter data map(to:kappa)
   }
@@ -171,6 +182,10 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:thetavN2)
   }
   else
+  if (!strcmp(name,"uref")) {
+    #pragma omp target enter data map(to:uref)
+  }
+  else
   {
     throw OPSException(OPS_RUNTIME_ERROR, "error: unknown const name");
   }
@@ -180,9 +195,9 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel022_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel020_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel021_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel009_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel010_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel015_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel008_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel009_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel018_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel019_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel006_ompoffload_kernel.cpp"

@@ -406,7 +406,7 @@ void ops_par_loop_opensbliblock00Kernel016_execute(ops_kernel_descriptor *desc) 
    Residual2_B0(0) = -d1_prhou0u0_dx;
 
     Residual3_B0(0) = -d1_rhoevu0_dx + 9.86923266716013e-6*(-rhoev_B0(0) +
-      rhoN2_B0(0)*eveqN2_B0(0))*p_B0(0)/ptauN2_B0(0) + wdotN_B0(0) + wdotN2_B0(0);
+      rhoN2_B0(0)*eveqN2_B0(0))*Lref*invuref*p_B0(0)/ptauN2_B0(0) + wdotN_B0(0) + wdotN2_B0(0);
 
    Residual4_B0(0) = -d1_prhoEu0_dx;
 

@@ -36,7 +36,7 @@ void ops_par_loop_opensbliblock00Kernel021(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg );
 
-void ops_par_loop_opensbliblock00Kernel009(char const *, ops_block, int , int*,
+void ops_par_loop_opensbliblock00Kernel010(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg,
   ops_arg,
@@ -49,7 +49,7 @@ void ops_par_loop_opensbliblock00Kernel015(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg );
 
-void ops_par_loop_opensbliblock00Kernel008(char const *, ops_block, int , int*,
+void ops_par_loop_opensbliblock00Kernel009(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg,
   ops_arg,
@@ -57,11 +57,11 @@ void ops_par_loop_opensbliblock00Kernel008(char const *, ops_block, int , int*,
 
 void ops_par_loop_opensbliblock00Kernel018(char const *, ops_block, int , int*,
   ops_arg,
+  ops_arg,
+  ops_arg,
   ops_arg );
 
 void ops_par_loop_opensbliblock00Kernel019(char const *, ops_block, int , int*,
-  ops_arg,
-  ops_arg,
   ops_arg,
   ops_arg );
 
@@ -179,17 +179,19 @@ Rhat = 8314.3;
 HDF5_timing = 0;
 delta_TVD = 0.500000000000000;
 eps_TVD = 1.00000000000000e-8;
-kappa_TVD = 0.3;
+kappa_TVD = 1.5;
 gama = 1.4;
 gamma_m1 = -1 + gama;
-dhN = 112.951;
-MN = 14.0;
-cN2 = 0.95;
 cN = 0.05;
+cN2 = 0.95;
+MN = 14.0;
+uref = 340;
+dhN = 112.951;
 thetavN2 = 3390.0;
 MN2 = 28.0;
 Re = 1.0;
 kappa = 1.4;
+Lref = 1.0;
 inv2Delta0block0 = 1.0/(Delta0block0*Delta0block0);
 inv2gamma_m1 = 1.0/(gamma_m1*gamma_m1);
 invDelta0block0 = 1.0/(Delta0block0);
@@ -200,8 +202,10 @@ invRhat = 1.0/(Rhat);
 invdelta_TVD = 1.0/(delta_TVD);
 invgama = 1.0/(gama);
 invgamma_m1 = 1.0/(gamma_m1);
+invuref = 1.0/(uref);
 ops_decl_const("Delta0block0" , 1, "double", &Delta0block0);
 ops_decl_const("HDF5_timing" , 1, "int", &HDF5_timing);
+ops_decl_const("Lref" , 1, "double", &Lref);
 ops_decl_const("MN" , 1, "double", &MN);
 ops_decl_const("MN2" , 1, "double", &MN2);
 ops_decl_const("Re" , 1, "double", &Re);
@@ -225,12 +229,14 @@ ops_decl_const("invRhat" , 1, "double", &invRhat);
 ops_decl_const("invdelta_TVD" , 1, "double", &invdelta_TVD);
 ops_decl_const("invgama" , 1, "double", &invgama);
 ops_decl_const("invgamma_m1" , 1, "double", &invgamma_m1);
+ops_decl_const("invuref" , 1, "double", &invuref);
 ops_decl_const("kappa" , 1, "double", &kappa);
 ops_decl_const("kappa_TVD" , 1, "double", &kappa_TVD);
 ops_decl_const("niter" , 1, "int", &niter);
 ops_decl_const("simulation_time" , 1, "double", &simulation_time);
 ops_decl_const("start_iter" , 1, "int", &start_iter);
 ops_decl_const("thetavN2" , 1, "double", &thetavN2);
+ops_decl_const("uref" , 1, "double", &uref);
 
 ops_block opensbliblock00 = ops_decl_block(1, "opensbliblock00");
 #include "defdec_data_set.h"
@@ -311,8 +317,8 @@ ops_par_loop_opensbliblock00Kernel021("Dirichlet boundary dir0 side1", opensblib
 
 for(stage=0; stage<=2; stage++)
 {
-int iteration_range_9_block0[] = {-2, block0np0 + 2};
-ops_par_loop_opensbliblock00Kernel009("CRu0_B0", opensbliblock00, 1, iteration_range_9_block0,
+int iteration_range_10_block0[] = {-2, block0np0 + 2};
+ops_par_loop_opensbliblock00Kernel010("CRu0_B0", opensbliblock00, 1, iteration_range_10_block0,
              ops_arg_dat(rhoN2_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(rhoN_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_READ),
@@ -326,24 +332,24 @@ ops_par_loop_opensbliblock00Kernel015("CRT_B0", opensbliblock00, 1, iteration_ra
              ops_arg_dat(u0_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(T_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
-int iteration_range_8_block0[] = {-2, block0np0 + 2};
-ops_par_loop_opensbliblock00Kernel008("CRp_B0", opensbliblock00, 1, iteration_range_8_block0,
+int iteration_range_9_block0[] = {-2, block0np0 + 2};
+ops_par_loop_opensbliblock00Kernel009("CRp_B0", opensbliblock00, 1, iteration_range_9_block0,
              ops_arg_dat(T_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(rhoN2_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(rhoN_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(p_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
 int iteration_range_18_block0[] = {0, block0np0};
-ops_par_loop_opensbliblock00Kernel018("CReveqN2_B0", opensbliblock00, 1, iteration_range_18_block0,
-             ops_arg_dat(T_B0, 1, stencil_0_00_1, "double", OPS_READ),
-             ops_arg_dat(eveqN2_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
-
-int iteration_range_19_block0[] = {0, block0np0};
-ops_par_loop_opensbliblock00Kernel019("CRptauN2_B0", opensbliblock00, 1, iteration_range_19_block0,
+ops_par_loop_opensbliblock00Kernel018("CRptauN2_B0", opensbliblock00, 1, iteration_range_18_block0,
              ops_arg_dat(T_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(rhoN2_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(rhoN_B0, 1, stencil_0_00_1, "double", OPS_READ),
              ops_arg_dat(ptauN2_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
+
+int iteration_range_19_block0[] = {0, block0np0};
+ops_par_loop_opensbliblock00Kernel019("CReveqN2_B0", opensbliblock00, 1, iteration_range_19_block0,
+             ops_arg_dat(T_B0, 1, stencil_0_00_1, "double", OPS_READ),
+             ops_arg_dat(eveqN2_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
 int iteration_range_6_block0[] = {0, block0np0};
 ops_par_loop_opensbliblock00Kernel006("Derivative evaluation CD u_B0 x0 ", opensbliblock00, 1, iteration_range_6_block0,

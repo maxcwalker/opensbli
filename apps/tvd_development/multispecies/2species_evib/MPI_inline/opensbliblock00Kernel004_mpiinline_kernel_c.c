@@ -173,9 +173,7 @@ void opensbliblock00Kernel004_c_wrapper(
    double ws_lambda_22 = 0.0;
    double ws_lambda_33 = 0.0;
    double ws_lambda_44 = 0.0;
-   AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0) + OPS_ACC(u0_B0, -1));
-
-   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0) + OPS_ACC(a_B0, -1));
+   AVG_0_ev = ((1.0/2.0))*(OPS_ACC(ev_B0, 0) + OPS_ACC(ev_B0, -1));
 
    AVG_0_rhoN = ((1.0/2.0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN_B0, -1));
 
@@ -183,7 +181,9 @@ void opensbliblock00Kernel004_c_wrapper(
 
    AVG_0_u = ((1.0/2.0))*(OPS_ACC(u_B0, 0) + OPS_ACC(u_B0, -1));
 
-   AVG_0_ev = ((1.0/2.0))*(OPS_ACC(ev_B0, 0) + OPS_ACC(ev_B0, -1));
+   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0) + OPS_ACC(a_B0, -1));
+
+   AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0) + OPS_ACC(u0_B0, -1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -250,9 +250,7 @@ void opensbliblock00Kernel004_c_wrapper(
     alpha_40 = (-OPS_ACC(rhoE_B0, -1) + OPS_ACC(rhoE_B0, 0))*AVG_0_0_LEV_44 + (-OPS_ACC(rhoN_B0, -1) + OPS_ACC(rhoN_B0, 0))*AVG_0_0_LEV_40 + (-OPS_ACC(rhoN2_B0, -1)
       + OPS_ACC(rhoN2_B0, 0))*AVG_0_0_LEV_41 + (-OPS_ACC(rhou0_B0, -1) + OPS_ACC(rhou0_B0, 0))*AVG_0_0_LEV_42;
 
-   AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0) + OPS_ACC(u0_B0, 1));
-
-   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0) + OPS_ACC(a_B0, 1));
+   AVG_0_ev = ((1.0/2.0))*(OPS_ACC(ev_B0, 0) + OPS_ACC(ev_B0, 1));
 
    AVG_0_rhoN = ((1.0/2.0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN_B0, 1));
 
@@ -260,7 +258,9 @@ void opensbliblock00Kernel004_c_wrapper(
 
    AVG_0_u = ((1.0/2.0))*(OPS_ACC(u_B0, 0) + OPS_ACC(u_B0, 1));
 
-   AVG_0_ev = ((1.0/2.0))*(OPS_ACC(ev_B0, 0) + OPS_ACC(ev_B0, 1));
+   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0) + OPS_ACC(a_B0, 1));
+
+   AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0) + OPS_ACC(u0_B0, 1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -373,9 +373,7 @@ void opensbliblock00Kernel004_c_wrapper(
     AVG_0_REV_44 = (AVG_0_rhoN + AVG_0_rhoN2)*(2.0*(AVG_0_a*AVG_0_a) + 2.0*(AVG_0_a*AVG_0_a)*gamma_m1 +
       1.0*(AVG_0_u*AVG_0_u)*gama*gamma_m1 + 2.0*gama*gamma_m1*AVG_0_a*AVG_0_u)*invgama*inv2gamma_m1*inv_AVG_a;
 
-   AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 1) + OPS_ACC(u0_B0, 2));
-
-   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 1) + OPS_ACC(a_B0, 2));
+   AVG_0_ev = ((1.0/2.0))*(OPS_ACC(ev_B0, 1) + OPS_ACC(ev_B0, 2));
 
    AVG_0_rhoN = ((1.0/2.0))*(OPS_ACC(rhoN_B0, 1) + OPS_ACC(rhoN_B0, 2));
 
@@ -383,7 +381,9 @@ void opensbliblock00Kernel004_c_wrapper(
 
    AVG_0_u = ((1.0/2.0))*(OPS_ACC(u_B0, 1) + OPS_ACC(u_B0, 2));
 
-   AVG_0_ev = ((1.0/2.0))*(OPS_ACC(ev_B0, 1) + OPS_ACC(ev_B0, 2));
+   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 1) + OPS_ACC(a_B0, 2));
+
+   AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 1) + OPS_ACC(u0_B0, 2));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
