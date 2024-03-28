@@ -53,6 +53,7 @@ except:
     Ny = 200.0
     Nz = 200.0
 
+g=h5py.File("opensbli_output.h5", 'r')
 x0dum=read_dataset(f,'x0_B0')
 x1dum=read_dataset(f,'x1_B0')
 
