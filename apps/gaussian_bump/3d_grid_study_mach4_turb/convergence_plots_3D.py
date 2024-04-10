@@ -50,13 +50,13 @@ Ly = 115.0
 Lx = 400.0
 scale = 4.959043
 
-list = ['400x200x100','1000x200x100', '1000x200x200','1000x300x200']
+list = ['400x200x100','1000x200x100', '1000x200x200','1000x300x200','1500x200x200']
 # list = ['1000x200x100', '1000x200x200']
 fig1, ax1 = plt.subplots(1,1)
 fig2, ax2 = plt.subplots(1,1)
 
 line_styles = ['-', '-', '-', '-','-']
-line_colours = ['k','b', 'orange','y']
+line_colours = ['k','b', 'orange','y','green']
 axins1 = zoomed_inset_axes(ax1, 5, loc=2)
 axins2 = zoomed_inset_axes(ax2, 5, loc=2)
 

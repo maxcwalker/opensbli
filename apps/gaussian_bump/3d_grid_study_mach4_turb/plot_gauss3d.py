@@ -53,7 +53,7 @@ except:
     Ny = 200.0
     Nz = 200.0
 
-g=h5py.File("opensbli_output.h5", 'r')
+# g=h5py.File("opensbli_output.h5", 'r')
 x0dum=read_dataset(f,'x0_B0')
 x1dum=read_dataset(f,'x1_B0')
 
@@ -136,7 +136,7 @@ y1, y2, x1, x2 = 0, 60, 140, 180
 for idx in z_idx:
     fig1,ax=plt.subplots()
     # axins1 = zoomed_inset_axes(ax, 7,loc='lower center',bbox_to_anchor=(200,45))
-    CS=ax.contourf(x[idx,:,:],y[idx,:,:],u[idx,:,:],levels=np.linspace(np.min(u[idx,:,:]), np.max(u[idx,:,:]),50), cmap=cm.jet)
+    CS=ax.contour(x[idx,:,:],y[idx,:,:],u[idx,:,:],levels=np.linspace(np.min(u[idx,:,:]), np.max(u[idx,:,:]),50), cmap='gray')
     print(u[idx,:,:])
     xp1,xp2 = int(len(x[0,0,:])/Lx *x1), int(len(x[0,0,:])/Lx *x2)
     # try:
@@ -147,7 +147,7 @@ for idx in z_idx:
 
     divider = make_axes_locatable(ax)
     cax1 = divider.append_axes("right", size=0.2,pad=0.1)
-    cbar=fig1.colorbar(CS, cax=cax1, )
+    cbar=fig1.colorbar(CS, cax=cax1 )
     cbar.set_label(r"u velocity [main plot]", fontsize=7 )
     cbar.ax.tick_params(labelsize=5)
 
@@ -163,186 +163,186 @@ for idx in z_idx:
     # ubar=fig1.colorbar(U, orientation='horizontal', cax=cax, format=tkr.FormatStrFormatter('%.2g'))
     # ubar.set_label(r"u velocity [zoomed plot]", fontsize=7 )
     # ubar.ax.tick_params(labelsize=5)
-
+    plt.show()
     plt.savefig(directory+'contour_z%d_nozoom.pdf' % idx,bbox_inches='tight')
 
-###################################################################################################
-#                                                                                                 #
-#                plan contours with zoomed inset of separation region                             #
-#                                                                                                 #
-###################################################################################################
+# ###################################################################################################
+# #                                                                                                 #
+# #                plan contours with zoomed inset of separation region                             #
+# #                                                                                                 #
+# ###################################################################################################
 
-y_idx=[1,20,40,60]
-zoom =True
+# y_idx=[1,20,40,60]
+# zoom =True
 
-for idx in y_idx:
-    ## plan view slice at y_idx point
-    fig2, ax1 = plt.subplots()
+# for idx in y_idx:
+#     ## plan view slice at y_idx point
+#     fig2, ax1 = plt.subplots()
 
-    if zoom:
-        axins1 = zoomed_inset_axes(ax1, 2,loc='upper center',bbox_to_anchor=(200,240))
-    else:
-        pass
+#     if zoom:
+#         axins1 = zoomed_inset_axes(ax1, 2,loc='upper center',bbox_to_anchor=(200,240))
+#     else:
+#         pass
 
-    emphasis_level = 0
-    U = ax1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:], levels=np.linspace(np.min(u[:,idx,:]), np.max(u[:,idx,:]),50), cmap=cm.jet) #
+#     emphasis_level = 0
+#     U = ax1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:], levels=np.linspace(np.min(u[:,idx,:]), np.max(u[:,idx,:]),50), cmap=cm.jet) #
 
-    #finding the index for locations 100 and 200
-    xp1,xp2 = int(len(x[0,0,:])/Lx *100), int(len(x[0,0,:])/Lx *200)
-    if zoom:
-        try:
-            U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:], levels= list(np.linspace(np.min(u[:,idx,xp1:xp2]), 0, 5))+list(np.linspace(0.001,np.max(u[:,idx,xp1:xp2]),25)), cmap=cm.jet)
-            # recirc=ax1.contour(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels=[0],colors='black')
-            print('yes')
-        except:
-            U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels= list(np.linspace(np.min(u[:,idx,xp1-20:xp2+20]), np.max(u[:,idx,xp1:xp2]), 30)), cmap=cm.jet)
-            print('no')
-        cax1 = inset_axes(ax1, width="60%", height="30%", loc='lower center',borderpad=-3)
-        ubar=fig2.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
-        ubar.ax.tick_params(labelsize=5)
-        ubar.set_label("u velocity [zoomed axes]" ,fontsize=5)
-        ax1.set_aspect(1)
+#     #finding the index for locations 100 and 200
+#     xp1,xp2 = int(len(x[0,0,:])/Lx *100), int(len(x[0,0,:])/Lx *200)
+#     if zoom:
+#         try:
+#             U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:], levels= list(np.linspace(np.min(u[:,idx,xp1:xp2]), 0, 5))+list(np.linspace(0.001,np.max(u[:,idx,xp1:xp2]),25)), cmap=cm.jet)
+#             # recirc=ax1.contour(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels=[0],colors='black')
+#             print('yes')
+#         except:
+#             U = axins1.contourf(x[:,idx,:], z[:,idx,:], u[:,idx,:],levels= list(np.linspace(np.min(u[:,idx,xp1-20:xp2+20]), np.max(u[:,idx,xp1:xp2]), 30)), cmap=cm.jet)
+#             print('no')
+#         cax1 = inset_axes(ax1, width="60%", height="30%", loc='lower center',borderpad=-3)
+#         ubar=fig2.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
+#         ubar.ax.tick_params(labelsize=5)
+#         ubar.set_label("u velocity [zoomed axes]" ,fontsize=5)
+#         ax1.set_aspect(1)
 
-        mark_inset(ax1, axins1, loc1=3, loc2=4, fc="none", ec="0.5")
-        x1, x2 = 100, 200
+#         mark_inset(ax1, axins1, loc1=3, loc2=4, fc="none", ec="0.5")
+#         x1, x2 = 100, 200
 
-        axins1.set_xlim(x1,x2) # apply the x-limits 
-        axins1.tick_params(axis='both', which='major', labelsize=5)
-    else:
-        cax1 = inset_axes(ax1, width="60%", height="30%", loc='lower center',borderpad=-3)
-        ubar=fig2.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
-        ubar.ax.tick_params(labelsize=5)
-        ubar.set_label("u velocity" ,fontsize=5)
-        ax1.set_aspect('equal')
+#         axins1.set_xlim(x1,x2) # apply the x-limits 
+#         axins1.tick_params(axis='both', which='major', labelsize=5)
+#     else:
+#         cax1 = inset_axes(ax1, width="60%", height="30%", loc='lower center',borderpad=-3)
+#         ubar=fig2.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
+#         ubar.ax.tick_params(labelsize=5)
+#         ubar.set_label("u velocity" ,fontsize=5)
+#         ax1.set_aspect('equal')
 
 
         
 
-    # plt.clabel(recirc, inline = False,fontsize=8)
+#     # plt.clabel(recirc, inline = False,fontsize=8)
 
 
-    ax1.tick_params(axis='both', which='major', labelsize=5)
-    # ax1.set_title('contours at y index %d'%idx)
+#     ax1.tick_params(axis='both', which='major', labelsize=5)
+#     # ax1.set_title('contours at y index %d'%idx)
 
-    fig2.savefig(directory+"wall_u_vel_contours_y%d.pdf" % idx, bbox_inches='tight')
+#     fig2.savefig(directory+"wall_u_vel_contours_y%d.pdf" % idx, bbox_inches='tight')
 
-###################################################################################################
-#                                                                                                 #
-#                y-z plane slices                                                                 #
-#                                                                                                 #
-###################################################################################################
+# ###################################################################################################
+# #                                                                                                 #
+# #                y-z plane slices                                                                 #
+# #                                                                                                 #
+# ###################################################################################################
 
-x_idx=[170,175,180,185,190,195,200,210,220,350]
+# x_idx=[170,175,180,185,190,195,200,210,220,350]
 
-for idx in x_idx:
-    ## plan view slice at y_idx point
-    fig3, ax1 = plt.subplots()
-    # axins1 = zoomed_inset_axes(ax1, 2,loc='upper center',bbox_to_anchor=(200,240))
-    x_loc = int(len(x[0,0,:])/Lx * idx)
-    vel = np.sqrt(w[:,:,x_loc]**2 + v[:,:,x_loc]**2 )
-    U=ax1.contourf(z[:,:,x_loc], y[:,:,x_loc], vel, levels=25, cmap=cm.jet) #
+# for idx in x_idx:
+#     ## plan view slice at y_idx point
+#     fig3, ax1 = plt.subplots()
+#     # axins1 = zoomed_inset_axes(ax1, 2,loc='upper center',bbox_to_anchor=(200,240))
+#     x_loc = int(len(x[0,0,:])/Lx * idx)
+#     vel = np.sqrt(w[:,:,x_loc]**2 + v[:,:,x_loc]**2 )
+#     U=ax1.contourf(z[:,:,x_loc], y[:,:,x_loc], vel, levels=25, cmap=cm.jet) #
 
-    cax1 = inset_axes(ax1, width="50%", height="10%", loc='lower center',borderpad=-4)
-    ubar=fig3.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
-    ubar.ax.tick_params(labelsize=5)
-    ubar.set_label("u velocity" ,fontsize=5)
+#     cax1 = inset_axes(ax1, width="50%", height="10%", loc='lower center',borderpad=-4)
+#     ubar=fig3.colorbar(U, orientation='horizontal', cax=cax1, format=tkr.FormatStrFormatter('%.2g'))
+#     ubar.ax.tick_params(labelsize=5)
+#     ubar.set_label("u velocity" ,fontsize=5)
 
-    nth =3
-    ax1.quiver(z[::nth,::nth,x_loc],y[::nth,::nth,x_loc],w[::nth,::nth,x_loc],v[::nth,::nth,x_loc],pivot='mid',scale=25,units='width')
+#     nth =3
+#     ax1.quiver(z[::nth,::nth,x_loc],y[::nth,::nth,x_loc],w[::nth,::nth,x_loc],v[::nth,::nth,x_loc],pivot='mid',scale=25,units='width')
     
-    ax1.set_ylim(y[0,0,x_loc],y[0,0,x_loc]+3)
-    ax1.set_xlabel(r'z',fontsize=6)
-    ax1.set_ylabel(r'y',fontsize=6)
-    ax1.set_aspect('equal')
-    # mark_inset(ax1, axins1, loc1=3, loc2=4, fc="none", ec="0.5")
-    # x1, x2 = 100, 200
+#     ax1.set_ylim(y[0,0,x_loc],y[0,0,x_loc]+3)
+#     ax1.set_xlabel(r'z',fontsize=6)
+#     ax1.set_ylabel(r'y',fontsize=6)
+#     ax1.set_aspect('equal')
+#     # mark_inset(ax1, axins1, loc1=3, loc2=4, fc="none", ec="0.5")
+#     # x1, x2 = 100, 200
 
-    # axins1.set_xlim(100,200) # apply the x-limits 
-    # axins1.tick_params(axis='both', which='major', labelsize=5)
-    # ax1.tick_params(axis='both', which='major', labelsize=5)
+#     # axins1.set_xlim(100,200) # apply the x-limits 
+#     # axins1.tick_params(axis='both', which='major', labelsize=5)
+#     # ax1.tick_params(axis='both', which='major', labelsize=5)
 
-    fig3.savefig(directory+"z-y_plane_x%d.pdf" % idx, bbox_inches='tight')
+#     fig3.savefig(directory+"z-y_plane_x%d.pdf" % idx, bbox_inches='tight')
 
-#####################################################################################################
+# #####################################################################################################
 
-# fig3, ax2 = plt.subplots()
-# ax2.plot(z[:,0,50], v[:,0,50])
-# # ax2.text(1, 1.5, '20% amplitude',
-# #     verticalalignment='bottom', horizontalalignment='right',
-# #     transform=ax.transAxes,
-# #     color='black')
-# ax2.annotate(f'v={v[0, 0, 50]:.2f}', (z[0, 0, 50], v[0, 0, 50]), xytext=(20, -30),
-#             textcoords='offset points', arrowprops=dict(arrowstyle="->"))
-# ax2.annotate(f'v={v[99, 0, 50]:.2f}', (z[99, 0, 50], v[99, 0, 50]), xytext=(-30, 30),
-#             textcoords='offset points', arrowprops=dict(arrowstyle="->"))
-# ax2.set_xlabel(r'along z axis')
-# ax2.set_ylabel(r'v velocity')
-# ax2.set_title(r'v velocity along z axis at forcing strip location')
-# ax2.grid()
-# fig3.savefig(directory+'v_vel_forcing.pdf',bbox_inches='tight')
-#n_levels=25
-#name= "u"
-#min_val = np.min(u)
-#max_val = np.max(u)
-#levels = np.linspace(min_val, max_val, n_levels)
-#print("%s" % name)
-#fig = plt.figure()
-#self.contour_local(fig, levels, "%s" % name, var)
-#plt.savefig("katzer_%s.pdf" % name, bbox_inches='tight')
-#plt.clf()
-
-
-
-### boundary layer profile in the separataion region
-
-## point 160 is a separation region, only for a grid with Nx=400. Find a better way of doing this
+# # fig3, ax2 = plt.subplots()
+# # ax2.plot(z[:,0,50], v[:,0,50])
+# # # ax2.text(1, 1.5, '20% amplitude',
+# # #     verticalalignment='bottom', horizontalalignment='right',
+# # #     transform=ax.transAxes,
+# # #     color='black')
+# # ax2.annotate(f'v={v[0, 0, 50]:.2f}', (z[0, 0, 50], v[0, 0, 50]), xytext=(20, -30),
+# #             textcoords='offset points', arrowprops=dict(arrowstyle="->"))
+# # ax2.annotate(f'v={v[99, 0, 50]:.2f}', (z[99, 0, 50], v[99, 0, 50]), xytext=(-30, 30),
+# #             textcoords='offset points', arrowprops=dict(arrowstyle="->"))
+# # ax2.set_xlabel(r'along z axis')
+# # ax2.set_ylabel(r'v velocity')
+# # ax2.set_title(r'v velocity along z axis at forcing strip location')
+# # ax2.grid()
+# # fig3.savefig(directory+'v_vel_forcing.pdf',bbox_inches='tight')
+# #n_levels=25
+# #name= "u"
+# #min_val = np.min(u)
+# #max_val = np.max(u)
+# #levels = np.linspace(min_val, max_val, n_levels)
+# #print("%s" % name)
+# #fig = plt.figure()
+# #self.contour_local(fig, levels, "%s" % name, var)
+# #plt.savefig("katzer_%s.pdf" % name, bbox_inches='tight')
+# #plt.clf()
 
 
-###################################################################################################
-#                                                                                                 #
-#                   separation u velocity profile                                                 #
-#                                                                                                 #
-###################################################################################################
 
-fig4,ax3 = plt.subplots()
-ax3.plot(u[0,:,160],y[0,:,160],color='k')
-ax3.set_ylim([0,10])
-# ax3.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-ax3.set_xlabel(r'u0',fontsize=20)
-ax3.set_ylabel(r'y',fontsize=20)
-ax3.set_title(r'u velocity profile in the upstream separation region')
-ax3.grid()
-fig4.savefig(directory+'separation_u_vel.pdf',bbox_inches='tight')
+# ### boundary layer profile in the separataion region
 
-## how many points in the boundary layer at the thinnest region; roughly point 190
-count=0
-for i in u[0,:,195]:
-    if i<= 0.98*max(u[0,:,195]):
-        # print(i)
-        count+=1
-    else:
-        break
-print('points in BL = %d' % count)
+# ## point 160 is a separation region, only for a grid with Nx=400. Find a better way of doing this
 
-# fig4,ax4 = plt.subplots()
-# ax4.plot(u[0,:,195],y[0,:,195]-y[0,0,195],marker='.',markersize=0.2,color='k')
-# ax4.set_ylim([0,16])
-# ax4.set_xlabel(r'u0',fontsize=20)
-# ax4.set_ylabel(r'y',fontsize=20)
-# ax4.axhline(y = y[0,count,195]-y[0,0,195], color = 'k', linestyle = '--')
-# ax4.set_title(r'u velocity at thinnest region of the BL')
-# ax4.grid()
-# fig4.savefig(directory+'thin_BL_region.pdf',bbox_inches='tight')
 
-indexes = [1,20,40,60]
+# ###################################################################################################
+# #                                                                                                 #
+# #                   separation u velocity profile                                                 #
+# #                                                                                                 #
+# ###################################################################################################
 
-for index in indexes:
-    print('index: %d is at height y=%.2f' % (index, y[0,index,0]))
+# fig4,ax3 = plt.subplots()
+# ax3.plot(u[0,:,160],y[0,:,160],color='k')
+# ax3.set_ylim([0,10])
+# # ax3.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+# ax3.set_xlabel(r'u0',fontsize=20)
+# ax3.set_ylabel(r'y',fontsize=20)
+# ax3.set_title(r'u velocity profile in the upstream separation region')
+# ax3.grid()
+# fig4.savefig(directory+'separation_u_vel.pdf',bbox_inches='tight')
 
-fig5 ,ax5 = plt.subplots(1)
-ax5.scatter(x0dum[100,:,:],x1dum[100,:,:])
-ax5.set_aspect('equal')
-fig5.savefig("x_y_plot.pdf")
-# print(np.linspace(np.min(u[0,150:170,0:10]), np.max(u[0,150:170,0:10]),40))
-# print(np.max(u[0,150:170,0:10]))
-# plt.show()
+# ## how many points in the boundary layer at the thinnest region; roughly point 190
+# count=0
+# for i in u[0,:,195]:
+#     if i<= 0.98*max(u[0,:,195]):
+#         # print(i)
+#         count+=1
+#     else:
+#         break
+# print('points in BL = %d' % count)
+
+# # fig4,ax4 = plt.subplots()
+# # ax4.plot(u[0,:,195],y[0,:,195]-y[0,0,195],marker='.',markersize=0.2,color='k')
+# # ax4.set_ylim([0,16])
+# # ax4.set_xlabel(r'u0',fontsize=20)
+# # ax4.set_ylabel(r'y',fontsize=20)
+# # ax4.axhline(y = y[0,count,195]-y[0,0,195], color = 'k', linestyle = '--')
+# # ax4.set_title(r'u velocity at thinnest region of the BL')
+# # ax4.grid()
+# # fig4.savefig(directory+'thin_BL_region.pdf',bbox_inches='tight')
+
+# indexes = [1,20,40,60]
+
+# for index in indexes:
+#     print('index: %d is at height y=%.2f' % (index, y[0,index,0]))
+
+# fig5 ,ax5 = plt.subplots(1)
+# ax5.scatter(x0dum[100,:,:],x1dum[100,:,:])
+# ax5.set_aspect('equal')
+# fig5.savefig("x_y_plot.pdf")
+# # print(np.linspace(np.min(u[0,150:170,0:10]), np.max(u[0,150:170,0:10]),40))
+# # print(np.max(u[0,150:170,0:10]))
+# # plt.show()

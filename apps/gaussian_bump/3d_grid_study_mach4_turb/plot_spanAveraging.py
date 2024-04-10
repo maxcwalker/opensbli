@@ -76,7 +76,7 @@ mu = (T**(1.5)*(1.0+SuthT/RefT)/(T+SuthT/RefT))
 
 a = np.sqrt(1.4*p/rho)
 M = np.sqrt(u**2 + v**2 +w**2)/a
-D11 = read_dataset(f, "D11_B0")
+D11 = read_dataset(g, "D11_B0")
 
 
 # note that the first array index is y, the second x (python convention)

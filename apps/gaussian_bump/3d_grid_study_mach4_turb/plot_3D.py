@@ -147,7 +147,6 @@ class plots_3D(plotFunctions):
         return Rex, St_Re_ana, St_act
 
     def SBLI_comparison(self, Cf, P):
-
         fig = plt.figure()
         ax = fig.add_subplot(111)
 
@@ -155,8 +154,6 @@ class plots_3D(plotFunctions):
         dx, dy, dz = self.x[0, 0, 1], self.y[0, 1, 0], self.z[1,0,0]
         dx_plus, dy_plus, dz_plus = dx/ dv, dy/ dv, dz/ dv
 
-
-        
         ax.plot(self.x[0, 1, :], Cf, color='k', label='OpenSBLI')
         ax.axhline(y=0.0, linestyle='--', color='k')
         ax.annotate("At x=%.1f \n$dx^+$: %.2f \n$dy^+$: %.2f \n$dz^+$: %.2f" % (self.x[0,0,self.loc], dx_plus[self.loc], dy_plus[self.loc], dz_plus[self.loc]), xy =(350,0.31), xycoords='data', xytext=(-90,-5),

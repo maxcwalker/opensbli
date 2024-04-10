@@ -8,47 +8,47 @@
 #include "io.h"
 int main(int argc, char **argv) 
 {
+// Initializing OPS 
+ops_init(argc,argv,1);
 // Set restart to 1 to restart the simulation from HDF5 file
 restart = 0;
 // User defined constant values
-eps = 1.00000000000000e-40;
-TENO_CT = 1e-5;
 niter = 500000;
 double rkB[] = {(1.0/3.0), (15.0/16.0), (8.0/15.0)};
 double rkA[] = {0, (-5.0/9.0), (-153.0/128.0)};
-dt = 0.0015;
+dt = 0.005;
 block0np0 = 400;
 block0np1 = 200;
 block0np2 = 100;
 Delta0block0 = 400.0/(block0np0-1);
 Delta1block0 = 115.0/(block0np1-1);
 Delta2block0 = 20.0/(block0np2-1);
-Twall = 1.37;
 Minf = 4.0;
-write_output_file = 5000;
+Twall = 1.37;
+write_output_file = 50000;
 HDF5_timing = 0;
 gama = 1.4;
 RefT = 439.0;
 SuthT = 110.4;
-Re = 4000.0;
 Pr = 0.72;
+Re = 4000.0;
 shock_filter_control = 1.00000000000000;
 gamma_m1 = -1 + gama;
-omega_0 = 0.1;
-omega_2 = 0.4;
-omega_3 = 1.0;
-omega_1 = 0.2;
-b_f = 0.002;
+phi_2 = 4.712;
+tripA = 0.0;
 phi_0 = 1.571;
+omega_3 = 1.0;
+omega_0 = 0.1;
+xts = 50.0;
+omega_2 = 0.4;
+b_f = 0.002;
 phi_1 = 3.141;
 beta_0 = 0.628;
-tripA = 0.05;
-phi_2 = 4.712;
-xts = 50.0;
+omega_1 = 0.2;
 a = 20.0;
+L = 400.0;
 b = 5.0;
 H = 115.0;
-L = 400.0;
 inv2Delta0block0 = 1.0/(Delta0block0*Delta0block0);
 inv2Delta1block0 = 1.0/(Delta1block0*Delta1block0);
 inv2Delta2block0 = 1.0/(Delta2block0*Delta2block0);
@@ -75,7 +75,6 @@ ops_decl_const("Pr" , 1, "double", &Pr);
 ops_decl_const("Re" , 1, "double", &Re);
 ops_decl_const("RefT" , 1, "double", &RefT);
 ops_decl_const("SuthT" , 1, "double", &SuthT);
-ops_decl_const("TENO_CT" , 1, "double", &TENO_CT);
 ops_decl_const("Twall" , 1, "double", &Twall);
 ops_decl_const("a" , 1, "double", &a);
 ops_decl_const("b" , 1, "double", &b);
@@ -85,7 +84,6 @@ ops_decl_const("block0np0" , 1, "int", &block0np0);
 ops_decl_const("block0np1" , 1, "int", &block0np1);
 ops_decl_const("block0np2" , 1, "int", &block0np2);
 ops_decl_const("dt" , 1, "double", &dt);
-ops_decl_const("eps" , 1, "double", &eps);
 ops_decl_const("gama" , 1, "double", &gama);
 ops_decl_const("gamma_m1" , 1, "double", &gamma_m1);
 ops_decl_const("inv2Delta0block0" , 1, "double", &inv2Delta0block0);
@@ -117,8 +115,6 @@ ops_decl_const("start_iter" , 1, "int", &start_iter);
 ops_decl_const("tripA" , 1, "double", &tripA);
 ops_decl_const("write_output_file" , 1, "int", &write_output_file);
 ops_decl_const("xts" , 1, "double", &xts);
-// Initializing OPS 
-ops_init(argc,argv,1);
 // Define and Declare OPS Block
 ops_block opensbliblock00 = ops_decl_block(3, "opensbliblock00");
 #include "defdec_data_set.h"
@@ -288,26 +284,34 @@ ops_halo_transfer(periodicBC_direction2_side0_65_block0);
 ops_halo_transfer(periodicBC_direction2_side1_66_block0);
 for(stage=0; stage<=2; stage++)
 {
-int iteration_range_5_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
-ops_par_loop(opensbliblock00Kernel005, "CRu0", opensbliblock00, 3, iteration_range_5_block0,
-ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
-ops_arg_dat(u0_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
-
-int iteration_range_9_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
-ops_par_loop(opensbliblock00Kernel009, "CRu2", opensbliblock00, 3, iteration_range_9_block0,
+int iteration_range_6_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
+ops_par_loop(opensbliblock00Kernel006, "CRu2", opensbliblock00, 3, iteration_range_6_block0,
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rhou2_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(u2_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
-int iteration_range_10_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
-ops_par_loop(opensbliblock00Kernel010, "CRu1", opensbliblock00, 3, iteration_range_10_block0,
+int iteration_range_8_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
+ops_par_loop(opensbliblock00Kernel008, "CRu1", opensbliblock00, 3, iteration_range_8_block0,
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rhou1_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(u1_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
-int iteration_range_8_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
-ops_par_loop(opensbliblock00Kernel008, "CRp", opensbliblock00, 3, iteration_range_8_block0,
+int iteration_range_9_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
+ops_par_loop(opensbliblock00Kernel009, "CRu0", opensbliblock00, 3, iteration_range_9_block0,
+ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
+ops_arg_dat(rhou0_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
+ops_arg_dat(u0_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
+
+int iteration_range_10_block0[] = {-3, block0np0 + 4, 0, block0np1, 0, block0np2};
+ops_par_loop(opensbliblock00Kernel010, "CRU0", opensbliblock00, 3, iteration_range_10_block0,
+ops_arg_dat(D00_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
+ops_arg_dat(D01_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
+ops_arg_dat(u0_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
+ops_arg_dat(u1_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
+ops_arg_dat(U0_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
+
+int iteration_range_12_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
+ops_par_loop(opensbliblock00Kernel012, "CRp", opensbliblock00, 3, iteration_range_12_block0,
 ops_arg_dat(rhoE_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(u0_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
@@ -315,16 +319,8 @@ ops_arg_dat(u1_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(u2_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(p_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
-int iteration_range_15_block0[] = {-3, block0np0 + 4, 0, block0np1, 0, block0np2};
-ops_par_loop(opensbliblock00Kernel015, "CRU0", opensbliblock00, 3, iteration_range_15_block0,
-ops_arg_dat(D00_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
-ops_arg_dat(D01_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
-ops_arg_dat(u0_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
-ops_arg_dat(u1_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
-ops_arg_dat(U0_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
-
-int iteration_range_18_block0[] = {0, block0np0, -3, block0np1 + 4, 0, block0np2};
-ops_par_loop(opensbliblock00Kernel018, "CRU1", opensbliblock00, 3, iteration_range_18_block0,
+int iteration_range_17_block0[] = {0, block0np0, -3, block0np1 + 4, 0, block0np2};
+ops_par_loop(opensbliblock00Kernel017, "CRU1", opensbliblock00, 3, iteration_range_17_block0,
 ops_arg_dat(D10_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(D11_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(u0_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
@@ -336,25 +332,25 @@ ops_par_loop(opensbliblock00Kernel020, "CRU2", opensbliblock00, 3, iteration_ran
 ops_arg_dat(u2_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(U2_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
-int iteration_range_7_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
-ops_par_loop(opensbliblock00Kernel007, "CRa", opensbliblock00, 3, iteration_range_7_block0,
+int iteration_range_15_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
+ops_par_loop(opensbliblock00Kernel015, "CRa", opensbliblock00, 3, iteration_range_15_block0,
 ops_arg_dat(p_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(a_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
-int iteration_range_26_block0[] = {-2, block0np0 + 2, -2, block0np1 + 2, -2, block0np2 + 2};
-ops_par_loop(opensbliblock00Kernel026, "CRT_B0", opensbliblock00, 3, iteration_range_26_block0,
+int iteration_range_25_block0[] = {-2, block0np0 + 2, -2, block0np1 + 2, -2, block0np2 + 2};
+ops_par_loop(opensbliblock00Kernel025, "CRT_B0", opensbliblock00, 3, iteration_range_25_block0,
 ops_arg_dat(p_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(T_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
-int iteration_range_27_block0[] = {-2, block0np0 + 2, -2, block0np1 + 2, -2, block0np2 + 2};
-ops_par_loop(opensbliblock00Kernel027, "CRmu_B0", opensbliblock00, 3, iteration_range_27_block0,
+int iteration_range_22_block0[] = {-2, block0np0 + 2, -2, block0np1 + 2, -2, block0np2 + 2};
+ops_par_loop(opensbliblock00Kernel022, "CRmu_B0", opensbliblock00, 3, iteration_range_22_block0,
 ops_arg_dat(T_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(mu_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
 int iteration_range_0_block0[] = {-1, block0np0 + 1, 0, block0np1, 0, block0np2};
-ops_par_loop(opensbliblock00Kernel000, "LFTeno_reconstruction_0_direction", opensbliblock00, 3, iteration_range_0_block0,
+ops_par_loop(opensbliblock00Kernel000, "LFWeno_reconstruction_0_direction", opensbliblock00, 3, iteration_range_0_block0,
 ops_arg_dat(D00_B0, 1, stencil_0_23_00_00_13, "double", OPS_READ),
 ops_arg_dat(D01_B0, 1, stencil_0_23_00_00_13, "double", OPS_READ),
 ops_arg_dat(U0_B0, 1, stencil_0_23_00_00_13, "double", OPS_READ),
@@ -376,7 +372,7 @@ ops_arg_dat(wk3_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE),
 ops_arg_dat(wk4_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
 int iteration_range_1_block0[] = {0, block0np0, -1, block0np1 + 1, 0, block0np2};
-ops_par_loop(opensbliblock00Kernel001, "LFTeno_reconstruction_1_direction", opensbliblock00, 3, iteration_range_1_block0,
+ops_par_loop(opensbliblock00Kernel001, "LFWeno_reconstruction_1_direction", opensbliblock00, 3, iteration_range_1_block0,
 ops_arg_dat(D10_B0, 1, stencil_0_00_23_00_13, "double", OPS_READ),
 ops_arg_dat(D11_B0, 1, stencil_0_00_23_00_13, "double", OPS_READ),
 ops_arg_dat(U1_B0, 1, stencil_0_00_23_00_13, "double", OPS_READ),
@@ -398,7 +394,7 @@ ops_arg_dat(wk8_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE),
 ops_arg_dat(wk9_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
 int iteration_range_2_block0[] = {0, block0np0, 0, block0np1, -1, block0np2 + 1};
-ops_par_loop(opensbliblock00Kernel002, "LFTeno_reconstruction_2_direction", opensbliblock00, 3, iteration_range_2_block0,
+ops_par_loop(opensbliblock00Kernel002, "LFWeno_reconstruction_2_direction", opensbliblock00, 3, iteration_range_2_block0,
 ops_arg_dat(U2_B0, 1, stencil_0_00_00_23_13, "double", OPS_READ),
 ops_arg_dat(a_B0, 1, stencil_0_00_00_01_5, "double", OPS_READ),
 ops_arg_dat(detJ_B0, 1, stencil_0_00_00_23_13, "double", OPS_READ),
@@ -418,7 +414,7 @@ ops_arg_dat(wk13_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE),
 ops_arg_dat(wk14_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
 int iteration_range_21_block0[] = {0, block0np0, 0, block0np1, 0, block0np2};
-ops_par_loop(opensbliblock00Kernel021, "LFTeno Residual", opensbliblock00, 3, iteration_range_21_block0,
+ops_par_loop(opensbliblock00Kernel021, "LFWeno Residual", opensbliblock00, 3, iteration_range_21_block0,
 ops_arg_dat(detJ_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(wk0_B0, 1, stencil_0_10_00_00_5, "double", OPS_READ),
 ops_arg_dat(wk10_B0, 1, stencil_0_00_00_10_5, "double", OPS_READ),

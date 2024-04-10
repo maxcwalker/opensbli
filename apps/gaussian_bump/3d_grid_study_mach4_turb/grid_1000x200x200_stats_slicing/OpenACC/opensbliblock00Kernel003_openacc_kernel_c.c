@@ -13,11 +13,11 @@ int ydim2_opensbliblock00Kernel003;
 
 //user function
 inline 
-void opensbliblock00Kernel003(const ptr_double p_B0,
-  const ptr_double rho_B0,
-  ptr_double a_B0)
+void opensbliblock00Kernel003(const ptr_double rho_B0,
+  const ptr_double rhou2_B0,
+  ptr_double u2_B0)
 {
-   OPS_ACC(a_B0, 0,0,0) = sqrt(gama*OPS_ACC(p_B0, 0,0,0)/OPS_ACC(rho_B0, 0,0,0));
+   OPS_ACC(u2_B0, 0,0,0) = OPS_ACC(rhou2_B0, 0,0,0)/OPS_ACC(rho_B0, 0,0,0);
 
 }
 

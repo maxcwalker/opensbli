@@ -278,13 +278,13 @@ void ops_par_loop_opensbliblock00Kernel000_execute(ops_kernel_descriptor *desc) 
 
    AVG_0_u0 = ((1.0/2.0))*(u0_B0(0,0) + u0_B0(1,0));
 
-   AVG_0_rho = ((1.0/2.0))*(rho_B0(0,0) + rho_B0(1,0));
-
    AVG_0_a = ((1.0/2.0))*(a_B0(0,0) + a_B0(1,0));
 
-   AVG_0_detJ = ((1.0/2.0))*(detJ_B0(0,0) + detJ_B0(1,0));
+   AVG_0_rho = ((1.0/2.0))*(rho_B0(0,0) + rho_B0(1,0));
 
    AVG_0_D01 = ((1.0/2.0))*(D01_B0(0,0) + D01_B0(1,0));
+
+   AVG_0_detJ = ((1.0/2.0))*(detJ_B0(0,0) + detJ_B0(1,0));
 
    AVG_0_D00 = ((1.0/2.0))*(D00_B0(0,0) + D00_B0(1,0));
 

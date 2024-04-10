@@ -272,15 +272,15 @@ void ops_par_loop_opensbliblock00Kernel001_execute(ops_kernel_descriptor *desc) 
 
    AVG_1_u0 = ((1.0/2.0))*(u0_B0(0,0) + u0_B0(0,1));
 
-   AVG_1_rho = ((1.0/2.0))*(rho_B0(0,0) + rho_B0(0,1));
-
    AVG_1_a = ((1.0/2.0))*(a_B0(0,0) + a_B0(0,1));
+
+   AVG_1_rho = ((1.0/2.0))*(rho_B0(0,0) + rho_B0(0,1));
 
    AVG_1_detJ = ((1.0/2.0))*(detJ_B0(0,0) + detJ_B0(0,1));
 
-   AVG_1_D10 = ((1.0/2.0))*(D10_B0(0,0) + D10_B0(0,1));
-
    AVG_1_D11 = ((1.0/2.0))*(D11_B0(0,0) + D11_B0(0,1));
+
+   AVG_1_D10 = ((1.0/2.0))*(D10_B0(0,0) + D10_B0(0,1));
 
    inv_AVG_a = 1.0/(AVG_1_a);
 
@@ -514,17 +514,17 @@ void ops_par_loop_opensbliblock00Kernel001_execute(ops_kernel_descriptor *desc) 
 
    max_lambda_11 = max_lambda_00;
 
-    max_lambda_22 = shock_filter_control*fmax(fabs(sqrt((D10_B0(0,1)*D10_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)) +
-      (D11_B0(0,1)*D11_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)))*a_B0(0,1) + u0_B0(0,1)*D10_B0(0,1)*detJ_B0(0,1) +
-      u1_B0(0,1)*D11_B0(0,1)*detJ_B0(0,1)), fabs(sqrt((D10_B0(0,0)*D10_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
+    max_lambda_22 = shock_filter_control*fmax(fabs(sqrt((D10_B0(0,0)*D10_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
       (D11_B0(0,0)*D11_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)))*a_B0(0,0) + u0_B0(0,0)*D10_B0(0,0)*detJ_B0(0,0) +
-      u1_B0(0,0)*D11_B0(0,0)*detJ_B0(0,0)));
-
-    max_lambda_33 = shock_filter_control*fmax(fabs(-sqrt((D10_B0(0,0)*D10_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
-      (D11_B0(0,0)*D11_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)))*a_B0(0,0) + u0_B0(0,0)*D10_B0(0,0)*detJ_B0(0,0) +
-      u1_B0(0,0)*D11_B0(0,0)*detJ_B0(0,0)), fabs(-sqrt((D10_B0(0,1)*D10_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)) +
+      u1_B0(0,0)*D11_B0(0,0)*detJ_B0(0,0)), fabs(sqrt((D10_B0(0,1)*D10_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)) +
       (D11_B0(0,1)*D11_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)))*a_B0(0,1) + u0_B0(0,1)*D10_B0(0,1)*detJ_B0(0,1) +
       u1_B0(0,1)*D11_B0(0,1)*detJ_B0(0,1)));
+
+    max_lambda_33 = shock_filter_control*fmax(fabs(-sqrt((D10_B0(0,1)*D10_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)) +
+      (D11_B0(0,1)*D11_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)))*a_B0(0,1) + u0_B0(0,1)*D10_B0(0,1)*detJ_B0(0,1) +
+      u1_B0(0,1)*D11_B0(0,1)*detJ_B0(0,1)), fabs(-sqrt((D10_B0(0,0)*D10_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
+      (D11_B0(0,0)*D11_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)))*a_B0(0,0) + u0_B0(0,0)*D10_B0(0,0)*detJ_B0(0,0) +
+      u1_B0(0,0)*D11_B0(0,0)*detJ_B0(0,0)));
 
     beta_0 = ((1.0/3.0))*((CS_04*max_lambda_00 + CF_04)*(CS_04*max_lambda_00 + CF_04)) +
       ((1.0/2.0))*(-(19.0/6.0)*(CS_04*max_lambda_00 + CF_04) + ((25.0/6.0))*(CS_03*max_lambda_00 +

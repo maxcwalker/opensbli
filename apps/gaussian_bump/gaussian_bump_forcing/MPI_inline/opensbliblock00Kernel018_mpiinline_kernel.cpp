@@ -27,12 +27,12 @@ void ops_par_loop_opensbliblock00Kernel018(char const *name, ops_block block, in
 
 
   #ifdef CHECKPOINTING
-  if (!ops_checkpointing_before(args,2,range,30)) return;
+  if (!ops_checkpointing_before(args,2,range,18)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,30,"opensbliblock00Kernel018");
-    block->instance->OPS_kernels[30].count++;
+    ops_timing_realloc(block->instance,18,"opensbliblock00Kernel018");
+    block->instance->OPS_kernels[18].count++;
   }
 
   //compute localy allocated range for the sub-block
@@ -90,7 +90,7 @@ void ops_par_loop_opensbliblock00Kernel018(char const *name, ops_block block, in
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[30].mpi_time += t1-t2;
+    block->instance->OPS_kernels[18].mpi_time += t1-t2;
   }
 
   opensbliblock00Kernel018_c_wrapper(
@@ -100,14 +100,14 @@ void ops_par_loop_opensbliblock00Kernel018(char const *name, ops_block block, in
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[30].time += t2-t1;
+    block->instance->OPS_kernels[18].time += t2-t1;
   }
   ops_set_dirtybit_host(args, 2);
   ops_set_halo_dirtybit3(&args[1],range);
 
   //Update kernel record
   if (block->instance->OPS_diags > 1) {
-    block->instance->OPS_kernels[30].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[30].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }

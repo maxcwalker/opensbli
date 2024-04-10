@@ -25,7 +25,7 @@ input_dict = {
     "Pr"                   : "0.72", 
     "Re"                   : "4000.0", 
     "Twall"                : "1.37", 
-    "dt"                   : "0.01", 
+    "dt"                   : "0.005", 
     "niter"                : "500000", 
     "block0np0"            : "1500", 
     "block0np1"            : "200",
@@ -65,7 +65,7 @@ values = input_dict.values()
 # Governing equations 																														#
 #																																			#
 #############################################################################################################################################
-weno = False
+weno = True
 teno = False
 conservative=True
 ndim = 3
@@ -81,7 +81,6 @@ if weno or teno:
     else:
         sc1 = "**{\'scheme\':\'Teno\'}" 
     # Define the compresible Navier-Stokes equations in Einstein notation.
-    sc1 = "**{\'scheme\':\'Teno\'}"
     a = "Conservative(detJ * rho*U_j,xi_j,%s)" % sc1
     mass = "Eq(Der(rho,t), - %s/detJ)" % (a)
     a = "Conservative(detJ * (rhou_i*U_j + p*D_j_i), xi_j , %s)" % sc1
@@ -168,14 +167,17 @@ coordinate_symbol = "x"
 #############################################################################################################################################
 
 schemes = {}
-if teno:
-    teno_order = 6
-    # averaging procedure to be used for the eigen system evaluation
-    Avg = RoeAverage([0, 1])
-    # LF scheme
-    LF = LFTeno(teno_order, averaging=Avg)
-    # add to schemes
-    schemes[LF.name] = LF
+Avg = RoeAverage([0, 1])
+if teno or weno:
+    if teno:
+        teno_order = 6
+
+        LF = LFTeno(teno_order, averaging=Avg)
+    else:
+        weno_order = 5
+        LF = LFWeno(weno_order, formulation='Z', averaging=Avg)
+
+schemes[LF.name] = LF
 
 fns = 'u0 u1 u2 T'
 cent = StoreSome(4, fns)
@@ -316,7 +318,7 @@ initial = Initialise_Flatplate(polynomial_directions, n_poly_coefficients, Re, x
 #############################################################################################################################################
 
 kwargs = {'iotype': "Write"}
-h5 = iohdf5(save_every=5000, **kwargs)
+h5 = iohdf5(save_every=50000, **kwargs)
 h5.add_arrays(simulation_eq.time_advance_arrays)
 h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('x2'), DataObject('D11')])
 h5.add_arrays([DataObject('p')]) # save pressure

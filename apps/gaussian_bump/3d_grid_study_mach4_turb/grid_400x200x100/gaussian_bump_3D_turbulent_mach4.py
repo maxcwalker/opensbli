@@ -26,7 +26,8 @@ input_dict = {
     "Re"                   : "4000.0", 
     "Twall"                : "1.37", 
     "dt"                   : "0.01", 
-    "niter"                : "500000", 
+    "niter"                : "8", 
+    "stat_frequency"       : "200",
     "block0np0"            : "400", 
     "block0np1"            : "200",
     'block0np2'            : "100", 
@@ -44,7 +45,7 @@ input_dict = {
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
     "epsilon"              : "1.0e-30",
-    "tripA"                : "0.05",
+    "tripA"                : "0.0",
     "xts"                  : "50.0",
     "omega_0"              : "0.1",
     "omega_1"              : "0.2", 
@@ -54,7 +55,8 @@ input_dict = {
     "phi_1"                : "3.141",
     "phi_2"                : "4.712",
     "b_f"                  : "0.002", # was 0.02
-    "beta_0"               : "0.628" #was 0.31
+    "beta_0"               : "0.628", #was 0.31
+    'kappa_TVD'            : "0.3",
 }
 
 constants = input_dict.keys()
@@ -66,6 +68,14 @@ values = input_dict.values()
 #																																			#
 #############################################################################################################################################
 
+weno = True
+teno = False
+TVD = False
+slices = True
+stats = False
+monitor = True
+
+conservative=True
 ndim = 3
 # Define coordinate direction symbol (x) this will be x_i, x_j, x_k
 coordinate_symbol = "x"
@@ -73,18 +83,30 @@ coordinate_symbol = "x"
 metriceq = MetricsEquation()
 metriceq.generate_transformations(ndim, coordinate_symbol, [(True, True), (True, True),(False,False)], 2)
 
-# Define the compresible Navier-Stokes equations in Einstein notation.
-sc1 = "**{\'scheme\':\'Teno\'}"
-a = "Conservative(detJ * rho*U_j,xi_j,%s)" % sc1
-mass = "Eq(Der(rho,t), - %s/detJ)" % (a)
-a = "Conservative(detJ * (rhou_i*U_j + p*D_j_i), xi_j , %s)" % sc1
-momentum = "Eq(Der(rhou_i,t) , -  %s/detJ)" % (a)
-a = "Conservative(detJ * (p+rhoE)*U_j,xi_j, %s)" % sc1
-energy = "Eq(Der(rhoE,t), - %s/detJ)" % (a)
+if weno or teno:
+    if weno:
+       sc1 = "**{\'scheme\':\'Weno\'}"
+    else:
+        sc1 = "**{\'scheme\':\'Teno\'}" 
+    # Define the compresible Navier-Stokes equations in Einstein notation.
+    a = "Conservative(detJ * rho*U_j,xi_j,%s)" % sc1
+    mass = "Eq(Der(rho,t), - %s/detJ)" % (a)
+    a = "Conservative(detJ * (rhou_i*U_j + p*D_j_i), xi_j , %s)" % sc1
+    momentum = "Eq(Der(rhou_i,t) , -  %s/detJ)" % (a)
+    a = "Conservative(detJ * (p+rhoE)*U_j,xi_j, %s)" % sc1
+    energy = "Eq(Der(rhoE,t), - %s/detJ)" % (a)
+    # auxilliary equations for NS
+    stress_tensor = "Eq(tau_i_j, (mu/Re)*(Der(u_i,x_j)+ Der(u_j,x_i) - (2/3)* KD(_i,_j)* Der(u_k,x_k)))"
+    heat_flux = "Eq(q_j, (-mu/((gama-1)*Minf*Minf*Pr*Re))*Der(T,x_j))"
+else:
+    NS = NS_Split('KGP', ndim, constants, coordinate_symbol=coordinate_symbol, conservative=conservative, viscosity='dynamic', energy_formulation='enthalpy', debug=False)
+    mass, momentum, energy = NS.mass, NS.momentum, NS.energy
+    # Expand the simulation equations, for this create a simulation equations class
+    simulation_eq = SimulationEquations()
+    simulation_eq.add_equations(mass)
+    simulation_eq.add_equations(momentum)
+    simulation_eq.add_equations(energy)
 
-# auxilliary equations for NS
-stress_tensor = "Eq(tau_i_j, (mu/Re)*(Der(u_i,x_j)+ Der(u_j,x_i) - (2/3)* KD(_i,_j)* Der(u_k,x_k)))"
-heat_flux = "Eq(q_j, (-mu/((gama-1)*Minf*Minf*Pr*Re))*Der(T,x_j))"
 
 # Substitutions
 substitutions = [stress_tensor, heat_flux]
@@ -153,12 +175,16 @@ coordinate_symbol = "x"
 #############################################################################################################################################
 
 schemes = {}
-teno_order = 6
-# averaging procedure to be used for the eigen system evaluation
 Avg = RoeAverage([0, 1])
-# LF scheme
-LF = LFTeno(teno_order, averaging=Avg)
-# add to schemes
+if teno or weno:
+    if teno:
+        teno_order = 6
+
+        LF = LFTeno(teno_order, averaging=Avg)
+    else:
+        weno_order = 5
+        LF = LFWeno(weno_order, formulation='Z', averaging=Avg)
+
 schemes[LF.name] = LF
 
 fns = 'u0 u1 u2 T'
@@ -207,7 +233,7 @@ for con in wall_const:
 # Isothermal wall condition
 rhoE_wall = parse_expr("Eq(DataObject(rhoE), DataObject(rho)*Twall/(gama*(gama-1.0)*Minf**2.0))", local_dict=local_dict)
 wall_eqns = [rhoE_wall]
-# boundaries[direction][side] = IsothermalWallBC(1, 0, wall_eqns, scheme=ReducedAccess())
+
 #############################################################################################################################################
 #																																			#
 # Forcing																													                #
@@ -266,20 +292,20 @@ for side in [0,1]:
 block.set_block_boundaries(boundaries)
 
 # Monitor points
-# arrays = ['p', 'p', 'p', 'p', 'p', 'p', 'p']
-# #arrays = ['rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0']
-# arrays = [block.location_dataset('%s' % dset) for dset in arrays]
-# indices = [(178, 45), (178, 72), (178, 96), (178, 118), (178, 139), (178, 160), (178, 176)]
-# SM = SimulationMonitor(arrays, indices, block, print_frequency=100, fp_precision=12, output_file='monitor.log')
+if monitor:
+    Nx, Nz, L = symbols('block0np0 block0np2 L', **{'cls': ConstantObject})
+    arrays = ['p', 'p', 'p', 'p', 'p', 'p', 'p']
+    arrays += ['rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0']
+    arrays = [block.location_dataset('%s' % dset) for dset in arrays]
+    indices = [(50 * Nx/L, 0, Nz/2), (100 * Nx/L, 2, Nz/2), (175 * Nx/L, 4, Nz/2), (187 * Nx/L, 6, Nz/2), (200 * Nx/L, 8, Nz/2), (225 * Nx/L, 10, Nz/2), (300 * Nx/L, 12, Nz/2), (350 * Nx/L, 12, Nz/2),\
+               (50 * Nx/L, 0, Nz/2), (100 * Nx/L, 2, Nz/2), (175 * Nx/L, 4, Nz/2), (187 * Nx/L, 6, Nz/2), (200 * Nx/L, 8, Nz/2), (225 * Nx/L, 10, Nz/2), (300 * Nx/L, 12, Nz/2), (350 * Nx/L, 12, Nz/2)]
+    SM = SimulationMonitor(arrays, indices, block, print_frequency=2, fp_precision=12, output_file='monitor.log')
 
 #############################################################################################################################################
 #																																			#
 # Grid and intial conditions																												#
 #																																			#
 #############################################################################################################################################
-
-# Perform initial condition
-# Reynolds number, Mach number and free-stream temperature for the initial profile
 Re, xMach, Tinf,Twall = 4000.0, 4.0, 288.0, 1.37
 ## Ensure the grid size passed to the initialisation routine matches the grid sizes used in the simulation parameters
 polynomial_directions = [(False, DataObject('x0')), (True, DataObject('x1')), (False, DataObject('x2'))]
@@ -291,16 +317,24 @@ gridx0 = parse_expr("Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])",
 gridx1 = parse_expr("Eq(DataObject(x1), H/20*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2) + (H - H/20*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2))*sinh(b*block.deltas[1]*block.grid_indexes[1]/H)/sinh(b))", local_dict=local_dict)
 gridx2 = parse_expr("Eq(DataObject(x2), block.deltas[2]*block.grid_indexes[2])", local_dict=local_dict)
 coordinate_evaluation = [gridx0, gridx1, gridx2]
-# initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)
 initial = Initialise_Flatplate(polynomial_directions, n_poly_coefficients, Re, xMach, Tinf, Twall,coordinate_evaluations=coordinate_evaluation)
+
 #############################################################################################################################################
 #																																			#
 # Data i/o 																																	#
 #																																			#
 #############################################################################################################################################
+#grouping conserved variables into 1 vector
+q_vector = flatten(simulation_eq.time_advance_arrays)
+#   Stats    #
+if stats:
+    from airfoil_stats import favre_averaged_stats
+    stat_equation_classes, stats_arrays = favre_averaged_stats(ndim, q_vector, conservative=True)
+else:
+    stat_equation_classes, stats_arrays = [], []
 
 kwargs = {'iotype': "Write"}
-h5 = iohdf5(save_every=5000, **kwargs)
+h5 = iohdf5(save_every=50000, **kwargs)
 h5.add_arrays(simulation_eq.time_advance_arrays)
 h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('x2'), DataObject('D11')])
 h5.add_arrays([DataObject('p')]) # save pressure
@@ -308,11 +342,38 @@ block.setio(h5)
 
 # Set equations on the block and discretise
 block.set_equations([constituent, simulation_eq, initial, metriceq])
+
+if TVD:
+    TVD_filter = TVDFilter(block, airfoil=False, optimize=True, metrics=metriceq)
+    block.set_equations(TVD_filter.equation_classes)
+
+
+##################################################################################################################																															
+#         Slicing																																																																	
+##################################################################################################################
+if slices:
+    # Add grid coordinates to the slices, once at the start of the simulation
+    grid_slice_hdf5 = iohdf5_slices(**{'iotype': "Init"})
+    coords = [([DataObject('x0'), DataObject('x2')], 1, 1), ([DataObject('x0'), DataObject('x2')], 2, 'block0np2/2')] # q vector, x-z, j=1 plane, # q vector, x-y, z=Lz/2 plane
+    grid_slice_hdf5.add_slices(coords)
+    # Q vector slices written out in time
+    slices_hdf5 = iohdf5_slices(save_every=2500, **{'iotype': "Write"})
+    # Arrays, direction, index
+    slices = [(q_vector, 1, 1)] # conserved variables, plan view, j=1
+    slices = [(q_vector, 1, 10)] # conserved variables, plan view, j=10
+    slices += [(q_vector, 2, 'block0np2/2')] # q vector, x-y, z=Lz/2 plane
+    slices_hdf5.add_slices(slices)
+    block.setio([grid_slice_hdf5, slices_hdf5])
+
 block.discretise()
 
-alg = TraditionalAlgorithmRK(block)
+if monitor:
+    alg = TraditionalAlgorithmRK(block, simulation_monitor=SM)
+else:
+    alg = TraditionalAlgorithmRK(block)
+
 SimulationDataType.set_datatype(Double)
 OPSC(alg)
 
 substitute_simulation_parameters(constants, values)
-print_iteration_ops(every=1000, NaN_check='rho_B0')
+print_iteration_ops(every=1, NaN_check='rho_B0')

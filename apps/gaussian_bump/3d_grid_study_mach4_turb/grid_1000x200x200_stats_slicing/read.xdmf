@@ -4,34 +4,13 @@
 <Domain>
 <Grid Name="CellTime" GridType="Collection" CollectionType="Temporal">
     <Grid Name="mesh1" GridType="Uniform">
-    <Time Value = "0" />
-     <Topology TopologyType="2DSMesh" NumberOfElements="200 1000"/><Geometry GeometryType="X_Y">
-<DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_000000_pp.h5:/x0_B0
-</DataItem>
-<DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_000000_pp.h5:/x1_B0
-</DataItem>
-</Geometry>
-<Attribute Name="x0_B0" AttributeType="Scalar" Center="Node">
-<DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_000000_pp.h5:/x0_B0
-</DataItem>
-</Attribute>
-<Attribute Name="x2_B0" AttributeType="Scalar" Center="Node">
-<DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_000000_pp.h5:/x2_B0
-</DataItem>
-</Attribute>
-   </Grid>
-    <Grid Name="mesh1" GridType="Uniform">
     <Time Value = "10000" />
      <Topology TopologyType="2DSMesh" NumberOfElements="200 1000"/><Geometry GeometryType="X_Y">
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
  ./outputs/opensbli_output_010000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_010000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_010000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -77,7 +56,7 @@
  ./outputs/opensbli_output_020000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_020000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_020000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -123,7 +102,7 @@
  ./outputs/opensbli_output_030000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_030000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_030000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -169,7 +148,7 @@
  ./outputs/opensbli_output_040000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_040000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_040000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -215,7 +194,7 @@
  ./outputs/opensbli_output_050000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_050000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_050000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -261,7 +240,7 @@
  ./outputs/opensbli_output_060000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_060000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_060000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -307,7 +286,7 @@
  ./outputs/opensbli_output_070000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_070000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_070000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -353,7 +332,7 @@
  ./outputs/opensbli_output_080000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_080000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_080000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -399,7 +378,7 @@
  ./outputs/opensbli_output_090000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_090000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_090000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -445,7 +424,7 @@
  ./outputs/opensbli_output_100000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_100000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_100000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -491,7 +470,7 @@
  ./outputs/opensbli_output_110000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_110000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_110000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -537,7 +516,7 @@
  ./outputs/opensbli_output_120000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_120000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_120000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -583,7 +562,7 @@
  ./outputs/opensbli_output_130000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_130000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_130000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -629,7 +608,7 @@
  ./outputs/opensbli_output_140000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_140000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_140000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">
@@ -675,7 +654,7 @@
  ./outputs/opensbli_output_150000_pp.h5:/x0_B0
 </DataItem>
 <DataItem Dimensions="200 1000" NumberType="Float" Precision="4" Format="HDF">
- ./outputs/opensbli_output_150000_pp.h5:/x1_B0
+ ./outputs/opensbli_output_150000_pp.h5:/x2_B0
 </DataItem>
 </Geometry>
 <Attribute Name="rhoE_B0" AttributeType="Scalar" Center="Node">

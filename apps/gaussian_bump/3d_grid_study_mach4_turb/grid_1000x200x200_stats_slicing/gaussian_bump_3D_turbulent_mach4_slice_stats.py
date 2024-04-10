@@ -26,7 +26,7 @@ input_dict = {
     "Re"                   : "4000.0", 
     "Twall"                : "1.37", 
     "dt"                   : "0.003", 
-    "niter"                : "5000", 
+    "niter"                : "1", 
     "stat_frequency"       : "200",
     "block0np0"            : "1000", 
     "block0np1"            : "200",
@@ -308,7 +308,7 @@ block.set_equations([constituent, simulation_eq, initial, metriceq] + stat_equat
 
 # Set the IO class to write out arrays
 h5 = iohdf5(save_every=1, **{'iotype': "Write"})
-h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('x2')]+q_vector)
+h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('x2'),DataObject('D11')]+q_vector)
 # h5.add_arrays([DataObject('kappa')]) # shock sensor array
 # Read grid file
 # h5_read = iohdf5(**{'iotype': "Read"})

@@ -157,13 +157,13 @@ void opensbliblock00Kernel000_c_wrapper(
 
    AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0,0) + OPS_ACC(u0_B0, 1,0));
 
-   AVG_0_rho = ((1.0/2.0))*(OPS_ACC(rho_B0, 0,0) + OPS_ACC(rho_B0, 1,0));
-
    AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0,0) + OPS_ACC(a_B0, 1,0));
 
-   AVG_0_detJ = ((1.0/2.0))*(OPS_ACC(detJ_B0, 0,0) + OPS_ACC(detJ_B0, 1,0));
+   AVG_0_rho = ((1.0/2.0))*(OPS_ACC(rho_B0, 0,0) + OPS_ACC(rho_B0, 1,0));
 
    AVG_0_D01 = ((1.0/2.0))*(OPS_ACC(D01_B0, 0,0) + OPS_ACC(D01_B0, 1,0));
+
+   AVG_0_detJ = ((1.0/2.0))*(OPS_ACC(detJ_B0, 0,0) + OPS_ACC(detJ_B0, 1,0));
 
    AVG_0_D00 = ((1.0/2.0))*(OPS_ACC(D00_B0, 0,0) + OPS_ACC(D00_B0, 1,0));
 

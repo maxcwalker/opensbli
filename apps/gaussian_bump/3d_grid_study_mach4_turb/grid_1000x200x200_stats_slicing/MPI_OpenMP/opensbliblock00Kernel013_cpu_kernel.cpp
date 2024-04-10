@@ -69,10 +69,10 @@ void ops_par_loop_opensbliblock00Kernel013_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ rho_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ rhou1_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ rhou0_B0_p = (double *)(args[1].data + base1);
 
   int base2 = args[2].dat->base_offset;
-  double * __restrict__ u1_B0_p = (double *)(args[2].data + base2);
+  double * __restrict__ u0_B0_p = (double *)(args[2].data + base2);
 
 
 
@@ -103,10 +103,10 @@ void ops_par_loop_opensbliblock00Kernel013_execute(ops_kernel_descriptor *desc) 
       #endif
       for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
         const ACC<double> rho_B0(xdim0_opensbliblock00Kernel013, ydim0_opensbliblock00Kernel013, rho_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel013*1 + n_z * xdim0_opensbliblock00Kernel013 * ydim0_opensbliblock00Kernel013*1);
-        const ACC<double> rhou1_B0(xdim1_opensbliblock00Kernel013, ydim1_opensbliblock00Kernel013, rhou1_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel013*1 + n_z * xdim1_opensbliblock00Kernel013 * ydim1_opensbliblock00Kernel013*1);
-        ACC<double> u1_B0(xdim2_opensbliblock00Kernel013, ydim2_opensbliblock00Kernel013, u1_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel013*1 + n_z * xdim2_opensbliblock00Kernel013 * ydim2_opensbliblock00Kernel013*1);
+        const ACC<double> rhou0_B0(xdim1_opensbliblock00Kernel013, ydim1_opensbliblock00Kernel013, rhou0_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel013*1 + n_z * xdim1_opensbliblock00Kernel013 * ydim1_opensbliblock00Kernel013*1);
+        ACC<double> u0_B0(xdim2_opensbliblock00Kernel013, ydim2_opensbliblock00Kernel013, u0_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel013*1 + n_z * xdim2_opensbliblock00Kernel013 * ydim2_opensbliblock00Kernel013*1);
         
-   u1_B0(0,0,0) = rhou1_B0(0,0,0)/rho_B0(0,0,0);
+   u0_B0(0,0,0) = rhou0_B0(0,0,0)/rho_B0(0,0,0);
 
 
       }

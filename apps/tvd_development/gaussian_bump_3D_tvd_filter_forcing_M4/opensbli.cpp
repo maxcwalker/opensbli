@@ -27,29 +27,29 @@ Twall = 1.37;
 Minf = 4.0;
 write_output_file = 10000;
 HDF5_timing = 0;
-gama = 1.4;
 RefT = 439.0;
-a = 20.0;
 SuthT = 110.4;
-Pr = 0.72;
+gama = 1.4;
+a = 20.0;
 Re = 4000.0;
+Pr = 0.72;
 delta_TVD = 0.500000000000000;
 eps_TVD = 1.00000000000000e-8;
 kappa_TVD = 0.3;
 gamma_m1 = -1 + gama;
 Ducros_check = 0.0500000000000000;
 Ducros_select = 0.0500000000000000;
-phi_2 = 4.712;
-b_f = 0.002;
-omega_0 = 0.1;
 xts = 50.0;
-omega_1 = 0.2;
-omega_2 = 0.4;
 beta_0 = 0.628;
-phi_1 = 3.141;
-phi_0 = 1.571;
-tripA = 0.0;
 omega_3 = 1.0;
+tripA = 0.0;
+omega_0 = 0.1;
+phi_0 = 1.571;
+phi_2 = 4.712;
+phi_1 = 3.141;
+b_f = 0.002;
+omega_2 = 0.4;
+omega_1 = 0.2;
 L = 400.0;
 b = 5.0;
 H = 115.0;
@@ -527,7 +527,7 @@ ops_halo_transfer(periodicBC_direction2_side0_40_block0);
 ops_halo_transfer(periodicBC_direction2_side1_41_block0);
 }
 int iteration_range_57_block0[] = {-1, block0np0 + 2, -1, block0np1 + 2, -1, block0np2 + 2};
-ops_par_loop(opensbliblock00Kernel057, "User kernel: Constituent Relations evaluation", opensbliblock00, 3, iteration_range_57_block0,
+ops_par_loop(opensbliblock00Kernel057, "User kernel: Constituent Relations evaluationOG", opensbliblock00, 3, iteration_range_57_block0,
 ops_arg_dat(rhoE_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rhou0_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
@@ -552,7 +552,7 @@ ops_arg_dat(kappa_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE),
 ops_arg_idx());
 
 int iteration_range_62_block0[] = {-1, block0np0 + 2, -1, block0np1 + 2, -1, block0np2 + 2};
-ops_par_loop(opensbliblock00Kernel062, "User kernel: Constituent Relations evaluation", opensbliblock00, 3, iteration_range_62_block0,
+ops_par_loop(opensbliblock00Kernel062, "User kernel: Constituent Relations evaluationOG", opensbliblock00, 3, iteration_range_62_block0,
 ops_arg_dat(rhoE_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rhou0_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
