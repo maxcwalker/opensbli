@@ -278,10 +278,7 @@ side = 0
 # ForcingStripBC(direction, side, v, wall_eqns)
 boundaries[direction][side] = ForcingStripBC(direction, side,  wall_normal_velocity, wall_eqns, scheme=ReducedAccess())
 
-# Top dirichlet shock generator condition
-direction = 1
-side = 1
-
+# Top zero gradient
 boundaries[direction][side] = ZeroGradientOutletBC(1, 1)
 
 direction = 2
@@ -306,7 +303,7 @@ if monitor:
 # Grid and intial conditions																												#
 #																																			#
 #############################################################################################################################################
-Re, xMach, Tinf,Twall = 4000.0, 4.0, 288.0, 1.37
+Re, xMach, Tinf,Twall = symbols('Re Minf RefT Twall', **{'cls': ConstantObject})
 ## Ensure the grid size passed to the initialisation routine matches the grid sizes used in the simulation parameters
 polynomial_directions = [(False, DataObject('x0')), (True, DataObject('x1')), (False, DataObject('x2'))]
 n_poly_coefficients = 50

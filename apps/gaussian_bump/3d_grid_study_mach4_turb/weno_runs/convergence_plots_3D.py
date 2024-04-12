@@ -50,13 +50,13 @@ Ly = 115.0
 Lx = 400.0
 scale = 4.959043
 
-list = ['400x200x100','1000x200x100', '1000x200x200','1000x300x200','1500x200x200']
+list = ['400x200x100','1000x200x100', '1000x200x200','1000x300x200','1500x200x200','1500x300x200']
 # list = ['1000x200x100', '1000x200x200']
 fig1, ax1 = plt.subplots(1,1)
 fig2, ax2 = plt.subplots(1,1)
 
-line_styles = ['-', '-', '-', '-','-']
-line_colours = ['k','b', 'orange','y','green']
+line_styles = ['-', '-', '-', '-','-', '-']
+line_colours = ['k','b', 'orange','y','green','c']
 axins1 = zoomed_inset_axes(ax1, 5, loc=2)
 axins2 = zoomed_inset_axes(ax2, 5, loc=2)
 
@@ -127,7 +127,7 @@ for i in range(len(list)):
 
 
 mark_inset(ax1, axins1, loc1=1, loc2=4, fc="none", ec="0.5")
-x1, x2, y1, y2 = 190, 210, 0.0023, 0.0026 # specify the limits
+x1, x2, y1, y2 = 190, 210, 0.00175, 0.00201 # specify the limits
 axins1.set_xlim(x1, x2) # apply the x-limits
 axins1.set_ylim(y1, y2) # apply the y-limits 
 axins1.set_xticks([])
@@ -157,4 +157,4 @@ ax2.legend(loc='best')
 ax2.grid()
 fig2.savefig(directory+"wall_pressure.pdf",bbox_inches='tight') 
 
-# plt.show()
+plt.show()
