@@ -1,5 +1,4 @@
 import numpy
-import numpy as np
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.pyplot as plt
 import h5py
@@ -40,6 +39,10 @@ Ly = 115.0
 Lx = 400.0
 scale = 2.31669259
 
+
+
+
+D11 = read_dataset(group1, "D11_B0")
 x = read_dataset(group1, "x0_B0")
 y = read_dataset(group1, "x1_B0")
 rho = read_dataset(group1, "rho_B0")
@@ -53,73 +56,79 @@ a = numpy.sqrt(1.4*p/rho)
 M = numpy.sqrt(u**2 + v**2)/a
 T = 1.4*(Minf**2)*p/rho
 
-plt.plot(x[0,:],v[0,:])
-plt.xlabel('x')
-plt.ylabel('v')
-plt.title('v velocity along the wall')
-plt.savefig('v_vel_along_wall.pdf')
 
-
-levels = 25
-
-
-fig, (ax1,ax2, ax3) = plt.subplots(3,1)
-fig.set_size_inches(18.5, 10.5)
-T = ax1.contourf(x, y, T, levels = levels,  cmap=cm.jet) 
-ax1.set_title("Contours for flow over a Gaussian bump")
-plt.xlabel('x')
-ax1.set_aspect(1)
-ax1.set_ylabel("y")
-tbar = plt.colorbar(T, ax=ax1)
-tbar.set_label("Temperature [$^{\circ}$C]" ) #rotation= 270
-
-P = ax2.contourf(x, y, p, levels = levels,  cmap=cm.jet)
-ax2.set_ylabel("y")
-ax2.set_aspect(1)
-# ax2.set_ylim([0, 5])
-# ax2.set_xlim([0, 5])
-Pbar = plt.colorbar(P, ax=ax2)
-Pbar.set_label("Pressure [Pa]" ) #rotation= 270
-plt.legend
-plt.show()
-U = ax3.contourf(x, y, M, levels = levels, cmap=cm.jet)
-ax3.set_ylabel("y")
-ax3.set_aspect(1)
-ubar = plt.colorbar(U, ax=ax3)
-ubar.set_label("Mach Number") #X_Velocity [ms$^{-1}$]
-plt.legend
-plt.style.use('classic')
-plt.savefig('shock_patern_contours.pdf')
-
-print(numpy.shape(x))
-
-# fig2, b1 = plt.subplots(1,1)
-# x = b1.contourf(x, y, u, levels= numpy.linspace(-0.2,0.05,40), cmap=cm.jet) 
-# b1.set_title("u velocity contours to show the regions of separation")
+# plt.plot(x[0,:],v[0,:])
 # plt.xlabel('x')
-# b1.set_ylabel("y")
-# ubar = plt.colorbar(x, ax=b1)
-# b1.set_ylim([0,15])
-# ubar.set_label("u velocity [$ms^1$]" ) #rotation= 270
+# plt.ylabel('v')
+# plt.title('v velocity along the wall')
+# plt.savefig('v_vel_along_wall.pdf')
 
-fig3, c1 = plt.subplots(1,1)
-z = c1.contourf(x, y, rho, levels =25, cmap=cm.jet) 
-c1.set_title("density")
+
+
+fig2, b1 = plt.subplots(1,1)
+sep = b1.contourf(x, y, u, levels= list(numpy.linspace(-0.2,0,2)) + list([0.2]),cmap=cm.jet) 
+#b1.set_title("u velocity contours to show the regions of separation")
 plt.xlabel('x')
-c1.set_ylabel("y")
+b1.set_ylabel("y")
+b1.set_ylim([0, 15])
+b1.set_aspect('equal')
+b1.set_xlim([130,270])
+b1.set_ylim([0,20])
+b1.spines[['top','left','right']].set_visible(False)
+b1.grid()
+divider = make_axes_locatable(b1)
+cax1 = divider.append_axes("right", size=0.2,,pad=0.1)
+cbar=fig2.colorbar(sep, cax=cax1 )
+cbar.ax.tick_params(labelsize=5)
+# divider = make_axes_locatable(b1)
+# cax = divider.append_axes("right", size=1, pad=5)
+cbar.set_label(r"u velocity [$ms^1$]",fontsize=5) #rotation= 270
+fig2.savefig('Recirculation_zone.pdf',bbox_inches='tight')
+
+
+
+fig3,c1=plt.subplots()
+CS=c1.contourf(x,y,M,levels=25, cmap=cm.jet)
 divider = make_axes_locatable(c1)
 cax = divider.append_axes("right", size=0.2,pad=0.1)
-ubar = plt.colorbar(z, ax=c1, cax=cax)
-c1.set_aspect(1)
-# b1.set_ylim([0,15])
-ubar.set_label("density [kg/m$^3$]" ) #rotation= 270
+cbar=fig3.colorbar(CS, cax=cax)
+cbar.set_label("Mach Number" )
+c1.set_aspect('equal')
+c1.set_ylim([0,100])
+# ax.set_aspect(1)
+# plt.show()
+#ax.set_ylim([0.0,20])
+plt.savefig('contours_Mach2_2D.pdf')
 
 
-fig2, bx1 = plt.subplots(1,1)
-bx1.plot(u[:,0],y[:,0])
-bx1.set_ylim([0,3])
-bx1.axhline(y=1, color =  'k', linestyle ='--',  label = 'position of boundary layer comparison')
-bx1.set_title('Plot to show the boundary layer thickness')
-bx1.set_ylabel('nromal distance from ')
-fig2.savefig('u_velocity_profile_at_inlet.pdf')
-plt.show()
+# levels = 100
+# fig, (ax1,ax2, ax3) = plt.subplots(3,1)
+# fig.set_size_inches(18.5, 10.5)
+# T = ax1.contourf(x, y, T, levels = levels, cmap=cm.jet) 
+# ax1.set_title("Contours for flow over a Gaussian bump")
+# plt.xlabel('x')
+# ax1.set_ylabel("y")
+# tbar = plt.colorbar(T, ax=ax1)
+# tbar.set_label("Temperature [$^{\circ}$C]" ) #rotation= 270
+
+# P = ax2.contourf(x, y, p, levels = levels, cmap=cm.jet)
+# ax2.set_ylabel("y")
+# Pbar = plt.colorbar(P, ax=ax2)
+# Pbar.set_label("Pressure [Pa]" ) #rotation= 270
+# plt.legend
+
+# U = ax3.contourf(x, y, M, levels = levels, cmap=cm.jet)
+# ax3.set_ylabel("y")
+# ubar = plt.colorbar(U, ax=ax3)
+# ubar.set_label("Mach Number") #X_Velocity [ms$^{-1}$]
+# plt.legend
+# plt.style.use('classic')
+# plt.savefig('Gaussian_bump_contours.pdf')
+
+
+
+
+
+
+
+

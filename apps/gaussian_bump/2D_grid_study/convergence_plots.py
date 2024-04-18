@@ -6,8 +6,10 @@ import h5py
 import os.path
 import matplotlib.cm as cm
 import os
+from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
+from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 
-plt.style.use('classic')
+# plt.style.use('classic')
 
 fname = 'opensbli_output.h5'
 
@@ -40,13 +42,15 @@ Lx = 400.0
 scale = 2.31669259
 
 
-#list = ['100x100', '200x100', '400x100', '600x100', '800x100']
-list = ['600x100', '600x200', '600x400', '600x600']
+list = ['100x100', '200x100', '400x100', '600x100', '800x100', '600x200', '600x400']
+# list = ['600x100', '600x200', '600x400', '600x600']
 
 fig1, ax1 = plt.subplots(1,1)
 fig2, ax2 = plt.subplots(1,1)
+axins1 = zoomed_inset_axes(ax1, 20, loc=2)
+axins2 = zoomed_inset_axes(ax2, 5, loc=2)
 
-line_styles = ['-.', '.', '-', '-','-']
+line_styles = ['-', '-', '-', '-','-','-','-']
 
 for i in range(len(list)):
 
@@ -81,27 +85,43 @@ for i in range(len(list)):
     mu_wall = mu[0, :]
     tau_wall = dudy*mu_wall
     Cf = tau_wall/(0.5*Re)
-
-
     
     ax1.plot(x[1, :], Cf, '%s'%line_styles[i],label = 'grid_%s' % list[i])
+    axins1.plot(x[1, :], Cf, '%s'%line_styles[i],label = 'grid_%s' % list[i],linewidth=1)
+
     ax2.plot(x[1, :], p[0, :]/p[0, 0], '%s'%line_styles[i], label='grid_%s' % list[i])
+    axins2.plot(x[1, :], p[0, :]/p[0, 0], '%s'%line_styles[i], label='grid_%s' % list[i],linewidth=1)
+
+
+mark_inset(ax1, axins1, loc1=1, loc2=4, fc="none", ec="0.5")
+x1, x2, y1, y2 = 197, 205, 0.0071, 0.0073 # specify the limits
+axins1.set_xlim(x1, x2) # apply the x-limits
+axins1.set_ylim(y1, y2) # apply the y-limits 
+axins1.set_xticks([])
+axins1.set_yticks([])
+
+mark_inset(ax2, axins2, loc1=1, loc2=4, fc="none", ec="0.5")
+x1, x2, y1, y2 = 185, 200, 0.85,0.9 # specify the limits
+axins2.set_xlim(x1, x2) # apply the x-limits
+axins2.set_ylim(y1, y2) # apply the y-limits 
+axins2.set_xticks([])
+axins2.set_yticks([])
 
 
 ax1.axhline(y=0.0, linestyle='--', color='black')
 ax1.set_xlabel(r'$x_0$', fontsize=20)
 ax1.set_ylabel(r'$C_f$', fontsize=20)
-ax1.set_title('Skin friction')
+# ax1.set_title('Skin friction')
 ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
 ax1.legend()
 ax1.grid()
-fig1.savefig('skin_friction.pdf')
+fig1.savefig('skin_friction.pdf',bbox_inches='tight')
 
 ax2.set_xlabel(r'$x_0$', fontsize=20)
 ax2.set_ylabel(r'$\frac{P_w}{P_1}$', fontsize=22)
-ax2.set_title('Normalised wall pressure')
+# ax2.set_title('Normalised wall pressure')
 ax2.legend()
 ax2.grid()
-fig2.savefig("wall_pressure.pdf") 
+fig2.savefig("wall_pressure.pdf",bbox_inches='tight') 
 
 plt.show()

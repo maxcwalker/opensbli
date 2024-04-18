@@ -11,8 +11,6 @@ from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 
 
-
-
 def read_dataset(file, dataset):
     group = file["opensbliblock00"]
     d_m = group["%s" % (dataset)].attrs['d_m']
@@ -215,8 +213,6 @@ for idx in y_idx:
         ax1.set_aspect('equal')
 
 
-        
-
     # plt.clabel(recirc, inline = False,fontsize=8)
 
 
@@ -231,7 +227,7 @@ for idx in y_idx:
 #                                                                                                 #
 ###################################################################################################
 
-x_idx=[170,175,180,185,190,195,200,210,220,350]
+x_idx=[100]
 
 for idx in x_idx:
     ## plan view slice at y_idx point
