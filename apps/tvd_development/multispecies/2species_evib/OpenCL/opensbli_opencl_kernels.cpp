@@ -30,6 +30,7 @@ extern double gama;
 extern double gamma_m1;
 extern double inv2Delta0block0;
 extern double inv2gamma_m1;
+extern double inv2uref;
 extern double invDelta0block0;
 extern double invMN;
 extern double invMN2;
@@ -55,8 +56,8 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
   ops_execute(instance);
   cl_int ret = 0;
   if (instance->opencl_instance->OPS_opencl_core.constant == NULL) {
-    instance->opencl_instance->OPS_opencl_core.constant = (cl_mem*) malloc((34)*sizeof(cl_mem));
-    for ( int i=0; i<34; i++ ){
+    instance->opencl_instance->OPS_opencl_core.constant = (cl_mem*) malloc((35)*sizeof(cl_mem));
+    for ( int i=0; i<35; i++ ){
       instance->opencl_instance->OPS_opencl_core.constant[i] = NULL;
     }
   }
@@ -258,7 +259,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"invDelta0block0")) {
+  if (!strcmp(name,"inv2uref")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[18] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[18] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -269,7 +270,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"invMN")) {
+  if (!strcmp(name,"invDelta0block0")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[19] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[19] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -280,7 +281,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"invMN2")) {
+  if (!strcmp(name,"invMN")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[20] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[20] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -291,7 +292,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"invRe")) {
+  if (!strcmp(name,"invMN2")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[21] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[21] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -302,7 +303,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"invRhat")) {
+  if (!strcmp(name,"invRe")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[22] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[22] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -313,7 +314,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"invdelta_TVD")) {
+  if (!strcmp(name,"invRhat")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[23] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[23] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -324,7 +325,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"invgama")) {
+  if (!strcmp(name,"invdelta_TVD")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[24] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[24] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -335,7 +336,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"invgamma_m1")) {
+  if (!strcmp(name,"invgama")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[25] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[25] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -346,7 +347,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"invuref")) {
+  if (!strcmp(name,"invgamma_m1")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[26] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[26] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -357,7 +358,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"kappa")) {
+  if (!strcmp(name,"invuref")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[27] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[27] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -368,7 +369,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"kappa_TVD")) {
+  if (!strcmp(name,"kappa")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[28] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[28] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -379,7 +380,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"niter")) {
+  if (!strcmp(name,"kappa_TVD")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[29] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[29] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -390,7 +391,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"simulation_time")) {
+  if (!strcmp(name,"niter")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[30] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[30] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -401,7 +402,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"start_iter")) {
+  if (!strcmp(name,"simulation_time")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[31] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[31] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -412,7 +413,7 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"thetavN2")) {
+  if (!strcmp(name,"start_iter")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[32] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[32] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
@@ -423,13 +424,24 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
   else
-  if (!strcmp(name,"uref")) {
+  if (!strcmp(name,"thetavN2")) {
     if (instance->opencl_instance->OPS_opencl_core.constant[33] == NULL) {
       instance->opencl_instance->OPS_opencl_core.constant[33] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
       clSafeCall( ret );
     }
     //Write the new constant to the memory of the device
     clSafeCall( clEnqueueWriteBuffer(instance->opencl_instance->OPS_opencl_core.command_queue, instance->opencl_instance->OPS_opencl_core.constant[33], CL_TRUE, 0, dim*typeSize, (void*) dat, 0, NULL, NULL) );
+    clSafeCall( clFlush(instance->opencl_instance->OPS_opencl_core.command_queue) );
+    clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
+  }
+  else
+  if (!strcmp(name,"uref")) {
+    if (instance->opencl_instance->OPS_opencl_core.constant[34] == NULL) {
+      instance->opencl_instance->OPS_opencl_core.constant[34] = clCreateBuffer(instance->opencl_instance->OPS_opencl_core.context, CL_MEM_READ_ONLY, dim*typeSize, NULL, &ret);
+      clSafeCall( ret );
+    }
+    //Write the new constant to the memory of the device
+    clSafeCall( clEnqueueWriteBuffer(instance->opencl_instance->OPS_opencl_core.command_queue, instance->opencl_instance->OPS_opencl_core.constant[34], CL_TRUE, 0, dim*typeSize, (void*) dat, 0, NULL, NULL) );
     clSafeCall( clFlush(instance->opencl_instance->OPS_opencl_core.command_queue) );
     clSafeCall( clFinish(instance->opencl_instance->OPS_opencl_core.command_queue) );
   }
@@ -457,9 +469,9 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
 #include "opensbliblock00Kernel022_opencl_kernel.cpp"
 #include "opensbliblock00Kernel020_opencl_kernel.cpp"
 #include "opensbliblock00Kernel021_opencl_kernel.cpp"
-#include "opensbliblock00Kernel010_opencl_kernel.cpp"
+#include "opensbliblock00Kernel008_opencl_kernel.cpp"
 #include "opensbliblock00Kernel015_opencl_kernel.cpp"
-#include "opensbliblock00Kernel009_opencl_kernel.cpp"
+#include "opensbliblock00Kernel010_opencl_kernel.cpp"
 #include "opensbliblock00Kernel018_opencl_kernel.cpp"
 #include "opensbliblock00Kernel019_opencl_kernel.cpp"
 #include "opensbliblock00Kernel006_opencl_kernel.cpp"

@@ -32,6 +32,7 @@ extern double gama;
 extern double gamma_m1;
 extern double inv2Delta0block0;
 extern double inv2gamma_m1;
+extern double inv2uref;
 extern double invDelta0block0;
 extern double invMN;
 extern double invMN2;

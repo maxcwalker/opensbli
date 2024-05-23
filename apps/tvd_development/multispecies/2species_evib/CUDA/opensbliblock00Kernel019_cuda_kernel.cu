@@ -10,7 +10,7 @@ __device__
 void opensbliblock00Kernel019_gpu(const ACC<double> &T_B0,
   ACC<double> &eveqN2_B0)
 {
-   eveqN2_B0(0) = Rhat*invMN2*invuref*thetavN2/(-1.0 + exp(thetavN2/T_B0(0)));
+   eveqN2_B0(0) = Rhat*invMN2*inv2uref*thetavN2/(-1.0 + exp(thetavN2/T_B0(0)));
 
 }
 

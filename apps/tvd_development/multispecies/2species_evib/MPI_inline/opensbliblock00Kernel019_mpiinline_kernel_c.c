@@ -19,7 +19,7 @@ void opensbliblock00Kernel019_c_wrapper(
     const ptr_double T_B0 = { T_B0_p + n_x*1};
     ptr_double eveqN2_B0 = { eveqN2_B0_p + n_x*1};
     
-   OPS_ACC(eveqN2_B0, 0) = Rhat*invMN2*invuref*thetavN2/(-1.0 + exp(thetavN2/OPS_ACC(T_B0, 0)));
+   OPS_ACC(eveqN2_B0, 0) = Rhat*invMN2*inv2uref*thetavN2/(-1.0 + exp(thetavN2/OPS_ACC(T_B0, 0)));
 
 
   }

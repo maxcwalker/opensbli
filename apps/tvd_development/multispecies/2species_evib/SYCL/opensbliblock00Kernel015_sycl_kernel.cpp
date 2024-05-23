@@ -115,7 +115,7 @@ void ops_par_loop_opensbliblock00Kernel015_execute(ops_kernel_descriptor *desc) 
         //USER CODE
         if (n_x < end_0) {
           
-    T_B0(0) = (-0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) - 1.0e-6*dhN_sycl[0]*invMN_sycl[0]*rhoN_B0(0) +
+    T_B0(0) = (-0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) - 1.0e-8*dhN_sycl[0]*invMN_sycl[0]*rhoN_B0(0) +
       rhoE_B0(0))*invRhat_sycl[0]/(invMN_sycl[0]*rhoN_B0(0) + invMN2_sycl[0]*rhoN2_B0(0));
 
 

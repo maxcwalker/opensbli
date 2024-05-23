@@ -14,14 +14,14 @@ from sympy import exp
 input_dict = {
     "gama"                 : "1.4", 
     "Re"                   : "1.0",
-    "dt"                   : "0.0002", 
-    "niter"                : "800",#ceil(0.2/0.0002)",
-    "block0np0"            : "200", 
+    "dt"                   : "0.00002", 
+    "niter"                : "ceil(0.2/0.00003)",#ceil(0.2/0.0002)",
+    "block0np0"            : "2000", 
     "Delta0block0"         : "1.0/(block0np0-1)",
     "eps"                  : "1.0e-16",
     "inv_rfact0_block0"  : "1.0/Delta0block0",
     "lambda0_TVD"          : "dt/Delta0block0", 
-    "kappa_TVD"           : "1.5",
+    "kappa_TVD"           : "0.6",
     "MN"                   : "14.0",    
     "MN2"                  : "28.0",
     "dhN"                   : "112.951",
@@ -34,7 +34,7 @@ input_dict = {
     "Tref"                    : "600",
     "rhoref"                : "1.225",
     "p_r"                  : "101325.0",
-    "kappa"                 : "1.4", #completely made up! Just for testing
+    "kappa"                 : "0.3", #completely made up! Just for testing
 }
 
 constants = input_dict.keys()

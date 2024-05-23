@@ -49,6 +49,8 @@ cl::sycl::buffer<double,1> *inv2Delta0block0_p=nullptr;
 extern double inv2Delta0block0;
 cl::sycl::buffer<double,1> *inv2gamma_m1_p=nullptr;
 extern double inv2gamma_m1;
+cl::sycl::buffer<double,1> *inv2uref_p=nullptr;
+extern double inv2uref;
 cl::sycl::buffer<double,1> *invDelta0block0_p=nullptr;
 extern double invDelta0block0;
 cl::sycl::buffer<double,1> *invMN_p=nullptr;
@@ -229,6 +231,14 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     }
   }
   else
+  if (!strcmp(name,"inv2uref")) {
+    if (inv2uref_p == nullptr) inv2uref_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
+    auto accessor = (*inv2uref_p).get_access<cl::sycl::access::mode::write>();
+    for ( int d=0; d<dim; d++ ){
+      accessor[d] = ((double*)dat)[d];
+    }
+  }
+  else
   if (!strcmp(name,"invDelta0block0")) {
     if (invDelta0block0_p == nullptr) invDelta0block0_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
     auto accessor = (*invDelta0block0_p).get_access<cl::sycl::access::mode::write>();
@@ -366,9 +376,9 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
 #include "opensbliblock00Kernel022_sycl_kernel.cpp"
 #include "opensbliblock00Kernel020_sycl_kernel.cpp"
 #include "opensbliblock00Kernel021_sycl_kernel.cpp"
-#include "opensbliblock00Kernel010_sycl_kernel.cpp"
+#include "opensbliblock00Kernel008_sycl_kernel.cpp"
 #include "opensbliblock00Kernel015_sycl_kernel.cpp"
-#include "opensbliblock00Kernel009_sycl_kernel.cpp"
+#include "opensbliblock00Kernel010_sycl_kernel.cpp"
 #include "opensbliblock00Kernel018_sycl_kernel.cpp"
 #include "opensbliblock00Kernel019_sycl_kernel.cpp"
 #include "opensbliblock00Kernel006_sycl_kernel.cpp"

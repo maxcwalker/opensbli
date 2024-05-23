@@ -82,6 +82,10 @@ int size, char *dat, char const *name){
     inv2gamma_m1 = *(double*)dat;
   }
   else
+  if (!strcmp(name,"inv2uref")) {
+    inv2uref = *(double*)dat;
+  }
+  else
   if (!strcmp(name,"invDelta0block0")) {
     invDelta0block0 = *(double*)dat;
   }
@@ -155,9 +159,9 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel022_openacc_kernel.cpp"
 #include "opensbliblock00Kernel020_openacc_kernel.cpp"
 #include "opensbliblock00Kernel021_openacc_kernel.cpp"
-#include "opensbliblock00Kernel010_openacc_kernel.cpp"
+#include "opensbliblock00Kernel008_openacc_kernel.cpp"
 #include "opensbliblock00Kernel015_openacc_kernel.cpp"
-#include "opensbliblock00Kernel009_openacc_kernel.cpp"
+#include "opensbliblock00Kernel010_openacc_kernel.cpp"
 #include "opensbliblock00Kernel018_openacc_kernel.cpp"
 #include "opensbliblock00Kernel019_openacc_kernel.cpp"
 #include "opensbliblock00Kernel006_openacc_kernel.cpp"

@@ -33,6 +33,7 @@ __constant__ double gama;
 __constant__ double gamma_m1;
 __constant__ double inv2Delta0block0;
 __constant__ double inv2gamma_m1;
+__constant__ double inv2uref;
 __constant__ double invDelta0block0;
 __constant__ double invMN;
 __constant__ double invMN2;
@@ -127,6 +128,10 @@ int size, char *dat, char const *name){
     cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(inv2gamma_m1, dat, dim*size));
   }
   else
+  if (!strcmp(name,"inv2uref")) {
+    cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(inv2uref, dat, dim*size));
+  }
+  else
   if (!strcmp(name,"invDelta0block0")) {
     cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(invDelta0block0, dat, dim*size));
   }
@@ -201,9 +206,9 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel022_cuda_kernel.cu"
 #include "opensbliblock00Kernel020_cuda_kernel.cu"
 #include "opensbliblock00Kernel021_cuda_kernel.cu"
-#include "opensbliblock00Kernel010_cuda_kernel.cu"
+#include "opensbliblock00Kernel008_cuda_kernel.cu"
 #include "opensbliblock00Kernel015_cuda_kernel.cu"
-#include "opensbliblock00Kernel009_cuda_kernel.cu"
+#include "opensbliblock00Kernel010_cuda_kernel.cu"
 #include "opensbliblock00Kernel018_cuda_kernel.cu"
 #include "opensbliblock00Kernel019_cuda_kernel.cu"
 #include "opensbliblock00Kernel006_cuda_kernel.cu"

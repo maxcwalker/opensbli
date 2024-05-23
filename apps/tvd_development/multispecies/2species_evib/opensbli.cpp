@@ -13,31 +13,32 @@ ops_init(argc,argv,1);
 // Set restart to 1 to restart the simulation from HDF5 file
 restart = 0;
 // User defined constant values
-block0np0 = 200;
+block0np0 = 2000;
 Delta0block0 = 1.0/(block0np0-1);
-niter = 800;
+niter = ceil(0.2/0.00003);
 double rkB[] = {0.924574112262461, 0.287712943868770, 0.626538293270800};
 double rkA[] = {0.0, -2.91549395770192, 0.0};
-dt = 0.0002;
+dt = 0.00002;
 Rhat = 8314.3;
 HDF5_timing = 0;
 delta_TVD = 0.500000000000000;
 eps_TVD = 1.00000000000000e-8;
-kappa_TVD = 1.5;
+kappa_TVD = 0.6;
 gama = 1.4;
 gamma_m1 = -1 + gama;
+thetavN2 = 3390.0;
+uref = 340;
 cN = 0.05;
 cN2 = 0.95;
 MN = 14.0;
-uref = 340;
-dhN = 112.951;
-thetavN2 = 3390.0;
 MN2 = 28.0;
-Re = 1.0;
-kappa = 1.4;
+dhN = 112.951;
 Lref = 1.0;
+Re = 1.0;
+kappa = 0.3;
 inv2Delta0block0 = 1.0/(Delta0block0*Delta0block0);
 inv2gamma_m1 = 1.0/(gamma_m1*gamma_m1);
+inv2uref = 1.0/(uref*uref);
 invDelta0block0 = 1.0/(Delta0block0);
 invMN = 1.0/(MN);
 invMN2 = 1.0/(MN2);
@@ -65,6 +66,7 @@ ops_decl_const("gama" , 1, "double", &gama);
 ops_decl_const("gamma_m1" , 1, "double", &gamma_m1);
 ops_decl_const("inv2Delta0block0" , 1, "double", &inv2Delta0block0);
 ops_decl_const("inv2gamma_m1" , 1, "double", &inv2gamma_m1);
+ops_decl_const("inv2uref" , 1, "double", &inv2uref);
 ops_decl_const("invDelta0block0" , 1, "double", &invDelta0block0);
 ops_decl_const("invMN" , 1, "double", &invMN);
 ops_decl_const("invMN2" , 1, "double", &invMN2);
@@ -161,8 +163,8 @@ ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
 for(stage=0; stage<=2; stage++)
 {
-int iteration_range_10_block0[] = {-2, block0np0 + 2};
-ops_par_loop(opensbliblock00Kernel010, "CRu0_B0", opensbliblock00, 1, iteration_range_10_block0,
+int iteration_range_8_block0[] = {-2, block0np0 + 2};
+ops_par_loop(opensbliblock00Kernel008, "CRu0_B0", opensbliblock00, 1, iteration_range_8_block0,
 ops_arg_dat(rhoN2_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(rhoN_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_READ),
@@ -176,8 +178,8 @@ ops_arg_dat(rhoN_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(u0_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(T_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
-int iteration_range_9_block0[] = {-2, block0np0 + 2};
-ops_par_loop(opensbliblock00Kernel009, "CRp_B0", opensbliblock00, 1, iteration_range_9_block0,
+int iteration_range_10_block0[] = {-2, block0np0 + 2};
+ops_par_loop(opensbliblock00Kernel010, "CRp_B0", opensbliblock00, 1, iteration_range_10_block0,
 ops_arg_dat(T_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(rhoN2_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(rhoN_B0, 1, stencil_0_00_1, "double", OPS_READ),

@@ -101,7 +101,7 @@ void ops_par_loop_opensbliblock00Kernel015_execute(ops_kernel_descriptor *desc) 
     const ACC<double> u0_B0(u0_B0_p + n_x*1);
     ACC<double> T_B0(T_B0_p + n_x*1);
     
-    T_B0(0) = (-0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) - 1.0e-6*dhN*invMN*rhoN_B0(0) +
+    T_B0(0) = (-0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) - 1.0e-8*dhN*invMN*rhoN_B0(0) +
       rhoE_B0(0))*invRhat/(invMN*rhoN_B0(0) + invMN2*rhoN2_B0(0));
 
 

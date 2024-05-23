@@ -12,7 +12,7 @@ inline
 void opensbliblock00Kernel019(const ptr_double T_B0,
   ptr_double eveqN2_B0)
 {
-   OPS_ACC(eveqN2_B0, 0) = Rhat*invMN2*invuref*thetavN2/(-1.0 + exp(thetavN2/OPS_ACC(T_B0, 0)));
+   OPS_ACC(eveqN2_B0, 0) = Rhat*invMN2*inv2uref*thetavN2/(-1.0 + exp(thetavN2/OPS_ACC(T_B0, 0)));
 
 }
 

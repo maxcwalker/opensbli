@@ -75,8 +75,8 @@ class Plot(plotFunctions):
         f, group1 = self.read_file(fname)
         rhoN, rhoN2, u, p, x, T, p_calced = self.extract_flow_variables(group1)
         rho = rhoN + rhoN2
-        rhoN = rhoN/rho
-        rhoN2 = rhoN2/rho
+        # rhoN = rhoN/rho
+        # rhoN2 = rhoN2/rho
 
         x_vars, variables = [x,x,x,x, x], [rhoN,rhoN2, p, rho, T]
         names = ['rhoN', 'rhoN2', 'p','rho', 'T']

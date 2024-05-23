@@ -21,6 +21,7 @@ double gama;
 double gamma_m1;
 double inv2Delta0block0;
 double inv2gamma_m1;
+double inv2uref;
 double invDelta0block0;
 double invMN;
 double invMN2;

@@ -130,7 +130,7 @@ ACC<double> &rhou0_B0)
 
 }
 
- void opensbliblock00Kernel010(const ACC<double> &rhoN2_B0, const ACC<double> &rhoN_B0, const ACC<double> &rhou0_B0,
+ void opensbliblock00Kernel008(const ACC<double> &rhoN2_B0, const ACC<double> &rhoN_B0, const ACC<double> &rhou0_B0,
 ACC<double> &u0_B0)
 {
    u0_B0(0) = rhou0_B0(0)/(rhoN_B0(0) + rhoN2_B0(0));
@@ -140,12 +140,12 @@ ACC<double> &u0_B0)
  void opensbliblock00Kernel015(const ACC<double> &rhoE_B0, const ACC<double> &rhoN2_B0, const ACC<double> &rhoN_B0,
 const ACC<double> &u0_B0, ACC<double> &T_B0)
 {
-    T_B0(0) = (-0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) - 1.0e-6*dhN*invMN*rhoN_B0(0) +
+    T_B0(0) = (-0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) - 1.0e-8*dhN*invMN*rhoN_B0(0) +
       rhoE_B0(0))*invRhat/(invMN*rhoN_B0(0) + invMN2*rhoN2_B0(0));
 
 }
 
- void opensbliblock00Kernel009(const ACC<double> &T_B0, const ACC<double> &rhoN2_B0, const ACC<double> &rhoN_B0,
+ void opensbliblock00Kernel010(const ACC<double> &T_B0, const ACC<double> &rhoN2_B0, const ACC<double> &rhoN_B0,
 ACC<double> &p_B0)
 {
    p_B0(0) = (invMN*rhoN_B0(0) + invMN2*rhoN2_B0(0))*Rhat*T_B0(0);
@@ -163,7 +163,7 @@ ACC<double> &ptauN2_B0)
 
 void opensbliblock00Kernel019(const ACC<double> &T_B0, ACC<double> &eveqN2_B0)
 {
-   eveqN2_B0(0) = Rhat*invMN2*invuref*thetavN2/(-1.0 + exp(thetavN2/T_B0(0)));
+   eveqN2_B0(0) = Rhat*invMN2*inv2uref*thetavN2/(-1.0 + exp(thetavN2/T_B0(0)));
 
 }
 
@@ -707,13 +707,13 @@ ACC<double> &u0_B0, const ACC<double> &u_B0, ACC<double> &wk0_B0, ACC<double> &w
 
    AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(-1));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(-1));
-
    AVG_0_u = ((1.0/2.0))*(u_B0(0) + u_B0(-1));
 
-   AVG_0_a = ((1.0/2.0))*(a_B0(0) + a_B0(-1));
-
    AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(-1));
+
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(-1));
+
+   AVG_0_a = ((1.0/2.0))*(a_B0(0) + a_B0(-1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -784,13 +784,13 @@ ACC<double> &u0_B0, const ACC<double> &u_B0, ACC<double> &wk0_B0, ACC<double> &w
 
    AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(1));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(1));
-
    AVG_0_u = ((1.0/2.0))*(u_B0(0) + u_B0(1));
 
-   AVG_0_a = ((1.0/2.0))*(a_B0(0) + a_B0(1));
-
    AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(1));
+
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(1));
+
+   AVG_0_a = ((1.0/2.0))*(a_B0(0) + a_B0(1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -907,13 +907,13 @@ ACC<double> &u0_B0, const ACC<double> &u_B0, ACC<double> &wk0_B0, ACC<double> &w
 
    AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(1) + rhoN_B0(2));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(1) + rhoN2_B0(2));
-
    AVG_0_u = ((1.0/2.0))*(u_B0(1) + u_B0(2));
 
-   AVG_0_a = ((1.0/2.0))*(a_B0(1) + a_B0(2));
-
    AVG_0_u0 = ((1.0/2.0))*(u0_B0(1) + u0_B0(2));
+
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(1) + rhoN2_B0(2));
+
+   AVG_0_a = ((1.0/2.0))*(a_B0(1) + a_B0(2));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 

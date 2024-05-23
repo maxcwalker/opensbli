@@ -28,6 +28,7 @@ extern double gama;
 extern double gamma_m1;
 extern double inv2Delta0block0;
 extern double inv2gamma_m1;
+extern double inv2uref;
 extern double invDelta0block0;
 extern double invMN;
 extern double invMN2;
@@ -122,6 +123,10 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:inv2gamma_m1)
   }
   else
+  if (!strcmp(name,"inv2uref")) {
+    #pragma omp target enter data map(to:inv2uref)
+  }
+  else
   if (!strcmp(name,"invDelta0block0")) {
     #pragma omp target enter data map(to:invDelta0block0)
   }
@@ -195,9 +200,9 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel022_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel020_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel021_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel010_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel008_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel015_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel009_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel010_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel018_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel019_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel006_ompoffload_kernel.cpp"
