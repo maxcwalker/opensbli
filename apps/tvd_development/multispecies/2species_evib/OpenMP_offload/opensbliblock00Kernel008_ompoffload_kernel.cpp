@@ -27,12 +27,12 @@ void ops_par_loop_opensbliblock00Kernel008_execute(ops_kernel_descriptor *desc) 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,4,range,3)) return;
+  if (!ops_checkpointing_before(args,4,range,5)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,3,"opensbliblock00Kernel008");
-    block->instance->OPS_kernels[3].count++;
+    ops_timing_realloc(block->instance,5,"opensbliblock00Kernel008");
+    block->instance->OPS_kernels[5].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -63,16 +63,16 @@ void ops_par_loop_opensbliblock00Kernel008_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ rhoN2_B0_p = (double *)(args[0].data_d + base0);
+  double * __restrict__ T_B0_p = (double *)(args[0].data_d + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ rhoN_B0_p = (double *)(args[1].data_d + base1);
+  double * __restrict__ rhoN2_B0_p = (double *)(args[1].data_d + base1);
 
   int base2 = args[2].dat->base_offset;
-  double * __restrict__ rhou0_B0_p = (double *)(args[2].data_d + base2);
+  double * __restrict__ rhoN_B0_p = (double *)(args[2].data_d + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ u0_B0_p = (double *)(args[3].data_d + base3);
+  double * __restrict__ p_B0_p = (double *)(args[3].data_d + base3);
 
 
 
@@ -85,23 +85,23 @@ void ops_par_loop_opensbliblock00Kernel008_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[3].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[5].mpi_time += __t1-__t2;
   }
 
   #pragma omp target teams distribute parallel for collapse(1)
   for ( int n_x=start0; n_x<end0; n_x++ ){
+    const ACC<double> T_B0(T_B0_p + n_x*1);
     const ACC<double> rhoN2_B0(rhoN2_B0_p + n_x*1);
     const ACC<double> rhoN_B0(rhoN_B0_p + n_x*1);
-    const ACC<double> rhou0_B0(rhou0_B0_p + n_x*1);
-    ACC<double> u0_B0(u0_B0_p + n_x*1);
+    ACC<double> p_B0(p_B0_p + n_x*1);
     
-   u0_B0(0) = rhou0_B0(0)/(rhoN_B0(0) + rhoN2_B0(0));
+   p_B0(0) = (invMN*rhoN_B0(0) + invMN2*rhoN2_B0(0))*Rhat*T_B0(0);
 
 
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[3].time += __t2-__t1;
+    block->instance->OPS_kernels[5].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_device(args, 4);
@@ -111,11 +111,11 @@ void ops_par_loop_opensbliblock00Kernel008_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[3].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[3].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[3].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[3].transfer += ops_compute_transfer(dim, start, end, &arg2);
-    block->instance->OPS_kernels[3].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[5].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[5].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[5].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[5].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[5].transfer += ops_compute_transfer(dim, start, end, &arg3);
   }
 }
 
@@ -126,6 +126,6 @@ void ops_par_loop_opensbliblock00Kernel008(char const *name, ops_block block, in
   ops_arg args[4] = { arg0, arg1, arg2, arg3 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 4, 3, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel008_execute);
+  create_kerneldesc_and_enque(name, args, 4, 5, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel008_execute);
 }
 #endif

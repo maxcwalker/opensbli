@@ -15,7 +15,7 @@ restart = 0;
 // User defined constant values
 block0np0 = 2000;
 Delta0block0 = 1.0/(block0np0-1);
-niter = ceil(0.2/0.00003);
+niter = 2000;
 double rkB[] = {0.924574112262461, 0.287712943868770, 0.626538293270800};
 double rkA[] = {0.0, -2.91549395770192, 0.0};
 dt = 0.00002;
@@ -26,15 +26,15 @@ eps_TVD = 1.00000000000000e-8;
 kappa_TVD = 0.6;
 gama = 1.4;
 gamma_m1 = -1 + gama;
-thetavN2 = 3390.0;
+dhN = 112.951;
+MN = 14.0;
+cN2 = 0.95;
 uref = 340;
 cN = 0.05;
-cN2 = 0.95;
-MN = 14.0;
+thetavN2 = 3390.0;
 MN2 = 28.0;
-dhN = 112.951;
-Lref = 1.0;
 Re = 1.0;
+Lref = 1.0;
 kappa = 0.3;
 inv2Delta0block0 = 1.0/(Delta0block0*Delta0block0);
 inv2gamma_m1 = 1.0/(gamma_m1*gamma_m1);
@@ -163,8 +163,8 @@ ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
 for(stage=0; stage<=2; stage++)
 {
-int iteration_range_8_block0[] = {-2, block0np0 + 2};
-ops_par_loop(opensbliblock00Kernel008, "CRu0_B0", opensbliblock00, 1, iteration_range_8_block0,
+int iteration_range_9_block0[] = {-2, block0np0 + 2};
+ops_par_loop(opensbliblock00Kernel009, "CRu0_B0", opensbliblock00, 1, iteration_range_9_block0,
 ops_arg_dat(rhoN2_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(rhoN_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_READ),
@@ -178,8 +178,8 @@ ops_arg_dat(rhoN_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(u0_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(T_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
-int iteration_range_10_block0[] = {-2, block0np0 + 2};
-ops_par_loop(opensbliblock00Kernel010, "CRp_B0", opensbliblock00, 1, iteration_range_10_block0,
+int iteration_range_8_block0[] = {-2, block0np0 + 2};
+ops_par_loop(opensbliblock00Kernel008, "CRp_B0", opensbliblock00, 1, iteration_range_8_block0,
 ops_arg_dat(T_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(rhoN2_B0, 1, stencil_0_00_1, "double", OPS_READ),
 ops_arg_dat(rhoN_B0, 1, stencil_0_00_1, "double", OPS_READ),
