@@ -7,15 +7,6 @@ int base[] = {0};
 double* value = NULL;
 a_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "a_B0");
 }
-ops_dat ev_B0;
-{
-int halo_p[] = {5};
-int halo_m[] = {-5};
-int size[] = {block0np0};
-int base[] = {0};
-double* value = NULL;
-ev_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "ev_B0");
-}
 ops_dat eveqN2_B0;
 {
 int halo_p[] = {5};
@@ -87,6 +78,15 @@ int size[] = {block0np0};
 int base[] = {0};
 double* value = NULL;
 Residual4_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "Residual4_B0");
+}
+ops_dat rho_B0;
+{
+int halo_p[] = {5};
+int halo_m[] = {-5};
+int size[] = {block0np0};
+int base[] = {0};
+double* value = NULL;
+rho_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rho_B0");
 }
 ops_dat rhoE_B0;
 {
@@ -274,24 +274,6 @@ int size[] = {block0np0};
 int base[] = {0};
 double* value = NULL;
 wk2_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "wk2_B0");
-}
-ops_dat wk3_B0;
-{
-int halo_p[] = {5};
-int halo_m[] = {-5};
-int size[] = {block0np0};
-int base[] = {0};
-double* value = NULL;
-wk3_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "wk3_B0");
-}
-ops_dat wk4_B0;
-{
-int halo_p[] = {5};
-int halo_m[] = {-5};
-int size[] = {block0np0};
-int base[] = {0};
-double* value = NULL;
-wk4_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "wk4_B0");
 }
 ops_dat x0_B0;
 {

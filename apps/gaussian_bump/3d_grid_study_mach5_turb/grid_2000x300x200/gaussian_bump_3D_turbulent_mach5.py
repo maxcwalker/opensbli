@@ -291,8 +291,8 @@ block.set_block_boundaries(boundaries)
 
 # Monitor points - indexing is (x,y,z)
 if monitor:
-    Nx, Nz, L = symbols('block0np0 block0np2 L', **{'cls': ConstantObject})
-    Nx, Nz, L = 1500,200, 400.0
+    # Nx, Nz, L = symbols('block0np0 block0np2 L', **{'cls': ConstantObject})
+    Nx, Nz, L = 2000, 200, 400.0
     arrays = ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p']
     arrays += ['rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0']
     arrays = [block.location_dataset('%s' % dset) for dset in arrays]

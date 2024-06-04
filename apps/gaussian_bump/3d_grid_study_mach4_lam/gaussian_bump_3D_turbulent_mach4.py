@@ -45,7 +45,7 @@ input_dict = {
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
     "epsilon"              : "1.0e-30",
-    "tripA"                : "0.0",
+    "tripA"                : "0.00000001",
     "xts"                  : "50.0",
     "omega_0"              : "0.1",
     "omega_1"              : "0.2", 
@@ -71,8 +71,8 @@ values = input_dict.values()
 weno = True
 teno = False
 TVD = False
-slices = False
-stats = False
+slices = True
+stats = True
 monitor = True
 
 conservative=True

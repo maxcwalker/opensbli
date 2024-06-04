@@ -34,7 +34,7 @@ input_dict = {
     "Tref"                    : "600",
     "rhoref"                : "1.225",
     "p_r"                  : "101325.0",
-    "kappa"                 : "0.00000075", #completely made up! Just for testing
+    "kappa"                 : "0.00000075", 
 }
 
 constants = input_dict.keys()

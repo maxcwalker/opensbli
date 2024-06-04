@@ -11,12 +11,12 @@ int xdim3_opensbliblock00Kernel008;
 
 //user function
 inline 
- void opensbliblock00Kernel008(const ptr_double rhoN2_B0,
+ void opensbliblock00Kernel008(const ptr_double T_B0,
+  const ptr_double rhoN2_B0,
   const ptr_double rhoN_B0,
-  const ptr_double rhou0_B0,
-  ptr_double u0_B0)
+  ptr_double p_B0)
 {
-   OPS_ACC(u0_B0, 0) = OPS_ACC(rhou0_B0, 0)/(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN2_B0, 0));
+   OPS_ACC(p_B0, 0) = (invMN*OPS_ACC(rhoN_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0))*Rhat*OPS_ACC(T_B0, 0);
 
 }
 
@@ -36,6 +36,9 @@ void opensbliblock00Kernel008_c_wrapper(
     const ptr_double ptr1 = {  p_a1 + n_x*1*1 };
     const ptr_double ptr2 = {  p_a2 + n_x*1*1 };
     ptr_double ptr3 = {  p_a3 + n_x*1*1 };
-    opensbliblock00Kernel008( ptr0, ptr1, ptr2, ptr3);
+    opensbliblock00Kernel008( ptr0,
+          ptr1,ptr2,
+          ptr3 );
+
   }
 }

@@ -8,7 +8,6 @@ int xdim2_opensbliblock00Kernel002;
 int xdim3_opensbliblock00Kernel002;
 int xdim4_opensbliblock00Kernel002;
 int xdim5_opensbliblock00Kernel002;
-int xdim6_opensbliblock00Kernel002;
 
 
 //user function
@@ -17,8 +16,7 @@ int xdim6_opensbliblock00Kernel002;
 
 void opensbliblock00Kernel002_c_wrapper(
   double * restrict rhoE_B0_p,
-  double * restrict rhoN2_B0_p,
-  double * restrict rhoN_B0_p,
+  double * restrict rho_B0_p,
   double * restrict rhou0_B0_p,
   double * restrict a_B0_p,
   double * restrict u0_B0_p,
@@ -27,21 +25,20 @@ void opensbliblock00Kernel002_c_wrapper(
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
     const ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
-    const ptr_double rhoN2_B0 = { rhoN2_B0_p + n_x*1};
-    const ptr_double rhoN_B0 = { rhoN_B0_p + n_x*1};
+    const ptr_double rho_B0 = { rho_B0_p + n_x*1};
     const ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
     ptr_double a_B0 = { a_B0_p + n_x*1};
     ptr_double u0_B0 = { u0_B0_p + n_x*1};
     ptr_double p_B0 = { p_B0_p + n_x*1};
     
    double inv_rho = 0.0;
-   inv_rho = 1.0/(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN2_B0, 0));
+   inv_rho = 1.0/OPS_ACC(rho_B0, 0);
 
    OPS_ACC(u0_B0, 0) = OPS_ACC(rhou0_B0, 0)*inv_rho;
 
    OPS_ACC(p_B0, 0) = (-1 + gama)*(-0.5*(OPS_ACC(rhou0_B0, 0)*OPS_ACC(rhou0_B0, 0))*inv_rho + OPS_ACC(rhoE_B0, 0));
 
-   OPS_ACC(a_B0, 0) = sqrt(gama*OPS_ACC(p_B0, 0)*inv_rho);
+   OPS_ACC(a_B0, 0) = sqrt((gama*OPS_ACC(p_B0, 0)*inv_rho));
 
 
   }

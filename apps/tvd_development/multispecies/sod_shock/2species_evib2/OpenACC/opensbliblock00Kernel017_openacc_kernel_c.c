@@ -28,6 +28,8 @@ void opensbliblock00Kernel017_c_wrapper(
   for ( int n_x=0; n_x<x_size; n_x++ ){
     const ptr_double ptr0 = {  p_a0 + n_x*1*1 };
     ptr_double ptr1 = {  p_a1 + n_x*1*1 };
-    opensbliblock00Kernel017( ptr0, ptr1);
+    opensbliblock00Kernel017( ptr0,
+          ptr1 );
+
   }
 }
