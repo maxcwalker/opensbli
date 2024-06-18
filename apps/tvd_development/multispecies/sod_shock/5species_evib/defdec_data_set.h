@@ -565,15 +565,6 @@ double* value = NULL;
 x0_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "x0_B0");
 }
 }
-ops_dat YN2_B0;
-{
-int halo_p[] = {5};
-int halo_m[] = {-5};
-int size[] = {block0np0};
-int base[] = {0};
-double* value = NULL;
-YN2_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "YN2_B0");
-}
 ops_dat yN2_B0;
 {
 int halo_p[] = {5};
@@ -582,6 +573,15 @@ int size[] = {block0np0};
 int base[] = {0};
 double* value = NULL;
 yN2_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "yN2_B0");
+}
+ops_dat YN2_B0;
+{
+int halo_p[] = {5};
+int halo_m[] = {-5};
+int size[] = {block0np0};
+int base[] = {0};
+double* value = NULL;
+YN2_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "YN2_B0");
 }
 ops_dat yN_B0;
 {

@@ -58,6 +58,7 @@ void ops_par_loop_opensbliblock00Kernel020_execute(ops_kernel_descriptor *desc) 
   #endif
 
 
+
   //initialize global variable with the dimension of dats
 
   //set up initial pointers and exchange halos if necessary
@@ -105,7 +106,7 @@ void ops_par_loop_opensbliblock00Kernel020_execute(ops_kernel_descriptor *desc) 
    double p0 = 0.0;
    double r = 0.0;
    double u0 = 0.0;
-   r = 0.200000000000000;
+   r = 0.125000000000000;
 
    u0 = 0.0;
 
@@ -115,7 +116,7 @@ void ops_par_loop_opensbliblock00Kernel020_execute(ops_kernel_descriptor *desc) 
 
    cN = 0.0500000000000000;
 
-   T0 = 0.5*invRhat;
+   T0 = 0.8*invRhat;
 
    rhoN_B0(0) = cN*r;
 
@@ -125,7 +126,7 @@ void ops_par_loop_opensbliblock00Kernel020_execute(ops_kernel_descriptor *desc) 
 
    evN2 = Rhat*thetavN2/(MN2*(-1.0 + exp(thetavN2/T0)));
 
-   rhoev_B0(0) = 0.00100000000000000;
+   rhoev_B0(0) = Rhat*thetavN2*(cN*r/MN + cN2*r/MN2)/(MN2*Tref*(uref*uref)*(-1.0 + exp(thetavN2/(T0*Tref))));
 
    rhoE_B0(0) = (u0*u0)*(0.5*cN*r + 0.5*cN2*r) + p0*(1.5*cN*r/MN + 2.5*cN2*r/MN2)/(cN*r/MN + cN2*r/MN2);
 
@@ -161,35 +162,9 @@ void ops_par_loop_opensbliblock00Kernel020_execute(ops_kernel_descriptor *desc) 
 void ops_par_loop_opensbliblock00Kernel020(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
  ops_arg arg4) {
-  ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
-  desc->name = name;
-  desc->block = block;
-  desc->dim = dim;
-  desc->device = 0;
-  desc->index = 2;
-  desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 2;
-  for ( int i=0; i<2; i++ ){
-    desc->range[i] = range[i];
-    desc->orig_range[i] = range[i];
-    desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
-  }
-  desc->nargs = 5;
-  desc->args = (ops_arg*)ops_malloc(5*sizeof(ops_arg));
-  desc->args[0] = arg0;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
-  desc->args[1] = arg1;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
-  desc->args[2] = arg2;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg2.dat->index;
-  desc->args[3] = arg3;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg3.dat->index;
-  desc->args[4] = arg4;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg4.dat->index;
-  desc->function = ops_par_loop_opensbliblock00Kernel020_execute;
-  if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,2,"opensbliblock00Kernel020");
-  }
-  ops_enqueue_kernel(desc);
+  ops_arg args[5] = { arg0, arg1, arg2, arg3, arg4 };
+
+  //create kernel descriptor and pass it to ops_enqueue_kernel
+  create_kerneldesc_and_enque(name, args, 5, 2, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel020_execute);
 }
 #endif

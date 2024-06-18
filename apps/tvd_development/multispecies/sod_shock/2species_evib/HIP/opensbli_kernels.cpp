@@ -25,7 +25,6 @@ __constant__ int block0np0;
 __constant__ double cN;
 __constant__ double cN2;
 __constant__ double delta_TVD;
-__constant__ double dhN;
 __constant__ double dt;
 __constant__ double eps_TVD;
 __constant__ double gama;
@@ -97,10 +96,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"delta_TVD")) {
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(delta_TVD), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"dhN")) {
-    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(dhN), dat, dim*size));
   }
   else
   if (!strcmp(name,"dt")) {
@@ -205,9 +200,9 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel022_hip_kernel.cpp"
 #include "opensbliblock00Kernel020_hip_kernel.cpp"
 #include "opensbliblock00Kernel021_hip_kernel.cpp"
-#include "opensbliblock00Kernel009_hip_kernel.cpp"
+#include "opensbliblock00Kernel010_hip_kernel.cpp"
 #include "opensbliblock00Kernel015_hip_kernel.cpp"
-#include "opensbliblock00Kernel008_hip_kernel.cpp"
+#include "opensbliblock00Kernel009_hip_kernel.cpp"
 #include "opensbliblock00Kernel018_hip_kernel.cpp"
 #include "opensbliblock00Kernel019_hip_kernel.cpp"
 #include "opensbliblock00Kernel006_hip_kernel.cpp"

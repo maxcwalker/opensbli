@@ -10,6 +10,8 @@ int xdim4_opensbliblock00Kernel005;
 int xdim5_opensbliblock00Kernel005;
 int xdim6_opensbliblock00Kernel005;
 int xdim7_opensbliblock00Kernel005;
+int xdim8_opensbliblock00Kernel005;
+int xdim9_opensbliblock00Kernel005;
 
 
 //user function
@@ -21,9 +23,11 @@ void opensbliblock00Kernel005_c_wrapper(
   double * restrict wk1_B0_p,
   double * restrict wk2_B0_p,
   double * restrict wk3_B0_p,
+  double * restrict wk4_B0_p,
   double * restrict rhoE_B0_p,
   double * restrict rhoN2_B0_p,
   double * restrict rhoN_B0_p,
+  double * restrict rhoev_B0_p,
   double * restrict rhou0_B0_p,
   int * restrict idx,
   int arg_idx0, 
@@ -35,9 +39,11 @@ void opensbliblock00Kernel005_c_wrapper(
     const ptr_double wk1_B0 = { wk1_B0_p + n_x*1};
     const ptr_double wk2_B0 = { wk2_B0_p + n_x*1};
     const ptr_double wk3_B0 = { wk3_B0_p + n_x*1};
+    const ptr_double wk4_B0 = { wk4_B0_p + n_x*1};
     ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
     ptr_double rhoN2_B0 = { rhoN2_B0_p + n_x*1};
     ptr_double rhoN_B0 = { rhoN_B0_p + n_x*1};
+    ptr_double rhoev_B0 = { rhoev_B0_p + n_x*1};
     ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
     
    double Grid_0 = 0.0;
@@ -52,7 +58,9 @@ void opensbliblock00Kernel005_c_wrapper(
 
    OPS_ACC(rhou0_B0, 0) = -(-OPS_ACC(wk2_B0, -1) + OPS_ACC(wk2_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhou0_B0, 0);
 
-   OPS_ACC(rhoE_B0, 0) = -(-OPS_ACC(wk3_B0, -1) + OPS_ACC(wk3_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhoE_B0, 0);
+   OPS_ACC(rhoev_B0, 0) = -(-OPS_ACC(wk3_B0, -1) + OPS_ACC(wk3_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhoev_B0, 0);
+
+   OPS_ACC(rhoE_B0, 0) = -(-OPS_ACC(wk4_B0, -1) + OPS_ACC(wk4_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhoE_B0, 0);
 
 
   }

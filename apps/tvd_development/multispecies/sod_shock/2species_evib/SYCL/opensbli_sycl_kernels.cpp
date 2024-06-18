@@ -35,8 +35,6 @@ cl::sycl::buffer<double,1> *cN2_p=nullptr;
 extern double cN2;
 cl::sycl::buffer<double,1> *delta_TVD_p=nullptr;
 extern double delta_TVD;
-cl::sycl::buffer<double,1> *dhN_p=nullptr;
-extern double dhN;
 cl::sycl::buffer<double,1> *dt_p=nullptr;
 extern double dt;
 cl::sycl::buffer<double,1> *eps_TVD_p=nullptr;
@@ -170,14 +168,6 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
   if (!strcmp(name,"delta_TVD")) {
     if (delta_TVD_p == nullptr) delta_TVD_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
     auto accessor = (*delta_TVD_p).get_access<cl::sycl::access::mode::write>();
-    for ( int d=0; d<dim; d++ ){
-      accessor[d] = ((double*)dat)[d];
-    }
-  }
-  else
-  if (!strcmp(name,"dhN")) {
-    if (dhN_p == nullptr) dhN_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
-    auto accessor = (*dhN_p).get_access<cl::sycl::access::mode::write>();
     for ( int d=0; d<dim; d++ ){
       accessor[d] = ((double*)dat)[d];
     }
@@ -376,9 +366,9 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
 #include "opensbliblock00Kernel022_sycl_kernel.cpp"
 #include "opensbliblock00Kernel020_sycl_kernel.cpp"
 #include "opensbliblock00Kernel021_sycl_kernel.cpp"
-#include "opensbliblock00Kernel009_sycl_kernel.cpp"
+#include "opensbliblock00Kernel010_sycl_kernel.cpp"
 #include "opensbliblock00Kernel015_sycl_kernel.cpp"
-#include "opensbliblock00Kernel008_sycl_kernel.cpp"
+#include "opensbliblock00Kernel009_sycl_kernel.cpp"
 #include "opensbliblock00Kernel018_sycl_kernel.cpp"
 #include "opensbliblock00Kernel019_sycl_kernel.cpp"
 #include "opensbliblock00Kernel006_sycl_kernel.cpp"

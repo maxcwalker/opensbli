@@ -18,8 +18,32 @@ int size, char *dat, char const *name){
     HDF5_timing = *(int*)dat;
   }
   else
+  if (!strcmp(name,"MN")) {
+    MN = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"MN2")) {
+    MN2 = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"Rhat")) {
+    Rhat = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"Tref")) {
+    Tref = *(double*)dat;
+  }
+  else
   if (!strcmp(name,"block0np0")) {
     block0np0 = *(int*)dat;
+  }
+  else
+  if (!strcmp(name,"cN")) {
+    cN = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"cN2")) {
+    cN2 = *(double*)dat;
   }
   else
   if (!strcmp(name,"delta_TVD")) {
@@ -42,12 +66,32 @@ int size, char *dat, char const *name){
     gamma_m1 = *(double*)dat;
   }
   else
+  if (!strcmp(name,"inv2Delta0block0")) {
+    inv2Delta0block0 = *(double*)dat;
+  }
+  else
   if (!strcmp(name,"inv2gamma_m1")) {
     inv2gamma_m1 = *(double*)dat;
   }
   else
+  if (!strcmp(name,"inv2uref")) {
+    inv2uref = *(double*)dat;
+  }
+  else
   if (!strcmp(name,"invDelta0block0")) {
     invDelta0block0 = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"invMN")) {
+    invMN = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"invMN2")) {
+    invMN2 = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"invRhat")) {
+    invRhat = *(double*)dat;
   }
   else
   if (!strcmp(name,"invdelta_TVD")) {
@@ -60,6 +104,10 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"invgamma_m1")) {
     invgamma_m1 = *(double*)dat;
+  }
+  else
+  if (!strcmp(name,"kappa")) {
+    kappa = *(double*)dat;
   }
   else
   if (!strcmp(name,"kappa_TVD")) {
@@ -78,18 +126,24 @@ int size, char *dat, char const *name){
     start_iter = *(int*)dat;
   }
   else
+  if (!strcmp(name,"uref")) {
+    uref = *(double*)dat;
+  }
+  else
   {
     throw OPSException(OPS_RUNTIME_ERROR, "error: unknown const name");
   }
 }
 
 //user kernel files
+#include "opensbliblock00Kernel018_openacc_kernel.cpp"
 #include "opensbliblock00Kernel016_openacc_kernel.cpp"
-#include "opensbliblock00Kernel014_openacc_kernel.cpp"
-#include "opensbliblock00Kernel015_openacc_kernel.cpp"
-#include "opensbliblock00Kernel006_openacc_kernel.cpp"
-#include "opensbliblock00Kernel013_openacc_kernel.cpp"
 #include "opensbliblock00Kernel017_openacc_kernel.cpp"
+#include "opensbliblock00Kernel008_openacc_kernel.cpp"
+#include "opensbliblock00Kernel009_openacc_kernel.cpp"
+#include "opensbliblock00Kernel006_openacc_kernel.cpp"
+#include "opensbliblock00Kernel015_openacc_kernel.cpp"
+#include "opensbliblock00Kernel019_openacc_kernel.cpp"
 #include "opensbliblock00Kernel002_openacc_kernel.cpp"
 #include "opensbliblock00Kernel003_openacc_kernel.cpp"
 #include "opensbliblock00Kernel004_openacc_kernel.cpp"

@@ -26,7 +26,6 @@ __constant__ int block0np0;
 __constant__ double cN;
 __constant__ double cN2;
 __constant__ double delta_TVD;
-__constant__ double dhN;
 __constant__ double dt;
 __constant__ double eps_TVD;
 __constant__ double gama;
@@ -98,10 +97,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"delta_TVD")) {
     cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(delta_TVD, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"dhN")) {
-    cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(dhN, dat, dim*size));
   }
   else
   if (!strcmp(name,"dt")) {
@@ -206,9 +201,9 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel022_cuda_kernel.cu"
 #include "opensbliblock00Kernel020_cuda_kernel.cu"
 #include "opensbliblock00Kernel021_cuda_kernel.cu"
-#include "opensbliblock00Kernel009_cuda_kernel.cu"
+#include "opensbliblock00Kernel010_cuda_kernel.cu"
 #include "opensbliblock00Kernel015_cuda_kernel.cu"
-#include "opensbliblock00Kernel008_cuda_kernel.cu"
+#include "opensbliblock00Kernel009_cuda_kernel.cu"
 #include "opensbliblock00Kernel018_cuda_kernel.cu"
 #include "opensbliblock00Kernel019_cuda_kernel.cu"
 #include "opensbliblock00Kernel006_cuda_kernel.cu"

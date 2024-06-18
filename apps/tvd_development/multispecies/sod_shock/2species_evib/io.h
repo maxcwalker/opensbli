@@ -10,7 +10,6 @@ ops_write_const_hdf5("block0np0", 1, "int", (char*)&block0np0, filename);
 ops_write_const_hdf5("cN", 1, "double", (char*)&cN, filename);
 ops_write_const_hdf5("cN2", 1, "double", (char*)&cN2, filename);
 ops_write_const_hdf5("delta_TVD", 1, "double", (char*)&delta_TVD, filename);
-ops_write_const_hdf5("dhN", 1, "double", (char*)&dhN, filename);
 ops_write_const_hdf5("dt", 1, "double", (char*)&dt, filename);
 ops_write_const_hdf5("eps_TVD", 1, "double", (char*)&eps_TVD, filename);
 ops_write_const_hdf5("gama", 1, "double", (char*)&gama, filename);

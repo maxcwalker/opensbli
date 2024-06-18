@@ -25,7 +25,7 @@ void opensbliblock00Kernel008_c_wrapper(
     const ptr_double rhoN_B0 = { rhoN_B0_p + n_x*1};
     ptr_double p_B0 = { p_B0_p + n_x*1};
     
-   OPS_ACC(p_B0, 0) = (invMN*OPS_ACC(rhoN_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0))*Rhat*OPS_ACC(T_B0, 0);
+   OPS_ACC(p_B0, 0) = (invMN*OPS_ACC(rhoN_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0))*Rhat*Tref*inv2uref*OPS_ACC(T_B0, 0);
 
 
   }

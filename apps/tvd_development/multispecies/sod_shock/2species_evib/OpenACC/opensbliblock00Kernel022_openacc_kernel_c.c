@@ -70,7 +70,7 @@ inline
 
    evN2 = Rhat*thetavN2/(MN2*(-1.0 + exp(thetavN2/T0)));
 
-   OPS_ACC(rhoev_B0, 0) = 1.00000000000000e-7;
+   OPS_ACC(rhoev_B0, 0) = 0.0;
 
    OPS_ACC(rhoE_B0, 0) = (u0*u0)*(0.5*cN*r + 0.5*cN2*r) + p0*(1.5*cN*r/MN + 2.5*cN2*r/MN2)/(cN*r/MN + cN2*r/MN2);
 

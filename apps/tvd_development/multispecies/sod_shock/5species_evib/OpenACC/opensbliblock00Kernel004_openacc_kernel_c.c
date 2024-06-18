@@ -245,21 +245,21 @@ ptr_double rhoO_B0,
    double ws_lambda_55 = 0.0;
    double ws_lambda_66 = 0.0;
    double ws_lambda_77 = 0.0;
-   AVG_0_rhoN = ((1.0/2.0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN_B0, -1));
-
-   AVG_0_rhoO = ((1.0/2.0))*(OPS_ACC(rhoO_B0, 0) + OPS_ACC(rhoO_B0, -1));
-
    AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0) + OPS_ACC(u0_B0, -1));
+
+   AVG_0_rhoN2 = ((1.0/2.0))*(OPS_ACC(rhoN2_B0, 0) + OPS_ACC(rhoN2_B0, -1));
 
    AVG_0_rhoNO = ((1.0/2.0))*(OPS_ACC(rhoNO_B0, 0) + OPS_ACC(rhoNO_B0, -1));
 
-   AVG_0_gamaf = ((1.0/2.0))*(OPS_ACC(gamaf_B0, 0) + OPS_ACC(gamaf_B0, -1));
+   AVG_0_af = ((1.0/2.0))*(OPS_ACC(af_B0, 0) + OPS_ACC(af_B0, -1));
+
+   AVG_0_rhoO = ((1.0/2.0))*(OPS_ACC(rhoO_B0, 0) + OPS_ACC(rhoO_B0, -1));
 
    AVG_0_rhoO2 = ((1.0/2.0))*(OPS_ACC(rhoO2_B0, 0) + OPS_ACC(rhoO2_B0, -1));
 
-   AVG_0_af = ((1.0/2.0))*(OPS_ACC(af_B0, 0) + OPS_ACC(af_B0, -1));
+   AVG_0_gamaf = ((1.0/2.0))*(OPS_ACC(gamaf_B0, 0) + OPS_ACC(gamaf_B0, -1));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(OPS_ACC(rhoN2_B0, 0) + OPS_ACC(rhoN2_B0, -1));
+   AVG_0_rhoN = ((1.0/2.0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN_B0, -1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -405,21 +405,21 @@ ptr_double rhoO_B0,
       OPS_ACC(rhoNO_B0, 0))*AVG_0_0_LEV_74 + (-OPS_ACC(rhoO2_B0, -1) + OPS_ACC(rhoO2_B0, 0))*AVG_0_0_LEV_71 + (-OPS_ACC(rhou0_B0, -1) +
       OPS_ACC(rhou0_B0, 0))*AVG_0_0_LEV_75;
 
-   AVG_0_rhoN = ((1.0/2.0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN_B0, 1));
-
-   AVG_0_rhoO = ((1.0/2.0))*(OPS_ACC(rhoO_B0, 0) + OPS_ACC(rhoO_B0, 1));
-
    AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0) + OPS_ACC(u0_B0, 1));
+
+   AVG_0_rhoN2 = ((1.0/2.0))*(OPS_ACC(rhoN2_B0, 0) + OPS_ACC(rhoN2_B0, 1));
 
    AVG_0_rhoNO = ((1.0/2.0))*(OPS_ACC(rhoNO_B0, 0) + OPS_ACC(rhoNO_B0, 1));
 
-   AVG_0_gamaf = ((1.0/2.0))*(OPS_ACC(gamaf_B0, 0) + OPS_ACC(gamaf_B0, 1));
+   AVG_0_af = ((1.0/2.0))*(OPS_ACC(af_B0, 0) + OPS_ACC(af_B0, 1));
+
+   AVG_0_rhoO = ((1.0/2.0))*(OPS_ACC(rhoO_B0, 0) + OPS_ACC(rhoO_B0, 1));
 
    AVG_0_rhoO2 = ((1.0/2.0))*(OPS_ACC(rhoO2_B0, 0) + OPS_ACC(rhoO2_B0, 1));
 
-   AVG_0_af = ((1.0/2.0))*(OPS_ACC(af_B0, 0) + OPS_ACC(af_B0, 1));
+   AVG_0_gamaf = ((1.0/2.0))*(OPS_ACC(gamaf_B0, 0) + OPS_ACC(gamaf_B0, 1));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(OPS_ACC(rhoN2_B0, 0) + OPS_ACC(rhoN2_B0, 1));
+   AVG_0_rhoN = ((1.0/2.0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN_B0, 1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -631,21 +631,21 @@ ptr_double rhoO_B0,
 
    AVG_0_REV_77 = ((1.0/2.0))*(-1 + AVG_0_gamaf)*AVG_0_af/AVG_0_rhoO;
 
-   AVG_0_rhoN = ((1.0/2.0))*(OPS_ACC(rhoN_B0, 1) + OPS_ACC(rhoN_B0, 2));
-
-   AVG_0_rhoO = ((1.0/2.0))*(OPS_ACC(rhoO_B0, 1) + OPS_ACC(rhoO_B0, 2));
-
    AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 1) + OPS_ACC(u0_B0, 2));
+
+   AVG_0_rhoN2 = ((1.0/2.0))*(OPS_ACC(rhoN2_B0, 1) + OPS_ACC(rhoN2_B0, 2));
 
    AVG_0_rhoNO = ((1.0/2.0))*(OPS_ACC(rhoNO_B0, 1) + OPS_ACC(rhoNO_B0, 2));
 
-   AVG_0_gamaf = ((1.0/2.0))*(OPS_ACC(gamaf_B0, 1) + OPS_ACC(gamaf_B0, 2));
+   AVG_0_af = ((1.0/2.0))*(OPS_ACC(af_B0, 1) + OPS_ACC(af_B0, 2));
+
+   AVG_0_rhoO = ((1.0/2.0))*(OPS_ACC(rhoO_B0, 1) + OPS_ACC(rhoO_B0, 2));
 
    AVG_0_rhoO2 = ((1.0/2.0))*(OPS_ACC(rhoO2_B0, 1) + OPS_ACC(rhoO2_B0, 2));
 
-   AVG_0_af = ((1.0/2.0))*(OPS_ACC(af_B0, 1) + OPS_ACC(af_B0, 2));
+   AVG_0_gamaf = ((1.0/2.0))*(OPS_ACC(gamaf_B0, 1) + OPS_ACC(gamaf_B0, 2));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(OPS_ACC(rhoN2_B0, 1) + OPS_ACC(rhoN2_B0, 2));
+   AVG_0_rhoN = ((1.0/2.0))*(OPS_ACC(rhoN_B0, 1) + OPS_ACC(rhoN_B0, 2));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 

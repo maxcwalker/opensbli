@@ -132,7 +132,7 @@ void ops_par_loop_opensbliblock00Kernel021_execute(ops_kernel_descriptor *desc) 
    1.0
 )
 : (
-   0.2
+   0.125
 ));
 
    p0 = ((x0_B0(0) < 0.5) ? (
@@ -145,14 +145,14 @@ void ops_par_loop_opensbliblock00Kernel021_execute(ops_kernel_descriptor *desc) 
    T0 = p0/(Rhat*r);
 
    cN = ((x0_B0(0) < 0.5) ? (
-   0.2
+   0.0
 )
 : (
    0.05
 ));
 
    cN2 = ((x0_B0(0) < 0.5) ? (
-   0.8
+   1.0
 )
 : (
    0.95
@@ -166,7 +166,7 @@ void ops_par_loop_opensbliblock00Kernel021_execute(ops_kernel_descriptor *desc) 
 
    evN2 = Rhat*thetavN2/(MN2*(-1.0 + exp(thetavN2/T0)));
 
-   rhoev_B0(0) = 0.00100000000000000;
+   rhoev_B0(0) = Rhat*thetavN2*(cN*r/MN + cN2*r/MN2)/(MN2*Tref*(uref*uref)*(-1.0 + exp(thetavN2/(T0*Tref))));
 
    rhoE_B0(0) = (u0*u0)*(0.5*cN*r + 0.5*cN2*r) + p0*(1.5*cN*r/MN + 2.5*cN2*r/MN2)/(cN*r/MN + cN2*r/MN2);
 

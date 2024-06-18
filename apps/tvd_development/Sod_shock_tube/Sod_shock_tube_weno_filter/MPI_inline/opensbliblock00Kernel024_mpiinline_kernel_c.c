@@ -6,6 +6,21 @@ int xdim0_opensbliblock00Kernel024;
 int xdim1_opensbliblock00Kernel024;
 int xdim2_opensbliblock00Kernel024;
 int xdim3_opensbliblock00Kernel024;
+int xdim4_opensbliblock00Kernel024;
+int xdim5_opensbliblock00Kernel024;
+int xdim6_opensbliblock00Kernel024;
+int xdim7_opensbliblock00Kernel024;
+int xdim8_opensbliblock00Kernel024;
+int xdim9_opensbliblock00Kernel024;
+int xdim10_opensbliblock00Kernel024;
+int xdim11_opensbliblock00Kernel024;
+int xdim12_opensbliblock00Kernel024;
+int xdim13_opensbliblock00Kernel024;
+int xdim14_opensbliblock00Kernel024;
+int xdim15_opensbliblock00Kernel024;
+int xdim16_opensbliblock00Kernel024;
+int xdim17_opensbliblock00Kernel024;
+int xdim18_opensbliblock00Kernel024;
 
 
 //user function
@@ -13,47 +28,55 @@ int xdim3_opensbliblock00Kernel024;
 
 
 void opensbliblock00Kernel024_c_wrapper(
+  double * restrict rhoE_B0_p,
   double * restrict rho_B0_p,
   double * restrict rhou0_B0_p,
-  double * restrict rhoE_B0_p,
-  double * restrict x0_B0_p,
-  int * restrict idx,
-  int arg_idx0, 
+  double * restrict tau00_B0_p,
+  double * restrict u0_B0_p,
+  double * restrict wk10_B0_p,
+  double * restrict wk11_B0_p,
+  double * restrict wk12_B0_p,
+  double * restrict wk13_B0_p,
+  double * restrict wk3_B0_p,
+  double * restrict wk4_B0_p,
+  double * restrict wk5_B0_p,
+  double * restrict wk6_B0_p,
+  double * restrict wk7_B0_p,
+  double * restrict wk8_B0_p,
+  double * restrict wk9_B0_p,
+  double * restrict Residual0_B0_p,
+  double * restrict Residual1_B0_p,
+  double * restrict Residual2_B0_p,
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
-    int idx[] = {arg_idx0+n_x};
-    ptr_double rho_B0 = { rho_B0_p + n_x*1};
-    ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
-    ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
-    ptr_double x0_B0 = { x0_B0_p + n_x*1};
+    const ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
+    const ptr_double rho_B0 = { rho_B0_p + n_x*1};
+    const ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
+    const ptr_double tau00_B0 = { tau00_B0_p + n_x*1};
+    const ptr_double u0_B0 = { u0_B0_p + n_x*1};
+    const ptr_double wk10_B0 = { wk10_B0_p + n_x*1};
+    const ptr_double wk11_B0 = { wk11_B0_p + n_x*1};
+    const ptr_double wk12_B0 = { wk12_B0_p + n_x*1};
+    const ptr_double wk13_B0 = { wk13_B0_p + n_x*1};
+    const ptr_double wk3_B0 = { wk3_B0_p + n_x*1};
+    const ptr_double wk4_B0 = { wk4_B0_p + n_x*1};
+    const ptr_double wk5_B0 = { wk5_B0_p + n_x*1};
+    const ptr_double wk6_B0 = { wk6_B0_p + n_x*1};
+    const ptr_double wk7_B0 = { wk7_B0_p + n_x*1};
+    const ptr_double wk8_B0 = { wk8_B0_p + n_x*1};
+    const ptr_double wk9_B0 = { wk9_B0_p + n_x*1};
+    ptr_double Residual0_B0 = { Residual0_B0_p + n_x*1};
+    ptr_double Residual1_B0 = { Residual1_B0_p + n_x*1};
+    ptr_double Residual2_B0 = { Residual2_B0_p + n_x*1};
     
-   double p = 0.0;
-   double d = 0.0;
-   double u0 = 0.0;
-   OPS_ACC(x0_B0, 0) = Delta0block0*idx[0];
+   OPS_ACC(Residual0_B0, 0) = -(1.0/2.0)*OPS_ACC(wk9_B0, 0) - (1.0/2.0)*OPS_ACC(u0_B0, 0)*OPS_ACC(wk13_B0, 0) - (1.0/2.0)*OPS_ACC(rho_B0, 0)*OPS_ACC(wk11_B0, 0);
 
-   u0 = 0;
+    OPS_ACC(Residual1_B0, 0) = -OPS_ACC(wk12_B0, 0) - (1.0/2.0)*OPS_ACC(wk8_B0, 0) - (1.0/2.0)*OPS_ACC(u0_B0, 0)*OPS_ACC(wk10_B0, 0) -
+      (1.0/2.0)*OPS_ACC(wk11_B0, 0)*OPS_ACC(rhou0_B0, 0) + OPS_ACC(wk3_B0, 0);
 
-   p = ((OPS_ACC(x0_B0, 0) < 0.5) ? (
-   1.0
-)
-: (
-   0.1
-));
-
-   d = ((OPS_ACC(x0_B0, 0) < 0.5) ? (
-   1.0
-)
-: (
-   0.125
-));
-
-   OPS_ACC(rho_B0, 0) = d;
-
-   OPS_ACC(rhou0_B0, 0) = d*u0;
-
-   OPS_ACC(rhoE_B0, 0) = 0.5*d*pow(u0, 2.0) + p/(gama - 1.0);
+    OPS_ACC(Residual2_B0, 0) = -OPS_ACC(wk6_B0, 0) - (1.0/2.0)*OPS_ACC(wk4_B0, 0) + OPS_ACC(u0_B0, 0)*OPS_ACC(wk3_B0, 0) + OPS_ACC(wk11_B0, 0)*OPS_ACC(tau00_B0, 0) -
+      (1.0/2.0)*OPS_ACC(u0_B0, 0)*OPS_ACC(wk5_B0, 0) - (1.0/2.0)*OPS_ACC(rhoE_B0, 0)*OPS_ACC(wk11_B0, 0) + OPS_ACC(wk7_B0, 0);
 
 
   }

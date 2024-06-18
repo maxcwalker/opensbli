@@ -21,7 +21,6 @@ extern int block0np0;
 extern double cN;
 extern double cN2;
 extern double delta_TVD;
-extern double dhN;
 extern double dt;
 extern double eps_TVD;
 extern double gama;
@@ -93,10 +92,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"delta_TVD")) {
     #pragma omp target enter data map(to:delta_TVD)
-  }
-  else
-  if (!strcmp(name,"dhN")) {
-    #pragma omp target enter data map(to:dhN)
   }
   else
   if (!strcmp(name,"dt")) {
@@ -200,9 +195,9 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel022_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel020_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel021_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel009_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel010_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel015_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel008_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel009_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel018_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel019_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel006_ompoffload_kernel.cpp"

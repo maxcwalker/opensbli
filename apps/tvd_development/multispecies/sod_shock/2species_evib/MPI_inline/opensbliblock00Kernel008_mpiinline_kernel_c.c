@@ -13,19 +13,19 @@ int xdim3_opensbliblock00Kernel008;
 
 
 void opensbliblock00Kernel008_c_wrapper(
-  double * restrict T_B0_p,
   double * restrict rhoN2_B0_p,
   double * restrict rhoN_B0_p,
-  double * restrict p_B0_p,
+  double * restrict rhou0_B0_p,
+  double * restrict u0_B0_p,
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
-    const ptr_double T_B0 = { T_B0_p + n_x*1};
     const ptr_double rhoN2_B0 = { rhoN2_B0_p + n_x*1};
     const ptr_double rhoN_B0 = { rhoN_B0_p + n_x*1};
-    ptr_double p_B0 = { p_B0_p + n_x*1};
+    const ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
+    ptr_double u0_B0 = { u0_B0_p + n_x*1};
     
-   OPS_ACC(p_B0, 0) = (invMN*OPS_ACC(rhoN_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0))*Rhat*OPS_ACC(T_B0, 0);
+   OPS_ACC(u0_B0, 0) = OPS_ACC(rhou0_B0, 0)/(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN2_B0, 0));
 
 
   }

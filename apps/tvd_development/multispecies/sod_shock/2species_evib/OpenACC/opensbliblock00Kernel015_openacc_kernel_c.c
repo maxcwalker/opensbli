@@ -18,8 +18,8 @@ inline
   const ptr_double u0_B0,
   ptr_double T_B0)
 {
-    OPS_ACC(T_B0, 0) = (-0.5*(OPS_ACC(u0_B0, 0)*OPS_ACC(u0_B0, 0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN2_B0, 0)) - 1.0e-8*dhN*invMN*OPS_ACC(rhoN_B0, 0) +
-      OPS_ACC(rhoE_B0, 0))*invRhat/(invMN*OPS_ACC(rhoN_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0));
+    OPS_ACC(T_B0, 0) = (-0.5*(OPS_ACC(u0_B0, 0)*OPS_ACC(u0_B0, 0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN2_B0, 0)) + OPS_ACC(rhoE_B0, 0))*invRhat/(invMN*OPS_ACC(rhoN_B0, 0) +
+      invMN2*OPS_ACC(rhoN2_B0, 0));
 
 }
 

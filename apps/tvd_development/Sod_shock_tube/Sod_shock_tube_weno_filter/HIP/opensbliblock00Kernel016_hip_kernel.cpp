@@ -7,61 +7,52 @@ static int dims_opensbliblock00Kernel016_h [3][1] = {{0}};
 //user function
 __device__
 
-void opensbliblock00Kernel016_gpu(const ACC<double> &rho_B0,
-  ACC<double> &wk10_B0,
+void opensbliblock00Kernel016_gpu(const ACC<double> &wk16_B0,
+  ACC<double> &wk8_B0,
   const int *idx)
 {
-    wk10_B0(0) = inv_0*((idx[0] == 0) ? (
-   0.333333333333356*rho_B0(3) -
-      1.50000000000003*rho_B0(2) + 1.06910315192207e-15*rho_B0(5) +
-      3.00000000000002*rho_B0(1) - 8.34657956545823e-15*rho_B0(4) -
-      1.83333333333334*rho_B0(0)
+    wk8_B0(0) = invDelta0block0*((idx[0] == 0) ? (
+   3.0*wk16_B0(1) + 0.333333333333333*wk16_B0(3) - 1.5*wk16_B0(2) -
+      1.83333333333333*wk16_B0(0)
 )
 : ((idx[0] == 1) ? (
-   -0.0658051057710389*rho_B0(3) +
-      0.0394168524399447*rho_B0(2) - 0.376283677513354*rho_B0(-1) +
-      0.719443173328855*rho_B0(1) + 0.00571369039775442*rho_B0(4) -
-      0.322484932882161*rho_B0(0)
+   0.0394168524399447*wk16_B0(2) +
+      0.00571369039775442*wk16_B0(4) + 0.719443173328855*wk16_B0(1) - 0.322484932882161*wk16_B0(0) -
+      0.0658051057710389*wk16_B0(3) - 0.376283677513354*wk16_B0(-1)
 )
 : ((idx[0] == 2) ? (
-   -0.00412637789557492*rho_B0(3) -
-      0.0367146847001261*rho_B0(2) + 0.113446470384241*rho_B0(-2) -
-      0.791245592765872*rho_B0(-1) + 0.521455851089587*rho_B0(1) +
-      0.197184333887745*rho_B0(0)
-)
-: ((idx[0] == 3) ? (
-   -0.082033432844602*rho_B0(2) +
-      0.121937153224065*rho_B0(-2) - 0.727822147724592*rho_B0(-1) +
-      0.652141084861241*rho_B0(1) - 0.00932597985049999*rho_B0(-3) +
-      0.0451033223343881*rho_B0(0)
-)
-: ((idx[0] == block0np0 - 1) ? (
 
-      -1.06910315192207e-15*rho_B0(-5) + 1.50000000000003*rho_B0(-2) -
-      3.00000000000002*rho_B0(-1) - 0.333333333333356*rho_B0(-3) +
-      1.83333333333334*rho_B0(0) + 8.34657956545823e-15*rho_B0(-4)
+      0.197184333887745*wk16_B0(0) + 0.521455851089587*wk16_B0(1) + 0.113446470384241*wk16_B0(-2) -
+      0.00412637789557492*wk16_B0(3) - 0.0367146847001261*wk16_B0(2) - 0.791245592765872*wk16_B0(-1)
 )
-: ((idx[0] == block0np0 - 2) ?
-      (
-   -0.0394168524399447*rho_B0(-2) - 0.719443173328855*rho_B0(-1) +
-      0.376283677513354*rho_B0(1) + 0.0658051057710389*rho_B0(-3) +
-      0.322484932882161*rho_B0(0) - 0.00571369039775442*rho_B0(-4)
+: ((idx[0] == 3)
+      ? (
+   0.0451033223343881*wk16_B0(0) + 0.652141084861241*wk16_B0(1) + 0.121937153224065*wk16_B0(-2) -
+      0.00932597985049999*wk16_B0(-3) - 0.727822147724592*wk16_B0(-1) - 0.082033432844602*wk16_B0(2)
 )
-: ((idx[0] == block0np0 - 3) ?
-      (
-   -0.113446470384241*rho_B0(2) + 0.0367146847001261*rho_B0(-2) -
-      0.521455851089587*rho_B0(-1) + 0.791245592765872*rho_B0(1) +
-      0.00412637789557492*rho_B0(-3) - 0.197184333887745*rho_B0(0)
+: ((idx[0] == -1
+      + block0np0) ? (
+   1.5*wk16_B0(-2) + 1.83333333333333*wk16_B0(0) - 3.0*wk16_B0(-1) -
+      0.333333333333333*wk16_B0(-3)
 )
-: ((idx[0] == block0np0 - 4) ?
-      (
-   0.00932597985049999*rho_B0(3) - 0.121937153224065*rho_B0(2) +
-      0.082033432844602*rho_B0(-2) - 0.652141084861241*rho_B0(-1) +
-      0.727822147724592*rho_B0(1) - 0.0451033223343881*rho_B0(0)
+: ((idx[0] == -2 + block0np0) ? (
+   0.322484932882161*wk16_B0(0) +
+      0.0658051057710389*wk16_B0(-3) + 0.376283677513354*wk16_B0(1) - 0.0394168524399447*wk16_B0(-2) -
+      0.00571369039775442*wk16_B0(-4) - 0.719443173328855*wk16_B0(-1)
+)
+: ((idx[0] == -3 + block0np0) ? (
+
+      0.00412637789557492*wk16_B0(-3) + 0.0367146847001261*wk16_B0(-2) + 0.791245592765872*wk16_B0(1) -
+      0.197184333887745*wk16_B0(0) - 0.521455851089587*wk16_B0(-1) - 0.113446470384241*wk16_B0(2)
+)
+: ((idx[0] == -4 +
+      block0np0) ? (
+   0.00932597985049999*wk16_B0(3) + 0.727822147724592*wk16_B0(1) + 0.082033432844602*wk16_B0(-2) -
+      0.0451033223343881*wk16_B0(0) - 0.652141084861241*wk16_B0(-1) - 0.121937153224065*wk16_B0(2)
 )
 : (
-   (rc3)*rho_B0(1)
-      - rc3*rho_B0(-1) + (rc2)*rho_B0(-2) - rc2*rho_B0(2)
+
+      -(2.0/3.0)*wk16_B0(-1) - (1.0/12.0)*wk16_B0(2) + ((1.0/12.0))*wk16_B0(-2) + ((2.0/3.0))*wk16_B0(1)
 )))))))));
 
 }
@@ -74,11 +65,8 @@ double* __restrict arg1,
 int arg_idx0,
 int size0 ){
 
-  //Make sure constants are not optimized out
-  if (size0==-1) dims_opensbliblock00Kernel016[0][0]=0;
 
-
-  int idx_x = hipBlockDim_x * hipBlockIdx_x + hipThreadIdx_x;
+  int idx_x = blockDim.x * blockIdx.x + threadIdx.x;
 
   int arg_idx[1];
   arg_idx[0] = arg_idx0+idx_x;
@@ -88,7 +76,8 @@ int size0 ){
   if (idx_x < size0) {
     const ACC<double> argp0(arg0);
     ACC<double> argp1(arg1);
-    opensbliblock00Kernel016_gpu(argp0, argp1, arg_idx);
+    opensbliblock00Kernel016_gpu(
+     argp0, argp1, arg_idx);
   }
 
 }
@@ -116,38 +105,43 @@ void ops_par_loop_opensbliblock00Kernel016_execute(ops_kernel_descriptor *desc) 
 
 
   #if CHECKPOINTING && !OPS_LAZY
-  if (!ops_checkpointing_before(args,3,range,15)) return;
+  if (!ops_checkpointing_before(args,3,range,11)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,15,"opensbliblock00Kernel016");
-    block->instance->OPS_kernels[15].count++;
+    ops_timing_realloc(block->instance,11,"opensbliblock00Kernel016");
+    block->instance->OPS_kernels[11].count++;
     ops_timers_core(&c1,&t1);
   }
 
   //compute locally allocated range for the sub-block
   int start[1];
   int end[1];
-  #if OPS_MPI && !OPS_LAZY
-  sub_block_list sb = OPS_sub_block_list[block->index];
-  #endif //OPS_MPI
 
   int arg_idx[1];
-  #ifdef OPS_MPI
-  if (compute_ranges(args, 3,block, range, start, end, arg_idx) < 0) return;
-  #else //OPS_MPI
+  #if defined(OPS_LAZY) || !defined(OPS_MPI)
   for ( int n=0; n<1; n++ ){
     start[n] = range[2*n];end[n] = range[2*n+1];
-    arg_idx[n] = start[n];
   }
+  #else
+  if (compute_ranges(args, 3,block, range, start, end, arg_idx) < 0) return;
   #endif
+
+  #if defined(OPS_MPI)
+  #if defined(OPS_LAZY)
+  sub_block_list sb = OPS_sub_block_list[block->index];
+  arg_idx[0] = sb->decomp_disp[0]+start[0];
+  #endif
+  #else //OPS_MPI
+  arg_idx[0] = start[0];
+  #endif //OPS_MPI
   int xdim0 = args[0].dat->size[0];
   int xdim1 = args[1].dat->size[0];
 
   if (xdim0 != dims_opensbliblock00Kernel016_h[0][0] || xdim1 != dims_opensbliblock00Kernel016_h[1][0]) {
     dims_opensbliblock00Kernel016_h[0][0] = xdim0;
     dims_opensbliblock00Kernel016_h[1][0] = xdim1;
-    hipSafeCall(block->instance->ostream(), hipMemcpyToSymbol(HIP_SYMBOL(dims_opensbliblock00Kernel016), dims_opensbliblock00Kernel016_h, sizeof(dims_opensbliblock00Kernel016)));
+    hipSafeCall(block->instance->ostream(), hipMemcpyToSymbol( dims_opensbliblock00Kernel016, dims_opensbliblock00Kernel016_h, sizeof(dims_opensbliblock00Kernel016)));
   }
 
 
@@ -181,21 +175,23 @@ void ops_par_loop_opensbliblock00Kernel016_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[15].mpi_time += t2-t1;
+    block->instance->OPS_kernels[11].mpi_time += t2-t1;
   }
 
 
   //call kernel wrapper function, passing in pointers to data
   if (x_size > 0)
-    hipLaunchKernelGGL(ops_opensbliblock00Kernel016,grid ,tblock ,0 ,0 , (double *)p_a[0], (double *)p_a[1],
-         arg_idx[0],x_size);
+    ops_opensbliblock00Kernel016<<<grid, tblock >>> ( 
+     (double *)p_a[0], (double *)p_a[1],
+     arg_idx[0],
+    x_size);
 
   hipSafeCall(block->instance->ostream(), hipGetLastError());
 
   if (block->instance->OPS_diags>1) {
     hipSafeCall(block->instance->ostream(), hipDeviceSynchronize());
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[15].time += t1-t2;
+    block->instance->OPS_kernels[11].time += t1-t2;
   }
 
   #ifndef OPS_LAZY
@@ -206,39 +202,18 @@ void ops_par_loop_opensbliblock00Kernel016_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[15].mpi_time += t2-t1;
-    block->instance->OPS_kernels[15].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[15].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[11].mpi_time += t2-t1;
+    block->instance->OPS_kernels[11].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[11].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel016(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2) {
-  ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
-  desc->name = name;
-  desc->block = block;
-  desc->dim = dim;
-  desc->device = 1;
-  desc->index = 15;
-  desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 15;
-  for ( int i=0; i<2; i++ ){
-    desc->range[i] = range[i];
-    desc->orig_range[i] = range[i];
-    desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
-  }
-  desc->nargs = 3;
-  desc->args = (ops_arg*)malloc(3*sizeof(ops_arg));
-  desc->args[0] = arg0;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
-  desc->args[1] = arg1;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
-  desc->args[2] = arg2;
-  desc->function = ops_par_loop_opensbliblock00Kernel016_execute;
-  if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,15,"opensbliblock00Kernel016");
-  }
-  ops_enqueue_kernel(desc);
+  ops_arg args[3] = { arg0, arg1, arg2 };
+
+  //create kernel descriptor and pass it to ops_enqueue_kernel
+  create_kerneldesc_and_enque(name, args, 3, 11, dim, 1, range, block, ops_par_loop_opensbliblock00Kernel016_execute);
 }
 #endif

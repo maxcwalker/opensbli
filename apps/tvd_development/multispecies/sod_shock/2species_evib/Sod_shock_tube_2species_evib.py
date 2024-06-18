@@ -15,7 +15,7 @@ input_dict = {
     "gama"                 : "1.4", 
     "Re"                   : "1.0",
     "dt"                   : "0.00002", 
-    "niter"                : "2000",#ceil(0.2/0.00003)",#ceil(0.2/0.0002)",
+    "niter"                : "6000",#ceil(0.2/0.00003)",#ceil(0.2/0.0002)",
     "block0np0"            : "2000", 
     "Delta0block0"         : "1.0/(block0np0-1)",
     "eps"                  : "1.0e-16",
@@ -34,7 +34,7 @@ input_dict = {
     "Tref"                    : "600",
     "rhoref"                : "1.225",
     "p_r"                  : "101325.0",
-    "kappa"                 : "0.3", #completely made up! Just for testing
+    "kappa"                 : "0.0", #completely made up! Just for testing
 }
 
 constants = input_dict.keys()
@@ -47,8 +47,8 @@ coordinate_symbol = "x"
 conservative = True 
 
 eq = EinsteinEquation()
-massN   = "Eq(Der(rhoN,t), - Conservative(rhoN*u_j,x_j) + wdotN )" #+ Der(mu/(Re*Sc)*Der(yN,x_j),x_j) 
-massN2  = "Eq(Der(rhoN2,t), - Conservative(rhoN2*u_j,x_j) + wdotN2)" #+ Der(mu/(Re*Sc)*Der(yN2,x_j),x_j)
+massN   = "Eq(Der(rhoN,t), - Conservative(rhoN*u_j,x_j) + wdotN )" 
+massN2  = "Eq(Der(rhoN2,t), - Conservative(rhoN2*u_j,x_j) + wdotN2)" 
 momentum = "Eq(Der(rhou_i,t) , -Conservative(rhou_i*u_j + KD(_i,_j)*p,x_j))"
 evib     = "Eq(Der(rhoev,t), - Conservative(rhoev*u_j,x_j) + (rhoN2*eveqN2 - rho*ev)/tau + wdotN + wdotN2)" 
 energy = "Eq(Der(rhoE,t), - Conservative((p+rhoE)*u_j,x_j) - Der(q_j,x_j))"
@@ -62,7 +62,7 @@ heat_flux = "Eq(q_j, -(kappa/Re)*Der(T,x_j))"
 evibration = "Eq(ev, rhoev/rho)"
 molesum = "Eq(ysum, rhoN/MN+rhoN2/MN2)"
 timeconst = "Eq(tau, uref/Lref * (rhoN2/MN2)*101325.0/(p*(rhoN2/(MN2*ptauN2))))"
-hformation = "Eq(dhf, 0.00000001*(dhN*rhoN/MN))"
+hformation = "Eq(dhf, 0.0 *(dhN*rhoN/MN))"
 
 substitutions = [heat_flux, timeconst, evibration, molesum, hformation]
 # Expand the simulation equations, for this create a simulation equations class
@@ -80,9 +80,9 @@ simulation_eq.add_equations(energy)
 
 # Constituent relations
 # pressure = "Eq(p, (gama-1)*(rhoE - (1/2)*(rhoN+rhoN2)*(KD(_i,_j)*u_i*u_j)))"
-pressure = "Eq(p, Rhat*T*(rhoN/MN+rhoN2/MN2))"
+pressure = "Eq(p,  Rhat*T*(rhoN/MN+rhoN2/MN2))"
 velocity = "Eq(u_i, rhou_i/(rhoN + rhoN2))"
-# temperature = "Eq(T, p/((rhoN + rhoN2)*Rhat))"
+
 temperature = "Eq(T, (rhoE - dhf - (rhoN + rhoN2)*(1./2.)*(KD(_i,_j)*u_i*u_j))/(Rhat*((rhoN/MN)+(rhoN2/MN2))))"
 speed_of_sound = "Eq(a, (gama*p/(rhoN + rhoN2))**0.5)"
 timefactorN2 = "Eq(ptauN2, (rhoN/MN*exp(220.0*(T**(-1.0/3.0)-0.0262)-18.42)+rhoN2/MN2*exp(220.0*(T**(-1.0/3.0)-0.0290)-18.42))/ysum)" 
@@ -120,7 +120,7 @@ rhoN = "Eq(DataObject(rhoN), r*cN)"
 T = "Eq(GridVariable(T0), p0 / (r*Rhat))"
 evN2 = "Eq(GridVariable(evN2), thetavN2*Rhat/(MN2*(exp(thetavN2/T0)-1.0)))"
 
-rhoev = "Eq(DataObject(rhoev), 0.0000001)"
+rhoev = "Eq(DataObject(rhoev), 0.0)"
 rhou0 = "Eq(DataObject(rhou0), r*u0)"
 rhoE = "Eq(DataObject(rhoE), p0*(3.0/2.0*(r*cN/MN)+5.0/2.0*(r*cN2/MN2))/(r*cN/MN+r*cN2/MN2)+ 0.5*(r*cN + r*cN2)*(u0**2))"
 

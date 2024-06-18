@@ -52,6 +52,15 @@ int base[] = {0, 0, 0};
 double* value = NULL;
 detJ_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "detJ_B0");
 }
+ops_dat E_mean_B0;
+{
+int halo_p[] = {5, 5, 5};
+int halo_m[] = {-5, -5, -5};
+int size[] = {block0np0, block0np1, block0np2};
+int base[] = {0, 0, 0};
+double* value = NULL;
+E_mean_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "E_mean_B0");
+}
 ops_dat mu_B0;
 {
 int halo_p[] = {5, 5, 5};
@@ -161,6 +170,15 @@ int base[] = {0, 0, 0};
 double* value = NULL;
 rhoE_RKold_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhoE_RKold_B0");
 }
+ops_dat rhomean_B0;
+{
+int halo_p[] = {5, 5, 5};
+int halo_m[] = {-5, -5, -5};
+int size[] = {block0np0, block0np1, block0np2};
+int base[] = {0, 0, 0};
+double* value = NULL;
+rhomean_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhomean_B0");
+}
 ops_dat rhou0_B0;
 {
 if (restart == 1){
@@ -183,6 +201,42 @@ int size[] = {block0np0, block0np1, block0np2};
 int base[] = {0, 0, 0};
 double* value = NULL;
 rhou0_RKold_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou0_RKold_B0");
+}
+ops_dat rhou0mean_B0;
+{
+int halo_p[] = {5, 5, 5};
+int halo_m[] = {-5, -5, -5};
+int size[] = {block0np0, block0np1, block0np2};
+int base[] = {0, 0, 0};
+double* value = NULL;
+rhou0mean_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou0mean_B0");
+}
+ops_dat rhou0u0mean_B0;
+{
+int halo_p[] = {5, 5, 5};
+int halo_m[] = {-5, -5, -5};
+int size[] = {block0np0, block0np1, block0np2};
+int base[] = {0, 0, 0};
+double* value = NULL;
+rhou0u0mean_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou0u0mean_B0");
+}
+ops_dat rhou0u1mean_B0;
+{
+int halo_p[] = {5, 5, 5};
+int halo_m[] = {-5, -5, -5};
+int size[] = {block0np0, block0np1, block0np2};
+int base[] = {0, 0, 0};
+double* value = NULL;
+rhou0u1mean_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou0u1mean_B0");
+}
+ops_dat rhou0u2mean_B0;
+{
+int halo_p[] = {5, 5, 5};
+int halo_m[] = {-5, -5, -5};
+int size[] = {block0np0, block0np1, block0np2};
+int base[] = {0, 0, 0};
+double* value = NULL;
+rhou0u2mean_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou0u2mean_B0");
 }
 ops_dat rhou1_B0;
 {
@@ -207,6 +261,33 @@ int base[] = {0, 0, 0};
 double* value = NULL;
 rhou1_RKold_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou1_RKold_B0");
 }
+ops_dat rhou1mean_B0;
+{
+int halo_p[] = {5, 5, 5};
+int halo_m[] = {-5, -5, -5};
+int size[] = {block0np0, block0np1, block0np2};
+int base[] = {0, 0, 0};
+double* value = NULL;
+rhou1mean_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou1mean_B0");
+}
+ops_dat rhou1u1mean_B0;
+{
+int halo_p[] = {5, 5, 5};
+int halo_m[] = {-5, -5, -5};
+int size[] = {block0np0, block0np1, block0np2};
+int base[] = {0, 0, 0};
+double* value = NULL;
+rhou1u1mean_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou1u1mean_B0");
+}
+ops_dat rhou1u2mean_B0;
+{
+int halo_p[] = {5, 5, 5};
+int halo_m[] = {-5, -5, -5};
+int size[] = {block0np0, block0np1, block0np2};
+int base[] = {0, 0, 0};
+double* value = NULL;
+rhou1u2mean_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou1u2mean_B0");
+}
 ops_dat rhou2_B0;
 {
 if (restart == 1){
@@ -229,6 +310,24 @@ int size[] = {block0np0, block0np1, block0np2};
 int base[] = {0, 0, 0};
 double* value = NULL;
 rhou2_RKold_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou2_RKold_B0");
+}
+ops_dat rhou2mean_B0;
+{
+int halo_p[] = {5, 5, 5};
+int halo_m[] = {-5, -5, -5};
+int size[] = {block0np0, block0np1, block0np2};
+int base[] = {0, 0, 0};
+double* value = NULL;
+rhou2mean_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou2mean_B0");
+}
+ops_dat rhou2u2mean_B0;
+{
+int halo_p[] = {5, 5, 5};
+int halo_m[] = {-5, -5, -5};
+int size[] = {block0np0, block0np1, block0np2};
+int base[] = {0, 0, 0};
+double* value = NULL;
+rhou2u2mean_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "rhou2u2mean_B0");
 }
 ops_dat SD000_B0;
 {

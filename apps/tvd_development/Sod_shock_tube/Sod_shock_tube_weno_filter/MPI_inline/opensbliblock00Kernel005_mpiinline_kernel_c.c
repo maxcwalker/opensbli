@@ -4,6 +4,13 @@
 
 int xdim0_opensbliblock00Kernel005;
 int xdim1_opensbliblock00Kernel005;
+int xdim2_opensbliblock00Kernel005;
+int xdim3_opensbliblock00Kernel005;
+int xdim4_opensbliblock00Kernel005;
+int xdim5_opensbliblock00Kernel005;
+int xdim6_opensbliblock00Kernel005;
+int xdim7_opensbliblock00Kernel005;
+int xdim8_opensbliblock00Kernel005;
 
 
 //user function
@@ -11,70 +18,35 @@ int xdim1_opensbliblock00Kernel005;
 
 
 void opensbliblock00Kernel005_c_wrapper(
+  double * restrict p_B0_p,
+  double * restrict rhoE_B0_p,
+  double * restrict rho_B0_p,
+  double * restrict rhou0_B0_p,
+  double * restrict u0_B0_p,
   double * restrict wk14_B0_p,
-  double * restrict wk3_B0_p,
-  int * restrict idx,
-  int arg_idx0, 
+  double * restrict wk15_B0_p,
+  double * restrict wk16_B0_p,
+  double * restrict wk17_B0_p,
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
-    int idx[] = {arg_idx0+n_x};
-    const ptr_double wk14_B0 = { wk14_B0_p + n_x*1};
-    ptr_double wk3_B0 = { wk3_B0_p + n_x*1};
+    const ptr_double p_B0 = { p_B0_p + n_x*1};
+    const ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
+    const ptr_double rho_B0 = { rho_B0_p + n_x*1};
+    const ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
+    const ptr_double u0_B0 = { u0_B0_p + n_x*1};
+    ptr_double wk14_B0 = { wk14_B0_p + n_x*1};
+    ptr_double wk15_B0 = { wk15_B0_p + n_x*1};
+    ptr_double wk16_B0 = { wk16_B0_p + n_x*1};
+    ptr_double wk17_B0 = { wk17_B0_p + n_x*1};
     
-    OPS_ACC(wk3_B0, 0) = inv_0*((idx[0] == 0) ? (
-   -8.34657956545823e-15*OPS_ACC(wk14_B0, 4) -
-      1.83333333333334*OPS_ACC(wk14_B0, 0) + 1.06910315192207e-15*OPS_ACC(wk14_B0, 5) +
-      3.00000000000002*OPS_ACC(wk14_B0, 1) - 1.50000000000003*OPS_ACC(wk14_B0, 2) +
-      0.333333333333356*OPS_ACC(wk14_B0, 3)
-)
-: ((idx[0] == 1) ? (
-   0.00571369039775442*OPS_ACC(wk14_B0, 4) -
-      0.322484932882161*OPS_ACC(wk14_B0, 0) - 0.376283677513354*OPS_ACC(wk14_B0, -1) +
-      0.719443173328855*OPS_ACC(wk14_B0, 1) + 0.0394168524399447*OPS_ACC(wk14_B0, 2) -
-      0.0658051057710389*OPS_ACC(wk14_B0, 3)
-)
-: ((idx[0] == 2) ? (
-   0.197184333887745*OPS_ACC(wk14_B0, 0) +
-      0.113446470384241*OPS_ACC(wk14_B0, -2) - 0.791245592765872*OPS_ACC(wk14_B0, -1) +
-      0.521455851089587*OPS_ACC(wk14_B0, 1) - 0.0367146847001261*OPS_ACC(wk14_B0, 2) -
-      0.00412637789557492*OPS_ACC(wk14_B0, 3)
-)
-: ((idx[0] == 3) ? (
-   -0.00932597985049999*OPS_ACC(wk14_B0, -3) +
-      0.0451033223343881*OPS_ACC(wk14_B0, 0) + 0.121937153224065*OPS_ACC(wk14_B0, -2) -
-      0.727822147724592*OPS_ACC(wk14_B0, -1) + 0.652141084861241*OPS_ACC(wk14_B0, 1) -
-      0.082033432844602*OPS_ACC(wk14_B0, 2)
-)
-: ((idx[0] == block0np0 - 1) ? (
+   OPS_ACC(wk14_B0, 0) = OPS_ACC(u0_B0, 0)*OPS_ACC(rhoE_B0, 0);
 
-      -0.333333333333356*OPS_ACC(wk14_B0, -3) + 1.83333333333334*OPS_ACC(wk14_B0, 0) +
-      1.50000000000003*OPS_ACC(wk14_B0, -2) - 3.00000000000002*OPS_ACC(wk14_B0, -1) -
-      1.06910315192207e-15*OPS_ACC(wk14_B0, -5) + 8.34657956545823e-15*OPS_ACC(wk14_B0, -4)
-)
-: ((idx[0] == block0np0
-      - 2) ? (
-   0.0658051057710389*OPS_ACC(wk14_B0, -3) + 0.322484932882161*OPS_ACC(wk14_B0, 0) -
-      0.0394168524399447*OPS_ACC(wk14_B0, -2) - 0.719443173328855*OPS_ACC(wk14_B0, -1) +
-      0.376283677513354*OPS_ACC(wk14_B0, 1) - 0.00571369039775442*OPS_ACC(wk14_B0, -4)
-)
-: ((idx[0] == block0np0 - 3)
-      ? (
-   0.00412637789557492*OPS_ACC(wk14_B0, -3) - 0.197184333887745*OPS_ACC(wk14_B0, 0) +
-      0.0367146847001261*OPS_ACC(wk14_B0, -2) - 0.521455851089587*OPS_ACC(wk14_B0, -1) +
-      0.791245592765872*OPS_ACC(wk14_B0, 1) - 0.113446470384241*OPS_ACC(wk14_B0, 2)
-)
-: ((idx[0] == block0np0 - 4) ?
-      (
-   -0.0451033223343881*OPS_ACC(wk14_B0, 0) + 0.082033432844602*OPS_ACC(wk14_B0, -2) -
-      0.652141084861241*OPS_ACC(wk14_B0, -1) + 0.727822147724592*OPS_ACC(wk14_B0, 1) -
-      0.121937153224065*OPS_ACC(wk14_B0, 2) + 0.00932597985049999*OPS_ACC(wk14_B0, 3)
-)
-: (
+   OPS_ACC(wk15_B0, 0) = OPS_ACC(p_B0, 0)*OPS_ACC(u0_B0, 0);
 
-      -rc2*OPS_ACC(wk14_B0, 2) + (rc3)*OPS_ACC(wk14_B0, 1) - rc3*OPS_ACC(wk14_B0, -1) +
-      (rc2)*OPS_ACC(wk14_B0, -2)
-)))))))));
+   OPS_ACC(wk16_B0, 0) = OPS_ACC(u0_B0, 0)*OPS_ACC(rhou0_B0, 0);
+
+   OPS_ACC(wk17_B0, 0) = OPS_ACC(u0_B0, 0)*OPS_ACC(rho_B0, 0);
 
 
   }

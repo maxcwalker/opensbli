@@ -6,6 +6,19 @@ int xdim0_opensbliblock00Kernel010;
 int xdim1_opensbliblock00Kernel010;
 int xdim2_opensbliblock00Kernel010;
 int xdim3_opensbliblock00Kernel010;
+int xdim4_opensbliblock00Kernel010;
+int xdim5_opensbliblock00Kernel010;
+int xdim6_opensbliblock00Kernel010;
+int xdim7_opensbliblock00Kernel010;
+int xdim8_opensbliblock00Kernel010;
+int xdim9_opensbliblock00Kernel010;
+int xdim10_opensbliblock00Kernel010;
+int xdim11_opensbliblock00Kernel010;
+int xdim12_opensbliblock00Kernel010;
+int xdim13_opensbliblock00Kernel010;
+int xdim14_opensbliblock00Kernel010;
+int xdim15_opensbliblock00Kernel010;
+int xdim16_opensbliblock00Kernel010;
 
 
 //user function
@@ -14,18 +27,321 @@ int xdim3_opensbliblock00Kernel010;
 
 void opensbliblock00Kernel010_c_wrapper(
   double * restrict T_B0_p,
+  double * restrict eveqN2_B0_p,
+  double * restrict p_B0_p,
+  double * restrict ptauN2_B0_p,
+  double * restrict rhoE_B0_p,
   double * restrict rhoN2_B0_p,
   double * restrict rhoN_B0_p,
-  double * restrict p_B0_p,
+  double * restrict rhoev_B0_p,
+  double * restrict rhou0_B0_p,
+  double * restrict u0_B0_p,
+  double * restrict wdotN2_B0_p,
+  double * restrict wdotN_B0_p,
+  double * restrict Residual0_B0_p,
+  double * restrict Residual1_B0_p,
+  double * restrict Residual2_B0_p,
+  double * restrict Residual3_B0_p,
+  double * restrict Residual4_B0_p,
+  int * restrict idx,
+  int arg_idx0, 
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
+    int idx[] = {arg_idx0+n_x};
     const ptr_double T_B0 = { T_B0_p + n_x*1};
+    const ptr_double eveqN2_B0 = { eveqN2_B0_p + n_x*1};
+    const ptr_double p_B0 = { p_B0_p + n_x*1};
+    const ptr_double ptauN2_B0 = { ptauN2_B0_p + n_x*1};
+    const ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
     const ptr_double rhoN2_B0 = { rhoN2_B0_p + n_x*1};
     const ptr_double rhoN_B0 = { rhoN_B0_p + n_x*1};
-    ptr_double p_B0 = { p_B0_p + n_x*1};
+    const ptr_double rhoev_B0 = { rhoev_B0_p + n_x*1};
+    const ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
+    const ptr_double u0_B0 = { u0_B0_p + n_x*1};
+    const ptr_double wdotN2_B0 = { wdotN2_B0_p + n_x*1};
+    const ptr_double wdotN_B0 = { wdotN_B0_p + n_x*1};
+    ptr_double Residual0_B0 = { Residual0_B0_p + n_x*1};
+    ptr_double Residual1_B0 = { Residual1_B0_p + n_x*1};
+    ptr_double Residual2_B0 = { Residual2_B0_p + n_x*1};
+    ptr_double Residual3_B0 = { Residual3_B0_p + n_x*1};
+    ptr_double Residual4_B0 = { Residual4_B0_p + n_x*1};
     
-   OPS_ACC(p_B0, 0) = (invMN*OPS_ACC(rhoN_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0))*Rhat*OPS_ACC(T_B0, 0);
+   double d1_prhoEu0_dx = 0.0;
+   double d1_prhou0u0_dx = 0.0;
+   double d1_rhoN2u0_dx = 0.0;
+   double d1_rhoNu0_dx = 0.0;
+   double d1_rhoevu0_dx = 0.0;
+   double d2_T_dx = 0.0;
+   if (idx[0] == 0){
+
+       d1_prhoEu0_dx = (3.0*(OPS_ACC(p_B0, 1) + OPS_ACC(rhoE_B0, 1))*OPS_ACC(u0_B0, 1) + 0.333333333333333*(OPS_ACC(p_B0, 3) + OPS_ACC(rhoE_B0, 3))*OPS_ACC(u0_B0, 3) -
+            1.5*(OPS_ACC(p_B0, 2) + OPS_ACC(rhoE_B0, 2))*OPS_ACC(u0_B0, 2) - 1.83333333333333*(OPS_ACC(p_B0, 0) + OPS_ACC(rhoE_B0, 0))*OPS_ACC(u0_B0, 0))*invDelta0block0;
+
+       d1_prhou0u0_dx = (3.0*OPS_ACC(p_B0, 1) + 0.333333333333333*OPS_ACC(p_B0, 3) - 1.5*OPS_ACC(p_B0, 2) - 1.83333333333333*OPS_ACC(p_B0, 0) +
+            3.0*OPS_ACC(u0_B0, 1)*OPS_ACC(rhou0_B0, 1) + 0.333333333333333*OPS_ACC(u0_B0, 3)*OPS_ACC(rhou0_B0, 3) - 1.5*OPS_ACC(u0_B0, 2)*OPS_ACC(rhou0_B0, 2) -
+            1.83333333333333*OPS_ACC(u0_B0, 0)*OPS_ACC(rhou0_B0, 0))*invDelta0block0;
+
+       d1_rhoN2u0_dx = (3.0*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN2_B0, 1) + 0.333333333333333*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoN2_B0, 3) - 1.5*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN2_B0, 2) -
+            1.83333333333333*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN2_B0, 0))*invDelta0block0;
+
+       d1_rhoNu0_dx = (3.0*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN_B0, 1) + 0.333333333333333*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoN_B0, 3) - 1.5*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN_B0, 2) -
+            1.83333333333333*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN_B0, 0))*invDelta0block0;
+
+       d1_rhoevu0_dx = (3.0*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoev_B0, 1) + 0.333333333333333*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoev_B0, 3) - 1.5*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoev_B0, 2) -
+            1.83333333333333*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoev_B0, 0))*invDelta0block0;
+
+   }
+
+   else if (idx[0] == 1){
+
+       d1_prhoEu0_dx = (0.0394168524399447*(OPS_ACC(p_B0, 2) + OPS_ACC(rhoE_B0, 2))*OPS_ACC(u0_B0, 2) + 0.00571369039775442*(OPS_ACC(p_B0, 4) +
+            OPS_ACC(rhoE_B0, 4))*OPS_ACC(u0_B0, 4) + 0.719443173328855*(OPS_ACC(p_B0, 1) + OPS_ACC(rhoE_B0, 1))*OPS_ACC(u0_B0, 1) - 0.322484932882161*(OPS_ACC(p_B0, 0) +
+            OPS_ACC(rhoE_B0, 0))*OPS_ACC(u0_B0, 0) - 0.0658051057710389*(OPS_ACC(p_B0, 3) + OPS_ACC(rhoE_B0, 3))*OPS_ACC(u0_B0, 3) - 0.376283677513354*(OPS_ACC(p_B0, -1) +
+            OPS_ACC(rhoE_B0, -1))*OPS_ACC(u0_B0, -1))*invDelta0block0;
+
+       d1_prhou0u0_dx = (0.0394168524399447*OPS_ACC(p_B0, 2) + 0.00571369039775442*OPS_ACC(p_B0, 4) + 0.719443173328855*OPS_ACC(p_B0, 1) -
+            0.322484932882161*OPS_ACC(p_B0, 0) - 0.0658051057710389*OPS_ACC(p_B0, 3) - 0.376283677513354*OPS_ACC(p_B0, -1) +
+            0.0394168524399447*OPS_ACC(u0_B0, 2)*OPS_ACC(rhou0_B0, 2) + 0.00571369039775442*OPS_ACC(u0_B0, 4)*OPS_ACC(rhou0_B0, 4) +
+            0.719443173328855*OPS_ACC(u0_B0, 1)*OPS_ACC(rhou0_B0, 1) - 0.322484932882161*OPS_ACC(u0_B0, 0)*OPS_ACC(rhou0_B0, 0) -
+            0.0658051057710389*OPS_ACC(u0_B0, 3)*OPS_ACC(rhou0_B0, 3) - 0.376283677513354*OPS_ACC(u0_B0, -1)*OPS_ACC(rhou0_B0, -1))*invDelta0block0;
+
+       d1_rhoN2u0_dx = (0.0394168524399447*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN2_B0, 2) + 0.00571369039775442*OPS_ACC(u0_B0, 4)*OPS_ACC(rhoN2_B0, 4) +
+            0.719443173328855*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN2_B0, 1) - 0.322484932882161*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN2_B0, 0) -
+            0.0658051057710389*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoN2_B0, 3) - 0.376283677513354*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN2_B0, -1))*invDelta0block0;
+
+       d1_rhoNu0_dx = (0.0394168524399447*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN_B0, 2) + 0.00571369039775442*OPS_ACC(u0_B0, 4)*OPS_ACC(rhoN_B0, 4) +
+            0.719443173328855*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN_B0, 1) - 0.322484932882161*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN_B0, 0) -
+            0.0658051057710389*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoN_B0, 3) - 0.376283677513354*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN_B0, -1))*invDelta0block0;
+
+       d1_rhoevu0_dx = (0.0394168524399447*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoev_B0, 2) + 0.00571369039775442*OPS_ACC(u0_B0, 4)*OPS_ACC(rhoev_B0, 4) +
+            0.719443173328855*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoev_B0, 1) - 0.322484932882161*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoev_B0, 0) -
+            0.0658051057710389*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoev_B0, 3) - 0.376283677513354*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoev_B0, -1))*invDelta0block0;
+
+   }
+
+   else if (idx[0] == 2){
+
+       d1_prhoEu0_dx = (0.197184333887745*(OPS_ACC(p_B0, 0) + OPS_ACC(rhoE_B0, 0))*OPS_ACC(u0_B0, 0) + 0.521455851089587*(OPS_ACC(p_B0, 1) +
+            OPS_ACC(rhoE_B0, 1))*OPS_ACC(u0_B0, 1) + 0.113446470384241*(OPS_ACC(p_B0, -2) + OPS_ACC(rhoE_B0, -2))*OPS_ACC(u0_B0, -2) - 0.00412637789557492*(OPS_ACC(p_B0, 3) +
+            OPS_ACC(rhoE_B0, 3))*OPS_ACC(u0_B0, 3) - 0.0367146847001261*(OPS_ACC(p_B0, 2) + OPS_ACC(rhoE_B0, 2))*OPS_ACC(u0_B0, 2) - 0.791245592765872*(OPS_ACC(p_B0, -1) +
+            OPS_ACC(rhoE_B0, -1))*OPS_ACC(u0_B0, -1))*invDelta0block0;
+
+       d1_prhou0u0_dx = (0.197184333887745*OPS_ACC(p_B0, 0) + 0.521455851089587*OPS_ACC(p_B0, 1) + 0.113446470384241*OPS_ACC(p_B0, -2) -
+            0.00412637789557492*OPS_ACC(p_B0, 3) - 0.0367146847001261*OPS_ACC(p_B0, 2) - 0.791245592765872*OPS_ACC(p_B0, -1) +
+            0.197184333887745*OPS_ACC(u0_B0, 0)*OPS_ACC(rhou0_B0, 0) + 0.521455851089587*OPS_ACC(u0_B0, 1)*OPS_ACC(rhou0_B0, 1) +
+            0.113446470384241*OPS_ACC(u0_B0, -2)*OPS_ACC(rhou0_B0, -2) - 0.00412637789557492*OPS_ACC(u0_B0, 3)*OPS_ACC(rhou0_B0, 3) -
+            0.0367146847001261*OPS_ACC(u0_B0, 2)*OPS_ACC(rhou0_B0, 2) - 0.791245592765872*OPS_ACC(u0_B0, -1)*OPS_ACC(rhou0_B0, -1))*invDelta0block0;
+
+       d1_rhoN2u0_dx = (0.197184333887745*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN2_B0, 0) + 0.521455851089587*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN2_B0, 1) +
+            0.113446470384241*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN2_B0, -2) - 0.00412637789557492*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoN2_B0, 3) -
+            0.0367146847001261*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN2_B0, 2) - 0.791245592765872*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN2_B0, -1))*invDelta0block0;
+
+       d1_rhoNu0_dx = (0.197184333887745*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN_B0, 0) + 0.521455851089587*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN_B0, 1) +
+            0.113446470384241*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN_B0, -2) - 0.00412637789557492*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoN_B0, 3) -
+            0.0367146847001261*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN_B0, 2) - 0.791245592765872*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN_B0, -1))*invDelta0block0;
+
+       d1_rhoevu0_dx = (0.197184333887745*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoev_B0, 0) + 0.521455851089587*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoev_B0, 1) +
+            0.113446470384241*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoev_B0, -2) - 0.00412637789557492*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoev_B0, 3) -
+            0.0367146847001261*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoev_B0, 2) - 0.791245592765872*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoev_B0, -1))*invDelta0block0;
+
+   }
+
+   else if (idx[0] == 3){
+
+       d1_prhoEu0_dx = (0.0451033223343881*(OPS_ACC(p_B0, 0) + OPS_ACC(rhoE_B0, 0))*OPS_ACC(u0_B0, 0) + 0.652141084861241*(OPS_ACC(p_B0, 1) +
+            OPS_ACC(rhoE_B0, 1))*OPS_ACC(u0_B0, 1) + 0.121937153224065*(OPS_ACC(p_B0, -2) + OPS_ACC(rhoE_B0, -2))*OPS_ACC(u0_B0, -2) - 0.00932597985049999*(OPS_ACC(p_B0, -3)
+            + OPS_ACC(rhoE_B0, -3))*OPS_ACC(u0_B0, -3) - 0.727822147724592*(OPS_ACC(p_B0, -1) + OPS_ACC(rhoE_B0, -1))*OPS_ACC(u0_B0, -1) - 0.082033432844602*(OPS_ACC(p_B0, 2)
+            + OPS_ACC(rhoE_B0, 2))*OPS_ACC(u0_B0, 2))*invDelta0block0;
+
+       d1_prhou0u0_dx = (0.0451033223343881*OPS_ACC(p_B0, 0) + 0.652141084861241*OPS_ACC(p_B0, 1) + 0.121937153224065*OPS_ACC(p_B0, -2) -
+            0.00932597985049999*OPS_ACC(p_B0, -3) - 0.727822147724592*OPS_ACC(p_B0, -1) - 0.082033432844602*OPS_ACC(p_B0, 2) +
+            0.0451033223343881*OPS_ACC(u0_B0, 0)*OPS_ACC(rhou0_B0, 0) + 0.652141084861241*OPS_ACC(u0_B0, 1)*OPS_ACC(rhou0_B0, 1) +
+            0.121937153224065*OPS_ACC(u0_B0, -2)*OPS_ACC(rhou0_B0, -2) - 0.00932597985049999*OPS_ACC(u0_B0, -3)*OPS_ACC(rhou0_B0, -3) -
+            0.727822147724592*OPS_ACC(u0_B0, -1)*OPS_ACC(rhou0_B0, -1) - 0.082033432844602*OPS_ACC(u0_B0, 2)*OPS_ACC(rhou0_B0, 2))*invDelta0block0;
+
+       d1_rhoN2u0_dx = (0.0451033223343881*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN2_B0, 0) + 0.652141084861241*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN2_B0, 1) +
+            0.121937153224065*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN2_B0, -2) - 0.00932597985049999*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoN2_B0, -3) -
+            0.727822147724592*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN2_B0, -1) - 0.082033432844602*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN2_B0, 2))*invDelta0block0;
+
+       d1_rhoNu0_dx = (0.0451033223343881*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN_B0, 0) + 0.652141084861241*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN_B0, 1) +
+            0.121937153224065*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN_B0, -2) - 0.00932597985049999*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoN_B0, -3) -
+            0.727822147724592*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN_B0, -1) - 0.082033432844602*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN_B0, 2))*invDelta0block0;
+
+       d1_rhoevu0_dx = (0.0451033223343881*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoev_B0, 0) + 0.652141084861241*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoev_B0, 1) +
+            0.121937153224065*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoev_B0, -2) - 0.00932597985049999*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoev_B0, -3) -
+            0.727822147724592*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoev_B0, -1) - 0.082033432844602*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoev_B0, 2))*invDelta0block0;
+
+   }
+
+   else if (idx[0] == -1 + block0np0){
+
+       d1_prhoEu0_dx = (1.5*(OPS_ACC(p_B0, -2) + OPS_ACC(rhoE_B0, -2))*OPS_ACC(u0_B0, -2) + 1.83333333333333*(OPS_ACC(p_B0, 0) + OPS_ACC(rhoE_B0, 0))*OPS_ACC(u0_B0, 0) -
+            3.0*(OPS_ACC(p_B0, -1) + OPS_ACC(rhoE_B0, -1))*OPS_ACC(u0_B0, -1) - 0.333333333333333*(OPS_ACC(p_B0, -3) +
+            OPS_ACC(rhoE_B0, -3))*OPS_ACC(u0_B0, -3))*invDelta0block0;
+
+       d1_prhou0u0_dx = (1.5*OPS_ACC(p_B0, -2) + 1.83333333333333*OPS_ACC(p_B0, 0) - 3.0*OPS_ACC(p_B0, -1) - 0.333333333333333*OPS_ACC(p_B0, -3) +
+            1.5*OPS_ACC(u0_B0, -2)*OPS_ACC(rhou0_B0, -2) + 1.83333333333333*OPS_ACC(u0_B0, 0)*OPS_ACC(rhou0_B0, 0) - 3.0*OPS_ACC(u0_B0, -1)*OPS_ACC(rhou0_B0, -1) -
+            0.333333333333333*OPS_ACC(u0_B0, -3)*OPS_ACC(rhou0_B0, -3))*invDelta0block0;
+
+       d1_rhoN2u0_dx = (1.5*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN2_B0, -2) + 1.83333333333333*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN2_B0, 0) - 3.0*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN2_B0, -1)
+            - 0.333333333333333*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoN2_B0, -3))*invDelta0block0;
+
+       d1_rhoNu0_dx = (1.5*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN_B0, -2) + 1.83333333333333*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN_B0, 0) - 3.0*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN_B0, -1) -
+            0.333333333333333*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoN_B0, -3))*invDelta0block0;
+
+       d1_rhoevu0_dx = (1.5*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoev_B0, -2) + 1.83333333333333*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoev_B0, 0) - 3.0*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoev_B0, -1)
+            - 0.333333333333333*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoev_B0, -3))*invDelta0block0;
+
+   }
+
+   else if (idx[0] == -2 + block0np0){
+
+       d1_prhoEu0_dx = (0.322484932882161*(OPS_ACC(p_B0, 0) + OPS_ACC(rhoE_B0, 0))*OPS_ACC(u0_B0, 0) + 0.0658051057710389*(OPS_ACC(p_B0, -3) +
+            OPS_ACC(rhoE_B0, -3))*OPS_ACC(u0_B0, -3) + 0.376283677513354*(OPS_ACC(p_B0, 1) + OPS_ACC(rhoE_B0, 1))*OPS_ACC(u0_B0, 1) - 0.0394168524399447*(OPS_ACC(p_B0, -2) +
+            OPS_ACC(rhoE_B0, -2))*OPS_ACC(u0_B0, -2) - 0.00571369039775442*(OPS_ACC(p_B0, -4) + OPS_ACC(rhoE_B0, -4))*OPS_ACC(u0_B0, -4) -
+            0.719443173328855*(OPS_ACC(p_B0, -1) + OPS_ACC(rhoE_B0, -1))*OPS_ACC(u0_B0, -1))*invDelta0block0;
+
+       d1_prhou0u0_dx = (0.322484932882161*OPS_ACC(p_B0, 0) + 0.0658051057710389*OPS_ACC(p_B0, -3) + 0.376283677513354*OPS_ACC(p_B0, 1) -
+            0.0394168524399447*OPS_ACC(p_B0, -2) - 0.00571369039775442*OPS_ACC(p_B0, -4) - 0.719443173328855*OPS_ACC(p_B0, -1) +
+            0.322484932882161*OPS_ACC(u0_B0, 0)*OPS_ACC(rhou0_B0, 0) + 0.0658051057710389*OPS_ACC(u0_B0, -3)*OPS_ACC(rhou0_B0, -3) +
+            0.376283677513354*OPS_ACC(u0_B0, 1)*OPS_ACC(rhou0_B0, 1) - 0.0394168524399447*OPS_ACC(u0_B0, -2)*OPS_ACC(rhou0_B0, -2) -
+            0.00571369039775442*OPS_ACC(u0_B0, -4)*OPS_ACC(rhou0_B0, -4) - 0.719443173328855*OPS_ACC(u0_B0, -1)*OPS_ACC(rhou0_B0, -1))*invDelta0block0;
+
+       d1_rhoN2u0_dx = (0.322484932882161*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN2_B0, 0) + 0.0658051057710389*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoN2_B0, -3) +
+            0.376283677513354*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN2_B0, 1) - 0.0394168524399447*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN2_B0, -2) -
+            0.00571369039775442*OPS_ACC(u0_B0, -4)*OPS_ACC(rhoN2_B0, -4) - 0.719443173328855*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN2_B0, -1))*invDelta0block0;
+
+       d1_rhoNu0_dx = (0.322484932882161*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN_B0, 0) + 0.0658051057710389*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoN_B0, -3) +
+            0.376283677513354*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN_B0, 1) - 0.0394168524399447*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN_B0, -2) -
+            0.00571369039775442*OPS_ACC(u0_B0, -4)*OPS_ACC(rhoN_B0, -4) - 0.719443173328855*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN_B0, -1))*invDelta0block0;
+
+       d1_rhoevu0_dx = (0.322484932882161*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoev_B0, 0) + 0.0658051057710389*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoev_B0, -3) +
+            0.376283677513354*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoev_B0, 1) - 0.0394168524399447*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoev_B0, -2) -
+            0.00571369039775442*OPS_ACC(u0_B0, -4)*OPS_ACC(rhoev_B0, -4) - 0.719443173328855*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoev_B0, -1))*invDelta0block0;
+
+   }
+
+   else if (idx[0] == -3 + block0np0){
+
+       d1_prhoEu0_dx = (0.00412637789557492*(OPS_ACC(p_B0, -3) + OPS_ACC(rhoE_B0, -3))*OPS_ACC(u0_B0, -3) + 0.0367146847001261*(OPS_ACC(p_B0, -2) +
+            OPS_ACC(rhoE_B0, -2))*OPS_ACC(u0_B0, -2) + 0.791245592765872*(OPS_ACC(p_B0, 1) + OPS_ACC(rhoE_B0, 1))*OPS_ACC(u0_B0, 1) - 0.197184333887745*(OPS_ACC(p_B0, 0) +
+            OPS_ACC(rhoE_B0, 0))*OPS_ACC(u0_B0, 0) - 0.521455851089587*(OPS_ACC(p_B0, -1) + OPS_ACC(rhoE_B0, -1))*OPS_ACC(u0_B0, -1) - 0.113446470384241*(OPS_ACC(p_B0, 2) +
+            OPS_ACC(rhoE_B0, 2))*OPS_ACC(u0_B0, 2))*invDelta0block0;
+
+       d1_prhou0u0_dx = (0.00412637789557492*OPS_ACC(p_B0, -3) + 0.0367146847001261*OPS_ACC(p_B0, -2) + 0.791245592765872*OPS_ACC(p_B0, 1) -
+            0.197184333887745*OPS_ACC(p_B0, 0) - 0.521455851089587*OPS_ACC(p_B0, -1) - 0.113446470384241*OPS_ACC(p_B0, 2) +
+            0.00412637789557492*OPS_ACC(u0_B0, -3)*OPS_ACC(rhou0_B0, -3) + 0.0367146847001261*OPS_ACC(u0_B0, -2)*OPS_ACC(rhou0_B0, -2) +
+            0.791245592765872*OPS_ACC(u0_B0, 1)*OPS_ACC(rhou0_B0, 1) - 0.197184333887745*OPS_ACC(u0_B0, 0)*OPS_ACC(rhou0_B0, 0) -
+            0.521455851089587*OPS_ACC(u0_B0, -1)*OPS_ACC(rhou0_B0, -1) - 0.113446470384241*OPS_ACC(u0_B0, 2)*OPS_ACC(rhou0_B0, 2))*invDelta0block0;
+
+       d1_rhoN2u0_dx = (0.00412637789557492*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoN2_B0, -3) + 0.0367146847001261*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN2_B0, -2) +
+            0.791245592765872*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN2_B0, 1) - 0.197184333887745*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN2_B0, 0) -
+            0.521455851089587*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN2_B0, -1) - 0.113446470384241*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN2_B0, 2))*invDelta0block0;
+
+       d1_rhoNu0_dx = (0.00412637789557492*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoN_B0, -3) + 0.0367146847001261*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN_B0, -2) +
+            0.791245592765872*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN_B0, 1) - 0.197184333887745*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN_B0, 0) -
+            0.521455851089587*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN_B0, -1) - 0.113446470384241*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN_B0, 2))*invDelta0block0;
+
+       d1_rhoevu0_dx = (0.00412637789557492*OPS_ACC(u0_B0, -3)*OPS_ACC(rhoev_B0, -3) + 0.0367146847001261*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoev_B0, -2) +
+            0.791245592765872*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoev_B0, 1) - 0.197184333887745*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoev_B0, 0) -
+            0.521455851089587*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoev_B0, -1) - 0.113446470384241*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoev_B0, 2))*invDelta0block0;
+
+   }
+
+   else if (idx[0] == -4 + block0np0){
+
+       d1_prhoEu0_dx = (0.00932597985049999*(OPS_ACC(p_B0, 3) + OPS_ACC(rhoE_B0, 3))*OPS_ACC(u0_B0, 3) + 0.727822147724592*(OPS_ACC(p_B0, 1) +
+            OPS_ACC(rhoE_B0, 1))*OPS_ACC(u0_B0, 1) + 0.082033432844602*(OPS_ACC(p_B0, -2) + OPS_ACC(rhoE_B0, -2))*OPS_ACC(u0_B0, -2) - 0.0451033223343881*(OPS_ACC(p_B0, 0) +
+            OPS_ACC(rhoE_B0, 0))*OPS_ACC(u0_B0, 0) - 0.652141084861241*(OPS_ACC(p_B0, -1) + OPS_ACC(rhoE_B0, -1))*OPS_ACC(u0_B0, -1) - 0.121937153224065*(OPS_ACC(p_B0, 2) +
+            OPS_ACC(rhoE_B0, 2))*OPS_ACC(u0_B0, 2))*invDelta0block0;
+
+       d1_prhou0u0_dx = (0.00932597985049999*OPS_ACC(p_B0, 3) + 0.727822147724592*OPS_ACC(p_B0, 1) + 0.082033432844602*OPS_ACC(p_B0, -2) -
+            0.0451033223343881*OPS_ACC(p_B0, 0) - 0.652141084861241*OPS_ACC(p_B0, -1) - 0.121937153224065*OPS_ACC(p_B0, 2) +
+            0.00932597985049999*OPS_ACC(u0_B0, 3)*OPS_ACC(rhou0_B0, 3) + 0.727822147724592*OPS_ACC(u0_B0, 1)*OPS_ACC(rhou0_B0, 1) +
+            0.082033432844602*OPS_ACC(u0_B0, -2)*OPS_ACC(rhou0_B0, -2) - 0.0451033223343881*OPS_ACC(u0_B0, 0)*OPS_ACC(rhou0_B0, 0) -
+            0.652141084861241*OPS_ACC(u0_B0, -1)*OPS_ACC(rhou0_B0, -1) - 0.121937153224065*OPS_ACC(u0_B0, 2)*OPS_ACC(rhou0_B0, 2))*invDelta0block0;
+
+       d1_rhoN2u0_dx = (0.00932597985049999*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoN2_B0, 3) + 0.727822147724592*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN2_B0, 1) +
+            0.082033432844602*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN2_B0, -2) - 0.0451033223343881*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN2_B0, 0) -
+            0.652141084861241*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN2_B0, -1) - 0.121937153224065*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN2_B0, 2))*invDelta0block0;
+
+       d1_rhoNu0_dx = (0.00932597985049999*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoN_B0, 3) + 0.727822147724592*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN_B0, 1) +
+            0.082033432844602*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN_B0, -2) - 0.0451033223343881*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoN_B0, 0) -
+            0.652141084861241*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN_B0, -1) - 0.121937153224065*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN_B0, 2))*invDelta0block0;
+
+       d1_rhoevu0_dx = (0.00932597985049999*OPS_ACC(u0_B0, 3)*OPS_ACC(rhoev_B0, 3) + 0.727822147724592*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoev_B0, 1) +
+            0.082033432844602*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoev_B0, -2) - 0.0451033223343881*OPS_ACC(u0_B0, 0)*OPS_ACC(rhoev_B0, 0) -
+            0.652141084861241*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoev_B0, -1) - 0.121937153224065*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoev_B0, 2))*invDelta0block0;
+
+   }
+
+   else{
+
+       d1_prhoEu0_dx = (-(2.0/3.0)*(OPS_ACC(p_B0, -1) + OPS_ACC(rhoE_B0, -1))*OPS_ACC(u0_B0, -1) - (1.0/12.0)*(OPS_ACC(p_B0, 2) + OPS_ACC(rhoE_B0, 2))*OPS_ACC(u0_B0, 2) +
+            ((1.0/12.0))*(OPS_ACC(p_B0, -2) + OPS_ACC(rhoE_B0, -2))*OPS_ACC(u0_B0, -2) + ((2.0/3.0))*(OPS_ACC(p_B0, 1) +
+            OPS_ACC(rhoE_B0, 1))*OPS_ACC(u0_B0, 1))*invDelta0block0;
+
+       d1_prhou0u0_dx = (-(2.0/3.0)*OPS_ACC(p_B0, -1) - (1.0/12.0)*OPS_ACC(p_B0, 2) + ((1.0/12.0))*OPS_ACC(p_B0, -2) + ((2.0/3.0))*OPS_ACC(p_B0, 1) -
+            (2.0/3.0)*OPS_ACC(u0_B0, -1)*OPS_ACC(rhou0_B0, -1) - (1.0/12.0)*OPS_ACC(u0_B0, 2)*OPS_ACC(rhou0_B0, 2) + ((1.0/12.0))*OPS_ACC(u0_B0, -2)*OPS_ACC(rhou0_B0, -2) +
+            ((2.0/3.0))*OPS_ACC(u0_B0, 1)*OPS_ACC(rhou0_B0, 1))*invDelta0block0;
+
+       d1_rhoN2u0_dx = (-(2.0/3.0)*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN2_B0, -1) - (1.0/12.0)*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN2_B0, 2) +
+            ((1.0/12.0))*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN2_B0, -2) + ((2.0/3.0))*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN2_B0, 1))*invDelta0block0;
+
+       d1_rhoNu0_dx = (-(2.0/3.0)*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoN_B0, -1) - (1.0/12.0)*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoN_B0, 2) +
+            ((1.0/12.0))*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoN_B0, -2) + ((2.0/3.0))*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoN_B0, 1))*invDelta0block0;
+
+       d1_rhoevu0_dx = (-(2.0/3.0)*OPS_ACC(u0_B0, -1)*OPS_ACC(rhoev_B0, -1) - (1.0/12.0)*OPS_ACC(u0_B0, 2)*OPS_ACC(rhoev_B0, 2) +
+            ((1.0/12.0))*OPS_ACC(u0_B0, -2)*OPS_ACC(rhoev_B0, -2) + ((2.0/3.0))*OPS_ACC(u0_B0, 1)*OPS_ACC(rhoev_B0, 1))*invDelta0block0;
+
+   }
+
+   if (idx[0] == 0){
+
+       d2_T_dx = (-(26.0/3.0)*OPS_ACC(T_B0, 1) - (14.0/3.0)*OPS_ACC(T_B0, 3) + ((11.0/12.0))*OPS_ACC(T_B0, 4) + ((19.0/2.0))*OPS_ACC(T_B0, 2) +
+            ((35.0/12.0))*OPS_ACC(T_B0, 0))*inv2Delta0block0;
+
+   }
+
+   else if (idx[0] == 1){
+
+       d2_T_dx = (((1.0/2.0))*OPS_ACC(T_B0, 1) - (5.0/3.0)*OPS_ACC(T_B0, 0) - (1.0/12.0)*OPS_ACC(T_B0, 3) + ((1.0/3.0))*OPS_ACC(T_B0, 2) +
+            ((11.0/12.0))*OPS_ACC(T_B0, -1))*inv2Delta0block0;
+
+   }
+
+   else if (idx[0] == -1 + block0np0){
+
+       d2_T_dx = (-(26.0/3.0)*OPS_ACC(T_B0, -1) - (14.0/3.0)*OPS_ACC(T_B0, -3) + ((11.0/12.0))*OPS_ACC(T_B0, -4) + ((19.0/2.0))*OPS_ACC(T_B0, -2) +
+            ((35.0/12.0))*OPS_ACC(T_B0, 0))*inv2Delta0block0;
+
+   }
+
+   else if (idx[0] == -2 + block0np0){
+
+       d2_T_dx = (((1.0/2.0))*OPS_ACC(T_B0, -1) - (5.0/3.0)*OPS_ACC(T_B0, 0) - (1.0/12.0)*OPS_ACC(T_B0, -3) + ((1.0/3.0))*OPS_ACC(T_B0, -2) +
+            ((11.0/12.0))*OPS_ACC(T_B0, 1))*inv2Delta0block0;
+
+   }
+
+   else{
+
+       d2_T_dx = (-(5.0/2.0)*OPS_ACC(T_B0, 0) - (1.0/12.0)*OPS_ACC(T_B0, -2) - (1.0/12.0)*OPS_ACC(T_B0, 2) + ((4.0/3.0))*OPS_ACC(T_B0, 1) +
+            ((4.0/3.0))*OPS_ACC(T_B0, -1))*inv2Delta0block0;
+
+   }
+
+   OPS_ACC(Residual0_B0, 0) = -d1_rhoNu0_dx + OPS_ACC(wdotN_B0, 0);
+
+   OPS_ACC(Residual1_B0, 0) = -d1_rhoN2u0_dx + OPS_ACC(wdotN2_B0, 0);
+
+   OPS_ACC(Residual2_B0, 0) = -d1_prhou0u0_dx;
+
+    OPS_ACC(Residual3_B0, 0) = -d1_rhoevu0_dx + 9.86923266716013e-6*(-OPS_ACC(rhoev_B0, 0) +
+      OPS_ACC(rhoN2_B0, 0)*OPS_ACC(eveqN2_B0, 0))*Lref*invuref*OPS_ACC(p_B0, 0)/OPS_ACC(ptauN2_B0, 0) + OPS_ACC(wdotN_B0, 0) + OPS_ACC(wdotN2_B0, 0);
+
+   OPS_ACC(Residual4_B0, 0) = -d1_prhoEu0_dx + kappa*d2_T_dx;
 
 
   }

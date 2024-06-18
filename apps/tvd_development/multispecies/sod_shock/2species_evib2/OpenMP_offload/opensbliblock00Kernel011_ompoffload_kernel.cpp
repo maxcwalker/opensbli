@@ -8,7 +8,7 @@
 #ifndef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel011(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
- ops_arg arg4) {
+ ops_arg arg4, ops_arg arg5) {
 #else
 void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) {
   ops_block block = desc->block;
@@ -19,17 +19,18 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
   ops_arg arg2 = desc->args[2];
   ops_arg arg3 = desc->args[3];
   ops_arg arg4 = desc->args[4];
+  ops_arg arg5 = desc->args[5];
   #endif
 
   //Timing
   double __t1,__t2,__c1,__c2;
 
-  ops_arg args[5] = { arg0, arg1, arg2, arg3, arg4};
+  ops_arg args[6] = { arg0, arg1, arg2, arg3, arg4, arg5};
 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,5,range,4)) return;
+  if (!ops_checkpointing_before(args,6,range,4)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
@@ -54,7 +55,7 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
     start[n] = range[2*n];end[n] = range[2*n+1];
   }
   #else
-  if (compute_ranges(args, 5,block, range, start, end, arg_idx) < 0) return;
+  if (compute_ranges(args, 6,block, range, start, end, arg_idx) < 0) return;
   #endif
 
   int start0 = start[0];
@@ -74,18 +75,21 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ rhoN_B0_p = (double *)(args[2].data_d + base2);
 
   int base3 = args[3].dat->base_offset;
-  double * __restrict__ u0_B0_p = (double *)(args[3].data_d + base3);
+  double * __restrict__ rhoev_B0_p = (double *)(args[3].data_d + base3);
 
   int base4 = args[4].dat->base_offset;
-  double * __restrict__ T_B0_p = (double *)(args[4].data_d + base4);
+  double * __restrict__ u0_B0_p = (double *)(args[4].data_d + base4);
+
+  int base5 = args[5].dat->base_offset;
+  double * __restrict__ T_B0_p = (double *)(args[5].data_d + base5);
 
 
 
   #ifndef OPS_LAZY
   //Halo Exchanges
-  ops_H_D_exchanges_device(args, 5);
-  ops_halo_exchanges(args,5,range);
-  ops_H_D_exchanges_device(args, 5);
+  ops_H_D_exchanges_device(args, 6);
+  ops_halo_exchanges(args,6,range);
+  ops_H_D_exchanges_device(args, 6);
   #endif
 
   if (block->instance->OPS_diags > 1) {
@@ -98,11 +102,12 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
     const ACC<double> rhoE_B0(rhoE_B0_p + n_x*1);
     const ACC<double> rhoN2_B0(rhoN2_B0_p + n_x*1);
     const ACC<double> rhoN_B0(rhoN_B0_p + n_x*1);
+    const ACC<double> rhoev_B0(rhoev_B0_p + n_x*1);
     const ACC<double> u0_B0(u0_B0_p + n_x*1);
     ACC<double> T_B0(T_B0_p + n_x*1);
     
-    T_B0(0) = (-0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) - 1.0e-10*dhN*invMN*rhoN_B0(0) +
-      rhoE_B0(0))*invRhat/(invMN*rhoN_B0(0) + invMN2*rhoN2_B0(0));
+    T_B0(0) = (uref*uref)*(-rhoev_B0(0) - 0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) +
+      rhoE_B0(0))*invRhat*invTref/(invMN*rhoN_B0(0) + invMN2*rhoN2_B0(0));
 
 
   }
@@ -111,8 +116,8 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
     block->instance->OPS_kernels[4].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
-  ops_set_dirtybit_device(args, 5);
-  ops_set_halo_dirtybit3(&args[4],range);
+  ops_set_dirtybit_device(args, 6);
+  ops_set_halo_dirtybit3(&args[5],range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
@@ -124,6 +129,7 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
     block->instance->OPS_kernels[4].transfer += ops_compute_transfer(dim, start, end, &arg2);
     block->instance->OPS_kernels[4].transfer += ops_compute_transfer(dim, start, end, &arg3);
     block->instance->OPS_kernels[4].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[4].transfer += ops_compute_transfer(dim, start, end, &arg5);
   }
 }
 
@@ -131,10 +137,10 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel011(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
- ops_arg arg4) {
-  ops_arg args[5] = { arg0, arg1, arg2, arg3, arg4 };
+ ops_arg arg4, ops_arg arg5) {
+  ops_arg args[6] = { arg0, arg1, arg2, arg3, arg4, arg5 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 5, 4, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel011_execute);
+  create_kerneldesc_and_enque(name, args, 6, 4, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel011_execute);
 }
 #endif

@@ -312,13 +312,25 @@ ACC<double> &yN_B0, const ACC<double> &yO2_B0, const ACC<double> &yO_B0, ACC<dou
 
 }
 
-void opensbliblock00Kernel036(const ACC<double> &T_B0, ACC<double> &eveqO2_B0)
+void opensbliblock00Kernel036(const ACC<double> &T_B0, ACC<double> &eveqNO_B0)
+{
+   eveqNO_B0(0) = Rhat*invMNO*thetavNO/(-1.0 + exp(thetavNO/T_B0(0)));
+
+}
+
+void opensbliblock00Kernel037(const ACC<double> &T_B0, ACC<double> &eveqO2_B0)
 {
    eveqO2_B0(0) = Rhat*invMO2*thetavO2/(-1.0 + exp(thetavO2/T_B0(0)));
 
 }
 
- void opensbliblock00Kernel037(const ACC<double> &T_B0, const ACC<double> &rhoN2_B0, const ACC<double> &rhoNO_B0, const
+void opensbliblock00Kernel038(const ACC<double> &T_B0, ACC<double> &eveqN2_B0)
+{
+   eveqN2_B0(0) = Rhat*invMN2*thetavN2/(-1.0 + exp(thetavN2/T_B0(0)));
+
+}
+
+ void opensbliblock00Kernel039(const ACC<double> &T_B0, const ACC<double> &rhoN2_B0, const ACC<double> &rhoNO_B0, const
 ACC<double> &rhoN_B0, const ACC<double> &rhoO2_B0, const ACC<double> &rhoO_B0, ACC<double> &ptauN2_B0)
 {
     ptauN2_B0(0) = (3.14066959164866e-11*invMN*rhoN_B0(0)*exp(220.0*pow(T_B0(0), -0.333333333333333)) +
@@ -330,7 +342,7 @@ ACC<double> &rhoN_B0, const ACC<double> &rhoO2_B0, const ACC<double> &rhoO_B0, A
 
 }
 
- void opensbliblock00Kernel038(const ACC<double> &T_B0, const ACC<double> &rhoN2_B0, const ACC<double> &rhoNO_B0, const
+ void opensbliblock00Kernel040(const ACC<double> &T_B0, const ACC<double> &rhoN2_B0, const ACC<double> &rhoNO_B0, const
 ACC<double> &rhoN_B0, const ACC<double> &rhoO2_B0, const ACC<double> &rhoO_B0, ACC<double> &ptauO2_B0)
 {
     ptauO2_B0(0) = (3.03420950194169e-10*invMO*rhoO_B0(0)*exp(129.0*pow(T_B0(0), -0.333333333333333)) +
@@ -339,18 +351,6 @@ ACC<double> &rhoN_B0, const ACC<double> &rhoO2_B0, const ACC<double> &rhoO_B0, A
       2.08725734681668e-10*invMO2*rhoO2_B0(0)*exp(129.0*pow(T_B0(0), -0.333333333333333)) +
       2.22632207449373e-10*invMN2*rhoN2_B0(0)*exp(129.0*pow(T_B0(0), -0.333333333333333)))/(invMN*rhoN_B0(0) +
       invMO*rhoO_B0(0) + invMN2*rhoN2_B0(0) + invMNO*rhoNO_B0(0) + invMO2*rhoO2_B0(0));
-
-}
-
-void opensbliblock00Kernel039(const ACC<double> &T_B0, ACC<double> &eveqNO_B0)
-{
-   eveqNO_B0(0) = Rhat*invMNO*thetavNO/(-1.0 + exp(thetavNO/T_B0(0)));
-
-}
-
-void opensbliblock00Kernel040(const ACC<double> &T_B0, ACC<double> &eveqN2_B0)
-{
-   eveqN2_B0(0) = Rhat*invMN2*thetavN2/(-1.0 + exp(thetavN2/T_B0(0)));
 
 }
 
@@ -2207,21 +2207,21 @@ ACC<double> &wk6_B0, ACC<double> &wk7_B0)
    double ws_lambda_55 = 0.0;
    double ws_lambda_66 = 0.0;
    double ws_lambda_77 = 0.0;
-   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(-1));
-
-   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(0) + rhoO_B0(-1));
-
-   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(-1));
+   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(0) + gamaf_B0(-1));
 
    AVG_0_rhoNO = ((1.0/2.0))*(rhoNO_B0(0) + rhoNO_B0(-1));
 
-   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(0) + gamaf_B0(-1));
-
-   AVG_0_rhoO2 = ((1.0/2.0))*(rhoO2_B0(0) + rhoO2_B0(-1));
-
    AVG_0_af = ((1.0/2.0))*(af_B0(0) + af_B0(-1));
 
+   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(0) + rhoO_B0(-1));
+
    AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(-1));
+
+   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(-1));
+
+   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(-1));
+
+   AVG_0_rhoO2 = ((1.0/2.0))*(rhoO2_B0(0) + rhoO2_B0(-1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -2367,21 +2367,21 @@ ACC<double> &wk6_B0, ACC<double> &wk7_B0)
       rhoNO_B0(0))*AVG_0_0_LEV_74 + (-rhoO2_B0(-1) + rhoO2_B0(0))*AVG_0_0_LEV_71 + (-rhou0_B0(-1) +
       rhou0_B0(0))*AVG_0_0_LEV_75;
 
-   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(1));
-
-   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(0) + rhoO_B0(1));
-
-   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(1));
+   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(0) + gamaf_B0(1));
 
    AVG_0_rhoNO = ((1.0/2.0))*(rhoNO_B0(0) + rhoNO_B0(1));
 
-   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(0) + gamaf_B0(1));
-
-   AVG_0_rhoO2 = ((1.0/2.0))*(rhoO2_B0(0) + rhoO2_B0(1));
-
    AVG_0_af = ((1.0/2.0))*(af_B0(0) + af_B0(1));
 
+   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(0) + rhoO_B0(1));
+
    AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(1));
+
+   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(1));
+
+   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(1));
+
+   AVG_0_rhoO2 = ((1.0/2.0))*(rhoO2_B0(0) + rhoO2_B0(1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -2593,21 +2593,21 @@ ACC<double> &wk6_B0, ACC<double> &wk7_B0)
 
    AVG_0_REV_77 = ((1.0/2.0))*(-1 + AVG_0_gamaf)*AVG_0_af/AVG_0_rhoO;
 
-   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(1) + rhoN_B0(2));
-
-   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(1) + rhoO_B0(2));
-
-   AVG_0_u0 = ((1.0/2.0))*(u0_B0(1) + u0_B0(2));
+   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(1) + gamaf_B0(2));
 
    AVG_0_rhoNO = ((1.0/2.0))*(rhoNO_B0(1) + rhoNO_B0(2));
 
-   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(1) + gamaf_B0(2));
-
-   AVG_0_rhoO2 = ((1.0/2.0))*(rhoO2_B0(1) + rhoO2_B0(2));
-
    AVG_0_af = ((1.0/2.0))*(af_B0(1) + af_B0(2));
 
+   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(1) + rhoO_B0(2));
+
    AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(1) + rhoN2_B0(2));
+
+   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(1) + rhoN_B0(2));
+
+   AVG_0_u0 = ((1.0/2.0))*(u0_B0(1) + u0_B0(2));
+
+   AVG_0_rhoO2 = ((1.0/2.0))*(rhoO2_B0(1) + rhoO2_B0(2));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 

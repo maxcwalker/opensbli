@@ -41,14 +41,16 @@ class Plot(plotFunctions):
                 plt.plot(x[i], variables[i], label=labels[i], color=colors[i], marker='o', linestyle='--', markevery=4)
             elif name == 'p':
                 plt.plot(x[i], variables[i], label= r'$%s$' % labels[i], color=colors[i])
+            elif name == 'ev':
+                plt.plot(x[i], variables[i], label= r'$%s$' % labels[i], color=colors[i])
             elif name=='T':
                 continue
             elif name == 'rho':
                 plt.plot(x[i], variables[i], label= r'$\%s$' % labels[i], color=colors[i])
             else:
-                plt.plot(x[i], variables[i], label= r'$\%s$ / $\rho$' % labels[i], color=colors[i])
+                plt.plot(x[i], variables[i], label= r'$%s$' % labels[i], color=colors[i]) #r'$\%s$ / $\rho$'
         plt.xlabel(r'$x$', fontsize=20)
-        plt.ylabel(r'$\%s$' % 'rho', fontsize=20)
+        # plt.ylabel(r'$\%s$' % 'rho', fontsize=20)
         plt.legend(loc='best')
         
         plt.savefig('density_plot.pdf', bbox_inches='tight')
@@ -62,24 +64,26 @@ class Plot(plotFunctions):
         rhoN2 = self.read_dataset(group, "rhoN2_B0")
         rho = rhoN+rhoN2
         rhou = self.read_dataset(group, "rhou0_B0")
+        rhoev = self.read_dataset(group, "rhoev_B0")
         rhoE = self.read_dataset(group, "rhoE_B0")
         p = self.read_dataset(group, "p_B0")
         # print(p)
         x = self.read_dataset(group, "x0_B0")
         u = rhou/rho
+        ev = rhoev/rho
         p_calced = (0.4)*(rhoE - 0.5*(u**2)*rho)
         T = p / (1.4*rho)
-        return rhoN, rhoN2, u, p, x, T, p_calced
+        return rhoN, rhoN2, u, p, x, T, ev, p_calced
 
     def main_plot(self, fname, n_levels):
         f, group1 = self.read_file(fname)
-        rhoN, rhoN2, u, p, x, T, p_calced = self.extract_flow_variables(group1)
+        rhoN, rhoN2, u, p, x, T, ev, p_calced = self.extract_flow_variables(group1)
         rho = rhoN + rhoN2
         # rhoN = rhoN/rho
         # rhoN2 = rhoN2/rho
 
-        x_vars, variables = [x,x,x,x, x], [rhoN,rhoN2, p, rho, T]
-        names = ['rhoN', 'rhoN2', 'p','rho', 'T']
+        x_vars, variables = [x,x,x,x,x], [p, rho, T, u, ev]
+        names = ['p','rho', 'T','u']
         self.line_graphs(x_vars, variables, names)
 
         fig2,ax2 = plt.subplots(1)
@@ -93,17 +97,18 @@ class Plot(plotFunctions):
         fig2.savefig("molefrac.pdf")
 
         fig3,ax3 = plt.subplots(1)
-        ax3.plot(x,p,label =r"p_B0")
-        # ax3.plot(x,p_calced,label =r"calculated p")
+        # ax3.plot(x,p,label =r"e_v")
+        ax3.plot(x,ev,label =r"e_V",color='k')
         ax3.legend()
-        ax3.set_ylabel(r"P")
+        ax3.set_ylabel(r"e_v")
         ax3.set_xlabel(r"X")
-        fig3.savefig("p_diff.pdf")
+        fig3.savefig("ev.pdf")
 
         return
 
-labels = ['rho_{N}', 'rho_{N2}', 'p', 'rho_{Total}', 'T']
-colors = ['r', 'k','c','b', 'orange']
+# labels = ['rho_{N}', 'rho_{N2}', 'p', 'rho_{Total}', 'T', 'e_v']
+labels = ['p', 'rho', 'T', 'u']
+colors = ['r', 'k','c','b', 'orange','grey']
 
 directory = './'
 fname = "opensbli_output.h5"

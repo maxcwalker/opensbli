@@ -1,373 +1,293 @@
 #include <stdlib.h> 
 #include <string.h> 
-#include <math.h>
-int block0np0;
-double Delta0block0;
-int niter;
-double dt;
-double gama;
-double gamma_m1;
-double shock_filter_control;
-double sensor_theta;
-double inv_0;
-double rc1;
-double rc2;
-double rc3;
-double rc4;
-double rc5;
-double rc6;
-double rc7;
-double rc8;
-double rc9;
-double rc10;
-double rc11;
-double rc12;
-double rc13;
-double rc14;
-double rc15;
-double rc16;
-double rc17;
-double rc18;
-double rc19;
-double rc20;
-double rc21;
-double rcinv22;
+#include <math.h> 
+#include "constants.h"
 #define OPS_1D
 #include "ops_seq.h"
 #include "opensbliblock00_kernels.h"
+#include "io.h"
 int main(int argc, char **argv) 
 {
+// Initializing OPS 
+ops_init(argc,argv,1);
+// Set restart to 1 to restart the simulation from HDF5 file
+restart = 0;
+// User defined constant values
 block0np0 = 200;
 Delta0block0 = 1.0/(block0np0-1);
 niter = ceil(0.2/0.0002);
-double rkB[] = {1.0/3.0, 15.0/16.0, 8.0/15.0};
-double rkA[] = {0, -5.0/9.0, -153.0/128.0};
+double rkB[] = {(1.0/3.0), (15.0/16.0), (8.0/15.0)};
+double rkA[] = {0, (-5.0/9.0), (-153.0/128.0)};
 dt = 0.0002;
+HDF5_timing = 0;
+shock_filter_control = 1.00000000000000;
 gama = 1.4;
-gamma_m1 = gama - 1;
-shock_filter_control = 1;
-sensor_theta = 4.00000000000000;
-inv_0 = 1.0/Delta0block0;
-rc1 = 1.0/2.0;
-rc2 = 1.0/12.0;
-rc3 = 2.0/3.0;
-rc4 = 1.0/4.0;
-rc5 = 5.0/3.0;
-rc6 = 31.0/6.0;
-rc7 = 11.0/6.0;
-rc8 = 25.0/6.0;
-rc9 = 19.0/6.0;
-rc10 = 1.0/3.0;
-rc11 = 13.0/6.0;
-rc12 = 5.0/6.0;
-rc13 = 3.0/10.0;
-rc14 = 3.0/5.0;
-rc15 = 1.0/10.0;
-rc16 = 1.0/6.0;
-rc17 = 5.0/12.0;
-rc18 = 7.0/12.0;
-rc19 = 11.0/12.0;
-rc20 = 10.0/3.0;
-rc21 = 1.0/60.0;
-rcinv22 = 1.0/gamma_m1;
-// Initializing OPS 
-ops_init(argc,argv,1);
-ops_decl_const("block0np0" , 1, "int", &block0np0);
+gamma_m1 = -1 + gama;
+inv_rfact0_block0 = 1.0/Delta0block0;
+invDelta0block0 = 1.0/(Delta0block0);
+invgamma_m1 = 1.0/(gamma_m1);
 ops_decl_const("Delta0block0" , 1, "double", &Delta0block0);
-ops_decl_const("niter" , 1, "int", &niter);
+ops_decl_const("HDF5_timing" , 1, "int", &HDF5_timing);
+ops_decl_const("block0np0" , 1, "int", &block0np0);
 ops_decl_const("dt" , 1, "double", &dt);
 ops_decl_const("gama" , 1, "double", &gama);
 ops_decl_const("gamma_m1" , 1, "double", &gamma_m1);
+ops_decl_const("invDelta0block0" , 1, "double", &invDelta0block0);
+ops_decl_const("inv_rfact0_block0" , 1, "double", &inv_rfact0_block0);
+ops_decl_const("invgamma_m1" , 1, "double", &invgamma_m1);
+ops_decl_const("niter" , 1, "int", &niter);
 ops_decl_const("shock_filter_control" , 1, "double", &shock_filter_control);
-ops_decl_const("sensor_theta" , 1, "double", &sensor_theta);
-ops_decl_const("inv_0" , 1, "double", &inv_0);
-ops_decl_const("rc1" , 1, "double", &rc1);
-ops_decl_const("rc2" , 1, "double", &rc2);
-ops_decl_const("rc3" , 1, "double", &rc3);
-ops_decl_const("rc4" , 1, "double", &rc4);
-ops_decl_const("rc5" , 1, "double", &rc5);
-ops_decl_const("rc6" , 1, "double", &rc6);
-ops_decl_const("rc7" , 1, "double", &rc7);
-ops_decl_const("rc8" , 1, "double", &rc8);
-ops_decl_const("rc9" , 1, "double", &rc9);
-ops_decl_const("rc10" , 1, "double", &rc10);
-ops_decl_const("rc11" , 1, "double", &rc11);
-ops_decl_const("rc12" , 1, "double", &rc12);
-ops_decl_const("rc13" , 1, "double", &rc13);
-ops_decl_const("rc14" , 1, "double", &rc14);
-ops_decl_const("rc15" , 1, "double", &rc15);
-ops_decl_const("rc16" , 1, "double", &rc16);
-ops_decl_const("rc17" , 1, "double", &rc17);
-ops_decl_const("rc18" , 1, "double", &rc18);
-ops_decl_const("rc19" , 1, "double", &rc19);
-ops_decl_const("rc20" , 1, "double", &rc20);
-ops_decl_const("rc21" , 1, "double", &rc21);
-ops_decl_const("rcinv22" , 1, "double", &rcinv22);
+ops_decl_const("simulation_time" , 1, "double", &simulation_time);
+ops_decl_const("start_iter" , 1, "int", &start_iter);
 // Define and Declare OPS Block
 ops_block opensbliblock00 = ops_decl_block(1, "opensbliblock00");
 #include "defdec_data_set.h"
 // Define and declare stencils
-int stencil_0_00temp[] = {0};
-ops_stencil stencil_0_00 = ops_decl_stencil(1,1,stencil_0_00temp,"stencil_0_00temp");
-int stencil_0_01temp[] = {-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5};
-ops_stencil stencil_0_01 = ops_decl_stencil(1,11,stencil_0_01temp,"stencil_0_01temp");
-int stencil_0_02temp[] = {-3, -2, -1, 1, 2, 3};
-ops_stencil stencil_0_02 = ops_decl_stencil(1,6,stencil_0_02temp,"stencil_0_02temp");
-int stencil_0_03temp[] = {-4, -3, -2, -1, 1, 2, 3, 4};
-ops_stencil stencil_0_03 = ops_decl_stencil(1,8,stencil_0_03temp,"stencil_0_03temp");
-int stencil_0_04temp[] = {-2, -1, 0, 1, 2, 3};
-ops_stencil stencil_0_04 = ops_decl_stencil(1,6,stencil_0_04temp,"stencil_0_04temp");
-int stencil_0_05temp[] = {-1, 0};
-ops_stencil stencil_0_05 = ops_decl_stencil(1,2,stencil_0_05temp,"stencil_0_05temp");
+#include "stencils.h"
 // Init OPS partition
+double partition_start0, elapsed_partition_start0, partition_end0, elapsed_partition_end0;
+ops_timers(&partition_start0, &elapsed_partition_start0);
 ops_partition("");
+ops_timers(&partition_end0, &elapsed_partition_end0);
+ops_printf("-----------------------------------------\n MPI partition and reading input file time: %lf\n -----------------------------------------\n", elapsed_partition_end0-elapsed_partition_start0);
+fflush(stdout);
 
-int iteration_range_24_block0[] = {-5, block0np0 + 5};
-ops_par_loop(opensbliblock00Kernel024, "Grid_based_initialisation0", opensbliblock00, 1, iteration_range_24_block0,
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(x0_B0, 1, stencil_0_00, "double", OPS_RW),
+// Restart procedure
+ops_printf("\033[1;32m");
+if (restart == 1){
+ops_printf("OpenSBLI is restarting from the input file: restart.h5\n");
+}
+else {
+ops_printf("OpenSBLI is starting from the initial condition.\n");
+}
+ops_printf("\033[0m");
+// Constants from HDF5 restart file
+if (restart == 1){
+ops_get_const_hdf5("simulation_time", 1, "double", (char*)&simulation_time, "restart.h5");
+ops_get_const_hdf5("iter", 1, "int", (char*)&start_iter, "restart.h5");
+}
+else {
+simulation_time = 0.0;
+start_iter = 0;
+}
+tstart = simulation_time;
+
+if (restart == 0){
+int iteration_range_27_block0[] = {-5, block0np0 + 5};
+ops_par_loop(opensbliblock00Kernel027, "Grid_based_initialisation0", opensbliblock00, 1, iteration_range_27_block0,
+ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(x0_B0, 1, stencil_0_00_1, "double", OPS_RW),
 ops_arg_idx());
+}
 
-
-int iteration_range_25_block0[] = {0, 1};
-ops_par_loop(opensbliblock00Kernel025, "Metric boundary dir0 side0", opensbliblock00, 1, iteration_range_25_block0,
-ops_arg_dat(detJ_B0, 1, stencil_0_02, "double", OPS_RW));
-
-
-int iteration_range_26_block0[] = {block0np0 - 1, block0np0};
-ops_par_loop(opensbliblock00Kernel026, "Metric boundary dir0 side1", opensbliblock00, 1, iteration_range_26_block0,
-ops_arg_dat(detJ_B0, 1, stencil_0_03, "double", OPS_RW));
-
-
-double cpu_start0, elapsed_start0;
+// Initialize loop timers
+double cpu_start0, elapsed_start0, cpu_end0, elapsed_end0;
 ops_timers(&cpu_start0, &elapsed_start0);
-for(int iter=0; iter<=niter - 1; iter++)
+double inner_start, elapsed_inner_start;
+double inner_end, elapsed_inner_end;
+ops_timers(&inner_start, &elapsed_inner_start);
+for(iter=start_iter; iter<=start_iter+niter - 1; iter++)
 {
-int iteration_range_22_block0[] = {-3, 1};
-ops_par_loop(opensbliblock00Kernel022, "Dirichlet boundary dir0 side0", opensbliblock00, 1, iteration_range_22_block0,
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_WRITE));
+simulation_time = tstart + dt*((iter - start_iter)+1);
+if(fmod(iter+1, 1) == 0){
+        ops_timers(&inner_end, &elapsed_inner_end);
+        ops_printf("Iteration: %d. Time-step: %.3e. Simulation time: %.5f. Time/iteration: %lf.\n", iter+1, dt, simulation_time, (elapsed_inner_end - elapsed_inner_start)/1);
+        fflush(stdout);
+        ops_NaNcheck(rho_B0);
+        ops_timers(&inner_start, &elapsed_inner_start);
+}
 
+int iteration_range_25_block0[] = {-3, 1};
+ops_par_loop(opensbliblock00Kernel025, "Dirichlet boundary dir0 side0", opensbliblock00, 1, iteration_range_25_block0,
+ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
-int iteration_range_23_block0[] = {block0np0 - 1, block0np0 + 4};
-ops_par_loop(opensbliblock00Kernel023, "Dirichlet boundary dir0 side1", opensbliblock00, 1, iteration_range_23_block0,
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_WRITE));
+int iteration_range_26_block0[] = {block0np0 - 1, block0np0 + 4};
+ops_par_loop(opensbliblock00Kernel026, "Dirichlet boundary dir0 side1", opensbliblock00, 1, iteration_range_26_block0,
+ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
-
-for(int stage=0; stage<=2; stage++)
+for(stage=0; stage<=2; stage++)
 {
-int iteration_range_3_block0[] = {-2, block0np0 + 2};
-ops_par_loop(opensbliblock00Kernel003, "CRu0_B0", opensbliblock00, 1, iteration_range_3_block0,
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(u0_B0, 1, stencil_0_00, "double", OPS_WRITE));
+int iteration_range_9_block0[] = {-2, block0np0 + 2};
+ops_par_loop(opensbliblock00Kernel009, "CRu0_B0", opensbliblock00, 1, iteration_range_9_block0,
+ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(u0_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
+int iteration_range_12_block0[] = {-2, block0np0 + 2};
+ops_par_loop(opensbliblock00Kernel012, "CRp_B0", opensbliblock00, 1, iteration_range_12_block0,
+ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(u0_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(p_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
-int iteration_range_13_block0[] = {-2, block0np0 + 2};
-ops_par_loop(opensbliblock00Kernel013, "CRp_B0", opensbliblock00, 1, iteration_range_13_block0,
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(u0_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(p_B0, 1, stencil_0_00, "double", OPS_WRITE));
-
-
-int iteration_range_2_block0[] = {-2, block0np0 + 2};
-ops_par_loop(opensbliblock00Kernel002, "Convective terms group 0", opensbliblock00, 1, iteration_range_2_block0,
-ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(p_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(u0_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk16_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(wk14_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(wk17_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(wk15_B0, 1, stencil_0_00, "double", OPS_WRITE));
-
-
-int iteration_range_5_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel005, "Convective CD rhoE_B0*u0_B0 xi0 ", opensbliblock00, 1, iteration_range_5_block0,
-ops_arg_dat(wk14_B0, 1, stencil_0_01, "double", OPS_READ),
-ops_arg_dat(wk3_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_idx());
-
+int iteration_range_5_block0[] = {-2, block0np0 + 2};
+ops_par_loop(opensbliblock00Kernel005, "Convective terms group 0", opensbliblock00, 1, iteration_range_5_block0,
+ops_arg_dat(p_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(u0_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk14_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(wk15_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(wk16_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(wk17_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
 int iteration_range_7_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel007, "Convective CD q0_B0 xi0 ", opensbliblock00, 1, iteration_range_7_block0,
-ops_arg_dat(q0_B0, 1, stencil_0_01, "double", OPS_READ),
-ops_arg_dat(wk4_B0, 1, stencil_0_00, "double", OPS_WRITE),
+ops_par_loop(opensbliblock00Kernel007, "Convective CD tau00_B0 xi0 ", opensbliblock00, 1, iteration_range_7_block0,
+ops_arg_dat(tau00_B0, 1, stencil_0_44_1, "double", OPS_READ),
+ops_arg_dat(wk3_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_idx());
 
-
-int iteration_range_9_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel009, "Convective CD rho_B0*u0_B0 xi0 ", opensbliblock00, 1, iteration_range_9_block0,
-ops_arg_dat(wk15_B0, 1, stencil_0_01, "double", OPS_READ),
-ops_arg_dat(wk5_B0, 1, stencil_0_00, "double", OPS_WRITE),
+int iteration_range_10_block0[] = {0, block0np0};
+ops_par_loop(opensbliblock00Kernel010, "Convective CD rhoE_B0*u0_B0 xi0 ", opensbliblock00, 1, iteration_range_10_block0,
+ops_arg_dat(wk14_B0, 1, stencil_0_44_1, "double", OPS_READ),
+ops_arg_dat(wk4_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_idx());
-
 
 int iteration_range_11_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel011, "Convective CD rhou0_B0*u0_B0 xi0 ", opensbliblock00, 1, iteration_range_11_block0,
-ops_arg_dat(wk16_B0, 1, stencil_0_01, "double", OPS_READ),
-ops_arg_dat(wk6_B0, 1, stencil_0_00, "double", OPS_WRITE),
+ops_par_loop(opensbliblock00Kernel011, "Convective CD rhoE_B0 xi0 ", opensbliblock00, 1, iteration_range_11_block0,
+ops_arg_dat(rhoE_B0, 1, stencil_0_44_1, "double", OPS_READ),
+ops_arg_dat(wk5_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_idx());
 
-
-int iteration_range_12_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel012, "Convective CD rhoE_B0 xi0 ", opensbliblock00, 1, iteration_range_12_block0,
-ops_arg_dat(rhoE_B0, 1, stencil_0_01, "double", OPS_READ),
-ops_arg_dat(wk7_B0, 1, stencil_0_00, "double", OPS_WRITE),
+int iteration_range_13_block0[] = {0, block0np0};
+ops_par_loop(opensbliblock00Kernel013, "Convective CD p_B0*u0_B0 xi0 ", opensbliblock00, 1, iteration_range_13_block0,
+ops_arg_dat(wk15_B0, 1, stencil_0_44_1, "double", OPS_READ),
+ops_arg_dat(wk6_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_idx());
-
-
-int iteration_range_14_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel014, "Convective CD p_B0*u0_B0 xi0 ", opensbliblock00, 1, iteration_range_14_block0,
-ops_arg_dat(wk17_B0, 1, stencil_0_01, "double", OPS_READ),
-ops_arg_dat(wk8_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_idx());
-
 
 int iteration_range_15_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel015, "Convective CD p_B0 xi0 ", opensbliblock00, 1, iteration_range_15_block0,
-ops_arg_dat(p_B0, 1, stencil_0_01, "double", OPS_READ),
-ops_arg_dat(wk9_B0, 1, stencil_0_00, "double", OPS_WRITE),
+ops_par_loop(opensbliblock00Kernel015, "Convective CD q0_B0 xi0 ", opensbliblock00, 1, iteration_range_15_block0,
+ops_arg_dat(q0_B0, 1, stencil_0_44_1, "double", OPS_READ),
+ops_arg_dat(wk7_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_idx());
-
-
-int iteration_range_16_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel016, "Convective CD rho_B0 xi0 ", opensbliblock00, 1, iteration_range_16_block0,
-ops_arg_dat(rho_B0, 1, stencil_0_01, "double", OPS_READ),
-ops_arg_dat(wk10_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_idx());
-
 
 int iteration_range_17_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel017, "Convective CD rhou0_B0 xi0 ", opensbliblock00, 1, iteration_range_17_block0,
-ops_arg_dat(rhou0_B0, 1, stencil_0_01, "double", OPS_READ),
-ops_arg_dat(wk11_B0, 1, stencil_0_00, "double", OPS_WRITE),
+ops_par_loop(opensbliblock00Kernel017, "Convective CD rhou0_B0*u0_B0 xi0 ", opensbliblock00, 1, iteration_range_17_block0,
+ops_arg_dat(wk16_B0, 1, stencil_0_44_1, "double", OPS_READ),
+ops_arg_dat(wk8_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_idx());
 
-
-int iteration_range_18_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel018, "Convective CD u0_B0 xi0 ", opensbliblock00, 1, iteration_range_18_block0,
-ops_arg_dat(u0_B0, 1, stencil_0_01, "double", OPS_READ),
-ops_arg_dat(wk12_B0, 1, stencil_0_00, "double", OPS_WRITE),
+int iteration_range_19_block0[] = {0, block0np0};
+ops_par_loop(opensbliblock00Kernel019, "Convective CD rho_B0*u0_B0 xi0 ", opensbliblock00, 1, iteration_range_19_block0,
+ops_arg_dat(wk17_B0, 1, stencil_0_44_1, "double", OPS_READ),
+ops_arg_dat(wk9_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_idx());
-
 
 int iteration_range_20_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel020, "Convective CD tau00_B0 xi0 ", opensbliblock00, 1, iteration_range_20_block0,
-ops_arg_dat(tau00_B0, 1, stencil_0_01, "double", OPS_READ),
-ops_arg_dat(wk13_B0, 1, stencil_0_00, "double", OPS_WRITE),
+ops_par_loop(opensbliblock00Kernel020, "Convective CD rhou0_B0 xi0 ", opensbliblock00, 1, iteration_range_20_block0,
+ops_arg_dat(rhou0_B0, 1, stencil_0_44_1, "double", OPS_READ),
+ops_arg_dat(wk10_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_idx());
-
 
 int iteration_range_21_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel021, "Convective residual ", opensbliblock00, 1, iteration_range_21_block0,
-ops_arg_dat(wk5_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk3_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk11_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk13_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk6_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(tau00_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk10_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(u0_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk12_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk7_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk4_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk8_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk9_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(Residual0_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(Residual1_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(Residual2_B0, 1, stencil_0_00, "double", OPS_WRITE));
-
-
-int iteration_range_30_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel030, "Temporal solution advancement", opensbliblock00, 1, iteration_range_30_block0,
-ops_arg_dat(Residual1_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(Residual2_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(Residual0_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(tempRK_rho_B0, 1, stencil_0_00, "double", OPS_RW),
-ops_arg_dat(tempRK_rhoE_B0, 1, stencil_0_00, "double", OPS_RW),
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_RW),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_RW),
-ops_arg_dat(tempRK_rhou0_B0, 1, stencil_0_00, "double", OPS_RW),
-ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_RW),
-ops_arg_gbl(&rkB[stage], 1, "double", OPS_READ),
-ops_arg_gbl(&rkA[stage], 1, "double", OPS_READ));
-
-
-int iteration_range_22_block0[] = {-3, 1};
-ops_par_loop(opensbliblock00Kernel022, "Dirichlet boundary dir0 side0", opensbliblock00, 1, iteration_range_22_block0,
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_WRITE));
-
-
-int iteration_range_23_block0[] = {block0np0 - 1, block0np0 + 4};
-ops_par_loop(opensbliblock00Kernel023, "Dirichlet boundary dir0 side1", opensbliblock00, 1, iteration_range_23_block0,
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_WRITE));
-
-
-}
-int iteration_range_27_block0[] = {-3, block0np0 + 4};
-ops_par_loop(opensbliblock00Kernel027, "User kernel: Constituent Relations evaluation", opensbliblock00, 1, iteration_range_27_block0,
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(Mach_sensor_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(u0_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(a_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(p_B0, 1, stencil_0_00, "double", OPS_RW));
-
-
-int iteration_range_28_block0[] = {-1, block0np0 + 1};
-ops_par_loop(opensbliblock00Kernel028, "User kernel: WENO reconstruction direction 0", opensbliblock00, 1, iteration_range_28_block0,
-ops_arg_dat(rhoE_B0, 1, stencil_0_04, "double", OPS_READ),
-ops_arg_dat(p_B0, 1, stencil_0_04, "double", OPS_READ),
-ops_arg_dat(rho_B0, 1, stencil_0_04, "double", OPS_READ),
-ops_arg_dat(rhou0_B0, 1, stencil_0_04, "double", OPS_READ),
-ops_arg_dat(u0_B0, 1, stencil_0_04, "double", OPS_READ),
-ops_arg_dat(a_B0, 1, stencil_0_04, "double", OPS_READ),
-ops_arg_dat(wk0_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(wk2_B0, 1, stencil_0_00, "double", OPS_WRITE),
-ops_arg_dat(wk1_B0, 1, stencil_0_00, "double", OPS_WRITE));
-
-
-int iteration_range_29_block0[] = {0, block0np0};
-ops_par_loop(opensbliblock00Kernel029, "User kernel: Non-linear filter application", opensbliblock00, 1, iteration_range_29_block0,
-ops_arg_dat(wk0_B0, 1, stencil_0_05, "double", OPS_READ),
-ops_arg_dat(Mach_sensor_B0, 1, stencil_0_00, "double", OPS_READ),
-ops_arg_dat(wk2_B0, 1, stencil_0_05, "double", OPS_READ),
-ops_arg_dat(wk1_B0, 1, stencil_0_05, "double", OPS_READ),
-ops_arg_dat(rho_B0, 1, stencil_0_00, "double", OPS_RW),
-ops_arg_dat(rhou0_B0, 1, stencil_0_00, "double", OPS_RW),
-ops_arg_dat(rhoE_B0, 1, stencil_0_00, "double", OPS_RW),
+ops_par_loop(opensbliblock00Kernel021, "Convective CD u0_B0 xi0 ", opensbliblock00, 1, iteration_range_21_block0,
+ops_arg_dat(u0_B0, 1, stencil_0_44_1, "double", OPS_READ),
+ops_arg_dat(wk11_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
 ops_arg_idx());
 
+int iteration_range_22_block0[] = {0, block0np0};
+ops_par_loop(opensbliblock00Kernel022, "Convective CD p_B0 xi0 ", opensbliblock00, 1, iteration_range_22_block0,
+ops_arg_dat(p_B0, 1, stencil_0_44_1, "double", OPS_READ),
+ops_arg_dat(wk12_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_idx());
+
+int iteration_range_23_block0[] = {0, block0np0};
+ops_par_loop(opensbliblock00Kernel023, "Convective CD rho_B0 xi0 ", opensbliblock00, 1, iteration_range_23_block0,
+ops_arg_dat(rho_B0, 1, stencil_0_44_1, "double", OPS_READ),
+ops_arg_dat(wk13_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_idx());
+
+int iteration_range_24_block0[] = {0, block0np0};
+ops_par_loop(opensbliblock00Kernel024, "Convective residual ", opensbliblock00, 1, iteration_range_24_block0,
+ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(tau00_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(u0_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk10_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk11_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk12_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk13_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk3_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk4_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk5_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk6_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk7_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk8_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(wk9_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(Residual0_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(Residual1_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(Residual2_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
+
+int iteration_range_28_block0[] = {0, block0np0};
+ops_par_loop(opensbliblock00Kernel028, "Temporal solution advancement", opensbliblock00, 1, iteration_range_28_block0,
+ops_arg_dat(Residual0_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(Residual1_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(Residual2_B0, 1, stencil_0_00_1, "double", OPS_READ),
+ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_RW),
+ops_arg_dat(rhoE_RKold_B0, 1, stencil_0_00_1, "double", OPS_RW),
+ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_RW),
+ops_arg_dat(rho_RKold_B0, 1, stencil_0_00_1, "double", OPS_RW),
+ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_RW),
+ops_arg_dat(rhou0_RKold_B0, 1, stencil_0_00_1, "double", OPS_RW),
+ops_arg_gbl(&rkA[stage], 1, "double", OPS_READ),
+ops_arg_gbl(&rkB[stage], 1, "double", OPS_READ));
+
+int iteration_range_25_block0[] = {-3, 1};
+ops_par_loop(opensbliblock00Kernel025, "Dirichlet boundary dir0 side0", opensbliblock00, 1, iteration_range_25_block0,
+ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
+
+int iteration_range_26_block0[] = {block0np0 - 1, block0np0 + 4};
+ops_par_loop(opensbliblock00Kernel026, "Dirichlet boundary dir0 side1", opensbliblock00, 1, iteration_range_26_block0,
+ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
 
 }
-double cpu_end0, elapsed_end0;
+int iteration_range_2_block0[] = {-5, block0np0 + 5};
+ops_par_loop(opensbliblock00Kernel002, "User kernel: Zero the work arrays", opensbliblock00, 1, iteration_range_2_block0,
+ops_arg_dat(wk0_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(wk1_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(wk2_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
+
+int iteration_range_3_block0[] = {-1, block0np0 + 1};
+ops_par_loop(opensbliblock00Kernel003, "User kernel: WENO reconstruction direction 0", opensbliblock00, 1, iteration_range_3_block0,
+ops_arg_dat(a_B0, 1, stencil_0_01_1, "double", OPS_READ),
+ops_arg_dat(p_B0, 1, stencil_0_23_1, "double", OPS_READ),
+ops_arg_dat(rhoE_B0, 1, stencil_0_23_1, "double", OPS_READ),
+ops_arg_dat(rho_B0, 1, stencil_0_23_1, "double", OPS_READ),
+ops_arg_dat(rhou0_B0, 1, stencil_0_23_1, "double", OPS_READ),
+ops_arg_dat(u0_B0, 1, stencil_0_23_1, "double", OPS_READ),
+ops_arg_dat(wk0_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(wk1_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
+ops_arg_dat(wk2_B0, 1, stencil_0_00_1, "double", OPS_WRITE));
+
+int iteration_range_4_block0[] = {0, block0np0};
+ops_par_loop(opensbliblock00Kernel004, "User kernel: Non-linear filter application", opensbliblock00, 1, iteration_range_4_block0,
+ops_arg_dat(wk0_B0, 1, stencil_0_10_1, "double", OPS_READ),
+ops_arg_dat(wk1_B0, 1, stencil_0_10_1, "double", OPS_READ),
+ops_arg_dat(wk2_B0, 1, stencil_0_10_1, "double", OPS_READ),
+ops_arg_dat(rhoE_B0, 1, stencil_0_00_1, "double", OPS_RW),
+ops_arg_dat(rho_B0, 1, stencil_0_00_1, "double", OPS_RW),
+ops_arg_dat(rhou0_B0, 1, stencil_0_00_1, "double", OPS_RW),
+ops_arg_idx());
+
+}
 ops_timers(&cpu_end0, &elapsed_end0);
 ops_printf("\nTimings are:\n");
 ops_printf("-----------------------------------------\n");
 ops_printf("Total Wall time %lf\n",elapsed_end0-elapsed_start0);
-char name0[80];
-sprintf(name0, "opensbli_output.h5");
-ops_fetch_block_hdf5_file(opensbliblock00, name0);
-ops_fetch_dat_hdf5_file(rho_B0, name0);
-ops_fetch_dat_hdf5_file(rhou0_B0, name0);
-ops_fetch_dat_hdf5_file(rhoE_B0, name0);
-ops_fetch_dat_hdf5_file(x0_B0, name0);
+
+HDF5_IO_Write_0_opensbliblock00(opensbliblock00, rho_B0, rhou0_B0, rhoE_B0, x0_B0, HDF5_timing);
 ops_exit();
 //Main program end 
 }

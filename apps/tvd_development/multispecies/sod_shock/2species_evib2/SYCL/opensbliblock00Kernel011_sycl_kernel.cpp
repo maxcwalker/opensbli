@@ -8,7 +8,7 @@
 #ifndef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel011(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
- ops_arg arg4) {
+ ops_arg arg4, ops_arg arg5) {
 #else
 void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) {
   ops_block block = desc->block;
@@ -19,17 +19,19 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
   ops_arg arg2 = desc->args[2];
   ops_arg arg3 = desc->args[3];
   ops_arg arg4 = desc->args[4];
+  ops_arg arg5 = desc->args[5];
   #endif
 
   //Timing
   double __t1,__t2,__c1,__c2;
 
-  ops_arg args[5] = { arg0, arg1, arg2, arg3, arg4};
+  ops_arg args[6] = { arg0, arg1, arg2, arg3, arg4,
+ arg5};
 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,5,range,4)) return;
+  if (!ops_checkpointing_before(args,6,range,4)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
@@ -54,7 +56,7 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
     start[n] = range[2*n];end[n] = range[2*n+1];
   }
   #else
-  if (compute_ranges(args, 5,block, range, start, end, arg_idx) < 0) return;
+  if (compute_ranges(args, 6,block, range, start, end, arg_idx) < 0) return;
   #endif
 
 
@@ -71,17 +73,20 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
   double* rhoN_B0_p = (double*)args[2].data_d;
 
   int base3 = args[3].dat->base_offset/sizeof(double);
-  double* u0_B0_p = (double*)args[3].data_d;
+  double* rhoev_B0_p = (double*)args[3].data_d;
 
   int base4 = args[4].dat->base_offset/sizeof(double);
-  double* T_B0_p = (double*)args[4].data_d;
+  double* u0_B0_p = (double*)args[4].data_d;
+
+  int base5 = args[5].dat->base_offset/sizeof(double);
+  double* T_B0_p = (double*)args[5].data_d;
 
 
 
   #ifndef OPS_LAZY
   //Halo Exchanges
-  ops_H_D_exchanges_device(args, 5);
-  ops_halo_exchanges(args,5,range);
+  ops_H_D_exchanges_device(args, 6);
+  ops_halo_exchanges(args,6,range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
@@ -94,10 +99,11 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
   if ((end[0]-start[0])>0) {
     block->instance->sycl_instance->queue->submit([&](cl::sycl::handler &cgh) {
 
-      auto dhN_sycl = (*dhN_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invMN_sycl = (*invMN_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invMN2_sycl = (*invMN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invRhat_sycl = (*invRhat_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto invTref_sycl = (*invTref_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto uref_sycl = (*uref_p).template get_access<cl::sycl::access::mode::read>(cgh);
 
       cgh.parallel_for<class opensbliblock00Kernel011_kernel>(cl::sycl::nd_range<1>(cl::sycl::range<1>(
             ((end[0]-start[0]-1)/block->instance->OPS_block_size_x+1)*block->instance->OPS_block_size_x
@@ -110,13 +116,14 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
         const ACC<double> rhoE_B0(&rhoE_B0_p[0] + base0 + n_x*1);
         const ACC<double> rhoN2_B0(&rhoN2_B0_p[0] + base1 + n_x*1);
         const ACC<double> rhoN_B0(&rhoN_B0_p[0] + base2 + n_x*1);
-        const ACC<double> u0_B0(&u0_B0_p[0] + base3 + n_x*1);
-        ACC<double> T_B0(&T_B0_p[0] + base4 + n_x*1);
+        const ACC<double> rhoev_B0(&rhoev_B0_p[0] + base3 + n_x*1);
+        const ACC<double> u0_B0(&u0_B0_p[0] + base4 + n_x*1);
+        ACC<double> T_B0(&T_B0_p[0] + base5 + n_x*1);
         //USER CODE
         if (n_x < end_0) {
           
-    T_B0(0) = (-0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) - 1.0e-10*dhN_sycl[0]*invMN_sycl[0]*rhoN_B0(0) +
-      rhoE_B0(0))*invRhat_sycl[0]/(invMN_sycl[0]*rhoN_B0(0) + invMN2_sycl[0]*rhoN2_B0(0));
+    T_B0(0) = (uref_sycl[0]*uref_sycl[0])*(-rhoev_B0(0) - 0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) +
+      rhoE_B0(0))*invRhat_sycl[0]*invTref_sycl[0]/(invMN_sycl[0]*rhoN_B0(0) + invMN2_sycl[0]*rhoN2_B0(0));
 
 
         }
@@ -129,8 +136,8 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
     block->instance->OPS_kernels[4].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
-  ops_set_dirtybit_device(args, 5);
-  ops_set_halo_dirtybit3(&args[4],range);
+  ops_set_dirtybit_device(args, 6);
+  ops_set_halo_dirtybit3(&args[5],range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
@@ -142,6 +149,7 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
     block->instance->OPS_kernels[4].transfer += ops_compute_transfer(dim, start, end, &arg2);
     block->instance->OPS_kernels[4].transfer += ops_compute_transfer(dim, start, end, &arg3);
     block->instance->OPS_kernels[4].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[4].transfer += ops_compute_transfer(dim, start, end, &arg5);
   }
 }
 
@@ -149,7 +157,7 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel011(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
- ops_arg arg4) {
+ ops_arg arg4, ops_arg arg5) {
   ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
   desc->name = name;
   desc->block = block;
@@ -163,8 +171,8 @@ void ops_par_loop_opensbliblock00Kernel011(char const *name, ops_block block, in
     desc->orig_range[i] = range[i];
     desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
   }
-  desc->nargs = 5;
-  desc->args = (ops_arg*)ops_malloc(5*sizeof(ops_arg));
+  desc->nargs = 6;
+  desc->args = (ops_arg*)ops_malloc(6*sizeof(ops_arg));
   desc->args[0] = arg0;
   desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
   desc->args[1] = arg1;
@@ -175,6 +183,8 @@ void ops_par_loop_opensbliblock00Kernel011(char const *name, ops_block block, in
   desc->hash = ((desc->hash << 5) + desc->hash) + arg3.dat->index;
   desc->args[4] = arg4;
   desc->hash = ((desc->hash << 5) + desc->hash) + arg4.dat->index;
+  desc->args[5] = arg5;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg5.dat->index;
   desc->function = ops_par_loop_opensbliblock00Kernel011_execute;
   if (block->instance->OPS_diags > 1) {
     ops_timing_realloc(block->instance,4,"opensbliblock00Kernel011");

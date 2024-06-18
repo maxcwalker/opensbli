@@ -31,9 +31,9 @@ inline
 
    p0 = 1.00000000000000;
 
-   cN2 = 0.800000000000000;
+   cN2 = 1.00000000000000;
 
-   cN = 0.200000000000000;
+   cN = 0.0;
 
    T0 = 1.0*invRhat;
 
@@ -45,7 +45,7 @@ inline
 
    evN2 = Rhat*thetavN2/(MN2*(-1.0 + exp(thetavN2/T0)));
 
-   OPS_ACC(rhoev_B0, 0) = 0.00100000000000000;
+   OPS_ACC(rhoev_B0, 0) = Rhat*thetavN2*(cN*r/MN + cN2*r/MN2)/(MN2*Tref*(uref*uref)*(-1.0 + exp(thetavN2/(T0*Tref))));
 
    OPS_ACC(rhoE_B0, 0) = (u0*u0)*(0.5*cN*r + 0.5*cN2*r) + p0*(1.5*cN*r/MN + 2.5*cN2*r/MN2)/(cN*r/MN + cN2*r/MN2);
 
@@ -69,9 +69,7 @@ void opensbliblock00Kernel019_c_wrapper(
     ptr_double ptr2 = {  p_a2 + n_x*1*1 };
     ptr_double ptr3 = {  p_a3 + n_x*1*1 };
     ptr_double ptr4 = {  p_a4 + n_x*1*1 };
-    opensbliblock00Kernel019( ptr0,
-          ptr1,ptr2,
-          ptr3,ptr4 );
-
+    opensbliblock00Kernel019( ptr0, ptr1, ptr2, ptr3,
+           ptr4);
   }
 }

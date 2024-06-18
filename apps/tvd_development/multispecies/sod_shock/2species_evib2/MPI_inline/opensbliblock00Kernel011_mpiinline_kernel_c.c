@@ -7,6 +7,7 @@ int xdim1_opensbliblock00Kernel011;
 int xdim2_opensbliblock00Kernel011;
 int xdim3_opensbliblock00Kernel011;
 int xdim4_opensbliblock00Kernel011;
+int xdim5_opensbliblock00Kernel011;
 
 
 //user function
@@ -17,6 +18,7 @@ void opensbliblock00Kernel011_c_wrapper(
   double * restrict rhoE_B0_p,
   double * restrict rhoN2_B0_p,
   double * restrict rhoN_B0_p,
+  double * restrict rhoev_B0_p,
   double * restrict u0_B0_p,
   double * restrict T_B0_p,
   int x_size) {
@@ -25,11 +27,12 @@ void opensbliblock00Kernel011_c_wrapper(
     const ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
     const ptr_double rhoN2_B0 = { rhoN2_B0_p + n_x*1};
     const ptr_double rhoN_B0 = { rhoN_B0_p + n_x*1};
+    const ptr_double rhoev_B0 = { rhoev_B0_p + n_x*1};
     const ptr_double u0_B0 = { u0_B0_p + n_x*1};
     ptr_double T_B0 = { T_B0_p + n_x*1};
     
-    OPS_ACC(T_B0, 0) = (-0.5*(OPS_ACC(u0_B0, 0)*OPS_ACC(u0_B0, 0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN2_B0, 0)) - 1.0e-10*dhN*invMN*OPS_ACC(rhoN_B0, 0) +
-      OPS_ACC(rhoE_B0, 0))*invRhat/(invMN*OPS_ACC(rhoN_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0));
+    OPS_ACC(T_B0, 0) = (uref*uref)*(-OPS_ACC(rhoev_B0, 0) - 0.5*(OPS_ACC(u0_B0, 0)*OPS_ACC(u0_B0, 0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN2_B0, 0)) +
+      OPS_ACC(rhoE_B0, 0))*invRhat*invTref/(invMN*OPS_ACC(rhoN_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0));
 
 
   }

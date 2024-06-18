@@ -7,7 +7,8 @@
 // host stub function
 #ifndef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel003(char const *name, ops_block block, int dim, int* range,
- ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3) {
+ ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
+ ops_arg arg4) {
 #else
 void ops_par_loop_opensbliblock00Kernel003_execute(ops_kernel_descriptor *desc) {
   ops_block block = desc->block;
@@ -17,22 +18,23 @@ void ops_par_loop_opensbliblock00Kernel003_execute(ops_kernel_descriptor *desc) 
   ops_arg arg1 = desc->args[1];
   ops_arg arg2 = desc->args[2];
   ops_arg arg3 = desc->args[3];
+  ops_arg arg4 = desc->args[4];
   #endif
 
   //Timing
   double __t1,__t2,__c1,__c2;
 
-  ops_arg args[4] = { arg0, arg1, arg2, arg3};
+  ops_arg args[5] = { arg0, arg1, arg2, arg3, arg4};
 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,4,range,7)) return;
+  if (!ops_checkpointing_before(args,5,range,9)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,7,"opensbliblock00Kernel003");
-    block->instance->OPS_kernels[7].count++;
+    ops_timing_realloc(block->instance,9,"opensbliblock00Kernel003");
+    block->instance->OPS_kernels[9].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -52,7 +54,7 @@ void ops_par_loop_opensbliblock00Kernel003_execute(ops_kernel_descriptor *desc) 
     start[n] = range[2*n];end[n] = range[2*n+1];
   }
   #else
-  if (compute_ranges(args, 4,block, range, start, end, arg_idx) < 0) return;
+  if (compute_ranges(args, 5,block, range, start, end, arg_idx) < 0) return;
   #endif
 
   int start0 = start[0];
@@ -74,18 +76,21 @@ void ops_par_loop_opensbliblock00Kernel003_execute(ops_kernel_descriptor *desc) 
   int base3 = args[3].dat->base_offset;
   double * __restrict__ wk3_B0_p = (double *)(args[3].data_d + base3);
 
+  int base4 = args[4].dat->base_offset;
+  double * __restrict__ wk4_B0_p = (double *)(args[4].data_d + base4);
+
 
 
   #ifndef OPS_LAZY
   //Halo Exchanges
-  ops_H_D_exchanges_device(args, 4);
-  ops_halo_exchanges(args,4,range);
-  ops_H_D_exchanges_device(args, 4);
+  ops_H_D_exchanges_device(args, 5);
+  ops_halo_exchanges(args,5,range);
+  ops_H_D_exchanges_device(args, 5);
   #endif
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[7].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[9].mpi_time += __t1-__t2;
   }
 
   #pragma omp target teams distribute parallel for collapse(1)
@@ -94,6 +99,7 @@ void ops_par_loop_opensbliblock00Kernel003_execute(ops_kernel_descriptor *desc) 
     ACC<double> wk1_B0(wk1_B0_p + n_x*1);
     ACC<double> wk2_B0(wk2_B0_p + n_x*1);
     ACC<double> wk3_B0(wk3_B0_p + n_x*1);
+    ACC<double> wk4_B0(wk4_B0_p + n_x*1);
     
    wk0_B0(0) = 0.0;
 
@@ -103,38 +109,43 @@ void ops_par_loop_opensbliblock00Kernel003_execute(ops_kernel_descriptor *desc) 
 
    wk3_B0(0) = 0.0;
 
+   wk4_B0(0) = 0.0;
+
 
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[7].time += __t2-__t1;
+    block->instance->OPS_kernels[9].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
-  ops_set_dirtybit_device(args, 4);
+  ops_set_dirtybit_device(args, 5);
   ops_set_halo_dirtybit3(&args[0],range);
   ops_set_halo_dirtybit3(&args[1],range);
   ops_set_halo_dirtybit3(&args[2],range);
   ops_set_halo_dirtybit3(&args[3],range);
+  ops_set_halo_dirtybit3(&args[4],range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[7].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[7].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[7].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[7].transfer += ops_compute_transfer(dim, start, end, &arg2);
-    block->instance->OPS_kernels[7].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[9].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[9].transfer += ops_compute_transfer(dim, start, end, &arg4);
   }
 }
 
 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel003(char const *name, ops_block block, int dim, int* range,
- ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3) {
-  ops_arg args[4] = { arg0, arg1, arg2, arg3 };
+ ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
+ ops_arg arg4) {
+  ops_arg args[5] = { arg0, arg1, arg2, arg3, arg4 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 4, 7, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel003_execute);
+  create_kerneldesc_and_enque(name, args, 5, 9, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel003_execute);
 }
 #endif

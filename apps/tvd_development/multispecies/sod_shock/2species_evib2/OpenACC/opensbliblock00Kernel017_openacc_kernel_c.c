@@ -6,13 +6,19 @@
 
 int xdim0_opensbliblock00Kernel017;
 int xdim1_opensbliblock00Kernel017;
+int xdim2_opensbliblock00Kernel017;
+int xdim3_opensbliblock00Kernel017;
 
 //user function
 inline 
-void opensbliblock00Kernel017(const ptr_double T_B0,
-  ptr_double eveqN2_B0)
+ void opensbliblock00Kernel017(const ptr_double T_B0,
+  const ptr_double rhoN2_B0,
+  const ptr_double rhoN_B0,
+  ptr_double ptauN2_B0)
 {
-   OPS_ACC(eveqN2_B0, 0) = Rhat*invMN2*inv2uref*thetavN2/(-1.0 + exp(thetavN2/OPS_ACC(T_B0, 0)));
+    OPS_ACC(ptauN2_B0, 0) = (3.14066959164866e-11*invMN*OPS_ACC(rhoN_B0, 0)*exp(220.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
+      1.69627729418406e-11*invMN2*OPS_ACC(rhoN2_B0, 0)*exp(220.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)))/(invMN*OPS_ACC(rhoN_B0, 0) +
+      invMN2*OPS_ACC(rhoN2_B0, 0));
 
 }
 
@@ -20,16 +26,18 @@ void opensbliblock00Kernel017(const ptr_double T_B0,
 void opensbliblock00Kernel017_c_wrapper(
   double *p_a0,
   double *p_a1,
+  double *p_a2,
+  double *p_a3,
   int x_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1)
+  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3)
   #pragma acc loop
   #endif
   for ( int n_x=0; n_x<x_size; n_x++ ){
     const ptr_double ptr0 = {  p_a0 + n_x*1*1 };
-    ptr_double ptr1 = {  p_a1 + n_x*1*1 };
-    opensbliblock00Kernel017( ptr0,
-          ptr1 );
-
+    const ptr_double ptr1 = {  p_a1 + n_x*1*1 };
+    const ptr_double ptr2 = {  p_a2 + n_x*1*1 };
+    ptr_double ptr3 = {  p_a3 + n_x*1*1 };
+    opensbliblock00Kernel017( ptr0, ptr1, ptr2, ptr3);
   }
 }

@@ -27,7 +27,7 @@ input_dict = {
     "Twall"                : "1.37", 
     "dt"                   : "0.01", 
     "niter"                : "500000", 
-    "stat_frequency"       : "200",
+    "stat_frequency"       : "50",
     "block0np0"            : "1500", 
     "block0np1"            : "200",
     'block0np2'            : "200", 
@@ -335,6 +335,7 @@ if stats:
 else:
     stat_equation_classes, stats_arrays = [], []
 
+
 # Set equations on the block and discretise
 block.set_equations([constituent, simulation_eq, initial, metriceq] + stat_equation_classes)
 
@@ -343,10 +344,12 @@ h5 = iohdf5(save_every=100000, **kwargs)
 h5.add_arrays(simulation_eq.time_advance_arrays)
 h5.add_arrays([DataObject('x0'), DataObject('x1'), DataObject('x2'), DataObject('D11')])
 h5.add_arrays([DataObject('p')]) # save pressure
-kwargs = {'iotype': "Write", 'name': "stats_output.h5"}
-stats_hdf5 = iohdf5(arrays=stats_arrays, **kwargs)
-block.setio([h5, stats_hdf5])
-# block.setio(h5)
+if stats:
+    kwargs = {'iotype': "Write", 'name': "stats_output.h5"}
+    stats_hdf5 = iohdf5(arrays=stats_arrays, **kwargs)
+    block.setio([h5, stats_hdf5])
+else:
+    block.setio(h5)
 
 
 if TVD:

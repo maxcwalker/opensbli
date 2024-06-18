@@ -25,7 +25,6 @@ extern int block0np0;
 extern double cN;
 extern double cN2;
 extern double delta_TVD;
-extern double dhN;
 extern double dt;
 extern double eps_TVD;
 extern double gama;

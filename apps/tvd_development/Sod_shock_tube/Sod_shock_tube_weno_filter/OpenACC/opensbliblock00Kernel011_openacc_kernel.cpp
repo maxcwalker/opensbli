@@ -33,12 +33,12 @@ void ops_par_loop_opensbliblock00Kernel011(char const *name, ops_block block, in
 
 
   #ifdef CHECKPOINTING
-  if (!ops_checkpointing_before(args,3,range,11)) return;
+  if (!ops_checkpointing_before(args,3,range,8)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,11,"opensbliblock00Kernel011");
-    block->instance->OPS_kernels[11].count++;
+    ops_timing_realloc(block->instance,8,"opensbliblock00Kernel011");
+    block->instance->OPS_kernels[8].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -46,9 +46,6 @@ void ops_par_loop_opensbliblock00Kernel011(char const *name, ops_block block, in
 
   int start[1];
   int end[1];
-  #ifdef OPS_MPI
-  sub_block_list sb = OPS_sub_block_list[block->index];
-  #endif //OPS_MPI
 
   int arg_idx[1];
   int arg_idx_base[1];
@@ -114,7 +111,7 @@ void ops_par_loop_opensbliblock00Kernel011(char const *name, ops_block block, in
   #endif
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[11].mpi_time += t2-t1;
+    block->instance->OPS_kernels[8].mpi_time += t2-t1;
   }
 
   opensbliblock00Kernel011_c_wrapper(
@@ -126,7 +123,7 @@ void ops_par_loop_opensbliblock00Kernel011(char const *name, ops_block block, in
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[11].time += t1-t2;
+    block->instance->OPS_kernels[8].time += t1-t2;
   }
   #ifdef OPS_GPU
   ops_set_dirtybit_device(args, 3);
@@ -138,8 +135,8 @@ void ops_par_loop_opensbliblock00Kernel011(char const *name, ops_block block, in
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[11].mpi_time += t2-t1;
-    block->instance->OPS_kernels[11].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[11].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[8].mpi_time += t2-t1;
+    block->instance->OPS_kernels[8].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[8].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }

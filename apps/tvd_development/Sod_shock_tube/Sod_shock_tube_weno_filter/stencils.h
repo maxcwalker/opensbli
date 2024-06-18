@@ -1,0 +1,10 @@
+int stencil_0_00_1temp[] = {0};
+ops_stencil stencil_0_00_1 = ops_decl_stencil(1,1,stencil_0_00_1temp,"stencil_0_00_1temp");
+int stencil_0_23_1temp[] = {-2, -1, 0, 1, 2, 3};
+ops_stencil stencil_0_23_1 = ops_decl_stencil(1,6,stencil_0_23_1temp,"stencil_0_23_1temp");
+int stencil_0_01_1temp[] = {0, 1};
+ops_stencil stencil_0_01_1 = ops_decl_stencil(1,2,stencil_0_01_1temp,"stencil_0_01_1temp");
+int stencil_0_10_1temp[] = {-1, 0};
+ops_stencil stencil_0_10_1 = ops_decl_stencil(1,2,stencil_0_10_1temp,"stencil_0_10_1temp");
+int stencil_0_44_1temp[] = {-4, -3, -2, -1, 0, 1, 2, 3, 4};
+ops_stencil stencil_0_44_1 = ops_decl_stencil(1,9,stencil_0_44_1temp,"stencil_0_44_1temp");

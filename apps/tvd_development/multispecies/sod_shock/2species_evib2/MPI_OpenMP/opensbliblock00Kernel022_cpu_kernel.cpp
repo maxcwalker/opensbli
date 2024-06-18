@@ -73,6 +73,7 @@ void ops_par_loop_opensbliblock00Kernel022_execute(ops_kernel_descriptor *desc) 
   #endif
 
 
+
   //initialize global variable with the dimension of dats
 
   //set up initial pointers and exchange halos if necessary
@@ -229,63 +230,9 @@ void ops_par_loop_opensbliblock00Kernel022(char const *name, ops_block block, in
  ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
  ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
  ops_arg arg16) {
-  ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
-  desc->name = name;
-  desc->block = block;
-  desc->dim = dim;
-  desc->device = 0;
-  desc->index = 10;
-  desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 10;
-  for ( int i=0; i<2; i++ ){
-    desc->range[i] = range[i];
-    desc->orig_range[i] = range[i];
-    desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
-  }
-  desc->nargs = 17;
-  desc->args = (ops_arg*)ops_malloc(17*sizeof(ops_arg));
-  desc->args[0] = arg0;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
-  desc->args[1] = arg1;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
-  desc->args[2] = arg2;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg2.dat->index;
-  desc->args[3] = arg3;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg3.dat->index;
-  desc->args[4] = arg4;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg4.dat->index;
-  desc->args[5] = arg5;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg5.dat->index;
-  desc->args[6] = arg6;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg6.dat->index;
-  desc->args[7] = arg7;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg7.dat->index;
-  desc->args[8] = arg8;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg8.dat->index;
-  desc->args[9] = arg9;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg9.dat->index;
-  desc->args[10] = arg10;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg10.dat->index;
-  desc->args[11] = arg11;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg11.dat->index;
-  desc->args[12] = arg12;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg12.dat->index;
-  desc->args[13] = arg13;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg13.dat->index;
-  desc->args[14] = arg14;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg14.dat->index;
-  desc->args[15] = arg15;
-  char *tmp = (char*)ops_malloc(1*sizeof(double));
-  memcpy(tmp, arg15.data,1*sizeof(double));
-  desc->args[15].data = tmp;
-  desc->args[16] = arg16;
-  tmp = (char*)ops_malloc(1*sizeof(double));
-  memcpy(tmp, arg16.data,1*sizeof(double));
-  desc->args[16].data = tmp;
-  desc->function = ops_par_loop_opensbliblock00Kernel022_execute;
-  if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,10,"opensbliblock00Kernel022");
-  }
-  ops_enqueue_kernel(desc);
+  ops_arg args[17] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16 };
+
+  //create kernel descriptor and pass it to ops_enqueue_kernel
+  create_kerneldesc_and_enque(name, args, 17, 10, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel022_execute);
 }
 #endif

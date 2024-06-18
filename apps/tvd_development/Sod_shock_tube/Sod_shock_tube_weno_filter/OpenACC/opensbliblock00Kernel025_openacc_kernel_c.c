@@ -5,30 +5,46 @@
 #define OPS_GPU
 
 int xdim0_opensbliblock00Kernel025;
+int xdim1_opensbliblock00Kernel025;
+int xdim2_opensbliblock00Kernel025;
 
 //user function
 inline 
-void opensbliblock00Kernel025(ptr_double detJ_B0)
+void opensbliblock00Kernel025(ptr_double rhoE_B0,
+  ptr_double rho_B0,
+  ptr_double rhou0_B0)
 {
-   OPS_ACC(detJ_B0, -1) = OPS_ACC(detJ_B0, 1);
+   double d = 0.0;
+   double p = 0.0;
+   double u0 = 0.0;
+   d = 1.00000000000000;
 
-   OPS_ACC(detJ_B0, -2) = OPS_ACC(detJ_B0, 2);
+   u0 = 0.0;
 
-   OPS_ACC(detJ_B0, -3) = OPS_ACC(detJ_B0, 3);
+   p = 1.00000000000000;
+
+   OPS_ACC(rho_B0, 0) = d;
+
+   OPS_ACC(rhou0_B0, 0) = d*u0;
+
+   OPS_ACC(rhoE_B0, 0) = p/(-1.0 + gama) + 0.5*d*(u0*u0);
 
 }
 
 
 void opensbliblock00Kernel025_c_wrapper(
   double *p_a0,
+  double *p_a1,
+  double *p_a2,
   int x_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0)
+  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2)
   #pragma acc loop
   #endif
   for ( int n_x=0; n_x<x_size; n_x++ ){
     ptr_double ptr0 = {  p_a0 + n_x*1*1 };
-    opensbliblock00Kernel025( ptr0 );
-
+    ptr_double ptr1 = {  p_a1 + n_x*1*1 };
+    ptr_double ptr2 = {  p_a2 + n_x*1*1 };
+    opensbliblock00Kernel025( ptr0, ptr1, ptr2);
   }
 }

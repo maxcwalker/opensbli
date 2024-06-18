@@ -26,12 +26,12 @@ void ops_par_loop_opensbliblock00Kernel014_execute(ops_kernel_descriptor *desc) 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,3,range,13)) return;
+  if (!ops_checkpointing_before(args,3,range,10)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,13,"opensbliblock00Kernel014");
-    block->instance->OPS_kernels[13].count++;
+    ops_timing_realloc(block->instance,10,"opensbliblock00Kernel014");
+    block->instance->OPS_kernels[10].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -52,6 +52,7 @@ void ops_par_loop_opensbliblock00Kernel014_execute(ops_kernel_descriptor *desc) 
   if (compute_ranges(args, 3,block, range, start, end, arg_idx) < 0) return;
   #endif
 
+
   #if defined(OPS_MPI)
   #if defined(OPS_LAZY)
   sub_block_list sb = OPS_sub_block_list[block->index];
@@ -67,10 +68,10 @@ void ops_par_loop_opensbliblock00Kernel014_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ wk17_B0_p = (double *)(args[0].data + base0);
+  double * __restrict__ wk15_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ wk8_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ wk7_B0_p = (double *)(args[1].data + base1);
 
 
 
@@ -84,74 +85,64 @@ void ops_par_loop_opensbliblock00Kernel014_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[13].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[10].mpi_time += __t1-__t2;
   }
 
   #pragma omp parallel for
   for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
     int idx[] = {arg_idx[0]+n_x};
-    const ACC<double> wk17_B0(wk17_B0_p + n_x*1);
-    ACC<double> wk8_B0(wk8_B0_p + n_x*1);
+    const ACC<double> wk15_B0(wk15_B0_p + n_x*1);
+    ACC<double> wk7_B0(wk7_B0_p + n_x*1);
     
-    wk8_B0(0) = inv_0*((idx[0] == 0) ? (
-   3.00000000000002*wk17_B0(1) +
-      1.06910315192207e-15*wk17_B0(5) - 1.83333333333334*wk17_B0(0) -
-      8.34657956545823e-15*wk17_B0(4) + 0.333333333333356*wk17_B0(3) -
-      1.50000000000003*wk17_B0(2)
+    wk7_B0(0) = invDelta0block0*((idx[0] == 0) ? (
+   3.0*wk15_B0(1) + 0.333333333333333*wk15_B0(3) - 1.5*wk15_B0(2) -
+      1.83333333333333*wk15_B0(0)
 )
 : ((idx[0] == 1) ? (
-   0.719443173328855*wk17_B0(1) -
-      0.322484932882161*wk17_B0(0) + 0.00571369039775442*wk17_B0(4) -
-      0.0658051057710389*wk17_B0(3) - 0.376283677513354*wk17_B0(-1) +
-      0.0394168524399447*wk17_B0(2)
+   0.0394168524399447*wk15_B0(2) +
+      0.00571369039775442*wk15_B0(4) + 0.719443173328855*wk15_B0(1) - 0.322484932882161*wk15_B0(0) -
+      0.0658051057710389*wk15_B0(3) - 0.376283677513354*wk15_B0(-1)
 )
 : ((idx[0] == 2) ? (
-   0.521455851089587*wk17_B0(1) +
-      0.197184333887745*wk17_B0(0) - 0.791245592765872*wk17_B0(-1) -
-      0.00412637789557492*wk17_B0(3) + 0.113446470384241*wk17_B0(-2) -
-      0.0367146847001261*wk17_B0(2)
-)
-: ((idx[0] == 3) ? (
-   -0.00932597985049999*wk17_B0(-3) +
-      0.652141084861241*wk17_B0(1) + 0.0451033223343881*wk17_B0(0) -
-      0.727822147724592*wk17_B0(-1) + 0.121937153224065*wk17_B0(-2) -
-      0.082033432844602*wk17_B0(2)
-)
-: ((idx[0] == block0np0 - 1) ? (
 
-      -0.333333333333356*wk17_B0(-3) + 8.34657956545823e-15*wk17_B0(-4) +
-      1.83333333333334*wk17_B0(0) - 3.00000000000002*wk17_B0(-1) -
-      1.06910315192207e-15*wk17_B0(-5) + 1.50000000000003*wk17_B0(-2)
+      0.197184333887745*wk15_B0(0) + 0.521455851089587*wk15_B0(1) + 0.113446470384241*wk15_B0(-2) -
+      0.00412637789557492*wk15_B0(3) - 0.0367146847001261*wk15_B0(2) - 0.791245592765872*wk15_B0(-1)
 )
-: ((idx[0] == block0np0 - 2)
+: ((idx[0] == 3)
       ? (
-   0.0658051057710389*wk17_B0(-3) + 0.376283677513354*wk17_B0(1) -
-      0.00571369039775442*wk17_B0(-4) + 0.322484932882161*wk17_B0(0) -
-      0.719443173328855*wk17_B0(-1) - 0.0394168524399447*wk17_B0(-2)
+   0.0451033223343881*wk15_B0(0) + 0.652141084861241*wk15_B0(1) + 0.121937153224065*wk15_B0(-2) -
+      0.00932597985049999*wk15_B0(-3) - 0.727822147724592*wk15_B0(-1) - 0.082033432844602*wk15_B0(2)
 )
-: ((idx[0] == block0np0 - 3)
-      ? (
-   0.00412637789557492*wk17_B0(-3) + 0.791245592765872*wk17_B0(1) -
-      0.197184333887745*wk17_B0(0) - 0.521455851089587*wk17_B0(-1) +
-      0.0367146847001261*wk17_B0(-2) - 0.113446470384241*wk17_B0(2)
+: ((idx[0] == -1
+      + block0np0) ? (
+   1.5*wk15_B0(-2) + 1.83333333333333*wk15_B0(0) - 3.0*wk15_B0(-1) -
+      0.333333333333333*wk15_B0(-3)
 )
-: ((idx[0] == block0np0 - 4) ?
-      (
-   0.727822147724592*wk17_B0(1) - 0.0451033223343881*wk17_B0(0) -
-      0.652141084861241*wk17_B0(-1) + 0.00932597985049999*wk17_B0(3) +
-      0.082033432844602*wk17_B0(-2) - 0.121937153224065*wk17_B0(2)
+: ((idx[0] == -2 + block0np0) ? (
+   0.322484932882161*wk15_B0(0) +
+      0.0658051057710389*wk15_B0(-3) + 0.376283677513354*wk15_B0(1) - 0.0394168524399447*wk15_B0(-2) -
+      0.00571369039775442*wk15_B0(-4) - 0.719443173328855*wk15_B0(-1)
+)
+: ((idx[0] == -3 + block0np0) ? (
+
+      0.00412637789557492*wk15_B0(-3) + 0.0367146847001261*wk15_B0(-2) + 0.791245592765872*wk15_B0(1) -
+      0.197184333887745*wk15_B0(0) - 0.521455851089587*wk15_B0(-1) - 0.113446470384241*wk15_B0(2)
+)
+: ((idx[0] == -4 +
+      block0np0) ? (
+   0.00932597985049999*wk15_B0(3) + 0.727822147724592*wk15_B0(1) + 0.082033432844602*wk15_B0(-2) -
+      0.0451033223343881*wk15_B0(0) - 0.652141084861241*wk15_B0(-1) - 0.121937153224065*wk15_B0(2)
 )
 : (
 
-      -rc3*wk17_B0(-1) + (rc2)*wk17_B0(-2) - rc2*wk17_B0(2) +
-      (rc3)*wk17_B0(1)
+      -(2.0/3.0)*wk15_B0(-1) - (1.0/12.0)*wk15_B0(2) + ((1.0/12.0))*wk15_B0(-2) + ((2.0/3.0))*wk15_B0(1)
 )))))))));
 
 
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[13].time += __t2-__t1;
+    block->instance->OPS_kernels[10].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_host(args, 3);
@@ -161,9 +152,9 @@ void ops_par_loop_opensbliblock00Kernel014_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[13].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[13].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[13].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[10].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[10].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[10].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
@@ -171,30 +162,9 @@ void ops_par_loop_opensbliblock00Kernel014_execute(ops_kernel_descriptor *desc) 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel014(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2) {
-  ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
-  desc->name = name;
-  desc->block = block;
-  desc->dim = dim;
-  desc->device = 0;
-  desc->index = 13;
-  desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 13;
-  for ( int i=0; i<2; i++ ){
-    desc->range[i] = range[i];
-    desc->orig_range[i] = range[i];
-    desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
-  }
-  desc->nargs = 3;
-  desc->args = (ops_arg*)ops_malloc(3*sizeof(ops_arg));
-  desc->args[0] = arg0;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
-  desc->args[1] = arg1;
-  desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
-  desc->args[2] = arg2;
-  desc->function = ops_par_loop_opensbliblock00Kernel014_execute;
-  if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,13,"opensbliblock00Kernel014");
-  }
-  ops_enqueue_kernel(desc);
+  ops_arg args[3] = { arg0, arg1, arg2 };
+
+  //create kernel descriptor and pass it to ops_enqueue_kernel
+  create_kerneldesc_and_enque(name, args, 3, 10, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel014_execute);
 }
 #endif

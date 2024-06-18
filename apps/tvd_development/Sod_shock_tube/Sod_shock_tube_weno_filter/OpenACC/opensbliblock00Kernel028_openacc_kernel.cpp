@@ -36,6 +36,8 @@ void opensbliblock00Kernel028_c_wrapper(
   double *p_a6,
   double *p_a7,
   double *p_a8,
+  double p_a9,
+  double p_a10,
   int x_size);
 
 #ifdef __cplusplus
@@ -44,20 +46,22 @@ void opensbliblock00Kernel028_c_wrapper(
 
 // host stub function
 void ops_par_loop_opensbliblock00Kernel028(char const *name, ops_block block, int dim, int* range,
- ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3, ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7, ops_arg arg8) {
+ ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
+ ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
+ ops_arg arg8, ops_arg arg9, ops_arg arg10) {
 
   //Timing
   double t1,t2,c1,c2;
-  ops_arg args[9] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8};
+  ops_arg args[11] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10};
 
 
   #ifdef CHECKPOINTING
-  if (!ops_checkpointing_before(args,9,range,22)) return;
+  if (!ops_checkpointing_before(args,11,range,18)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,22,"opensbliblock00Kernel028");
-    block->instance->OPS_kernels[22].count++;
+    ops_timing_realloc(block->instance,18,"opensbliblock00Kernel028");
+    block->instance->OPS_kernels[18].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -65,14 +69,11 @@ void ops_par_loop_opensbliblock00Kernel028(char const *name, ops_block block, in
 
   int start[1];
   int end[1];
-  #ifdef OPS_MPI
-  sub_block_list sb = OPS_sub_block_list[block->index];
-  #endif //OPS_MPI
 
   int arg_idx[1];
   int arg_idx_base[1];
   #ifdef OPS_MPI
-  if (compute_ranges(args, 9,block, range, start, end, arg_idx) < 0) return;
+  if (compute_ranges(args, 11,block, range, start, end, arg_idx) < 0) return;
   #else //OPS_MPI
   for ( int n=0; n<1; n++ ){
     start[n] = range[2*n];end[n] = range[2*n+1];
@@ -158,6 +159,8 @@ void ops_par_loop_opensbliblock00Kernel028(char const *name, ops_block block, in
   double *p_a8 = (double *)((char *)args[8].data + base8);
   #endif
 
+  double *p_a9 = (double *)args[9].data;
+  double *p_a10 = (double *)args[10].data;
 
   int x_size = MAX(0,end[0]-start[0]);
 
@@ -195,20 +198,20 @@ void ops_par_loop_opensbliblock00Kernel028(char const *name, ops_block block, in
   //Halo Exchanges
 
   #ifdef OPS_GPU
-  ops_H_D_exchanges_device(args, 9);
+  ops_H_D_exchanges_device(args, 11);
   #else
-  ops_H_D_exchanges_host(args, 9);
+  ops_H_D_exchanges_host(args, 11);
   #endif
-  ops_halo_exchanges(args,9,range);
+  ops_halo_exchanges(args,11,range);
 
   #ifdef OPS_GPU
-  ops_H_D_exchanges_device(args, 9);
+  ops_H_D_exchanges_device(args, 11);
   #else
-  ops_H_D_exchanges_host(args, 9);
+  ops_H_D_exchanges_host(args, 11);
   #endif
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[22].mpi_time += t2-t1;
+    block->instance->OPS_kernels[18].mpi_time += t2-t1;
   }
 
   opensbliblock00Kernel028_c_wrapper(
@@ -221,17 +224,22 @@ void ops_par_loop_opensbliblock00Kernel028(char const *name, ops_block block, in
     p_a6,
     p_a7,
     p_a8,
+    *p_a9,
+    *p_a10,
     x_size);
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[22].time += t1-t2;
+    block->instance->OPS_kernels[18].time += t1-t2;
   }
   #ifdef OPS_GPU
-  ops_set_dirtybit_device(args, 9);
+  ops_set_dirtybit_device(args, 11);
   #else
-  ops_set_dirtybit_host(args, 9);
+  ops_set_dirtybit_host(args, 11);
   #endif
+  ops_set_halo_dirtybit3(&args[3],range);
+  ops_set_halo_dirtybit3(&args[4],range);
+  ops_set_halo_dirtybit3(&args[5],range);
   ops_set_halo_dirtybit3(&args[6],range);
   ops_set_halo_dirtybit3(&args[7],range);
   ops_set_halo_dirtybit3(&args[8],range);
@@ -239,15 +247,15 @@ void ops_par_loop_opensbliblock00Kernel028(char const *name, ops_block block, in
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[22].mpi_time += t2-t1;
-    block->instance->OPS_kernels[22].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[22].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[22].transfer += ops_compute_transfer(dim, start, end, &arg2);
-    block->instance->OPS_kernels[22].transfer += ops_compute_transfer(dim, start, end, &arg3);
-    block->instance->OPS_kernels[22].transfer += ops_compute_transfer(dim, start, end, &arg4);
-    block->instance->OPS_kernels[22].transfer += ops_compute_transfer(dim, start, end, &arg5);
-    block->instance->OPS_kernels[22].transfer += ops_compute_transfer(dim, start, end, &arg6);
-    block->instance->OPS_kernels[22].transfer += ops_compute_transfer(dim, start, end, &arg7);
-    block->instance->OPS_kernels[22].transfer += ops_compute_transfer(dim, start, end, &arg8);
+    block->instance->OPS_kernels[18].mpi_time += t2-t1;
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg5);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg6);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg7);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg8);
   }
 }

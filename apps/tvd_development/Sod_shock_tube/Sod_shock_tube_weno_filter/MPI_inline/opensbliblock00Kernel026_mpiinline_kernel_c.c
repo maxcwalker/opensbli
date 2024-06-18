@@ -3,6 +3,8 @@
 //
 
 int xdim0_opensbliblock00Kernel026;
+int xdim1_opensbliblock00Kernel026;
+int xdim2_opensbliblock00Kernel026;
 
 
 //user function
@@ -10,19 +12,30 @@ int xdim0_opensbliblock00Kernel026;
 
 
 void opensbliblock00Kernel026_c_wrapper(
-  double * restrict detJ_B0_p,
+  double * restrict rhoE_B0_p,
+  double * restrict rho_B0_p,
+  double * restrict rhou0_B0_p,
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
-    ptr_double detJ_B0 = { detJ_B0_p + n_x*1};
+    ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
+    ptr_double rho_B0 = { rho_B0_p + n_x*1};
+    ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
     
-   OPS_ACC(detJ_B0, 1) = OPS_ACC(detJ_B0, -1);
+   double d = 0.0;
+   double p = 0.0;
+   double u0 = 0.0;
+   d = 0.125000000000000;
 
-   OPS_ACC(detJ_B0, 2) = OPS_ACC(detJ_B0, -2);
+   u0 = 0.0;
 
-   OPS_ACC(detJ_B0, 3) = OPS_ACC(detJ_B0, -3);
+   p = 0.100000000000000;
 
-   OPS_ACC(detJ_B0, 4) = OPS_ACC(detJ_B0, -4);
+   OPS_ACC(rho_B0, 0) = d;
+
+   OPS_ACC(rhou0_B0, 0) = d*u0;
+
+   OPS_ACC(rhoE_B0, 0) = p/(-1.0 + gama) + 0.5*d*(u0*u0);
 
 
   }

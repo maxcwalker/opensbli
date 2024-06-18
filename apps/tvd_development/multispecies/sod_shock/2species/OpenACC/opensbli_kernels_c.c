@@ -7,12 +7,14 @@
 #include <openacc.h>
 
 //user kernel files
+#include "opensbliblock00Kernel018_openacc_kernel_c.c"
 #include "opensbliblock00Kernel016_openacc_kernel_c.c"
-#include "opensbliblock00Kernel014_openacc_kernel_c.c"
-#include "opensbliblock00Kernel015_openacc_kernel_c.c"
-#include "opensbliblock00Kernel006_openacc_kernel_c.c"
-#include "opensbliblock00Kernel013_openacc_kernel_c.c"
 #include "opensbliblock00Kernel017_openacc_kernel_c.c"
+#include "opensbliblock00Kernel008_openacc_kernel_c.c"
+#include "opensbliblock00Kernel009_openacc_kernel_c.c"
+#include "opensbliblock00Kernel006_openacc_kernel_c.c"
+#include "opensbliblock00Kernel015_openacc_kernel_c.c"
+#include "opensbliblock00Kernel019_openacc_kernel_c.c"
 #include "opensbliblock00Kernel002_openacc_kernel_c.c"
 #include "opensbliblock00Kernel003_openacc_kernel_c.c"
 #include "opensbliblock00Kernel004_openacc_kernel_c.c"

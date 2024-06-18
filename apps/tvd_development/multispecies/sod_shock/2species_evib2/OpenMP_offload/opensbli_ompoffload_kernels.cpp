@@ -16,11 +16,11 @@ extern double Lref;
 extern double MN;
 extern double MN2;
 extern double Rhat;
+extern double Tref;
 extern int block0np0;
 extern double cN;
 extern double cN2;
 extern double delta_TVD;
-extern double dhN;
 extern double dt;
 extern double eps_TVD;
 extern double gama;
@@ -32,6 +32,7 @@ extern double invDelta0block0;
 extern double invMN;
 extern double invMN2;
 extern double invRhat;
+extern double invTref;
 extern double invdelta_TVD;
 extern double invgama;
 extern double invgamma_m1;
@@ -73,6 +74,10 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:Rhat)
   }
   else
+  if (!strcmp(name,"Tref")) {
+    #pragma omp target enter data map(to:Tref)
+  }
+  else
   if (!strcmp(name,"block0np0")) {
     #pragma omp target enter data map(to:block0np0)
   }
@@ -87,10 +92,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"delta_TVD")) {
     #pragma omp target enter data map(to:delta_TVD)
-  }
-  else
-  if (!strcmp(name,"dhN")) {
-    #pragma omp target enter data map(to:dhN)
   }
   else
   if (!strcmp(name,"dt")) {
@@ -135,6 +136,10 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"invRhat")) {
     #pragma omp target enter data map(to:invRhat)
+  }
+  else
+  if (!strcmp(name,"invTref")) {
+    #pragma omp target enter data map(to:invTref)
   }
   else
   if (!strcmp(name,"invdelta_TVD")) {
@@ -190,9 +195,9 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel021_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel019_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel020_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel008_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel009_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel011_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel010_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel008_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel017_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel018_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel006_ompoffload_kernel.cpp"

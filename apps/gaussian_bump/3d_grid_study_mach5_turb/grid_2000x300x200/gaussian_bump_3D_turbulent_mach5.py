@@ -27,7 +27,7 @@ input_dict = {
     "Twall"                : "1.9544", 
     "dt"                   : "0.01", 
     "niter"                : "500000", 
-    "stat_frequency"       : "200",
+    "stat_frequency"       : "50",
     "block0np0"            : "2000", 
     "block0np1"            : "300",
     'block0np2'            : "200", 
@@ -72,7 +72,7 @@ weno = True
 teno = False
 TVD = False
 slices = True
-stats = False
+stats = True
 monitor = True
 
 conservative=True
@@ -292,15 +292,17 @@ block.set_block_boundaries(boundaries)
 # Monitor points - indexing is (x,y,z)
 if monitor:
     # Nx, Nz, L = symbols('block0np0 block0np2 L', **{'cls': ConstantObject})
-    Nx, Nz, L = 2000, 200, 400.0
-    arrays = ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p']
-    arrays += ['rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0']
+    Nx, Nz, L = 2000,200, 400.0
+    arrays = ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p','p','p','p','p','p','p','p','p','p','p','p','p','p','p','p','p','p','p','p','p']
+    arrays += ['rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0', 'rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0','rhou0']
+    arrays += ['rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2', 'rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2','rhou2']
     arrays = [block.location_dataset('%s' % dset) for dset in arrays]
-    indices = [(int(50 * Nx/L), 0, Nz/2), (int(96 * Nx/L), 0, Nz/2), (int(100 * Nx/L), 0, Nz/2), (int(175 * Nx/L), 0, Nz/2), (int(187 * Nx/L), 0, Nz/2), (int(191 * Nx/L), 0, Nz/2), (int(200 * Nx/L), 0, Nz/2), (int(213 * Nx/L), 0, Nz/2), (int(225 * Nx/L), 0, Nz/2),(int(240 * Nx/L), 0, Nz/2),(int(250 * Nx/L), 0, Nz/2), (int(275 * Nx/L), 0, Nz/2),  (int(300 * Nx/L), 0, Nz/2), (int(325 * Nx/L), 0, Nz/2), (int(350 * Nx/L), 0, Nz/2),(int(375 * Nx/L), 0, Nz/2),(int(399 * Nx/L), 0, Nz/2),\
-               (int(50 * Nx/L), 1, Nz/2), (int(96 * Nx/L), 1, Nz/2), (int(100 * Nx/L), 1, Nz/2), (int(175 * Nx/L), 1, Nz/2), (int(187 * Nx/L), 1, Nz/2), (int(191 * Nx/L), 1, Nz/2), (int(200 * Nx/L), 1, Nz/2), (int(213 * Nx/L), 1, Nz/2), (int(225 * Nx/L), 1, Nz/2),(int(240 * Nx/L), 1, Nz/2),(int(250 * Nx/L), 1, Nz/2), (int(275 * Nx/L), 1, Nz/2),  (int(300 * Nx/L), 1, Nz/2), (int(325 * Nx/L), 1, Nz/2), (int(350 * Nx/L), 1, Nz/2),(int(375 * Nx/L), 1, Nz/2),(int(399 * Nx/L), 1, Nz/2),]
+    indices = [(int(50 * Nx/L), 0, Nz/2), (int(90 * Nx/L), 0, Nz/2), (int(100 * Nx/L), 0, Nz/2), (int(110 * Nx/L), 0, Nz/2), (int(120 * Nx/L), 0, Nz/2), (int(130 * Nx/L), 0, Nz/2), (int(140 * Nx/L), 0, Nz/2), (int(150 * Nx/L), 0, Nz/2), (int(160 * Nx/L), 0, Nz/2), (int(170 * Nx/L), 0, Nz/2), (int(180 * Nx/L), 0, Nz/2), (int(185 * Nx/L), 0, Nz/2), (int(190 * Nx/L), 0, Nz/2), (int(195 * Nx/L), 0, Nz/2), (int(200 * Nx/L), 0, Nz/2), (int(205 * Nx/L), 0, Nz/2), (int(210 * Nx/L), 0, Nz/2), (int(215 * Nx/L), 0, Nz/2), (int(220 * Nx/L), 0, Nz/2), (int(230 * Nx/L), 0, Nz/2), (int(240 * Nx/L), 0, Nz/2),(int(250 * Nx/L), 0, Nz/2), (int(260 * Nx/L), 0, Nz/2), (int(270 * Nx/L), 0, Nz/2),(int(280 * Nx/L), 0, Nz/2),(int(290 * Nx/L), 0, Nz/2), (int(300 * Nx/L), 0, Nz/2), (int(310 * Nx/L), 0, Nz/2), (int(320 * Nx/L), 0, Nz/2), (int(330 * Nx/L), 0, Nz/2), (int(340 * Nx/L), 0, Nz/2), (int(350 * Nx/L), 0, Nz/2), (int(360 * Nx/L), 0, Nz/2), (int(370 * Nx/L), 0, Nz/2),(int(380 * Nx/L), 0, Nz/2), (int(390 * Nx/L), 0, Nz/2),(int(399 * Nx/L), 0, Nz/2),\
+               (int(50 * Nx/L), 1, Nz/2), (int(90 * Nx/L), 1, Nz/2), (int(100 * Nx/L), 1, Nz/2), (int(110 * Nx/L), 1, Nz/2), (int(120 * Nx/L), 1, Nz/2), (int(130 * Nx/L), 1, Nz/2), (int(140 * Nx/L), 1, Nz/2), (int(150 * Nx/L), 1, Nz/2), (int(160 * Nx/L), 1, Nz/2), (int(170 * Nx/L), 1, Nz/2), (int(180 * Nx/L), 1, Nz/2), (int(185 * Nx/L), 1, Nz/2), (int(190 * Nx/L), 1, Nz/2), (int(195 * Nx/L), 1, Nz/2), (int(200 * Nx/L), 1, Nz/2), (int(205 * Nx/L), 1, Nz/2), (int(210 * Nx/L), 1, Nz/2), (int(215 * Nx/L), 1, Nz/2), (int(220 * Nx/L), 1, Nz/2), (int(230 * Nx/L), 1, Nz/2), (int(240 * Nx/L), 1, Nz/2),(int(250 * Nx/L), 1, Nz/2), (int(260 * Nx/L), 1, Nz/2), (int(270 * Nx/L), 1, Nz/2),(int(280 * Nx/L), 1, Nz/2),(int(290 * Nx/L), 1, Nz/2), (int(300 * Nx/L), 1, Nz/2), (int(310 * Nx/L), 1, Nz/2), (int(320 * Nx/L), 1, Nz/2), (int(330 * Nx/L), 1, Nz/2), (int(340 * Nx/L), 1, Nz/2), (int(350 * Nx/L), 1, Nz/2), (int(360 * Nx/L), 1, Nz/2), (int(370 * Nx/L), 1, Nz/2),(int(380 * Nx/L), 1, Nz/2), (int(390 * Nx/L), 1, Nz/2),(int(399 * Nx/L), 1, Nz/2),\
+               (int(50 * Nx/L), 1, Nz/2), (int(90 * Nx/L), 1, Nz/2), (int(100 * Nx/L), 1, Nz/2), (int(110 * Nx/L), 1, Nz/2), (int(120 * Nx/L), 1, Nz/2), (int(130 * Nx/L), 1, Nz/2), (int(140 * Nx/L), 1, Nz/2), (int(150 * Nx/L), 1, Nz/2), (int(160 * Nx/L), 1, Nz/2), (int(170 * Nx/L), 1, Nz/2), (int(180 * Nx/L), 1, Nz/2), (int(185 * Nx/L), 1, Nz/2), (int(190 * Nx/L), 1, Nz/2), (int(195 * Nx/L), 1, Nz/2), (int(200 * Nx/L), 1, Nz/2), (int(205 * Nx/L), 1, Nz/2), (int(210 * Nx/L), 1, Nz/2), (int(215 * Nx/L), 1, Nz/2), (int(220 * Nx/L), 1, Nz/2), (int(230 * Nx/L), 1, Nz/2), (int(240 * Nx/L), 1, Nz/2),(int(250 * Nx/L), 1, Nz/2), (int(260 * Nx/L), 1, Nz/2), (int(270 * Nx/L), 1, Nz/2),(int(280 * Nx/L), 1, Nz/2),(int(290 * Nx/L), 1, Nz/2), (int(300 * Nx/L), 1, Nz/2), (int(310 * Nx/L), 1, Nz/2), (int(320 * Nx/L), 1, Nz/2), (int(330 * Nx/L), 1, Nz/2), (int(340 * Nx/L), 1, Nz/2), (int(350 * Nx/L), 1, Nz/2), (int(360 * Nx/L), 1, Nz/2), (int(370 * Nx/L), 1, Nz/2),(int(380 * Nx/L), 1, Nz/2), (int(390 * Nx/L), 1, Nz/2),(int(399 * Nx/L), 1, Nz/2)]
 
     SM = SimulationMonitor(arrays, indices, block, print_frequency=20, fp_precision=12, output_file='monitor.log')
-
+ 
 #############################################################################################################################################
 #																																			#
 # Grid and intial conditions																												#
@@ -362,11 +364,11 @@ if slices:
     # Add grid coordinates to the slices, once at the start of the simulation
     grid_slice_hdf5 = iohdf5_slices(**{'iotype': "Init"})
     coords = [([DataObject('x0'), DataObject('x2')], 1, 1), ([DataObject('x0'), DataObject('x2')], 1, 1),\
-              ([DataObject('x2'), DataObject('x1')], 0, int(50 * Nx/L)), ([DataObject('x2'), DataObject('x1')], 0, int(100 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(125 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(150 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(175 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(190 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(200 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(210 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(225 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(240 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(250 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(275 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(325 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0,int(350 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(375 * Nx/L)),\
+              ([DataObject('x2'), DataObject('x1')], 0, int(50 * Nx/L)), ([DataObject('x2'), DataObject('x1')], 0, int(90 * Nx/L)), ([DataObject('x2'), DataObject('x1')], 0, int(100 * Nx/L)), ([DataObject('x2'), DataObject('x1')], 0, int(110 * Nx/L)), ([DataObject('x2'), DataObject('x1')], 0, int(125 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(150 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(160 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(170 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(180 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(190 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(200 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(210 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(220 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(230 * Nx/L)), ([DataObject('x2'), DataObject('x1')], 0, int(240 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(250 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(275 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(300 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(310 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(325 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0,int(350 * Nx/L)), ([DataObject('x2'), DataObject('x1')], 0, int(375 * Nx/L)), ([DataObject('x2'), DataObject('x1')], 0, int(390 * Nx/L)),([DataObject('x2'), DataObject('x1')], 0, int(395 * Nx/L)),\
               ([DataObject('x0'), DataObject('x2')], 2, 'block0np2/2')] # q vector, x-z, j=1 plane, # q vector, x-y, z=Lz/2 plane
     grid_slice_hdf5.add_slices(coords)
     # Q vector slices written out in time
-    slices_hdf5 = iohdf5_slices(save_every=2500, **{'iotype': "Write"})
+    slices_hdf5 = iohdf5_slices(save_every= 2500, **{'iotype': "Write"})
     # Arrays, direction, index
     #plan contours
     slices = [(q_vector, 1, 1)] # conserved variables, plan view, j=1
@@ -374,20 +376,29 @@ if slices:
 
     #span contours
     slices += [(q_vector, 0, int(50 * Nx/L))]
+    slices += [(q_vector, 0, int(90 * Nx/L))]
     slices += [(q_vector, 0, int(100 * Nx/L))]
+    slices += [(q_vector, 0, int(110 * Nx/L))]
     slices += [(q_vector, 0, int(125 * Nx/L))]
     slices += [(q_vector, 0, int(150 * Nx/L))]
-    slices += [(q_vector, 0, int(175 * Nx/L))]
+    slices += [(q_vector, 0, int(160 * Nx/L))]
+    slices += [(q_vector, 0, int(170 * Nx/L))] 
+    slices += [(q_vector, 0, int(180 * Nx/L))] 
     slices += [(q_vector, 0, int(190 * Nx/L))]
     slices += [(q_vector, 0, int(200 * Nx/L))]
     slices += [(q_vector, 0, int(210 * Nx/L))]
-    slices += [(q_vector, 0, int(225 * Nx/L))]
+    slices += [(q_vector, 0, int(220 * Nx/L))]
+    slices += [(q_vector, 0, int(230 * Nx/L))]
     slices += [(q_vector, 0, int(240 * Nx/L))]
     slices += [(q_vector, 0, int(250 * Nx/L))]
     slices += [(q_vector, 0, int(275 * Nx/L))]
+    slices += [(q_vector, 0, int(300 * Nx/L))]
+    slices += [(q_vector, 0, int(310 * Nx/L))]
     slices += [(q_vector, 0, int(325 * Nx/L))]
     slices += [(q_vector, 0, int(350 * Nx/L))]
     slices += [(q_vector, 0, int(375 * Nx/L))]
+    slices += [(q_vector, 0, int(390 * Nx/L))]
+    slices += [(q_vector, 0, int(395 * Nx/L))]
 
     #slide contours
     slices += [(q_vector, 2, 'block0np2/2')] # q vector, x-y, z=Lz/2 plane

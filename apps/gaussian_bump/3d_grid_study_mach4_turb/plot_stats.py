@@ -63,6 +63,7 @@ except:
 
 
 g=h5py.File('opensbli_output.h5', 'r')
+print(g)
 x0dum=read_dataset(g,'x0_B0')
 x1dum=read_dataset(g,'x1_B0')
 x2dum=read_dataset(g,'x2_B0')

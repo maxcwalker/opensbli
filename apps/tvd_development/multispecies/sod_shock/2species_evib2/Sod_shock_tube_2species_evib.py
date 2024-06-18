@@ -15,26 +15,26 @@ input_dict = {
     "gama"                 : "1.4", 
     "Re"                   : "1.0",
     "dt"                   : "0.00002", 
-    "niter"                : "ceil(0.2/0.00003)",#ceil(0.2/0.0002)",
+    "niter"                : "6000",#ceil(0.2/0.00003)",#ceil(0.2/0.0002)",
     "block0np0"            : "2000", 
     "Delta0block0"         : "1.0/(block0np0-1)",
     "eps"                  : "1.0e-16",
-    "inv_rfact0_block0"  : "1.0/Delta0block0",
+    "inv_rfact0_block0"    : "1.0/Delta0block0",
     "lambda0_TVD"          : "dt/Delta0block0", 
-    "kappa_TVD"           : "0.4",
+    "kappa_TVD"            : "1.1",
     "MN"                   : "14.0",    
     "MN2"                  : "28.0",
-    "dhN"                   : "112.951",
+    "dhN"                  : "112.951",
     "cN"                   : "0.05",
-    "cN2"                   : "0.95",
+    "cN2"                  : "0.95",
     "thetavN2"             : "3390.0",
     "Rhat"                 : "8314.3",
-    "uref"                  : "340",
-    "Lref"                  : "1.0",
-    "Tref"                    : "600",
-    "rhoref"                : "1.225",
+    "uref"                 : "340",
+    "Lref"                 : "1.0",
+    "Tref"                 : "600",
+    "rhoref"               : "1.225",
     "p_r"                  : "101325.0",
-    "kappa"                 : "0.00000075", 
+    "kappa"                : "0.0",   
 }
 
 constants = input_dict.keys()
@@ -47,22 +47,18 @@ coordinate_symbol = "x"
 conservative = True 
 
 eq = EinsteinEquation()
-massN   = "Eq(Der(rhoN,t), - Conservative(rhoN*u_j,x_j) + wdotN )" #+ Der(mu/(Re*Sc)*Der(yN,x_j),x_j) 
-massN2  = "Eq(Der(rhoN2,t), - Conservative(rhoN2*u_j,x_j) + wdotN2)" #+ Der(mu/(Re*Sc)*Der(yN2,x_j),x_j)
+massN   = "Eq(Der(rhoN,t), - Conservative(rhoN*u_j,x_j) + wdotN )" 
+massN2  = "Eq(Der(rhoN2,t), - Conservative(rhoN2*u_j,x_j) + wdotN2)" 
 momentum = "Eq(Der(rhou_i,t) , -Conservative(rhou_i*u_j + KD(_i,_j)*p,x_j))"
 evib     = "Eq(Der(rhoev,t), - Conservative(rhoev*u_j,x_j) + (rhoN2*eveqN2 - rho*ev)/tau + wdotN + wdotN2)" 
 energy = "Eq(Der(rhoE,t), - Conservative((p+rhoE)*u_j,x_j) - Der(q_j,x_j))"
 
 # substitutions used in the equations
-# massN_dim = "Eq(rhoN_dim, rhoN*rho_r)" # all reference values are dimensional
-# massN2_dim = "Eq(rhoN2_dim, rhoN2*rho_r)"
-# T_dim = "Eq(T_dim, T*u_r/(gama*Rhat))"
-# p_dim = "Eq(p_dim, p*rho_r*u_r*u_r)"
 heat_flux = "Eq(q_j, -(kappa)*Der(T,x_j))"
 evibration = "Eq(ev, rhoev/rho)"
 molesum = "Eq(ysum, rhoN/MN+rhoN2/MN2)"
 timeconst = "Eq(tau, uref/Lref * (rhoN2/MN2)*101325.0/(p*(rhoN2/(MN2*ptauN2))))"
-hformation = "Eq(dhf, 0.0000000001*(dhN*rhoN/MN))"
+hformation = "Eq(dhf, 0.0*(dhN*rhoN/MN))"
 
 substitutions = [heat_flux, timeconst, evibration, molesum, hformation]
 # Expand the simulation equations, for this create a simulation equations class
@@ -79,15 +75,14 @@ simulation_eq.add_equations(evib)
 simulation_eq.add_equations(energy)
 
 # Constituent relations
-# pressure = "Eq(p, (gama-1)*(rhoE - (1/2)*(rhoN+rhoN2)*(KD(_i,_j)*u_i*u_j)))"
-pressure = "Eq(p, Rhat*T*(rhoN/MN+rhoN2/MN2))"
+pressure = "Eq(p, Tref/uref**2 * Rhat*T*(rhoN/MN+rhoN2/MN2))"
 velocity = "Eq(u_i, rhou_i/(rhoN + rhoN2))"
-# temperature = "Eq(T, p/((rhoN + rhoN2)*Rhat))"
-temperature = "Eq(T, (rhoE - dhf - (rhoN + rhoN2)*(1./2.)*(KD(_i,_j)*u_i*u_j))/(Rhat*((rhoN/MN)+(rhoN2/MN2))))"
+
+temperature = "Eq(T, uref**2 / Tref *(rhoE - dhf - (rhoN + rhoN2)*(1./2.)*(KD(_i,_j)*u_i*u_j)-rhoev)/(Rhat*((rhoN/MN)+(rhoN2/MN2))))"
 speed_of_sound = "Eq(a, (gama*p/(rhoN + rhoN2))**0.5)"
 timefactorN2 = "Eq(ptauN2, (rhoN/MN*exp(220.0*(T**(-1.0/3.0)-0.0262)-18.42)+rhoN2/MN2*exp(220.0*(T**(-1.0/3.0)-0.0290)-18.42))/ysum)" 
-evequilN2 = "Eq(eveqN2, 1/uref**2 * thetavN2*Rhat/(MN2*(exp(thetavN2/T)-1.0)))"
-evN2 = "Eq(evN2, thetavN2*Rhat/(MN2*(exp(thetavN2/T)-1.0)))"
+evequilN2 = "Eq(eveqN2, 1/uref**2 * thetavN2/Tref*Rhat/(MN2*(exp(thetavN2/Tref/T)-1.0)))"
+# evN2 = "Eq(evN2, thetavN2*Rhat/(MN2*(exp(thetavN2/T)-1.0)))"
 consts = "Eq(consts, cN + cN2)" # This is just to declare constants that arent called in the CR and so wont be recognised in the initialisation
 
 constituent = ConstituentRelations()
@@ -100,31 +95,31 @@ for eqn in constituent_eqns:
 block = SimulationBlock(ndim, block_number=0)
 
 # Initial conditions
-cN2l, cNl = 0.8, 0.2
+cN2l, cNl = 1.0, 0.0
 cN2r, cNr = 0.95, 0.05
 pl, pr = 1.0, 0.1
-rl, rr = 1.0, 0.2
+rl, rr = 1.0, 0.125
 
 MN2, MN, Rhat =  symbols('MN2 MN Rhat', **{'cls': ConstantObject})
 
 x0 = "Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])"
-r = "Eq(GridVariable(r), Piecewise((1.0, DataObject(x0) < 0.5), (0.2, True)))"
+r = "Eq(GridVariable(r), Piecewise((1.0, DataObject(x0) < 0.5), (0.125, True)))"
 u0 = "Eq(GridVariable(u0), Piecewise((0.0, DataObject(x0) < 0.5),(0.0, True)))"
 p = "Eq(GridVariable(p0), Piecewise((1.0, DataObject(x0) < 0.5), (0.1, True)))"
-cN = "Eq(GridVariable(cN), Piecewise((0.2, DataObject(x0) < 0.5), (0.05, True)))"
-cN2 = "Eq(GridVariable(cN2), Piecewise((0.8, DataObject(x0) < 0.5), (0.95, True)))"
+cN = "Eq(GridVariable(cN), Piecewise((0.0, DataObject(x0) < 0.5), (0.05, True)))"
+cN2 = "Eq(GridVariable(cN2), Piecewise((1.0, DataObject(x0) < 0.5), (0.95, True)))"
 
 rhoN2 = "Eq(DataObject(rhoN2), r*cN2)" 
 rhoN = "Eq(DataObject(rhoN), r*cN)" 
 
+# T = "Eq(GridVariable(T0), p0 / ((r*cN/MN)+(r*cN2/MN2)*Rhat*uref**2/Tref))"
 T = "Eq(GridVariable(T0), p0 / (r*Rhat))"
 evN2 = "Eq(GridVariable(evN2), thetavN2*Rhat/(MN2*(exp(thetavN2/T0)-1.0)))"
-
-rhoev = "Eq(DataObject(rhoev), 0.001)"
+rhoev = "Eq(DataObject(rhoev), (r*cN/MN+r*cN2/MN2) * 1/uref**2 * thetavN2/Tref*Rhat/(MN2*(exp(thetavN2/Tref/T0)-1.0)))"
 rhou0 = "Eq(DataObject(rhou0), r*u0)"
 rhoE = "Eq(DataObject(rhoE), p0*(3.0/2.0*(r*cN/MN)+5.0/2.0*(r*cN2/MN2))/(r*cN/MN+r*cN2/MN2)+ 0.5*(r*cN + r*cN2)*(u0**2))"
 
-eqns = [x0, u0, r, p, T, cN,cN2, rhoN, rhoN2, rhou0, evN2, rhoev,  rhoE]
+eqns = [x0, u0, r, p, T, cN, cN2, rhoN, rhoN2, rhou0, evN2, rhoev,  rhoE]
 local_dict = {"block": block, "GridVariable": GridVariable, "DataObject": DataObject}
 initial_equations = [parse_expr(eq, local_dict=local_dict) for eq in eqns]
 initial = GridBasedInitialisation()
@@ -161,11 +156,13 @@ h5.add_arrays([DataObject('x0')])
 h5.add_arrays([DataObject('T')])
 h5.add_arrays([DataObject('p')])
 
-
 block.setio(copy.deepcopy(h5))
 
 TVD_filter = TVDFilter(block, airfoil=False, optimize=False, species = '2_species_ev')
 block.set_equations(TVD_filter.equation_classes)
+
+# WF = WENOFilter(block, order=5, flux_type='LLF', airfoil=False, optimize=False, species='2_species_ev')
+# block.set_equations(WF.equation_classes) 
 
 block.set_equations([copy.deepcopy(constituent), copy.deepcopy(simulation_eq), initial])
 block.set_discretisation_schemes(schemes)

@@ -8,33 +8,46 @@ int xdim0_opensbliblock00Kernel014;
 int xdim1_opensbliblock00Kernel014;
 int xdim2_opensbliblock00Kernel014;
 int xdim3_opensbliblock00Kernel014;
+int xdim4_opensbliblock00Kernel014;
 
 //user function
 inline 
  void opensbliblock00Kernel014(ptr_double rhoE_B0,
   ptr_double rhoN2_B0,
   ptr_double rhoN_B0,
+  ptr_double rhoev_B0,
   ptr_double rhou0_B0)
 {
-   double dN = 0.0;
-   double dN2 = 0.0;
-   double p = 0.0;
+   double T0 = 0.0;
+   double cN = 0.0;
+   double cN2 = 0.0;
+   double evN2 = 0.0;
+   double p0 = 0.0;
+   double r = 0.0;
    double u0 = 0.0;
-   dN = 1.00000000000000;
-
-   dN2 = 0.125000000000000;
+   r = 0.125000000000000;
 
    u0 = 0.0;
 
-   p = 1.00000000000000;
+   p0 = 0.100000000000000;
 
-   OPS_ACC(rhoN_B0, 0) = dN;
+   cN2 = 0.950000000000000;
 
-   OPS_ACC(rhoN2_B0, 0) = dN2;
+   cN = 0.0500000000000000;
 
-   OPS_ACC(rhou0_B0, 0) = u0*(dN + dN2);
+   T0 = 0.8*invRhat;
 
-   OPS_ACC(rhoE_B0, 0) = p/(-1.0 + gama) + (u0*u0)*(0.5*dN + 0.5*dN2);
+   OPS_ACC(rhoN_B0, 0) = cN*r;
+
+   OPS_ACC(rhoN2_B0, 0) = cN2*r;
+
+   OPS_ACC(rhou0_B0, 0) = r*u0;
+
+   evN2 = Rhat*thetavN2/(MN2*(-1.0 + exp(thetavN2/T0)));
+
+   OPS_ACC(rhoev_B0, 0) = Rhat*thetavN2*(cN*r/MN + cN2*r/MN2)/(MN2*Tref*(uref*uref)*(-1.0 + exp(thetavN2/(T0*Tref))));
+
+   OPS_ACC(rhoE_B0, 0) = (u0*u0)*(0.5*cN*r + 0.5*cN2*r) + p0*(1.5*cN*r/MN + 2.5*cN2*r/MN2)/(cN*r/MN + cN2*r/MN2);
 
 }
 
@@ -44,9 +57,10 @@ void opensbliblock00Kernel014_c_wrapper(
   double *p_a1,
   double *p_a2,
   double *p_a3,
+  double *p_a4,
   int x_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3)
+  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4)
   #pragma acc loop
   #endif
   for ( int n_x=0; n_x<x_size; n_x++ ){
@@ -54,6 +68,8 @@ void opensbliblock00Kernel014_c_wrapper(
     ptr_double ptr1 = {  p_a1 + n_x*1*1 };
     ptr_double ptr2 = {  p_a2 + n_x*1*1 };
     ptr_double ptr3 = {  p_a3 + n_x*1*1 };
-    opensbliblock00Kernel014( ptr0, ptr1, ptr2, ptr3);
+    ptr_double ptr4 = {  p_a4 + n_x*1*1 };
+    opensbliblock00Kernel014( ptr0, ptr1, ptr2, ptr3,
+           ptr4);
   }
 }

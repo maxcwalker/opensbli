@@ -4,23 +4,6 @@
 
 int xdim0_opensbliblock00Kernel021;
 int xdim1_opensbliblock00Kernel021;
-int xdim2_opensbliblock00Kernel021;
-int xdim3_opensbliblock00Kernel021;
-int xdim4_opensbliblock00Kernel021;
-int xdim5_opensbliblock00Kernel021;
-int xdim6_opensbliblock00Kernel021;
-int xdim7_opensbliblock00Kernel021;
-int xdim8_opensbliblock00Kernel021;
-int xdim9_opensbliblock00Kernel021;
-int xdim10_opensbliblock00Kernel021;
-int xdim11_opensbliblock00Kernel021;
-int xdim12_opensbliblock00Kernel021;
-int xdim13_opensbliblock00Kernel021;
-int xdim14_opensbliblock00Kernel021;
-int xdim15_opensbliblock00Kernel021;
-int xdim16_opensbliblock00Kernel021;
-int xdim17_opensbliblock00Kernel021;
-int xdim18_opensbliblock00Kernel021;
 
 
 //user function
@@ -28,59 +11,59 @@ int xdim18_opensbliblock00Kernel021;
 
 
 void opensbliblock00Kernel021_c_wrapper(
-  double * restrict wk5_B0_p,
-  double * restrict rhou0_B0_p,
-  double * restrict wk3_B0_p,
-  double * restrict rhoE_B0_p,
-  double * restrict wk11_B0_p,
-  double * restrict wk13_B0_p,
-  double * restrict wk6_B0_p,
-  double * restrict tau00_B0_p,
-  double * restrict rho_B0_p,
-  double * restrict wk10_B0_p,
   double * restrict u0_B0_p,
-  double * restrict wk12_B0_p,
-  double * restrict wk7_B0_p,
-  double * restrict wk4_B0_p,
-  double * restrict wk8_B0_p,
-  double * restrict wk9_B0_p,
-  double * restrict Residual0_B0_p,
-  double * restrict Residual1_B0_p,
-  double * restrict Residual2_B0_p,
+  double * restrict wk11_B0_p,
+  int * restrict idx,
+  int arg_idx0, 
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
-    const ptr_double wk5_B0 = { wk5_B0_p + n_x*1};
-    const ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
-    const ptr_double wk3_B0 = { wk3_B0_p + n_x*1};
-    const ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
-    const ptr_double wk11_B0 = { wk11_B0_p + n_x*1};
-    const ptr_double wk13_B0 = { wk13_B0_p + n_x*1};
-    const ptr_double wk6_B0 = { wk6_B0_p + n_x*1};
-    const ptr_double tau00_B0 = { tau00_B0_p + n_x*1};
-    const ptr_double rho_B0 = { rho_B0_p + n_x*1};
-    const ptr_double wk10_B0 = { wk10_B0_p + n_x*1};
+    int idx[] = {arg_idx0+n_x};
     const ptr_double u0_B0 = { u0_B0_p + n_x*1};
-    const ptr_double wk12_B0 = { wk12_B0_p + n_x*1};
-    const ptr_double wk7_B0 = { wk7_B0_p + n_x*1};
-    const ptr_double wk4_B0 = { wk4_B0_p + n_x*1};
-    const ptr_double wk8_B0 = { wk8_B0_p + n_x*1};
-    const ptr_double wk9_B0 = { wk9_B0_p + n_x*1};
-    ptr_double Residual0_B0 = { Residual0_B0_p + n_x*1};
-    ptr_double Residual1_B0 = { Residual1_B0_p + n_x*1};
-    ptr_double Residual2_B0 = { Residual2_B0_p + n_x*1};
+    ptr_double wk11_B0 = { wk11_B0_p + n_x*1};
     
-    OPS_ACC(Residual0_B0, 0) = -rc1*OPS_ACC(rho_B0, 0)*OPS_ACC(wk12_B0, 0) -
-      rc1*OPS_ACC(u0_B0, 0)*OPS_ACC(wk10_B0, 0) - rc1*OPS_ACC(wk5_B0, 0);
+    OPS_ACC(wk11_B0, 0) = invDelta0block0*((idx[0] == 0) ? (
+   3.0*OPS_ACC(u0_B0, 1) + 0.333333333333333*OPS_ACC(u0_B0, 3) - 1.5*OPS_ACC(u0_B0, 2) -
+      1.83333333333333*OPS_ACC(u0_B0, 0)
+)
+: ((idx[0] == 1) ? (
+   0.0394168524399447*OPS_ACC(u0_B0, 2) + 0.00571369039775442*OPS_ACC(u0_B0, 4) +
+      0.719443173328855*OPS_ACC(u0_B0, 1) - 0.322484932882161*OPS_ACC(u0_B0, 0) - 0.0658051057710389*OPS_ACC(u0_B0, 3) -
+      0.376283677513354*OPS_ACC(u0_B0, -1)
+)
+: ((idx[0] == 2) ? (
+   0.197184333887745*OPS_ACC(u0_B0, 0) + 0.521455851089587*OPS_ACC(u0_B0, 1) +
+      0.113446470384241*OPS_ACC(u0_B0, -2) - 0.00412637789557492*OPS_ACC(u0_B0, 3) - 0.0367146847001261*OPS_ACC(u0_B0, 2) -
+      0.791245592765872*OPS_ACC(u0_B0, -1)
+)
+: ((idx[0] == 3) ? (
+   0.0451033223343881*OPS_ACC(u0_B0, 0) + 0.652141084861241*OPS_ACC(u0_B0, 1) +
+      0.121937153224065*OPS_ACC(u0_B0, -2) - 0.00932597985049999*OPS_ACC(u0_B0, -3) - 0.727822147724592*OPS_ACC(u0_B0, -1) -
+      0.082033432844602*OPS_ACC(u0_B0, 2)
+)
+: ((idx[0] == -1 + block0np0) ? (
+   1.5*OPS_ACC(u0_B0, -2) + 1.83333333333333*OPS_ACC(u0_B0, 0) -
+      3.0*OPS_ACC(u0_B0, -1) - 0.333333333333333*OPS_ACC(u0_B0, -3)
+)
+: ((idx[0] == -2 + block0np0) ? (
+   0.322484932882161*OPS_ACC(u0_B0, 0) +
+      0.0658051057710389*OPS_ACC(u0_B0, -3) + 0.376283677513354*OPS_ACC(u0_B0, 1) - 0.0394168524399447*OPS_ACC(u0_B0, -2) -
+      0.00571369039775442*OPS_ACC(u0_B0, -4) - 0.719443173328855*OPS_ACC(u0_B0, -1)
+)
+: ((idx[0] == -3 + block0np0) ? (
 
-    OPS_ACC(Residual1_B0, 0) = -rc1*OPS_ACC(rhou0_B0, 0)*OPS_ACC(wk12_B0, 0) -
-      rc1*OPS_ACC(u0_B0, 0)*OPS_ACC(wk11_B0, 0) + OPS_ACC(wk13_B0, 0) - rc1*OPS_ACC(wk6_B0, 0) -
-      OPS_ACC(wk9_B0, 0);
+      0.00412637789557492*OPS_ACC(u0_B0, -3) + 0.0367146847001261*OPS_ACC(u0_B0, -2) + 0.791245592765872*OPS_ACC(u0_B0, 1) -
+      0.197184333887745*OPS_ACC(u0_B0, 0) - 0.521455851089587*OPS_ACC(u0_B0, -1) - 0.113446470384241*OPS_ACC(u0_B0, 2)
+)
+: ((idx[0] == -4 +
+      block0np0) ? (
+   0.00932597985049999*OPS_ACC(u0_B0, 3) + 0.727822147724592*OPS_ACC(u0_B0, 1) + 0.082033432844602*OPS_ACC(u0_B0, -2) -
+      0.0451033223343881*OPS_ACC(u0_B0, 0) - 0.652141084861241*OPS_ACC(u0_B0, -1) - 0.121937153224065*OPS_ACC(u0_B0, 2)
+)
+: (
 
-    OPS_ACC(Residual2_B0, 0) = -rc1*OPS_ACC(rhoE_B0, 0)*OPS_ACC(wk12_B0, 0) +
-      OPS_ACC(tau00_B0, 0)*OPS_ACC(wk12_B0, 0) + OPS_ACC(u0_B0, 0)*OPS_ACC(wk13_B0, 0) -
-      rc1*OPS_ACC(u0_B0, 0)*OPS_ACC(wk7_B0, 0) - rc1*OPS_ACC(wk3_B0, 0) + OPS_ACC(wk4_B0, 0) -
-      OPS_ACC(wk8_B0, 0);
+      -(2.0/3.0)*OPS_ACC(u0_B0, -1) - (1.0/12.0)*OPS_ACC(u0_B0, 2) + ((1.0/12.0))*OPS_ACC(u0_B0, -2) + ((2.0/3.0))*OPS_ACC(u0_B0, 1)
+)))))))));
 
 
   }

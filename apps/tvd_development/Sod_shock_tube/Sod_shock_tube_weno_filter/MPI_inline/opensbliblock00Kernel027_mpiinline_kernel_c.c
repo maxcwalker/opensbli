@@ -6,9 +6,6 @@ int xdim0_opensbliblock00Kernel027;
 int xdim1_opensbliblock00Kernel027;
 int xdim2_opensbliblock00Kernel027;
 int xdim3_opensbliblock00Kernel027;
-int xdim4_opensbliblock00Kernel027;
-int xdim5_opensbliblock00Kernel027;
-int xdim6_opensbliblock00Kernel027;
 
 
 //user function
@@ -16,48 +13,47 @@ int xdim6_opensbliblock00Kernel027;
 
 
 void opensbliblock00Kernel027_c_wrapper(
+  double * restrict rhoE_B0_p,
   double * restrict rho_B0_p,
   double * restrict rhou0_B0_p,
-  double * restrict rhoE_B0_p,
-  double * restrict Mach_sensor_B0_p,
-  double * restrict u0_B0_p,
-  double * restrict a_B0_p,
-  double * restrict p_B0_p,
+  double * restrict x0_B0_p,
+  int * restrict idx,
+  int arg_idx0, 
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
-    const ptr_double rho_B0 = { rho_B0_p + n_x*1};
-    const ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
-    const ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
-    ptr_double Mach_sensor_B0 = { Mach_sensor_B0_p + n_x*1};
-    ptr_double u0_B0 = { u0_B0_p + n_x*1};
-    ptr_double a_B0 = { a_B0_p + n_x*1};
-    ptr_double p_B0 = { p_B0_p + n_x*1};
+    int idx[] = {arg_idx0+n_x};
+    ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
+    ptr_double rho_B0 = { rho_B0_p + n_x*1};
+    ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
+    ptr_double x0_B0 = { x0_B0_p + n_x*1};
     
-   double M = 0.0;
+   double d = 0.0;
    double p = 0.0;
-   double inv_rho = 0.0;
-   double inv_a = 0.0;
    double u0 = 0.0;
-   inv_rho = 1.0/OPS_ACC(rho_B0, 0);
+   OPS_ACC(x0_B0, 0) = Delta0block0*idx[0];
 
-   OPS_ACC(u0_B0, 0) = inv_rho*OPS_ACC(rhou0_B0, 0);
+   u0 = 0;
 
-   OPS_ACC(p_B0, 0) = (gama - 1)*(-0.5*inv_rho*pow(OPS_ACC(rhou0_B0, 0), 2) + OPS_ACC(rhoE_B0, 0));
+   p = ((OPS_ACC(x0_B0, 0) < 0.5) ? (
+   1.0
+)
+: (
+   0.1
+));
 
-   OPS_ACC(a_B0, 0) = sqrt(gama*inv_rho*OPS_ACC(p_B0, 0));
+   d = ((OPS_ACC(x0_B0, 0) < 0.5) ? (
+   1.0
+)
+: (
+   0.125
+));
 
-   inv_rho = 1.0/OPS_ACC(rho_B0, 0);
+   OPS_ACC(rho_B0, 0) = d;
 
-   u0 = inv_rho*OPS_ACC(rhou0_B0, 0);
+   OPS_ACC(rhou0_B0, 0) = d*u0;
 
-   p = (gama - 1)*(-0.5*inv_rho*pow(OPS_ACC(rhou0_B0, 0), 2) + OPS_ACC(rhoE_B0, 0));
-
-   inv_a = 1.0/sqrt(gama*inv_rho*p);
-
-   M = inv_a*sqrt(pow(u0, 2));
-
-   OPS_ACC(Mach_sensor_B0, 0) = fmin(1, 0.5*pow(M, 2)*sqrt(pow(-pow(M, 2) + 1, 2) + 4)/(pow(M, 2) + 1));
+   OPS_ACC(rhoE_B0, 0) = p/(-1.0 + gama) + 0.5*d*(u0*u0);
 
 
   }

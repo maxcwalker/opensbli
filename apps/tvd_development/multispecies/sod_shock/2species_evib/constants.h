@@ -14,7 +14,6 @@ int block0np0;
 double cN;
 double cN2;
 double delta_TVD;
-double dhN;
 double dt;
 double eps_TVD;
 double gama;

@@ -7,12 +7,14 @@
 void ops_init_backend() {}
 
 //user kernel files
+#include "opensbliblock00Kernel018_mpiinline_kernel.cpp"
 #include "opensbliblock00Kernel016_mpiinline_kernel.cpp"
-#include "opensbliblock00Kernel014_mpiinline_kernel.cpp"
-#include "opensbliblock00Kernel015_mpiinline_kernel.cpp"
-#include "opensbliblock00Kernel006_mpiinline_kernel.cpp"
-#include "opensbliblock00Kernel013_mpiinline_kernel.cpp"
 #include "opensbliblock00Kernel017_mpiinline_kernel.cpp"
+#include "opensbliblock00Kernel008_mpiinline_kernel.cpp"
+#include "opensbliblock00Kernel009_mpiinline_kernel.cpp"
+#include "opensbliblock00Kernel006_mpiinline_kernel.cpp"
+#include "opensbliblock00Kernel015_mpiinline_kernel.cpp"
+#include "opensbliblock00Kernel019_mpiinline_kernel.cpp"
 #include "opensbliblock00Kernel002_mpiinline_kernel.cpp"
 #include "opensbliblock00Kernel003_mpiinline_kernel.cpp"
 #include "opensbliblock00Kernel004_mpiinline_kernel.cpp"

@@ -8,44 +8,41 @@ int xdim0_opensbliblock00Kernel027;
 int xdim1_opensbliblock00Kernel027;
 int xdim2_opensbliblock00Kernel027;
 int xdim3_opensbliblock00Kernel027;
-int xdim4_opensbliblock00Kernel027;
-int xdim5_opensbliblock00Kernel027;
-int xdim6_opensbliblock00Kernel027;
 
 //user function
 inline 
- void opensbliblock00Kernel027(const ptr_double rho_B0,
-  const ptr_double rhou0_B0,
-  const ptr_double rhoE_B0,
-  ptr_double Mach_sensor_B0,
-  ptr_double u0_B0,
-  ptr_double a_B0,
-  ptr_double p_B0)
+ void opensbliblock00Kernel027(ptr_double rhoE_B0,
+  ptr_double rho_B0,
+  ptr_double rhou0_B0,
+  ptr_double x0_B0,
+  const int *idx)
 {
-   double M = 0.0;
+   double d = 0.0;
    double p = 0.0;
-   double inv_rho = 0.0;
-   double inv_a = 0.0;
    double u0 = 0.0;
-   inv_rho = 1.0/OPS_ACC(rho_B0, 0);
+   OPS_ACC(x0_B0, 0) = Delta0block0*idx[0];
 
-   OPS_ACC(u0_B0, 0) = inv_rho*OPS_ACC(rhou0_B0, 0);
+   u0 = 0;
 
-   OPS_ACC(p_B0, 0) = (gama - 1)*(-0.5*inv_rho*pow(OPS_ACC(rhou0_B0, 0), 2) + OPS_ACC(rhoE_B0, 0));
+   p = ((OPS_ACC(x0_B0, 0) < 0.5) ? (
+   1.0
+)
+: (
+   0.1
+));
 
-   OPS_ACC(a_B0, 0) = sqrt(gama*inv_rho*OPS_ACC(p_B0, 0));
+   d = ((OPS_ACC(x0_B0, 0) < 0.5) ? (
+   1.0
+)
+: (
+   0.125
+));
 
-   inv_rho = 1.0/OPS_ACC(rho_B0, 0);
+   OPS_ACC(rho_B0, 0) = d;
 
-   u0 = inv_rho*OPS_ACC(rhou0_B0, 0);
+   OPS_ACC(rhou0_B0, 0) = d*u0;
 
-   p = (gama - 1)*(-0.5*inv_rho*pow(OPS_ACC(rhou0_B0, 0), 2) + OPS_ACC(rhoE_B0, 0));
-
-   inv_a = 1.0/sqrt(gama*inv_rho*p);
-
-   M = inv_a*sqrt(pow(u0, 2));
-
-   OPS_ACC(Mach_sensor_B0, 0) = fmin(1, 0.5*pow(M, 2)*sqrt(pow(-pow(M, 2) + 1, 2) + 4)/(pow(M, 2) + 1));
+   OPS_ACC(rhoE_B0, 0) = p/(-1.0 + gama) + 0.5*d*(u0*u0);
 
 }
 
@@ -55,26 +52,20 @@ void opensbliblock00Kernel027_c_wrapper(
   double *p_a1,
   double *p_a2,
   double *p_a3,
-  double *p_a4,
-  double *p_a5,
-  double *p_a6,
+  int *p_a4,
+  int arg_idx0,
   int x_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4,p_a5,p_a6)
+  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3)
   #pragma acc loop
   #endif
   for ( int n_x=0; n_x<x_size; n_x++ ){
-    const ptr_double ptr0 = {  p_a0 + n_x*1*1 };
-    const ptr_double ptr1 = {  p_a1 + n_x*1*1 };
-    const ptr_double ptr2 = {  p_a2 + n_x*1*1 };
+    int arg_idx[] = {arg_idx0+n_x};
+    ptr_double ptr0 = {  p_a0 + n_x*1*1 };
+    ptr_double ptr1 = {  p_a1 + n_x*1*1 };
+    ptr_double ptr2 = {  p_a2 + n_x*1*1 };
     ptr_double ptr3 = {  p_a3 + n_x*1*1 };
-    ptr_double ptr4 = {  p_a4 + n_x*1*1 };
-    ptr_double ptr5 = {  p_a5 + n_x*1*1 };
-    ptr_double ptr6 = {  p_a6 + n_x*1*1 };
-    opensbliblock00Kernel027( ptr0,
-          ptr1,ptr2,
-          ptr3,ptr4,
-          ptr5,ptr6 );
-
+    opensbliblock00Kernel027( ptr0, ptr1, ptr2, ptr3,
+          arg_idx);
   }
 }

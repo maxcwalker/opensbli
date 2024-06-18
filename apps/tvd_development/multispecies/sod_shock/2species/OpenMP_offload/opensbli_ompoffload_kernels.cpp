@@ -12,21 +12,34 @@
 // global constants
 extern double Delta0block0;
 extern int HDF5_timing;
+extern double MN;
+extern double MN2;
+extern double Rhat;
+extern double Tref;
 extern int block0np0;
+extern double cN;
+extern double cN2;
 extern double delta_TVD;
 extern double dt;
 extern double eps_TVD;
 extern double gama;
 extern double gamma_m1;
+extern double inv2Delta0block0;
 extern double inv2gamma_m1;
+extern double inv2uref;
 extern double invDelta0block0;
+extern double invMN;
+extern double invMN2;
+extern double invRhat;
 extern double invdelta_TVD;
 extern double invgama;
 extern double invgamma_m1;
+extern double kappa;
 extern double kappa_TVD;
 extern int niter;
 extern double simulation_time;
 extern int start_iter;
+extern double uref;
 
 void ops_init_backend() {}
 
@@ -41,8 +54,32 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:HDF5_timing)
   }
   else
+  if (!strcmp(name,"MN")) {
+    #pragma omp target enter data map(to:MN)
+  }
+  else
+  if (!strcmp(name,"MN2")) {
+    #pragma omp target enter data map(to:MN2)
+  }
+  else
+  if (!strcmp(name,"Rhat")) {
+    #pragma omp target enter data map(to:Rhat)
+  }
+  else
+  if (!strcmp(name,"Tref")) {
+    #pragma omp target enter data map(to:Tref)
+  }
+  else
   if (!strcmp(name,"block0np0")) {
     #pragma omp target enter data map(to:block0np0)
+  }
+  else
+  if (!strcmp(name,"cN")) {
+    #pragma omp target enter data map(to:cN)
+  }
+  else
+  if (!strcmp(name,"cN2")) {
+    #pragma omp target enter data map(to:cN2)
   }
   else
   if (!strcmp(name,"delta_TVD")) {
@@ -65,12 +102,32 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:gamma_m1)
   }
   else
+  if (!strcmp(name,"inv2Delta0block0")) {
+    #pragma omp target enter data map(to:inv2Delta0block0)
+  }
+  else
   if (!strcmp(name,"inv2gamma_m1")) {
     #pragma omp target enter data map(to:inv2gamma_m1)
   }
   else
+  if (!strcmp(name,"inv2uref")) {
+    #pragma omp target enter data map(to:inv2uref)
+  }
+  else
   if (!strcmp(name,"invDelta0block0")) {
     #pragma omp target enter data map(to:invDelta0block0)
+  }
+  else
+  if (!strcmp(name,"invMN")) {
+    #pragma omp target enter data map(to:invMN)
+  }
+  else
+  if (!strcmp(name,"invMN2")) {
+    #pragma omp target enter data map(to:invMN2)
+  }
+  else
+  if (!strcmp(name,"invRhat")) {
+    #pragma omp target enter data map(to:invRhat)
   }
   else
   if (!strcmp(name,"invdelta_TVD")) {
@@ -83,6 +140,10 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"invgamma_m1")) {
     #pragma omp target enter data map(to:invgamma_m1)
+  }
+  else
+  if (!strcmp(name,"kappa")) {
+    #pragma omp target enter data map(to:kappa)
   }
   else
   if (!strcmp(name,"kappa_TVD")) {
@@ -101,18 +162,24 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:start_iter)
   }
   else
+  if (!strcmp(name,"uref")) {
+    #pragma omp target enter data map(to:uref)
+  }
+  else
   {
     throw OPSException(OPS_RUNTIME_ERROR, "error: unknown const name");
   }
 }
 
 //user kernel files
+#include "opensbliblock00Kernel018_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel016_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel014_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel015_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel006_ompoffload_kernel.cpp"
-#include "opensbliblock00Kernel013_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel017_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel008_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel009_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel006_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel015_ompoffload_kernel.cpp"
+#include "opensbliblock00Kernel019_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel002_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel003_ompoffload_kernel.cpp"
 #include "opensbliblock00Kernel004_ompoffload_kernel.cpp"

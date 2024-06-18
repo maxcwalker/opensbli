@@ -97,10 +97,12 @@ void ops_par_loop_opensbliblock00Kernel020_execute(ops_kernel_descriptor *desc) 
       auto MN_sycl = (*MN_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto MN2_sycl = (*MN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto Rhat_sycl = (*Rhat_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto Tref_sycl = (*Tref_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto cN_sycl = (*cN_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto cN2_sycl = (*cN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invRhat_sycl = (*invRhat_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto thetavN2_sycl = (*thetavN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto uref_sycl = (*uref_p).template get_access<cl::sycl::access::mode::read>(cgh);
 
       cgh.parallel_for<class opensbliblock00Kernel020_kernel>(cl::sycl::nd_range<1>(cl::sycl::range<1>(
             ((end[0]-start[0]-1)/block->instance->OPS_block_size_x+1)*block->instance->OPS_block_size_x
@@ -125,7 +127,7 @@ void ops_par_loop_opensbliblock00Kernel020_execute(ops_kernel_descriptor *desc) 
    double p0 = 0.0;
    double r = 0.0;
    double u0 = 0.0;
-   r = 0.200000000000000;
+   r = 0.125000000000000;
 
    u0 = 0.0;
 
@@ -135,7 +137,7 @@ void ops_par_loop_opensbliblock00Kernel020_execute(ops_kernel_descriptor *desc) 
 
    cN_sycl[0] = 0.0500000000000000;
 
-   T0 = 0.5*invRhat_sycl[0];
+   T0 = 0.8*invRhat_sycl[0];
 
    rhoN_B0(0) = cN_sycl[0]*r;
 
@@ -145,7 +147,7 @@ void ops_par_loop_opensbliblock00Kernel020_execute(ops_kernel_descriptor *desc) 
 
    evN2 = Rhat_sycl[0]*thetavN2_sycl[0]/(MN2_sycl[0]*(-1.0 + cl::sycl::exp(thetavN2_sycl[0]/T0)));
 
-   rhoev_B0(0) = 0.00100000000000000;
+   rhoev_B0(0) = Rhat_sycl[0]*thetavN2_sycl[0]*(cN_sycl[0]*r/MN_sycl[0] + cN2_sycl[0]*r/MN2_sycl[0])/(MN2_sycl[0]*Tref_sycl[0]*(uref_sycl[0]*uref_sycl[0])*(-1.0 + cl::sycl::exp(thetavN2_sycl[0]/(T0*Tref_sycl[0]))));
 
    rhoE_B0(0) = (u0*u0)*(0.5*cN_sycl[0]*r + 0.5*cN2_sycl[0]*r) + p0*(1.5*cN_sycl[0]*r/MN_sycl[0] + 2.5*cN2_sycl[0]*r/MN2_sycl[0])/(cN_sycl[0]*r/MN_sycl[0] + cN2_sycl[0]*r/MN2_sycl[0]);
 

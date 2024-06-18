@@ -62,7 +62,7 @@ void ops_par_loop_opensbliblock00Kernel039_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ T_B0_p = (double *)(args[0].data + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ eveqNO_B0_p = (double *)(args[1].data + base1);
+  double * __restrict__ eveqN2_B0_p = (double *)(args[1].data + base1);
 
 
 
@@ -81,9 +81,9 @@ void ops_par_loop_opensbliblock00Kernel039_execute(ops_kernel_descriptor *desc) 
   #pragma omp parallel for
   for ( int n_x=start[0]; n_x<end[0]; n_x++ ){
     const ACC<double> T_B0(T_B0_p + n_x*1);
-    ACC<double> eveqNO_B0(eveqNO_B0_p + n_x*1);
+    ACC<double> eveqN2_B0(eveqN2_B0_p + n_x*1);
     
-   eveqNO_B0(0) = Rhat*invMNO*thetavNO/(-1.0 + exp(thetavNO/T_B0(0)));
+   eveqN2_B0(0) = Rhat*invMN2*thetavN2/(-1.0 + exp(thetavN2/T_B0(0)));
 
 
   }

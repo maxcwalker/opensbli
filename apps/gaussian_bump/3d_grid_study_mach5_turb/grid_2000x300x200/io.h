@@ -22,6 +22,7 @@ ops_write_const_hdf5("dt", 1, "double", (char*)&dt, filename);
 ops_write_const_hdf5("gama", 1, "double", (char*)&gama, filename);
 ops_write_const_hdf5("gamma_m1", 1, "double", (char*)&gamma_m1, filename);
 ops_write_const_hdf5("niter", 1, "int", (char*)&niter, filename);
+ops_write_const_hdf5("nsamples", 1, "int", (char*)&nsamples, filename);
 ops_write_const_hdf5("omega_0", 1, "double", (char*)&omega_0, filename);
 ops_write_const_hdf5("omega_1", 1, "double", (char*)&omega_1, filename);
 ops_write_const_hdf5("omega_2", 1, "double", (char*)&omega_2, filename);
@@ -32,6 +33,7 @@ ops_write_const_hdf5("phi_2", 1, "double", (char*)&phi_2, filename);
 ops_write_const_hdf5("shock_filter_control", 1, "double", (char*)&shock_filter_control, filename);
 ops_write_const_hdf5("simulation_time", 1, "double", (char*)&simulation_time, filename);
 ops_write_const_hdf5("start_iter", 1, "int", (char*)&start_iter, filename);
+ops_write_const_hdf5("stat_frequency", 1, "int", (char*)&stat_frequency, filename);
 ops_write_const_hdf5("tripA", 1, "double", (char*)&tripA, filename);
 ops_write_const_hdf5("write_output_file", 1, "int", (char*)&write_output_file, filename);
 ops_write_const_hdf5("write_slices", 1, "int", (char*)&write_slices, filename);
@@ -96,6 +98,36 @@ double cpu_end0, elapsed_end0;
 ops_timers(&cpu_end0, &elapsed_end0);
 ops_printf("-----------------------------------------\n");
 ops_printf("Time to write HDF5 file: %s: %lf\n", name0, elapsed_end0-elapsed_start0);
+ops_printf("-----------------------------------------\n");
+fflush(stdout);
+}
+}
+
+void HDF5_IO_Write_1_opensbliblock00(ops_block& opensbliblock00, ops_dat& rhomean_B0, ops_dat& rhou0mean_B0, ops_dat& rhou1mean_B0, ops_dat& rhou2mean_B0, ops_dat& E_mean_B0, ops_dat& rhou0u0mean_B0, ops_dat& rhou0u1mean_B0, ops_dat& rhou1u1mean_B0, ops_dat& rhou0u2mean_B0, ops_dat& rhou1u2mean_B0, ops_dat& rhou2u2mean_B0, int HDF5_timing){
+double cpu_start0, elapsed_start0;
+if (HDF5_timing == 1){
+ops_timers(&cpu_start0, &elapsed_start0);
+}
+// Writing OPS datasets
+ops_fetch_block_hdf5_file(opensbliblock00, "stats_output.h5");
+ops_fetch_dat_hdf5_file(rhomean_B0, "stats_output.h5");
+ops_fetch_dat_hdf5_file(rhou0mean_B0, "stats_output.h5");
+ops_fetch_dat_hdf5_file(rhou1mean_B0, "stats_output.h5");
+ops_fetch_dat_hdf5_file(rhou2mean_B0, "stats_output.h5");
+ops_fetch_dat_hdf5_file(E_mean_B0, "stats_output.h5");
+ops_fetch_dat_hdf5_file(rhou0u0mean_B0, "stats_output.h5");
+ops_fetch_dat_hdf5_file(rhou0u1mean_B0, "stats_output.h5");
+ops_fetch_dat_hdf5_file(rhou1u1mean_B0, "stats_output.h5");
+ops_fetch_dat_hdf5_file(rhou0u2mean_B0, "stats_output.h5");
+ops_fetch_dat_hdf5_file(rhou1u2mean_B0, "stats_output.h5");
+ops_fetch_dat_hdf5_file(rhou2u2mean_B0, "stats_output.h5");
+// Writing simulation constants
+write_constants("stats_output.h5");
+if (HDF5_timing == 1){
+double cpu_end0, elapsed_end0;
+ops_timers(&cpu_end0, &elapsed_end0);
+ops_printf("-----------------------------------------\n");
+ops_printf("Time to write HDF5 file: %s: %lf\n", "stats_output.h5", elapsed_end0-elapsed_start0);
 ops_printf("-----------------------------------------\n");
 fflush(stdout);
 }

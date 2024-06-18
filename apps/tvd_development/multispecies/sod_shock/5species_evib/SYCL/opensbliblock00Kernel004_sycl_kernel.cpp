@@ -388,21 +388,21 @@ void ops_par_loop_opensbliblock00Kernel004_execute(ops_kernel_descriptor *desc) 
    double ws_lambda_55 = 0.0;
    double ws_lambda_66 = 0.0;
    double ws_lambda_77 = 0.0;
-   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(-1));
-
-   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(0) + rhoO_B0(-1));
-
    AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(-1));
+
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(-1));
 
    AVG_0_rhoNO = ((1.0/2.0))*(rhoNO_B0(0) + rhoNO_B0(-1));
 
-   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(0) + gamaf_B0(-1));
+   AVG_0_af = ((1.0/2.0))*(af_B0(0) + af_B0(-1));
+
+   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(0) + rhoO_B0(-1));
 
    AVG_0_rhoO2 = ((1.0/2.0))*(rhoO2_B0(0) + rhoO2_B0(-1));
 
-   AVG_0_af = ((1.0/2.0))*(af_B0(0) + af_B0(-1));
+   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(0) + gamaf_B0(-1));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(-1));
+   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(-1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -548,21 +548,21 @@ void ops_par_loop_opensbliblock00Kernel004_execute(ops_kernel_descriptor *desc) 
       rhoNO_B0(0))*AVG_0_0_LEV_74 + (-rhoO2_B0(-1) + rhoO2_B0(0))*AVG_0_0_LEV_71 + (-rhou0_B0(-1) +
       rhou0_B0(0))*AVG_0_0_LEV_75;
 
-   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(1));
-
-   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(0) + rhoO_B0(1));
-
    AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(1));
+
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(1));
 
    AVG_0_rhoNO = ((1.0/2.0))*(rhoNO_B0(0) + rhoNO_B0(1));
 
-   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(0) + gamaf_B0(1));
+   AVG_0_af = ((1.0/2.0))*(af_B0(0) + af_B0(1));
+
+   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(0) + rhoO_B0(1));
 
    AVG_0_rhoO2 = ((1.0/2.0))*(rhoO2_B0(0) + rhoO2_B0(1));
 
-   AVG_0_af = ((1.0/2.0))*(af_B0(0) + af_B0(1));
+   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(0) + gamaf_B0(1));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(1));
+   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -774,21 +774,21 @@ void ops_par_loop_opensbliblock00Kernel004_execute(ops_kernel_descriptor *desc) 
 
    AVG_0_REV_77 = ((1.0/2.0))*(-1 + AVG_0_gamaf)*AVG_0_af/AVG_0_rhoO;
 
-   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(1) + rhoN_B0(2));
-
-   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(1) + rhoO_B0(2));
-
    AVG_0_u0 = ((1.0/2.0))*(u0_B0(1) + u0_B0(2));
+
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(1) + rhoN2_B0(2));
 
    AVG_0_rhoNO = ((1.0/2.0))*(rhoNO_B0(1) + rhoNO_B0(2));
 
-   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(1) + gamaf_B0(2));
+   AVG_0_af = ((1.0/2.0))*(af_B0(1) + af_B0(2));
+
+   AVG_0_rhoO = ((1.0/2.0))*(rhoO_B0(1) + rhoO_B0(2));
 
    AVG_0_rhoO2 = ((1.0/2.0))*(rhoO2_B0(1) + rhoO2_B0(2));
 
-   AVG_0_af = ((1.0/2.0))*(af_B0(1) + af_B0(2));
+   AVG_0_gamaf = ((1.0/2.0))*(gamaf_B0(1) + gamaf_B0(2));
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(1) + rhoN2_B0(2));
+   AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(1) + rhoN_B0(2));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 

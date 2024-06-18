@@ -101,10 +101,12 @@ h5.add_arrays(simulation_eq.time_advance_arrays)
 h5.add_arrays([DataObject('x0')])
 block.setio(copy.deepcopy(h5))
 
-ShockFilter = WENOFilter(block, order=5, metrics=metriceq, dissipation_sensor='Constant', Mach_correction=True)
+WF = WENOFilter(block, order=5, formulation='Z', flux_type='LLF', airfoil=False, optimize=False, species=None)
+block.set_equations(WF.equation_classes) 
 
+block.set_equations([copy.deepcopy(constituent), copy.deepcopy(simulation_eq), initial])
 # Set the equations to be solved on the block
-block.set_equations([constituent, simulation_eq, initial, metriceq] + ShockFilter.equation_classes)
+# block.set_equations([constituent, simulation_eq, initial, metriceq] + ShockFilter.equation_classes)
 
 # block.set_equations([copy.deepcopy(constituent), copy.deepcopy(simulation_eq), initial])
 block.set_discretisation_schemes(schemes)
@@ -116,7 +118,8 @@ alg = TraditionalAlgorithmRK(block)
 SimulationDataType.set_datatype(Double)
 OPSC(alg)
 # Substitute simulation paramters into the C code
-constants = ['gama', 'dt', 'niter', 'block0np0', 'Delta0block0', 'eps', 'TENO_CT']
-values = ['1.4', '0.0002', 'ceil(0.2/0.0002)', '200', '1.0/(block0np0-1)', '1.0e-16', '1.0e-5']
+constants = ['gama', 'dt', 'niter', 'block0np0', 'Delta0block0', 'eps', 'TENO_CT',"inv_rfact0_block0"]
+values = ['1.4', '0.0002', 'ceil(0.2/0.0002)', '200', '1.0/(block0np0-1)', '1.0e-16', '1.0e-5', "1.0/Delta0block0"]
 substitute_simulation_parameters(constants, values)
+print_iteration_ops(every=1, NaN_check='rho')
 # print_iteration_ops(NaN_check='rho_B0')

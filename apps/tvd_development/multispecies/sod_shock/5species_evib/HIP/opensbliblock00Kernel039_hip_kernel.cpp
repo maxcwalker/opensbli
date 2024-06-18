@@ -8,9 +8,9 @@ static int dims_opensbliblock00Kernel039_h [2][1] = {{0}};
 __device__
 
 void opensbliblock00Kernel039_gpu(const ACC<double> &T_B0,
-  ACC<double> &eveqNO_B0)
+  ACC<double> &eveqN2_B0)
 {
-   eveqNO_B0(0) = Rhat*invMNO*thetavNO/(-1.0 + exp(thetavNO/T_B0(0)));
+   eveqN2_B0(0) = Rhat*invMN2*thetavN2/(-1.0 + exp(thetavN2/T_B0(0)));
 
 }
 

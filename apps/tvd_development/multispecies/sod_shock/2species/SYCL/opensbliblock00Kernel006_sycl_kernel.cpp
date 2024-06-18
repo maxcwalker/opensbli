@@ -26,12 +26,12 @@ void ops_par_loop_opensbliblock00Kernel006_execute(ops_kernel_descriptor *desc) 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,3,range,3)) return;
+  if (!ops_checkpointing_before(args,3,range,5)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,3,"opensbliblock00Kernel006");
-    block->instance->OPS_kernels[3].count++;
+    ops_timing_realloc(block->instance,5,"opensbliblock00Kernel006");
+    block->instance->OPS_kernels[5].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -67,7 +67,7 @@ void ops_par_loop_opensbliblock00Kernel006_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset/sizeof(double);
-  double* u0_B0_p = (double*)args[0].data_d;
+  double* u_B0_p = (double*)args[0].data_d;
 
   int base1 = args[1].dat->base_offset/sizeof(double);
   double* wk0_B0_p = (double*)args[1].data_d;
@@ -83,7 +83,7 @@ void ops_par_loop_opensbliblock00Kernel006_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[3].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[5].mpi_time += __t1-__t2;
   }
 
   int start_0 = start[0];
@@ -104,72 +104,70 @@ void ops_par_loop_opensbliblock00Kernel006_execute(ops_kernel_descriptor *desc) 
       ) [[intel::kernel_args_restrict]] {
         int n_x = item.get_global_id(0)+start_0;
         int idx[] = {arg_idx_0+n_x};
-        const ACC<double> u0_B0(&u0_B0_p[0] + base0 + n_x*1);
+        const ACC<double> u_B0(&u_B0_p[0] + base0 + n_x*1);
         ACC<double> wk0_B0(&wk0_B0_p[0] + base1 + n_x*1);
         //USER CODE
         if (n_x < end_0) {
           
    if (idx[0] == 0){
 
-       wk0_B0(0) = (3.0*u0_B0(1) + 0.333333333333333*u0_B0(3) - 1.5*u0_B0(2) -
-            1.83333333333333*u0_B0(0))*invDelta0block0_sycl[0];
+      wk0_B0(0) = (3.0*u_B0(1) + 0.333333333333333*u_B0(3) - 1.5*u_B0(2) - 1.83333333333333*u_B0(0))*invDelta0block0_sycl[0];
 
    }
 
    else if (idx[0] == 1){
 
-       wk0_B0(0) = (0.0394168524399447*u0_B0(2) + 0.00571369039775442*u0_B0(4) + 0.719443173328855*u0_B0(1) -
-            0.322484932882161*u0_B0(0) - 0.0658051057710389*u0_B0(3) - 0.376283677513354*u0_B0(-1))*invDelta0block0_sycl[0];
+       wk0_B0(0) = (0.0394168524399447*u_B0(2) + 0.00571369039775442*u_B0(4) + 0.719443173328855*u_B0(1) -
+            0.322484932882161*u_B0(0) - 0.0658051057710389*u_B0(3) - 0.376283677513354*u_B0(-1))*invDelta0block0_sycl[0];
 
    }
 
    else if (idx[0] == 2){
 
-       wk0_B0(0) = (0.197184333887745*u0_B0(0) + 0.521455851089587*u0_B0(1) + 0.113446470384241*u0_B0(-2) -
-            0.00412637789557492*u0_B0(3) - 0.0367146847001261*u0_B0(2) - 0.791245592765872*u0_B0(-1))*invDelta0block0_sycl[0];
+       wk0_B0(0) = (0.197184333887745*u_B0(0) + 0.521455851089587*u_B0(1) + 0.113446470384241*u_B0(-2) -
+            0.00412637789557492*u_B0(3) - 0.0367146847001261*u_B0(2) - 0.791245592765872*u_B0(-1))*invDelta0block0_sycl[0];
 
    }
 
    else if (idx[0] == 3){
 
-       wk0_B0(0) = (0.0451033223343881*u0_B0(0) + 0.652141084861241*u0_B0(1) + 0.121937153224065*u0_B0(-2) -
-            0.00932597985049999*u0_B0(-3) - 0.727822147724592*u0_B0(-1) - 0.082033432844602*u0_B0(2))*invDelta0block0_sycl[0];
+       wk0_B0(0) = (0.0451033223343881*u_B0(0) + 0.652141084861241*u_B0(1) + 0.121937153224065*u_B0(-2) -
+            0.00932597985049999*u_B0(-3) - 0.727822147724592*u_B0(-1) - 0.082033432844602*u_B0(2))*invDelta0block0_sycl[0];
 
    }
 
    else if (idx[0] == -1 + block0np0_sycl[0]){
 
-       wk0_B0(0) = (1.5*u0_B0(-2) + 1.83333333333333*u0_B0(0) - 3.0*u0_B0(-1) -
-            0.333333333333333*u0_B0(-3))*invDelta0block0_sycl[0];
+       wk0_B0(0) = (1.5*u_B0(-2) + 1.83333333333333*u_B0(0) - 3.0*u_B0(-1) -
+            0.333333333333333*u_B0(-3))*invDelta0block0_sycl[0];
 
    }
 
    else if (idx[0] == -2 + block0np0_sycl[0]){
 
-       wk0_B0(0) = (0.322484932882161*u0_B0(0) + 0.0658051057710389*u0_B0(-3) + 0.376283677513354*u0_B0(1) -
-            0.0394168524399447*u0_B0(-2) - 0.00571369039775442*u0_B0(-4) -
-            0.719443173328855*u0_B0(-1))*invDelta0block0_sycl[0];
+       wk0_B0(0) = (0.322484932882161*u_B0(0) + 0.0658051057710389*u_B0(-3) + 0.376283677513354*u_B0(1) -
+            0.0394168524399447*u_B0(-2) - 0.00571369039775442*u_B0(-4) - 0.719443173328855*u_B0(-1))*invDelta0block0_sycl[0];
 
    }
 
    else if (idx[0] == -3 + block0np0_sycl[0]){
 
-       wk0_B0(0) = (0.00412637789557492*u0_B0(-3) + 0.0367146847001261*u0_B0(-2) + 0.791245592765872*u0_B0(1) -
-            0.197184333887745*u0_B0(0) - 0.521455851089587*u0_B0(-1) - 0.113446470384241*u0_B0(2))*invDelta0block0_sycl[0];
+       wk0_B0(0) = (0.00412637789557492*u_B0(-3) + 0.0367146847001261*u_B0(-2) + 0.791245592765872*u_B0(1) -
+            0.197184333887745*u_B0(0) - 0.521455851089587*u_B0(-1) - 0.113446470384241*u_B0(2))*invDelta0block0_sycl[0];
 
    }
 
    else if (idx[0] == -4 + block0np0_sycl[0]){
 
-       wk0_B0(0) = (0.00932597985049999*u0_B0(3) + 0.727822147724592*u0_B0(1) + 0.082033432844602*u0_B0(-2) -
-            0.0451033223343881*u0_B0(0) - 0.652141084861241*u0_B0(-1) - 0.121937153224065*u0_B0(2))*invDelta0block0_sycl[0];
+       wk0_B0(0) = (0.00932597985049999*u_B0(3) + 0.727822147724592*u_B0(1) + 0.082033432844602*u_B0(-2) -
+            0.0451033223343881*u_B0(0) - 0.652141084861241*u_B0(-1) - 0.121937153224065*u_B0(2))*invDelta0block0_sycl[0];
 
    }
 
    else{
 
-       wk0_B0(0) = (-(2.0/3.0)*u0_B0(-1) - (1.0/12.0)*u0_B0(2) + ((1.0/12.0))*u0_B0(-2) +
-            ((2.0/3.0))*u0_B0(1))*invDelta0block0_sycl[0];
+       wk0_B0(0) = (-(2.0/3.0)*u_B0(-1) - (1.0/12.0)*u_B0(2) + ((1.0/12.0))*u_B0(-2) +
+            ((2.0/3.0))*u_B0(1))*invDelta0block0_sycl[0];
 
    }
 
@@ -181,7 +179,7 @@ void ops_par_loop_opensbliblock00Kernel006_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     block->instance->sycl_instance->queue->wait();
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[3].time += __t2-__t1;
+    block->instance->OPS_kernels[5].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_device(args, 3);
@@ -191,9 +189,9 @@ void ops_par_loop_opensbliblock00Kernel006_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[3].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[3].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[3].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[5].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[5].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[5].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
@@ -206,9 +204,9 @@ void ops_par_loop_opensbliblock00Kernel006(char const *name, ops_block block, in
   desc->block = block;
   desc->dim = dim;
   desc->device = 1;
-  desc->index = 3;
+  desc->index = 5;
   desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 3;
+  desc->hash = ((desc->hash << 5) + desc->hash) + 5;
   for ( int i=0; i<2; i++ ){
     desc->range[i] = range[i];
     desc->orig_range[i] = range[i];
@@ -223,7 +221,7 @@ void ops_par_loop_opensbliblock00Kernel006(char const *name, ops_block block, in
   desc->args[2] = arg2;
   desc->function = ops_par_loop_opensbliblock00Kernel006_execute;
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,3,"opensbliblock00Kernel006");
+    ops_timing_realloc(block->instance,5,"opensbliblock00Kernel006");
   }
   ops_enqueue_kernel(desc);
 }
