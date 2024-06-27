@@ -7,6 +7,9 @@ int xdim1_opensbliblock00Kernel003;
 int xdim2_opensbliblock00Kernel003;
 int xdim3_opensbliblock00Kernel003;
 int xdim4_opensbliblock00Kernel003;
+int xdim5_opensbliblock00Kernel003;
+int xdim6_opensbliblock00Kernel003;
+int xdim7_opensbliblock00Kernel003;
 
 
 //user function
@@ -19,6 +22,9 @@ void opensbliblock00Kernel003_c_wrapper(
   double * restrict wk2_B0_p,
   double * restrict wk3_B0_p,
   double * restrict wk4_B0_p,
+  double * restrict wk5_B0_p,
+  double * restrict wk6_B0_p,
+  double * restrict wk7_B0_p,
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
@@ -27,6 +33,9 @@ void opensbliblock00Kernel003_c_wrapper(
     ptr_double wk2_B0 = { wk2_B0_p + n_x*1};
     ptr_double wk3_B0 = { wk3_B0_p + n_x*1};
     ptr_double wk4_B0 = { wk4_B0_p + n_x*1};
+    ptr_double wk5_B0 = { wk5_B0_p + n_x*1};
+    ptr_double wk6_B0 = { wk6_B0_p + n_x*1};
+    ptr_double wk7_B0 = { wk7_B0_p + n_x*1};
     
    OPS_ACC(wk0_B0, 0) = 0.0;
 
@@ -37,6 +46,12 @@ void opensbliblock00Kernel003_c_wrapper(
    OPS_ACC(wk3_B0, 0) = 0.0;
 
    OPS_ACC(wk4_B0, 0) = 0.0;
+
+   OPS_ACC(wk5_B0, 0) = 0.0;
+
+   OPS_ACC(wk6_B0, 0) = 0.0;
+
+   OPS_ACC(wk7_B0, 0) = 0.0;
 
 
   }

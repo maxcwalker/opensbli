@@ -26,7 +26,6 @@ extern double eps_TVD;
 extern double gama;
 extern double gamma_m1;
 extern double inv2Delta0block0;
-extern double inv2gamma_m1;
 extern double inv2uref;
 extern double invDelta0block0;
 extern double invMN;
@@ -34,7 +33,6 @@ extern double invMN2;
 extern double invRhat;
 extern double invTref;
 extern double invdelta_TVD;
-extern double invgama;
 extern double invgamma_m1;
 extern double invuref;
 extern double kappa;
@@ -114,10 +112,6 @@ int size, char *dat, char const *name){
     #pragma omp target enter data map(to:inv2Delta0block0)
   }
   else
-  if (!strcmp(name,"inv2gamma_m1")) {
-    #pragma omp target enter data map(to:inv2gamma_m1)
-  }
-  else
   if (!strcmp(name,"inv2uref")) {
     #pragma omp target enter data map(to:inv2uref)
   }
@@ -144,10 +138,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"invdelta_TVD")) {
     #pragma omp target enter data map(to:invdelta_TVD)
-  }
-  else
-  if (!strcmp(name,"invgama")) {
-    #pragma omp target enter data map(to:invgama)
   }
   else
   if (!strcmp(name,"invgamma_m1")) {

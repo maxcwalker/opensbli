@@ -31,7 +31,6 @@ __constant__ double eps_TVD;
 __constant__ double gama;
 __constant__ double gamma_m1;
 __constant__ double inv2Delta0block0;
-__constant__ double inv2gamma_m1;
 __constant__ double inv2uref;
 __constant__ double invDelta0block0;
 __constant__ double invMN;
@@ -39,7 +38,6 @@ __constant__ double invMN2;
 __constant__ double invRhat;
 __constant__ double invTref;
 __constant__ double invdelta_TVD;
-__constant__ double invgama;
 __constant__ double invgamma_m1;
 __constant__ double invuref;
 __constant__ double kappa;
@@ -119,10 +117,6 @@ int size, char *dat, char const *name){
     cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(inv2Delta0block0, dat, dim*size));
   }
   else
-  if (!strcmp(name,"inv2gamma_m1")) {
-    cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(inv2gamma_m1, dat, dim*size));
-  }
-  else
   if (!strcmp(name,"inv2uref")) {
     cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(inv2uref, dat, dim*size));
   }
@@ -149,10 +143,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"invdelta_TVD")) {
     cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(invdelta_TVD, dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"invgama")) {
-    cutilSafeCall(instance->ostream(),cudaMemcpyToSymbol(invgama, dat, dim*size));
   }
   else
   if (!strcmp(name,"invgamma_m1")) {

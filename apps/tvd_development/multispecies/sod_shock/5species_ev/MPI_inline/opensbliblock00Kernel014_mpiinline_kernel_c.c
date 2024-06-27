@@ -22,7 +22,7 @@ void opensbliblock00Kernel014_c_wrapper(
   double * restrict rhoN_B0_p,
   double * restrict rhoO2_B0_p,
   double * restrict rhoO_B0_p,
-  double * restrict ptauNO_B0_p,
+  double * restrict ptauO2_B0_p,
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
@@ -32,13 +32,13 @@ void opensbliblock00Kernel014_c_wrapper(
     const ptr_double rhoN_B0 = { rhoN_B0_p + n_x*1};
     const ptr_double rhoO2_B0 = { rhoO2_B0_p + n_x*1};
     const ptr_double rhoO_B0 = { rhoO_B0_p + n_x*1};
-    ptr_double ptauNO_B0 = { ptauNO_B0_p + n_x*1};
+    ptr_double ptauO2_B0 = { ptauO2_B0_p + n_x*1};
     
-    OPS_ACC(ptauNO_B0, 0) = (6.69952094392908e-11*invMO2*OPS_ACC(rhoO2_B0, 0)*exp(168.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
-      1.07234831431176e-10*invMO*OPS_ACC(rhoO_B0, 0)*exp(168.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
-      1.18607665290378e-10*invMN*OPS_ACC(rhoN_B0, 0)*exp(168.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
-      7.04583049652578e-11*invMNO*OPS_ACC(rhoNO_B0, 0)*exp(168.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
-      7.28659255329465e-11*invMN2*OPS_ACC(rhoN2_B0, 0)*exp(168.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)))/(invMN*OPS_ACC(rhoN_B0, 0) +
+    OPS_ACC(ptauO2_B0, 0) = (3.03420950194169e-10*invMO*OPS_ACC(rhoO_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
+      2.14180928034488e-10*invMNO*OPS_ACC(rhoNO_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
+      3.27838502246041e-10*invMN*OPS_ACC(rhoN_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
+      2.08725734681668e-10*invMO2*OPS_ACC(rhoO2_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
+      2.22632207449373e-10*invMN2*OPS_ACC(rhoN2_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)))/(invMN*OPS_ACC(rhoN_B0, 0) +
       invMO*OPS_ACC(rhoO_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0) + invMNO*OPS_ACC(rhoNO_B0, 0) + invMO2*OPS_ACC(rhoO2_B0, 0));
 
 

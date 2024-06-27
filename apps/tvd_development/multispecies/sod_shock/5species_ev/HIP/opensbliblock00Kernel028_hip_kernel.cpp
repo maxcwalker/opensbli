@@ -39,17 +39,22 @@ __device__
    1.0
 )
 : (
-   0.125
+   0.1
 ));
 
    p0 = ((x0_B0(0) < 0.5) ? (
    1.0
 )
 : (
-   0.1
+   0.125
 ));
 
-   T0 = p0/(Rhat*r);
+   T0 = ((x0_B0(0) < 0.5) ? (
+   1.0
+)
+: (
+   0.125
+));
 
    cN = ((x0_B0(0) < 0.5) ? (
    0.725
@@ -99,7 +104,7 @@ __device__
 
    evNO = Rhat*thetavNO/(MN2*(-1.0 + exp(thetavN2/T0)));
 
-   rhoev_B0(0) = Rhat*thetavN2*(cN*r/MN + cN2*r/MN2)/(MN2*Tref*(uref*uref)*(-1.0 + exp(thetavN2/(T0*Tref))));
+   rhoev_B0(0) = (cN2*evN2*r + cNO*evNO*r + cO2*evO2*r)*(cN*r + cN2*r + cNO*r + cO*r + cO2*r)/(cN2*r + cNO*r + cO2*r);
 
     rhoE_B0(0) = (u0*u0)*(0.5*cN*r/MN + 0.5*cN2*r/MN2 + 0.5*cNO*r/MNO + 0.5*cO*r/MO + 0.5*cO2*r/MO2) + cN2*evN2*r +
       cNO*evNO*r + cO2*evO2*r + p0*(1.5*cN*r/MN + 1.5*cO*r/MO + 2.5*cN2*r/MN2 + 2.5*cNO*r/MNO + 2.5*cO2*r/MO2)/(cN*r/MN

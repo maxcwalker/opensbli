@@ -9,7 +9,9 @@
 void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
  ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
- ops_arg arg8, ops_arg arg9, ops_arg arg10) {
+ ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
+ ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
+ ops_arg arg16) {
 #else
 void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) {
   ops_block block = desc->block;
@@ -26,19 +28,26 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
   ops_arg arg8 = desc->args[8];
   ops_arg arg9 = desc->args[9];
   ops_arg arg10 = desc->args[10];
+  ops_arg arg11 = desc->args[11];
+  ops_arg arg12 = desc->args[12];
+  ops_arg arg13 = desc->args[13];
+  ops_arg arg14 = desc->args[14];
+  ops_arg arg15 = desc->args[15];
+  ops_arg arg16 = desc->args[16];
   #endif
 
   //Timing
   double __t1,__t2,__c1,__c2;
 
-  ops_arg args[11] = { arg0, arg1, arg2, arg3, arg4,
+  ops_arg args[17] = { arg0, arg1, arg2, arg3, arg4,
  arg5, arg6, arg7, arg8, arg9,
- arg10};
+ arg10, arg11, arg12, arg13, arg14,
+ arg15, arg16};
 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,11,range,18)) return;
+  if (!ops_checkpointing_before(args,17,range,18)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
@@ -61,7 +70,7 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
     start[n] = range[2*n];end[n] = range[2*n+1];
   }
   #else
-  if (compute_ranges(args, 11,block, range, start, end, arg_idx) < 0) return;
+  if (compute_ranges(args, 17,block, range, start, end, arg_idx) < 0) return;
   #endif
 
   #if defined(OPS_MPI)
@@ -94,27 +103,45 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
   double* wk4_B0_p = (double*)args[4].data_d;
 
   int base5 = args[5].dat->base_offset/sizeof(double);
-  double* rhoE_B0_p = (double*)args[5].data_d;
+  double* wk5_B0_p = (double*)args[5].data_d;
 
   int base6 = args[6].dat->base_offset/sizeof(double);
-  double* rhoN2_B0_p = (double*)args[6].data_d;
+  double* wk6_B0_p = (double*)args[6].data_d;
 
   int base7 = args[7].dat->base_offset/sizeof(double);
-  double* rhoN_B0_p = (double*)args[7].data_d;
+  double* wk7_B0_p = (double*)args[7].data_d;
 
   int base8 = args[8].dat->base_offset/sizeof(double);
-  double* rhoev_B0_p = (double*)args[8].data_d;
+  double* rhoE_B0_p = (double*)args[8].data_d;
 
   int base9 = args[9].dat->base_offset/sizeof(double);
-  double* rhou0_B0_p = (double*)args[9].data_d;
+  double* rhoN2_B0_p = (double*)args[9].data_d;
+
+  int base10 = args[10].dat->base_offset/sizeof(double);
+  double* rhoNO_B0_p = (double*)args[10].data_d;
+
+  int base11 = args[11].dat->base_offset/sizeof(double);
+  double* rhoN_B0_p = (double*)args[11].data_d;
+
+  int base12 = args[12].dat->base_offset/sizeof(double);
+  double* rhoO2_B0_p = (double*)args[12].data_d;
+
+  int base13 = args[13].dat->base_offset/sizeof(double);
+  double* rhoO_B0_p = (double*)args[13].data_d;
+
+  int base14 = args[14].dat->base_offset/sizeof(double);
+  double* rhoev_B0_p = (double*)args[14].data_d;
+
+  int base15 = args[15].dat->base_offset/sizeof(double);
+  double* rhou0_B0_p = (double*)args[15].data_d;
 
 
 
 
   #ifndef OPS_LAZY
   //Halo Exchanges
-  ops_H_D_exchanges_device(args, 11);
-  ops_halo_exchanges(args,11,range);
+  ops_H_D_exchanges_device(args, 17);
+  ops_halo_exchanges(args,17,range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
@@ -145,11 +172,17 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
         const ACC<double> wk2_B0(&wk2_B0_p[0] + base2 + n_x*1);
         const ACC<double> wk3_B0(&wk3_B0_p[0] + base3 + n_x*1);
         const ACC<double> wk4_B0(&wk4_B0_p[0] + base4 + n_x*1);
-        ACC<double> rhoE_B0(&rhoE_B0_p[0] + base5 + n_x*1);
-        ACC<double> rhoN2_B0(&rhoN2_B0_p[0] + base6 + n_x*1);
-        ACC<double> rhoN_B0(&rhoN_B0_p[0] + base7 + n_x*1);
-        ACC<double> rhoev_B0(&rhoev_B0_p[0] + base8 + n_x*1);
-        ACC<double> rhou0_B0(&rhou0_B0_p[0] + base9 + n_x*1);
+        const ACC<double> wk5_B0(&wk5_B0_p[0] + base5 + n_x*1);
+        const ACC<double> wk6_B0(&wk6_B0_p[0] + base6 + n_x*1);
+        const ACC<double> wk7_B0(&wk7_B0_p[0] + base7 + n_x*1);
+        ACC<double> rhoE_B0(&rhoE_B0_p[0] + base8 + n_x*1);
+        ACC<double> rhoN2_B0(&rhoN2_B0_p[0] + base9 + n_x*1);
+        ACC<double> rhoNO_B0(&rhoNO_B0_p[0] + base10 + n_x*1);
+        ACC<double> rhoN_B0(&rhoN_B0_p[0] + base11 + n_x*1);
+        ACC<double> rhoO2_B0(&rhoO2_B0_p[0] + base12 + n_x*1);
+        ACC<double> rhoO_B0(&rhoO_B0_p[0] + base13 + n_x*1);
+        ACC<double> rhoev_B0(&rhoev_B0_p[0] + base14 + n_x*1);
+        ACC<double> rhou0_B0(&rhou0_B0_p[0] + base15 + n_x*1);
         //USER CODE
         if (n_x < end_0) {
           
@@ -159,15 +192,21 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
 
    Wall = 1;
 
-   rhoN_B0(0) = -(-wk0_B0(-1) + wk0_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhoN_B0(0);
+   rhoO_B0(0) = -(-wk0_B0(-1) + wk0_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhoO_B0(0);
 
-   rhoN2_B0(0) = -(-wk1_B0(-1) + wk1_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhoN2_B0(0);
+   rhoO2_B0(0) = -(-wk1_B0(-1) + wk1_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhoO2_B0(0);
 
-   rhou0_B0(0) = -(-wk2_B0(-1) + wk2_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhou0_B0(0);
+   rhoN_B0(0) = -(-wk2_B0(-1) + wk2_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhoN_B0(0);
 
-   rhoev_B0(0) = -(-wk3_B0(-1) + wk3_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhoev_B0(0);
+   rhoN2_B0(0) = -(-wk3_B0(-1) + wk3_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhoN2_B0(0);
 
-   rhoE_B0(0) = -(-wk4_B0(-1) + wk4_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhoE_B0(0);
+   rhoNO_B0(0) = -(-wk4_B0(-1) + wk4_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhoNO_B0(0);
+
+   rhou0_B0(0) = -(-wk5_B0(-1) + wk5_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhou0_B0(0);
+
+   rhoev_B0(0) = -(-wk6_B0(-1) + wk6_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhoev_B0(0);
+
+   rhoE_B0(0) = -(-wk7_B0(-1) + wk7_B0(0))*dt_sycl[0]*invDelta0block0_sycl[0] + rhoE_B0(0);
 
 
         }
@@ -180,12 +219,15 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
     block->instance->OPS_kernels[18].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
-  ops_set_dirtybit_device(args, 11);
-  ops_set_halo_dirtybit3(&args[5],range);
-  ops_set_halo_dirtybit3(&args[6],range);
-  ops_set_halo_dirtybit3(&args[7],range);
+  ops_set_dirtybit_device(args, 17);
   ops_set_halo_dirtybit3(&args[8],range);
   ops_set_halo_dirtybit3(&args[9],range);
+  ops_set_halo_dirtybit3(&args[10],range);
+  ops_set_halo_dirtybit3(&args[11],range);
+  ops_set_halo_dirtybit3(&args[12],range);
+  ops_set_halo_dirtybit3(&args[13],range);
+  ops_set_halo_dirtybit3(&args[14],range);
+  ops_set_halo_dirtybit3(&args[15],range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
@@ -202,6 +244,12 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
     block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg7);
     block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg8);
     block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg9);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg10);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg11);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg12);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg13);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg14);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg15);
   }
 }
 
@@ -210,7 +258,9 @@ void ops_par_loop_opensbliblock00Kernel005_execute(ops_kernel_descriptor *desc) 
 void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, int dim, int* range,
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
  ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
- ops_arg arg8, ops_arg arg9, ops_arg arg10) {
+ ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
+ ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
+ ops_arg arg16) {
   ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
   desc->name = name;
   desc->block = block;
@@ -224,8 +274,8 @@ void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, in
     desc->orig_range[i] = range[i];
     desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
   }
-  desc->nargs = 11;
-  desc->args = (ops_arg*)ops_malloc(11*sizeof(ops_arg));
+  desc->nargs = 17;
+  desc->args = (ops_arg*)ops_malloc(17*sizeof(ops_arg));
   desc->args[0] = arg0;
   desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
   desc->args[1] = arg1;
@@ -247,6 +297,18 @@ void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, in
   desc->args[9] = arg9;
   desc->hash = ((desc->hash << 5) + desc->hash) + arg9.dat->index;
   desc->args[10] = arg10;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg10.dat->index;
+  desc->args[11] = arg11;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg11.dat->index;
+  desc->args[12] = arg12;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg12.dat->index;
+  desc->args[13] = arg13;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg13.dat->index;
+  desc->args[14] = arg14;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg14.dat->index;
+  desc->args[15] = arg15;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg15.dat->index;
+  desc->args[16] = arg16;
   desc->function = ops_par_loop_opensbliblock00Kernel005_execute;
   if (block->instance->OPS_diags > 1) {
     ops_timing_realloc(block->instance,18,"opensbliblock00Kernel005");

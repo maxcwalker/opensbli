@@ -74,10 +74,6 @@ int size, char *dat, char const *name){
     inv2Delta0block0 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"inv2gamma_m1")) {
-    inv2gamma_m1 = *(double*)dat;
-  }
-  else
   if (!strcmp(name,"inv2uref")) {
     inv2uref = *(double*)dat;
   }
@@ -104,10 +100,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"invdelta_TVD")) {
     invdelta_TVD = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"invgama")) {
-    invgama = *(double*)dat;
   }
   else
   if (!strcmp(name,"invgamma_m1")) {

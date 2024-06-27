@@ -31,7 +31,6 @@ __constant__ double eps_TVD;
 __constant__ double gama;
 __constant__ double gamma_m1;
 __constant__ double inv2Delta0block0;
-__constant__ double inv2gamma_m1;
 __constant__ double inv2uref;
 __constant__ double invDelta0block0;
 __constant__ double invMN;
@@ -42,7 +41,6 @@ __constant__ double invMO2;
 __constant__ double invRhat;
 __constant__ double invTref;
 __constant__ double invdelta_TVD;
-__constant__ double invgama;
 __constant__ double invgamma_m1;
 __constant__ double invuref;
 __constant__ double kappa;
@@ -128,10 +126,6 @@ int size, char *dat, char const *name){
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(inv2Delta0block0), dat, dim*size));
   }
   else
-  if (!strcmp(name,"inv2gamma_m1")) {
-    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(inv2gamma_m1), dat, dim*size));
-  }
-  else
   if (!strcmp(name,"inv2uref")) {
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(inv2uref), dat, dim*size));
   }
@@ -170,10 +164,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"invdelta_TVD")) {
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(invdelta_TVD), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"invgama")) {
-    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(invgama), dat, dim*size));
   }
   else
   if (!strcmp(name,"invgamma_m1")) {
@@ -230,7 +220,7 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel028_hip_kernel.cpp"
 #include "opensbliblock00Kernel026_hip_kernel.cpp"
 #include "opensbliblock00Kernel027_hip_kernel.cpp"
-#include "opensbliblock00Kernel010_hip_kernel.cpp"
+#include "opensbliblock00Kernel008_hip_kernel.cpp"
 #include "opensbliblock00Kernel011_hip_kernel.cpp"
 #include "opensbliblock00Kernel009_hip_kernel.cpp"
 #include "opensbliblock00Kernel020_hip_kernel.cpp"

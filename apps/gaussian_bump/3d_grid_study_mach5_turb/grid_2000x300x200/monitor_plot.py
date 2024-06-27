@@ -8,6 +8,7 @@ from mpl_toolkits.axes_grid1.inset_locator import mark_inset, inset_axes
 
 # Read the CSV file
 df = pd.read_csv('block0_monitor.log')
+df = df.iloc[15003:]
 
 # # Remove columns with NaN values
 df = df.dropna(axis=1, how='all')
@@ -28,13 +29,15 @@ for i, val in enumerate(new_columns[2:17]):
     ax1[i].plot(df['Time'], df[val],color='k',linewidth=0.7)  # Adjust column name as needed
     ax1[i].set_ylabel(val)
 
-    ax1[i].yaxis.set_major_formatter(FormatStrFormatter('%.4f'))
+    # ax1[i].yaxis.set_major_formatter(FormatStrFormatter('%.4f'))
     ax1[i].grid(True)
-    ax1[i].set_xlabel('Time')
+    
     # ax1[i].set_xlim([0,df['Time'].iloc[-1]])
     ax1[i].tick_params(labelbottom=False)
 ax1[-1].tick_params(labelbottom=True)
 # ax1[0].set_ylim([0.0001,0.1])
+plt.subplots_adjust(hspace=0.5)
+ax1[-1].set_xlabel('Time')
 fig1.savefig(directory_monitor+"monitoring_p_upstream.pdf",bbox_inches='tight')
 
 
@@ -70,12 +73,14 @@ for i, val in enumerate(new_columns[17:39]):
     # val = new_columns[idx]
     ax1[i].plot(df['Time'], df[val], color='k', linewidth=0.7)
     ax1[i].set_ylabel(val[2:])
-    ax1[i].yaxis.set_major_formatter(FormatStrFormatter('%.4f'))
+    # ax1[i].yaxis.set_major_formatter(FormatStrFormatter('%.4f'))
     ax1[i].grid(True)
-    ax1[i].set_xlabel('Time')
+
     # ax1[i].set_xlim([0, df['Time'].iloc[-1]])
     ax1[i].tick_params(labelbottom=False)
 ax1[-1].tick_params(labelbottom=True)
+plt.subplots_adjust(hspace=0.5)
+ax1[-1].set_xlabel('Time')
 fig1.savefig(directory_monitor+"monitoring_p_downstream.pdf",bbox_inches='tight')
 
 exit()

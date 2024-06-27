@@ -11,19 +11,25 @@ int xdim3_opensbliblock00Kernel002;
 int xdim4_opensbliblock00Kernel002;
 int xdim5_opensbliblock00Kernel002;
 int xdim6_opensbliblock00Kernel002;
+int xdim7_opensbliblock00Kernel002;
+int xdim8_opensbliblock00Kernel002;
+int xdim9_opensbliblock00Kernel002;
 
 //user function
 inline 
  void opensbliblock00Kernel002(const ptr_double rhoE_B0,
   const ptr_double rhoN2_B0,
+  const ptr_double rhoNO_B0,
   const ptr_double rhoN_B0,
+  const ptr_double rhoO2_B0,
+  const ptr_double rhoO_B0,
   const ptr_double rhou0_B0,
   ptr_double a_B0,
   ptr_double u0_B0,
   ptr_double p_B0)
 {
    double inv_rho = 0.0;
-   inv_rho = 1.0/(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN2_B0, 0));
+   inv_rho = 1.0/(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoO_B0, 0) + OPS_ACC(rhoN2_B0, 0) + OPS_ACC(rhoNO_B0, 0) + OPS_ACC(rhoO2_B0, 0));
 
    OPS_ACC(u0_B0, 0) = OPS_ACC(rhou0_B0, 0)*inv_rho;
 
@@ -42,9 +48,12 @@ void opensbliblock00Kernel002_c_wrapper(
   double *p_a4,
   double *p_a5,
   double *p_a6,
+  double *p_a7,
+  double *p_a8,
+  double *p_a9,
   int x_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4,p_a5,p_a6)
+  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4,p_a5,p_a6,p_a7,p_a8,p_a9)
   #pragma acc loop
   #endif
   for ( int n_x=0; n_x<x_size; n_x++ ){
@@ -52,10 +61,14 @@ void opensbliblock00Kernel002_c_wrapper(
     const ptr_double ptr1 = {  p_a1 + n_x*1*1 };
     const ptr_double ptr2 = {  p_a2 + n_x*1*1 };
     const ptr_double ptr3 = {  p_a3 + n_x*1*1 };
-    ptr_double ptr4 = {  p_a4 + n_x*1*1 };
-    ptr_double ptr5 = {  p_a5 + n_x*1*1 };
-    ptr_double ptr6 = {  p_a6 + n_x*1*1 };
+    const ptr_double ptr4 = {  p_a4 + n_x*1*1 };
+    const ptr_double ptr5 = {  p_a5 + n_x*1*1 };
+    const ptr_double ptr6 = {  p_a6 + n_x*1*1 };
+    ptr_double ptr7 = {  p_a7 + n_x*1*1 };
+    ptr_double ptr8 = {  p_a8 + n_x*1*1 };
+    ptr_double ptr9 = {  p_a9 + n_x*1*1 };
     opensbliblock00Kernel002( ptr0, ptr1, ptr2, ptr3,
-           ptr4, ptr5, ptr6);
+           ptr4, ptr5, ptr6, ptr7,
+           ptr8, ptr9);
   }
 }

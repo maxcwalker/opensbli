@@ -78,10 +78,6 @@ int size, char *dat, char const *name){
     inv2Delta0block0 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"inv2gamma_m1")) {
-    inv2gamma_m1 = *(double*)dat;
-  }
-  else
   if (!strcmp(name,"inv2uref")) {
     inv2uref = *(double*)dat;
   }
@@ -120,10 +116,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"invdelta_TVD")) {
     invdelta_TVD = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"invgama")) {
-    invgama = *(double*)dat;
   }
   else
   if (!strcmp(name,"invgamma_m1")) {
@@ -179,7 +171,7 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel028_openacc_kernel.cpp"
 #include "opensbliblock00Kernel026_openacc_kernel.cpp"
 #include "opensbliblock00Kernel027_openacc_kernel.cpp"
-#include "opensbliblock00Kernel010_openacc_kernel.cpp"
+#include "opensbliblock00Kernel008_openacc_kernel.cpp"
 #include "opensbliblock00Kernel011_openacc_kernel.cpp"
 #include "opensbliblock00Kernel009_openacc_kernel.cpp"
 #include "opensbliblock00Kernel020_openacc_kernel.cpp"

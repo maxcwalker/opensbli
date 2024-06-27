@@ -64,7 +64,7 @@ void ops_par_loop_opensbliblock00Kernel015_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ T_B0_p = (double *)(args[0].data_d + base0);
 
   int base1 = args[1].dat->base_offset;
-  double * __restrict__ eveqN2_B0_p = (double *)(args[1].data_d + base1);
+  double * __restrict__ eveqNO_B0_p = (double *)(args[1].data_d + base1);
 
 
 
@@ -83,9 +83,9 @@ void ops_par_loop_opensbliblock00Kernel015_execute(ops_kernel_descriptor *desc) 
   #pragma omp target teams distribute parallel for collapse(1)
   for ( int n_x=start0; n_x<end0; n_x++ ){
     const ACC<double> T_B0(T_B0_p + n_x*1);
-    ACC<double> eveqN2_B0(eveqN2_B0_p + n_x*1);
+    ACC<double> eveqNO_B0(eveqNO_B0_p + n_x*1);
     
-   eveqN2_B0(0) = Rhat*invMN2*invTref*inv2uref*thetavN2/(-1.0 + exp(invTref*thetavN2/T_B0(0)));
+   eveqNO_B0(0) = Rhat*invMNO*invTref*inv2uref*thetavNO/(-1.0 + exp(invTref*thetavNO/T_B0(0)));
 
 
   }

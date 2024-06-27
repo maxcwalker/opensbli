@@ -130,11 +130,9 @@ void ops_par_loop_opensbliblock00Kernel028_execute(ops_kernel_descriptor *desc) 
       auto MO_sycl = (*MO_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto MO2_sycl = (*MO2_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto Rhat_sycl = (*Rhat_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto Tref_sycl = (*Tref_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto thetavN2_sycl = (*thetavN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto thetavNO_sycl = (*thetavNO_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto thetavO2_sycl = (*thetavO2_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto uref_sycl = (*uref_p).template get_access<cl::sycl::access::mode::read>(cgh);
 
       cgh.parallel_for<class opensbliblock00Kernel028_kernel>(cl::sycl::nd_range<1>(cl::sycl::range<1>(
             ((end[0]-start[0]-1)/block->instance->OPS_block_size_x+1)*block->instance->OPS_block_size_x
@@ -177,17 +175,22 @@ void ops_par_loop_opensbliblock00Kernel028_execute(ops_kernel_descriptor *desc) 
    1.0
 )
 : (
-   0.125
+   0.1
 ));
 
    p0 = ((x0_B0(0) < 0.5) ? (
    1.0
 )
 : (
-   0.1
+   0.125
 ));
 
-   T0 = p0/(Rhat_sycl[0]*r);
+   T0 = ((x0_B0(0) < 0.5) ? (
+   1.0
+)
+: (
+   0.125
+));
 
    cN = ((x0_B0(0) < 0.5) ? (
    0.725
@@ -237,7 +240,7 @@ void ops_par_loop_opensbliblock00Kernel028_execute(ops_kernel_descriptor *desc) 
 
    evNO = Rhat_sycl[0]*thetavNO_sycl[0]/(MN2_sycl[0]*(-1.0 + cl::sycl::exp(thetavN2_sycl[0]/T0)));
 
-   rhoev_B0(0) = Rhat_sycl[0]*thetavN2_sycl[0]*(cN*r/MN_sycl[0] + cN2*r/MN2_sycl[0])/(MN2_sycl[0]*Tref_sycl[0]*(uref_sycl[0]*uref_sycl[0])*(-1.0 + cl::sycl::exp(thetavN2_sycl[0]/(T0*Tref_sycl[0]))));
+   rhoev_B0(0) = (cN2*evN2*r + cNO*evNO*r + cO2*evO2*r)*(cN*r + cN2*r + cNO*r + cO*r + cO2*r)/(cN2*r + cNO*r + cO2*r);
 
     rhoE_B0(0) = (u0*u0)*(0.5*cN*r/MN_sycl[0] + 0.5*cN2*r/MN2_sycl[0] + 0.5*cNO*r/MNO_sycl[0] + 0.5*cO*r/MO_sycl[0] + 0.5*cO2*r/MO2_sycl[0]) + cN2*evN2*r +
       cNO*evNO*r + cO2*evO2*r + p0*(1.5*cN*r/MN_sycl[0] + 1.5*cO*r/MO_sycl[0] + 2.5*cN2*r/MN2_sycl[0] + 2.5*cNO*r/MNO_sycl[0] + 2.5*cO2*r/MO2_sycl[0])/(cN*r/MN_sycl[0]

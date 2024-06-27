@@ -479,6 +479,33 @@ int base[] = {0};
 double* value = NULL;
 wk4_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "wk4_B0");
 }
+ops_dat wk5_B0;
+{
+int halo_p[] = {5};
+int halo_m[] = {-5};
+int size[] = {block0np0};
+int base[] = {0};
+double* value = NULL;
+wk5_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "wk5_B0");
+}
+ops_dat wk6_B0;
+{
+int halo_p[] = {5};
+int halo_m[] = {-5};
+int size[] = {block0np0};
+int base[] = {0};
+double* value = NULL;
+wk6_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "wk6_B0");
+}
+ops_dat wk7_B0;
+{
+int halo_p[] = {5};
+int halo_m[] = {-5};
+int size[] = {block0np0};
+int base[] = {0};
+double* value = NULL;
+wk7_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "wk7_B0");
+}
 ops_dat x0_B0;
 {
 if (restart == 1){

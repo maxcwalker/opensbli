@@ -27,7 +27,6 @@ extern double eps_TVD;
 extern double gama;
 extern double gamma_m1;
 extern double inv2Delta0block0;
-extern double inv2gamma_m1;
 extern double inv2uref;
 extern double invDelta0block0;
 extern double invMN;
@@ -38,7 +37,6 @@ extern double invMO2;
 extern double invRhat;
 extern double invTref;
 extern double invdelta_TVD;
-extern double invgama;
 extern double invgamma_m1;
 extern double invuref;
 extern double kappa;
@@ -57,7 +55,7 @@ void ops_init_backend() {}
 #include "opensbliblock00Kernel028_cpu_kernel.cpp"
 #include "opensbliblock00Kernel026_cpu_kernel.cpp"
 #include "opensbliblock00Kernel027_cpu_kernel.cpp"
-#include "opensbliblock00Kernel010_cpu_kernel.cpp"
+#include "opensbliblock00Kernel008_cpu_kernel.cpp"
 #include "opensbliblock00Kernel011_cpu_kernel.cpp"
 #include "opensbliblock00Kernel009_cpu_kernel.cpp"
 #include "opensbliblock00Kernel020_cpu_kernel.cpp"

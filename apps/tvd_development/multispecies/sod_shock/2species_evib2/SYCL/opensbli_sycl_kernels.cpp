@@ -45,8 +45,6 @@ cl::sycl::buffer<double,1> *gamma_m1_p=nullptr;
 extern double gamma_m1;
 cl::sycl::buffer<double,1> *inv2Delta0block0_p=nullptr;
 extern double inv2Delta0block0;
-cl::sycl::buffer<double,1> *inv2gamma_m1_p=nullptr;
-extern double inv2gamma_m1;
 cl::sycl::buffer<double,1> *inv2uref_p=nullptr;
 extern double inv2uref;
 cl::sycl::buffer<double,1> *invDelta0block0_p=nullptr;
@@ -61,8 +59,6 @@ cl::sycl::buffer<double,1> *invTref_p=nullptr;
 extern double invTref;
 cl::sycl::buffer<double,1> *invdelta_TVD_p=nullptr;
 extern double invdelta_TVD;
-cl::sycl::buffer<double,1> *invgama_p=nullptr;
-extern double invgama;
 cl::sycl::buffer<double,1> *invgamma_m1_p=nullptr;
 extern double invgamma_m1;
 cl::sycl::buffer<double,1> *invuref_p=nullptr;
@@ -213,14 +209,6 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
     }
   }
   else
-  if (!strcmp(name,"inv2gamma_m1")) {
-    if (inv2gamma_m1_p == nullptr) inv2gamma_m1_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
-    auto accessor = (*inv2gamma_m1_p).get_access<cl::sycl::access::mode::write>();
-    for ( int d=0; d<dim; d++ ){
-      accessor[d] = ((double*)dat)[d];
-    }
-  }
-  else
   if (!strcmp(name,"inv2uref")) {
     if (inv2uref_p == nullptr) inv2uref_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
     auto accessor = (*inv2uref_p).get_access<cl::sycl::access::mode::write>();
@@ -272,14 +260,6 @@ void ops_decl_const_char(OPS_instance *instance, int dim, char const * type, int
   if (!strcmp(name,"invdelta_TVD")) {
     if (invdelta_TVD_p == nullptr) invdelta_TVD_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
     auto accessor = (*invdelta_TVD_p).get_access<cl::sycl::access::mode::write>();
-    for ( int d=0; d<dim; d++ ){
-      accessor[d] = ((double*)dat)[d];
-    }
-  }
-  else
-  if (!strcmp(name,"invgama")) {
-    if (invgama_p == nullptr) invgama_p = new cl::sycl::buffer<double,1>(cl::sycl::range<1>(dim));
-    auto accessor = (*invgama_p).get_access<cl::sycl::access::mode::write>();
     for ( int d=0; d<dim; d++ ){
       accessor[d] = ((double*)dat)[d];
     }

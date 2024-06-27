@@ -85,7 +85,7 @@ void ops_par_loop_opensbliblock00Kernel014_execute(ops_kernel_descriptor *desc) 
   double * __restrict__ rhoO_B0_p = (double *)(args[5].data_d + base5);
 
   int base6 = args[6].dat->base_offset;
-  double * __restrict__ ptauNO_B0_p = (double *)(args[6].data_d + base6);
+  double * __restrict__ ptauO2_B0_p = (double *)(args[6].data_d + base6);
 
 
 
@@ -109,13 +109,13 @@ void ops_par_loop_opensbliblock00Kernel014_execute(ops_kernel_descriptor *desc) 
     const ACC<double> rhoN_B0(rhoN_B0_p + n_x*1);
     const ACC<double> rhoO2_B0(rhoO2_B0_p + n_x*1);
     const ACC<double> rhoO_B0(rhoO_B0_p + n_x*1);
-    ACC<double> ptauNO_B0(ptauNO_B0_p + n_x*1);
+    ACC<double> ptauO2_B0(ptauO2_B0_p + n_x*1);
     
-    ptauNO_B0(0) = (6.69952094392908e-11*invMO2*rhoO2_B0(0)*exp(168.0*pow(T_B0(0), -0.333333333333333)) +
-      1.07234831431176e-10*invMO*rhoO_B0(0)*exp(168.0*pow(T_B0(0), -0.333333333333333)) +
-      1.18607665290378e-10*invMN*rhoN_B0(0)*exp(168.0*pow(T_B0(0), -0.333333333333333)) +
-      7.04583049652578e-11*invMNO*rhoNO_B0(0)*exp(168.0*pow(T_B0(0), -0.333333333333333)) +
-      7.28659255329465e-11*invMN2*rhoN2_B0(0)*exp(168.0*pow(T_B0(0), -0.333333333333333)))/(invMN*rhoN_B0(0) +
+    ptauO2_B0(0) = (3.03420950194169e-10*invMO*rhoO_B0(0)*exp(129.0*pow(T_B0(0), -0.333333333333333)) +
+      2.14180928034488e-10*invMNO*rhoNO_B0(0)*exp(129.0*pow(T_B0(0), -0.333333333333333)) +
+      3.27838502246041e-10*invMN*rhoN_B0(0)*exp(129.0*pow(T_B0(0), -0.333333333333333)) +
+      2.08725734681668e-10*invMO2*rhoO2_B0(0)*exp(129.0*pow(T_B0(0), -0.333333333333333)) +
+      2.22632207449373e-10*invMN2*rhoN2_B0(0)*exp(129.0*pow(T_B0(0), -0.333333333333333)))/(invMN*rhoN_B0(0) +
       invMO*rhoO_B0(0) + invMN2*rhoN2_B0(0) + invMNO*rhoNO_B0(0) + invMO2*rhoO2_B0(0));
 
 

@@ -139,7 +139,6 @@ void ops_par_loop_opensbliblock00Kernel004(char const *, ops_block, int , int*,
   ops_arg,
   ops_arg,
   ops_arg,
-  ops_arg,
   ops_arg );
 
 void ops_par_loop_opensbliblock00Kernel005(char const *, ops_block, int , int*,
@@ -180,16 +179,15 @@ kappa_TVD = 1.1;
 gama = 1.4;
 gamma_m1 = -1 + gama;
 MN2 = 28.0;
-cN = 0.05;
 thetavN2 = 3390.0;
-cN2 = 0.95;
 uref = 340;
-Tref = 600;
 MN = 14.0;
-kappa = 0.0;
+cN2 = 0.95;
+cN = 0.05;
+Tref = 600;
 Lref = 1.0;
+kappa = 0.0;
 inv2Delta0block0 = 1.0/(Delta0block0*Delta0block0);
-inv2gamma_m1 = 1.0/(gamma_m1*gamma_m1);
 inv2uref = 1.0/(uref*uref);
 invDelta0block0 = 1.0/(Delta0block0);
 invMN = 1.0/(MN);
@@ -197,7 +195,6 @@ invMN2 = 1.0/(MN2);
 invRhat = 1.0/(Rhat);
 invTref = 1.0/(Tref);
 invdelta_TVD = 1.0/(delta_TVD);
-invgama = 1.0/(gama);
 invgamma_m1 = 1.0/(gamma_m1);
 invuref = 1.0/(uref);
 ops_decl_const("Delta0block0" , 1, "double", &Delta0block0);
@@ -216,7 +213,6 @@ ops_decl_const("eps_TVD" , 1, "double", &eps_TVD);
 ops_decl_const("gama" , 1, "double", &gama);
 ops_decl_const("gamma_m1" , 1, "double", &gamma_m1);
 ops_decl_const("inv2Delta0block0" , 1, "double", &inv2Delta0block0);
-ops_decl_const("inv2gamma_m1" , 1, "double", &inv2gamma_m1);
 ops_decl_const("inv2uref" , 1, "double", &inv2uref);
 ops_decl_const("invDelta0block0" , 1, "double", &invDelta0block0);
 ops_decl_const("invMN" , 1, "double", &invMN);
@@ -224,7 +220,6 @@ ops_decl_const("invMN2" , 1, "double", &invMN2);
 ops_decl_const("invRhat" , 1, "double", &invRhat);
 ops_decl_const("invTref" , 1, "double", &invTref);
 ops_decl_const("invdelta_TVD" , 1, "double", &invdelta_TVD);
-ops_decl_const("invgama" , 1, "double", &invgama);
 ops_decl_const("invgamma_m1" , 1, "double", &invgamma_m1);
 ops_decl_const("invuref" , 1, "double", &invuref);
 ops_decl_const("kappa" , 1, "double", &kappa);
@@ -441,7 +436,6 @@ ops_par_loop_opensbliblock00Kernel004("User kernel: TVD reconstruction direction
              ops_arg_dat(rhoev_B0, 1, stencil_0_12_1, "double", OPS_READ),
              ops_arg_dat(rhou0_B0, 1, stencil_0_12_1, "double", OPS_READ),
              ops_arg_dat(u0_B0, 1, stencil_0_12_1, "double", OPS_READ),
-             ops_arg_dat(u_B0, 1, stencil_0_12_1, "double", OPS_READ),
              ops_arg_dat(wk0_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(wk1_B0, 1, stencil_0_00_1, "double", OPS_WRITE),
              ops_arg_dat(wk2_B0, 1, stencil_0_00_1, "double", OPS_WRITE),

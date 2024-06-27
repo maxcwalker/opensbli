@@ -1,0 +1,1 @@
+rm -rf opensbli_output_0* opensbli_output_1* opensbli_output_2* opensbli_output_3* opensbli_output_4* opensbli_output_5* opensbli_output_6* opensbli_output_96* opensbli_output_97* opensbli_output_98* opensbli_output_99* *1000.h5 *3000.h5 *5000.h5 *7000.h5 *9000.h5

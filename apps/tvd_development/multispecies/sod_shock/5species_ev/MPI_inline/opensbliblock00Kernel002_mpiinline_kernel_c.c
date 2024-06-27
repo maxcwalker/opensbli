@@ -9,6 +9,9 @@ int xdim3_opensbliblock00Kernel002;
 int xdim4_opensbliblock00Kernel002;
 int xdim5_opensbliblock00Kernel002;
 int xdim6_opensbliblock00Kernel002;
+int xdim7_opensbliblock00Kernel002;
+int xdim8_opensbliblock00Kernel002;
+int xdim9_opensbliblock00Kernel002;
 
 
 //user function
@@ -18,7 +21,10 @@ int xdim6_opensbliblock00Kernel002;
 void opensbliblock00Kernel002_c_wrapper(
   double * restrict rhoE_B0_p,
   double * restrict rhoN2_B0_p,
+  double * restrict rhoNO_B0_p,
   double * restrict rhoN_B0_p,
+  double * restrict rhoO2_B0_p,
+  double * restrict rhoO_B0_p,
   double * restrict rhou0_B0_p,
   double * restrict a_B0_p,
   double * restrict u0_B0_p,
@@ -28,14 +34,17 @@ void opensbliblock00Kernel002_c_wrapper(
   for ( int n_x=0; n_x<x_size; n_x++ ){
     const ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
     const ptr_double rhoN2_B0 = { rhoN2_B0_p + n_x*1};
+    const ptr_double rhoNO_B0 = { rhoNO_B0_p + n_x*1};
     const ptr_double rhoN_B0 = { rhoN_B0_p + n_x*1};
+    const ptr_double rhoO2_B0 = { rhoO2_B0_p + n_x*1};
+    const ptr_double rhoO_B0 = { rhoO_B0_p + n_x*1};
     const ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
     ptr_double a_B0 = { a_B0_p + n_x*1};
     ptr_double u0_B0 = { u0_B0_p + n_x*1};
     ptr_double p_B0 = { p_B0_p + n_x*1};
     
    double inv_rho = 0.0;
-   inv_rho = 1.0/(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoN2_B0, 0));
+   inv_rho = 1.0/(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoO_B0, 0) + OPS_ACC(rhoN2_B0, 0) + OPS_ACC(rhoNO_B0, 0) + OPS_ACC(rhoO2_B0, 0));
 
    OPS_ACC(u0_B0, 0) = OPS_ACC(rhou0_B0, 0)*inv_rho;
 

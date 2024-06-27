@@ -14,9 +14,9 @@ from sympy import exp
 input_dict = {
     "gama"                 : "1.4", 
     "Re"                   : "1.0",
-    "dt"                   : "0.00002", 
-    "niter"                : "6000",#ceil(0.2/0.00003)",#ceil(0.2/0.0002)",
-    "block0np0"            : "2000", 
+    "dt"                   : "0.0001", 
+    "niter"                : "700",#ceil(0.2/0.00003)",#ceil(0.2/0.0002)",
+    "block0np0"            : "200", 
     "Delta0block0"         : "1.0/(block0np0-1)",
     "eps"                  : "1.0e-16",
     "inv_rfact0_block0"    : "1.0/Delta0block0",
@@ -28,8 +28,6 @@ input_dict = {
     "MO2"                  : "32.0",
     "MNO"                  : "30.0",
     "dhN"                  : "112.951",
-    "cN"                   : "0.05",
-    "cN2"                  : "0.95",
     "thetavO2"              : "2270.0",
     "thetavN2"             : "3390.0",
     "thetavNO"             : "2740.0",
@@ -65,10 +63,11 @@ energy = "Eq(Der(rhoE,t), - Conservative((p+rhoE)*u_j,x_j) - Der(q_j,x_j))"
 heat_flux = "Eq(q_j, -(kappa)*Der(T,x_j))"
 evibration = "Eq(ev, rhoev/rho)"
 molesum = "Eq(ysum, (rhoO/MO+rhoO2/MO2+rhoN/MN+rhoN2/MN2+rhoNO/MNO))"
+molesumM = "Eq(ysumM, (rhoO2/MO2+rhoN2/MN2+rhoNO/MNO))"
 timeconst = "Eq(tau, uref/Lref * (rhoO2/MO2+rhoN2/MN2+rhoNO/MNO)*101325.0/(p*(rhoO2/(MO2*ptauO2)+rhoN2/(MN2*ptauN2)+rhoNO/(MNO*ptauNO))))"
 hformation = "Eq(dhf, 0.0*(dhO*rhoO/MO+dhN*rhoN/MN+dhNO*rhoNO/MNO))"
 
-substitutions = [heat_flux, timeconst, evibration, molesum, hformation]
+substitutions = [heat_flux, timeconst, evibration, molesum, molesumM, hformation]
 # Expand the simulation equations, for this create a simulation equations class
 massN = eq.expand(massN, ndim, coordinate_symbol, substitutions, constants)
 massN2 = eq.expand(massN2, ndim, coordinate_symbol, substitutions, constants)
@@ -93,7 +92,8 @@ density = "Eq(rho, (rhoO+rhoO2+rhoN+rhoN2+rhoNO))"
 velocity = "Eq(u_i, rhou_i/(rhoO+rhoO2+rhoN+rhoN2+rhoNO))"
 pressure = "Eq(p, Tref/uref**2 * Rhat*T*(rhoO/MO+rhoO2/MO2+rhoN/MN+rhoN2/MN2+rhoNO/MNO))"
 temperature = "Eq(T, uref**2 / Tref *(rhoE -rhoev - dhf - (rhoO+rhoO2+rhoN+rhoN2+rhoNO)*(1./2.)*(KD(_i,_j)*u_i*u_j)-rhoev)/(Rhat*(3.0/2.0*(rhoO/MO+rhoN/MN)+5.0/2.0*(rhoO2/MO2+rhoN2/MN2+rhoNO/MNO))) )"
-# temperature = "Eq(T, uref**2 / Tref *(rhoE - dhf - rho*(1./2.)*(KD(_i,_j)*u_i*u_j)-rhoev)/(Rhat*((rhoN/MN)+(rhoN2/MN2))))"
+# vibrational terms
+tempv = "Eq(Tv, thetavnum/(ysumM*log(1.0+thetavnum*Rhat/(rhoev))))" # method to find Tv based on a mole-weighted thetav (compare with N-R or Cv-based method later)
 
 
 timefactorO2 = "Eq(ptauO2, (rhoO/MO*exp(129.0*(T**(-1.0/3.0)-0.0271)-18.42)+rhoO2/MO2*exp(129.0*(T**(-1.0/3.0)-0.0300)-18.42)+rhoN/MN*exp(129.0*(T**(-1.0/3.0)-0.0265)-18.42)+rhoN2/MN2*exp(129.0*(T**(-1.0/3.0)-0.0295)-18.42)+rhoNO/MNO*exp(129.0*(T**(-1.0/3.0)-0.0298)-18.42))/ysum)" 
@@ -104,11 +104,10 @@ evequilO2 = "Eq(eveqO2, 1/uref**2 * thetavO2/Tref*Rhat/(MO2*(exp(thetavO2/Tref/T
 evequilN2 = "Eq(eveqN2, 1/uref**2 * thetavN2/Tref*Rhat/(MN2*(exp(thetavN2/Tref/T)-1.0)))"
 evequilNO = "Eq(eveqNO, 1/uref**2 * thetavNO/Tref*Rhat/(MNO*(exp(thetavNO/Tref/T)-1.0)))"
 
-# evN2 = "Eq(evN2, thetavN2*Rhat/(MN2*(exp(thetavN2/T)-1.0)))"
-# consts = "Eq(consts, cN + cN2)" # This is just to declare constants that arent called in the CR and so wont be recognised in the initialisation
+
 
 constituent = ConstituentRelations()
-constituent_eqns = [density, velocity, temperature,pressure, timefactorO2, timefactorN2, timefactorNO, evequilO2, evequilN2, evequilNO] 
+constituent_eqns = [density, velocity, temperature,tempv, pressure, timefactorO2, timefactorN2, timefactorNO, evequilO2, evequilN2, evequilNO] 
 for i, CR in enumerate(constituent_eqns):
     constituent_eqns[i] = eq.expand(CR, ndim, coordinate_symbol, substitutions, constants)
 for eqn in constituent_eqns:
@@ -123,15 +122,16 @@ cOl, cOr = 0.225, 0.0
 cO2l, cO2r = 0.0, 0.225
 cNOl, cNOr = 0.0, 0.0
 
-pl, pr = 1.0, 0.1
-rl, rr = 1.0, 0.125
+pl, pr = 1.0, 0.125
+rl, rr = 1.0, 0.1
 
-MN2, MN, MO,MO2,MNO, Rhat =  symbols('MN2 MN MO MO2 MNO Rhat', **{'cls': ConstantObject})
+MN2, MN, MO,MO2,MNO, Rhat, Tref, uref =  symbols('MN2 MN MO MO2 MNO Rhat Tref uref', **{'cls': ConstantObject})
 
 x0 = "Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])"
-r = "Eq(GridVariable(r), Piecewise((1.0, DataObject(x0) < 0.5), (0.125, True)))"
+r = "Eq(GridVariable(r), Piecewise((1.0, DataObject(x0) < 0.5), (0.1, True)))"
 u0 = "Eq(GridVariable(u0), Piecewise((0.0, DataObject(x0) < 0.5),(0.0, True)))"
-p = "Eq(GridVariable(p0), Piecewise((1.0, DataObject(x0) < 0.5), (0.1, True)))"
+p = "Eq(GridVariable(p0), Piecewise((1.0, DataObject(x0) < 0.5), (0.125, True)))"
+T = "Eq(GridVariable(T0), Piecewise((1.0, DataObject(x0) < 0.5), (0.125, True)))"
 
 cN = "Eq(GridVariable(cN), Piecewise((0.725, DataObject(x0) < 0.5), (0.0, True)))"
 cN2 = "Eq(GridVariable(cN2), Piecewise((0.05, DataObject(x0) < 0.5), (0.775, True)))"
@@ -146,16 +146,15 @@ rhoO2 = "Eq(DataObject(rhoO2), r*cO2)"
 rhoNO = "Eq(DataObject(rhoNO), r*cNO)" 
 
 # T = "Eq(GridVariable(T0), p0 / ((r*cN/MN)+(r*cN2/MN2)*Rhat*uref**2/Tref))"
-T = "Eq(GridVariable(T0), p0/(Rhat*(r*cO/MO+r*cO2/MO2+r*cN/MN+r*cN2/MN2+r*cNO/MNO)))"
-T = "Eq(GridVariable(T0), p0 / (r*Rhat))"
+# T = "Eq(GridVariable(T0), p0/(Rhat*r*(cO/MO+cO2/MO2+cN/MN+cN2/MN2+cNO/MNO)))"
 # T = "Eq(GridVariable(T0), p0 / (r*Rhat))"
-# T = "Eq(GridVariable(T0), p0 / ((r*cN/MN)+(r*cN2/MN2)*Rhat*uref**2/Tref))"
+
 evN2 = "Eq(GridVariable(evN2), thetavN2*Rhat/(MN2*(exp(thetavN2/T0)-1.0)))"
 evO2 = "Eq(GridVariable(evO2), thetavO2*Rhat/(MN2*(exp(thetavN2/T0)-1.0)))"
 evNO = "Eq(GridVariable(evNO), thetavNO*Rhat/(MN2*(exp(thetavN2/T0)-1.0)))"
-rhoev = "Eq(DataObject(rhoev), (r*cN/MN+r*cN2/MN2) * 1/uref**2 * thetavN2/Tref*Rhat/(MN2*(exp(thetavN2/Tref/T0)-1.0)))"
+# rhoev = "Eq(DataObject(rhoev), (r*cN/MN+r*cN2/MN2) * 1/uref**2 * thetavN2/Tref*Rhat/(MN2*(exp(thetavN2/Tref/T0)-1.0)))"
+rhoev = "Eq(DataObject(rhoev), (r*cO2*evO2+r*cN2*evN2+r*cNO*evNO)*(r*cO+r*cO2+r*cN+r*cN2+r*cNO)/(r*cO2+r*cN2+r*cNO))"
 rhou0 = "Eq(DataObject(rhou0), r*u0)"
-# rhoE = "Eq(DataObject(rhoE), p0*(3.0/2.0*(r*cN/MN)+5.0/2.0*(r*cN2/MN2))/(r*cN/MN+r*cN2/MN2)+ 0.5*(r*cN + r*cN2)*(u0**2))"
 rhoE = "Eq(DataObject(rhoE), p0*(3.0/2.0*(r*cO/MO+r*cN/MN)+5.0/2.0*(r*cO2/MO2+r*cN2/MN2+r*cNO/MNO))/(r*cO/MO+r*cN/MN+r*cO2/MO2+r*cN2/MN2+r*cNO/MNO)+r*cO2*evO2+r*cN2*evN2+r*cNO*evNO+0.5*(r*cO/MO+r*cO2/MO2+r*cN/MN+r*cN2/MN2+r*cNO/MNO)*(u0**2))"
 
 eqns = [x0, u0, r, p, T, cN,cN2, cO, cO2, cNO, rhoN, rhoN2, rhoO, rhoO2, rhoNO, rhou0, evN2, evO2, evNO, rhoev,  rhoE]
@@ -164,13 +163,13 @@ initial_equations = [parse_expr(eq, local_dict=local_dict) for eq in eqns]
 initial = GridBasedInitialisation()
 initial.add_equations(initial_equations)
 
-r, u, p, cN, cN2, cO, cO2, cNO, T  = symbols('r u0 p0 cN cN2 cO cO2 cNO T0', **{'cls':GridVariable})
+r, u, p, cN, cN2, cO, cO2, cNO = symbols('r u0 p0 cN cN2 cO cO2 cNO', **{'cls':GridVariable})
 # Left boundary condition
 left_eqns = [OpenSBLIEq(r, rl), OpenSBLIEq(u, 0.0), OpenSBLIEq(p, pl), OpenSBLIEq(cN, cNl),  OpenSBLIEq(cN2, cN2l),  OpenSBLIEq(cO, cOl),  OpenSBLIEq(cO2, cO2l),  OpenSBLIEq(cNO, cNOl),\
-OpenSBLIEq(T, pl*(1/Rhat)/(rl))] + [parse_expr(eq, local_dict=local_dict) for eq in [rhoN, rhoN2, rhoO, rhoO2, rhoNO, rhou0, evN2, evO2, evNO, rhoev, rhoE]] #T, pl/(Rhat*(rl*cOl/MO+rl*cO2l/MO2+rl*cNl/MN+rl*cN2l/MN2+rl*cNOl/MNO))
+] + [parse_expr(eq, local_dict=local_dict) for eq in [rhoN, rhoN2, rhoO, rhoO2, rhoNO, T, rhou0, evN2, evO2, evNO, rhoev, rhoE]] #*(cOl/MO+cO2l/MO2+cNl/MN+cN2l/MN2+cNOl/MNO)
 # Right boundary condition
 right_eqns = [OpenSBLIEq(r, rr), OpenSBLIEq(u, 0.0),  OpenSBLIEq(p, pr), OpenSBLIEq(cN, cNr),  OpenSBLIEq(cN2, cN2r),  OpenSBLIEq(cO, cOr),  OpenSBLIEq(cO2, cO2r),  OpenSBLIEq(cNO, cNOr),\
-OpenSBLIEq(T, pr*(1/Rhat)/(rr))] + [parse_expr(eq, local_dict=local_dict) for eq in [rhoN, rhoN2, rhoO, rhoO2, rhoNO, rhou0, evN2, evO2, evNO, rhoev, rhoE]]
+] + [parse_expr(eq, local_dict=local_dict) for eq in [rhoN, rhoN2, rhoO, rhoO2, rhoNO, T, rhou0, evN2, evO2, evNO, rhoev, rhoE]] #*(cOr/MO+cO2r/MO2+cNr/MN+cN2r/MN2+cNOr/MNO)
 
 boundaries = []
 # Create boundaries, one for each side per dimension
@@ -211,7 +210,6 @@ block.discretise()
 alg = TraditionalAlgorithmRK(block)
 SimulationDataType.set_datatype(Double)
 OPSC(alg)
-
 
 substitute_simulation_parameters(constants, values)
 print_iteration_ops(every=1, NaN_check='rhoN')
