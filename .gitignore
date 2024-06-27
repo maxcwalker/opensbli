@@ -1,3 +1,4 @@
 *.h5
 *.cl
+*.log
 apps/viscous_shock_delery/delery_to_gaussian/OpenACC/
