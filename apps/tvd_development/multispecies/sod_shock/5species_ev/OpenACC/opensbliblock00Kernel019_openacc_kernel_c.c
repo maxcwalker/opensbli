@@ -463,7 +463,7 @@ ptr_double wdotO2_B0,
     OPS_ACC(Residual6_B0, 0) = -d1_rhoevu0_dx + OPS_ACC(evN2_B0, 0)*OPS_ACC(wdotN2_B0, 0) + OPS_ACC(evNO_B0, 0)*OPS_ACC(wdotNO_B0, 0) + OPS_ACC(evO2_B0, 0)*OPS_ACC(wdotO2_B0, 0) +
       9.86923266716013e-6*(invMN2*OPS_ACC(rhoN2_B0, 0)/OPS_ACC(ptauN2_B0, 0) + invMNO*OPS_ACC(rhoNO_B0, 0)/OPS_ACC(ptauNO_B0, 0) +
       invMO2*OPS_ACC(rhoO2_B0, 0)/OPS_ACC(ptauO2_B0, 0))*(-OPS_ACC(rhoev_B0, 0) + OPS_ACC(rhoN2_B0, 0)*OPS_ACC(eveqN2_B0, 0) + OPS_ACC(rhoNO_B0, 0)*OPS_ACC(eveqNO_B0, 0) +
-      OPS_ACC(rhoO2_B0, 0)*OPS_ACC(eveqO2_B0, 0))*Lref*invuref*OPS_ACC(p_B0, 0)/(invMN2*OPS_ACC(rhoN2_B0, 0) + invMNO*OPS_ACC(rhoNO_B0, 0) + invMO2*OPS_ACC(rhoO2_B0, 0));
+      OPS_ACC(rhoO2_B0, 0)*OPS_ACC(eveqO2_B0, 0))*OPS_ACC(p_B0, 0)/(invMN2*OPS_ACC(rhoN2_B0, 0) + invMNO*OPS_ACC(rhoNO_B0, 0) + invMO2*OPS_ACC(rhoO2_B0, 0));
 
    OPS_ACC(Residual7_B0, 0) = -d1_prhoEu0_dx + kappa*d2_T_dx;
 

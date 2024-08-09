@@ -230,14 +230,12 @@ void ops_par_loop_opensbliblock00Kernel019_execute(ops_kernel_descriptor *desc) 
   if ((end[0]-start[0])>0) {
     block->instance->sycl_instance->queue->submit([&](cl::sycl::handler &cgh) {
 
-      auto Lref_sycl = (*Lref_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto block0np0_sycl = (*block0np0_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto inv2Delta0block0_sycl = (*inv2Delta0block0_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invDelta0block0_sycl = (*invDelta0block0_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invMN2_sycl = (*invMN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invMNO_sycl = (*invMNO_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invMO2_sycl = (*invMO2_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto invuref_sycl = (*invuref_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto kappa_sycl = (*kappa_p).template get_access<cl::sycl::access::mode::read>(cgh);
 
       cgh.parallel_for<class opensbliblock00Kernel019_kernel>(cl::sycl::nd_range<1>(cl::sycl::range<1>(
@@ -667,7 +665,7 @@ void ops_par_loop_opensbliblock00Kernel019_execute(ops_kernel_descriptor *desc) 
     Residual6_B0(0) = -d1_rhoevu0_dx + evN2_B0(0)*wdotN2_B0(0) + evNO_B0(0)*wdotNO_B0(0) + evO2_B0(0)*wdotO2_B0(0) +
       9.86923266716013e-6*(invMN2_sycl[0]*rhoN2_B0(0)/ptauN2_B0(0) + invMNO_sycl[0]*rhoNO_B0(0)/ptauNO_B0(0) +
       invMO2_sycl[0]*rhoO2_B0(0)/ptauO2_B0(0))*(-rhoev_B0(0) + rhoN2_B0(0)*eveqN2_B0(0) + rhoNO_B0(0)*eveqNO_B0(0) +
-      rhoO2_B0(0)*eveqO2_B0(0))*Lref_sycl[0]*invuref_sycl[0]*p_B0(0)/(invMN2_sycl[0]*rhoN2_B0(0) + invMNO_sycl[0]*rhoNO_B0(0) + invMO2_sycl[0]*rhoO2_B0(0));
+      rhoO2_B0(0)*eveqO2_B0(0))*p_B0(0)/(invMN2_sycl[0]*rhoN2_B0(0) + invMNO_sycl[0]*rhoNO_B0(0) + invMO2_sycl[0]*rhoO2_B0(0));
 
    Residual7_B0(0) = -d1_prhoEu0_dx + kappa_sycl[0]*d2_T_dx;
 

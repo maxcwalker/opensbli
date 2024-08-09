@@ -5,118 +5,25 @@
 #define OPS_GPU
 
 int xdim0_opensbliblock00Kernel043;
-int xdim1_opensbliblock00Kernel043;
-int xdim2_opensbliblock00Kernel043;
-int xdim3_opensbliblock00Kernel043;
-int xdim4_opensbliblock00Kernel043;
-int xdim5_opensbliblock00Kernel043;
-int xdim6_opensbliblock00Kernel043;
-int xdim7_opensbliblock00Kernel043;
-int xdim8_opensbliblock00Kernel043;
 
 //user function
 inline 
- void opensbliblock00Kernel043(ptr_double rhoE_B0,
-  ptr_double rhoN2_B0,
-  ptr_double rhoNO_B0,
-  ptr_double rhoN_B0,
-  ptr_double rhoO2_B0,
-  ptr_double rhoO_B0,
-  ptr_double rho_B0,
-  ptr_double rhoev_B0,
-  ptr_double rhou0_B0)
+void opensbliblock00Kernel043(ptr_double wdotO2_B0)
 {
-   double T = 0.0;
-   double Tv = 0.0;
-   double cN = 0.0;
-   double cN2 = 0.0;
-   double cNO = 0.0;
-   double cO = 0.0;
-   double cO2 = 0.0;
-   double evN2 = 0.0;
-   double evNO = 0.0;
-   double evO2 = 0.0;
-   double p0 = 0.0;
-   double rhoref = 0.0;
-   double u0 = 0.0;
-   T = 0.300000000000000;
-
-   u0 = 0.0;
-
-   p0 = 0.125000000000000;
-
-   cN2 = 0.0693020000000000;
-
-   cN = 0.145363000000000;
-
-   cO2 = 2.50000000000000e-5;
-
-   cO = 0.745802000000000;
-
-   cNO = 0.0395080000000000;
-
-   rhoref = 0.100000000000000;
-
-   OPS_ACC(rhoN2_B0, 0) = cN2*rhoref;
-
-   OPS_ACC(rhoN_B0, 0) = cN*rhoref;
-
-   OPS_ACC(rhoO2_B0, 0) = cO2*rhoref;
-
-   OPS_ACC(rhoO_B0, 0) = cO*rhoref;
-
-   OPS_ACC(rhoNO_B0, 0) = cNO*rhoref;
-
-   OPS_ACC(rho_B0, 0) = cN*rhoref + cN2*rhoref + cNO*rhoref + cO*rhoref + cO2*rhoref;
-
-   OPS_ACC(rhou0_B0, 0) = u0*(cN*rhoref + cN2*rhoref + cNO*rhoref + cO*rhoref + cO2*rhoref);
-
-   Tv = p0/(Rhat*(cN*rhoref/MN + cN2*rhoref/MN2 + cNO*rhoref/MNO + cO*rhoref/MO + cO2*rhoref/MO2));
-
-   evO2 = Rhat*thetavO2/(MO2*(-1.0 + exp(thetavO2/Tv)));
-
-   evN2 = Rhat*thetavN2/(MN2*(-1.0 + exp(thetavN2/Tv)));
-
-   evNO = Rhat*thetavNO/(MNO*(-1.0 + exp(thetavNO/Tv)));
-
-    OPS_ACC(rhoev_B0, 0) = (cN2*evN2*rhoref + cNO*evNO*rhoref + cO2*evO2*rhoref)*(cN*rhoref + cN2*rhoref + cNO*rhoref + cO*rhoref
-      + cO2*rhoref)/(cN2*rhoref + cNO*rhoref + cO2*rhoref);
-
-    OPS_ACC(rhoE_B0, 0) = (u0*u0)*(0.5*cN*rhoref + 0.5*cN2*rhoref + 0.5*cNO*rhoref + 0.5*cO*rhoref + 0.5*cO2*rhoref) +
-      cN2*evN2*rhoref + cNO*evNO*rhoref + cO2*evO2*rhoref + p0*(1.5*cN*rhoref/MN + 1.5*cO*rhoref/MO + 2.5*cN2*rhoref/MN2
-      + 2.5*cNO*rhoref/MNO + 2.5*cO2*rhoref/MO2)/(cN*rhoref/MN + cN2*rhoref/MN2 + cNO*rhoref/MNO + cO*rhoref/MO +
-      cO2*rhoref/MO2) + 4186800.0*cN*dhN*rhoref/MN + 4186800.0*cNO*dhNO*rhoref/MNO + 4186800.0*cO*dhO*rhoref/MO;
+   OPS_ACC(wdotO2_B0, 0) = 0.0;
 
 }
 
 
 void opensbliblock00Kernel043_c_wrapper(
   double *p_a0,
-  double *p_a1,
-  double *p_a2,
-  double *p_a3,
-  double *p_a4,
-  double *p_a5,
-  double *p_a6,
-  double *p_a7,
-  double *p_a8,
   int x_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4,p_a5,p_a6,p_a7,p_a8)
+  #pragma acc parallel deviceptr(p_a0)
   #pragma acc loop
   #endif
   for ( int n_x=0; n_x<x_size; n_x++ ){
     ptr_double ptr0 = {  p_a0 + n_x*1*1 };
-    ptr_double ptr1 = {  p_a1 + n_x*1*1 };
-    ptr_double ptr2 = {  p_a2 + n_x*1*1 };
-    ptr_double ptr3 = {  p_a3 + n_x*1*1 };
-    ptr_double ptr4 = {  p_a4 + n_x*1*1 };
-    ptr_double ptr5 = {  p_a5 + n_x*1*1 };
-    ptr_double ptr6 = {  p_a6 + n_x*1*1 };
-    ptr_double ptr7 = {  p_a7 + n_x*1*1 };
-    ptr_double ptr8 = {  p_a8 + n_x*1*1 };
-    opensbliblock00Kernel043( ptr0, ptr1, ptr2, ptr3,
-           ptr4, ptr5, ptr6, ptr7,
-           ptr8);
+    opensbliblock00Kernel043( ptr0);
   }
 }

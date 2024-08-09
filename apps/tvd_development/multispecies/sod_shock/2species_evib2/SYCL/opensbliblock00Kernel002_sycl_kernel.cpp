@@ -65,7 +65,7 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset/sizeof(double);
-  double* rhoE_B0_p = (double*)args[0].data_d;
+  double* T_B0_p = (double*)args[0].data_d;
 
   int base1 = args[1].dat->base_offset/sizeof(double);
   double* rhoN2_B0_p = (double*)args[1].data_d;
@@ -103,7 +103,10 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
   if ((end[0]-start[0])>0) {
     block->instance->sycl_instance->queue->submit([&](cl::sycl::handler &cgh) {
 
+      auto Rhat_sycl = (*Rhat_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto gama_sycl = (*gama_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto invMN_sycl = (*invMN_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto invMN2_sycl = (*invMN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
 
       cgh.parallel_for<class opensbliblock00Kernel002_kernel>(cl::sycl::nd_range<1>(cl::sycl::range<1>(
             ((end[0]-start[0]-1)/block->instance->OPS_block_size_x+1)*block->instance->OPS_block_size_x
@@ -113,7 +116,7 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
       , [=](cl::sycl::nd_item<1> item
       ) [[intel::kernel_args_restrict]] {
         int n_x = item.get_global_id(0)+start_0;
-        const ACC<double> rhoE_B0(&rhoE_B0_p[0] + base0 + n_x*1);
+        const ACC<double> T_B0(&T_B0_p[0] + base0 + n_x*1);
         const ACC<double> rhoN2_B0(&rhoN2_B0_p[0] + base1 + n_x*1);
         const ACC<double> rhoN_B0(&rhoN_B0_p[0] + base2 + n_x*1);
         const ACC<double> rhou0_B0(&rhou0_B0_p[0] + base3 + n_x*1);
@@ -128,7 +131,7 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
 
    u0_B0(0) = rhou0_B0(0)*inv_rho;
 
-   p_B0(0) = (-1 + gama_sycl[0])*(-0.5*(rhou0_B0(0)*rhou0_B0(0))*inv_rho + rhoE_B0(0));
+   p_B0(0) = (invMN_sycl[0]*rhoN_B0(0) + invMN2_sycl[0]*rhoN2_B0(0))*Rhat_sycl[0]*T_B0(0);
 
    a_B0(0) = cl::sycl::sqrt(gama_sycl[0]*p_B0(0)*inv_rho);
 

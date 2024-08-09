@@ -12,14 +12,12 @@
 // global constants
 extern double Delta0block0;
 extern int HDF5_timing;
-extern double Lref;
 extern double MN;
 extern double MN2;
 extern double MNO;
 extern double MO;
 extern double MO2;
 extern double Rhat;
-extern double Tref;
 extern int block0np0;
 extern double delta_TVD;
 extern double dt;
@@ -27,7 +25,6 @@ extern double eps_TVD;
 extern double gama;
 extern double gamma_m1;
 extern double inv2Delta0block0;
-extern double inv2uref;
 extern double invDelta0block0;
 extern double invMN;
 extern double invMN2;
@@ -35,10 +32,8 @@ extern double invMNO;
 extern double invMO;
 extern double invMO2;
 extern double invRhat;
-extern double invTref;
 extern double invdelta_TVD;
 extern double invgamma_m1;
-extern double invuref;
 extern double kappa;
 extern double kappa_TVD;
 extern int niter;
@@ -47,7 +42,6 @@ extern int start_iter;
 extern double thetavN2;
 extern double thetavNO;
 extern double thetavO2;
-extern double uref;
 
 void ops_init_backend() {}
 
@@ -57,7 +51,7 @@ void ops_init_backend() {}
 #include "opensbliblock00Kernel027_cpu_kernel.cpp"
 #include "opensbliblock00Kernel008_cpu_kernel.cpp"
 #include "opensbliblock00Kernel011_cpu_kernel.cpp"
-#include "opensbliblock00Kernel009_cpu_kernel.cpp"
+#include "opensbliblock00Kernel010_cpu_kernel.cpp"
 #include "opensbliblock00Kernel020_cpu_kernel.cpp"
 #include "opensbliblock00Kernel021_cpu_kernel.cpp"
 #include "opensbliblock00Kernel022_cpu_kernel.cpp"

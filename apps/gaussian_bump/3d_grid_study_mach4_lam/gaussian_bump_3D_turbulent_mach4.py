@@ -26,7 +26,7 @@ input_dict = {
     "Re"                   : "4000.0", 
     "Twall"                : "1.37", 
     "dt"                   : "0.01", 
-    "niter"                : "500000", 
+    "niter"                : "20000", 
     "stat_frequency"       : "200",
     "block0np0"            : "2000", 
     "block0np1"            : "300",
@@ -45,8 +45,8 @@ input_dict = {
     "teno_a1"              : "10.5",
     "teno_a2"              : "4.5",
     "epsilon"              : "1.0e-30",
-    "tripA"                : "0.00000001",
-    "xts"                  : "50.0",
+    "tripA"                : "0.0",
+    "xts"                  : "225.0",
     "omega_0"              : "0.1",
     "omega_1"              : "0.2", 
     "omega_2"              : "0.4",
@@ -55,7 +55,7 @@ input_dict = {
     "phi_1"                : "3.141",
     "phi_2"                : "4.712",
     "b_f"                  : "0.002", # was 0.02
-    "beta_0"               : "0.628", #was 0.31
+    "beta_0"               : "2.513272", #was 0.31
     'kappa_TVD'            : "0.3",
 }
 
@@ -71,7 +71,7 @@ values = input_dict.values()
 weno = True
 teno = False
 TVD = False
-slices = False
+slices = True
 stats = False
 monitor = True
 
@@ -257,9 +257,6 @@ x0, z0 = DataObject('x0'), DataObject('x2')
 
 conditional_expressions = []
 trip_eqn = Amp*(exp(-bf*(x0-xts)**2))*(sin(omega0*dt*current_iter)
-                                        +sin(omega1*dt*current_iter+phi0)
-                                        +sin(omega2*dt*current_iter+phi1)
-                                        +sin(omega3*dt*current_iter+phi2)
                                         )*sin(b0*z0)
 
 wall_normal_velocity = OpenSBLIEq(DataObject('rhou1'), DataObject('rho')*trip_eqn)
@@ -357,8 +354,9 @@ if TVD:
     block.set_equations(TVD_filter.equation_classes)
 
 ##################################################################################################################																															
-#         Slicing																																																																	
+#              Slicing																								 #																																									
 ##################################################################################################################
+
 if slices:
     # Add grid coordinates to the slices, once at the start of the simulation
     grid_slice_hdf5 = iohdf5_slices(**{'iotype': "Init"})
@@ -367,7 +365,7 @@ if slices:
               ([DataObject('x0'), DataObject('x2')], 2, 'block0np2/2')] # q vector, x-z, j=1 plane, # q vector, x-y, z=Lz/2 plane
     grid_slice_hdf5.add_slices(coords)
     # Q vector slices written out in time
-    slices_hdf5 = iohdf5_slices(save_every=2500, **{'iotype': "Write"})
+    slices_hdf5 = iohdf5_slices(save_every= 2500, **{'iotype': "Write"})
     # Arrays, direction, index
     #plan contours
     slices = [(q_vector, 1, 1)] # conserved variables, plan view, j=1
@@ -406,6 +404,7 @@ if slices:
     block.setio([grid_slice_hdf5, slices_hdf5])
 
 block.discretise()
+
 
 if monitor:
     alg = TraditionalAlgorithmRK(block, simulation_monitor=SM)

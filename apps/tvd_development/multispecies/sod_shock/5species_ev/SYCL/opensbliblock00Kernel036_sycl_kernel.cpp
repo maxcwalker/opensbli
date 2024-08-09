@@ -7,7 +7,20 @@
 // host stub function
 #ifndef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel036(char const *name, ops_block block, int dim, int* range,
- ops_arg arg0, ops_arg arg1) {
+ ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
+ ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
+ ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
+ ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
+ ops_arg arg16, ops_arg arg17, ops_arg arg18, ops_arg arg19,
+ ops_arg arg20, ops_arg arg21, ops_arg arg22, ops_arg arg23,
+ ops_arg arg24, ops_arg arg25, ops_arg arg26, ops_arg arg27,
+ ops_arg arg28, ops_arg arg29, ops_arg arg30, ops_arg arg31,
+ ops_arg arg32, ops_arg arg33, ops_arg arg34, ops_arg arg35,
+ ops_arg arg36, ops_arg arg37, ops_arg arg38, ops_arg arg39,
+ ops_arg arg40, ops_arg arg41, ops_arg arg42, ops_arg arg43,
+ ops_arg arg44, ops_arg arg45, ops_arg arg46, ops_arg arg47,
+ ops_arg arg48, ops_arg arg49, ops_arg arg50, ops_arg arg51,
+ ops_arg arg52, ops_arg arg53, ops_arg arg54, ops_arg arg55) {
 #else
 void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) {
   ops_block block = desc->block;
@@ -15,22 +28,87 @@ void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) 
   int *range = desc->range;
   ops_arg arg0 = desc->args[0];
   ops_arg arg1 = desc->args[1];
+  ops_arg arg2 = desc->args[2];
+  ops_arg arg3 = desc->args[3];
+  ops_arg arg4 = desc->args[4];
+  ops_arg arg5 = desc->args[5];
+  ops_arg arg6 = desc->args[6];
+  ops_arg arg7 = desc->args[7];
+  ops_arg arg8 = desc->args[8];
+  ops_arg arg9 = desc->args[9];
+  ops_arg arg10 = desc->args[10];
+  ops_arg arg11 = desc->args[11];
+  ops_arg arg12 = desc->args[12];
+  ops_arg arg13 = desc->args[13];
+  ops_arg arg14 = desc->args[14];
+  ops_arg arg15 = desc->args[15];
+  ops_arg arg16 = desc->args[16];
+  ops_arg arg17 = desc->args[17];
+  ops_arg arg18 = desc->args[18];
+  ops_arg arg19 = desc->args[19];
+  ops_arg arg20 = desc->args[20];
+  ops_arg arg21 = desc->args[21];
+  ops_arg arg22 = desc->args[22];
+  ops_arg arg23 = desc->args[23];
+  ops_arg arg24 = desc->args[24];
+  ops_arg arg25 = desc->args[25];
+  ops_arg arg26 = desc->args[26];
+  ops_arg arg27 = desc->args[27];
+  ops_arg arg28 = desc->args[28];
+  ops_arg arg29 = desc->args[29];
+  ops_arg arg30 = desc->args[30];
+  ops_arg arg31 = desc->args[31];
+  ops_arg arg32 = desc->args[32];
+  ops_arg arg33 = desc->args[33];
+  ops_arg arg34 = desc->args[34];
+  ops_arg arg35 = desc->args[35];
+  ops_arg arg36 = desc->args[36];
+  ops_arg arg37 = desc->args[37];
+  ops_arg arg38 = desc->args[38];
+  ops_arg arg39 = desc->args[39];
+  ops_arg arg40 = desc->args[40];
+  ops_arg arg41 = desc->args[41];
+  ops_arg arg42 = desc->args[42];
+  ops_arg arg43 = desc->args[43];
+  ops_arg arg44 = desc->args[44];
+  ops_arg arg45 = desc->args[45];
+  ops_arg arg46 = desc->args[46];
+  ops_arg arg47 = desc->args[47];
+  ops_arg arg48 = desc->args[48];
+  ops_arg arg49 = desc->args[49];
+  ops_arg arg50 = desc->args[50];
+  ops_arg arg51 = desc->args[51];
+  ops_arg arg52 = desc->args[52];
+  ops_arg arg53 = desc->args[53];
+  ops_arg arg54 = desc->args[54];
+  ops_arg arg55 = desc->args[55];
   #endif
 
   //Timing
   double __t1,__t2,__c1,__c2;
 
-  ops_arg args[2] = { arg0, arg1};
+  ops_arg args[56] = { arg0, arg1, arg2, arg3, arg4,
+ arg5, arg6, arg7, arg8, arg9,
+ arg10, arg11, arg12, arg13, arg14,
+ arg15, arg16, arg17, arg18, arg19,
+ arg20, arg21, arg22, arg23, arg24,
+ arg25, arg26, arg27, arg28, arg29,
+ arg30, arg31, arg32, arg33, arg34,
+ arg35, arg36, arg37, arg38, arg39,
+ arg40, arg41, arg42, arg43, arg44,
+ arg45, arg46, arg47, arg48, arg49,
+ arg50, arg51, arg52, arg53, arg54,
+ arg55};
 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,2,range,18)) return;
+  if (!ops_checkpointing_before(args,56,range,43)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,18,"opensbliblock00Kernel036");
-    block->instance->OPS_kernels[18].count++;
+    ops_timing_realloc(block->instance,43,"opensbliblock00Kernel036");
+    block->instance->OPS_kernels[43].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -42,48 +120,226 @@ void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) 
   //compute locally allocated range for the sub-block
   int start[1];
   int end[1];
-  #if defined(OPS_MPI) && !defined(OPS_LAZY)
   int arg_idx[1];
-  #endif
   #if defined(OPS_LAZY) || !defined(OPS_MPI)
   for ( int n=0; n<1; n++ ){
     start[n] = range[2*n];end[n] = range[2*n+1];
   }
   #else
-  if (compute_ranges(args, 2,block, range, start, end, arg_idx) < 0) return;
+  if (compute_ranges(args, 56,block, range, start, end, arg_idx) < 0) return;
   #endif
 
+  #if defined(OPS_MPI)
+  #if defined(OPS_LAZY)
+  sub_block_list sb = OPS_sub_block_list[block->index];
+  arg_idx[0] = sb->decomp_disp[0];
+  #else
+  arg_idx[0] -= start[0];
+  #endif
+  #else //OPS_MPI
+  arg_idx[0] = 0;
+  #endif //OPS_MPI
 
   //initialize global variable with the dimension of dats
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset/sizeof(double);
-  double* T_B0_p = (double*)args[0].data_d;
+  double* DN2_B0_p = (double*)args[0].data_d;
 
   int base1 = args[1].dat->base_offset/sizeof(double);
-  double* eveqNO_B0_p = (double*)args[1].data_d;
+  double* DNO_B0_p = (double*)args[1].data_d;
+
+  int base2 = args[2].dat->base_offset/sizeof(double);
+  double* DN_B0_p = (double*)args[2].data_d;
+
+  int base3 = args[3].dat->base_offset/sizeof(double);
+  double* DO2_B0_p = (double*)args[3].data_d;
+
+  int base4 = args[4].dat->base_offset/sizeof(double);
+  double* DO_B0_p = (double*)args[4].data_d;
+
+  int base5 = args[5].dat->base_offset/sizeof(double);
+  double* T_B0_p = (double*)args[5].data_d;
+
+  int base6 = args[6].dat->base_offset/sizeof(double);
+  double* Tv_B0_p = (double*)args[6].data_d;
+
+  int base7 = args[7].dat->base_offset/sizeof(double);
+  double* XN2_B0_p = (double*)args[7].data_d;
+
+  int base8 = args[8].dat->base_offset/sizeof(double);
+  double* XNO_B0_p = (double*)args[8].data_d;
+
+  int base9 = args[9].dat->base_offset/sizeof(double);
+  double* XN_B0_p = (double*)args[9].data_d;
+
+  int base10 = args[10].dat->base_offset/sizeof(double);
+  double* XO2_B0_p = (double*)args[10].data_d;
+
+  int base11 = args[11].dat->base_offset/sizeof(double);
+  double* XO_B0_p = (double*)args[11].data_d;
+
+  int base12 = args[12].dat->base_offset/sizeof(double);
+  double* af_B0_p = (double*)args[12].data_d;
+
+  int base13 = args[13].dat->base_offset/sizeof(double);
+  double* cp_B0_p = (double*)args[13].data_d;
+
+  int base14 = args[14].dat->base_offset/sizeof(double);
+  double* dumgaama_B0_p = (double*)args[14].data_d;
+
+  int base15 = args[15].dat->base_offset/sizeof(double);
+  double* evN2_B0_p = (double*)args[15].data_d;
+
+  int base16 = args[16].dat->base_offset/sizeof(double);
+  double* evNO_B0_p = (double*)args[16].data_d;
+
+  int base17 = args[17].dat->base_offset/sizeof(double);
+  double* evO2_B0_p = (double*)args[17].data_d;
+
+  int base18 = args[18].dat->base_offset/sizeof(double);
+  double* eveqN2_B0_p = (double*)args[18].data_d;
+
+  int base19 = args[19].dat->base_offset/sizeof(double);
+  double* eveqNO_B0_p = (double*)args[19].data_d;
+
+  int base20 = args[20].dat->base_offset/sizeof(double);
+  double* eveqO2_B0_p = (double*)args[20].data_d;
+
+  int base21 = args[21].dat->base_offset/sizeof(double);
+  double* gammaf_B0_p = (double*)args[21].data_d;
+
+  int base22 = args[22].dat->base_offset/sizeof(double);
+  double* p_B0_p = (double*)args[22].data_d;
+
+  int base23 = args[23].dat->base_offset/sizeof(double);
+  double* rhoE_B0_p = (double*)args[23].data_d;
+
+  int base24 = args[24].dat->base_offset/sizeof(double);
+  double* rhoN2_B0_p = (double*)args[24].data_d;
+
+  int base25 = args[25].dat->base_offset/sizeof(double);
+  double* rhoNO_B0_p = (double*)args[25].data_d;
+
+  int base26 = args[26].dat->base_offset/sizeof(double);
+  double* rhoN_B0_p = (double*)args[26].data_d;
+
+  int base27 = args[27].dat->base_offset/sizeof(double);
+  double* rhoO2_B0_p = (double*)args[27].data_d;
+
+  int base28 = args[28].dat->base_offset/sizeof(double);
+  double* rhoO_B0_p = (double*)args[28].data_d;
+
+  int base29 = args[29].dat->base_offset/sizeof(double);
+  double* rhoev_B0_p = (double*)args[29].data_d;
+
+  int base30 = args[30].dat->base_offset/sizeof(double);
+  double* rhou0_B0_p = (double*)args[30].data_d;
+
+  int base31 = args[31].dat->base_offset/sizeof(double);
+  double* tauN2_B0_p = (double*)args[31].data_d;
+
+  int base32 = args[32].dat->base_offset/sizeof(double);
+  double* tauNO_B0_p = (double*)args[32].data_d;
+
+  int base33 = args[33].dat->base_offset/sizeof(double);
+  double* tauO2_B0_p = (double*)args[33].data_d;
+
+  int base34 = args[34].dat->base_offset/sizeof(double);
+  double* u0_B0_p = (double*)args[34].data_d;
+
+  int base35 = args[35].dat->base_offset/sizeof(double);
+  double* wdotN2_B0_p = (double*)args[35].data_d;
+
+  int base36 = args[36].dat->base_offset/sizeof(double);
+  double* wdotNO_B0_p = (double*)args[36].data_d;
+
+  int base37 = args[37].dat->base_offset/sizeof(double);
+  double* wdotN_B0_p = (double*)args[37].data_d;
+
+  int base38 = args[38].dat->base_offset/sizeof(double);
+  double* wdotO2_B0_p = (double*)args[38].data_d;
+
+  int base39 = args[39].dat->base_offset/sizeof(double);
+  double* wdotO_B0_p = (double*)args[39].data_d;
+
+  int base40 = args[40].dat->base_offset/sizeof(double);
+  double* wk0_B0_p = (double*)args[40].data_d;
+
+  int base41 = args[41].dat->base_offset/sizeof(double);
+  double* wk1_B0_p = (double*)args[41].data_d;
+
+  int base42 = args[42].dat->base_offset/sizeof(double);
+  double* yN2_B0_p = (double*)args[42].data_d;
+
+  int base43 = args[43].dat->base_offset/sizeof(double);
+  double* yNO_B0_p = (double*)args[43].data_d;
+
+  int base44 = args[44].dat->base_offset/sizeof(double);
+  double* yN_B0_p = (double*)args[44].data_d;
+
+  int base45 = args[45].dat->base_offset/sizeof(double);
+  double* yO2_B0_p = (double*)args[45].data_d;
+
+  int base46 = args[46].dat->base_offset/sizeof(double);
+  double* yO_B0_p = (double*)args[46].data_d;
+
+  int base47 = args[47].dat->base_offset/sizeof(double);
+  double* Residual0_B0_p = (double*)args[47].data_d;
+
+  int base48 = args[48].dat->base_offset/sizeof(double);
+  double* Residual1_B0_p = (double*)args[48].data_d;
+
+  int base49 = args[49].dat->base_offset/sizeof(double);
+  double* Residual2_B0_p = (double*)args[49].data_d;
+
+  int base50 = args[50].dat->base_offset/sizeof(double);
+  double* Residual3_B0_p = (double*)args[50].data_d;
+
+  int base51 = args[51].dat->base_offset/sizeof(double);
+  double* Residual4_B0_p = (double*)args[51].data_d;
+
+  int base52 = args[52].dat->base_offset/sizeof(double);
+  double* Residual5_B0_p = (double*)args[52].data_d;
+
+  int base53 = args[53].dat->base_offset/sizeof(double);
+  double* Residual6_B0_p = (double*)args[53].data_d;
+
+  int base54 = args[54].dat->base_offset/sizeof(double);
+  double* Residual7_B0_p = (double*)args[54].data_d;
+
 
 
 
   #ifndef OPS_LAZY
   //Halo Exchanges
-  ops_H_D_exchanges_device(args, 2);
-  ops_halo_exchanges(args,2,range);
+  ops_H_D_exchanges_device(args, 56);
+  ops_halo_exchanges(args,56,range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[18].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[43].mpi_time += __t1-__t2;
   }
 
   int start_0 = start[0];
   int end_0 = end[0];
+  int arg_idx_0 = arg_idx[0];
   if ((end[0]-start[0])>0) {
     block->instance->sycl_instance->queue->submit([&](cl::sycl::handler &cgh) {
 
       auto Rhat_sycl = (*Rhat_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto block0np0_sycl = (*block0np0_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto dhf0N_sycl = (*dhf0N_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto dhf0NO_sycl = (*dhf0NO_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto dhf0O_sycl = (*dhf0O_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto inv2Delta0block0_sycl = (*inv2Delta0block0_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto invDelta0block0_sycl = (*invDelta0block0_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto invMN_sycl = (*invMN_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto invMN2_sycl = (*invMN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invMNO_sycl = (*invMNO_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto thetavNO_sycl = (*thetavNO_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto invMO_sycl = (*invMO_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto invMO2_sycl = (*invMO2_p).template get_access<cl::sycl::access::mode::read>(cgh);
 
       cgh.parallel_for<class opensbliblock00Kernel036_kernel>(cl::sycl::nd_range<1>(cl::sycl::range<1>(
             ((end[0]-start[0]-1)/block->instance->OPS_block_size_x+1)*block->instance->OPS_block_size_x
@@ -93,12 +349,1272 @@ void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) 
       , [=](cl::sycl::nd_item<1> item
       ) [[intel::kernel_args_restrict]] {
         int n_x = item.get_global_id(0)+start_0;
-        const ACC<double> T_B0(&T_B0_p[0] + base0 + n_x*1);
-        ACC<double> eveqNO_B0(&eveqNO_B0_p[0] + base1 + n_x*1);
+        int idx[] = {arg_idx_0+n_x};
+        const ACC<double> DN2_B0(&DN2_B0_p[0] + base0 + n_x*1);
+        const ACC<double> DNO_B0(&DNO_B0_p[0] + base1 + n_x*1);
+        const ACC<double> DN_B0(&DN_B0_p[0] + base2 + n_x*1);
+        const ACC<double> DO2_B0(&DO2_B0_p[0] + base3 + n_x*1);
+        const ACC<double> DO_B0(&DO_B0_p[0] + base4 + n_x*1);
+        const ACC<double> T_B0(&T_B0_p[0] + base5 + n_x*1);
+        const ACC<double> Tv_B0(&Tv_B0_p[0] + base6 + n_x*1);
+        const ACC<double> XN2_B0(&XN2_B0_p[0] + base7 + n_x*1);
+        const ACC<double> XNO_B0(&XNO_B0_p[0] + base8 + n_x*1);
+        const ACC<double> XN_B0(&XN_B0_p[0] + base9 + n_x*1);
+        const ACC<double> XO2_B0(&XO2_B0_p[0] + base10 + n_x*1);
+        const ACC<double> XO_B0(&XO_B0_p[0] + base11 + n_x*1);
+        const ACC<double> af_B0(&af_B0_p[0] + base12 + n_x*1);
+        const ACC<double> cp_B0(&cp_B0_p[0] + base13 + n_x*1);
+        const ACC<double> dumgaama_B0(&dumgaama_B0_p[0] + base14 + n_x*1);
+        const ACC<double> evN2_B0(&evN2_B0_p[0] + base15 + n_x*1);
+        const ACC<double> evNO_B0(&evNO_B0_p[0] + base16 + n_x*1);
+        const ACC<double> evO2_B0(&evO2_B0_p[0] + base17 + n_x*1);
+        const ACC<double> eveqN2_B0(&eveqN2_B0_p[0] + base18 + n_x*1);
+        const ACC<double> eveqNO_B0(&eveqNO_B0_p[0] + base19 + n_x*1);
+        const ACC<double> eveqO2_B0(&eveqO2_B0_p[0] + base20 + n_x*1);
+        const ACC<double> gammaf_B0(&gammaf_B0_p[0] + base21 + n_x*1);
+        const ACC<double> p_B0(&p_B0_p[0] + base22 + n_x*1);
+        const ACC<double> rhoE_B0(&rhoE_B0_p[0] + base23 + n_x*1);
+        const ACC<double> rhoN2_B0(&rhoN2_B0_p[0] + base24 + n_x*1);
+        const ACC<double> rhoNO_B0(&rhoNO_B0_p[0] + base25 + n_x*1);
+        const ACC<double> rhoN_B0(&rhoN_B0_p[0] + base26 + n_x*1);
+        const ACC<double> rhoO2_B0(&rhoO2_B0_p[0] + base27 + n_x*1);
+        const ACC<double> rhoO_B0(&rhoO_B0_p[0] + base28 + n_x*1);
+        const ACC<double> rhoev_B0(&rhoev_B0_p[0] + base29 + n_x*1);
+        const ACC<double> rhou0_B0(&rhou0_B0_p[0] + base30 + n_x*1);
+        const ACC<double> tauN2_B0(&tauN2_B0_p[0] + base31 + n_x*1);
+        const ACC<double> tauNO_B0(&tauNO_B0_p[0] + base32 + n_x*1);
+        const ACC<double> tauO2_B0(&tauO2_B0_p[0] + base33 + n_x*1);
+        const ACC<double> u0_B0(&u0_B0_p[0] + base34 + n_x*1);
+        const ACC<double> wdotN2_B0(&wdotN2_B0_p[0] + base35 + n_x*1);
+        const ACC<double> wdotNO_B0(&wdotNO_B0_p[0] + base36 + n_x*1);
+        const ACC<double> wdotN_B0(&wdotN_B0_p[0] + base37 + n_x*1);
+        const ACC<double> wdotO2_B0(&wdotO2_B0_p[0] + base38 + n_x*1);
+        const ACC<double> wdotO_B0(&wdotO_B0_p[0] + base39 + n_x*1);
+        const ACC<double> wk0_B0(&wk0_B0_p[0] + base40 + n_x*1);
+        const ACC<double> wk1_B0(&wk1_B0_p[0] + base41 + n_x*1);
+        const ACC<double> yN2_B0(&yN2_B0_p[0] + base42 + n_x*1);
+        const ACC<double> yNO_B0(&yNO_B0_p[0] + base43 + n_x*1);
+        const ACC<double> yN_B0(&yN_B0_p[0] + base44 + n_x*1);
+        const ACC<double> yO2_B0(&yO2_B0_p[0] + base45 + n_x*1);
+        const ACC<double> yO_B0(&yO_B0_p[0] + base46 + n_x*1);
+        ACC<double> Residual0_B0(&Residual0_B0_p[0] + base47 + n_x*1);
+        ACC<double> Residual1_B0(&Residual1_B0_p[0] + base48 + n_x*1);
+        ACC<double> Residual2_B0(&Residual2_B0_p[0] + base49 + n_x*1);
+        ACC<double> Residual3_B0(&Residual3_B0_p[0] + base50 + n_x*1);
+        ACC<double> Residual4_B0(&Residual4_B0_p[0] + base51 + n_x*1);
+        ACC<double> Residual5_B0(&Residual5_B0_p[0] + base52 + n_x*1);
+        ACC<double> Residual6_B0(&Residual6_B0_p[0] + base53 + n_x*1);
+        ACC<double> Residual7_B0(&Residual7_B0_p[0] + base54 + n_x*1);
         //USER CODE
         if (n_x < end_0) {
           
-   eveqNO_B0(0) = Rhat_sycl[0]*invMNO_sycl[0]*thetavNO_sycl[0]/(-1.0 + cl::sycl::exp(thetavNO_sycl[0]/T_B0(0)));
+   double d1_DN2_dx = 0.0;
+   double d1_DNO_dx = 0.0;
+   double d1_DN_dx = 0.0;
+   double d1_DO2_dx = 0.0;
+   double d1_DO_dx = 0.0;
+   double d1_XN2_dx = 0.0;
+   double d1_XNO_dx = 0.0;
+   double d1_XN_dx = 0.0;
+   double d1_XO2_dx = 0.0;
+   double d1_XO_dx = 0.0;
+   double d1_evN2_dx = 0.0;
+   double d1_evNO_dx = 0.0;
+   double d1_evO2_dx = 0.0;
+   double d1_p_dx = 0.0;
+   double d1_pu0_dx = 0.0;
+   double d1_rhoE_dx = 0.0;
+   double d1_rhoEu0_dx = 0.0;
+   double d1_rhoN2_dx = 0.0;
+   double d1_rhoN2u0_dx = 0.0;
+   double d1_rhoNO_dx = 0.0;
+   double d1_rhoNOu0_dx = 0.0;
+   double d1_rhoN_dx = 0.0;
+   double d1_rhoNu0_dx = 0.0;
+   double d1_rhoO2_dx = 0.0;
+   double d1_rhoO2u0_dx = 0.0;
+   double d1_rhoO_dx = 0.0;
+   double d1_rhoOu0_dx = 0.0;
+   double d1_rhoev_dx = 0.0;
+   double d1_rhoevu0_dx = 0.0;
+   double d1_rhou0_dx = 0.0;
+   double d1_rhou0u0_dx = 0.0;
+   double d2_XN2_dx = 0.0;
+   double d2_XNO_dx = 0.0;
+   double d2_XN_dx = 0.0;
+   double d2_XO2_dx = 0.0;
+   double d2_XO_dx = 0.0;
+   if (idx[0] == 0){
+
+       d1_DN2_dx = (3.0*DN2_B0(1) + 0.333333333333333*DN2_B0(3) - 1.5*DN2_B0(2) -
+            1.83333333333333*DN2_B0(0))*invDelta0block0_sycl[0];
+
+       d1_DNO_dx = (3.0*DNO_B0(1) + 0.333333333333333*DNO_B0(3) - 1.5*DNO_B0(2) -
+            1.83333333333333*DNO_B0(0))*invDelta0block0_sycl[0];
+
+       d1_DN_dx = (3.0*DN_B0(1) + 0.333333333333333*DN_B0(3) - 1.5*DN_B0(2) -
+            1.83333333333333*DN_B0(0))*invDelta0block0_sycl[0];
+
+       d1_DO2_dx = (3.0*DO2_B0(1) + 0.333333333333333*DO2_B0(3) - 1.5*DO2_B0(2) -
+            1.83333333333333*DO2_B0(0))*invDelta0block0_sycl[0];
+
+       d1_DO_dx = (3.0*DO_B0(1) + 0.333333333333333*DO_B0(3) - 1.5*DO_B0(2) -
+            1.83333333333333*DO_B0(0))*invDelta0block0_sycl[0];
+
+       d1_XN2_dx = (3.0*XN2_B0(1) + 0.333333333333333*XN2_B0(3) - 1.5*XN2_B0(2) -
+            1.83333333333333*XN2_B0(0))*invDelta0block0_sycl[0];
+
+       d1_XNO_dx = (3.0*XNO_B0(1) + 0.333333333333333*XNO_B0(3) - 1.5*XNO_B0(2) -
+            1.83333333333333*XNO_B0(0))*invDelta0block0_sycl[0];
+
+       d1_XN_dx = (3.0*XN_B0(1) + 0.333333333333333*XN_B0(3) - 1.5*XN_B0(2) -
+            1.83333333333333*XN_B0(0))*invDelta0block0_sycl[0];
+
+       d1_XO2_dx = (3.0*XO2_B0(1) + 0.333333333333333*XO2_B0(3) - 1.5*XO2_B0(2) -
+            1.83333333333333*XO2_B0(0))*invDelta0block0_sycl[0];
+
+       d1_XO_dx = (3.0*XO_B0(1) + 0.333333333333333*XO_B0(3) - 1.5*XO_B0(2) -
+            1.83333333333333*XO_B0(0))*invDelta0block0_sycl[0];
+
+       d1_evN2_dx = (3.0*evN2_B0(1) + 0.333333333333333*evN2_B0(3) - 1.5*evN2_B0(2) -
+            1.83333333333333*evN2_B0(0))*invDelta0block0_sycl[0];
+
+       d1_evNO_dx = (3.0*evNO_B0(1) + 0.333333333333333*evNO_B0(3) - 1.5*evNO_B0(2) -
+            1.83333333333333*evNO_B0(0))*invDelta0block0_sycl[0];
+
+       d1_evO2_dx = (3.0*evO2_B0(1) + 0.333333333333333*evO2_B0(3) - 1.5*evO2_B0(2) -
+            1.83333333333333*evO2_B0(0))*invDelta0block0_sycl[0];
+
+      d1_p_dx = (3.0*p_B0(1) + 0.333333333333333*p_B0(3) - 1.5*p_B0(2) - 1.83333333333333*p_B0(0))*invDelta0block0_sycl[0];
+
+       d1_pu0_dx = (3.0*p_B0(1)*u0_B0(1) + 0.333333333333333*p_B0(3)*u0_B0(3) - 1.5*p_B0(2)*u0_B0(2) -
+            1.83333333333333*p_B0(0)*u0_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoE_dx = (3.0*rhoE_B0(1) + 0.333333333333333*rhoE_B0(3) - 1.5*rhoE_B0(2) -
+            1.83333333333333*rhoE_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoEu0_dx = (3.0*u0_B0(1)*rhoE_B0(1) + 0.333333333333333*u0_B0(3)*rhoE_B0(3) - 1.5*u0_B0(2)*rhoE_B0(2) -
+            1.83333333333333*u0_B0(0)*rhoE_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoN2_dx = (3.0*rhoN2_B0(1) + 0.333333333333333*rhoN2_B0(3) - 1.5*rhoN2_B0(2) -
+            1.83333333333333*rhoN2_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoN2u0_dx = (3.0*u0_B0(1)*rhoN2_B0(1) + 0.333333333333333*u0_B0(3)*rhoN2_B0(3) - 1.5*u0_B0(2)*rhoN2_B0(2) -
+            1.83333333333333*u0_B0(0)*rhoN2_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoNO_dx = (3.0*rhoNO_B0(1) + 0.333333333333333*rhoNO_B0(3) - 1.5*rhoNO_B0(2) -
+            1.83333333333333*rhoNO_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoNOu0_dx = (3.0*u0_B0(1)*rhoNO_B0(1) + 0.333333333333333*u0_B0(3)*rhoNO_B0(3) - 1.5*u0_B0(2)*rhoNO_B0(2) -
+            1.83333333333333*u0_B0(0)*rhoNO_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoN_dx = (3.0*rhoN_B0(1) + 0.333333333333333*rhoN_B0(3) - 1.5*rhoN_B0(2) -
+            1.83333333333333*rhoN_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoNu0_dx = (3.0*u0_B0(1)*rhoN_B0(1) + 0.333333333333333*u0_B0(3)*rhoN_B0(3) - 1.5*u0_B0(2)*rhoN_B0(2) -
+            1.83333333333333*u0_B0(0)*rhoN_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoO2_dx = (3.0*rhoO2_B0(1) + 0.333333333333333*rhoO2_B0(3) - 1.5*rhoO2_B0(2) -
+            1.83333333333333*rhoO2_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoO2u0_dx = (3.0*u0_B0(1)*rhoO2_B0(1) + 0.333333333333333*u0_B0(3)*rhoO2_B0(3) - 1.5*u0_B0(2)*rhoO2_B0(2) -
+            1.83333333333333*u0_B0(0)*rhoO2_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoO_dx = (3.0*rhoO_B0(1) + 0.333333333333333*rhoO_B0(3) - 1.5*rhoO_B0(2) -
+            1.83333333333333*rhoO_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoOu0_dx = (3.0*u0_B0(1)*rhoO_B0(1) + 0.333333333333333*u0_B0(3)*rhoO_B0(3) - 1.5*u0_B0(2)*rhoO_B0(2) -
+            1.83333333333333*u0_B0(0)*rhoO_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoev_dx = (3.0*rhoev_B0(1) + 0.333333333333333*rhoev_B0(3) - 1.5*rhoev_B0(2) -
+            1.83333333333333*rhoev_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhoevu0_dx = (3.0*u0_B0(1)*rhoev_B0(1) + 0.333333333333333*u0_B0(3)*rhoev_B0(3) - 1.5*u0_B0(2)*rhoev_B0(2) -
+            1.83333333333333*u0_B0(0)*rhoev_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhou0_dx = (3.0*rhou0_B0(1) + 0.333333333333333*rhou0_B0(3) - 1.5*rhou0_B0(2) -
+            1.83333333333333*rhou0_B0(0))*invDelta0block0_sycl[0];
+
+       d1_rhou0u0_dx = (3.0*u0_B0(1)*rhou0_B0(1) + 0.333333333333333*u0_B0(3)*rhou0_B0(3) - 1.5*u0_B0(2)*rhou0_B0(2) -
+            1.83333333333333*u0_B0(0)*rhou0_B0(0))*invDelta0block0_sycl[0];
+
+   }
+
+   else if (idx[0] == 1){
+
+       d1_DN2_dx = (0.0394168524399447*DN2_B0(2) + 0.00571369039775442*DN2_B0(4) + 0.719443173328855*DN2_B0(1) -
+            0.322484932882161*DN2_B0(0) - 0.0658051057710389*DN2_B0(3) - 0.376283677513354*DN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DNO_dx = (0.0394168524399447*DNO_B0(2) + 0.00571369039775442*DNO_B0(4) + 0.719443173328855*DNO_B0(1) -
+            0.322484932882161*DNO_B0(0) - 0.0658051057710389*DNO_B0(3) - 0.376283677513354*DNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DN_dx = (0.0394168524399447*DN_B0(2) + 0.00571369039775442*DN_B0(4) + 0.719443173328855*DN_B0(1) -
+            0.322484932882161*DN_B0(0) - 0.0658051057710389*DN_B0(3) - 0.376283677513354*DN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DO2_dx = (0.0394168524399447*DO2_B0(2) + 0.00571369039775442*DO2_B0(4) + 0.719443173328855*DO2_B0(1) -
+            0.322484932882161*DO2_B0(0) - 0.0658051057710389*DO2_B0(3) - 0.376283677513354*DO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DO_dx = (0.0394168524399447*DO_B0(2) + 0.00571369039775442*DO_B0(4) + 0.719443173328855*DO_B0(1) -
+            0.322484932882161*DO_B0(0) - 0.0658051057710389*DO_B0(3) - 0.376283677513354*DO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XN2_dx = (0.0394168524399447*XN2_B0(2) + 0.00571369039775442*XN2_B0(4) + 0.719443173328855*XN2_B0(1) -
+            0.322484932882161*XN2_B0(0) - 0.0658051057710389*XN2_B0(3) - 0.376283677513354*XN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XNO_dx = (0.0394168524399447*XNO_B0(2) + 0.00571369039775442*XNO_B0(4) + 0.719443173328855*XNO_B0(1) -
+            0.322484932882161*XNO_B0(0) - 0.0658051057710389*XNO_B0(3) - 0.376283677513354*XNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XN_dx = (0.0394168524399447*XN_B0(2) + 0.00571369039775442*XN_B0(4) + 0.719443173328855*XN_B0(1) -
+            0.322484932882161*XN_B0(0) - 0.0658051057710389*XN_B0(3) - 0.376283677513354*XN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XO2_dx = (0.0394168524399447*XO2_B0(2) + 0.00571369039775442*XO2_B0(4) + 0.719443173328855*XO2_B0(1) -
+            0.322484932882161*XO2_B0(0) - 0.0658051057710389*XO2_B0(3) - 0.376283677513354*XO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XO_dx = (0.0394168524399447*XO_B0(2) + 0.00571369039775442*XO_B0(4) + 0.719443173328855*XO_B0(1) -
+            0.322484932882161*XO_B0(0) - 0.0658051057710389*XO_B0(3) - 0.376283677513354*XO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_evN2_dx = (0.0394168524399447*evN2_B0(2) + 0.00571369039775442*evN2_B0(4) + 0.719443173328855*evN2_B0(1) -
+            0.322484932882161*evN2_B0(0) - 0.0658051057710389*evN2_B0(3) -
+            0.376283677513354*evN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_evNO_dx = (0.0394168524399447*evNO_B0(2) + 0.00571369039775442*evNO_B0(4) + 0.719443173328855*evNO_B0(1) -
+            0.322484932882161*evNO_B0(0) - 0.0658051057710389*evNO_B0(3) -
+            0.376283677513354*evNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_evO2_dx = (0.0394168524399447*evO2_B0(2) + 0.00571369039775442*evO2_B0(4) + 0.719443173328855*evO2_B0(1) -
+            0.322484932882161*evO2_B0(0) - 0.0658051057710389*evO2_B0(3) -
+            0.376283677513354*evO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_p_dx = (0.0394168524399447*p_B0(2) + 0.00571369039775442*p_B0(4) + 0.719443173328855*p_B0(1) -
+            0.322484932882161*p_B0(0) - 0.0658051057710389*p_B0(3) - 0.376283677513354*p_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_pu0_dx = (0.0394168524399447*p_B0(2)*u0_B0(2) + 0.00571369039775442*p_B0(4)*u0_B0(4) +
+            0.719443173328855*p_B0(1)*u0_B0(1) - 0.322484932882161*p_B0(0)*u0_B0(0) -
+            0.0658051057710389*p_B0(3)*u0_B0(3) - 0.376283677513354*p_B0(-1)*u0_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoE_dx = (0.0394168524399447*rhoE_B0(2) + 0.00571369039775442*rhoE_B0(4) + 0.719443173328855*rhoE_B0(1) -
+            0.322484932882161*rhoE_B0(0) - 0.0658051057710389*rhoE_B0(3) -
+            0.376283677513354*rhoE_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoEu0_dx = (0.0394168524399447*u0_B0(2)*rhoE_B0(2) + 0.00571369039775442*u0_B0(4)*rhoE_B0(4) +
+            0.719443173328855*u0_B0(1)*rhoE_B0(1) - 0.322484932882161*u0_B0(0)*rhoE_B0(0) -
+            0.0658051057710389*u0_B0(3)*rhoE_B0(3) - 0.376283677513354*u0_B0(-1)*rhoE_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoN2_dx = (0.0394168524399447*rhoN2_B0(2) + 0.00571369039775442*rhoN2_B0(4) + 0.719443173328855*rhoN2_B0(1) -
+            0.322484932882161*rhoN2_B0(0) - 0.0658051057710389*rhoN2_B0(3) -
+            0.376283677513354*rhoN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoN2u0_dx = (0.0394168524399447*u0_B0(2)*rhoN2_B0(2) + 0.00571369039775442*u0_B0(4)*rhoN2_B0(4) +
+            0.719443173328855*u0_B0(1)*rhoN2_B0(1) - 0.322484932882161*u0_B0(0)*rhoN2_B0(0) -
+            0.0658051057710389*u0_B0(3)*rhoN2_B0(3) - 0.376283677513354*u0_B0(-1)*rhoN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoNO_dx = (0.0394168524399447*rhoNO_B0(2) + 0.00571369039775442*rhoNO_B0(4) + 0.719443173328855*rhoNO_B0(1) -
+            0.322484932882161*rhoNO_B0(0) - 0.0658051057710389*rhoNO_B0(3) -
+            0.376283677513354*rhoNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoNOu0_dx = (0.0394168524399447*u0_B0(2)*rhoNO_B0(2) + 0.00571369039775442*u0_B0(4)*rhoNO_B0(4) +
+            0.719443173328855*u0_B0(1)*rhoNO_B0(1) - 0.322484932882161*u0_B0(0)*rhoNO_B0(0) -
+            0.0658051057710389*u0_B0(3)*rhoNO_B0(3) - 0.376283677513354*u0_B0(-1)*rhoNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoN_dx = (0.0394168524399447*rhoN_B0(2) + 0.00571369039775442*rhoN_B0(4) + 0.719443173328855*rhoN_B0(1) -
+            0.322484932882161*rhoN_B0(0) - 0.0658051057710389*rhoN_B0(3) -
+            0.376283677513354*rhoN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoNu0_dx = (0.0394168524399447*u0_B0(2)*rhoN_B0(2) + 0.00571369039775442*u0_B0(4)*rhoN_B0(4) +
+            0.719443173328855*u0_B0(1)*rhoN_B0(1) - 0.322484932882161*u0_B0(0)*rhoN_B0(0) -
+            0.0658051057710389*u0_B0(3)*rhoN_B0(3) - 0.376283677513354*u0_B0(-1)*rhoN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoO2_dx = (0.0394168524399447*rhoO2_B0(2) + 0.00571369039775442*rhoO2_B0(4) + 0.719443173328855*rhoO2_B0(1) -
+            0.322484932882161*rhoO2_B0(0) - 0.0658051057710389*rhoO2_B0(3) -
+            0.376283677513354*rhoO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoO2u0_dx = (0.0394168524399447*u0_B0(2)*rhoO2_B0(2) + 0.00571369039775442*u0_B0(4)*rhoO2_B0(4) +
+            0.719443173328855*u0_B0(1)*rhoO2_B0(1) - 0.322484932882161*u0_B0(0)*rhoO2_B0(0) -
+            0.0658051057710389*u0_B0(3)*rhoO2_B0(3) - 0.376283677513354*u0_B0(-1)*rhoO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoO_dx = (0.0394168524399447*rhoO_B0(2) + 0.00571369039775442*rhoO_B0(4) + 0.719443173328855*rhoO_B0(1) -
+            0.322484932882161*rhoO_B0(0) - 0.0658051057710389*rhoO_B0(3) -
+            0.376283677513354*rhoO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoOu0_dx = (0.0394168524399447*u0_B0(2)*rhoO_B0(2) + 0.00571369039775442*u0_B0(4)*rhoO_B0(4) +
+            0.719443173328855*u0_B0(1)*rhoO_B0(1) - 0.322484932882161*u0_B0(0)*rhoO_B0(0) -
+            0.0658051057710389*u0_B0(3)*rhoO_B0(3) - 0.376283677513354*u0_B0(-1)*rhoO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoev_dx = (0.0394168524399447*rhoev_B0(2) + 0.00571369039775442*rhoev_B0(4) + 0.719443173328855*rhoev_B0(1) -
+            0.322484932882161*rhoev_B0(0) - 0.0658051057710389*rhoev_B0(3) -
+            0.376283677513354*rhoev_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoevu0_dx = (0.0394168524399447*u0_B0(2)*rhoev_B0(2) + 0.00571369039775442*u0_B0(4)*rhoev_B0(4) +
+            0.719443173328855*u0_B0(1)*rhoev_B0(1) - 0.322484932882161*u0_B0(0)*rhoev_B0(0) -
+            0.0658051057710389*u0_B0(3)*rhoev_B0(3) - 0.376283677513354*u0_B0(-1)*rhoev_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhou0_dx = (0.0394168524399447*rhou0_B0(2) + 0.00571369039775442*rhou0_B0(4) + 0.719443173328855*rhou0_B0(1) -
+            0.322484932882161*rhou0_B0(0) - 0.0658051057710389*rhou0_B0(3) -
+            0.376283677513354*rhou0_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhou0u0_dx = (0.0394168524399447*u0_B0(2)*rhou0_B0(2) + 0.00571369039775442*u0_B0(4)*rhou0_B0(4) +
+            0.719443173328855*u0_B0(1)*rhou0_B0(1) - 0.322484932882161*u0_B0(0)*rhou0_B0(0) -
+            0.0658051057710389*u0_B0(3)*rhou0_B0(3) - 0.376283677513354*u0_B0(-1)*rhou0_B0(-1))*invDelta0block0_sycl[0];
+
+   }
+
+   else if (idx[0] == 2){
+
+       d1_DN2_dx = (0.197184333887745*DN2_B0(0) + 0.521455851089587*DN2_B0(1) + 0.113446470384241*DN2_B0(-2) -
+            0.00412637789557492*DN2_B0(3) - 0.0367146847001261*DN2_B0(2) -
+            0.791245592765872*DN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DNO_dx = (0.197184333887745*DNO_B0(0) + 0.521455851089587*DNO_B0(1) + 0.113446470384241*DNO_B0(-2) -
+            0.00412637789557492*DNO_B0(3) - 0.0367146847001261*DNO_B0(2) -
+            0.791245592765872*DNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DN_dx = (0.197184333887745*DN_B0(0) + 0.521455851089587*DN_B0(1) + 0.113446470384241*DN_B0(-2) -
+            0.00412637789557492*DN_B0(3) - 0.0367146847001261*DN_B0(2) - 0.791245592765872*DN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DO2_dx = (0.197184333887745*DO2_B0(0) + 0.521455851089587*DO2_B0(1) + 0.113446470384241*DO2_B0(-2) -
+            0.00412637789557492*DO2_B0(3) - 0.0367146847001261*DO2_B0(2) -
+            0.791245592765872*DO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DO_dx = (0.197184333887745*DO_B0(0) + 0.521455851089587*DO_B0(1) + 0.113446470384241*DO_B0(-2) -
+            0.00412637789557492*DO_B0(3) - 0.0367146847001261*DO_B0(2) - 0.791245592765872*DO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XN2_dx = (0.197184333887745*XN2_B0(0) + 0.521455851089587*XN2_B0(1) + 0.113446470384241*XN2_B0(-2) -
+            0.00412637789557492*XN2_B0(3) - 0.0367146847001261*XN2_B0(2) -
+            0.791245592765872*XN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XNO_dx = (0.197184333887745*XNO_B0(0) + 0.521455851089587*XNO_B0(1) + 0.113446470384241*XNO_B0(-2) -
+            0.00412637789557492*XNO_B0(3) - 0.0367146847001261*XNO_B0(2) -
+            0.791245592765872*XNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XN_dx = (0.197184333887745*XN_B0(0) + 0.521455851089587*XN_B0(1) + 0.113446470384241*XN_B0(-2) -
+            0.00412637789557492*XN_B0(3) - 0.0367146847001261*XN_B0(2) - 0.791245592765872*XN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XO2_dx = (0.197184333887745*XO2_B0(0) + 0.521455851089587*XO2_B0(1) + 0.113446470384241*XO2_B0(-2) -
+            0.00412637789557492*XO2_B0(3) - 0.0367146847001261*XO2_B0(2) -
+            0.791245592765872*XO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XO_dx = (0.197184333887745*XO_B0(0) + 0.521455851089587*XO_B0(1) + 0.113446470384241*XO_B0(-2) -
+            0.00412637789557492*XO_B0(3) - 0.0367146847001261*XO_B0(2) - 0.791245592765872*XO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_evN2_dx = (0.197184333887745*evN2_B0(0) + 0.521455851089587*evN2_B0(1) + 0.113446470384241*evN2_B0(-2) -
+            0.00412637789557492*evN2_B0(3) - 0.0367146847001261*evN2_B0(2) -
+            0.791245592765872*evN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_evNO_dx = (0.197184333887745*evNO_B0(0) + 0.521455851089587*evNO_B0(1) + 0.113446470384241*evNO_B0(-2) -
+            0.00412637789557492*evNO_B0(3) - 0.0367146847001261*evNO_B0(2) -
+            0.791245592765872*evNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_evO2_dx = (0.197184333887745*evO2_B0(0) + 0.521455851089587*evO2_B0(1) + 0.113446470384241*evO2_B0(-2) -
+            0.00412637789557492*evO2_B0(3) - 0.0367146847001261*evO2_B0(2) -
+            0.791245592765872*evO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_p_dx = (0.197184333887745*p_B0(0) + 0.521455851089587*p_B0(1) + 0.113446470384241*p_B0(-2) -
+            0.00412637789557492*p_B0(3) - 0.0367146847001261*p_B0(2) - 0.791245592765872*p_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_pu0_dx = (0.197184333887745*p_B0(0)*u0_B0(0) + 0.521455851089587*p_B0(1)*u0_B0(1) +
+            0.113446470384241*p_B0(-2)*u0_B0(-2) - 0.00412637789557492*p_B0(3)*u0_B0(3) -
+            0.0367146847001261*p_B0(2)*u0_B0(2) - 0.791245592765872*p_B0(-1)*u0_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoE_dx = (0.197184333887745*rhoE_B0(0) + 0.521455851089587*rhoE_B0(1) + 0.113446470384241*rhoE_B0(-2) -
+            0.00412637789557492*rhoE_B0(3) - 0.0367146847001261*rhoE_B0(2) -
+            0.791245592765872*rhoE_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoEu0_dx = (0.197184333887745*u0_B0(0)*rhoE_B0(0) + 0.521455851089587*u0_B0(1)*rhoE_B0(1) +
+            0.113446470384241*u0_B0(-2)*rhoE_B0(-2) - 0.00412637789557492*u0_B0(3)*rhoE_B0(3) -
+            0.0367146847001261*u0_B0(2)*rhoE_B0(2) - 0.791245592765872*u0_B0(-1)*rhoE_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoN2_dx = (0.197184333887745*rhoN2_B0(0) + 0.521455851089587*rhoN2_B0(1) + 0.113446470384241*rhoN2_B0(-2) -
+            0.00412637789557492*rhoN2_B0(3) - 0.0367146847001261*rhoN2_B0(2) -
+            0.791245592765872*rhoN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoN2u0_dx = (0.197184333887745*u0_B0(0)*rhoN2_B0(0) + 0.521455851089587*u0_B0(1)*rhoN2_B0(1) +
+            0.113446470384241*u0_B0(-2)*rhoN2_B0(-2) - 0.00412637789557492*u0_B0(3)*rhoN2_B0(3) -
+            0.0367146847001261*u0_B0(2)*rhoN2_B0(2) - 0.791245592765872*u0_B0(-1)*rhoN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoNO_dx = (0.197184333887745*rhoNO_B0(0) + 0.521455851089587*rhoNO_B0(1) + 0.113446470384241*rhoNO_B0(-2) -
+            0.00412637789557492*rhoNO_B0(3) - 0.0367146847001261*rhoNO_B0(2) -
+            0.791245592765872*rhoNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoNOu0_dx = (0.197184333887745*u0_B0(0)*rhoNO_B0(0) + 0.521455851089587*u0_B0(1)*rhoNO_B0(1) +
+            0.113446470384241*u0_B0(-2)*rhoNO_B0(-2) - 0.00412637789557492*u0_B0(3)*rhoNO_B0(3) -
+            0.0367146847001261*u0_B0(2)*rhoNO_B0(2) - 0.791245592765872*u0_B0(-1)*rhoNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoN_dx = (0.197184333887745*rhoN_B0(0) + 0.521455851089587*rhoN_B0(1) + 0.113446470384241*rhoN_B0(-2) -
+            0.00412637789557492*rhoN_B0(3) - 0.0367146847001261*rhoN_B0(2) -
+            0.791245592765872*rhoN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoNu0_dx = (0.197184333887745*u0_B0(0)*rhoN_B0(0) + 0.521455851089587*u0_B0(1)*rhoN_B0(1) +
+            0.113446470384241*u0_B0(-2)*rhoN_B0(-2) - 0.00412637789557492*u0_B0(3)*rhoN_B0(3) -
+            0.0367146847001261*u0_B0(2)*rhoN_B0(2) - 0.791245592765872*u0_B0(-1)*rhoN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoO2_dx = (0.197184333887745*rhoO2_B0(0) + 0.521455851089587*rhoO2_B0(1) + 0.113446470384241*rhoO2_B0(-2) -
+            0.00412637789557492*rhoO2_B0(3) - 0.0367146847001261*rhoO2_B0(2) -
+            0.791245592765872*rhoO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoO2u0_dx = (0.197184333887745*u0_B0(0)*rhoO2_B0(0) + 0.521455851089587*u0_B0(1)*rhoO2_B0(1) +
+            0.113446470384241*u0_B0(-2)*rhoO2_B0(-2) - 0.00412637789557492*u0_B0(3)*rhoO2_B0(3) -
+            0.0367146847001261*u0_B0(2)*rhoO2_B0(2) - 0.791245592765872*u0_B0(-1)*rhoO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoO_dx = (0.197184333887745*rhoO_B0(0) + 0.521455851089587*rhoO_B0(1) + 0.113446470384241*rhoO_B0(-2) -
+            0.00412637789557492*rhoO_B0(3) - 0.0367146847001261*rhoO_B0(2) -
+            0.791245592765872*rhoO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoOu0_dx = (0.197184333887745*u0_B0(0)*rhoO_B0(0) + 0.521455851089587*u0_B0(1)*rhoO_B0(1) +
+            0.113446470384241*u0_B0(-2)*rhoO_B0(-2) - 0.00412637789557492*u0_B0(3)*rhoO_B0(3) -
+            0.0367146847001261*u0_B0(2)*rhoO_B0(2) - 0.791245592765872*u0_B0(-1)*rhoO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoev_dx = (0.197184333887745*rhoev_B0(0) + 0.521455851089587*rhoev_B0(1) + 0.113446470384241*rhoev_B0(-2) -
+            0.00412637789557492*rhoev_B0(3) - 0.0367146847001261*rhoev_B0(2) -
+            0.791245592765872*rhoev_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoevu0_dx = (0.197184333887745*u0_B0(0)*rhoev_B0(0) + 0.521455851089587*u0_B0(1)*rhoev_B0(1) +
+            0.113446470384241*u0_B0(-2)*rhoev_B0(-2) - 0.00412637789557492*u0_B0(3)*rhoev_B0(3) -
+            0.0367146847001261*u0_B0(2)*rhoev_B0(2) - 0.791245592765872*u0_B0(-1)*rhoev_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhou0_dx = (0.197184333887745*rhou0_B0(0) + 0.521455851089587*rhou0_B0(1) + 0.113446470384241*rhou0_B0(-2) -
+            0.00412637789557492*rhou0_B0(3) - 0.0367146847001261*rhou0_B0(2) -
+            0.791245592765872*rhou0_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhou0u0_dx = (0.197184333887745*u0_B0(0)*rhou0_B0(0) + 0.521455851089587*u0_B0(1)*rhou0_B0(1) +
+            0.113446470384241*u0_B0(-2)*rhou0_B0(-2) - 0.00412637789557492*u0_B0(3)*rhou0_B0(3) -
+            0.0367146847001261*u0_B0(2)*rhou0_B0(2) - 0.791245592765872*u0_B0(-1)*rhou0_B0(-1))*invDelta0block0_sycl[0];
+
+   }
+
+   else if (idx[0] == 3){
+
+       d1_DN2_dx = (0.0451033223343881*DN2_B0(0) + 0.652141084861241*DN2_B0(1) + 0.121937153224065*DN2_B0(-2) -
+            0.00932597985049999*DN2_B0(-3) - 0.727822147724592*DN2_B0(-1) -
+            0.082033432844602*DN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DNO_dx = (0.0451033223343881*DNO_B0(0) + 0.652141084861241*DNO_B0(1) + 0.121937153224065*DNO_B0(-2) -
+            0.00932597985049999*DNO_B0(-3) - 0.727822147724592*DNO_B0(-1) -
+            0.082033432844602*DNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DN_dx = (0.0451033223343881*DN_B0(0) + 0.652141084861241*DN_B0(1) + 0.121937153224065*DN_B0(-2) -
+            0.00932597985049999*DN_B0(-3) - 0.727822147724592*DN_B0(-1) - 0.082033432844602*DN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DO2_dx = (0.0451033223343881*DO2_B0(0) + 0.652141084861241*DO2_B0(1) + 0.121937153224065*DO2_B0(-2) -
+            0.00932597985049999*DO2_B0(-3) - 0.727822147724592*DO2_B0(-1) -
+            0.082033432844602*DO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DO_dx = (0.0451033223343881*DO_B0(0) + 0.652141084861241*DO_B0(1) + 0.121937153224065*DO_B0(-2) -
+            0.00932597985049999*DO_B0(-3) - 0.727822147724592*DO_B0(-1) - 0.082033432844602*DO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XN2_dx = (0.0451033223343881*XN2_B0(0) + 0.652141084861241*XN2_B0(1) + 0.121937153224065*XN2_B0(-2) -
+            0.00932597985049999*XN2_B0(-3) - 0.727822147724592*XN2_B0(-1) -
+            0.082033432844602*XN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XNO_dx = (0.0451033223343881*XNO_B0(0) + 0.652141084861241*XNO_B0(1) + 0.121937153224065*XNO_B0(-2) -
+            0.00932597985049999*XNO_B0(-3) - 0.727822147724592*XNO_B0(-1) -
+            0.082033432844602*XNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XN_dx = (0.0451033223343881*XN_B0(0) + 0.652141084861241*XN_B0(1) + 0.121937153224065*XN_B0(-2) -
+            0.00932597985049999*XN_B0(-3) - 0.727822147724592*XN_B0(-1) - 0.082033432844602*XN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XO2_dx = (0.0451033223343881*XO2_B0(0) + 0.652141084861241*XO2_B0(1) + 0.121937153224065*XO2_B0(-2) -
+            0.00932597985049999*XO2_B0(-3) - 0.727822147724592*XO2_B0(-1) -
+            0.082033432844602*XO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XO_dx = (0.0451033223343881*XO_B0(0) + 0.652141084861241*XO_B0(1) + 0.121937153224065*XO_B0(-2) -
+            0.00932597985049999*XO_B0(-3) - 0.727822147724592*XO_B0(-1) - 0.082033432844602*XO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_evN2_dx = (0.0451033223343881*evN2_B0(0) + 0.652141084861241*evN2_B0(1) + 0.121937153224065*evN2_B0(-2) -
+            0.00932597985049999*evN2_B0(-3) - 0.727822147724592*evN2_B0(-1) -
+            0.082033432844602*evN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_evNO_dx = (0.0451033223343881*evNO_B0(0) + 0.652141084861241*evNO_B0(1) + 0.121937153224065*evNO_B0(-2) -
+            0.00932597985049999*evNO_B0(-3) - 0.727822147724592*evNO_B0(-1) -
+            0.082033432844602*evNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_evO2_dx = (0.0451033223343881*evO2_B0(0) + 0.652141084861241*evO2_B0(1) + 0.121937153224065*evO2_B0(-2) -
+            0.00932597985049999*evO2_B0(-3) - 0.727822147724592*evO2_B0(-1) -
+            0.082033432844602*evO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_p_dx = (0.0451033223343881*p_B0(0) + 0.652141084861241*p_B0(1) + 0.121937153224065*p_B0(-2) -
+            0.00932597985049999*p_B0(-3) - 0.727822147724592*p_B0(-1) - 0.082033432844602*p_B0(2))*invDelta0block0_sycl[0];
+
+       d1_pu0_dx = (0.0451033223343881*p_B0(0)*u0_B0(0) + 0.652141084861241*p_B0(1)*u0_B0(1) +
+            0.121937153224065*p_B0(-2)*u0_B0(-2) - 0.00932597985049999*p_B0(-3)*u0_B0(-3) -
+            0.727822147724592*p_B0(-1)*u0_B0(-1) - 0.082033432844602*p_B0(2)*u0_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoE_dx = (0.0451033223343881*rhoE_B0(0) + 0.652141084861241*rhoE_B0(1) + 0.121937153224065*rhoE_B0(-2) -
+            0.00932597985049999*rhoE_B0(-3) - 0.727822147724592*rhoE_B0(-1) -
+            0.082033432844602*rhoE_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoEu0_dx = (0.0451033223343881*u0_B0(0)*rhoE_B0(0) + 0.652141084861241*u0_B0(1)*rhoE_B0(1) +
+            0.121937153224065*u0_B0(-2)*rhoE_B0(-2) - 0.00932597985049999*u0_B0(-3)*rhoE_B0(-3) -
+            0.727822147724592*u0_B0(-1)*rhoE_B0(-1) - 0.082033432844602*u0_B0(2)*rhoE_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoN2_dx = (0.0451033223343881*rhoN2_B0(0) + 0.652141084861241*rhoN2_B0(1) + 0.121937153224065*rhoN2_B0(-2) -
+            0.00932597985049999*rhoN2_B0(-3) - 0.727822147724592*rhoN2_B0(-1) -
+            0.082033432844602*rhoN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoN2u0_dx = (0.0451033223343881*u0_B0(0)*rhoN2_B0(0) + 0.652141084861241*u0_B0(1)*rhoN2_B0(1) +
+            0.121937153224065*u0_B0(-2)*rhoN2_B0(-2) - 0.00932597985049999*u0_B0(-3)*rhoN2_B0(-3) -
+            0.727822147724592*u0_B0(-1)*rhoN2_B0(-1) - 0.082033432844602*u0_B0(2)*rhoN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoNO_dx = (0.0451033223343881*rhoNO_B0(0) + 0.652141084861241*rhoNO_B0(1) + 0.121937153224065*rhoNO_B0(-2) -
+            0.00932597985049999*rhoNO_B0(-3) - 0.727822147724592*rhoNO_B0(-1) -
+            0.082033432844602*rhoNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoNOu0_dx = (0.0451033223343881*u0_B0(0)*rhoNO_B0(0) + 0.652141084861241*u0_B0(1)*rhoNO_B0(1) +
+            0.121937153224065*u0_B0(-2)*rhoNO_B0(-2) - 0.00932597985049999*u0_B0(-3)*rhoNO_B0(-3) -
+            0.727822147724592*u0_B0(-1)*rhoNO_B0(-1) - 0.082033432844602*u0_B0(2)*rhoNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoN_dx = (0.0451033223343881*rhoN_B0(0) + 0.652141084861241*rhoN_B0(1) + 0.121937153224065*rhoN_B0(-2) -
+            0.00932597985049999*rhoN_B0(-3) - 0.727822147724592*rhoN_B0(-1) -
+            0.082033432844602*rhoN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoNu0_dx = (0.0451033223343881*u0_B0(0)*rhoN_B0(0) + 0.652141084861241*u0_B0(1)*rhoN_B0(1) +
+            0.121937153224065*u0_B0(-2)*rhoN_B0(-2) - 0.00932597985049999*u0_B0(-3)*rhoN_B0(-3) -
+            0.727822147724592*u0_B0(-1)*rhoN_B0(-1) - 0.082033432844602*u0_B0(2)*rhoN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoO2_dx = (0.0451033223343881*rhoO2_B0(0) + 0.652141084861241*rhoO2_B0(1) + 0.121937153224065*rhoO2_B0(-2) -
+            0.00932597985049999*rhoO2_B0(-3) - 0.727822147724592*rhoO2_B0(-1) -
+            0.082033432844602*rhoO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoO2u0_dx = (0.0451033223343881*u0_B0(0)*rhoO2_B0(0) + 0.652141084861241*u0_B0(1)*rhoO2_B0(1) +
+            0.121937153224065*u0_B0(-2)*rhoO2_B0(-2) - 0.00932597985049999*u0_B0(-3)*rhoO2_B0(-3) -
+            0.727822147724592*u0_B0(-1)*rhoO2_B0(-1) - 0.082033432844602*u0_B0(2)*rhoO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoO_dx = (0.0451033223343881*rhoO_B0(0) + 0.652141084861241*rhoO_B0(1) + 0.121937153224065*rhoO_B0(-2) -
+            0.00932597985049999*rhoO_B0(-3) - 0.727822147724592*rhoO_B0(-1) -
+            0.082033432844602*rhoO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoOu0_dx = (0.0451033223343881*u0_B0(0)*rhoO_B0(0) + 0.652141084861241*u0_B0(1)*rhoO_B0(1) +
+            0.121937153224065*u0_B0(-2)*rhoO_B0(-2) - 0.00932597985049999*u0_B0(-3)*rhoO_B0(-3) -
+            0.727822147724592*u0_B0(-1)*rhoO_B0(-1) - 0.082033432844602*u0_B0(2)*rhoO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoev_dx = (0.0451033223343881*rhoev_B0(0) + 0.652141084861241*rhoev_B0(1) + 0.121937153224065*rhoev_B0(-2) -
+            0.00932597985049999*rhoev_B0(-3) - 0.727822147724592*rhoev_B0(-1) -
+            0.082033432844602*rhoev_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoevu0_dx = (0.0451033223343881*u0_B0(0)*rhoev_B0(0) + 0.652141084861241*u0_B0(1)*rhoev_B0(1) +
+            0.121937153224065*u0_B0(-2)*rhoev_B0(-2) - 0.00932597985049999*u0_B0(-3)*rhoev_B0(-3) -
+            0.727822147724592*u0_B0(-1)*rhoev_B0(-1) - 0.082033432844602*u0_B0(2)*rhoev_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhou0_dx = (0.0451033223343881*rhou0_B0(0) + 0.652141084861241*rhou0_B0(1) + 0.121937153224065*rhou0_B0(-2) -
+            0.00932597985049999*rhou0_B0(-3) - 0.727822147724592*rhou0_B0(-1) -
+            0.082033432844602*rhou0_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhou0u0_dx = (0.0451033223343881*u0_B0(0)*rhou0_B0(0) + 0.652141084861241*u0_B0(1)*rhou0_B0(1) +
+            0.121937153224065*u0_B0(-2)*rhou0_B0(-2) - 0.00932597985049999*u0_B0(-3)*rhou0_B0(-3) -
+            0.727822147724592*u0_B0(-1)*rhou0_B0(-1) - 0.082033432844602*u0_B0(2)*rhou0_B0(2))*invDelta0block0_sycl[0];
+
+   }
+
+   else if (idx[0] == -1 + block0np0_sycl[0]){
+
+       d1_DN2_dx = (1.5*DN2_B0(-2) + 1.83333333333333*DN2_B0(0) - 3.0*DN2_B0(-1) -
+            0.333333333333333*DN2_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_DNO_dx = (1.5*DNO_B0(-2) + 1.83333333333333*DNO_B0(0) - 3.0*DNO_B0(-1) -
+            0.333333333333333*DNO_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_DN_dx = (1.5*DN_B0(-2) + 1.83333333333333*DN_B0(0) - 3.0*DN_B0(-1) -
+            0.333333333333333*DN_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_DO2_dx = (1.5*DO2_B0(-2) + 1.83333333333333*DO2_B0(0) - 3.0*DO2_B0(-1) -
+            0.333333333333333*DO2_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_DO_dx = (1.5*DO_B0(-2) + 1.83333333333333*DO_B0(0) - 3.0*DO_B0(-1) -
+            0.333333333333333*DO_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_XN2_dx = (1.5*XN2_B0(-2) + 1.83333333333333*XN2_B0(0) - 3.0*XN2_B0(-1) -
+            0.333333333333333*XN2_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_XNO_dx = (1.5*XNO_B0(-2) + 1.83333333333333*XNO_B0(0) - 3.0*XNO_B0(-1) -
+            0.333333333333333*XNO_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_XN_dx = (1.5*XN_B0(-2) + 1.83333333333333*XN_B0(0) - 3.0*XN_B0(-1) -
+            0.333333333333333*XN_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_XO2_dx = (1.5*XO2_B0(-2) + 1.83333333333333*XO2_B0(0) - 3.0*XO2_B0(-1) -
+            0.333333333333333*XO2_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_XO_dx = (1.5*XO_B0(-2) + 1.83333333333333*XO_B0(0) - 3.0*XO_B0(-1) -
+            0.333333333333333*XO_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_evN2_dx = (1.5*evN2_B0(-2) + 1.83333333333333*evN2_B0(0) - 3.0*evN2_B0(-1) -
+            0.333333333333333*evN2_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_evNO_dx = (1.5*evNO_B0(-2) + 1.83333333333333*evNO_B0(0) - 3.0*evNO_B0(-1) -
+            0.333333333333333*evNO_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_evO2_dx = (1.5*evO2_B0(-2) + 1.83333333333333*evO2_B0(0) - 3.0*evO2_B0(-1) -
+            0.333333333333333*evO2_B0(-3))*invDelta0block0_sycl[0];
+
+      d1_p_dx = (1.5*p_B0(-2) + 1.83333333333333*p_B0(0) - 3.0*p_B0(-1) - 0.333333333333333*p_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_pu0_dx = (1.5*p_B0(-2)*u0_B0(-2) + 1.83333333333333*p_B0(0)*u0_B0(0) - 3.0*p_B0(-1)*u0_B0(-1) -
+            0.333333333333333*p_B0(-3)*u0_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoE_dx = (1.5*rhoE_B0(-2) + 1.83333333333333*rhoE_B0(0) - 3.0*rhoE_B0(-1) -
+            0.333333333333333*rhoE_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoEu0_dx = (1.5*u0_B0(-2)*rhoE_B0(-2) + 1.83333333333333*u0_B0(0)*rhoE_B0(0) - 3.0*u0_B0(-1)*rhoE_B0(-1) -
+            0.333333333333333*u0_B0(-3)*rhoE_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoN2_dx = (1.5*rhoN2_B0(-2) + 1.83333333333333*rhoN2_B0(0) - 3.0*rhoN2_B0(-1) -
+            0.333333333333333*rhoN2_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoN2u0_dx = (1.5*u0_B0(-2)*rhoN2_B0(-2) + 1.83333333333333*u0_B0(0)*rhoN2_B0(0) - 3.0*u0_B0(-1)*rhoN2_B0(-1)
+            - 0.333333333333333*u0_B0(-3)*rhoN2_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoNO_dx = (1.5*rhoNO_B0(-2) + 1.83333333333333*rhoNO_B0(0) - 3.0*rhoNO_B0(-1) -
+            0.333333333333333*rhoNO_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoNOu0_dx = (1.5*u0_B0(-2)*rhoNO_B0(-2) + 1.83333333333333*u0_B0(0)*rhoNO_B0(0) - 3.0*u0_B0(-1)*rhoNO_B0(-1)
+            - 0.333333333333333*u0_B0(-3)*rhoNO_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoN_dx = (1.5*rhoN_B0(-2) + 1.83333333333333*rhoN_B0(0) - 3.0*rhoN_B0(-1) -
+            0.333333333333333*rhoN_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoNu0_dx = (1.5*u0_B0(-2)*rhoN_B0(-2) + 1.83333333333333*u0_B0(0)*rhoN_B0(0) - 3.0*u0_B0(-1)*rhoN_B0(-1) -
+            0.333333333333333*u0_B0(-3)*rhoN_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoO2_dx = (1.5*rhoO2_B0(-2) + 1.83333333333333*rhoO2_B0(0) - 3.0*rhoO2_B0(-1) -
+            0.333333333333333*rhoO2_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoO2u0_dx = (1.5*u0_B0(-2)*rhoO2_B0(-2) + 1.83333333333333*u0_B0(0)*rhoO2_B0(0) - 3.0*u0_B0(-1)*rhoO2_B0(-1)
+            - 0.333333333333333*u0_B0(-3)*rhoO2_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoO_dx = (1.5*rhoO_B0(-2) + 1.83333333333333*rhoO_B0(0) - 3.0*rhoO_B0(-1) -
+            0.333333333333333*rhoO_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoOu0_dx = (1.5*u0_B0(-2)*rhoO_B0(-2) + 1.83333333333333*u0_B0(0)*rhoO_B0(0) - 3.0*u0_B0(-1)*rhoO_B0(-1) -
+            0.333333333333333*u0_B0(-3)*rhoO_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoev_dx = (1.5*rhoev_B0(-2) + 1.83333333333333*rhoev_B0(0) - 3.0*rhoev_B0(-1) -
+            0.333333333333333*rhoev_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhoevu0_dx = (1.5*u0_B0(-2)*rhoev_B0(-2) + 1.83333333333333*u0_B0(0)*rhoev_B0(0) - 3.0*u0_B0(-1)*rhoev_B0(-1)
+            - 0.333333333333333*u0_B0(-3)*rhoev_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhou0_dx = (1.5*rhou0_B0(-2) + 1.83333333333333*rhou0_B0(0) - 3.0*rhou0_B0(-1) -
+            0.333333333333333*rhou0_B0(-3))*invDelta0block0_sycl[0];
+
+       d1_rhou0u0_dx = (1.5*u0_B0(-2)*rhou0_B0(-2) + 1.83333333333333*u0_B0(0)*rhou0_B0(0) - 3.0*u0_B0(-1)*rhou0_B0(-1)
+            - 0.333333333333333*u0_B0(-3)*rhou0_B0(-3))*invDelta0block0_sycl[0];
+
+   }
+
+   else if (idx[0] == -2 + block0np0_sycl[0]){
+
+       d1_DN2_dx = (0.322484932882161*DN2_B0(0) + 0.0658051057710389*DN2_B0(-3) + 0.376283677513354*DN2_B0(1) -
+            0.0394168524399447*DN2_B0(-2) - 0.00571369039775442*DN2_B0(-4) -
+            0.719443173328855*DN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DNO_dx = (0.322484932882161*DNO_B0(0) + 0.0658051057710389*DNO_B0(-3) + 0.376283677513354*DNO_B0(1) -
+            0.0394168524399447*DNO_B0(-2) - 0.00571369039775442*DNO_B0(-4) -
+            0.719443173328855*DNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DN_dx = (0.322484932882161*DN_B0(0) + 0.0658051057710389*DN_B0(-3) + 0.376283677513354*DN_B0(1) -
+            0.0394168524399447*DN_B0(-2) - 0.00571369039775442*DN_B0(-4) -
+            0.719443173328855*DN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DO2_dx = (0.322484932882161*DO2_B0(0) + 0.0658051057710389*DO2_B0(-3) + 0.376283677513354*DO2_B0(1) -
+            0.0394168524399447*DO2_B0(-2) - 0.00571369039775442*DO2_B0(-4) -
+            0.719443173328855*DO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_DO_dx = (0.322484932882161*DO_B0(0) + 0.0658051057710389*DO_B0(-3) + 0.376283677513354*DO_B0(1) -
+            0.0394168524399447*DO_B0(-2) - 0.00571369039775442*DO_B0(-4) -
+            0.719443173328855*DO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XN2_dx = (0.322484932882161*XN2_B0(0) + 0.0658051057710389*XN2_B0(-3) + 0.376283677513354*XN2_B0(1) -
+            0.0394168524399447*XN2_B0(-2) - 0.00571369039775442*XN2_B0(-4) -
+            0.719443173328855*XN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XNO_dx = (0.322484932882161*XNO_B0(0) + 0.0658051057710389*XNO_B0(-3) + 0.376283677513354*XNO_B0(1) -
+            0.0394168524399447*XNO_B0(-2) - 0.00571369039775442*XNO_B0(-4) -
+            0.719443173328855*XNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XN_dx = (0.322484932882161*XN_B0(0) + 0.0658051057710389*XN_B0(-3) + 0.376283677513354*XN_B0(1) -
+            0.0394168524399447*XN_B0(-2) - 0.00571369039775442*XN_B0(-4) -
+            0.719443173328855*XN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XO2_dx = (0.322484932882161*XO2_B0(0) + 0.0658051057710389*XO2_B0(-3) + 0.376283677513354*XO2_B0(1) -
+            0.0394168524399447*XO2_B0(-2) - 0.00571369039775442*XO2_B0(-4) -
+            0.719443173328855*XO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_XO_dx = (0.322484932882161*XO_B0(0) + 0.0658051057710389*XO_B0(-3) + 0.376283677513354*XO_B0(1) -
+            0.0394168524399447*XO_B0(-2) - 0.00571369039775442*XO_B0(-4) -
+            0.719443173328855*XO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_evN2_dx = (0.322484932882161*evN2_B0(0) + 0.0658051057710389*evN2_B0(-3) + 0.376283677513354*evN2_B0(1) -
+            0.0394168524399447*evN2_B0(-2) - 0.00571369039775442*evN2_B0(-4) -
+            0.719443173328855*evN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_evNO_dx = (0.322484932882161*evNO_B0(0) + 0.0658051057710389*evNO_B0(-3) + 0.376283677513354*evNO_B0(1) -
+            0.0394168524399447*evNO_B0(-2) - 0.00571369039775442*evNO_B0(-4) -
+            0.719443173328855*evNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_evO2_dx = (0.322484932882161*evO2_B0(0) + 0.0658051057710389*evO2_B0(-3) + 0.376283677513354*evO2_B0(1) -
+            0.0394168524399447*evO2_B0(-2) - 0.00571369039775442*evO2_B0(-4) -
+            0.719443173328855*evO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_p_dx = (0.322484932882161*p_B0(0) + 0.0658051057710389*p_B0(-3) + 0.376283677513354*p_B0(1) -
+            0.0394168524399447*p_B0(-2) - 0.00571369039775442*p_B0(-4) - 0.719443173328855*p_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_pu0_dx = (0.322484932882161*p_B0(0)*u0_B0(0) + 0.0658051057710389*p_B0(-3)*u0_B0(-3) +
+            0.376283677513354*p_B0(1)*u0_B0(1) - 0.0394168524399447*p_B0(-2)*u0_B0(-2) -
+            0.00571369039775442*p_B0(-4)*u0_B0(-4) - 0.719443173328855*p_B0(-1)*u0_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoE_dx = (0.322484932882161*rhoE_B0(0) + 0.0658051057710389*rhoE_B0(-3) + 0.376283677513354*rhoE_B0(1) -
+            0.0394168524399447*rhoE_B0(-2) - 0.00571369039775442*rhoE_B0(-4) -
+            0.719443173328855*rhoE_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoEu0_dx = (0.322484932882161*u0_B0(0)*rhoE_B0(0) + 0.0658051057710389*u0_B0(-3)*rhoE_B0(-3) +
+            0.376283677513354*u0_B0(1)*rhoE_B0(1) - 0.0394168524399447*u0_B0(-2)*rhoE_B0(-2) -
+            0.00571369039775442*u0_B0(-4)*rhoE_B0(-4) - 0.719443173328855*u0_B0(-1)*rhoE_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoN2_dx = (0.322484932882161*rhoN2_B0(0) + 0.0658051057710389*rhoN2_B0(-3) + 0.376283677513354*rhoN2_B0(1) -
+            0.0394168524399447*rhoN2_B0(-2) - 0.00571369039775442*rhoN2_B0(-4) -
+            0.719443173328855*rhoN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoN2u0_dx = (0.322484932882161*u0_B0(0)*rhoN2_B0(0) + 0.0658051057710389*u0_B0(-3)*rhoN2_B0(-3) +
+            0.376283677513354*u0_B0(1)*rhoN2_B0(1) - 0.0394168524399447*u0_B0(-2)*rhoN2_B0(-2) -
+            0.00571369039775442*u0_B0(-4)*rhoN2_B0(-4) - 0.719443173328855*u0_B0(-1)*rhoN2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoNO_dx = (0.322484932882161*rhoNO_B0(0) + 0.0658051057710389*rhoNO_B0(-3) + 0.376283677513354*rhoNO_B0(1) -
+            0.0394168524399447*rhoNO_B0(-2) - 0.00571369039775442*rhoNO_B0(-4) -
+            0.719443173328855*rhoNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoNOu0_dx = (0.322484932882161*u0_B0(0)*rhoNO_B0(0) + 0.0658051057710389*u0_B0(-3)*rhoNO_B0(-3) +
+            0.376283677513354*u0_B0(1)*rhoNO_B0(1) - 0.0394168524399447*u0_B0(-2)*rhoNO_B0(-2) -
+            0.00571369039775442*u0_B0(-4)*rhoNO_B0(-4) - 0.719443173328855*u0_B0(-1)*rhoNO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoN_dx = (0.322484932882161*rhoN_B0(0) + 0.0658051057710389*rhoN_B0(-3) + 0.376283677513354*rhoN_B0(1) -
+            0.0394168524399447*rhoN_B0(-2) - 0.00571369039775442*rhoN_B0(-4) -
+            0.719443173328855*rhoN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoNu0_dx = (0.322484932882161*u0_B0(0)*rhoN_B0(0) + 0.0658051057710389*u0_B0(-3)*rhoN_B0(-3) +
+            0.376283677513354*u0_B0(1)*rhoN_B0(1) - 0.0394168524399447*u0_B0(-2)*rhoN_B0(-2) -
+            0.00571369039775442*u0_B0(-4)*rhoN_B0(-4) - 0.719443173328855*u0_B0(-1)*rhoN_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoO2_dx = (0.322484932882161*rhoO2_B0(0) + 0.0658051057710389*rhoO2_B0(-3) + 0.376283677513354*rhoO2_B0(1) -
+            0.0394168524399447*rhoO2_B0(-2) - 0.00571369039775442*rhoO2_B0(-4) -
+            0.719443173328855*rhoO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoO2u0_dx = (0.322484932882161*u0_B0(0)*rhoO2_B0(0) + 0.0658051057710389*u0_B0(-3)*rhoO2_B0(-3) +
+            0.376283677513354*u0_B0(1)*rhoO2_B0(1) - 0.0394168524399447*u0_B0(-2)*rhoO2_B0(-2) -
+            0.00571369039775442*u0_B0(-4)*rhoO2_B0(-4) - 0.719443173328855*u0_B0(-1)*rhoO2_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoO_dx = (0.322484932882161*rhoO_B0(0) + 0.0658051057710389*rhoO_B0(-3) + 0.376283677513354*rhoO_B0(1) -
+            0.0394168524399447*rhoO_B0(-2) - 0.00571369039775442*rhoO_B0(-4) -
+            0.719443173328855*rhoO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoOu0_dx = (0.322484932882161*u0_B0(0)*rhoO_B0(0) + 0.0658051057710389*u0_B0(-3)*rhoO_B0(-3) +
+            0.376283677513354*u0_B0(1)*rhoO_B0(1) - 0.0394168524399447*u0_B0(-2)*rhoO_B0(-2) -
+            0.00571369039775442*u0_B0(-4)*rhoO_B0(-4) - 0.719443173328855*u0_B0(-1)*rhoO_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoev_dx = (0.322484932882161*rhoev_B0(0) + 0.0658051057710389*rhoev_B0(-3) + 0.376283677513354*rhoev_B0(1) -
+            0.0394168524399447*rhoev_B0(-2) - 0.00571369039775442*rhoev_B0(-4) -
+            0.719443173328855*rhoev_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhoevu0_dx = (0.322484932882161*u0_B0(0)*rhoev_B0(0) + 0.0658051057710389*u0_B0(-3)*rhoev_B0(-3) +
+            0.376283677513354*u0_B0(1)*rhoev_B0(1) - 0.0394168524399447*u0_B0(-2)*rhoev_B0(-2) -
+            0.00571369039775442*u0_B0(-4)*rhoev_B0(-4) - 0.719443173328855*u0_B0(-1)*rhoev_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhou0_dx = (0.322484932882161*rhou0_B0(0) + 0.0658051057710389*rhou0_B0(-3) + 0.376283677513354*rhou0_B0(1) -
+            0.0394168524399447*rhou0_B0(-2) - 0.00571369039775442*rhou0_B0(-4) -
+            0.719443173328855*rhou0_B0(-1))*invDelta0block0_sycl[0];
+
+       d1_rhou0u0_dx = (0.322484932882161*u0_B0(0)*rhou0_B0(0) + 0.0658051057710389*u0_B0(-3)*rhou0_B0(-3) +
+            0.376283677513354*u0_B0(1)*rhou0_B0(1) - 0.0394168524399447*u0_B0(-2)*rhou0_B0(-2) -
+            0.00571369039775442*u0_B0(-4)*rhou0_B0(-4) - 0.719443173328855*u0_B0(-1)*rhou0_B0(-1))*invDelta0block0_sycl[0];
+
+   }
+
+   else if (idx[0] == -3 + block0np0_sycl[0]){
+
+       d1_DN2_dx = (0.00412637789557492*DN2_B0(-3) + 0.0367146847001261*DN2_B0(-2) + 0.791245592765872*DN2_B0(1) -
+            0.197184333887745*DN2_B0(0) - 0.521455851089587*DN2_B0(-1) - 0.113446470384241*DN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DNO_dx = (0.00412637789557492*DNO_B0(-3) + 0.0367146847001261*DNO_B0(-2) + 0.791245592765872*DNO_B0(1) -
+            0.197184333887745*DNO_B0(0) - 0.521455851089587*DNO_B0(-1) - 0.113446470384241*DNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DN_dx = (0.00412637789557492*DN_B0(-3) + 0.0367146847001261*DN_B0(-2) + 0.791245592765872*DN_B0(1) -
+            0.197184333887745*DN_B0(0) - 0.521455851089587*DN_B0(-1) - 0.113446470384241*DN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DO2_dx = (0.00412637789557492*DO2_B0(-3) + 0.0367146847001261*DO2_B0(-2) + 0.791245592765872*DO2_B0(1) -
+            0.197184333887745*DO2_B0(0) - 0.521455851089587*DO2_B0(-1) - 0.113446470384241*DO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DO_dx = (0.00412637789557492*DO_B0(-3) + 0.0367146847001261*DO_B0(-2) + 0.791245592765872*DO_B0(1) -
+            0.197184333887745*DO_B0(0) - 0.521455851089587*DO_B0(-1) - 0.113446470384241*DO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XN2_dx = (0.00412637789557492*XN2_B0(-3) + 0.0367146847001261*XN2_B0(-2) + 0.791245592765872*XN2_B0(1) -
+            0.197184333887745*XN2_B0(0) - 0.521455851089587*XN2_B0(-1) - 0.113446470384241*XN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XNO_dx = (0.00412637789557492*XNO_B0(-3) + 0.0367146847001261*XNO_B0(-2) + 0.791245592765872*XNO_B0(1) -
+            0.197184333887745*XNO_B0(0) - 0.521455851089587*XNO_B0(-1) - 0.113446470384241*XNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XN_dx = (0.00412637789557492*XN_B0(-3) + 0.0367146847001261*XN_B0(-2) + 0.791245592765872*XN_B0(1) -
+            0.197184333887745*XN_B0(0) - 0.521455851089587*XN_B0(-1) - 0.113446470384241*XN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XO2_dx = (0.00412637789557492*XO2_B0(-3) + 0.0367146847001261*XO2_B0(-2) + 0.791245592765872*XO2_B0(1) -
+            0.197184333887745*XO2_B0(0) - 0.521455851089587*XO2_B0(-1) - 0.113446470384241*XO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XO_dx = (0.00412637789557492*XO_B0(-3) + 0.0367146847001261*XO_B0(-2) + 0.791245592765872*XO_B0(1) -
+            0.197184333887745*XO_B0(0) - 0.521455851089587*XO_B0(-1) - 0.113446470384241*XO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_evN2_dx = (0.00412637789557492*evN2_B0(-3) + 0.0367146847001261*evN2_B0(-2) + 0.791245592765872*evN2_B0(1) -
+            0.197184333887745*evN2_B0(0) - 0.521455851089587*evN2_B0(-1) -
+            0.113446470384241*evN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_evNO_dx = (0.00412637789557492*evNO_B0(-3) + 0.0367146847001261*evNO_B0(-2) + 0.791245592765872*evNO_B0(1) -
+            0.197184333887745*evNO_B0(0) - 0.521455851089587*evNO_B0(-1) -
+            0.113446470384241*evNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_evO2_dx = (0.00412637789557492*evO2_B0(-3) + 0.0367146847001261*evO2_B0(-2) + 0.791245592765872*evO2_B0(1) -
+            0.197184333887745*evO2_B0(0) - 0.521455851089587*evO2_B0(-1) -
+            0.113446470384241*evO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_p_dx = (0.00412637789557492*p_B0(-3) + 0.0367146847001261*p_B0(-2) + 0.791245592765872*p_B0(1) -
+            0.197184333887745*p_B0(0) - 0.521455851089587*p_B0(-1) - 0.113446470384241*p_B0(2))*invDelta0block0_sycl[0];
+
+       d1_pu0_dx = (0.00412637789557492*p_B0(-3)*u0_B0(-3) + 0.0367146847001261*p_B0(-2)*u0_B0(-2) +
+            0.791245592765872*p_B0(1)*u0_B0(1) - 0.197184333887745*p_B0(0)*u0_B0(0) -
+            0.521455851089587*p_B0(-1)*u0_B0(-1) - 0.113446470384241*p_B0(2)*u0_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoE_dx = (0.00412637789557492*rhoE_B0(-3) + 0.0367146847001261*rhoE_B0(-2) + 0.791245592765872*rhoE_B0(1) -
+            0.197184333887745*rhoE_B0(0) - 0.521455851089587*rhoE_B0(-1) -
+            0.113446470384241*rhoE_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoEu0_dx = (0.00412637789557492*u0_B0(-3)*rhoE_B0(-3) + 0.0367146847001261*u0_B0(-2)*rhoE_B0(-2) +
+            0.791245592765872*u0_B0(1)*rhoE_B0(1) - 0.197184333887745*u0_B0(0)*rhoE_B0(0) -
+            0.521455851089587*u0_B0(-1)*rhoE_B0(-1) - 0.113446470384241*u0_B0(2)*rhoE_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoN2_dx = (0.00412637789557492*rhoN2_B0(-3) + 0.0367146847001261*rhoN2_B0(-2) + 0.791245592765872*rhoN2_B0(1)
+            - 0.197184333887745*rhoN2_B0(0) - 0.521455851089587*rhoN2_B0(-1) -
+            0.113446470384241*rhoN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoN2u0_dx = (0.00412637789557492*u0_B0(-3)*rhoN2_B0(-3) + 0.0367146847001261*u0_B0(-2)*rhoN2_B0(-2) +
+            0.791245592765872*u0_B0(1)*rhoN2_B0(1) - 0.197184333887745*u0_B0(0)*rhoN2_B0(0) -
+            0.521455851089587*u0_B0(-1)*rhoN2_B0(-1) - 0.113446470384241*u0_B0(2)*rhoN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoNO_dx = (0.00412637789557492*rhoNO_B0(-3) + 0.0367146847001261*rhoNO_B0(-2) + 0.791245592765872*rhoNO_B0(1)
+            - 0.197184333887745*rhoNO_B0(0) - 0.521455851089587*rhoNO_B0(-1) -
+            0.113446470384241*rhoNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoNOu0_dx = (0.00412637789557492*u0_B0(-3)*rhoNO_B0(-3) + 0.0367146847001261*u0_B0(-2)*rhoNO_B0(-2) +
+            0.791245592765872*u0_B0(1)*rhoNO_B0(1) - 0.197184333887745*u0_B0(0)*rhoNO_B0(0) -
+            0.521455851089587*u0_B0(-1)*rhoNO_B0(-1) - 0.113446470384241*u0_B0(2)*rhoNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoN_dx = (0.00412637789557492*rhoN_B0(-3) + 0.0367146847001261*rhoN_B0(-2) + 0.791245592765872*rhoN_B0(1) -
+            0.197184333887745*rhoN_B0(0) - 0.521455851089587*rhoN_B0(-1) -
+            0.113446470384241*rhoN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoNu0_dx = (0.00412637789557492*u0_B0(-3)*rhoN_B0(-3) + 0.0367146847001261*u0_B0(-2)*rhoN_B0(-2) +
+            0.791245592765872*u0_B0(1)*rhoN_B0(1) - 0.197184333887745*u0_B0(0)*rhoN_B0(0) -
+            0.521455851089587*u0_B0(-1)*rhoN_B0(-1) - 0.113446470384241*u0_B0(2)*rhoN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoO2_dx = (0.00412637789557492*rhoO2_B0(-3) + 0.0367146847001261*rhoO2_B0(-2) + 0.791245592765872*rhoO2_B0(1)
+            - 0.197184333887745*rhoO2_B0(0) - 0.521455851089587*rhoO2_B0(-1) -
+            0.113446470384241*rhoO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoO2u0_dx = (0.00412637789557492*u0_B0(-3)*rhoO2_B0(-3) + 0.0367146847001261*u0_B0(-2)*rhoO2_B0(-2) +
+            0.791245592765872*u0_B0(1)*rhoO2_B0(1) - 0.197184333887745*u0_B0(0)*rhoO2_B0(0) -
+            0.521455851089587*u0_B0(-1)*rhoO2_B0(-1) - 0.113446470384241*u0_B0(2)*rhoO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoO_dx = (0.00412637789557492*rhoO_B0(-3) + 0.0367146847001261*rhoO_B0(-2) + 0.791245592765872*rhoO_B0(1) -
+            0.197184333887745*rhoO_B0(0) - 0.521455851089587*rhoO_B0(-1) -
+            0.113446470384241*rhoO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoOu0_dx = (0.00412637789557492*u0_B0(-3)*rhoO_B0(-3) + 0.0367146847001261*u0_B0(-2)*rhoO_B0(-2) +
+            0.791245592765872*u0_B0(1)*rhoO_B0(1) - 0.197184333887745*u0_B0(0)*rhoO_B0(0) -
+            0.521455851089587*u0_B0(-1)*rhoO_B0(-1) - 0.113446470384241*u0_B0(2)*rhoO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoev_dx = (0.00412637789557492*rhoev_B0(-3) + 0.0367146847001261*rhoev_B0(-2) + 0.791245592765872*rhoev_B0(1)
+            - 0.197184333887745*rhoev_B0(0) - 0.521455851089587*rhoev_B0(-1) -
+            0.113446470384241*rhoev_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoevu0_dx = (0.00412637789557492*u0_B0(-3)*rhoev_B0(-3) + 0.0367146847001261*u0_B0(-2)*rhoev_B0(-2) +
+            0.791245592765872*u0_B0(1)*rhoev_B0(1) - 0.197184333887745*u0_B0(0)*rhoev_B0(0) -
+            0.521455851089587*u0_B0(-1)*rhoev_B0(-1) - 0.113446470384241*u0_B0(2)*rhoev_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhou0_dx = (0.00412637789557492*rhou0_B0(-3) + 0.0367146847001261*rhou0_B0(-2) + 0.791245592765872*rhou0_B0(1)
+            - 0.197184333887745*rhou0_B0(0) - 0.521455851089587*rhou0_B0(-1) -
+            0.113446470384241*rhou0_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhou0u0_dx = (0.00412637789557492*u0_B0(-3)*rhou0_B0(-3) + 0.0367146847001261*u0_B0(-2)*rhou0_B0(-2) +
+            0.791245592765872*u0_B0(1)*rhou0_B0(1) - 0.197184333887745*u0_B0(0)*rhou0_B0(0) -
+            0.521455851089587*u0_B0(-1)*rhou0_B0(-1) - 0.113446470384241*u0_B0(2)*rhou0_B0(2))*invDelta0block0_sycl[0];
+
+   }
+
+   else if (idx[0] == -4 + block0np0_sycl[0]){
+
+       d1_DN2_dx = (0.00932597985049999*DN2_B0(3) + 0.727822147724592*DN2_B0(1) + 0.082033432844602*DN2_B0(-2) -
+            0.0451033223343881*DN2_B0(0) - 0.652141084861241*DN2_B0(-1) - 0.121937153224065*DN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DNO_dx = (0.00932597985049999*DNO_B0(3) + 0.727822147724592*DNO_B0(1) + 0.082033432844602*DNO_B0(-2) -
+            0.0451033223343881*DNO_B0(0) - 0.652141084861241*DNO_B0(-1) - 0.121937153224065*DNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DN_dx = (0.00932597985049999*DN_B0(3) + 0.727822147724592*DN_B0(1) + 0.082033432844602*DN_B0(-2) -
+            0.0451033223343881*DN_B0(0) - 0.652141084861241*DN_B0(-1) - 0.121937153224065*DN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DO2_dx = (0.00932597985049999*DO2_B0(3) + 0.727822147724592*DO2_B0(1) + 0.082033432844602*DO2_B0(-2) -
+            0.0451033223343881*DO2_B0(0) - 0.652141084861241*DO2_B0(-1) - 0.121937153224065*DO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_DO_dx = (0.00932597985049999*DO_B0(3) + 0.727822147724592*DO_B0(1) + 0.082033432844602*DO_B0(-2) -
+            0.0451033223343881*DO_B0(0) - 0.652141084861241*DO_B0(-1) - 0.121937153224065*DO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XN2_dx = (0.00932597985049999*XN2_B0(3) + 0.727822147724592*XN2_B0(1) + 0.082033432844602*XN2_B0(-2) -
+            0.0451033223343881*XN2_B0(0) - 0.652141084861241*XN2_B0(-1) - 0.121937153224065*XN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XNO_dx = (0.00932597985049999*XNO_B0(3) + 0.727822147724592*XNO_B0(1) + 0.082033432844602*XNO_B0(-2) -
+            0.0451033223343881*XNO_B0(0) - 0.652141084861241*XNO_B0(-1) - 0.121937153224065*XNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XN_dx = (0.00932597985049999*XN_B0(3) + 0.727822147724592*XN_B0(1) + 0.082033432844602*XN_B0(-2) -
+            0.0451033223343881*XN_B0(0) - 0.652141084861241*XN_B0(-1) - 0.121937153224065*XN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XO2_dx = (0.00932597985049999*XO2_B0(3) + 0.727822147724592*XO2_B0(1) + 0.082033432844602*XO2_B0(-2) -
+            0.0451033223343881*XO2_B0(0) - 0.652141084861241*XO2_B0(-1) - 0.121937153224065*XO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_XO_dx = (0.00932597985049999*XO_B0(3) + 0.727822147724592*XO_B0(1) + 0.082033432844602*XO_B0(-2) -
+            0.0451033223343881*XO_B0(0) - 0.652141084861241*XO_B0(-1) - 0.121937153224065*XO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_evN2_dx = (0.00932597985049999*evN2_B0(3) + 0.727822147724592*evN2_B0(1) + 0.082033432844602*evN2_B0(-2) -
+            0.0451033223343881*evN2_B0(0) - 0.652141084861241*evN2_B0(-1) -
+            0.121937153224065*evN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_evNO_dx = (0.00932597985049999*evNO_B0(3) + 0.727822147724592*evNO_B0(1) + 0.082033432844602*evNO_B0(-2) -
+            0.0451033223343881*evNO_B0(0) - 0.652141084861241*evNO_B0(-1) -
+            0.121937153224065*evNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_evO2_dx = (0.00932597985049999*evO2_B0(3) + 0.727822147724592*evO2_B0(1) + 0.082033432844602*evO2_B0(-2) -
+            0.0451033223343881*evO2_B0(0) - 0.652141084861241*evO2_B0(-1) -
+            0.121937153224065*evO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_p_dx = (0.00932597985049999*p_B0(3) + 0.727822147724592*p_B0(1) + 0.082033432844602*p_B0(-2) -
+            0.0451033223343881*p_B0(0) - 0.652141084861241*p_B0(-1) - 0.121937153224065*p_B0(2))*invDelta0block0_sycl[0];
+
+       d1_pu0_dx = (0.00932597985049999*p_B0(3)*u0_B0(3) + 0.727822147724592*p_B0(1)*u0_B0(1) +
+            0.082033432844602*p_B0(-2)*u0_B0(-2) - 0.0451033223343881*p_B0(0)*u0_B0(0) -
+            0.652141084861241*p_B0(-1)*u0_B0(-1) - 0.121937153224065*p_B0(2)*u0_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoE_dx = (0.00932597985049999*rhoE_B0(3) + 0.727822147724592*rhoE_B0(1) + 0.082033432844602*rhoE_B0(-2) -
+            0.0451033223343881*rhoE_B0(0) - 0.652141084861241*rhoE_B0(-1) -
+            0.121937153224065*rhoE_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoEu0_dx = (0.00932597985049999*u0_B0(3)*rhoE_B0(3) + 0.727822147724592*u0_B0(1)*rhoE_B0(1) +
+            0.082033432844602*u0_B0(-2)*rhoE_B0(-2) - 0.0451033223343881*u0_B0(0)*rhoE_B0(0) -
+            0.652141084861241*u0_B0(-1)*rhoE_B0(-1) - 0.121937153224065*u0_B0(2)*rhoE_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoN2_dx = (0.00932597985049999*rhoN2_B0(3) + 0.727822147724592*rhoN2_B0(1) + 0.082033432844602*rhoN2_B0(-2) -
+            0.0451033223343881*rhoN2_B0(0) - 0.652141084861241*rhoN2_B0(-1) -
+            0.121937153224065*rhoN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoN2u0_dx = (0.00932597985049999*u0_B0(3)*rhoN2_B0(3) + 0.727822147724592*u0_B0(1)*rhoN2_B0(1) +
+            0.082033432844602*u0_B0(-2)*rhoN2_B0(-2) - 0.0451033223343881*u0_B0(0)*rhoN2_B0(0) -
+            0.652141084861241*u0_B0(-1)*rhoN2_B0(-1) - 0.121937153224065*u0_B0(2)*rhoN2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoNO_dx = (0.00932597985049999*rhoNO_B0(3) + 0.727822147724592*rhoNO_B0(1) + 0.082033432844602*rhoNO_B0(-2) -
+            0.0451033223343881*rhoNO_B0(0) - 0.652141084861241*rhoNO_B0(-1) -
+            0.121937153224065*rhoNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoNOu0_dx = (0.00932597985049999*u0_B0(3)*rhoNO_B0(3) + 0.727822147724592*u0_B0(1)*rhoNO_B0(1) +
+            0.082033432844602*u0_B0(-2)*rhoNO_B0(-2) - 0.0451033223343881*u0_B0(0)*rhoNO_B0(0) -
+            0.652141084861241*u0_B0(-1)*rhoNO_B0(-1) - 0.121937153224065*u0_B0(2)*rhoNO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoN_dx = (0.00932597985049999*rhoN_B0(3) + 0.727822147724592*rhoN_B0(1) + 0.082033432844602*rhoN_B0(-2) -
+            0.0451033223343881*rhoN_B0(0) - 0.652141084861241*rhoN_B0(-1) -
+            0.121937153224065*rhoN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoNu0_dx = (0.00932597985049999*u0_B0(3)*rhoN_B0(3) + 0.727822147724592*u0_B0(1)*rhoN_B0(1) +
+            0.082033432844602*u0_B0(-2)*rhoN_B0(-2) - 0.0451033223343881*u0_B0(0)*rhoN_B0(0) -
+            0.652141084861241*u0_B0(-1)*rhoN_B0(-1) - 0.121937153224065*u0_B0(2)*rhoN_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoO2_dx = (0.00932597985049999*rhoO2_B0(3) + 0.727822147724592*rhoO2_B0(1) + 0.082033432844602*rhoO2_B0(-2) -
+            0.0451033223343881*rhoO2_B0(0) - 0.652141084861241*rhoO2_B0(-1) -
+            0.121937153224065*rhoO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoO2u0_dx = (0.00932597985049999*u0_B0(3)*rhoO2_B0(3) + 0.727822147724592*u0_B0(1)*rhoO2_B0(1) +
+            0.082033432844602*u0_B0(-2)*rhoO2_B0(-2) - 0.0451033223343881*u0_B0(0)*rhoO2_B0(0) -
+            0.652141084861241*u0_B0(-1)*rhoO2_B0(-1) - 0.121937153224065*u0_B0(2)*rhoO2_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoO_dx = (0.00932597985049999*rhoO_B0(3) + 0.727822147724592*rhoO_B0(1) + 0.082033432844602*rhoO_B0(-2) -
+            0.0451033223343881*rhoO_B0(0) - 0.652141084861241*rhoO_B0(-1) -
+            0.121937153224065*rhoO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoOu0_dx = (0.00932597985049999*u0_B0(3)*rhoO_B0(3) + 0.727822147724592*u0_B0(1)*rhoO_B0(1) +
+            0.082033432844602*u0_B0(-2)*rhoO_B0(-2) - 0.0451033223343881*u0_B0(0)*rhoO_B0(0) -
+            0.652141084861241*u0_B0(-1)*rhoO_B0(-1) - 0.121937153224065*u0_B0(2)*rhoO_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoev_dx = (0.00932597985049999*rhoev_B0(3) + 0.727822147724592*rhoev_B0(1) + 0.082033432844602*rhoev_B0(-2) -
+            0.0451033223343881*rhoev_B0(0) - 0.652141084861241*rhoev_B0(-1) -
+            0.121937153224065*rhoev_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhoevu0_dx = (0.00932597985049999*u0_B0(3)*rhoev_B0(3) + 0.727822147724592*u0_B0(1)*rhoev_B0(1) +
+            0.082033432844602*u0_B0(-2)*rhoev_B0(-2) - 0.0451033223343881*u0_B0(0)*rhoev_B0(0) -
+            0.652141084861241*u0_B0(-1)*rhoev_B0(-1) - 0.121937153224065*u0_B0(2)*rhoev_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhou0_dx = (0.00932597985049999*rhou0_B0(3) + 0.727822147724592*rhou0_B0(1) + 0.082033432844602*rhou0_B0(-2) -
+            0.0451033223343881*rhou0_B0(0) - 0.652141084861241*rhou0_B0(-1) -
+            0.121937153224065*rhou0_B0(2))*invDelta0block0_sycl[0];
+
+       d1_rhou0u0_dx = (0.00932597985049999*u0_B0(3)*rhou0_B0(3) + 0.727822147724592*u0_B0(1)*rhou0_B0(1) +
+            0.082033432844602*u0_B0(-2)*rhou0_B0(-2) - 0.0451033223343881*u0_B0(0)*rhou0_B0(0) -
+            0.652141084861241*u0_B0(-1)*rhou0_B0(-1) - 0.121937153224065*u0_B0(2)*rhou0_B0(2))*invDelta0block0_sycl[0];
+
+   }
+
+   else{
+
+       d1_DN2_dx = (-(2.0/3.0)*DN2_B0(-1) - (1.0/12.0)*DN2_B0(2) + ((1.0/12.0))*DN2_B0(-2) +
+            ((2.0/3.0))*DN2_B0(1))*invDelta0block0_sycl[0];
+
+       d1_DNO_dx = (-(2.0/3.0)*DNO_B0(-1) - (1.0/12.0)*DNO_B0(2) + ((1.0/12.0))*DNO_B0(-2) +
+            ((2.0/3.0))*DNO_B0(1))*invDelta0block0_sycl[0];
+
+       d1_DN_dx = (-(2.0/3.0)*DN_B0(-1) - (1.0/12.0)*DN_B0(2) + ((1.0/12.0))*DN_B0(-2) +
+            ((2.0/3.0))*DN_B0(1))*invDelta0block0_sycl[0];
+
+       d1_DO2_dx = (-(2.0/3.0)*DO2_B0(-1) - (1.0/12.0)*DO2_B0(2) + ((1.0/12.0))*DO2_B0(-2) +
+            ((2.0/3.0))*DO2_B0(1))*invDelta0block0_sycl[0];
+
+       d1_DO_dx = (-(2.0/3.0)*DO_B0(-1) - (1.0/12.0)*DO_B0(2) + ((1.0/12.0))*DO_B0(-2) +
+            ((2.0/3.0))*DO_B0(1))*invDelta0block0_sycl[0];
+
+       d1_XN2_dx = (-(2.0/3.0)*XN2_B0(-1) - (1.0/12.0)*XN2_B0(2) + ((1.0/12.0))*XN2_B0(-2) +
+            ((2.0/3.0))*XN2_B0(1))*invDelta0block0_sycl[0];
+
+       d1_XNO_dx = (-(2.0/3.0)*XNO_B0(-1) - (1.0/12.0)*XNO_B0(2) + ((1.0/12.0))*XNO_B0(-2) +
+            ((2.0/3.0))*XNO_B0(1))*invDelta0block0_sycl[0];
+
+       d1_XN_dx = (-(2.0/3.0)*XN_B0(-1) - (1.0/12.0)*XN_B0(2) + ((1.0/12.0))*XN_B0(-2) +
+            ((2.0/3.0))*XN_B0(1))*invDelta0block0_sycl[0];
+
+       d1_XO2_dx = (-(2.0/3.0)*XO2_B0(-1) - (1.0/12.0)*XO2_B0(2) + ((1.0/12.0))*XO2_B0(-2) +
+            ((2.0/3.0))*XO2_B0(1))*invDelta0block0_sycl[0];
+
+       d1_XO_dx = (-(2.0/3.0)*XO_B0(-1) - (1.0/12.0)*XO_B0(2) + ((1.0/12.0))*XO_B0(-2) +
+            ((2.0/3.0))*XO_B0(1))*invDelta0block0_sycl[0];
+
+       d1_evN2_dx = (-(2.0/3.0)*evN2_B0(-1) - (1.0/12.0)*evN2_B0(2) + ((1.0/12.0))*evN2_B0(-2) +
+            ((2.0/3.0))*evN2_B0(1))*invDelta0block0_sycl[0];
+
+       d1_evNO_dx = (-(2.0/3.0)*evNO_B0(-1) - (1.0/12.0)*evNO_B0(2) + ((1.0/12.0))*evNO_B0(-2) +
+            ((2.0/3.0))*evNO_B0(1))*invDelta0block0_sycl[0];
+
+       d1_evO2_dx = (-(2.0/3.0)*evO2_B0(-1) - (1.0/12.0)*evO2_B0(2) + ((1.0/12.0))*evO2_B0(-2) +
+            ((2.0/3.0))*evO2_B0(1))*invDelta0block0_sycl[0];
+
+       d1_p_dx = (-(2.0/3.0)*p_B0(-1) - (1.0/12.0)*p_B0(2) + ((1.0/12.0))*p_B0(-2) +
+            ((2.0/3.0))*p_B0(1))*invDelta0block0_sycl[0];
+
+       d1_pu0_dx = (-(2.0/3.0)*p_B0(-1)*u0_B0(-1) - (1.0/12.0)*p_B0(2)*u0_B0(2) + ((1.0/12.0))*p_B0(-2)*u0_B0(-2) +
+            ((2.0/3.0))*p_B0(1)*u0_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoE_dx = (-(2.0/3.0)*rhoE_B0(-1) - (1.0/12.0)*rhoE_B0(2) + ((1.0/12.0))*rhoE_B0(-2) +
+            ((2.0/3.0))*rhoE_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoEu0_dx = (-(2.0/3.0)*u0_B0(-1)*rhoE_B0(-1) - (1.0/12.0)*u0_B0(2)*rhoE_B0(2) +
+            ((1.0/12.0))*u0_B0(-2)*rhoE_B0(-2) + ((2.0/3.0))*u0_B0(1)*rhoE_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoN2_dx = (-(2.0/3.0)*rhoN2_B0(-1) - (1.0/12.0)*rhoN2_B0(2) + ((1.0/12.0))*rhoN2_B0(-2) +
+            ((2.0/3.0))*rhoN2_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoN2u0_dx = (-(2.0/3.0)*u0_B0(-1)*rhoN2_B0(-1) - (1.0/12.0)*u0_B0(2)*rhoN2_B0(2) +
+            ((1.0/12.0))*u0_B0(-2)*rhoN2_B0(-2) + ((2.0/3.0))*u0_B0(1)*rhoN2_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoNO_dx = (-(2.0/3.0)*rhoNO_B0(-1) - (1.0/12.0)*rhoNO_B0(2) + ((1.0/12.0))*rhoNO_B0(-2) +
+            ((2.0/3.0))*rhoNO_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoNOu0_dx = (-(2.0/3.0)*u0_B0(-1)*rhoNO_B0(-1) - (1.0/12.0)*u0_B0(2)*rhoNO_B0(2) +
+            ((1.0/12.0))*u0_B0(-2)*rhoNO_B0(-2) + ((2.0/3.0))*u0_B0(1)*rhoNO_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoN_dx = (-(2.0/3.0)*rhoN_B0(-1) - (1.0/12.0)*rhoN_B0(2) + ((1.0/12.0))*rhoN_B0(-2) +
+            ((2.0/3.0))*rhoN_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoNu0_dx = (-(2.0/3.0)*u0_B0(-1)*rhoN_B0(-1) - (1.0/12.0)*u0_B0(2)*rhoN_B0(2) +
+            ((1.0/12.0))*u0_B0(-2)*rhoN_B0(-2) + ((2.0/3.0))*u0_B0(1)*rhoN_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoO2_dx = (-(2.0/3.0)*rhoO2_B0(-1) - (1.0/12.0)*rhoO2_B0(2) + ((1.0/12.0))*rhoO2_B0(-2) +
+            ((2.0/3.0))*rhoO2_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoO2u0_dx = (-(2.0/3.0)*u0_B0(-1)*rhoO2_B0(-1) - (1.0/12.0)*u0_B0(2)*rhoO2_B0(2) +
+            ((1.0/12.0))*u0_B0(-2)*rhoO2_B0(-2) + ((2.0/3.0))*u0_B0(1)*rhoO2_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoO_dx = (-(2.0/3.0)*rhoO_B0(-1) - (1.0/12.0)*rhoO_B0(2) + ((1.0/12.0))*rhoO_B0(-2) +
+            ((2.0/3.0))*rhoO_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoOu0_dx = (-(2.0/3.0)*u0_B0(-1)*rhoO_B0(-1) - (1.0/12.0)*u0_B0(2)*rhoO_B0(2) +
+            ((1.0/12.0))*u0_B0(-2)*rhoO_B0(-2) + ((2.0/3.0))*u0_B0(1)*rhoO_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoev_dx = (-(2.0/3.0)*rhoev_B0(-1) - (1.0/12.0)*rhoev_B0(2) + ((1.0/12.0))*rhoev_B0(-2) +
+            ((2.0/3.0))*rhoev_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhoevu0_dx = (-(2.0/3.0)*u0_B0(-1)*rhoev_B0(-1) - (1.0/12.0)*u0_B0(2)*rhoev_B0(2) +
+            ((1.0/12.0))*u0_B0(-2)*rhoev_B0(-2) + ((2.0/3.0))*u0_B0(1)*rhoev_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhou0_dx = (-(2.0/3.0)*rhou0_B0(-1) - (1.0/12.0)*rhou0_B0(2) + ((1.0/12.0))*rhou0_B0(-2) +
+            ((2.0/3.0))*rhou0_B0(1))*invDelta0block0_sycl[0];
+
+       d1_rhou0u0_dx = (-(2.0/3.0)*u0_B0(-1)*rhou0_B0(-1) - (1.0/12.0)*u0_B0(2)*rhou0_B0(2) +
+            ((1.0/12.0))*u0_B0(-2)*rhou0_B0(-2) + ((2.0/3.0))*u0_B0(1)*rhou0_B0(1))*invDelta0block0_sycl[0];
+
+   }
+
+   if (idx[0] == 0){
+
+       d2_XN2_dx = (-(26.0/3.0)*XN2_B0(1) - (14.0/3.0)*XN2_B0(3) + ((11.0/12.0))*XN2_B0(4) + ((19.0/2.0))*XN2_B0(2) +
+            ((35.0/12.0))*XN2_B0(0))*inv2Delta0block0_sycl[0];
+
+       d2_XNO_dx = (-(26.0/3.0)*XNO_B0(1) - (14.0/3.0)*XNO_B0(3) + ((11.0/12.0))*XNO_B0(4) + ((19.0/2.0))*XNO_B0(2) +
+            ((35.0/12.0))*XNO_B0(0))*inv2Delta0block0_sycl[0];
+
+       d2_XN_dx = (-(26.0/3.0)*XN_B0(1) - (14.0/3.0)*XN_B0(3) + ((11.0/12.0))*XN_B0(4) + ((19.0/2.0))*XN_B0(2) +
+            ((35.0/12.0))*XN_B0(0))*inv2Delta0block0_sycl[0];
+
+       d2_XO2_dx = (-(26.0/3.0)*XO2_B0(1) - (14.0/3.0)*XO2_B0(3) + ((11.0/12.0))*XO2_B0(4) + ((19.0/2.0))*XO2_B0(2) +
+            ((35.0/12.0))*XO2_B0(0))*inv2Delta0block0_sycl[0];
+
+       d2_XO_dx = (-(26.0/3.0)*XO_B0(1) - (14.0/3.0)*XO_B0(3) + ((11.0/12.0))*XO_B0(4) + ((19.0/2.0))*XO_B0(2) +
+            ((35.0/12.0))*XO_B0(0))*inv2Delta0block0_sycl[0];
+
+   }
+
+   else if (idx[0] == 1){
+
+       d2_XN2_dx = (((1.0/2.0))*XN2_B0(1) - (5.0/3.0)*XN2_B0(0) - (1.0/12.0)*XN2_B0(3) + ((1.0/3.0))*XN2_B0(2) +
+            ((11.0/12.0))*XN2_B0(-1))*inv2Delta0block0_sycl[0];
+
+       d2_XNO_dx = (((1.0/2.0))*XNO_B0(1) - (5.0/3.0)*XNO_B0(0) - (1.0/12.0)*XNO_B0(3) + ((1.0/3.0))*XNO_B0(2) +
+            ((11.0/12.0))*XNO_B0(-1))*inv2Delta0block0_sycl[0];
+
+       d2_XN_dx = (((1.0/2.0))*XN_B0(1) - (5.0/3.0)*XN_B0(0) - (1.0/12.0)*XN_B0(3) + ((1.0/3.0))*XN_B0(2) +
+            ((11.0/12.0))*XN_B0(-1))*inv2Delta0block0_sycl[0];
+
+       d2_XO2_dx = (((1.0/2.0))*XO2_B0(1) - (5.0/3.0)*XO2_B0(0) - (1.0/12.0)*XO2_B0(3) + ((1.0/3.0))*XO2_B0(2) +
+            ((11.0/12.0))*XO2_B0(-1))*inv2Delta0block0_sycl[0];
+
+       d2_XO_dx = (((1.0/2.0))*XO_B0(1) - (5.0/3.0)*XO_B0(0) - (1.0/12.0)*XO_B0(3) + ((1.0/3.0))*XO_B0(2) +
+            ((11.0/12.0))*XO_B0(-1))*inv2Delta0block0_sycl[0];
+
+   }
+
+   else if (idx[0] == -1 + block0np0_sycl[0]){
+
+       d2_XN2_dx = (-(26.0/3.0)*XN2_B0(-1) - (14.0/3.0)*XN2_B0(-3) + ((11.0/12.0))*XN2_B0(-4) + ((19.0/2.0))*XN2_B0(-2)
+            + ((35.0/12.0))*XN2_B0(0))*inv2Delta0block0_sycl[0];
+
+       d2_XNO_dx = (-(26.0/3.0)*XNO_B0(-1) - (14.0/3.0)*XNO_B0(-3) + ((11.0/12.0))*XNO_B0(-4) + ((19.0/2.0))*XNO_B0(-2)
+            + ((35.0/12.0))*XNO_B0(0))*inv2Delta0block0_sycl[0];
+
+       d2_XN_dx = (-(26.0/3.0)*XN_B0(-1) - (14.0/3.0)*XN_B0(-3) + ((11.0/12.0))*XN_B0(-4) + ((19.0/2.0))*XN_B0(-2) +
+            ((35.0/12.0))*XN_B0(0))*inv2Delta0block0_sycl[0];
+
+       d2_XO2_dx = (-(26.0/3.0)*XO2_B0(-1) - (14.0/3.0)*XO2_B0(-3) + ((11.0/12.0))*XO2_B0(-4) + ((19.0/2.0))*XO2_B0(-2)
+            + ((35.0/12.0))*XO2_B0(0))*inv2Delta0block0_sycl[0];
+
+       d2_XO_dx = (-(26.0/3.0)*XO_B0(-1) - (14.0/3.0)*XO_B0(-3) + ((11.0/12.0))*XO_B0(-4) + ((19.0/2.0))*XO_B0(-2) +
+            ((35.0/12.0))*XO_B0(0))*inv2Delta0block0_sycl[0];
+
+   }
+
+   else if (idx[0] == -2 + block0np0_sycl[0]){
+
+       d2_XN2_dx = (((1.0/2.0))*XN2_B0(-1) - (5.0/3.0)*XN2_B0(0) - (1.0/12.0)*XN2_B0(-3) + ((1.0/3.0))*XN2_B0(-2) +
+            ((11.0/12.0))*XN2_B0(1))*inv2Delta0block0_sycl[0];
+
+       d2_XNO_dx = (((1.0/2.0))*XNO_B0(-1) - (5.0/3.0)*XNO_B0(0) - (1.0/12.0)*XNO_B0(-3) + ((1.0/3.0))*XNO_B0(-2) +
+            ((11.0/12.0))*XNO_B0(1))*inv2Delta0block0_sycl[0];
+
+       d2_XN_dx = (((1.0/2.0))*XN_B0(-1) - (5.0/3.0)*XN_B0(0) - (1.0/12.0)*XN_B0(-3) + ((1.0/3.0))*XN_B0(-2) +
+            ((11.0/12.0))*XN_B0(1))*inv2Delta0block0_sycl[0];
+
+       d2_XO2_dx = (((1.0/2.0))*XO2_B0(-1) - (5.0/3.0)*XO2_B0(0) - (1.0/12.0)*XO2_B0(-3) + ((1.0/3.0))*XO2_B0(-2) +
+            ((11.0/12.0))*XO2_B0(1))*inv2Delta0block0_sycl[0];
+
+       d2_XO_dx = (((1.0/2.0))*XO_B0(-1) - (5.0/3.0)*XO_B0(0) - (1.0/12.0)*XO_B0(-3) + ((1.0/3.0))*XO_B0(-2) +
+            ((11.0/12.0))*XO_B0(1))*inv2Delta0block0_sycl[0];
+
+   }
+
+   else{
+
+       d2_XN2_dx = (-(5.0/2.0)*XN2_B0(0) - (1.0/12.0)*XN2_B0(-2) - (1.0/12.0)*XN2_B0(2) + ((4.0/3.0))*XN2_B0(1) +
+            ((4.0/3.0))*XN2_B0(-1))*inv2Delta0block0_sycl[0];
+
+       d2_XNO_dx = (-(5.0/2.0)*XNO_B0(0) - (1.0/12.0)*XNO_B0(-2) - (1.0/12.0)*XNO_B0(2) + ((4.0/3.0))*XNO_B0(1) +
+            ((4.0/3.0))*XNO_B0(-1))*inv2Delta0block0_sycl[0];
+
+       d2_XN_dx = (-(5.0/2.0)*XN_B0(0) - (1.0/12.0)*XN_B0(-2) - (1.0/12.0)*XN_B0(2) + ((4.0/3.0))*XN_B0(1) +
+            ((4.0/3.0))*XN_B0(-1))*inv2Delta0block0_sycl[0];
+
+       d2_XO2_dx = (-(5.0/2.0)*XO2_B0(0) - (1.0/12.0)*XO2_B0(-2) - (1.0/12.0)*XO2_B0(2) + ((4.0/3.0))*XO2_B0(1) +
+            ((4.0/3.0))*XO2_B0(-1))*inv2Delta0block0_sycl[0];
+
+       d2_XO_dx = (-(5.0/2.0)*XO_B0(0) - (1.0/12.0)*XO_B0(-2) - (1.0/12.0)*XO_B0(2) + ((4.0/3.0))*XO_B0(1) +
+            ((4.0/3.0))*XO_B0(-1))*inv2Delta0block0_sycl[0];
+
+   }
+
+    Residual0_B0(0) = -(1.0/2.0)*d1_rhoN2u0_dx - (1.0/2.0)*u0_B0(0)*d1_rhoN2_dx - (1.0/2.0)*wk0_B0(0)*rhoN2_B0(0) +
+      wdotN2_B0(0);
+
+    Residual1_B0(0) = -(1.0/2.0)*d1_rhoO2u0_dx - (1.0/2.0)*u0_B0(0)*d1_rhoO2_dx - (1.0/2.0)*wk0_B0(0)*rhoO2_B0(0) +
+      wdotO2_B0(0);
+
+    Residual2_B0(0) = -(1.0/2.0)*d1_rhoNOu0_dx - (1.0/2.0)*u0_B0(0)*d1_rhoNO_dx - (1.0/2.0)*wk0_B0(0)*rhoNO_B0(0) +
+      wdotNO_B0(0);
+
+    Residual3_B0(0) = -(1.0/2.0)*d1_rhoNu0_dx - (1.0/2.0)*u0_B0(0)*d1_rhoN_dx - (1.0/2.0)*wk0_B0(0)*rhoN_B0(0) +
+      wdotN_B0(0);
+
+    Residual4_B0(0) = -(1.0/2.0)*d1_rhoOu0_dx - (1.0/2.0)*u0_B0(0)*d1_rhoO_dx - (1.0/2.0)*wk0_B0(0)*rhoO_B0(0) +
+      wdotO_B0(0);
+
+    Residual5_B0(0) = -(1.0/2.0)*d1_rhoevu0_dx + (-rhoev_B0(0) + evNO_B0(0)*rhoNO_B0(0) + evO2_B0(0)*rhoO2_B0(0) +
+      rhoN2_B0(0)*eveqN2_B0(0))/tauN2_B0(0) + (-rhoev_B0(0) + evN2_B0(0)*rhoN2_B0(0) + evO2_B0(0)*rhoO2_B0(0) +
+      rhoNO_B0(0)*eveqNO_B0(0))/tauNO_B0(0) + (-rhoev_B0(0) + evN2_B0(0)*rhoN2_B0(0) + evNO_B0(0)*rhoNO_B0(0) +
+      rhoO2_B0(0)*eveqO2_B0(0))/tauO2_B0(0) + evN2_B0(0)*wdotN2_B0(0) + evO2_B0(0)*wdotO2_B0(0) -
+      (1.0/2.0)*u0_B0(0)*d1_rhoev_dx - (1.0/2.0)*wk0_B0(0)*rhoev_B0(0) + (rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) +
+      rhoNO_B0(0) + rhoO2_B0(0))*DN2_B0(0)*evN2_B0(0)*d2_XN2_dx + (rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0))*DN2_B0(0)*d1_XN2_dx*d1_evN2_dx + (rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0))*DNO_B0(0)*evNO_B0(0)*d2_XNO_dx + (rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0))*DNO_B0(0)*d1_XNO_dx*d1_evNO_dx + (rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0))*DO2_B0(0)*evO2_B0(0)*d2_XO2_dx + (rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0))*DO2_B0(0)*d1_XO2_dx*d1_evO2_dx + (rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0))*evN2_B0(0)*d1_DN2_dx*d1_XN2_dx + (rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0))*evNO_B0(0)*d1_DNO_dx*d1_XNO_dx + (rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0))*evO2_B0(0)*d1_DO2_dx*d1_XO2_dx + (d1_rhoN2_dx + d1_rhoNO_dx + d1_rhoN_dx + d1_rhoO2_dx +
+      d1_rhoO_dx)*DN2_B0(0)*evN2_B0(0)*d1_XN2_dx + (d1_rhoN2_dx + d1_rhoNO_dx + d1_rhoN_dx + d1_rhoO2_dx +
+      d1_rhoO_dx)*DNO_B0(0)*evNO_B0(0)*d1_XNO_dx + (d1_rhoN2_dx + d1_rhoNO_dx + d1_rhoN_dx + d1_rhoO2_dx +
+      d1_rhoO_dx)*DO2_B0(0)*evO2_B0(0)*d1_XO2_dx +
+      Tv_B0(0)*af_B0(0)*cp_B0(0)*yN_B0(0)*yO_B0(0)*yN2_B0(0)*yNO_B0(0)*yO2_B0(0)*evNO_B0(0)*gammaf_B0(0)*wdotNO_B0(0)*dumgaama_B0(0);
+
+    Residual6_B0(0) = -d1_p_dx - (1.0/2.0)*d1_rhou0u0_dx - (1.0/2.0)*u0_B0(0)*d1_rhou0_dx -
+      (1.0/2.0)*wk0_B0(0)*rhou0_B0(0);
+
+    Residual7_B0(0) = -d1_pu0_dx - (1.0/2.0)*d1_rhoEu0_dx - (1.0/2.0)*u0_B0(0)*d1_rhoE_dx -
+      (1.0/2.0)*wk0_B0(0)*rhoE_B0(0) + (dhf0N_sycl[0]*invMN_sycl[0] + 2.5*Rhat_sycl[0]*invMN_sycl[0]*T_B0(0))*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) +
+      rhoNO_B0(0) + rhoO2_B0(0))*DN_B0(0)*d2_XN_dx + (dhf0N_sycl[0]*invMN_sycl[0] + 2.5*Rhat_sycl[0]*invMN_sycl[0]*T_B0(0))*(rhoN_B0(0) + rhoO_B0(0) +
+      rhoN2_B0(0) + rhoNO_B0(0) + rhoO2_B0(0))*d1_DN_dx*d1_XN_dx + (dhf0N_sycl[0]*invMN_sycl[0] + 2.5*Rhat_sycl[0]*invMN_sycl[0]*T_B0(0))*(d1_rhoN2_dx +
+      d1_rhoNO_dx + d1_rhoN_dx + d1_rhoO2_dx + d1_rhoO_dx)*DN_B0(0)*d1_XN_dx + (dhf0O_sycl[0]*invMO_sycl[0] +
+      2.5*Rhat_sycl[0]*invMO_sycl[0]*T_B0(0))*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) + rhoO2_B0(0))*DO_B0(0)*d2_XO_dx +
+      (dhf0O_sycl[0]*invMO_sycl[0] + 2.5*Rhat_sycl[0]*invMO_sycl[0]*T_B0(0))*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0))*d1_DO_dx*d1_XO_dx + (dhf0O_sycl[0]*invMO_sycl[0] + 2.5*Rhat_sycl[0]*invMO_sycl[0]*T_B0(0))*(d1_rhoN2_dx + d1_rhoNO_dx + d1_rhoN_dx +
+      d1_rhoO2_dx + d1_rhoO_dx)*DO_B0(0)*d1_XO_dx + (3.5*Rhat_sycl[0]*invMN2_sycl[0]*T_B0(0) + evN2_B0(0))*(rhoN_B0(0) + rhoO_B0(0) +
+      rhoN2_B0(0) + rhoNO_B0(0) + rhoO2_B0(0))*DN2_B0(0)*d2_XN2_dx + (3.5*Rhat_sycl[0]*invMN2_sycl[0]*T_B0(0) + evN2_B0(0))*(rhoN_B0(0)
+      + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) + rhoO2_B0(0))*d1_DN2_dx*d1_XN2_dx + (3.5*Rhat_sycl[0]*invMN2_sycl[0]*T_B0(0) +
+      evN2_B0(0))*(d1_rhoN2_dx + d1_rhoNO_dx + d1_rhoN_dx + d1_rhoO2_dx + d1_rhoO_dx)*DN2_B0(0)*d1_XN2_dx +
+      (3.5*Rhat_sycl[0]*invMN2_sycl[0]*wk1_B0(0) + d1_evN2_dx)*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0))*DN2_B0(0)*d1_XN2_dx + (3.5*Rhat_sycl[0]*invMNO_sycl[0]*wk1_B0(0) + d1_evNO_dx)*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0)
+      + rhoNO_B0(0) + rhoO2_B0(0))*DNO_B0(0)*d1_XNO_dx + (3.5*Rhat_sycl[0]*invMO2_sycl[0]*T_B0(0) + evO2_B0(0))*(rhoN_B0(0) + rhoO_B0(0)
+      + rhoN2_B0(0) + rhoNO_B0(0) + rhoO2_B0(0))*DO2_B0(0)*d2_XO2_dx + (3.5*Rhat_sycl[0]*invMO2_sycl[0]*T_B0(0) +
+      evO2_B0(0))*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) + rhoO2_B0(0))*d1_DO2_dx*d1_XO2_dx +
+      (3.5*Rhat_sycl[0]*invMO2_sycl[0]*T_B0(0) + evO2_B0(0))*(d1_rhoN2_dx + d1_rhoNO_dx + d1_rhoN_dx + d1_rhoO2_dx +
+      d1_rhoO_dx)*DO2_B0(0)*d1_XO2_dx + (3.5*Rhat_sycl[0]*invMO2_sycl[0]*wk1_B0(0) + d1_evO2_dx)*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0)
+      + rhoNO_B0(0) + rhoO2_B0(0))*DO2_B0(0)*d1_XO2_dx + (dhf0NO_sycl[0]*invMNO_sycl[0] + 3.5*Rhat_sycl[0]*invMNO_sycl[0]*T_B0(0) +
+      evNO_B0(0))*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) + rhoO2_B0(0))*DNO_B0(0)*d2_XNO_dx +
+      (dhf0NO_sycl[0]*invMNO_sycl[0] + 3.5*Rhat_sycl[0]*invMNO_sycl[0]*T_B0(0) + evNO_B0(0))*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0))*d1_DNO_dx*d1_XNO_dx + (dhf0NO_sycl[0]*invMNO_sycl[0] + 3.5*Rhat_sycl[0]*invMNO_sycl[0]*T_B0(0) + evNO_B0(0))*(d1_rhoN2_dx +
+      d1_rhoNO_dx + d1_rhoN_dx + d1_rhoO2_dx + d1_rhoO_dx)*DNO_B0(0)*d1_XNO_dx + 2.5*(rhoN_B0(0) + rhoO_B0(0) +
+      rhoN2_B0(0) + rhoNO_B0(0) + rhoO2_B0(0))*Rhat_sycl[0]*invMN_sycl[0]*DN_B0(0)*wk1_B0(0)*d1_XN_dx + 2.5*(rhoN_B0(0) + rhoO_B0(0) +
+      rhoN2_B0(0) + rhoNO_B0(0) + rhoO2_B0(0))*Rhat_sycl[0]*invMO_sycl[0]*DO_B0(0)*wk1_B0(0)*d1_XO_dx;
 
 
         }
@@ -108,48 +1624,228 @@ void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     block->instance->sycl_instance->queue->wait();
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[18].time += __t2-__t1;
+    block->instance->OPS_kernels[43].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
-  ops_set_dirtybit_device(args, 2);
-  ops_set_halo_dirtybit3(&args[1],range);
+  ops_set_dirtybit_device(args, 56);
+  ops_set_halo_dirtybit3(&args[47],range);
+  ops_set_halo_dirtybit3(&args[48],range);
+  ops_set_halo_dirtybit3(&args[49],range);
+  ops_set_halo_dirtybit3(&args[50],range);
+  ops_set_halo_dirtybit3(&args[51],range);
+  ops_set_halo_dirtybit3(&args[52],range);
+  ops_set_halo_dirtybit3(&args[53],range);
+  ops_set_halo_dirtybit3(&args[54],range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[18].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[43].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg5);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg6);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg7);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg8);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg9);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg10);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg11);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg12);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg13);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg14);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg15);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg16);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg17);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg18);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg19);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg20);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg21);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg22);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg23);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg24);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg25);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg26);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg27);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg28);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg29);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg30);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg31);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg32);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg33);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg34);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg35);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg36);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg37);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg38);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg39);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg40);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg41);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg42);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg43);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg44);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg45);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg46);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg47);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg48);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg49);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg50);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg51);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg52);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg53);
+    block->instance->OPS_kernels[43].transfer += ops_compute_transfer(dim, start, end, &arg54);
   }
 }
 
 
 #ifdef OPS_LAZY
 void ops_par_loop_opensbliblock00Kernel036(char const *name, ops_block block, int dim, int* range,
- ops_arg arg0, ops_arg arg1) {
+ ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
+ ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
+ ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
+ ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
+ ops_arg arg16, ops_arg arg17, ops_arg arg18, ops_arg arg19,
+ ops_arg arg20, ops_arg arg21, ops_arg arg22, ops_arg arg23,
+ ops_arg arg24, ops_arg arg25, ops_arg arg26, ops_arg arg27,
+ ops_arg arg28, ops_arg arg29, ops_arg arg30, ops_arg arg31,
+ ops_arg arg32, ops_arg arg33, ops_arg arg34, ops_arg arg35,
+ ops_arg arg36, ops_arg arg37, ops_arg arg38, ops_arg arg39,
+ ops_arg arg40, ops_arg arg41, ops_arg arg42, ops_arg arg43,
+ ops_arg arg44, ops_arg arg45, ops_arg arg46, ops_arg arg47,
+ ops_arg arg48, ops_arg arg49, ops_arg arg50, ops_arg arg51,
+ ops_arg arg52, ops_arg arg53, ops_arg arg54, ops_arg arg55) {
   ops_kernel_descriptor *desc = (ops_kernel_descriptor *)calloc(1,sizeof(ops_kernel_descriptor));
   desc->name = name;
   desc->block = block;
   desc->dim = dim;
   desc->device = 1;
-  desc->index = 18;
+  desc->index = 43;
   desc->hash = 5381;
-  desc->hash = ((desc->hash << 5) + desc->hash) + 18;
+  desc->hash = ((desc->hash << 5) + desc->hash) + 43;
   for ( int i=0; i<2; i++ ){
     desc->range[i] = range[i];
     desc->orig_range[i] = range[i];
     desc->hash = ((desc->hash << 5) + desc->hash) + range[i];
   }
-  desc->nargs = 2;
-  desc->args = (ops_arg*)ops_malloc(2*sizeof(ops_arg));
+  desc->nargs = 56;
+  desc->args = (ops_arg*)ops_malloc(56*sizeof(ops_arg));
   desc->args[0] = arg0;
   desc->hash = ((desc->hash << 5) + desc->hash) + arg0.dat->index;
   desc->args[1] = arg1;
   desc->hash = ((desc->hash << 5) + desc->hash) + arg1.dat->index;
+  desc->args[2] = arg2;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg2.dat->index;
+  desc->args[3] = arg3;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg3.dat->index;
+  desc->args[4] = arg4;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg4.dat->index;
+  desc->args[5] = arg5;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg5.dat->index;
+  desc->args[6] = arg6;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg6.dat->index;
+  desc->args[7] = arg7;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg7.dat->index;
+  desc->args[8] = arg8;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg8.dat->index;
+  desc->args[9] = arg9;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg9.dat->index;
+  desc->args[10] = arg10;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg10.dat->index;
+  desc->args[11] = arg11;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg11.dat->index;
+  desc->args[12] = arg12;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg12.dat->index;
+  desc->args[13] = arg13;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg13.dat->index;
+  desc->args[14] = arg14;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg14.dat->index;
+  desc->args[15] = arg15;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg15.dat->index;
+  desc->args[16] = arg16;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg16.dat->index;
+  desc->args[17] = arg17;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg17.dat->index;
+  desc->args[18] = arg18;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg18.dat->index;
+  desc->args[19] = arg19;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg19.dat->index;
+  desc->args[20] = arg20;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg20.dat->index;
+  desc->args[21] = arg21;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg21.dat->index;
+  desc->args[22] = arg22;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg22.dat->index;
+  desc->args[23] = arg23;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg23.dat->index;
+  desc->args[24] = arg24;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg24.dat->index;
+  desc->args[25] = arg25;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg25.dat->index;
+  desc->args[26] = arg26;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg26.dat->index;
+  desc->args[27] = arg27;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg27.dat->index;
+  desc->args[28] = arg28;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg28.dat->index;
+  desc->args[29] = arg29;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg29.dat->index;
+  desc->args[30] = arg30;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg30.dat->index;
+  desc->args[31] = arg31;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg31.dat->index;
+  desc->args[32] = arg32;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg32.dat->index;
+  desc->args[33] = arg33;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg33.dat->index;
+  desc->args[34] = arg34;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg34.dat->index;
+  desc->args[35] = arg35;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg35.dat->index;
+  desc->args[36] = arg36;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg36.dat->index;
+  desc->args[37] = arg37;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg37.dat->index;
+  desc->args[38] = arg38;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg38.dat->index;
+  desc->args[39] = arg39;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg39.dat->index;
+  desc->args[40] = arg40;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg40.dat->index;
+  desc->args[41] = arg41;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg41.dat->index;
+  desc->args[42] = arg42;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg42.dat->index;
+  desc->args[43] = arg43;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg43.dat->index;
+  desc->args[44] = arg44;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg44.dat->index;
+  desc->args[45] = arg45;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg45.dat->index;
+  desc->args[46] = arg46;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg46.dat->index;
+  desc->args[47] = arg47;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg47.dat->index;
+  desc->args[48] = arg48;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg48.dat->index;
+  desc->args[49] = arg49;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg49.dat->index;
+  desc->args[50] = arg50;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg50.dat->index;
+  desc->args[51] = arg51;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg51.dat->index;
+  desc->args[52] = arg52;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg52.dat->index;
+  desc->args[53] = arg53;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg53.dat->index;
+  desc->args[54] = arg54;
+  desc->hash = ((desc->hash << 5) + desc->hash) + arg54.dat->index;
+  desc->args[55] = arg55;
   desc->function = ops_par_loop_opensbliblock00Kernel036_execute;
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,18,"opensbliblock00Kernel036");
+    ops_timing_realloc(block->instance,43,"opensbliblock00Kernel036");
   }
   ops_enqueue_kernel(desc);
 }

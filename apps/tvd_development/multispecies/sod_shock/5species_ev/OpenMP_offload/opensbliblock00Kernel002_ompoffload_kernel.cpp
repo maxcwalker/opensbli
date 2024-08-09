@@ -71,7 +71,7 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
-  double * __restrict__ rhoE_B0_p = (double *)(args[0].data_d + base0);
+  double * __restrict__ T_B0_p = (double *)(args[0].data_d + base0);
 
   int base1 = args[1].dat->base_offset;
   double * __restrict__ rhoN2_B0_p = (double *)(args[1].data_d + base1);
@@ -116,7 +116,7 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
 
   #pragma omp target teams distribute parallel for collapse(1)
   for ( int n_x=start0; n_x<end0; n_x++ ){
-    const ACC<double> rhoE_B0(rhoE_B0_p + n_x*1);
+    const ACC<double> T_B0(T_B0_p + n_x*1);
     const ACC<double> rhoN2_B0(rhoN2_B0_p + n_x*1);
     const ACC<double> rhoNO_B0(rhoNO_B0_p + n_x*1);
     const ACC<double> rhoN_B0(rhoN_B0_p + n_x*1);
@@ -132,7 +132,8 @@ void ops_par_loop_opensbliblock00Kernel002_execute(ops_kernel_descriptor *desc) 
 
    u0_B0(0) = rhou0_B0(0)*inv_rho;
 
-   p_B0(0) = (-1 + gama)*(-0.5*(rhou0_B0(0)*rhou0_B0(0))*inv_rho + rhoE_B0(0));
+    p_B0(0) = (invMN*rhoN_B0(0) + invMO*rhoO_B0(0) + invMN2*rhoN2_B0(0) + invMNO*rhoNO_B0(0) +
+      invMO2*rhoO2_B0(0))*Rhat*T_B0(0);
 
    a_B0(0) = sqrt(gama*p_B0(0)*inv_rho);
 

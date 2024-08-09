@@ -7,10 +7,11 @@ static int dims_opensbliblock00Kernel002_h [7][1] = {{0}};
 //user function
 __device__
 
- void opensbliblock00Kernel002_gpu(const ACC<double> &rhoE_B0,
+ void opensbliblock00Kernel002_gpu(const ACC<double> &T_B0,
   const ACC<double> &rhoN2_B0,
   const ACC<double> &rhoN_B0,
-  const ACC<double> &rhou0_B0,
+  const
+ACC<double> &rhou0_B0,
   ACC<double> &a_B0,
   ACC<double> &u0_B0,
   ACC<double> &p_B0)
@@ -20,7 +21,7 @@ __device__
 
    u0_B0(0) = rhou0_B0(0)*inv_rho;
 
-   p_B0(0) = (-1 + gama)*(-0.5*(rhou0_B0(0)*rhou0_B0(0))*inv_rho + rhoE_B0(0));
+   p_B0(0) = (invMN*rhoN_B0(0) + invMN2*rhoN2_B0(0))*Rhat*T_B0(0);
 
    a_B0(0) = sqrt(gama*p_B0(0)*inv_rho);
 

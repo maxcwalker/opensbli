@@ -27,9 +27,9 @@ inline
 ptr_double u0_B0,
   ptr_double T_B0)
 {
-    OPS_ACC(T_B0, 0) = (uref*uref)*(-2*OPS_ACC(rhoev_B0, 0) - 0.5*(OPS_ACC(u0_B0, 0)*OPS_ACC(u0_B0, 0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoO_B0, 0) + OPS_ACC(rhoN2_B0, 0) + OPS_ACC(rhoNO_B0, 0)
-      + OPS_ACC(rhoO2_B0, 0)) + OPS_ACC(rhoE_B0, 0))*invRhat*invTref/(1.5*invMN*OPS_ACC(rhoN_B0, 0) + 1.5*invMO*OPS_ACC(rhoO_B0, 0) + 2.5*invMN2*OPS_ACC(rhoN2_B0, 0)
-      + 2.5*invMNO*OPS_ACC(rhoNO_B0, 0) + 2.5*invMO2*OPS_ACC(rhoO2_B0, 0));
+    OPS_ACC(T_B0, 0) = (-2*OPS_ACC(rhoev_B0, 0) - 0.5*(OPS_ACC(u0_B0, 0)*OPS_ACC(u0_B0, 0))*(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoO_B0, 0) + OPS_ACC(rhoN2_B0, 0) + OPS_ACC(rhoNO_B0, 0) +
+      OPS_ACC(rhoO2_B0, 0)) + OPS_ACC(rhoE_B0, 0))*invRhat/(1.5*invMN*OPS_ACC(rhoN_B0, 0) + 1.5*invMO*OPS_ACC(rhoO_B0, 0) + 2.5*invMN2*OPS_ACC(rhoN2_B0, 0) +
+      2.5*invMNO*OPS_ACC(rhoNO_B0, 0) + 2.5*invMO2*OPS_ACC(rhoO2_B0, 0));
 
 }
 

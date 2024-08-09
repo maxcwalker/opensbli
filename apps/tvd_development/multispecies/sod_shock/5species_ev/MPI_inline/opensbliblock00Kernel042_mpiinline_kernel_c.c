@@ -3,14 +3,6 @@
 //
 
 int xdim0_opensbliblock00Kernel042;
-int xdim1_opensbliblock00Kernel042;
-int xdim2_opensbliblock00Kernel042;
-int xdim3_opensbliblock00Kernel042;
-int xdim4_opensbliblock00Kernel042;
-int xdim5_opensbliblock00Kernel042;
-int xdim6_opensbliblock00Kernel042;
-int xdim7_opensbliblock00Kernel042;
-int xdim8_opensbliblock00Kernel042;
 
 
 //user function
@@ -18,88 +10,13 @@ int xdim8_opensbliblock00Kernel042;
 
 
 void opensbliblock00Kernel042_c_wrapper(
-  double * restrict rhoE_B0_p,
-  double * restrict rhoN2_B0_p,
-  double * restrict rhoNO_B0_p,
-  double * restrict rhoN_B0_p,
-  double * restrict rhoO2_B0_p,
-  double * restrict rhoO_B0_p,
-  double * restrict rho_B0_p,
-  double * restrict rhoev_B0_p,
-  double * restrict rhou0_B0_p,
+  double * restrict wdotN2_B0_p,
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
-    ptr_double rhoE_B0 = { rhoE_B0_p + n_x*1};
-    ptr_double rhoN2_B0 = { rhoN2_B0_p + n_x*1};
-    ptr_double rhoNO_B0 = { rhoNO_B0_p + n_x*1};
-    ptr_double rhoN_B0 = { rhoN_B0_p + n_x*1};
-    ptr_double rhoO2_B0 = { rhoO2_B0_p + n_x*1};
-    ptr_double rhoO_B0 = { rhoO_B0_p + n_x*1};
-    ptr_double rho_B0 = { rho_B0_p + n_x*1};
-    ptr_double rhoev_B0 = { rhoev_B0_p + n_x*1};
-    ptr_double rhou0_B0 = { rhou0_B0_p + n_x*1};
+    ptr_double wdotN2_B0 = { wdotN2_B0_p + n_x*1};
     
-   double T = 0.0;
-   double Tv = 0.0;
-   double cN = 0.0;
-   double cN2 = 0.0;
-   double cNO = 0.0;
-   double cO = 0.0;
-   double cO2 = 0.0;
-   double evN2 = 0.0;
-   double evNO = 0.0;
-   double evO2 = 0.0;
-   double p0 = 0.0;
-   double rhoref = 0.0;
-   double u0 = 0.0;
-   T = 1.00000000000000;
-
-   u0 = 0.0;
-
-   p0 = 1.00000000000000;
-
-   cN2 = 0.234274000000000;
-
-   cN = 2.70000000000000e-5;
-
-   cO2 = 0.698439000000000;
-
-   cO = 0.0660720000000000;
-
-   cNO = 0.00118900000000000;
-
-   rhoref = 1.00000000000000;
-
-   OPS_ACC(rhoN2_B0, 0) = cN2*rhoref;
-
-   OPS_ACC(rhoN_B0, 0) = cN*rhoref;
-
-   OPS_ACC(rhoO2_B0, 0) = cO2*rhoref;
-
-   OPS_ACC(rhoO_B0, 0) = cO*rhoref;
-
-   OPS_ACC(rhoNO_B0, 0) = cNO*rhoref;
-
-   OPS_ACC(rho_B0, 0) = cN*rhoref + cN2*rhoref + cNO*rhoref + cO*rhoref + cO2*rhoref;
-
-   OPS_ACC(rhou0_B0, 0) = u0*(cN*rhoref + cN2*rhoref + cNO*rhoref + cO*rhoref + cO2*rhoref);
-
-   Tv = p0/(Rhat*(cN*rhoref/MN + cN2*rhoref/MN2 + cNO*rhoref/MNO + cO*rhoref/MO + cO2*rhoref/MO2));
-
-   evO2 = Rhat*thetavO2/(MO2*(-1.0 + exp(thetavO2/Tv)));
-
-   evN2 = Rhat*thetavN2/(MN2*(-1.0 + exp(thetavN2/Tv)));
-
-   evNO = Rhat*thetavNO/(MNO*(-1.0 + exp(thetavNO/Tv)));
-
-    OPS_ACC(rhoev_B0, 0) = (cN2*evN2*rhoref + cNO*evNO*rhoref + cO2*evO2*rhoref)*(cN*rhoref + cN2*rhoref + cNO*rhoref + cO*rhoref
-      + cO2*rhoref)/(cN2*rhoref + cNO*rhoref + cO2*rhoref);
-
-    OPS_ACC(rhoE_B0, 0) = (u0*u0)*(0.5*cN*rhoref + 0.5*cN2*rhoref + 0.5*cNO*rhoref + 0.5*cO*rhoref + 0.5*cO2*rhoref) +
-      cN2*evN2*rhoref + cNO*evNO*rhoref + cO2*evO2*rhoref + p0*(1.5*cN*rhoref/MN + 1.5*cO*rhoref/MO + 2.5*cN2*rhoref/MN2
-      + 2.5*cNO*rhoref/MNO + 2.5*cO2*rhoref/MO2)/(cN*rhoref/MN + cN2*rhoref/MN2 + cNO*rhoref/MNO + cO*rhoref/MO +
-      cO2*rhoref/MO2) + 4186800.0*cN*dhN*rhoref/MN + 4186800.0*cNO*dhNO*rhoref/MNO + 4186800.0*cO*dhO*rhoref/MO;
+   OPS_ACC(wdotN2_B0, 0) = 0.0;
 
 
   }

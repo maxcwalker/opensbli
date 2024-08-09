@@ -4,6 +4,11 @@
 
 int xdim0_opensbliblock00Kernel021;
 int xdim1_opensbliblock00Kernel021;
+int xdim2_opensbliblock00Kernel021;
+int xdim3_opensbliblock00Kernel021;
+int xdim4_opensbliblock00Kernel021;
+int xdim5_opensbliblock00Kernel021;
+int xdim6_opensbliblock00Kernel021;
 
 
 //user function
@@ -12,14 +17,29 @@ int xdim1_opensbliblock00Kernel021;
 
 void opensbliblock00Kernel021_c_wrapper(
   double * restrict T_B0_p,
-  double * restrict eveqO2_B0_p,
+  double * restrict rhoN2_B0_p,
+  double * restrict rhoNO_B0_p,
+  double * restrict rhoN_B0_p,
+  double * restrict rhoO2_B0_p,
+  double * restrict rhoO_B0_p,
+  double * restrict ptauO2_B0_p,
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
     const ptr_double T_B0 = { T_B0_p + n_x*1};
-    ptr_double eveqO2_B0 = { eveqO2_B0_p + n_x*1};
+    const ptr_double rhoN2_B0 = { rhoN2_B0_p + n_x*1};
+    const ptr_double rhoNO_B0 = { rhoNO_B0_p + n_x*1};
+    const ptr_double rhoN_B0 = { rhoN_B0_p + n_x*1};
+    const ptr_double rhoO2_B0 = { rhoO2_B0_p + n_x*1};
+    const ptr_double rhoO_B0 = { rhoO_B0_p + n_x*1};
+    ptr_double ptauO2_B0 = { ptauO2_B0_p + n_x*1};
     
-   OPS_ACC(eveqO2_B0, 0) = Rhat*invMO2*invTref*inv2uref*thetavO2/(-1.0 + exp(invTref*thetavO2/OPS_ACC(T_B0, 0)));
+    OPS_ACC(ptauO2_B0, 0) = (3.03420950194169e-10*invMO*OPS_ACC(rhoO_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
+      2.14180928034488e-10*invMNO*OPS_ACC(rhoNO_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
+      3.27838502246041e-10*invMN*OPS_ACC(rhoN_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
+      2.08725734681668e-10*invMO2*OPS_ACC(rhoO2_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
+      2.22632207449373e-10*invMN2*OPS_ACC(rhoN2_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)))/(invMN*OPS_ACC(rhoN_B0, 0) +
+      invMO*OPS_ACC(rhoO_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0) + invMNO*OPS_ACC(rhoNO_B0, 0) + invMO2*OPS_ACC(rhoO2_B0, 0));
 
 
   }

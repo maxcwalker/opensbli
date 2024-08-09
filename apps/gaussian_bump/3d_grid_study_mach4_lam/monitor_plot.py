@@ -82,22 +82,73 @@ fig1, ax1 = plt.subplots(36, 1, figsize=(6,35))
 # Plot
 # indices = [9, 10] + list(range(12, 19))
 
-for i, val in enumerate(new_columns[76:112]):
-    # val = new_columns[idx]
-    ax1[i].plot(df['Time'], df[val], color='k', linewidth=0.7)
-    ax1[i].set_ylabel(val[2:])
+# for i, val in enumerate(new_columns[76:112]):
+#     # val = new_columns[idx]
+#     ax1[i].plot(df['Time'], df[val], color='k', linewidth=0.7)
+#     ax1[i].set_ylabel(val[2:])
 
-    ax1[i].grid(True)
-    
-    ax1[i].set_xlim([0, df['Time'].iloc[-1]])
-    ax1[i].tick_params(labelbottom=False)
-ax1[0].ticklabel_format(style='sci', axis='y', scilimits=(-10, -10))
-# ax1[0].set_ylim([-0.0000000003,0.0000000003])
+#     ax1[i].grid(True)
+#     ax1[i].set_ylim([-0.000000001,0.000000001])
+#     ax1[i].set_xlim([0, 1000])
+#     # ax1[i].set_xlim([0, df['Time'].iloc[-1]])
+#     ax1[i].tick_params(labelbottom=False)
+# ax1[0].ticklabel_format(style='sci', axis='y', scilimits=(-10, -10))
+# # ax1[0].set_ylim([-0.0000000003,0.0000000003])
 
-ax1[-1].tick_params(labelbottom=True)
-ax1[-1].set_xlabel('Time')
-plt.subplots_adjust(hspace=0.5)
-fig1.savefig(directory_monitor+"monitoring_w.pdf",bbox_inches='tight')
+# ax1[-1].tick_params(labelbottom=True)
+# ax1[-1].set_xlabel('Time')
+# plt.subplots_adjust(hspace=0.5)
+# fig1.savefig(directory_monitor+"monitoring_w.pdf",bbox_inches='tight')
+
+
+
+# Extract the desired columns
+w_monitors = new_columns[76:112]
+
+# Indices to exclude
+exclude_indices = {11, 13, 15, 17, 31, 32, 33, 34, 35}
+
+# Create the new list excluding the specified indices
+filtered_monitors = [val for i, val in enumerate(w_monitors) if i not in exclude_indices]
+
+# Determine the number of plots
+num_plots = len(filtered_monitors)
+
+# Create subplots with 3 columns and 9 rows
+fig, ax = plt.subplots(9, 3, figsize=(22, 10))
+ax = ax.flatten()
+
+# Plot each filtered monitor
+for i, val in enumerate(filtered_monitors):
+    row = i % 9
+    col = i // 9
+    idx = row * 3 + col  # Calculate the index for the flattened array
+    ax[idx].plot(df['Time'][0:4000], df[val][0:4000], color='k', linewidth=0.7)
+    ax[idx].set_ylabel(val[2:])
+
+    ax[idx].grid(True)
+    ax[idx].set_ylim([-0.00000001, 0.00000001])
+    # ax[idx].set_xlim([0, 1000])
+    # ax[idx].set_xlim([0, df['Time'].iloc[-1]])
+    ax[idx].tick_params(labelbottom=False)
+
+# Adjust tick label format for the first plot
+# ax[0].ticklabel_format(style='sci', axis='y', scilimits=(-10, -10))
+# ax[0].set_ylim([-0.0000001, 0.0000001])
+
+# Set the x-axis label for the last plot
+for ind in [-1,-2,-3]:
+    ax[ind].tick_params(labelbottom=True)
+    ax[ind].set_xlabel('Time')
+
+# Adjust layout and save the figure
+plt.subplots_adjust(hspace=0.4)
+fig.savefig(directory_monitor + "monitoring_w.pdf", bbox_inches='tight')
+
+# Optionally, hide any unused subplots
+for i in range(len(filtered_monitors), len(ax)):
+    fig.delaxes(ax[i])
+
 
 
 exit()

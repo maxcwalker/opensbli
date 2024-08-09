@@ -12,7 +12,7 @@ void ops_init_backend() {}
 #include "opensbliblock00Kernel027_mpiinline_kernel.cpp"
 #include "opensbliblock00Kernel008_mpiinline_kernel.cpp"
 #include "opensbliblock00Kernel011_mpiinline_kernel.cpp"
-#include "opensbliblock00Kernel009_mpiinline_kernel.cpp"
+#include "opensbliblock00Kernel010_mpiinline_kernel.cpp"
 #include "opensbliblock00Kernel020_mpiinline_kernel.cpp"
 #include "opensbliblock00Kernel021_mpiinline_kernel.cpp"
 #include "opensbliblock00Kernel022_mpiinline_kernel.cpp"

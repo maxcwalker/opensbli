@@ -63,7 +63,7 @@ class Plot(plotFunctions):
         rhoO = self.read_dataset(group, "rhoO_B0")
         rhoO2 = self.read_dataset(group, "rhoO2_B0")
         rhoNO = self.read_dataset(group, "rhoNO_B0")
-        rho = rhoN+rhoN2
+        rho = rhoN+rhoN2+rhoO+rhoO2+rhoNO
         rhou = self.read_dataset(group, "rhou0_B0")
         rhoev = self.read_dataset(group, "rhoev_B0")
         rhoE = self.read_dataset(group, "rhoE_B0")
@@ -73,9 +73,9 @@ class Plot(plotFunctions):
         x = self.read_dataset(group, "x0_B0")
         u = rhou/rho
         ev = rhoev/rho
-        p_calced = (0.4)*(rhoE - 0.5*(u**2)*rho)
+        # p = (0.4)*(rhoE - 0.5*(u**2)*rho)
         T = p / (1.4*rho)
-        return rhoN, rhoN2, rhoO, rhoO2, rhoNO,  u, p, x, T, ev, p_calced
+        return rhoN, rhoN2, rhoO, rhoO2, rhoNO,  u, p, x, T, ev, p
 
     def main_plot(self, fname, n_levels):
         f, group1 = self.read_file(fname)
@@ -111,13 +111,13 @@ class Plot(plotFunctions):
         ax2.set_xlabel(r"X")
         fig2.savefig("molefrac.pdf")
 
-        # fig3,ax3 = plt.subplots(1)
-        # # ax3.plot(x,p,label =r"e_v")
-        # ax3.plot(x,ev,label =r"e_V",color='k')
-        # ax3.legend()
-        # ax3.set_ylabel(r"e_v")
-        # ax3.set_xlabel(r"X")
-        # fig3.savefig("ev.pdf")
+        fig3,ax3 = plt.subplots(1)
+        # ax3.plot(x,p,label =r"e_v")
+        ax3.plot(x,ev,label =r"e_V",color='k')
+        ax3.legend()
+        ax3.set_ylabel(r"e_v")
+        ax3.set_xlabel(r"X")
+        fig3.savefig("ev.pdf")
 
         # fig3,ax3 = plt.subplots(1)
         # # ax3.plot(x,p,label =r"e_v")

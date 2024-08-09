@@ -339,7 +339,7 @@ void opensbliblock00Kernel016_c_wrapper(
    OPS_ACC(Residual2_B0, 0) = -d1_prhou0u0_dx;
 
     OPS_ACC(Residual3_B0, 0) = -d1_rhoevu0_dx + 9.86923266716013e-6*(-OPS_ACC(rhoev_B0, 0) +
-      OPS_ACC(rhoN2_B0, 0)*OPS_ACC(eveqN2_B0, 0))*Lref*invuref*OPS_ACC(p_B0, 0)/OPS_ACC(ptauN2_B0, 0) + OPS_ACC(wdotN_B0, 0) + OPS_ACC(wdotN2_B0, 0);
+      OPS_ACC(rhoN2_B0, 0)*OPS_ACC(eveqN2_B0, 0))*OPS_ACC(p_B0, 0)/OPS_ACC(ptauN2_B0, 0) + OPS_ACC(wdotN_B0, 0) + OPS_ACC(wdotN2_B0, 0);
 
    OPS_ACC(Residual4_B0, 0) = -d1_prhoEu0_dx + kappa*d2_T_dx;
 

@@ -118,8 +118,6 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
       auto invMO_sycl = (*invMO_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invMO2_sycl = (*invMO2_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invRhat_sycl = (*invRhat_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto invTref_sycl = (*invTref_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto uref_sycl = (*uref_p).template get_access<cl::sycl::access::mode::read>(cgh);
 
       cgh.parallel_for<class opensbliblock00Kernel011_kernel>(cl::sycl::nd_range<1>(cl::sycl::range<1>(
             ((end[0]-start[0]-1)/block->instance->OPS_block_size_x+1)*block->instance->OPS_block_size_x
@@ -141,9 +139,9 @@ void ops_par_loop_opensbliblock00Kernel011_execute(ops_kernel_descriptor *desc) 
         //USER CODE
         if (n_x < end_0) {
           
-    T_B0(0) = (uref_sycl[0]*uref_sycl[0])*(-2*rhoev_B0(0) - 0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0)
-      + rhoO2_B0(0)) + rhoE_B0(0))*invRhat_sycl[0]*invTref_sycl[0]/(1.5*invMN_sycl[0]*rhoN_B0(0) + 1.5*invMO_sycl[0]*rhoO_B0(0) + 2.5*invMN2_sycl[0]*rhoN2_B0(0)
-      + 2.5*invMNO_sycl[0]*rhoNO_B0(0) + 2.5*invMO2_sycl[0]*rhoO2_B0(0));
+    T_B0(0) = (-2*rhoev_B0(0) - 0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0)) + rhoE_B0(0))*invRhat_sycl[0]/(1.5*invMN_sycl[0]*rhoN_B0(0) + 1.5*invMO_sycl[0]*rhoO_B0(0) + 2.5*invMN2_sycl[0]*rhoN2_B0(0) +
+      2.5*invMNO_sycl[0]*rhoNO_B0(0) + 2.5*invMO2_sycl[0]*rhoO2_B0(0));
 
 
         }

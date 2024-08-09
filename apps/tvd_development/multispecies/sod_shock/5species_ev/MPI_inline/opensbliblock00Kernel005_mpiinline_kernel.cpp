@@ -34,6 +34,16 @@ extern int xdim14_opensbliblock00Kernel005;
 int xdim14_opensbliblock00Kernel005_h = -1;
 extern int xdim15_opensbliblock00Kernel005;
 int xdim15_opensbliblock00Kernel005_h = -1;
+extern int xdim16_opensbliblock00Kernel005;
+int xdim16_opensbliblock00Kernel005_h = -1;
+extern int xdim17_opensbliblock00Kernel005;
+int xdim17_opensbliblock00Kernel005_h = -1;
+extern int xdim18_opensbliblock00Kernel005;
+int xdim18_opensbliblock00Kernel005_h = -1;
+extern int xdim19_opensbliblock00Kernel005;
+int xdim19_opensbliblock00Kernel005_h = -1;
+extern int xdim20_opensbliblock00Kernel005;
+int xdim20_opensbliblock00Kernel005_h = -1;
 
 #ifdef __cplusplus
 extern "C" {
@@ -55,7 +65,12 @@ void opensbliblock00Kernel005_c_wrapper(
   double *p_a13,
   double *p_a14,
   double *p_a15,
-  int *p_a16,
+  double *p_a16,
+  double *p_a17,
+  double *p_a18,
+  double *p_a19,
+  double *p_a20,
+  int *p_a21,
   int arg_idx0,
   int x_size);
 
@@ -69,13 +84,14 @@ void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, in
  ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
  ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
  ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
- ops_arg arg16) {
+ ops_arg arg16, ops_arg arg17, ops_arg arg18, ops_arg arg19,
+ ops_arg arg20, ops_arg arg21) {
 
-  ops_arg args[17] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16};
+  ops_arg args[22] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21};
 
 
   #ifdef CHECKPOINTING
-  if (!ops_checkpointing_before(args,17,range,18)) return;
+  if (!ops_checkpointing_before(args,22,range,18)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
@@ -89,7 +105,7 @@ void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, in
   int arg_idx[1];
 
   #ifdef OPS_MPI
-  if (compute_ranges(args, 17,block, range, start, end, arg_idx) < 0) return;
+  if (compute_ranges(args, 22,block, range, start, end, arg_idx) < 0) return;
   #else
   for ( int n=0; n<1; n++ ){
     start[n] = range[2*n];end[n] = range[2*n+1];
@@ -115,6 +131,11 @@ void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, in
   int xdim13 = args[13].dat->size[0];
   int xdim14 = args[14].dat->size[0];
   int xdim15 = args[15].dat->size[0];
+  int xdim16 = args[16].dat->size[0];
+  int xdim17 = args[17].dat->size[0];
+  int xdim18 = args[18].dat->size[0];
+  int xdim19 = args[19].dat->size[0];
+  int xdim20 = args[20].dat->size[0];
 
   //Timing
   double t1,t2,c1,c2;
@@ -122,7 +143,7 @@ void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, in
     ops_timers_core(&c2,&t2);
   }
 
-  if (xdim0 != xdim0_opensbliblock00Kernel005_h || xdim1 != xdim1_opensbliblock00Kernel005_h || xdim2 != xdim2_opensbliblock00Kernel005_h || xdim3 != xdim3_opensbliblock00Kernel005_h || xdim4 != xdim4_opensbliblock00Kernel005_h || xdim5 != xdim5_opensbliblock00Kernel005_h || xdim6 != xdim6_opensbliblock00Kernel005_h || xdim7 != xdim7_opensbliblock00Kernel005_h || xdim8 != xdim8_opensbliblock00Kernel005_h || xdim9 != xdim9_opensbliblock00Kernel005_h || xdim10 != xdim10_opensbliblock00Kernel005_h || xdim11 != xdim11_opensbliblock00Kernel005_h || xdim12 != xdim12_opensbliblock00Kernel005_h || xdim13 != xdim13_opensbliblock00Kernel005_h || xdim14 != xdim14_opensbliblock00Kernel005_h || xdim15 != xdim15_opensbliblock00Kernel005_h) {
+  if (xdim0 != xdim0_opensbliblock00Kernel005_h || xdim1 != xdim1_opensbliblock00Kernel005_h || xdim2 != xdim2_opensbliblock00Kernel005_h || xdim3 != xdim3_opensbliblock00Kernel005_h || xdim4 != xdim4_opensbliblock00Kernel005_h || xdim5 != xdim5_opensbliblock00Kernel005_h || xdim6 != xdim6_opensbliblock00Kernel005_h || xdim7 != xdim7_opensbliblock00Kernel005_h || xdim8 != xdim8_opensbliblock00Kernel005_h || xdim9 != xdim9_opensbliblock00Kernel005_h || xdim10 != xdim10_opensbliblock00Kernel005_h || xdim11 != xdim11_opensbliblock00Kernel005_h || xdim12 != xdim12_opensbliblock00Kernel005_h || xdim13 != xdim13_opensbliblock00Kernel005_h || xdim14 != xdim14_opensbliblock00Kernel005_h || xdim15 != xdim15_opensbliblock00Kernel005_h || xdim16 != xdim16_opensbliblock00Kernel005_h || xdim17 != xdim17_opensbliblock00Kernel005_h || xdim18 != xdim18_opensbliblock00Kernel005_h || xdim19 != xdim19_opensbliblock00Kernel005_h || xdim20 != xdim20_opensbliblock00Kernel005_h) {
     xdim0_opensbliblock00Kernel005 = xdim0;
     xdim0_opensbliblock00Kernel005_h = xdim0;
     xdim1_opensbliblock00Kernel005 = xdim1;
@@ -155,6 +176,16 @@ void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, in
     xdim14_opensbliblock00Kernel005_h = xdim14;
     xdim15_opensbliblock00Kernel005 = xdim15;
     xdim15_opensbliblock00Kernel005_h = xdim15;
+    xdim16_opensbliblock00Kernel005 = xdim16;
+    xdim16_opensbliblock00Kernel005_h = xdim16;
+    xdim17_opensbliblock00Kernel005 = xdim17;
+    xdim17_opensbliblock00Kernel005_h = xdim17;
+    xdim18_opensbliblock00Kernel005 = xdim18;
+    xdim18_opensbliblock00Kernel005_h = xdim18;
+    xdim19_opensbliblock00Kernel005 = xdim19;
+    xdim19_opensbliblock00Kernel005_h = xdim19;
+    xdim20_opensbliblock00Kernel005 = xdim20;
+    xdim20_opensbliblock00Kernel005_h = xdim20;
   }
 
 
@@ -208,12 +239,27 @@ void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, in
   long long int base15 = args[15].dat->base_offset + (long long int)(block->instance->OPS_soa ? args[15].dat->type_size : args[15].dat->elem_size) * start[0] * args[15].stencil->stride[0];
   double *p_a15 = (double *)(args[15].data + base15);
 
-  int *p_a16 = NULL;
+  long long int base16 = args[16].dat->base_offset + (long long int)(block->instance->OPS_soa ? args[16].dat->type_size : args[16].dat->elem_size) * start[0] * args[16].stencil->stride[0];
+  double *p_a16 = (double *)(args[16].data + base16);
+
+  long long int base17 = args[17].dat->base_offset + (long long int)(block->instance->OPS_soa ? args[17].dat->type_size : args[17].dat->elem_size) * start[0] * args[17].stencil->stride[0];
+  double *p_a17 = (double *)(args[17].data + base17);
+
+  long long int base18 = args[18].dat->base_offset + (long long int)(block->instance->OPS_soa ? args[18].dat->type_size : args[18].dat->elem_size) * start[0] * args[18].stencil->stride[0];
+  double *p_a18 = (double *)(args[18].data + base18);
+
+  long long int base19 = args[19].dat->base_offset + (long long int)(block->instance->OPS_soa ? args[19].dat->type_size : args[19].dat->elem_size) * start[0] * args[19].stencil->stride[0];
+  double *p_a19 = (double *)(args[19].data + base19);
+
+  long long int base20 = args[20].dat->base_offset + (long long int)(block->instance->OPS_soa ? args[20].dat->type_size : args[20].dat->elem_size) * start[0] * args[20].stencil->stride[0];
+  double *p_a20 = (double *)(args[20].data + base20);
+
+  int *p_a21 = NULL;
 
 
 
-  ops_H_D_exchanges_host(args, 17);
-  ops_halo_exchanges(args,17,range);
+  ops_H_D_exchanges_host(args, 22);
+  ops_halo_exchanges(args,22,range);
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c1,&t1);
@@ -238,6 +284,11 @@ void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, in
     p_a14,
     p_a15,
     p_a16,
+    p_a17,
+    p_a18,
+    p_a19,
+    p_a20,
+    p_a21,
     arg_idx[0],
     x_size);
 
@@ -245,15 +296,15 @@ void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, in
     ops_timers_core(&c2,&t2);
     block->instance->OPS_kernels[18].time += t2-t1;
   }
-  ops_set_dirtybit_host(args, 17);
-  ops_set_halo_dirtybit3(&args[8],range);
-  ops_set_halo_dirtybit3(&args[9],range);
-  ops_set_halo_dirtybit3(&args[10],range);
-  ops_set_halo_dirtybit3(&args[11],range);
-  ops_set_halo_dirtybit3(&args[12],range);
+  ops_set_dirtybit_host(args, 22);
   ops_set_halo_dirtybit3(&args[13],range);
   ops_set_halo_dirtybit3(&args[14],range);
   ops_set_halo_dirtybit3(&args[15],range);
+  ops_set_halo_dirtybit3(&args[16],range);
+  ops_set_halo_dirtybit3(&args[17],range);
+  ops_set_halo_dirtybit3(&args[18],range);
+  ops_set_halo_dirtybit3(&args[19],range);
+  ops_set_halo_dirtybit3(&args[20],range);
 
   //Update kernel record
   if (block->instance->OPS_diags > 1) {
@@ -273,5 +324,10 @@ void ops_par_loop_opensbliblock00Kernel005(char const *name, ops_block block, in
     block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg13);
     block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg14);
     block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg15);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg16);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg17);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg18);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg19);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg20);
   }
 }

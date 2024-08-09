@@ -14,10 +14,11 @@ int xdim6_opensbliblock00Kernel002;
 
 //user function
 inline 
- void opensbliblock00Kernel002(const ptr_double rhoE_B0,
+ void opensbliblock00Kernel002(const ptr_double T_B0,
   const ptr_double rhoN2_B0,
   const ptr_double rhoN_B0,
-  const ptr_double rhou0_B0,
+  const
+ptr_double rhou0_B0,
   ptr_double a_B0,
   ptr_double u0_B0,
   ptr_double p_B0)
@@ -27,7 +28,7 @@ inline
 
    OPS_ACC(u0_B0, 0) = OPS_ACC(rhou0_B0, 0)*inv_rho;
 
-   OPS_ACC(p_B0, 0) = (-1 + gama)*(-0.5*(OPS_ACC(rhou0_B0, 0)*OPS_ACC(rhou0_B0, 0))*inv_rho + OPS_ACC(rhoE_B0, 0));
+   OPS_ACC(p_B0, 0) = (invMN*OPS_ACC(rhoN_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0))*Rhat*OPS_ACC(T_B0, 0);
 
    OPS_ACC(a_B0, 0) = sqrt(gama*OPS_ACC(p_B0, 0)*inv_rho);
 

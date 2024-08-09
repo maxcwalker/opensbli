@@ -8,6 +8,7 @@ int xdim2_opensbliblock00Kernel033;
 int xdim3_opensbliblock00Kernel033;
 int xdim4_opensbliblock00Kernel033;
 int xdim5_opensbliblock00Kernel033;
+int xdim6_opensbliblock00Kernel033;
 
 
 //user function
@@ -15,24 +16,27 @@ int xdim5_opensbliblock00Kernel033;
 
 
 void opensbliblock00Kernel033_c_wrapper(
-  double * restrict rhoN2_B0_p,
-  double * restrict rhoNO_B0_p,
-  double * restrict rhoN_B0_p,
-  double * restrict rhoO2_B0_p,
-  double * restrict rhoO_B0_p,
-  double * restrict yO_B0_p,
+  double * restrict T_B0_p,
+  double * restrict XN2_B0_p,
+  double * restrict XNO_B0_p,
+  double * restrict XN_B0_p,
+  double * restrict XO2_B0_p,
+  double * restrict XO_B0_p,
+  double * restrict kappa_B0_p,
   int x_size) {
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
-    const ptr_double rhoN2_B0 = { rhoN2_B0_p + n_x*1};
-    const ptr_double rhoNO_B0 = { rhoNO_B0_p + n_x*1};
-    const ptr_double rhoN_B0 = { rhoN_B0_p + n_x*1};
-    const ptr_double rhoO2_B0 = { rhoO2_B0_p + n_x*1};
-    const ptr_double rhoO_B0 = { rhoO_B0_p + n_x*1};
-    ptr_double yO_B0 = { yO_B0_p + n_x*1};
+    const ptr_double T_B0 = { T_B0_p + n_x*1};
+    const ptr_double XN2_B0 = { XN2_B0_p + n_x*1};
+    const ptr_double XNO_B0 = { XNO_B0_p + n_x*1};
+    const ptr_double XN_B0 = { XN_B0_p + n_x*1};
+    const ptr_double XO2_B0 = { XO2_B0_p + n_x*1};
+    const ptr_double XO_B0 = { XO_B0_p + n_x*1};
+    ptr_double kappa_B0 = { kappa_B0_p + n_x*1};
     
-    OPS_ACC(yO_B0, 0) = invMO*OPS_ACC(rhoO_B0, 0)/(invMN*OPS_ACC(rhoN_B0, 0) + invMO*OPS_ACC(rhoO_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0) + invMNO*OPS_ACC(rhoNO_B0, 0) +
-      invMO2*OPS_ACC(rhoO2_B0, 0));
+    OPS_ACC(kappa_B0, 0) = (1.0 - exp(-0.010568*OPS_ACC(T_B0, 0)))*(0.00177095328464541*pow(OPS_ACC(T_B0, 0), 0.42509 +
+      0.022652*log(OPS_ACC(T_B0, 0)))*(OPS_ACC(XN_B0, 0) + OPS_ACC(XO_B0, 0)) + 0.00188950552784029*pow(OPS_ACC(T_B0, 0), 0.34567 +
+      0.021823*log(OPS_ACC(T_B0, 0)))*(OPS_ACC(XN2_B0, 0) + OPS_ACC(XNO_B0, 0) + OPS_ACC(XO2_B0, 0)));
 
 
   }

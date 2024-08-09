@@ -18,6 +18,11 @@ int xdim12_opensbliblock00Kernel005;
 int xdim13_opensbliblock00Kernel005;
 int xdim14_opensbliblock00Kernel005;
 int xdim15_opensbliblock00Kernel005;
+int xdim16_opensbliblock00Kernel005;
+int xdim17_opensbliblock00Kernel005;
+int xdim18_opensbliblock00Kernel005;
+int xdim19_opensbliblock00Kernel005;
+int xdim20_opensbliblock00Kernel005;
 
 
 //user function
@@ -25,6 +30,11 @@ int xdim15_opensbliblock00Kernel005;
 
 
 void opensbliblock00Kernel005_c_wrapper(
+  double * restrict wdotN2_B0_p,
+  double * restrict wdotNO_B0_p,
+  double * restrict wdotN_B0_p,
+  double * restrict wdotO2_B0_p,
+  double * restrict wdotO_B0_p,
   double * restrict wk0_B0_p,
   double * restrict wk1_B0_p,
   double * restrict wk2_B0_p,
@@ -47,6 +57,11 @@ void opensbliblock00Kernel005_c_wrapper(
   #pragma omp parallel for
   for ( int n_x=0; n_x<x_size; n_x++ ){
     int idx[] = {arg_idx0+n_x};
+    const ptr_double wdotN2_B0 = { wdotN2_B0_p + n_x*1};
+    const ptr_double wdotNO_B0 = { wdotNO_B0_p + n_x*1};
+    const ptr_double wdotN_B0 = { wdotN_B0_p + n_x*1};
+    const ptr_double wdotO2_B0 = { wdotO2_B0_p + n_x*1};
+    const ptr_double wdotO_B0 = { wdotO_B0_p + n_x*1};
     const ptr_double wk0_B0 = { wk0_B0_p + n_x*1};
     const ptr_double wk1_B0 = { wk1_B0_p + n_x*1};
     const ptr_double wk2_B0 = { wk2_B0_p + n_x*1};
@@ -70,19 +85,19 @@ void opensbliblock00Kernel005_c_wrapper(
 
    Wall = 1;
 
-   OPS_ACC(rhoO_B0, 0) = -(-OPS_ACC(wk0_B0, -1) + OPS_ACC(wk0_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhoO_B0, 0);
+   OPS_ACC(rhoN2_B0, 0) = (-(-OPS_ACC(wk0_B0, -1) + OPS_ACC(wk0_B0, 0))*invDelta0block0 + OPS_ACC(wdotN2_B0, 0))*dt + OPS_ACC(rhoN2_B0, 0);
 
-   OPS_ACC(rhoO2_B0, 0) = -(-OPS_ACC(wk1_B0, -1) + OPS_ACC(wk1_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhoO2_B0, 0);
+   OPS_ACC(rhoO_B0, 0) = (-(-OPS_ACC(wk1_B0, -1) + OPS_ACC(wk1_B0, 0))*invDelta0block0 + OPS_ACC(wdotO_B0, 0))*dt + OPS_ACC(rhoO_B0, 0);
 
-   OPS_ACC(rhoN_B0, 0) = -(-OPS_ACC(wk2_B0, -1) + OPS_ACC(wk2_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhoN_B0, 0);
+   OPS_ACC(rhoO2_B0, 0) = (-(-OPS_ACC(wk2_B0, -1) + OPS_ACC(wk2_B0, 0))*invDelta0block0 + OPS_ACC(wdotO2_B0, 0))*dt + OPS_ACC(rhoO2_B0, 0);
 
-   OPS_ACC(rhoN2_B0, 0) = -(-OPS_ACC(wk3_B0, -1) + OPS_ACC(wk3_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhoN2_B0, 0);
+   OPS_ACC(rhoNO_B0, 0) = (-(-OPS_ACC(wk3_B0, -1) + OPS_ACC(wk3_B0, 0))*invDelta0block0 + OPS_ACC(wdotNO_B0, 0))*dt + OPS_ACC(rhoNO_B0, 0);
 
-   OPS_ACC(rhoNO_B0, 0) = -(-OPS_ACC(wk4_B0, -1) + OPS_ACC(wk4_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhoNO_B0, 0);
+   OPS_ACC(rhoN_B0, 0) = (-(-OPS_ACC(wk4_B0, -1) + OPS_ACC(wk4_B0, 0))*invDelta0block0 + OPS_ACC(wdotN_B0, 0))*dt + OPS_ACC(rhoN_B0, 0);
 
-   OPS_ACC(rhou0_B0, 0) = -(-OPS_ACC(wk5_B0, -1) + OPS_ACC(wk5_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhou0_B0, 0);
+   OPS_ACC(rhoev_B0, 0) = -(-OPS_ACC(wk5_B0, -1) + OPS_ACC(wk5_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhoev_B0, 0);
 
-   OPS_ACC(rhoev_B0, 0) = -(-OPS_ACC(wk6_B0, -1) + OPS_ACC(wk6_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhoev_B0, 0);
+   OPS_ACC(rhou0_B0, 0) = -(-OPS_ACC(wk6_B0, -1) + OPS_ACC(wk6_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhou0_B0, 0);
 
    OPS_ACC(rhoE_B0, 0) = -(-OPS_ACC(wk7_B0, -1) + OPS_ACC(wk7_B0, 0))*dt*invDelta0block0 + OPS_ACC(rhoE_B0, 0);
 

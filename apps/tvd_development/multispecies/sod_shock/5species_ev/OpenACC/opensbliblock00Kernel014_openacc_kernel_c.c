@@ -14,21 +14,16 @@ int xdim6_opensbliblock00Kernel014;
 
 //user function
 inline 
- void opensbliblock00Kernel014(const ptr_double T_B0,
+ void opensbliblock00Kernel014(const ptr_double mu_B0,
   const ptr_double rhoN2_B0,
   const ptr_double rhoNO_B0,
   const
 ptr_double rhoN_B0,
   const ptr_double rhoO2_B0,
   const ptr_double rhoO_B0,
-  ptr_double ptauO2_B0)
+  ptr_double DO_B0)
 {
-    OPS_ACC(ptauO2_B0, 0) = (3.03420950194169e-10*invMO*OPS_ACC(rhoO_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
-      2.14180928034488e-10*invMNO*OPS_ACC(rhoNO_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
-      3.27838502246041e-10*invMN*OPS_ACC(rhoN_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
-      2.08725734681668e-10*invMO2*OPS_ACC(rhoO2_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)) +
-      2.22632207449373e-10*invMN2*OPS_ACC(rhoN2_B0, 0)*exp(129.0*pow(OPS_ACC(T_B0, 0), -0.333333333333333)))/(invMN*OPS_ACC(rhoN_B0, 0) +
-      invMO*OPS_ACC(rhoO_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0) + invMNO*OPS_ACC(rhoNO_B0, 0) + invMO2*OPS_ACC(rhoO2_B0, 0));
+   OPS_ACC(DO_B0, 0) = invRe*invSc*OPS_ACC(mu_B0, 0)/(OPS_ACC(rhoN_B0, 0) + OPS_ACC(rhoO_B0, 0) + OPS_ACC(rhoN2_B0, 0) + OPS_ACC(rhoNO_B0, 0) + OPS_ACC(rhoO2_B0, 0));
 
 }
 

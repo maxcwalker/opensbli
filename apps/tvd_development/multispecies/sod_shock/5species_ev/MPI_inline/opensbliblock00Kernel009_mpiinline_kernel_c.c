@@ -35,7 +35,7 @@ void opensbliblock00Kernel009_c_wrapper(
     ptr_double p_B0 = { p_B0_p + n_x*1};
     
     OPS_ACC(p_B0, 0) = (invMN*OPS_ACC(rhoN_B0, 0) + invMO*OPS_ACC(rhoO_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0) + invMNO*OPS_ACC(rhoNO_B0, 0) +
-      invMO2*OPS_ACC(rhoO2_B0, 0))*Rhat*Tref*inv2uref*OPS_ACC(T_B0, 0);
+      invMO2*OPS_ACC(rhoO2_B0, 0))*Rhat*OPS_ACC(T_B0, 0);
 
 
   }

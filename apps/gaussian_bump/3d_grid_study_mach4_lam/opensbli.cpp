@@ -15,7 +15,7 @@ ops_init(argc,argv,1);
 // Set restart to 1 to restart the simulation from HDF5 file
 restart = 0;
 // User defined constant values
-niter = 500000;
+niter = 20000;
 double rkB[] = {(1.0/3.0), (15.0/16.0), (8.0/15.0)};
 double rkA[] = {0, (-5.0/9.0), (-153.0/128.0)};
 dt = 0.01;
@@ -25,30 +25,25 @@ block0np2 = 200;
 Delta0block0 = 400.0/(block0np0-1);
 Delta1block0 = 115.0/(block0np1-1);
 Delta2block0 = 20.0/(block0np2-1);
-Twall = 1.37;
 Minf = 4.0;
+Twall = 1.37;
 RefT = 439.0;
 gama = 1.4;
 SuthT = 110.4;
-Re = 4000.0;
 Pr = 0.72;
+Re = 4000.0;
 write_output_file = 100000;
 HDF5_timing = 0;
+write_slices = 2500;
 shock_filter_control = 1.00000000000000;
 gamma_m1 = -1 + gama;
-phi_1 = 3.141;
-xts = 50.0;
-beta_0 = 0.628;
-omega_3 = 1.0;
-tripA = 0.00000001;
-b_f = 0.002;
-omega_1 = 0.2;
-omega_2 = 0.4;
-phi_0 = 1.571;
-phi_2 = 4.712;
+tripA = 0.0;
 omega_0 = 0.1;
-L = 400.0;
+b_f = 0.002;
+beta_0 = 2.513272;
+xts = 225.0;
 b = 5.0;
+L = 400.0;
 H = 115.0;
 a = 20.0;
 inv2Delta0block0 = 1.0/(Delta0block0*Delta0block0);
@@ -105,17 +100,12 @@ ops_decl_const("invgama" , 1, "double", &invgama);
 ops_decl_const("invgamma_m1" , 1, "double", &invgamma_m1);
 ops_decl_const("niter" , 1, "int", &niter);
 ops_decl_const("omega_0" , 1, "double", &omega_0);
-ops_decl_const("omega_1" , 1, "double", &omega_1);
-ops_decl_const("omega_2" , 1, "double", &omega_2);
-ops_decl_const("omega_3" , 1, "double", &omega_3);
-ops_decl_const("phi_0" , 1, "double", &phi_0);
-ops_decl_const("phi_1" , 1, "double", &phi_1);
-ops_decl_const("phi_2" , 1, "double", &phi_2);
 ops_decl_const("shock_filter_control" , 1, "double", &shock_filter_control);
 ops_decl_const("simulation_time" , 1, "double", &simulation_time);
 ops_decl_const("start_iter" , 1, "int", &start_iter);
 ops_decl_const("tripA" , 1, "double", &tripA);
 ops_decl_const("write_output_file" , 1, "int", &write_output_file);
+ops_decl_const("write_slices" , 1, "int", &write_slices);
 ops_decl_const("xts" , 1, "double", &xts);
 // Define and Declare OPS Block
 ops_block opensbliblock00 = ops_decl_block(3, "opensbliblock00");
@@ -230,6 +220,35 @@ ops_arg_dat(SD110_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE),
 ops_arg_dat(SD111_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE),
 ops_arg_idx());
 
+char slice_name0[80];
+sprintf(slice_name0, "0");
+ops_write_plane_group_hdf5({{1, 1}}, slice_name0, {{x0_B0, x2_B0}});
+ops_write_plane_group_hdf5({{1, 1}}, slice_name0, {{x0_B0, x2_B0}});
+ops_write_plane_group_hdf5({{0, 250}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 450}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 500}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 550}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 625}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 750}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 800}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 850}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 900}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 950}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1000}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1050}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1100}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1150}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1200}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1250}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1375}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1500}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1550}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1625}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1750}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1875}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1950}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{0, 1975}}, slice_name0, {{x2_B0, x1_B0}});
+ops_write_plane_group_hdf5({{2, block0np2/2}}, slice_name0, {{x0_B0, x2_B0}});
 // Initialize loop timers
 double cpu_start0, elapsed_start0, cpu_end0, elapsed_end0;
 ops_timers(&cpu_start0, &elapsed_start0);
@@ -286,23 +305,23 @@ ops_halo_transfer(periodicBC_direction2_side0_65_block0);
 ops_halo_transfer(periodicBC_direction2_side1_66_block0);
 for(stage=0; stage<=2; stage++)
 {
-int iteration_range_5_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
-ops_par_loop(opensbliblock00Kernel005, "CRu1", opensbliblock00, 3, iteration_range_5_block0,
-ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
-ops_arg_dat(rhou1_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
-ops_arg_dat(u1_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
-
-int iteration_range_9_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
-ops_par_loop(opensbliblock00Kernel009, "CRu2", opensbliblock00, 3, iteration_range_9_block0,
+int iteration_range_4_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
+ops_par_loop(opensbliblock00Kernel004, "CRu2", opensbliblock00, 3, iteration_range_4_block0,
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rhou2_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(u2_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
-int iteration_range_16_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
-ops_par_loop(opensbliblock00Kernel016, "CRu0", opensbliblock00, 3, iteration_range_16_block0,
+int iteration_range_5_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
+ops_par_loop(opensbliblock00Kernel005, "CRu0", opensbliblock00, 3, iteration_range_5_block0,
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rhou0_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(u0_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
+
+int iteration_range_11_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
+ops_par_loop(opensbliblock00Kernel011, "CRu1", opensbliblock00, 3, iteration_range_11_block0,
+ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
+ops_arg_dat(rhou1_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
+ops_arg_dat(u1_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
 int iteration_range_7_block0[] = {-3, block0np0 + 4, 0, block0np1, 0, block0np2};
 ops_par_loop(opensbliblock00Kernel007, "CRU0", opensbliblock00, 3, iteration_range_7_block0,
@@ -312,8 +331,8 @@ ops_arg_dat(u0_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(u1_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(U0_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
-int iteration_range_8_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
-ops_par_loop(opensbliblock00Kernel008, "CRp", opensbliblock00, 3, iteration_range_8_block0,
+int iteration_range_13_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
+ops_par_loop(opensbliblock00Kernel013, "CRp", opensbliblock00, 3, iteration_range_13_block0,
 ops_arg_dat(rhoE_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(u0_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
@@ -334,20 +353,20 @@ ops_par_loop(opensbliblock00Kernel020, "CRU2", opensbliblock00, 3, iteration_ran
 ops_arg_dat(u2_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(U2_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
-int iteration_range_10_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
-ops_par_loop(opensbliblock00Kernel010, "CRa", opensbliblock00, 3, iteration_range_10_block0,
+int iteration_range_6_block0[] = {-3, block0np0 + 4, -3, block0np1 + 4, -3, block0np2 + 4};
+ops_par_loop(opensbliblock00Kernel006, "CRa", opensbliblock00, 3, iteration_range_6_block0,
 ops_arg_dat(p_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(a_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
-int iteration_range_28_block0[] = {-2, block0np0 + 2, -2, block0np1 + 2, -2, block0np2 + 2};
-ops_par_loop(opensbliblock00Kernel028, "CRT_B0", opensbliblock00, 3, iteration_range_28_block0,
+int iteration_range_30_block0[] = {-2, block0np0 + 2, -2, block0np1 + 2, -2, block0np2 + 2};
+ops_par_loop(opensbliblock00Kernel030, "CRT_B0", opensbliblock00, 3, iteration_range_30_block0,
 ops_arg_dat(p_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(rho_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(T_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
-int iteration_range_29_block0[] = {-2, block0np0 + 2, -2, block0np1 + 2, -2, block0np2 + 2};
-ops_par_loop(opensbliblock00Kernel029, "CRmu_B0", opensbliblock00, 3, iteration_range_29_block0,
+int iteration_range_26_block0[] = {-2, block0np0 + 2, -2, block0np1 + 2, -2, block0np2 + 2};
+ops_par_loop(opensbliblock00Kernel026, "CRmu_B0", opensbliblock00, 3, iteration_range_26_block0,
 ops_arg_dat(T_B0, 1, stencil_0_00_00_00_3, "double", OPS_READ),
 ops_arg_dat(mu_B0, 1, stencil_0_00_00_00_3, "double", OPS_WRITE));
 
@@ -1833,6 +1852,38 @@ fflush(f0);
 
 if (fmod(1 + iter,write_output_file) == 0 || iter == 0){
 HDF5_IO_Write_0_opensbliblock00_dynamic(opensbliblock00, iter, rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0, x0_B0, x1_B0, x2_B0, D11_B0, p_B0, HDF5_timing);
+}
+
+if (fmod(1 + iter,write_slices) == 0){
+char slice_name0[80];
+sprintf(slice_name0, "%d", iter + 1);
+ops_write_plane_group_hdf5({{1, 1}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{1, 20}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 250}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 450}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 500}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 550}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 625}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 750}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 800}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 850}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 900}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 950}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1000}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1050}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1100}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1150}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1200}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1250}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1375}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1500}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1550}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1625}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1750}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1875}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1950}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{0, 1975}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
+ops_write_plane_group_hdf5({{2, block0np2/2}}, slice_name0, {{rho_B0, rhou0_B0, rhou1_B0, rhou2_B0, rhoE_B0}});
 }
 
 }

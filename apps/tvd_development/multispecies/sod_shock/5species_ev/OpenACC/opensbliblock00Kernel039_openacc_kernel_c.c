@@ -6,13 +6,31 @@
 
 int xdim0_opensbliblock00Kernel039;
 int xdim1_opensbliblock00Kernel039;
+int xdim2_opensbliblock00Kernel039;
+int xdim3_opensbliblock00Kernel039;
+int xdim4_opensbliblock00Kernel039;
+int xdim5_opensbliblock00Kernel039;
+int xdim6_opensbliblock00Kernel039;
+int xdim7_opensbliblock00Kernel039;
 
 //user function
 inline 
-void opensbliblock00Kernel039(const ptr_double T_B0,
-  ptr_double eveqO2_B0)
+ void opensbliblock00Kernel039(const ptr_double T_B0,
+  const ptr_double p_B0,
+  const ptr_double rhoN2_B0,
+  const
+ptr_double rhoNO_B0,
+  const ptr_double rhoN_B0,
+  const ptr_double rhoO2_B0,
+  const ptr_double rhoO_B0,
+  ptr_double tauN2_B0)
 {
-   OPS_ACC(eveqO2_B0, 0) = Rhat*invMO2*thetavO2/(-1.0 + exp(thetavO2/OPS_ACC(T_B0, 0)));
+    OPS_ACC(tauN2_B0, 0) = (invMN*OPS_ACC(rhoN_B0, 0) + invMO*OPS_ACC(rhoO_B0, 0) + invMN2*OPS_ACC(rhoN2_B0, 0) + invMNO*OPS_ACC(rhoNO_B0, 0) +
+      invMO2*OPS_ACC(rhoO2_B0, 0))*(1.45842652127424e-17*invMO2*OPS_ACC(p_B0, 0)*OPS_ACC(rhoO2_B0, 0)*exp(299.0/cbrt(OPS_ACC(T_B0, 0))) +
+      1.35360721002158e-16*invMNO*OPS_ACC(p_B0, 0)*OPS_ACC(rhoNO_B0, 0)*exp(225.0/cbrt(OPS_ACC(T_B0, 0))) +
+      1.62624395940909e-16*invMN2*OPS_ACC(p_B0, 0)*OPS_ACC(rhoN2_B0, 0)*exp(221.0/cbrt(OPS_ACC(T_B0, 0))) +
+      3.33376684850184e-14*invMO*OPS_ACC(p_B0, 0)*OPS_ACC(rhoO_B0, 0)*exp(72.4/cbrt(OPS_ACC(T_B0, 0))) +
+      8.83987765311328e-16*invMN*OPS_ACC(p_B0, 0)*OPS_ACC(rhoN_B0, 0)*exp(180.0/cbrt(OPS_ACC(T_B0, 0))));
 
 }
 
@@ -20,14 +38,27 @@ void opensbliblock00Kernel039(const ptr_double T_B0,
 void opensbliblock00Kernel039_c_wrapper(
   double *p_a0,
   double *p_a1,
+  double *p_a2,
+  double *p_a3,
+  double *p_a4,
+  double *p_a5,
+  double *p_a6,
+  double *p_a7,
   int x_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1)
+  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4,p_a5,p_a6,p_a7)
   #pragma acc loop
   #endif
   for ( int n_x=0; n_x<x_size; n_x++ ){
     const ptr_double ptr0 = {  p_a0 + n_x*1*1 };
-    ptr_double ptr1 = {  p_a1 + n_x*1*1 };
-    opensbliblock00Kernel039( ptr0, ptr1);
+    const ptr_double ptr1 = {  p_a1 + n_x*1*1 };
+    const ptr_double ptr2 = {  p_a2 + n_x*1*1 };
+    const ptr_double ptr3 = {  p_a3 + n_x*1*1 };
+    const ptr_double ptr4 = {  p_a4 + n_x*1*1 };
+    const ptr_double ptr5 = {  p_a5 + n_x*1*1 };
+    const ptr_double ptr6 = {  p_a6 + n_x*1*1 };
+    ptr_double ptr7 = {  p_a7 + n_x*1*1 };
+    opensbliblock00Kernel039( ptr0, ptr1, ptr2, ptr3,
+           ptr4, ptr5, ptr6, ptr7);
   }
 }

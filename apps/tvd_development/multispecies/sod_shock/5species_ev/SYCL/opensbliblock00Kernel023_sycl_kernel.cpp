@@ -61,7 +61,7 @@ void ops_par_loop_opensbliblock00Kernel023_execute(ops_kernel_descriptor *desc) 
   double* T_B0_p = (double*)args[0].data_d;
 
   int base1 = args[1].dat->base_offset/sizeof(double);
-  double* eveqNO_B0_p = (double*)args[1].data_d;
+  double* eveqO2_B0_p = (double*)args[1].data_d;
 
 
 
@@ -82,10 +82,8 @@ void ops_par_loop_opensbliblock00Kernel023_execute(ops_kernel_descriptor *desc) 
     block->instance->sycl_instance->queue->submit([&](cl::sycl::handler &cgh) {
 
       auto Rhat_sycl = (*Rhat_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto inv2uref_sycl = (*inv2uref_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto invMNO_sycl = (*invMNO_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto invTref_sycl = (*invTref_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto thetavNO_sycl = (*thetavNO_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto invMO2_sycl = (*invMO2_p).template get_access<cl::sycl::access::mode::read>(cgh);
+      auto thetavO2_sycl = (*thetavO2_p).template get_access<cl::sycl::access::mode::read>(cgh);
 
       cgh.parallel_for<class opensbliblock00Kernel023_kernel>(cl::sycl::nd_range<1>(cl::sycl::range<1>(
             ((end[0]-start[0]-1)/block->instance->OPS_block_size_x+1)*block->instance->OPS_block_size_x
@@ -96,11 +94,11 @@ void ops_par_loop_opensbliblock00Kernel023_execute(ops_kernel_descriptor *desc) 
       ) [[intel::kernel_args_restrict]] {
         int n_x = item.get_global_id(0)+start_0;
         const ACC<double> T_B0(&T_B0_p[0] + base0 + n_x*1);
-        ACC<double> eveqNO_B0(&eveqNO_B0_p[0] + base1 + n_x*1);
+        ACC<double> eveqO2_B0(&eveqO2_B0_p[0] + base1 + n_x*1);
         //USER CODE
         if (n_x < end_0) {
           
-   eveqNO_B0(0) = Rhat_sycl[0]*invMNO_sycl[0]*invTref_sycl[0]*inv2uref_sycl[0]*thetavNO_sycl[0]/(-1.0 + cl::sycl::exp(invTref_sycl[0]*thetavNO_sycl[0]/T_B0(0)));
+   eveqO2_B0(0) = Rhat_sycl[0]*invMO2_sycl[0]*thetavO2_sycl[0]/(-1.0 + cl::sycl::exp(thetavO2_sycl[0]/T_B0(0)));
 
 
         }

@@ -18,10 +18,6 @@ int size, char *dat, char const *name){
     HDF5_timing = *(int*)dat;
   }
   else
-  if (!strcmp(name,"Lref")) {
-    Lref = *(double*)dat;
-  }
-  else
   if (!strcmp(name,"MN")) {
     MN = *(double*)dat;
   }
@@ -44,10 +40,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"Rhat")) {
     Rhat = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"Tref")) {
-    Tref = *(double*)dat;
   }
   else
   if (!strcmp(name,"block0np0")) {
@@ -78,10 +70,6 @@ int size, char *dat, char const *name){
     inv2Delta0block0 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"inv2uref")) {
-    inv2uref = *(double*)dat;
-  }
-  else
   if (!strcmp(name,"invDelta0block0")) {
     invDelta0block0 = *(double*)dat;
   }
@@ -110,20 +98,12 @@ int size, char *dat, char const *name){
     invRhat = *(double*)dat;
   }
   else
-  if (!strcmp(name,"invTref")) {
-    invTref = *(double*)dat;
-  }
-  else
   if (!strcmp(name,"invdelta_TVD")) {
     invdelta_TVD = *(double*)dat;
   }
   else
   if (!strcmp(name,"invgamma_m1")) {
     invgamma_m1 = *(double*)dat;
-  }
-  else
-  if (!strcmp(name,"invuref")) {
-    invuref = *(double*)dat;
   }
   else
   if (!strcmp(name,"kappa")) {
@@ -158,10 +138,6 @@ int size, char *dat, char const *name){
     thetavO2 = *(double*)dat;
   }
   else
-  if (!strcmp(name,"uref")) {
-    uref = *(double*)dat;
-  }
-  else
   {
     throw OPSException(OPS_RUNTIME_ERROR, "error: unknown const name");
   }
@@ -173,7 +149,7 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel027_openacc_kernel.cpp"
 #include "opensbliblock00Kernel008_openacc_kernel.cpp"
 #include "opensbliblock00Kernel011_openacc_kernel.cpp"
-#include "opensbliblock00Kernel009_openacc_kernel.cpp"
+#include "opensbliblock00Kernel010_openacc_kernel.cpp"
 #include "opensbliblock00Kernel020_openacc_kernel.cpp"
 #include "opensbliblock00Kernel021_openacc_kernel.cpp"
 #include "opensbliblock00Kernel022_openacc_kernel.cpp"

@@ -104,8 +104,6 @@ void ops_par_loop_opensbliblock00Kernel009_execute(ops_kernel_descriptor *desc) 
     block->instance->sycl_instance->queue->submit([&](cl::sycl::handler &cgh) {
 
       auto Rhat_sycl = (*Rhat_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto Tref_sycl = (*Tref_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto inv2uref_sycl = (*inv2uref_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invMN_sycl = (*invMN_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invMN2_sycl = (*invMN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invMNO_sycl = (*invMNO_p).template get_access<cl::sycl::access::mode::read>(cgh);
@@ -131,7 +129,7 @@ void ops_par_loop_opensbliblock00Kernel009_execute(ops_kernel_descriptor *desc) 
         if (n_x < end_0) {
           
     p_B0(0) = (invMN_sycl[0]*rhoN_B0(0) + invMO_sycl[0]*rhoO_B0(0) + invMN2_sycl[0]*rhoN2_B0(0) + invMNO_sycl[0]*rhoNO_B0(0) +
-      invMO2_sycl[0]*rhoO2_B0(0))*Rhat_sycl[0]*Tref_sycl[0]*inv2uref_sycl[0]*T_B0(0);
+      invMO2_sycl[0]*rhoO2_B0(0))*Rhat_sycl[0]*T_B0(0);
 
 
         }

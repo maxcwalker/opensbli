@@ -114,11 +114,7 @@ void ops_par_loop_opensbliblock00Kernel021_execute(ops_kernel_descriptor *desc) 
       auto MN_sycl = (*MN_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto MN2_sycl = (*MN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto Rhat_sycl = (*Rhat_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto Tref_sycl = (*Tref_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto cN_sycl = (*cN_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto cN2_sycl = (*cN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto thetavN2_sycl = (*thetavN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto uref_sycl = (*uref_p).template get_access<cl::sycl::access::mode::read>(cgh);
 
       cgh.parallel_for<class opensbliblock00Kernel021_kernel>(cl::sycl::nd_range<1>(cl::sycl::range<1>(
             ((end[0]-start[0]-1)/block->instance->OPS_block_size_x+1)*block->instance->OPS_block_size_x
@@ -139,8 +135,8 @@ void ops_par_loop_opensbliblock00Kernel021_execute(ops_kernel_descriptor *desc) 
         if (n_x < end_0) {
           
    double T0 = 0.0;
-   double cN_sycl[0] = 0.0;
-   double cN2_sycl[0] = 0.0;
+   double cN = 0.0;
+   double cN2 = 0.0;
    double evN2 = 0.0;
    double p0 = 0.0;
    double r = 0.0;
@@ -165,31 +161,31 @@ void ops_par_loop_opensbliblock00Kernel021_execute(ops_kernel_descriptor *desc) 
 
    T0 = p0/(Rhat_sycl[0]*r);
 
-   cN_sycl[0] = ((x0_B0(0) < 0.5) ? (
+   cN = ((x0_B0(0) < 0.5) ? (
    0.0
 )
 : (
    0.05
 ));
 
-   cN2_sycl[0] = ((x0_B0(0) < 0.5) ? (
+   cN2 = ((x0_B0(0) < 0.5) ? (
    1.0
 )
 : (
    0.95
 ));
 
-   rhoN_B0(0) = cN_sycl[0]*r;
+   rhoN_B0(0) = cN*r;
 
-   rhoN2_B0(0) = cN2_sycl[0]*r;
+   rhoN2_B0(0) = cN2*r;
 
    rhou0_B0(0) = r*u0;
 
    evN2 = Rhat_sycl[0]*thetavN2_sycl[0]/(MN2_sycl[0]*(-1.0 + cl::sycl::exp(thetavN2_sycl[0]/T0)));
 
-   rhoev_B0(0) = Rhat_sycl[0]*thetavN2_sycl[0]*(cN_sycl[0]*r/MN_sycl[0] + cN2_sycl[0]*r/MN2_sycl[0])/(MN2_sycl[0]*Tref_sycl[0]*(uref_sycl[0]*uref_sycl[0])*(-1.0 + cl::sycl::exp(thetavN2_sycl[0]/(T0*Tref_sycl[0]))));
+   rhoev_B0(0) = Rhat_sycl[0]*thetavN2_sycl[0]*(cN*r/MN_sycl[0] + cN2*r/MN2_sycl[0])/(MN2_sycl[0]*(-1.0 + cl::sycl::exp(thetavN2_sycl[0]/T0)));
 
-   rhoE_B0(0) = (u0*u0)*(0.5*cN_sycl[0]*r + 0.5*cN2_sycl[0]*r) + p0*(1.5*cN_sycl[0]*r/MN_sycl[0] + 2.5*cN2_sycl[0]*r/MN2_sycl[0])/(cN_sycl[0]*r/MN_sycl[0] + cN2_sycl[0]*r/MN2_sycl[0]);
+   rhoE_B0(0) = (u0*u0)*(0.5*cN*r + 0.5*cN2*r) + p0*(1.5*cN*r/MN_sycl[0] + 2.5*cN2*r/MN2_sycl[0])/(cN*r/MN_sycl[0] + cN2*r/MN2_sycl[0]);
 
 
         }

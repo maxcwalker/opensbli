@@ -432,7 +432,7 @@ ACC<double> &wdotO2_B0,
     Residual6_B0(0) = -d1_rhoevu0_dx + evN2_B0(0)*wdotN2_B0(0) + evNO_B0(0)*wdotNO_B0(0) + evO2_B0(0)*wdotO2_B0(0) +
       9.86923266716013e-6*(invMN2*rhoN2_B0(0)/ptauN2_B0(0) + invMNO*rhoNO_B0(0)/ptauNO_B0(0) +
       invMO2*rhoO2_B0(0)/ptauO2_B0(0))*(-rhoev_B0(0) + rhoN2_B0(0)*eveqN2_B0(0) + rhoNO_B0(0)*eveqNO_B0(0) +
-      rhoO2_B0(0)*eveqO2_B0(0))*Lref*invuref*p_B0(0)/(invMN2*rhoN2_B0(0) + invMNO*rhoNO_B0(0) + invMO2*rhoO2_B0(0));
+      rhoO2_B0(0)*eveqO2_B0(0))*p_B0(0)/(invMN2*rhoN2_B0(0) + invMNO*rhoNO_B0(0) + invMO2*rhoO2_B0(0));
 
    Residual7_B0(0) = -d1_prhoEu0_dx + kappa*d2_T_dx;
 

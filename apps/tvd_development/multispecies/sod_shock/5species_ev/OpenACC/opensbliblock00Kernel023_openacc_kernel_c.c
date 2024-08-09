@@ -10,9 +10,9 @@ int xdim1_opensbliblock00Kernel023;
 //user function
 inline 
 void opensbliblock00Kernel023(const ptr_double T_B0,
-  ptr_double eveqNO_B0)
+  ptr_double eveqO2_B0)
 {
-   OPS_ACC(eveqNO_B0, 0) = Rhat*invMNO*invTref*inv2uref*thetavNO/(-1.0 + exp(invTref*thetavNO/OPS_ACC(T_B0, 0)));
+   OPS_ACC(eveqO2_B0, 0) = Rhat*invMO2*thetavO2/(-1.0 + exp(thetavO2/OPS_ACC(T_B0, 0)));
 
 }
 

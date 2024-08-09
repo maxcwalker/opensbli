@@ -261,15 +261,15 @@ void ops_par_loop_opensbliblock00Kernel004_execute(ops_kernel_descriptor *desc) 
    double ws_lambda_22 = 0.0;
    double ws_lambda_33 = 0.0;
    double ws_lambda_44 = 0.0;
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(-1));
-
    AVG_0_a = ((1.0/2.0))*(a_B0(0) + a_B0(-1));
+
+   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(-1));
 
    AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(-1));
 
    AVG_0_ev = ((1.0/2.0))*(ev_B0(0) + ev_B0(-1));
 
-   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(-1));
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(-1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -343,15 +343,15 @@ void ops_par_loop_opensbliblock00Kernel004_execute(ops_kernel_descriptor *desc) 
     alpha_40 = (-rhoE_B0(-1) + rhoE_B0(0))*AVG_0_0_LEV_44 + (-rhoN_B0(-1) + rhoN_B0(0))*AVG_0_0_LEV_40 + (-rhoN2_B0(-1)
       + rhoN2_B0(0))*AVG_0_0_LEV_41 + (-rhou0_B0(-1) + rhou0_B0(0))*AVG_0_0_LEV_42;
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(1));
-
    AVG_0_a = ((1.0/2.0))*(a_B0(0) + a_B0(1));
+
+   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(1));
 
    AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(0) + rhoN_B0(1));
 
    AVG_0_ev = ((1.0/2.0))*(ev_B0(0) + ev_B0(1));
 
-   AVG_0_u0 = ((1.0/2.0))*(u0_B0(0) + u0_B0(1));
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(0) + rhoN2_B0(1));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 
@@ -469,15 +469,15 @@ void ops_par_loop_opensbliblock00Kernel004_execute(ops_kernel_descriptor *desc) 
     AVG_0_REV_44 = ((1.0/2.0))*(AVG_0_rhoN + AVG_0_rhoN2)*(-(AVG_0_u0*AVG_0_u0) + 2*(AVG_0_a*AVG_0_a) +
       (AVG_0_u0*AVG_0_u0)*gama + 2*AVG_0_a*AVG_0_u0 - 2*gama*AVG_0_a*AVG_0_u0)*invgamma_m1/AVG_0_rhoN2;
 
-   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(1) + rhoN2_B0(2));
-
    AVG_0_a = ((1.0/2.0))*(a_B0(1) + a_B0(2));
+
+   AVG_0_u0 = ((1.0/2.0))*(u0_B0(1) + u0_B0(2));
 
    AVG_0_rhoN = ((1.0/2.0))*(rhoN_B0(1) + rhoN_B0(2));
 
    AVG_0_ev = ((1.0/2.0))*(ev_B0(1) + ev_B0(2));
 
-   AVG_0_u0 = ((1.0/2.0))*(u0_B0(1) + u0_B0(2));
+   AVG_0_rhoN2 = ((1.0/2.0))*(rhoN2_B0(1) + rhoN2_B0(2));
 
    inv_AVG_a = 1.0/(AVG_0_a);
 

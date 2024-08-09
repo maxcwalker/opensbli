@@ -23,17 +23,12 @@ ops_write_const_hdf5("gama", 1, "double", (char*)&gama, filename);
 ops_write_const_hdf5("gamma_m1", 1, "double", (char*)&gamma_m1, filename);
 ops_write_const_hdf5("niter", 1, "int", (char*)&niter, filename);
 ops_write_const_hdf5("omega_0", 1, "double", (char*)&omega_0, filename);
-ops_write_const_hdf5("omega_1", 1, "double", (char*)&omega_1, filename);
-ops_write_const_hdf5("omega_2", 1, "double", (char*)&omega_2, filename);
-ops_write_const_hdf5("omega_3", 1, "double", (char*)&omega_3, filename);
-ops_write_const_hdf5("phi_0", 1, "double", (char*)&phi_0, filename);
-ops_write_const_hdf5("phi_1", 1, "double", (char*)&phi_1, filename);
-ops_write_const_hdf5("phi_2", 1, "double", (char*)&phi_2, filename);
 ops_write_const_hdf5("shock_filter_control", 1, "double", (char*)&shock_filter_control, filename);
 ops_write_const_hdf5("simulation_time", 1, "double", (char*)&simulation_time, filename);
 ops_write_const_hdf5("start_iter", 1, "int", (char*)&start_iter, filename);
 ops_write_const_hdf5("tripA", 1, "double", (char*)&tripA, filename);
 ops_write_const_hdf5("write_output_file", 1, "int", (char*)&write_output_file, filename);
+ops_write_const_hdf5("write_slices", 1, "int", (char*)&write_slices, filename);
 ops_write_const_hdf5("xts", 1, "double", (char*)&xts, filename);
 ops_write_const_hdf5("iter", 1, "int", (char*)&iter, filename);
 }

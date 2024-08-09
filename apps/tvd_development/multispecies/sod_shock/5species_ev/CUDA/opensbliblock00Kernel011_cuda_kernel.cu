@@ -18,9 +18,9 @@ __device__
 ACC<double> &u0_B0,
   ACC<double> &T_B0)
 {
-    T_B0(0) = (uref*uref)*(-2*rhoev_B0(0) - 0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0)
-      + rhoO2_B0(0)) + rhoE_B0(0))*invRhat*invTref/(1.5*invMN*rhoN_B0(0) + 1.5*invMO*rhoO_B0(0) + 2.5*invMN2*rhoN2_B0(0)
-      + 2.5*invMNO*rhoNO_B0(0) + 2.5*invMO2*rhoO2_B0(0));
+    T_B0(0) = (-2*rhoev_B0(0) - 0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoO_B0(0) + rhoN2_B0(0) + rhoNO_B0(0) +
+      rhoO2_B0(0)) + rhoE_B0(0))*invRhat/(1.5*invMN*rhoN_B0(0) + 1.5*invMO*rhoO_B0(0) + 2.5*invMN2*rhoN2_B0(0) +
+      2.5*invMNO*rhoNO_B0(0) + 2.5*invMO2*rhoO2_B0(0));
 
 }
 

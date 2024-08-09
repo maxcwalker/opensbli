@@ -16,14 +16,12 @@
 // global constants
 __constant__ double Delta0block0;
 __constant__ int HDF5_timing;
-__constant__ double Lref;
 __constant__ double MN;
 __constant__ double MN2;
 __constant__ double MNO;
 __constant__ double MO;
 __constant__ double MO2;
 __constant__ double Rhat;
-__constant__ double Tref;
 __constant__ int block0np0;
 __constant__ double delta_TVD;
 __constant__ double dt;
@@ -31,7 +29,6 @@ __constant__ double eps_TVD;
 __constant__ double gama;
 __constant__ double gamma_m1;
 __constant__ double inv2Delta0block0;
-__constant__ double inv2uref;
 __constant__ double invDelta0block0;
 __constant__ double invMN;
 __constant__ double invMN2;
@@ -39,10 +36,8 @@ __constant__ double invMNO;
 __constant__ double invMO;
 __constant__ double invMO2;
 __constant__ double invRhat;
-__constant__ double invTref;
 __constant__ double invdelta_TVD;
 __constant__ double invgamma_m1;
-__constant__ double invuref;
 __constant__ double kappa;
 __constant__ double kappa_TVD;
 __constant__ int niter;
@@ -51,7 +46,6 @@ __constant__ int start_iter;
 __constant__ double thetavN2;
 __constant__ double thetavNO;
 __constant__ double thetavO2;
-__constant__ double uref;
 
 void ops_init_backend() {}
 
@@ -64,10 +58,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"HDF5_timing")) {
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(HDF5_timing), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"Lref")) {
-    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Lref), dat, dim*size));
   }
   else
   if (!strcmp(name,"MN")) {
@@ -92,10 +82,6 @@ int size, char *dat, char const *name){
   else
   if (!strcmp(name,"Rhat")) {
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Rhat), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"Tref")) {
-    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(Tref), dat, dim*size));
   }
   else
   if (!strcmp(name,"block0np0")) {
@@ -126,10 +112,6 @@ int size, char *dat, char const *name){
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(inv2Delta0block0), dat, dim*size));
   }
   else
-  if (!strcmp(name,"inv2uref")) {
-    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(inv2uref), dat, dim*size));
-  }
-  else
   if (!strcmp(name,"invDelta0block0")) {
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(invDelta0block0), dat, dim*size));
   }
@@ -158,20 +140,12 @@ int size, char *dat, char const *name){
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(invRhat), dat, dim*size));
   }
   else
-  if (!strcmp(name,"invTref")) {
-    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(invTref), dat, dim*size));
-  }
-  else
   if (!strcmp(name,"invdelta_TVD")) {
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(invdelta_TVD), dat, dim*size));
   }
   else
   if (!strcmp(name,"invgamma_m1")) {
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(invgamma_m1), dat, dim*size));
-  }
-  else
-  if (!strcmp(name,"invuref")) {
-    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(invuref), dat, dim*size));
   }
   else
   if (!strcmp(name,"kappa")) {
@@ -206,10 +180,6 @@ int size, char *dat, char const *name){
     hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(thetavO2), dat, dim*size));
   }
   else
-  if (!strcmp(name,"uref")) {
-    hipSafeCall(instance->ostream(),hipMemcpyToSymbol(HIP_SYMBOL(uref), dat, dim*size));
-  }
-  else
   {
     throw OPSException(OPS_RUNTIME_ERROR, "error: unknown const name");
   }
@@ -222,7 +192,7 @@ int size, char *dat, char const *name){
 #include "opensbliblock00Kernel027_hip_kernel.cpp"
 #include "opensbliblock00Kernel008_hip_kernel.cpp"
 #include "opensbliblock00Kernel011_hip_kernel.cpp"
-#include "opensbliblock00Kernel009_hip_kernel.cpp"
+#include "opensbliblock00Kernel010_hip_kernel.cpp"
 #include "opensbliblock00Kernel020_hip_kernel.cpp"
 #include "opensbliblock00Kernel021_hip_kernel.cpp"
 #include "opensbliblock00Kernel022_hip_kernel.cpp"

@@ -17,7 +17,7 @@ ACC<double> &rhoN_B0,
   ACC<double> &p_B0)
 {
     p_B0(0) = (invMN*rhoN_B0(0) + invMO*rhoO_B0(0) + invMN2*rhoN2_B0(0) + invMNO*rhoNO_B0(0) +
-      invMO2*rhoO2_B0(0))*Rhat*Tref*inv2uref*T_B0(0);
+      invMO2*rhoO2_B0(0))*Rhat*T_B0(0);
 
 }
 

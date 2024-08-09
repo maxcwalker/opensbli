@@ -83,7 +83,7 @@ void ops_par_loop_opensbliblock00Kernel022_execute(ops_kernel_descriptor *desc) 
   double* rhoO_B0_p = (double*)args[5].data_d;
 
   int base6 = args[6].dat->base_offset/sizeof(double);
-  double* ptauO2_B0_p = (double*)args[6].data_d;
+  double* ptauN2_B0_p = (double*)args[6].data_d;
 
 
 
@@ -123,15 +123,15 @@ void ops_par_loop_opensbliblock00Kernel022_execute(ops_kernel_descriptor *desc) 
         const ACC<double> rhoN_B0(&rhoN_B0_p[0] + base3 + n_x*1);
         const ACC<double> rhoO2_B0(&rhoO2_B0_p[0] + base4 + n_x*1);
         const ACC<double> rhoO_B0(&rhoO_B0_p[0] + base5 + n_x*1);
-        ACC<double> ptauO2_B0(&ptauO2_B0_p[0] + base6 + n_x*1);
+        ACC<double> ptauN2_B0(&ptauN2_B0_p[0] + base6 + n_x*1);
         //USER CODE
         if (n_x < end_0) {
           
-    ptauO2_B0(0) = (3.03420950194169e-10*invMO_sycl[0]*rhoO_B0(0)*cl::sycl::exp(129.0*pow(T_B0(0), -0.333333333333333)) +
-      2.14180928034488e-10*invMNO_sycl[0]*rhoNO_B0(0)*cl::sycl::exp(129.0*pow(T_B0(0), -0.333333333333333)) +
-      3.27838502246041e-10*invMN_sycl[0]*rhoN_B0(0)*cl::sycl::exp(129.0*pow(T_B0(0), -0.333333333333333)) +
-      2.08725734681668e-10*invMO2_sycl[0]*rhoO2_B0(0)*cl::sycl::exp(129.0*pow(T_B0(0), -0.333333333333333)) +
-      2.22632207449373e-10*invMN2_sycl[0]*rhoN2_B0(0)*cl::sycl::exp(129.0*pow(T_B0(0), -0.333333333333333)))/(invMN_sycl[0]*rhoN_B0(0) +
+    ptauN2_B0(0) = (3.14066959164866e-11*invMN_sycl[0]*rhoN_B0(0)*cl::sycl::exp(220.0*pow(T_B0(0), -0.333333333333333)) +
+      1.69627729418406e-11*invMN2_sycl[0]*rhoN2_B0(0)*cl::sycl::exp(220.0*pow(T_B0(0), -0.333333333333333)) +
+      2.75229751516092e-11*invMO_sycl[0]*rhoO_B0(0)*cl::sycl::exp(220.0*pow(T_B0(0), -0.333333333333333)) +
+      1.51958310305852e-11*invMO2_sycl[0]*rhoO2_B0(0)*cl::sycl::exp(220.0*pow(T_B0(0), -0.333333333333333)) +
+      1.58793752948278e-11*invMNO_sycl[0]*rhoNO_B0(0)*cl::sycl::exp(220.0*pow(T_B0(0), -0.333333333333333)))/(invMN_sycl[0]*rhoN_B0(0) +
       invMO_sycl[0]*rhoO_B0(0) + invMN2_sycl[0]*rhoN2_B0(0) + invMNO_sycl[0]*rhoNO_B0(0) + invMO2_sycl[0]*rhoO2_B0(0));
 
 

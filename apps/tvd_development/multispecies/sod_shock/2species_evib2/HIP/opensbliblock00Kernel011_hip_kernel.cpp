@@ -14,8 +14,8 @@ __device__
   const ACC<double> &u0_B0,
   ACC<double> &T_B0)
 {
-    T_B0(0) = (uref*uref)*(-rhoev_B0(0) - 0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) +
-      rhoE_B0(0))*invRhat*invTref/(invMN*rhoN_B0(0) + invMN2*rhoN2_B0(0));
+    T_B0(0) = (-rhoev_B0(0) - 0.5*(u0_B0(0)*u0_B0(0))*(rhoN_B0(0) + rhoN2_B0(0)) + rhoE_B0(0))*invRhat/(invMN*rhoN_B0(0)
+      + invMN2*rhoN2_B0(0));
 
 }
 

@@ -82,9 +82,7 @@ void ops_par_loop_opensbliblock00Kernel018_execute(ops_kernel_descriptor *desc) 
     block->instance->sycl_instance->queue->submit([&](cl::sycl::handler &cgh) {
 
       auto Rhat_sycl = (*Rhat_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto inv2uref_sycl = (*inv2uref_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto invMN2_sycl = (*invMN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
-      auto invTref_sycl = (*invTref_p).template get_access<cl::sycl::access::mode::read>(cgh);
       auto thetavN2_sycl = (*thetavN2_p).template get_access<cl::sycl::access::mode::read>(cgh);
 
       cgh.parallel_for<class opensbliblock00Kernel018_kernel>(cl::sycl::nd_range<1>(cl::sycl::range<1>(
@@ -100,7 +98,7 @@ void ops_par_loop_opensbliblock00Kernel018_execute(ops_kernel_descriptor *desc) 
         //USER CODE
         if (n_x < end_0) {
           
-   eveqN2_B0(0) = Rhat_sycl[0]*invMN2_sycl[0]*invTref_sycl[0]*inv2uref_sycl[0]*thetavN2_sycl[0]/(-1.0 + cl::sycl::exp(invTref_sycl[0]*thetavN2_sycl[0]/T_B0(0)));
+   eveqN2_B0(0) = Rhat_sycl[0]*invMN2_sycl[0]*thetavN2_sycl[0]/(-1.0 + cl::sycl::exp(thetavN2_sycl[0]/T_B0(0)));
 
 
         }

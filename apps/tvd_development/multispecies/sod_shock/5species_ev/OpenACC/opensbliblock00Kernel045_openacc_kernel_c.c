@@ -12,84 +12,21 @@ int xdim4_opensbliblock00Kernel045;
 int xdim5_opensbliblock00Kernel045;
 int xdim6_opensbliblock00Kernel045;
 int xdim7_opensbliblock00Kernel045;
-int xdim8_opensbliblock00Kernel045;
-int xdim9_opensbliblock00Kernel045;
-int xdim10_opensbliblock00Kernel045;
-int xdim11_opensbliblock00Kernel045;
-int xdim12_opensbliblock00Kernel045;
-int xdim13_opensbliblock00Kernel045;
-int xdim14_opensbliblock00Kernel045;
-int xdim15_opensbliblock00Kernel045;
-int xdim16_opensbliblock00Kernel045;
-int xdim17_opensbliblock00Kernel045;
-int xdim18_opensbliblock00Kernel045;
-int xdim19_opensbliblock00Kernel045;
-int xdim20_opensbliblock00Kernel045;
-int xdim21_opensbliblock00Kernel045;
-int xdim22_opensbliblock00Kernel045;
-int xdim23_opensbliblock00Kernel045;
 
 //user function
 inline 
- void opensbliblock00Kernel045(const ptr_double Residual0_B0,
-  const ptr_double Residual1_B0,
-  const ptr_double Residual2_B0,
-  const ptr_double Residual3_B0,
-  const ptr_double Residual4_B0,
-  const ptr_double Residual5_B0,
+ void opensbliblock00Kernel045(const ptr_double T_B0,
+  const ptr_double gammaf_B0,
+  const ptr_double yN2_B0,
   const
-ptr_double Residual6_B0,
-  const ptr_double Residual7_B0,
-  ptr_double rhoE_B0,
-  ptr_double rhoE_RKold_B0,
-  ptr_double rhoN2_B0,
-  ptr_double rhoN2_RKold_B0,
-  ptr_double rhoNO_B0,
-  ptr_double rhoNO_RKold_B0,
-  ptr_double rhoN_B0,
-  ptr_double rhoN_RKold_B0,
-  ptr_double rhoO2_B0,
-  ptr_double rhoO2_RKold_B0,
-  ptr_double rhoO_B0,
-  ptr_double rhoO_RKold_B0,
-  ptr_double rhoev_B0,
-  ptr_double rhoev_RKold_B0,
-  ptr_double rhou0_B0,
-  ptr_double rhou0_RKold_B0,
-  const double *rkA,
-  const double *rkB)
+ptr_double yNO_B0,
+  const ptr_double yN_B0,
+  const ptr_double yO2_B0,
+  const ptr_double yO_B0,
+  ptr_double af_B0)
 {
-   OPS_ACC(rhoO_RKold_B0, 0) = rkA[0]*OPS_ACC(rhoO_RKold_B0, 0) + dt*OPS_ACC(Residual0_B0, 0);
-
-   OPS_ACC(rhoO_B0, 0) = rkB[0]*OPS_ACC(rhoO_RKold_B0, 0) + OPS_ACC(rhoO_B0, 0);
-
-   OPS_ACC(rhoO2_RKold_B0, 0) = rkA[0]*OPS_ACC(rhoO2_RKold_B0, 0) + dt*OPS_ACC(Residual1_B0, 0);
-
-   OPS_ACC(rhoO2_B0, 0) = rkB[0]*OPS_ACC(rhoO2_RKold_B0, 0) + OPS_ACC(rhoO2_B0, 0);
-
-   OPS_ACC(rhoN_RKold_B0, 0) = rkA[0]*OPS_ACC(rhoN_RKold_B0, 0) + dt*OPS_ACC(Residual2_B0, 0);
-
-   OPS_ACC(rhoN_B0, 0) = rkB[0]*OPS_ACC(rhoN_RKold_B0, 0) + OPS_ACC(rhoN_B0, 0);
-
-   OPS_ACC(rhoN2_RKold_B0, 0) = rkA[0]*OPS_ACC(rhoN2_RKold_B0, 0) + dt*OPS_ACC(Residual3_B0, 0);
-
-   OPS_ACC(rhoN2_B0, 0) = rkB[0]*OPS_ACC(rhoN2_RKold_B0, 0) + OPS_ACC(rhoN2_B0, 0);
-
-   OPS_ACC(rhoNO_RKold_B0, 0) = rkA[0]*OPS_ACC(rhoNO_RKold_B0, 0) + dt*OPS_ACC(Residual4_B0, 0);
-
-   OPS_ACC(rhoNO_B0, 0) = rkB[0]*OPS_ACC(rhoNO_RKold_B0, 0) + OPS_ACC(rhoNO_B0, 0);
-
-   OPS_ACC(rhou0_RKold_B0, 0) = rkA[0]*OPS_ACC(rhou0_RKold_B0, 0) + dt*OPS_ACC(Residual5_B0, 0);
-
-   OPS_ACC(rhou0_B0, 0) = rkB[0]*OPS_ACC(rhou0_RKold_B0, 0) + OPS_ACC(rhou0_B0, 0);
-
-   OPS_ACC(rhoev_RKold_B0, 0) = rkA[0]*OPS_ACC(rhoev_RKold_B0, 0) + dt*OPS_ACC(Residual6_B0, 0);
-
-   OPS_ACC(rhoev_B0, 0) = rkB[0]*OPS_ACC(rhoev_RKold_B0, 0) + OPS_ACC(rhoev_B0, 0);
-
-   OPS_ACC(rhoE_RKold_B0, 0) = rkA[0]*OPS_ACC(rhoE_RKold_B0, 0) + dt*OPS_ACC(Residual7_B0, 0);
-
-   OPS_ACC(rhoE_B0, 0) = rkB[0]*OPS_ACC(rhoE_RKold_B0, 0) + OPS_ACC(rhoE_B0, 0);
+    OPS_ACC(af_B0, 0) = sqrt((invMN*OPS_ACC(yN_B0, 0) + invMO*OPS_ACC(yO_B0, 0) + invMN2*OPS_ACC(yN2_B0, 0) + invMNO*OPS_ACC(yNO_B0, 0) +
+      invMO2*OPS_ACC(yO2_B0, 0))*Rhat*OPS_ACC(T_B0, 0)*OPS_ACC(gammaf_B0, 0));
 
 }
 
@@ -103,27 +40,9 @@ void opensbliblock00Kernel045_c_wrapper(
   double *p_a5,
   double *p_a6,
   double *p_a7,
-  double *p_a8,
-  double *p_a9,
-  double *p_a10,
-  double *p_a11,
-  double *p_a12,
-  double *p_a13,
-  double *p_a14,
-  double *p_a15,
-  double *p_a16,
-  double *p_a17,
-  double *p_a18,
-  double *p_a19,
-  double *p_a20,
-  double *p_a21,
-  double *p_a22,
-  double *p_a23,
-  double p_a24,
-  double p_a25,
   int x_size) {
   #ifdef OPS_GPU
-  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4,p_a5,p_a6,p_a7,p_a8,p_a9,p_a10,p_a11,p_a12,p_a13,p_a14,p_a15,p_a16,p_a17,p_a18,p_a19,p_a20,p_a21,p_a22,p_a23)
+  #pragma acc parallel deviceptr(p_a0,p_a1,p_a2,p_a3,p_a4,p_a5,p_a6,p_a7)
   #pragma acc loop
   #endif
   for ( int n_x=0; n_x<x_size; n_x++ ){
@@ -134,29 +53,8 @@ void opensbliblock00Kernel045_c_wrapper(
     const ptr_double ptr4 = {  p_a4 + n_x*1*1 };
     const ptr_double ptr5 = {  p_a5 + n_x*1*1 };
     const ptr_double ptr6 = {  p_a6 + n_x*1*1 };
-    const ptr_double ptr7 = {  p_a7 + n_x*1*1 };
-    ptr_double ptr8 = {  p_a8 + n_x*1*1 };
-    ptr_double ptr9 = {  p_a9 + n_x*1*1 };
-    ptr_double ptr10 = {  p_a10 + n_x*1*1 };
-    ptr_double ptr11 = {  p_a11 + n_x*1*1 };
-    ptr_double ptr12 = {  p_a12 + n_x*1*1 };
-    ptr_double ptr13 = {  p_a13 + n_x*1*1 };
-    ptr_double ptr14 = {  p_a14 + n_x*1*1 };
-    ptr_double ptr15 = {  p_a15 + n_x*1*1 };
-    ptr_double ptr16 = {  p_a16 + n_x*1*1 };
-    ptr_double ptr17 = {  p_a17 + n_x*1*1 };
-    ptr_double ptr18 = {  p_a18 + n_x*1*1 };
-    ptr_double ptr19 = {  p_a19 + n_x*1*1 };
-    ptr_double ptr20 = {  p_a20 + n_x*1*1 };
-    ptr_double ptr21 = {  p_a21 + n_x*1*1 };
-    ptr_double ptr22 = {  p_a22 + n_x*1*1 };
-    ptr_double ptr23 = {  p_a23 + n_x*1*1 };
+    ptr_double ptr7 = {  p_a7 + n_x*1*1 };
     opensbliblock00Kernel045( ptr0, ptr1, ptr2, ptr3,
-           ptr4, ptr5, ptr6, ptr7,
-           ptr8, ptr9, ptr10, ptr11,
-           ptr12, ptr13, ptr14, ptr15,
-           ptr16, ptr17, ptr18, ptr19,
-           ptr20, ptr21, ptr22, ptr23,
-           &p_a24, &p_a25);
+           ptr4, ptr5, ptr6, ptr7);
   }
 }

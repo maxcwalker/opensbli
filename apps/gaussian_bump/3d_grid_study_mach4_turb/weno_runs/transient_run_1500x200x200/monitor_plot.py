@@ -22,17 +22,75 @@ new_columns = ['Iter', 'Time', 'p_50', 'p_96', 'p_100', 'p_175', 'p_187', 'p_191
 df.columns = new_columns
 fig1, ax1 = plt.subplots(7, 1, figsize=(6,5.5))
 # Plot
-for i, val in enumerate(new_columns[2:9]):
+
+
+
+
+from matplotlib.ticker import ScalarFormatter
+from matplotlib.ticker import FormatStrFormatter
+
+# Create the new array
+pressure_loc = new_columns[2:16]
+
+# Select every other column
+# pressure_loc = pressure_loc[::2]
+
+# Determine the number of rows needed
+n = len(pressure_loc)
+rows = (n + 1) // 2
+
+# Create the figure and axes
+fig, axs = plt.subplots(rows, 2, figsize=(16, rows))
+
+# Plotting each column in the specified layout
+for i, val in enumerate(pressure_loc):
+    row = i % rows
+    col = i // rows
+    ax = axs[row, col]
+    ax.plot(df['Time'], df[val], color='k', linewidth=0.7)
+    ax.set_xlim([0,df['Time'].iloc[-1]])
+    ax.set_ylabel('x=%s'%val[2:])
+    ax.grid(True)
+    ax.tick_params(labelbottom=False)
+    # Set the y-axis formatter to avoid scientific notation
+    ax.yaxis.set_major_formatter(ScalarFormatter(useOffset=False))
+    # Set the y-axis formatter to show 3 decimal places
+    ax.yaxis.set_major_formatter(FormatStrFormatter('%.4f'))
+
+# Enable bottom x-axis labels for the last row
+for i in range(2):
+    if (n % 2 != 0 and i == 1) and (n // 2 == rows - 1):
+        axs[-1, 1].tick_params(labelbottom=True)
+    axs[-1, 0].tick_params(labelbottom=True)
+    axs[-1, 0].set_xlabel("Time")
+    axs[-1, 1].tick_params(labelbottom=True)
+    axs[-1, 1].set_xlabel("Time")
+    axs[0,0].set_ylim([0.0425,0.0455])
+    axs[-1,1].set_ylim([0.037,0.05])
+    axs[-2,1].set_ylim([0.037,0.05])
+    axs[-3,1].set_ylim([0.037,0.048])
+
+plt.subplots_adjust(hspace=0.5, wspace=0.2)
+fig.savefig(directory_monitor + "monitoring_pressure.pdf", bbox_inches='tight')
+
+exit()
+
+
+
+
+fig1, ax1 = plt.subplots(10, 1, figsize=(6,8))
+# Plot
+for i, val in enumerate(new_columns[26:36]):
     ax1[i].plot(df['Time'], df[val],color='k',linewidth=0.7)  # Adjust column name as needed
     ax1[i].set_ylabel(val)
-
+    ax1[i].set
     ax1[i].yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     ax1[i].grid(True)
     ax1[i].set_xlabel('Time')
     ax1[i].set_xlim([0,df['Time'].iloc[-1]])
     ax1[i].tick_params(labelbottom=False)
 ax1[-1].tick_params(labelbottom=True)
-ax1[0].set_ylim([0.0001,0.1])
+fig1.savefig(directory_monitor+"monitoring_u_downstream.pdf",bbox_inches='tight')
 
 fig1.savefig(directory_monitor+"monitoring_p_upstream.pdf",bbox_inches='tight')
 fig1, ax1 = plt.subplots(1, figsize=(6.5,1))
@@ -57,47 +115,3 @@ axins1.set_yticks([])
 
 fig1.savefig(directory_monitor+"monitoring_p_zoom.pdf",bbox_inches='tight')
 
-fig1, ax1 = plt.subplots(9, 1, figsize=(6,6))
-# Plot
-indices = [9, 10] + list(range(12, 19))
-for i, idx in enumerate(indices):
-    val = new_columns[idx]
-    ax1[i].plot(df['Time'], df[val], color='k', linewidth=0.7)
-    ax1[i].set_ylabel(val[2:])
-    ax1[i].yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    ax1[i].grid(True)
-    ax1[i].set_xlabel('Time')
-    ax1[i].set_xlim([0, df['Time'].iloc[-1]])
-    ax1[i].tick_params(labelbottom=False)
-ax1[-1].tick_params(labelbottom=True)
-fig1.savefig(directory_monitor+"monitoring_p_downstream.pdf",bbox_inches='tight')
-
-fig1, ax1 = plt.subplots(7, 1, figsize=(6,5.5))
-for i, val in enumerate(new_columns[19:26]):
-    ax1[i].plot(df['Time'], df[val],color='k',linewidth=0.7)  # Adjust column name as needed
-    ax1[i].set_ylabel(val)
-    ax1[i].set
-    ax1[i].yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    ax1[i].grid(True)
-    ax1[i].set_xlabel('Time')
-    ax1[i].set_xlim([0,df['Time'].iloc[-1]])
-    ax1[i].tick_params(labelbottom=False)
-ax1[-1].tick_params(labelbottom=True)
-    
-ax1[0].set_ylim([0.0001,0.1])
-
-fig1.savefig(directory_monitor+"monitoring_u_upstream.pdf",bbox_inches='tight')
-
-fig1, ax1 = plt.subplots(10, 1, figsize=(6,8))
-# Plot
-for i, val in enumerate(new_columns[26:36]):
-    ax1[i].plot(df['Time'], df[val],color='k',linewidth=0.7)  # Adjust column name as needed
-    ax1[i].set_ylabel(val)
-    ax1[i].set
-    ax1[i].yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
-    ax1[i].grid(True)
-    ax1[i].set_xlabel('Time')
-    ax1[i].set_xlim([0,df['Time'].iloc[-1]])
-    ax1[i].tick_params(labelbottom=False)
-ax1[-1].tick_params(labelbottom=True)
-fig1.savefig(directory_monitor+"monitoring_u_downstream.pdf",bbox_inches='tight')
