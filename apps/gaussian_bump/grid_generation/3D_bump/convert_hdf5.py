@@ -4,7 +4,7 @@ from opensbli import *
 
 def apply_group_attributes(group, block):
     group.attrs.create("dims", [block.ndim], dtype="int32")
-    group.attrs.create("ops_type", u"ops_block",dtype="S8")
+    group.attrs.create("ops_type", u"ops_block", dtype="S8")
     group.attrs.create("index", [block.blocknumber], dtype="int32")
     return
 
@@ -16,11 +16,11 @@ def set_hdf5_metadata(dset, halos, npoints, block):
     dset.attrs.create("d_p", d_p, dtype="int32")
     dset.attrs.create("d_m", d_m, dtype="int32")
     dset.attrs.create("dim", [1], dtype="int32")
-    dset.attrs.create("ops_type", u"ops_dat",dtype="S10")
+    dset.attrs.create("ops_type", u"ops_dat", dtype="S10")
     dset.attrs.create("block_index", [block.blocknumber], dtype="int32")
     dset.attrs.create("base", [0 for i in range(block.ndim)], dtype="int32")
-    dset.attrs.create("type", u"double",dtype="S15")
-    dset.attrs.create("block", u"%s" % block.blockname,dtype="S25")
+    dset.attrs.create("type", u"double", dtype="S15")
+    dset.attrs.create("block", u"%s" % block.blockname, dtype="S25")
     dset.attrs.create("size", npoints, dtype="int32")
     return
 
@@ -34,7 +34,7 @@ def output_hdf5(array, array_name, halos, npoints, block):
     assert len(array) == len(array_name)
     with h5py.File('data.h5', 'w') as hf:
         # Create a group
-        if (isinstance(block, MultiBlock)):
+        if isinstance(block, MultiBlock):
             all_blocks = block.blocks
         else:
             all_blocks = [block]
@@ -43,7 +43,7 @@ def output_hdf5(array, array_name, halos, npoints, block):
             # Loop over all the dataset inputs and write to the hdf5 file
             for ar, name in zip(array, array_name):
                 g1.attrs.create("dims", [b.ndim], dtype="int32")
-                g1.attrs.create("ops_type", u"ops_block",dtype="S9")
+                g1.attrs.create("ops_type", u"ops_block", dtype="S9")
                 g1.attrs.create("index", [b.blocknumber], dtype="int32")
                 block_dset_name = b.location_dataset(name).base
                 dset = g1.create_dataset('%s' % (block_dset_name), data=ar)
@@ -52,156 +52,178 @@ def output_hdf5(array, array_name, halos, npoints, block):
 
 def fill_halo_coordinates(block_data, block_number):
     x, y, z = block_data[block_number]['x'], block_data[block_number]['y'], block_data[block_number]['z']
-    # Create an array with zeros padded around the data
-    shape = [nz] + list(x.shape)
-    print(shape)
-    new_shape = tuple([shape[i] + 2 * nhalo for i in range(ndim)])
-    print("Reversed shape for C-style indexing", new_shape)
-    # Full arrays with halo points on the outside
-    full_x = np.zeros(new_shape)
-    full_y = np.zeros(new_shape)
-    full_z = np.zeros(new_shape)
+    nx, ny, nz = x.shape
+    shape = [nz + 2 * nhalo, ny + 2 * nhalo, nx + 2 * nhalo]
+    
+    # Initialize arrays with halos
+    full_x = np.zeros(shape)
+    full_y = np.zeros(shape)
+    full_z = np.zeros(shape)
+    
+    # Fill interior data
+    full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo:nhalo+nx] = x
+    full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo:nhalo+nx] = y
+    full_z[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo:nhalo+nx] = z
+    
+    # Halo Handling for full_x
+    for k in range(nz + 2 * nhalo):
+        # Bottom (k < nhalo)
+        if k < nhalo:
+            full_x[k, nhalo:nhalo+ny, nhalo:nhalo+nx] = full_x[nhalo, nhalo:nhalo+ny, nhalo:nhalo+nx] - (full_x[nhalo + 1, nhalo:nhalo+ny, nhalo:nhalo+nx] - full_x[nhalo, nhalo:nhalo+ny, nhalo:nhalo+nx])
+        # Top (k >= nz + nhalo)
+        if k >= nz + nhalo:
+            full_x[k, nhalo:nhalo+ny, nhalo:nhalo+nx] = full_x[nz + nhalo - 1, nhalo:nhalo+ny, nhalo:nhalo+nx] + (full_x[nz + nhalo - 1, nhalo:nhalo+ny, nhalo:nhalo+nx] - full_x[nz + nhalo - 2, nhalo:nhalo+ny, nhalo:nhalo+nx])
+    
+    for j in range(ny + 2 * nhalo):
+        # Left (j < nhalo)
+        if j < nhalo:
+            full_x[nhalo:nhalo+nz, j, nhalo:nhalo+nx] = full_x[nhalo:nhalo+nz, nhalo, nhalo:nhalo+nx] - (full_x[nhalo:nhalo+nz, nhalo + 1, nhalo:nhalo+nx] - full_x[nhalo:nhalo+nz, nhalo, nhalo:nhalo+nx])
+        # Right (j >= ny + nhalo)
+        if j >= ny + nhalo:
+            full_x[nhalo:nhalo+nz, j, nhalo:nhalo+nx] = full_x[nhalo:nhalo+nz, ny + nhalo - 1, nhalo:nhalo+nx] + (full_x[nhalo:nhalo+nz, ny + nhalo - 1, nhalo:nhalo+nx] - full_x[nhalo:nhalo+nz, ny + nhalo - 2, nhalo:nhalo+nx])
 
-    # Fill out the interior data
-    # Create slices of the interior points to reuse (Nz, Ny, Nz) (they have been transposed into C style)
-    x_slice = np.s_[nhalo:new_shape[2] - nhalo]
-    y_slice = np.s_[nhalo:new_shape[1] - nhalo]
-    z_slice = np.s_[nhalo:new_shape[0] - nhalo]
+    for i in range(nx + 2 * nhalo):
+        # Front (i < nhalo)
+        if i < nhalo:
+            full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, i] = full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo] - (full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo + 1] - full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo])
+        # Back (i >= nx + nhalo)
+        if i >= nx + nhalo:
+            full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, i] = full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 1] + (full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 1] - full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 2])
 
-    # Filling out the full data
-    for k in range(new_shape[0]):
-        full_x[k, y_slice, x_slice] = x
-        full_y[k, y_slice, x_slice] = y
-        full_z[k, y_slice, x_slice] = z
+    # Halo Handling for full_y
+    for k in range(nz + 2 * nhalo):
+        # Bottom (k < nhalo)
+        if k < nhalo:
+            full_y[k, nhalo:nhalo+ny, nhalo:nhalo+nx] = full_y[nhalo, nhalo:nhalo+ny, nhalo:nhalo+nx] - (full_y[nhalo + 1, nhalo:nhalo+ny, nhalo:nhalo+nx] - full_y[nhalo, nhalo:nhalo+ny, nhalo:nhalo+nx])
+        # Top (k >= nz + nhalo)
+        if k >= nz + nhalo:
+            full_y[k, nhalo:nhalo+ny, nhalo:nhalo+nx] = full_y[nz + nhalo - 1, nhalo:nhalo+ny, nhalo:nhalo+nx] + (full_y[nz + nhalo - 1, nhalo:nhalo+ny, nhalo:nhalo+nx] - full_y[nz + nhalo - 2, nhalo:nhalo+ny, nhalo:nhalo+nx])
+    
+    for j in range(ny + 2 * nhalo):
+        # Left (j < nhalo)
+        if j < nhalo:
+            full_y[nhalo:nhalo+nz, j, nhalo:nhalo+nx] = full_y[nhalo:nhalo+nz, nhalo, nhalo:nhalo+nx] - (full_y[nhalo:nhalo+nz, nhalo + 1, nhalo:nhalo+nx] - full_y[nhalo:nhalo+nz, nhalo, nhalo:nhalo+nx])
+        # Right (j >= ny + nhalo)
+        if j >= ny + nhalo:
+            full_y[nhalo:nhalo+nz, j, nhalo:nhalo+nx] = full_y[nhalo:nhalo+nz, ny + nhalo - 1, nhalo:nhalo+nx] + (full_y[nhalo:nhalo+nz, ny + nhalo - 1, nhalo:nhalo+nx] - full_y[nhalo:nhalo+nz, ny + nhalo - 2, nhalo:nhalo+nx])
 
-    # Halo filling logic for x, y, and z remains unchanged
-    for k in range(new_shape[0]):
-        # bottom
-        dx1 = np.abs((full_x[k, 6, x_slice] - full_x[k, 5, x_slice]))
-        full_x[k, 4, x_slice] = full_x[k, 5, x_slice] + dx1
-        full_x[k, 3, x_slice] = full_x[k, 5, x_slice] + 2 * dx1
-        full_x[k, 2, x_slice] = full_x[k, 5, x_slice] + 3 * dx1
-        full_x[k, 1, x_slice] = full_x[k, 5, x_slice] + 4 * dx1
-        full_x[k, 0, x_slice] = full_x[k, 5, x_slice] + 5 * dx1
+    for i in range(nx + 2 * nhalo):
+        # Front (i < nhalo)
+        if i < nhalo:
+            full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, i] = full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo] - (full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo + 1] - full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo])
+        # Back (i >= nx + nhalo)
+        if i >= nx + nhalo:
+            full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, i] = full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 1] + (full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 1] - full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 2])
 
-        # right
-        dx = np.abs((full_x[k, y_slice, -7] - full_x[k, y_slice, -6]))
-        full_x[k, y_slice, -5] = full_x[k, y_slice, -6] + dx
-        full_x[k, y_slice, -4] = full_x[k, y_slice, -5] + dx
-        full_x[k, y_slice, -3] = full_x[k, y_slice, -4] + dx
-        full_x[k, y_slice, -2] = full_x[k, y_slice, -3] + dx
-        full_x[k, y_slice, -1] = full_x[k, y_slice, -2] + dx
+    # Halo Handling for full_z
+    for k in range(nz + 2 * nhalo):
+        # Bottom (k < nhalo)
+        if k < nhalo:
+            full_z[k, nhalo:nhalo+ny, nhalo:nhalo+nx] = full_z[nhalo, nhalo:nhalo+ny, nhalo:nhalo+nx] - (full_z[nhalo + 1, nhalo:nhalo+ny, nhalo:nhalo+nx] - full_z[nhalo, nhalo:nhalo+ny, nhalo:nhalo+nx])
+        # Top (k >= nz + nhalo)
+        if k >= nz + nhalo:
+            full_z[k, nhalo:nhalo+ny, nhalo:nhalo+nx] = full_z[nz + nhalo - 1, nhalo:nhalo+ny, nhalo:nhalo+nx] + (full_z[nz + nhalo - 1, nhalo:nhalo+ny, nhalo:nhalo+nx] - full_z[nz + nhalo - 2, nhalo:nhalo+ny, nhalo:nhalo+nx])
+    
+    for j in range(ny + 2 * nhalo):
+        # Left (j < nhalo)
+        if j < nhalo:
+            full_z[nhalo:nhalo+nz, j, nhalo:nhalo+nx] = full_z[nhalo:nhalo+nz, nhalo, nhalo:nhalo+nx] - (full_z[nhalo:nhalo+nz, nhalo + 1, nhalo:nhalo+nx] - full_z[nhalo:nhalo+nz, nhalo, nhalo:nhalo+nx])
+        # Right (j >= ny + nhalo)
+        if j >= ny + nhalo:
+            full_z[nhalo:nhalo+nz, j, nhalo:nhalo+nx] = full_z[nhalo:nhalo+nz, ny + nhalo - 1, nhalo:nhalo+nx] + (full_z[nhalo:nhalo+nz, ny + nhalo - 1, nhalo:nhalo+nx] - full_z[nhalo:nhalo+nz, ny + nhalo - 2, nhalo:nhalo+nx])
 
-        # left
-        dx = np.abs((full_x[k, y_slice, 6] - full_x[k, y_slice, 5]))
-        full_x[k, y_slice, 4] = -full_x[k, y_slice, 5] + dx
-        full_x[k, y_slice, 3] = full_x[k, y_slice, 5] - 2 * dx
-        full_x[k, y_slice, 2] = full_x[k, y_slice, 5] - 3 * dx
-        full_x[k, y_slice, 1] = full_x[k, y_slice, 5] - 4 * dx
-        full_x[k, y_slice, 0] = full_x[k, y_slice, 5] - 5 * dx
+    for i in range(nx + 2 * nhalo):
+        # Front (i < nhalo)
+        if i < nhalo:
+            full_z[nhalo:nhalo+nz, nhalo:nhalo+ny, i] = full_z[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo] - (full_z[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo + 1] - full_z[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo])
+        # Back (i >= nx + nhalo)
+        if i >= nx + nhalo:
+            full_z[nhalo:nhalo+nz, nhalo:nhalo+ny, i] = full_z[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 1] + (full_z[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 1] - full_z[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 2])
 
-        # Top
-        dx = np.abs((full_x[k, -7, x_slice] - full_x[k, -6, x_slice]))
-        full_x[k, -5, x_slice] = full_x[k, -6, x_slice] + dx
-        full_x[k, -4, x_slice] = full_x[k, -5, x_slice] + dx
-        full_x[k, -3, x_slice] = full_x[k, -4, x_slice] + dx
-        full_x[k, -2, x_slice] = full_x[k, -3, x_slice] + dx
-        full_x[k, -1, x_slice] = full_x[k, -2, x_slice] + dx
-
-        # for y
-        # bottom
-        dy1 = np.abs((full_y[k, 6, x_slice] - full_y[k, 5, x_slice]))
-        full_y[k, 4, x_slice] = full_y[k, 5, x_slice] - dy1
-        full_y[k, 3, x_slice] = full_y[k, 5, x_slice] - 2 * dy1
-        full_y[k, 2, x_slice] = full_y[k, 5, x_slice] - 3 * dy1
-        full_y[k, 1, x_slice] = full_y[k, 5, x_slice] - 4 * dy1
-        full_y[k, 0, x_slice] = full_y[k, 5, x_slice] - 5 * dy1
-
-        # right
-        dy = np.abs((full_y[k, y_slice, -7] - full_y[k, y_slice, -6]))
-        full_y[k, y_slice, -5] = full_y[k, y_slice, -6] + dy
-        full_y[k, y_slice, -4] = full_y[k, y_slice, -5] + dy
-        full_y[k, y_slice, -3] = full_y[k, y_slice, -4] + dy
-        full_y[k, y_slice, -2] = full_y[k, y_slice, -3] + dy
-        full_y[k, y_slice, -1] = full_y[k, y_slice, -2] + dy
-
-        # left
-        dy = np.abs((full_y[k, y_slice, 6] - full_y[k, y_slice, 5]))
-        full_y[k, y_slice, 4] = full_y[k, y_slice, 5] + dy
-        full_y[k, y_slice, 3] = full_y[k, y_slice, 5] + 2 * dy
-        full_y[k, y_slice, 2] = full_y[k, y_slice, 5] + 3 * dy
-        full_y[k, y_slice, 1] = full_y[k, y_slice, 5] + 4 * dy
-        full_y[k, y_slice, 0] = full_y[k, y_slice, 5] + 5 * dy
-
-        # Top
-        dy = np.abs((full_y[k, -7, x_slice] - full_y[k, -6, x_slice]))
-        full_y[k, -5, x_slice] = full_y[k, -6, x_slice] + dy
-        full_y[k, -4, x_slice] = full_y[k, -5, x_slice] + dy
-        full_y[k, -3, x_slice] = full_y[k, -4, x_slice] + dy
-        full_y[k, -2, x_slice] = full_y[k, -3, x_slice] + dy
-        full_y[k, -1, x_slice] = full_y[k, -2, x_slice] + dy
-
-        # for z
-        # bottom
-        dz1 = np.abs((full_z[k, 6, x_slice] - full_z[k, 5, x_slice]))
-        full_z[k, 4, x_slice] = full_z[k, 5, x_slice] - dz1
-        full_z[k, 3, x_slice] = full_z[k, 5, x_slice] - 2 * dz1
-        full_z[k, 2, x_slice] = full_z[k, 5, x_slice] - 3 * dz1
-        full_z[k, 1, x_slice] = full_z[k, 5, x_slice] - 4 * dz1
-        full_z[k, 0, x_slice] = full_z[k, 5, x_slice] - 5 * dz1
-
-        # right
-        dz = np.abs((full_z[k, y_slice, -7] - full_z[k, y_slice, -6]))
-        full_z[k, y_slice, -5] = full_z[k, y_slice, -6] + dz
-        full_z[k, y_slice, -4] = full_z[k, y_slice, -5] + dz
-        full_z[k, y_slice, -3] = full_z[k, y_slice, -4] + dz
-        full_z[k, y_slice, -2] = full_z[k, y_slice, -3] + dz
-        full_z[k, y_slice, -1] = full_z[k, y_slice, -2] + dz
-
-        # left
-        dz = np.abs((full_z[k, y_slice, 6] - full_z[k, y_slice, 5]))
-        full_z[k, y_slice, 4] = full_z[k, y_slice, 5] + dz
-        full_z[k, y_slice, 3] = full_z[k, y_slice, 5] + 2 * dz
-        full_z[k, y_slice, 2] = full_z[k, y_slice, 5] + 3 * dz
-        full_z[k, y_slice, 1] = full_z[k, y_slice, 5] + 4 * dz
-        full_z[k, y_slice, 0] = full_z[k, y_slice, 5] + 5 * dz
-
-        # Top
-        dz = np.abs((full_z[k, -7, x_slice] - full_z[k, -6, x_slice]))
-        full_z[k, -5, x_slice] = full_z[k, -6, x_slice] + dz
-        full_z[k, -4, x_slice] = full_z[k, -5, x_slice] + dz
-        full_z[k, -3, x_slice] = full_z[k, -4, x_slice] + dz
-        full_z[k, -2, x_slice] = full_z[k, -3, x_slice] + dz
-        full_z[k, -1, x_slice] = full_z[k, -2, x_slice] + dz
-
-    # return the full coordinates
     return full_x, full_y, full_z
 
-def read_data_file(filename):
-    data = np.loadtxt(filename)
-    x = data[:, 0].reshape(nx, ny)
-    y = data[:, 1].reshape(nx, ny)
-    z = data[:, 2].reshape(nx, ny)
-    return x, y, z
 
-# Parameters
-nx = 50
-ny = 50
-nz = 30
+def read_blocks(block_data):
+    total_grid_points = 0
+    for block_number, block in enumerate(input_files):
+        print("\n\nReading from %s." % block)
+        f = open(block)
+        nx, ny, nz = map(int, f.readlines()[0].split())
+        print("Nx, Ny, Nz from the input file for block %d" % block_number, nx, ny, nz)
+        f.close()
+        # Read the data
+        x, y, z = np.loadtxt(block, skiprows=1, unpack=True)
+        x = x.reshape(nx, ny, nz)
+        y = y.reshape(nx, ny, nz)
+        z = z.reshape(nx, ny, nz)
+        
+        shape = list(x.shape)
+        total = shape[0] * shape[1] * shape[2]
+        print("Block %d has %e grid points." % (block_number, int(total)))
+        total_grid_points += total
+        print("Original 3D shape: %s" % shape)
+        # Save this block data to the dictionary
+        block_data[block_number] = {'x': x, 'y': y, 'z': z}
+    # Finish
+    print("Total grid points: %g" % total_grid_points)
+    return
+
+block_data = {}
+
+# Specify the input grid files
+input_files = ['new_output.dat']
+# Number of halo points to add on each side of each direction (default 5)
+nhalo = 5
 ndim = 3
-nhalo = 6
+nblocks = len(input_files)
+# Output grid file name
+fname = "data.h5"
+h5f = h5py.File(fname, 'w')
 
-# Read data
-x, y, z = read_data_file('new_output.dat')
+# Number of points in the periodic span (not needed anymore, since the span is in the file now)
+nz = 50
 
-# Allocate full data array with halo
-block_data = {'x': x, 'y': y, 'z': z}
+sharp_TE = False
 
-# Initialize Block
-block = Block("main", 1, ndim)
+total_grid_points = 0
 
-# Fill coordinates including halo
-full_x, full_y, full_z = fill_halo_coordinates(block_data, block.blocknumber)
+# Loop over all of the grid points
+for block_number, block in enumerate(input_files):
+    # Read all of the blocks at once
+    if block_number == 0:
+        print("Reading all of the x, y, z data for the %d blocks" % nblocks)
+        read_blocks(block_data)
 
-# Save to HDF5
-output_hdf5([full_x, full_y, full_z], ["x_coords", "y_coords", "z_coords"], [nhalo, nhalo], [nx, ny, nz], block)
+    x, y, z = block_data[block_number]['x'], block_data[block_number]['y'], block_data[block_number]['z']
+    # Extend the coordinates into the halo points to avoid issues with the metric calculations
+    full_x, full_y, full_z = fill_halo_coordinates(block_data, block_number)
+
+    # Shape without halo points (Nx, Ny, Nz) required for OPS attribute, without halos
+    OPS_shape = list(x.shape)[::-1]
+    # Make an OpenSBLI block
+    b = SimulationBlock(3, block_number=block_number)
+    g1 = h5f.create_group(b.blockname)
+    halo = [[-nhalo, -nhalo, -nhalo], [nhalo, nhalo, nhalo]]
+    apply_group_attributes(g1, b)
+    
+    # Create x coordinates
+    block_dset_name = b.location_dataset("x0").base
+    print("OpenSBLI block shape without halo points: %s" % OPS_shape)
+    dset = g1.create_dataset('%s' % (block_dset_name), data=full_x)
+    set_hdf5_metadata(dset, halos=halo, npoints=[OPS_shape[0], OPS_shape[1], OPS_shape[2]], block=b)
+    
+    # Create y coordinates
+    block_dset_name = b.location_dataset("x1").base
+    dset = g1.create_dataset('%s' % (block_dset_name), data=full_y)
+    set_hdf5_metadata(dset, halos=halo, npoints=[OPS_shape[0], OPS_shape[1], OPS_shape[2]], block=b)
+    
+    # Create z coordinates
+    block_dset_name = b.location_dataset("x2").base
+    dset = g1.create_dataset('%s' % (block_dset_name), data=full_z)
+    set_hdf5_metadata(dset, halos=halo, npoints=[OPS_shape[0], OPS_shape[1], OPS_shape[2]], block=b)
+    
+    print("Length in x for block %d:" % block_number, abs(np.amin(x) - np.amax(x)))
+    print("Length in y for block %d:" % block_number, abs(np.amin(y) - np.amax(y)))
+    print("Length in z for block %d:" % block_number, abs(np.amin(z) - np.amax(z)))
+
+h5f.close()

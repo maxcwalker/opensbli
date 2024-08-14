@@ -46,34 +46,63 @@ def reorder_and_generate_coordinates(filename, y_max, num_y_points, a):
 
 def calculate_counts_from_coordinates(coordinates):
     # Sort coordinates to make sure the counting logic works correctly
-    coordinates = coordinates[np.lexsort((coordinates[:, 2], coordinates[:, 0]))]
+    # coordinates = coordinates[np.lexsort((coordinates[:, 2], coordinates[:, 0]))]
+
+    x_column = coordinates[:, 0]
+    z_column = coordinates[:, 2]
     
-    # Determine the number of y points
-    num_y_points = len(np.unique(coordinates[:, 1]))  # Assume uniform number of y values per x-z
+    # Identify the number of y points (rows before x changes)
+    first_x_change_index = np.where(np.diff(x_column) != 0)[0]
+    print(first_x_change_index)
+    if len(first_x_change_index) == 0:
+        raise ValueError("No change in x-coordinate found; unable to determine grid structure.")
     
-    # Determine the number of x and z points
-    first_x_change_indices = np.where(np.diff(coordinates[:, 0], prepend=coordinates[0, 0]))[0]
-    num_y = len(first_x_change_indices)  # Number of unique x values
+    # Adding debug print to inspect the first_x_change_index
+    print(f"First x change index: {first_x_change_index[0]}")
     
-    first_z_change_indices = np.where(np.diff(coordinates[:, 2], prepend=coordinates[0, 0]))[2]
-    change_z = len(first_z_change_indices)
-    num_x = change_z / num_y
-    num_y_points_per_xz = num_y_points
-    num_xz = num_x * num_y_points_per_xz
-    num_z = 5
+    num_y_points = first_x_change_index[0] + 1  # Number of y points
+
+    # Identify the number of x points (rows before z changes)
+    first_z_change_index = np.where(np.diff(z_column) != 0)[0]
+    if len(first_z_change_index) == 0:
+        raise ValueError("No change in z-coordinate found; unable to determine grid structure.")
     
-    return num_x, num_y_points, num_z
+    # Adding debug print to inspect the first_z_change_index
+    print(f"First z change index: {first_z_change_index[0]}")
+    
+    num_x_points = (first_z_change_index[0] + 1) // num_y_points  # Number of x points
+    
+    # Debug prints to inspect calculated values
+    print(f"Number of x points: {num_x_points}")
+    print(f"Number of y points: {num_y_points}")
+    
+    if num_x_points <= 0 or num_y_points <= 0:
+        raise ValueError("Invalid grid structure detected (zero or negative x or y points).")
+
+    # Identify the number of z points
+    total_points = len(coordinates)
+    print("length of coords %.2f" %total_points )
+    num_z_points = total_points // (num_x_points * num_y_points)  # Number of z points
+
+    # Debug print to inspect calculated z points
+    print(f"Total points: {total_points}")
+    print(f"Number of z points: {num_z_points}")
+    
+    if num_z_points <= 0:
+        raise ValueError("Invalid number of z points detected (zero or negative z points).")
+
+    return num_x_points, num_y_points, num_z_points
 
 def save_with_header(filename, data):
-    num_x, num_y, num_z = calculate_counts_from_coordinates(data)
-    num_coordinates = num_x * num_y * num_z
-    header = (
-        f"Number of unique x values: {num_x}\n"
-        f"Number of y points: {num_y}\n"
-        f"Number of unique z values: {num_z}\n"
-        f"Total number of coordinates: {num_coordinates}\n"
-    )
-    np.savetxt(filename, data, fmt='%.6f', header=header, comments='')
+    try:
+        num_x, num_y, num_z = calculate_counts_from_coordinates(data)
+        num_coordinates = num_x * num_y * num_z
+        header = (
+            f"{num_x} {num_y} {num_z}"
+        )
+        np.savetxt(filename, data, fmt='%.6f', header=header, comments='')
+    except ValueError as e:
+        print(f"Error in calculating counts: {e}")
 
 def plot_central_xy_plane(coordinates, title, y_max):
     unique_z = np.unique(coordinates[:, 2])
@@ -92,7 +121,7 @@ def plot_central_xy_plane(coordinates, title, y_max):
     fig.savefig("central_scatter.pdf")
 
 if __name__ == "__main__":
-    filename = 'output.dat'  # Replace with your output file name
+    filename = 'output_interpolated.dat'  # Replace with your output file name
     y_max = 300.0  # Maximum y coordinate (farfield)
     num_y_points = 100  # Number of points in the y direction
     a = 2.0  # Parameter for the hyperbolic sine function
