@@ -1,6 +1,6 @@
 import numpy as np
 import h5py
-from opensbli import *
+#from opensbli import *
 
 def apply_group_attributes(group, block):
     group.attrs.create("dims", [block.ndim], dtype="int32")
@@ -52,7 +52,7 @@ def output_hdf5(array, array_name, halos, npoints, block):
 
 def fill_halo_coordinates(block_data, block_number):
     x, y, z = block_data[block_number]['x'], block_data[block_number]['y'], block_data[block_number]['z']
-    nx, ny, nz = x.shape
+    nz, ny, nx = x.shape
     shape = [nz + 2 * nhalo, ny + 2 * nhalo, nx + 2 * nhalo]
     
     # Initialize arrays with halos
@@ -153,10 +153,12 @@ def read_blocks(block_data):
         f.close()
         # Read the data
         x, y, z = np.loadtxt(block, skiprows=1, unpack=True)
-        x = x.reshape(nx, ny, nz)
-        y = y.reshape(nx, ny, nz)
-        z = z.reshape(nx, ny, nz)
-        
+        x = x.reshape(nz, nx, ny)
+        y = y.reshape(nz, nx, ny)
+        z = z.reshape(nz, nx, ny)
+        x = x.transpose((0,2,1))
+        y = y.transpose((0,2,1))
+        z = z.transpose((0,2,1))
         shape = list(x.shape)
         total = shape[0] * shape[1] * shape[2]
         print("Block %d has %e grid points." % (block_number, int(total)))

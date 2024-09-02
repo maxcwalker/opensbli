@@ -123,7 +123,7 @@ def plot_central_xy_plane(coordinates, title, y_max):
 if __name__ == "__main__":
     filename = 'output_interpolated.dat'  # Replace with your output file name
     y_max = 300.0  # Maximum y coordinate (farfield)
-    num_y_points = 100  # Number of points in the y direction
+    num_y_points = 400  # Number of points in the y direction
     a = 2.0  # Parameter for the hyperbolic sine function
     
     print("Loading original data...")
