@@ -1,0 +1,1437 @@
+// Auto-generated at 2024-09-02 15:36:03.356645 by ops-translator legacy
+
+__constant__ int dims_opensbliblock00Kernel056 [34][2];
+static int dims_opensbliblock00Kernel056_h [34][2] = {{0}};
+
+//  =============
+//  User function
+//  =============
+__device__ void opensbliblock00Kernel056_gpu(const ACC<double> &D00_B0,
+  const ACC<double> &D01_B0,
+  const ACC<double> &D10_B0,
+  const
+ACC<double> &D11_B0,
+  const ACC<double> &SD000_B0,
+  const ACC<double> &SD001_B0,
+  const ACC<double> &SD010_B0,
+  const
+ACC<double> &SD011_B0,
+  const ACC<double> &SD100_B0,
+  const ACC<double> &SD101_B0,
+  const ACC<double> &SD110_B0,
+  const
+ACC<double> &SD111_B0,
+  const ACC<double> &T_B0,
+  const ACC<double> &mu_B0,
+  const ACC<double> &u0_B0,
+  const ACC<double>
+&u1_B0,
+  const ACC<double> &u2_B0,
+  const ACC<double> &wk0_B0,
+  const ACC<double> &wk10_B0,
+  const ACC<double> &wk11_B0,
+  const ACC<double> &wk1_B0,
+  const ACC<double> &wk2_B0,
+  const ACC<double> &wk3_B0,
+  const ACC<double> &wk4_B0,
+  const
+ACC<double> &wk5_B0,
+  const ACC<double> &wk6_B0,
+  const ACC<double> &wk7_B0,
+  const ACC<double> &wk8_B0,
+  const ACC<double>
+&wk9_B0,
+  ACC<double> &Residual1_B0,
+  ACC<double> &Residual2_B0,
+  ACC<double> &Residual3_B0,
+  ACC<double> &Residual4_B0,
+  const int *idx)
+{
+   double d1_mu_dx = 0.0;
+   double d1_mu_dy = 0.0;
+   double d1_mu_dz = 0.0;
+   double d1_wk0_dy = 0.0;
+   double d1_wk0_dz = 0.0;
+   double d1_wk1_dy = 0.0;
+   double d1_wk1_dz = 0.0;
+   double d1_wk2_dy = 0.0;
+   double d1_wk2_dz = 0.0;
+   double d1_wk3_dy = 0.0;
+   double d1_wk4_dz = 0.0;
+   double d1_wk5_dz = 0.0;
+   double d1_wk6_dz = 0.0;
+   double d2_T_dx = 0.0;
+   double d2_T_dy = 0.0;
+   double d2_T_dz = 0.0;
+   double d2_u0_dx = 0.0;
+   double d2_u0_dy = 0.0;
+   double d2_u0_dz = 0.0;
+   double d2_u1_dx = 0.0;
+   double d2_u1_dy = 0.0;
+   double d2_u1_dz = 0.0;
+   double d2_u2_dx = 0.0;
+   double d2_u2_dy = 0.0;
+   double d2_u2_dz = 0.0;
+   if (idx[0] == 0){
+
+       d1_mu_dx = (-3*mu_B0(2,0,0) + 4*mu_B0(1,0,0) - (25.0/12.0)*mu_B0(0,0,0) - (1.0/4.0)*mu_B0(4,0,0) +
+            ((4.0/3.0))*mu_B0(3,0,0))*invDelta0block0;
+
+   }
+
+   else if (idx[0] == 1){
+
+       d1_mu_dx = (-(5.0/6.0)*mu_B0(0,0,0) - (1.0/2.0)*mu_B0(2,0,0) - (1.0/4.0)*mu_B0(-1,0,0) +
+            ((1.0/12.0))*mu_B0(3,0,0) + ((3.0/2.0))*mu_B0(1,0,0))*invDelta0block0;
+
+   }
+
+   else if (idx[0] == -1 + block0np0){
+
+       d1_mu_dx = (-4*mu_B0(-1,0,0) + 3*mu_B0(-2,0,0) - (4.0/3.0)*mu_B0(-3,0,0) + ((1.0/4.0))*mu_B0(-4,0,0) +
+            ((25.0/12.0))*mu_B0(0,0,0))*invDelta0block0;
+
+   }
+
+   else if (idx[0] == -2 + block0np0){
+
+       d1_mu_dx = (((1.0/2.0))*mu_B0(-2,0,0) - (3.0/2.0)*mu_B0(-1,0,0) - (1.0/12.0)*mu_B0(-3,0,0) +
+            ((1.0/4.0))*mu_B0(1,0,0) + ((5.0/6.0))*mu_B0(0,0,0))*invDelta0block0;
+
+   }
+
+   else{
+
+       d1_mu_dx = (-(2.0/3.0)*mu_B0(-1,0,0) - (1.0/12.0)*mu_B0(2,0,0) + ((1.0/12.0))*mu_B0(-2,0,0) +
+            ((2.0/3.0))*mu_B0(1,0,0))*invDelta0block0;
+
+   }
+
+   if (idx[0] == 0){
+
+       d2_T_dx = (-(26.0/3.0)*T_B0(1,0,0) - (14.0/3.0)*T_B0(3,0,0) + ((11.0/12.0))*T_B0(4,0,0) +
+            ((19.0/2.0))*T_B0(2,0,0) + ((35.0/12.0))*T_B0(0,0,0))*inv2Delta0block0;
+
+       d2_u0_dx = (-(26.0/3.0)*u0_B0(1,0,0) - (14.0/3.0)*u0_B0(3,0,0) + ((11.0/12.0))*u0_B0(4,0,0) +
+            ((19.0/2.0))*u0_B0(2,0,0) + ((35.0/12.0))*u0_B0(0,0,0))*inv2Delta0block0;
+
+       d2_u1_dx = (-(26.0/3.0)*u1_B0(1,0,0) - (14.0/3.0)*u1_B0(3,0,0) + ((11.0/12.0))*u1_B0(4,0,0) +
+            ((19.0/2.0))*u1_B0(2,0,0) + ((35.0/12.0))*u1_B0(0,0,0))*inv2Delta0block0;
+
+       d2_u2_dx = (-(26.0/3.0)*u2_B0(1,0,0) - (14.0/3.0)*u2_B0(3,0,0) + ((11.0/12.0))*u2_B0(4,0,0) +
+            ((19.0/2.0))*u2_B0(2,0,0) + ((35.0/12.0))*u2_B0(0,0,0))*inv2Delta0block0;
+
+   }
+
+   else if (idx[0] == 1){
+
+       d2_T_dx = (((1.0/2.0))*T_B0(1,0,0) - (5.0/3.0)*T_B0(0,0,0) - (1.0/12.0)*T_B0(3,0,0) + ((1.0/3.0))*T_B0(2,0,0) +
+            ((11.0/12.0))*T_B0(-1,0,0))*inv2Delta0block0;
+
+       d2_u0_dx = (((1.0/2.0))*u0_B0(1,0,0) - (5.0/3.0)*u0_B0(0,0,0) - (1.0/12.0)*u0_B0(3,0,0) +
+            ((1.0/3.0))*u0_B0(2,0,0) + ((11.0/12.0))*u0_B0(-1,0,0))*inv2Delta0block0;
+
+       d2_u1_dx = (((1.0/2.0))*u1_B0(1,0,0) - (5.0/3.0)*u1_B0(0,0,0) - (1.0/12.0)*u1_B0(3,0,0) +
+            ((1.0/3.0))*u1_B0(2,0,0) + ((11.0/12.0))*u1_B0(-1,0,0))*inv2Delta0block0;
+
+       d2_u2_dx = (((1.0/2.0))*u2_B0(1,0,0) - (5.0/3.0)*u2_B0(0,0,0) - (1.0/12.0)*u2_B0(3,0,0) +
+            ((1.0/3.0))*u2_B0(2,0,0) + ((11.0/12.0))*u2_B0(-1,0,0))*inv2Delta0block0;
+
+   }
+
+   else if (idx[0] == -1 + block0np0){
+
+       d2_T_dx = (-(26.0/3.0)*T_B0(-1,0,0) - (14.0/3.0)*T_B0(-3,0,0) + ((11.0/12.0))*T_B0(-4,0,0) +
+            ((19.0/2.0))*T_B0(-2,0,0) + ((35.0/12.0))*T_B0(0,0,0))*inv2Delta0block0;
+
+       d2_u0_dx = (-(26.0/3.0)*u0_B0(-1,0,0) - (14.0/3.0)*u0_B0(-3,0,0) + ((11.0/12.0))*u0_B0(-4,0,0) +
+            ((19.0/2.0))*u0_B0(-2,0,0) + ((35.0/12.0))*u0_B0(0,0,0))*inv2Delta0block0;
+
+       d2_u1_dx = (-(26.0/3.0)*u1_B0(-1,0,0) - (14.0/3.0)*u1_B0(-3,0,0) + ((11.0/12.0))*u1_B0(-4,0,0) +
+            ((19.0/2.0))*u1_B0(-2,0,0) + ((35.0/12.0))*u1_B0(0,0,0))*inv2Delta0block0;
+
+       d2_u2_dx = (-(26.0/3.0)*u2_B0(-1,0,0) - (14.0/3.0)*u2_B0(-3,0,0) + ((11.0/12.0))*u2_B0(-4,0,0) +
+            ((19.0/2.0))*u2_B0(-2,0,0) + ((35.0/12.0))*u2_B0(0,0,0))*inv2Delta0block0;
+
+   }
+
+   else if (idx[0] == -2 + block0np0){
+
+       d2_T_dx = (((1.0/2.0))*T_B0(-1,0,0) - (5.0/3.0)*T_B0(0,0,0) - (1.0/12.0)*T_B0(-3,0,0) + ((1.0/3.0))*T_B0(-2,0,0)
+            + ((11.0/12.0))*T_B0(1,0,0))*inv2Delta0block0;
+
+       d2_u0_dx = (((1.0/2.0))*u0_B0(-1,0,0) - (5.0/3.0)*u0_B0(0,0,0) - (1.0/12.0)*u0_B0(-3,0,0) +
+            ((1.0/3.0))*u0_B0(-2,0,0) + ((11.0/12.0))*u0_B0(1,0,0))*inv2Delta0block0;
+
+       d2_u1_dx = (((1.0/2.0))*u1_B0(-1,0,0) - (5.0/3.0)*u1_B0(0,0,0) - (1.0/12.0)*u1_B0(-3,0,0) +
+            ((1.0/3.0))*u1_B0(-2,0,0) + ((11.0/12.0))*u1_B0(1,0,0))*inv2Delta0block0;
+
+       d2_u2_dx = (((1.0/2.0))*u2_B0(-1,0,0) - (5.0/3.0)*u2_B0(0,0,0) - (1.0/12.0)*u2_B0(-3,0,0) +
+            ((1.0/3.0))*u2_B0(-2,0,0) + ((11.0/12.0))*u2_B0(1,0,0))*inv2Delta0block0;
+
+   }
+
+   else{
+
+       d2_T_dx = (-(5.0/2.0)*T_B0(0,0,0) - (1.0/12.0)*T_B0(-2,0,0) - (1.0/12.0)*T_B0(2,0,0) + ((4.0/3.0))*T_B0(1,0,0) +
+            ((4.0/3.0))*T_B0(-1,0,0))*inv2Delta0block0;
+
+       d2_u0_dx = (-(5.0/2.0)*u0_B0(0,0,0) - (1.0/12.0)*u0_B0(-2,0,0) - (1.0/12.0)*u0_B0(2,0,0) +
+            ((4.0/3.0))*u0_B0(1,0,0) + ((4.0/3.0))*u0_B0(-1,0,0))*inv2Delta0block0;
+
+       d2_u1_dx = (-(5.0/2.0)*u1_B0(0,0,0) - (1.0/12.0)*u1_B0(-2,0,0) - (1.0/12.0)*u1_B0(2,0,0) +
+            ((4.0/3.0))*u1_B0(1,0,0) + ((4.0/3.0))*u1_B0(-1,0,0))*inv2Delta0block0;
+
+       d2_u2_dx = (-(5.0/2.0)*u2_B0(0,0,0) - (1.0/12.0)*u2_B0(-2,0,0) - (1.0/12.0)*u2_B0(2,0,0) +
+            ((4.0/3.0))*u2_B0(1,0,0) + ((4.0/3.0))*u2_B0(-1,0,0))*inv2Delta0block0;
+
+   }
+
+   if (idx[1] == 0){
+
+       d1_mu_dy = (-3*mu_B0(0,2,0) + 4*mu_B0(0,1,0) - (25.0/12.0)*mu_B0(0,0,0) - (1.0/4.0)*mu_B0(0,4,0) +
+            ((4.0/3.0))*mu_B0(0,3,0))*invDelta1block0;
+
+       d1_wk0_dy = (-3*wk0_B0(0,2,0) + 4*wk0_B0(0,1,0) - (25.0/12.0)*wk0_B0(0,0,0) - (1.0/4.0)*wk0_B0(0,4,0) +
+            ((4.0/3.0))*wk0_B0(0,3,0))*invDelta1block0;
+
+       d1_wk1_dy = (-3*wk1_B0(0,2,0) + 4*wk1_B0(0,1,0) - (25.0/12.0)*wk1_B0(0,0,0) - (1.0/4.0)*wk1_B0(0,4,0) +
+            ((4.0/3.0))*wk1_B0(0,3,0))*invDelta1block0;
+
+       d1_wk2_dy = (-3*wk2_B0(0,2,0) + 4*wk2_B0(0,1,0) - (25.0/12.0)*wk2_B0(0,0,0) - (1.0/4.0)*wk2_B0(0,4,0) +
+            ((4.0/3.0))*wk2_B0(0,3,0))*invDelta1block0;
+
+       d1_wk3_dy = (-3*wk3_B0(0,2,0) + 4*wk3_B0(0,1,0) - (25.0/12.0)*wk3_B0(0,0,0) - (1.0/4.0)*wk3_B0(0,4,0) +
+            ((4.0/3.0))*wk3_B0(0,3,0))*invDelta1block0;
+
+   }
+
+   else if (idx[1] == 1){
+
+       d1_mu_dy = (-(5.0/6.0)*mu_B0(0,0,0) - (1.0/2.0)*mu_B0(0,2,0) - (1.0/4.0)*mu_B0(0,-1,0) +
+            ((1.0/12.0))*mu_B0(0,3,0) + ((3.0/2.0))*mu_B0(0,1,0))*invDelta1block0;
+
+       d1_wk0_dy = (-(5.0/6.0)*wk0_B0(0,0,0) - (1.0/2.0)*wk0_B0(0,2,0) - (1.0/4.0)*wk0_B0(0,-1,0) +
+            ((1.0/12.0))*wk0_B0(0,3,0) + ((3.0/2.0))*wk0_B0(0,1,0))*invDelta1block0;
+
+       d1_wk1_dy = (-(5.0/6.0)*wk1_B0(0,0,0) - (1.0/2.0)*wk1_B0(0,2,0) - (1.0/4.0)*wk1_B0(0,-1,0) +
+            ((1.0/12.0))*wk1_B0(0,3,0) + ((3.0/2.0))*wk1_B0(0,1,0))*invDelta1block0;
+
+       d1_wk2_dy = (-(5.0/6.0)*wk2_B0(0,0,0) - (1.0/2.0)*wk2_B0(0,2,0) - (1.0/4.0)*wk2_B0(0,-1,0) +
+            ((1.0/12.0))*wk2_B0(0,3,0) + ((3.0/2.0))*wk2_B0(0,1,0))*invDelta1block0;
+
+       d1_wk3_dy = (-(5.0/6.0)*wk3_B0(0,0,0) - (1.0/2.0)*wk3_B0(0,2,0) - (1.0/4.0)*wk3_B0(0,-1,0) +
+            ((1.0/12.0))*wk3_B0(0,3,0) + ((3.0/2.0))*wk3_B0(0,1,0))*invDelta1block0;
+
+   }
+
+   else{
+
+       d1_mu_dy = (-(2.0/3.0)*mu_B0(0,-1,0) - (1.0/12.0)*mu_B0(0,2,0) + ((1.0/12.0))*mu_B0(0,-2,0) +
+            ((2.0/3.0))*mu_B0(0,1,0))*invDelta1block0;
+
+       d1_wk0_dy = (-(2.0/3.0)*wk0_B0(0,-1,0) - (1.0/12.0)*wk0_B0(0,2,0) + ((1.0/12.0))*wk0_B0(0,-2,0) +
+            ((2.0/3.0))*wk0_B0(0,1,0))*invDelta1block0;
+
+       d1_wk1_dy = (-(2.0/3.0)*wk1_B0(0,-1,0) - (1.0/12.0)*wk1_B0(0,2,0) + ((1.0/12.0))*wk1_B0(0,-2,0) +
+            ((2.0/3.0))*wk1_B0(0,1,0))*invDelta1block0;
+
+       d1_wk2_dy = (-(2.0/3.0)*wk2_B0(0,-1,0) - (1.0/12.0)*wk2_B0(0,2,0) + ((1.0/12.0))*wk2_B0(0,-2,0) +
+            ((2.0/3.0))*wk2_B0(0,1,0))*invDelta1block0;
+
+       d1_wk3_dy = (-(2.0/3.0)*wk3_B0(0,-1,0) - (1.0/12.0)*wk3_B0(0,2,0) + ((1.0/12.0))*wk3_B0(0,-2,0) +
+            ((2.0/3.0))*wk3_B0(0,1,0))*invDelta1block0;
+
+   }
+
+   if (idx[1] == 0){
+
+       d2_T_dy = (-(26.0/3.0)*T_B0(0,1,0) - (14.0/3.0)*T_B0(0,3,0) + ((11.0/12.0))*T_B0(0,4,0) +
+            ((19.0/2.0))*T_B0(0,2,0) + ((35.0/12.0))*T_B0(0,0,0))*inv2Delta1block0;
+
+       d2_u0_dy = (-(26.0/3.0)*u0_B0(0,1,0) - (14.0/3.0)*u0_B0(0,3,0) + ((11.0/12.0))*u0_B0(0,4,0) +
+            ((19.0/2.0))*u0_B0(0,2,0) + ((35.0/12.0))*u0_B0(0,0,0))*inv2Delta1block0;
+
+       d2_u1_dy = (-(26.0/3.0)*u1_B0(0,1,0) - (14.0/3.0)*u1_B0(0,3,0) + ((11.0/12.0))*u1_B0(0,4,0) +
+            ((19.0/2.0))*u1_B0(0,2,0) + ((35.0/12.0))*u1_B0(0,0,0))*inv2Delta1block0;
+
+       d2_u2_dy = (-(26.0/3.0)*u2_B0(0,1,0) - (14.0/3.0)*u2_B0(0,3,0) + ((11.0/12.0))*u2_B0(0,4,0) +
+            ((19.0/2.0))*u2_B0(0,2,0) + ((35.0/12.0))*u2_B0(0,0,0))*inv2Delta1block0;
+
+   }
+
+   else if (idx[1] == 1){
+
+       d2_T_dy = (((1.0/2.0))*T_B0(0,1,0) - (5.0/3.0)*T_B0(0,0,0) - (1.0/12.0)*T_B0(0,3,0) + ((1.0/3.0))*T_B0(0,2,0) +
+            ((11.0/12.0))*T_B0(0,-1,0))*inv2Delta1block0;
+
+       d2_u0_dy = (((1.0/2.0))*u0_B0(0,1,0) - (5.0/3.0)*u0_B0(0,0,0) - (1.0/12.0)*u0_B0(0,3,0) +
+            ((1.0/3.0))*u0_B0(0,2,0) + ((11.0/12.0))*u0_B0(0,-1,0))*inv2Delta1block0;
+
+       d2_u1_dy = (((1.0/2.0))*u1_B0(0,1,0) - (5.0/3.0)*u1_B0(0,0,0) - (1.0/12.0)*u1_B0(0,3,0) +
+            ((1.0/3.0))*u1_B0(0,2,0) + ((11.0/12.0))*u1_B0(0,-1,0))*inv2Delta1block0;
+
+       d2_u2_dy = (((1.0/2.0))*u2_B0(0,1,0) - (5.0/3.0)*u2_B0(0,0,0) - (1.0/12.0)*u2_B0(0,3,0) +
+            ((1.0/3.0))*u2_B0(0,2,0) + ((11.0/12.0))*u2_B0(0,-1,0))*inv2Delta1block0;
+
+   }
+
+   else{
+
+       d2_T_dy = (-(5.0/2.0)*T_B0(0,0,0) - (1.0/12.0)*T_B0(0,-2,0) - (1.0/12.0)*T_B0(0,2,0) + ((4.0/3.0))*T_B0(0,1,0) +
+            ((4.0/3.0))*T_B0(0,-1,0))*inv2Delta1block0;
+
+       d2_u0_dy = (-(5.0/2.0)*u0_B0(0,0,0) - (1.0/12.0)*u0_B0(0,-2,0) - (1.0/12.0)*u0_B0(0,2,0) +
+            ((4.0/3.0))*u0_B0(0,1,0) + ((4.0/3.0))*u0_B0(0,-1,0))*inv2Delta1block0;
+
+       d2_u1_dy = (-(5.0/2.0)*u1_B0(0,0,0) - (1.0/12.0)*u1_B0(0,-2,0) - (1.0/12.0)*u1_B0(0,2,0) +
+            ((4.0/3.0))*u1_B0(0,1,0) + ((4.0/3.0))*u1_B0(0,-1,0))*inv2Delta1block0;
+
+       d2_u2_dy = (-(5.0/2.0)*u2_B0(0,0,0) - (1.0/12.0)*u2_B0(0,-2,0) - (1.0/12.0)*u2_B0(0,2,0) +
+            ((4.0/3.0))*u2_B0(0,1,0) + ((4.0/3.0))*u2_B0(0,-1,0))*inv2Delta1block0;
+
+   }
+
+    d2_T_dz = (-(5.0/2.0)*T_B0(0,0,0) - (1.0/12.0)*T_B0(0,0,-2) - (1.0/12.0)*T_B0(0,0,2) + ((4.0/3.0))*T_B0(0,0,1) +
+      ((4.0/3.0))*T_B0(0,0,-1))*inv2Delta2block0;
+
+    d1_mu_dz = (-(2.0/3.0)*mu_B0(0,0,-1) - (1.0/12.0)*mu_B0(0,0,2) + ((1.0/12.0))*mu_B0(0,0,-2) +
+      ((2.0/3.0))*mu_B0(0,0,1))*invDelta2block0;
+
+    d2_u0_dz = (-(5.0/2.0)*u0_B0(0,0,0) - (1.0/12.0)*u0_B0(0,0,-2) - (1.0/12.0)*u0_B0(0,0,2) + ((4.0/3.0))*u0_B0(0,0,1)
+      + ((4.0/3.0))*u0_B0(0,0,-1))*inv2Delta2block0;
+
+    d2_u1_dz = (-(5.0/2.0)*u1_B0(0,0,0) - (1.0/12.0)*u1_B0(0,0,-2) - (1.0/12.0)*u1_B0(0,0,2) + ((4.0/3.0))*u1_B0(0,0,1)
+      + ((4.0/3.0))*u1_B0(0,0,-1))*inv2Delta2block0;
+
+    d2_u2_dz = (-(5.0/2.0)*u2_B0(0,0,0) - (1.0/12.0)*u2_B0(0,0,-2) - (1.0/12.0)*u2_B0(0,0,2) + ((4.0/3.0))*u2_B0(0,0,1)
+      + ((4.0/3.0))*u2_B0(0,0,-1))*inv2Delta2block0;
+
+    d1_wk0_dz = (-(2.0/3.0)*wk0_B0(0,0,-1) - (1.0/12.0)*wk0_B0(0,0,2) + ((1.0/12.0))*wk0_B0(0,0,-2) +
+      ((2.0/3.0))*wk0_B0(0,0,1))*invDelta2block0;
+
+    d1_wk1_dz = (-(2.0/3.0)*wk1_B0(0,0,-1) - (1.0/12.0)*wk1_B0(0,0,2) + ((1.0/12.0))*wk1_B0(0,0,-2) +
+      ((2.0/3.0))*wk1_B0(0,0,1))*invDelta2block0;
+
+    d1_wk2_dz = (-(2.0/3.0)*wk2_B0(0,0,-1) - (1.0/12.0)*wk2_B0(0,0,2) + ((1.0/12.0))*wk2_B0(0,0,-2) +
+      ((2.0/3.0))*wk2_B0(0,0,1))*invDelta2block0;
+
+    d1_wk4_dz = (-(2.0/3.0)*wk4_B0(0,0,-1) - (1.0/12.0)*wk4_B0(0,0,2) + ((1.0/12.0))*wk4_B0(0,0,-2) +
+      ((2.0/3.0))*wk4_B0(0,0,1))*invDelta2block0;
+
+    d1_wk5_dz = (-(2.0/3.0)*wk5_B0(0,0,-1) - (1.0/12.0)*wk5_B0(0,0,2) + ((1.0/12.0))*wk5_B0(0,0,-2) +
+      ((2.0/3.0))*wk5_B0(0,0,1))*invDelta2block0;
+
+    d1_wk6_dz = (-(2.0/3.0)*wk6_B0(0,0,-1) - (1.0/12.0)*wk6_B0(0,0,2) + ((1.0/12.0))*wk6_B0(0,0,-2) +
+      ((2.0/3.0))*wk6_B0(0,0,1))*invDelta2block0;
+
+    Residual1_B0(0,0,0) = (D00_B0(0,0,0)*d1_mu_dx + D10_B0(0,0,0)*d1_mu_dy)*(-(2.0/3.0)*wk10_B0(0,0,0) -
+      (2.0/3.0)*D01_B0(0,0,0)*wk1_B0(0,0,0) - (2.0/3.0)*D11_B0(0,0,0)*wk5_B0(0,0,0) +
+      ((4.0/3.0))*D00_B0(0,0,0)*wk0_B0(0,0,0) + ((4.0/3.0))*D10_B0(0,0,0)*wk4_B0(0,0,0))*invRe + (D01_B0(0,0,0)*d1_mu_dx
+      + D11_B0(0,0,0)*d1_mu_dy)*(D00_B0(0,0,0)*wk1_B0(0,0,0) + D01_B0(0,0,0)*wk0_B0(0,0,0) + D10_B0(0,0,0)*wk5_B0(0,0,0)
+      + D11_B0(0,0,0)*wk4_B0(0,0,0))*invRe + (D00_B0(0,0,0)*wk2_B0(0,0,0) + D10_B0(0,0,0)*wk6_B0(0,0,0) +
+      wk8_B0(0,0,0))*invRe*d1_mu_dz + ((D01_B0(0,0,0)*D01_B0(0,0,0))*d2_u0_dx + (D11_B0(0,0,0)*D11_B0(0,0,0))*d2_u0_dy +
+      ((1.0/3.0))*D00_B0(0,0,0)*d1_wk2_dz + ((1.0/3.0))*D10_B0(0,0,0)*d1_wk6_dz +
+      ((4.0/3.0))*(D00_B0(0,0,0)*D00_B0(0,0,0))*d2_u0_dx + ((4.0/3.0))*(D10_B0(0,0,0)*D10_B0(0,0,0))*d2_u0_dy +
+      D01_B0(0,0,0)*wk0_B0(0,0,0)*SD010_B0(0,0,0) + D01_B0(0,0,0)*wk1_B0(0,0,0)*SD000_B0(0,0,0) +
+      D01_B0(0,0,0)*wk4_B0(0,0,0)*SD110_B0(0,0,0) + D01_B0(0,0,0)*wk5_B0(0,0,0)*SD100_B0(0,0,0) +
+      D11_B0(0,0,0)*wk0_B0(0,0,0)*SD011_B0(0,0,0) + D11_B0(0,0,0)*wk1_B0(0,0,0)*SD001_B0(0,0,0) +
+      D11_B0(0,0,0)*wk4_B0(0,0,0)*SD111_B0(0,0,0) + D11_B0(0,0,0)*wk5_B0(0,0,0)*SD101_B0(0,0,0) +
+      2*D01_B0(0,0,0)*D11_B0(0,0,0)*d1_wk0_dy - (2.0/3.0)*D00_B0(0,0,0)*wk1_B0(0,0,0)*SD010_B0(0,0,0) -
+      (2.0/3.0)*D00_B0(0,0,0)*wk5_B0(0,0,0)*SD110_B0(0,0,0) - (2.0/3.0)*D10_B0(0,0,0)*wk1_B0(0,0,0)*SD011_B0(0,0,0) -
+      (2.0/3.0)*D10_B0(0,0,0)*wk5_B0(0,0,0)*SD111_B0(0,0,0) + ((1.0/3.0))*D00_B0(0,0,0)*D01_B0(0,0,0)*d2_u1_dx +
+      ((1.0/3.0))*D00_B0(0,0,0)*D11_B0(0,0,0)*d1_wk1_dy + ((1.0/3.0))*D01_B0(0,0,0)*D10_B0(0,0,0)*d1_wk1_dy +
+      ((1.0/3.0))*D10_B0(0,0,0)*D11_B0(0,0,0)*d2_u1_dy + ((4.0/3.0))*D00_B0(0,0,0)*wk0_B0(0,0,0)*SD000_B0(0,0,0) +
+      ((4.0/3.0))*D00_B0(0,0,0)*wk4_B0(0,0,0)*SD100_B0(0,0,0) + ((4.0/3.0))*D10_B0(0,0,0)*wk0_B0(0,0,0)*SD001_B0(0,0,0)
+      + ((4.0/3.0))*D10_B0(0,0,0)*wk4_B0(0,0,0)*SD101_B0(0,0,0) + ((8.0/3.0))*D00_B0(0,0,0)*D10_B0(0,0,0)*d1_wk0_dy +
+      d2_u0_dz)*invRe*mu_B0(0,0,0) + Residual1_B0(0,0,0);
+
+    Residual2_B0(0,0,0) = (D00_B0(0,0,0)*d1_mu_dx + D10_B0(0,0,0)*d1_mu_dy)*(D00_B0(0,0,0)*wk1_B0(0,0,0) +
+      D01_B0(0,0,0)*wk0_B0(0,0,0) + D10_B0(0,0,0)*wk5_B0(0,0,0) + D11_B0(0,0,0)*wk4_B0(0,0,0))*invRe +
+      (D01_B0(0,0,0)*d1_mu_dx + D11_B0(0,0,0)*d1_mu_dy)*(-(2.0/3.0)*wk10_B0(0,0,0) -
+      (2.0/3.0)*D00_B0(0,0,0)*wk0_B0(0,0,0) - (2.0/3.0)*D10_B0(0,0,0)*wk4_B0(0,0,0) +
+      ((4.0/3.0))*D01_B0(0,0,0)*wk1_B0(0,0,0) + ((4.0/3.0))*D11_B0(0,0,0)*wk5_B0(0,0,0))*invRe +
+      (D01_B0(0,0,0)*wk2_B0(0,0,0) + D11_B0(0,0,0)*wk6_B0(0,0,0) + wk9_B0(0,0,0))*invRe*d1_mu_dz +
+      ((D00_B0(0,0,0)*D00_B0(0,0,0))*d2_u1_dx + (D10_B0(0,0,0)*D10_B0(0,0,0))*d2_u1_dy +
+      ((1.0/3.0))*D01_B0(0,0,0)*d1_wk2_dz + ((1.0/3.0))*D11_B0(0,0,0)*d1_wk6_dz +
+      ((4.0/3.0))*(D01_B0(0,0,0)*D01_B0(0,0,0))*d2_u1_dx + ((4.0/3.0))*(D11_B0(0,0,0)*D11_B0(0,0,0))*d2_u1_dy +
+      D00_B0(0,0,0)*wk0_B0(0,0,0)*SD010_B0(0,0,0) + D00_B0(0,0,0)*wk1_B0(0,0,0)*SD000_B0(0,0,0) +
+      D00_B0(0,0,0)*wk4_B0(0,0,0)*SD110_B0(0,0,0) + D00_B0(0,0,0)*wk5_B0(0,0,0)*SD100_B0(0,0,0) +
+      D10_B0(0,0,0)*wk0_B0(0,0,0)*SD011_B0(0,0,0) + D10_B0(0,0,0)*wk1_B0(0,0,0)*SD001_B0(0,0,0) +
+      D10_B0(0,0,0)*wk4_B0(0,0,0)*SD111_B0(0,0,0) + D10_B0(0,0,0)*wk5_B0(0,0,0)*SD101_B0(0,0,0) +
+      2*D00_B0(0,0,0)*D10_B0(0,0,0)*d1_wk1_dy - (2.0/3.0)*D01_B0(0,0,0)*wk0_B0(0,0,0)*SD000_B0(0,0,0) -
+      (2.0/3.0)*D01_B0(0,0,0)*wk4_B0(0,0,0)*SD100_B0(0,0,0) - (2.0/3.0)*D11_B0(0,0,0)*wk0_B0(0,0,0)*SD001_B0(0,0,0) -
+      (2.0/3.0)*D11_B0(0,0,0)*wk4_B0(0,0,0)*SD101_B0(0,0,0) + ((1.0/3.0))*D00_B0(0,0,0)*D01_B0(0,0,0)*d2_u0_dx +
+      ((1.0/3.0))*D00_B0(0,0,0)*D11_B0(0,0,0)*d1_wk0_dy + ((1.0/3.0))*D01_B0(0,0,0)*D10_B0(0,0,0)*d1_wk0_dy +
+      ((1.0/3.0))*D10_B0(0,0,0)*D11_B0(0,0,0)*d2_u0_dy + ((4.0/3.0))*D01_B0(0,0,0)*wk1_B0(0,0,0)*SD010_B0(0,0,0) +
+      ((4.0/3.0))*D01_B0(0,0,0)*wk5_B0(0,0,0)*SD110_B0(0,0,0) + ((4.0/3.0))*D11_B0(0,0,0)*wk1_B0(0,0,0)*SD011_B0(0,0,0)
+      + ((4.0/3.0))*D11_B0(0,0,0)*wk5_B0(0,0,0)*SD111_B0(0,0,0) + ((8.0/3.0))*D01_B0(0,0,0)*D11_B0(0,0,0)*d1_wk1_dy +
+      d2_u1_dz)*invRe*mu_B0(0,0,0) + Residual2_B0(0,0,0);
+
+    Residual3_B0(0,0,0) = (D00_B0(0,0,0)*d1_mu_dx + D10_B0(0,0,0)*d1_mu_dy)*(D00_B0(0,0,0)*wk2_B0(0,0,0) +
+      D10_B0(0,0,0)*wk6_B0(0,0,0) + wk8_B0(0,0,0))*invRe + (D01_B0(0,0,0)*d1_mu_dx +
+      D11_B0(0,0,0)*d1_mu_dy)*(D01_B0(0,0,0)*wk2_B0(0,0,0) + D11_B0(0,0,0)*wk6_B0(0,0,0) + wk9_B0(0,0,0))*invRe +
+      (((4.0/3.0))*wk10_B0(0,0,0) - (2.0/3.0)*D00_B0(0,0,0)*wk0_B0(0,0,0) - (2.0/3.0)*D01_B0(0,0,0)*wk1_B0(0,0,0) -
+      (2.0/3.0)*D10_B0(0,0,0)*wk4_B0(0,0,0) - (2.0/3.0)*D11_B0(0,0,0)*wk5_B0(0,0,0))*invRe*d1_mu_dz +
+      (((4.0/3.0))*d2_u2_dz + (D00_B0(0,0,0)*D00_B0(0,0,0))*d2_u2_dx + (D01_B0(0,0,0)*D01_B0(0,0,0))*d2_u2_dx +
+      (D10_B0(0,0,0)*D10_B0(0,0,0))*d2_u2_dy + (D11_B0(0,0,0)*D11_B0(0,0,0))*d2_u2_dy +
+      ((1.0/3.0))*D00_B0(0,0,0)*d1_wk0_dz + ((1.0/3.0))*D01_B0(0,0,0)*d1_wk1_dz + ((1.0/3.0))*D10_B0(0,0,0)*d1_wk4_dz +
+      ((1.0/3.0))*D11_B0(0,0,0)*d1_wk5_dz + D00_B0(0,0,0)*wk2_B0(0,0,0)*SD000_B0(0,0,0) +
+      D00_B0(0,0,0)*wk6_B0(0,0,0)*SD100_B0(0,0,0) + D01_B0(0,0,0)*wk2_B0(0,0,0)*SD010_B0(0,0,0) +
+      D01_B0(0,0,0)*wk6_B0(0,0,0)*SD110_B0(0,0,0) + D10_B0(0,0,0)*wk2_B0(0,0,0)*SD001_B0(0,0,0) +
+      D10_B0(0,0,0)*wk6_B0(0,0,0)*SD101_B0(0,0,0) + D11_B0(0,0,0)*wk2_B0(0,0,0)*SD011_B0(0,0,0) +
+      D11_B0(0,0,0)*wk6_B0(0,0,0)*SD111_B0(0,0,0) + 2*D00_B0(0,0,0)*D10_B0(0,0,0)*d1_wk2_dy +
+      2*D01_B0(0,0,0)*D11_B0(0,0,0)*d1_wk2_dy)*invRe*mu_B0(0,0,0) + Residual3_B0(0,0,0);
+
+    Residual4_B0(0,0,0) = (D00_B0(0,0,0)*wk0_B0(0,0,0) + D10_B0(0,0,0)*wk4_B0(0,0,0))*(-(2.0/3.0)*wk10_B0(0,0,0) -
+      (2.0/3.0)*D01_B0(0,0,0)*wk1_B0(0,0,0) - (2.0/3.0)*D11_B0(0,0,0)*wk5_B0(0,0,0) +
+      ((4.0/3.0))*D00_B0(0,0,0)*wk0_B0(0,0,0) + ((4.0/3.0))*D10_B0(0,0,0)*wk4_B0(0,0,0))*invRe*mu_B0(0,0,0) +
+      (D00_B0(0,0,0)*wk1_B0(0,0,0) + D10_B0(0,0,0)*wk5_B0(0,0,0))*(D00_B0(0,0,0)*wk1_B0(0,0,0) +
+      D01_B0(0,0,0)*wk0_B0(0,0,0) + D10_B0(0,0,0)*wk5_B0(0,0,0) + D11_B0(0,0,0)*wk4_B0(0,0,0))*invRe*mu_B0(0,0,0) +
+      (D00_B0(0,0,0)*wk2_B0(0,0,0) + D10_B0(0,0,0)*wk6_B0(0,0,0))*(D00_B0(0,0,0)*wk2_B0(0,0,0) +
+      D10_B0(0,0,0)*wk6_B0(0,0,0) + wk8_B0(0,0,0))*invRe*mu_B0(0,0,0) + (D00_B0(0,0,0)*d1_mu_dx +
+      D10_B0(0,0,0)*d1_mu_dy)*(D00_B0(0,0,0)*wk2_B0(0,0,0) + D10_B0(0,0,0)*wk6_B0(0,0,0) +
+      wk8_B0(0,0,0))*invRe*u2_B0(0,0,0) + (D00_B0(0,0,0)*d1_mu_dx + D10_B0(0,0,0)*d1_mu_dy)*(D00_B0(0,0,0)*wk1_B0(0,0,0)
+      + D01_B0(0,0,0)*wk0_B0(0,0,0) + D10_B0(0,0,0)*wk5_B0(0,0,0) + D11_B0(0,0,0)*wk4_B0(0,0,0))*invRe*u1_B0(0,0,0) +
+      (D00_B0(0,0,0)*d1_mu_dx + D10_B0(0,0,0)*d1_mu_dy)*(-(2.0/3.0)*wk10_B0(0,0,0) -
+      (2.0/3.0)*D01_B0(0,0,0)*wk1_B0(0,0,0) - (2.0/3.0)*D11_B0(0,0,0)*wk5_B0(0,0,0) +
+      ((4.0/3.0))*D00_B0(0,0,0)*wk0_B0(0,0,0) + ((4.0/3.0))*D10_B0(0,0,0)*wk4_B0(0,0,0))*invRe*u0_B0(0,0,0) +
+      (D01_B0(0,0,0)*wk0_B0(0,0,0) + D11_B0(0,0,0)*wk4_B0(0,0,0))*(D00_B0(0,0,0)*wk1_B0(0,0,0) +
+      D01_B0(0,0,0)*wk0_B0(0,0,0) + D10_B0(0,0,0)*wk5_B0(0,0,0) + D11_B0(0,0,0)*wk4_B0(0,0,0))*invRe*mu_B0(0,0,0) +
+      (D01_B0(0,0,0)*wk1_B0(0,0,0) + D11_B0(0,0,0)*wk5_B0(0,0,0))*(-(2.0/3.0)*wk10_B0(0,0,0) -
+      (2.0/3.0)*D00_B0(0,0,0)*wk0_B0(0,0,0) - (2.0/3.0)*D10_B0(0,0,0)*wk4_B0(0,0,0) +
+      ((4.0/3.0))*D01_B0(0,0,0)*wk1_B0(0,0,0) + ((4.0/3.0))*D11_B0(0,0,0)*wk5_B0(0,0,0))*invRe*mu_B0(0,0,0) +
+      (D01_B0(0,0,0)*wk2_B0(0,0,0) + D11_B0(0,0,0)*wk6_B0(0,0,0))*(D01_B0(0,0,0)*wk2_B0(0,0,0) +
+      D11_B0(0,0,0)*wk6_B0(0,0,0) + wk9_B0(0,0,0))*invRe*mu_B0(0,0,0) + (D01_B0(0,0,0)*d1_mu_dx +
+      D11_B0(0,0,0)*d1_mu_dy)*(D01_B0(0,0,0)*wk2_B0(0,0,0) + D11_B0(0,0,0)*wk6_B0(0,0,0) +
+      wk9_B0(0,0,0))*invRe*u2_B0(0,0,0) + (D01_B0(0,0,0)*d1_mu_dx + D11_B0(0,0,0)*d1_mu_dy)*(D00_B0(0,0,0)*wk1_B0(0,0,0)
+      + D01_B0(0,0,0)*wk0_B0(0,0,0) + D10_B0(0,0,0)*wk5_B0(0,0,0) + D11_B0(0,0,0)*wk4_B0(0,0,0))*invRe*u0_B0(0,0,0) +
+      (D01_B0(0,0,0)*d1_mu_dx + D11_B0(0,0,0)*d1_mu_dy)*(-(2.0/3.0)*wk10_B0(0,0,0) -
+      (2.0/3.0)*D00_B0(0,0,0)*wk0_B0(0,0,0) - (2.0/3.0)*D10_B0(0,0,0)*wk4_B0(0,0,0) +
+      ((4.0/3.0))*D01_B0(0,0,0)*wk1_B0(0,0,0) + ((4.0/3.0))*D11_B0(0,0,0)*wk5_B0(0,0,0))*invRe*u1_B0(0,0,0) +
+      (D00_B0(0,0,0)*wk2_B0(0,0,0) + D10_B0(0,0,0)*wk6_B0(0,0,0) + wk8_B0(0,0,0))*invRe*mu_B0(0,0,0)*wk8_B0(0,0,0) +
+      (D00_B0(0,0,0)*wk2_B0(0,0,0) + D10_B0(0,0,0)*wk6_B0(0,0,0) + wk8_B0(0,0,0))*invRe*u0_B0(0,0,0)*d1_mu_dz +
+      (D01_B0(0,0,0)*wk2_B0(0,0,0) + D11_B0(0,0,0)*wk6_B0(0,0,0) + wk9_B0(0,0,0))*invRe*mu_B0(0,0,0)*wk9_B0(0,0,0) +
+      (D01_B0(0,0,0)*wk2_B0(0,0,0) + D11_B0(0,0,0)*wk6_B0(0,0,0) + wk9_B0(0,0,0))*invRe*u1_B0(0,0,0)*d1_mu_dz +
+      (((4.0/3.0))*wk10_B0(0,0,0) - (2.0/3.0)*D00_B0(0,0,0)*wk0_B0(0,0,0) - (2.0/3.0)*D01_B0(0,0,0)*wk1_B0(0,0,0) -
+      (2.0/3.0)*D10_B0(0,0,0)*wk4_B0(0,0,0) - (2.0/3.0)*D11_B0(0,0,0)*wk5_B0(0,0,0))*invRe*mu_B0(0,0,0)*wk10_B0(0,0,0) +
+      (((4.0/3.0))*wk10_B0(0,0,0) - (2.0/3.0)*D00_B0(0,0,0)*wk0_B0(0,0,0) - (2.0/3.0)*D01_B0(0,0,0)*wk1_B0(0,0,0) -
+      (2.0/3.0)*D10_B0(0,0,0)*wk4_B0(0,0,0) - (2.0/3.0)*D11_B0(0,0,0)*wk5_B0(0,0,0))*invRe*u2_B0(0,0,0)*d1_mu_dz +
+      (((4.0/3.0))*d2_u2_dz + (D00_B0(0,0,0)*D00_B0(0,0,0))*d2_u2_dx + (D01_B0(0,0,0)*D01_B0(0,0,0))*d2_u2_dx +
+      (D10_B0(0,0,0)*D10_B0(0,0,0))*d2_u2_dy + (D11_B0(0,0,0)*D11_B0(0,0,0))*d2_u2_dy +
+      ((1.0/3.0))*D00_B0(0,0,0)*d1_wk0_dz + ((1.0/3.0))*D01_B0(0,0,0)*d1_wk1_dz + ((1.0/3.0))*D10_B0(0,0,0)*d1_wk4_dz +
+      ((1.0/3.0))*D11_B0(0,0,0)*d1_wk5_dz + D00_B0(0,0,0)*wk2_B0(0,0,0)*SD000_B0(0,0,0) +
+      D00_B0(0,0,0)*wk6_B0(0,0,0)*SD100_B0(0,0,0) + D01_B0(0,0,0)*wk2_B0(0,0,0)*SD010_B0(0,0,0) +
+      D01_B0(0,0,0)*wk6_B0(0,0,0)*SD110_B0(0,0,0) + D10_B0(0,0,0)*wk2_B0(0,0,0)*SD001_B0(0,0,0) +
+      D10_B0(0,0,0)*wk6_B0(0,0,0)*SD101_B0(0,0,0) + D11_B0(0,0,0)*wk2_B0(0,0,0)*SD011_B0(0,0,0) +
+      D11_B0(0,0,0)*wk6_B0(0,0,0)*SD111_B0(0,0,0) + 2*D00_B0(0,0,0)*D10_B0(0,0,0)*d1_wk2_dy +
+      2*D01_B0(0,0,0)*D11_B0(0,0,0)*d1_wk2_dy)*invRe*mu_B0(0,0,0)*u2_B0(0,0,0) + ((D00_B0(0,0,0)*D00_B0(0,0,0))*d2_u1_dx
+      + (D10_B0(0,0,0)*D10_B0(0,0,0))*d2_u1_dy + ((1.0/3.0))*D01_B0(0,0,0)*d1_wk2_dz +
+      ((1.0/3.0))*D11_B0(0,0,0)*d1_wk6_dz + ((4.0/3.0))*(D01_B0(0,0,0)*D01_B0(0,0,0))*d2_u1_dx +
+      ((4.0/3.0))*(D11_B0(0,0,0)*D11_B0(0,0,0))*d2_u1_dy + D00_B0(0,0,0)*wk0_B0(0,0,0)*SD010_B0(0,0,0) +
+      D00_B0(0,0,0)*wk1_B0(0,0,0)*SD000_B0(0,0,0) + D00_B0(0,0,0)*wk4_B0(0,0,0)*SD110_B0(0,0,0) +
+      D00_B0(0,0,0)*wk5_B0(0,0,0)*SD100_B0(0,0,0) + D10_B0(0,0,0)*wk0_B0(0,0,0)*SD011_B0(0,0,0) +
+      D10_B0(0,0,0)*wk1_B0(0,0,0)*SD001_B0(0,0,0) + D10_B0(0,0,0)*wk4_B0(0,0,0)*SD111_B0(0,0,0) +
+      D10_B0(0,0,0)*wk5_B0(0,0,0)*SD101_B0(0,0,0) + 2*D00_B0(0,0,0)*D10_B0(0,0,0)*d1_wk1_dy -
+      (2.0/3.0)*D01_B0(0,0,0)*wk0_B0(0,0,0)*SD000_B0(0,0,0) - (2.0/3.0)*D01_B0(0,0,0)*wk4_B0(0,0,0)*SD100_B0(0,0,0) -
+      (2.0/3.0)*D11_B0(0,0,0)*wk0_B0(0,0,0)*SD001_B0(0,0,0) - (2.0/3.0)*D11_B0(0,0,0)*wk4_B0(0,0,0)*SD101_B0(0,0,0) +
+      ((1.0/3.0))*D00_B0(0,0,0)*D01_B0(0,0,0)*d2_u0_dx + ((1.0/3.0))*D00_B0(0,0,0)*D11_B0(0,0,0)*d1_wk0_dy +
+      ((1.0/3.0))*D01_B0(0,0,0)*D10_B0(0,0,0)*d1_wk0_dy + ((1.0/3.0))*D10_B0(0,0,0)*D11_B0(0,0,0)*d2_u0_dy +
+      ((4.0/3.0))*D01_B0(0,0,0)*wk1_B0(0,0,0)*SD010_B0(0,0,0) + ((4.0/3.0))*D01_B0(0,0,0)*wk5_B0(0,0,0)*SD110_B0(0,0,0)
+      + ((4.0/3.0))*D11_B0(0,0,0)*wk1_B0(0,0,0)*SD011_B0(0,0,0) +
+      ((4.0/3.0))*D11_B0(0,0,0)*wk5_B0(0,0,0)*SD111_B0(0,0,0) + ((8.0/3.0))*D01_B0(0,0,0)*D11_B0(0,0,0)*d1_wk1_dy +
+      d2_u1_dz)*invRe*mu_B0(0,0,0)*u1_B0(0,0,0) + ((D01_B0(0,0,0)*D01_B0(0,0,0))*d2_u0_dx +
+      (D11_B0(0,0,0)*D11_B0(0,0,0))*d2_u0_dy + ((1.0/3.0))*D00_B0(0,0,0)*d1_wk2_dz + ((1.0/3.0))*D10_B0(0,0,0)*d1_wk6_dz
+      + ((4.0/3.0))*(D00_B0(0,0,0)*D00_B0(0,0,0))*d2_u0_dx + ((4.0/3.0))*(D10_B0(0,0,0)*D10_B0(0,0,0))*d2_u0_dy +
+      D01_B0(0,0,0)*wk0_B0(0,0,0)*SD010_B0(0,0,0) + D01_B0(0,0,0)*wk1_B0(0,0,0)*SD000_B0(0,0,0) +
+      D01_B0(0,0,0)*wk4_B0(0,0,0)*SD110_B0(0,0,0) + D01_B0(0,0,0)*wk5_B0(0,0,0)*SD100_B0(0,0,0) +
+      D11_B0(0,0,0)*wk0_B0(0,0,0)*SD011_B0(0,0,0) + D11_B0(0,0,0)*wk1_B0(0,0,0)*SD001_B0(0,0,0) +
+      D11_B0(0,0,0)*wk4_B0(0,0,0)*SD111_B0(0,0,0) + D11_B0(0,0,0)*wk5_B0(0,0,0)*SD101_B0(0,0,0) +
+      2*D01_B0(0,0,0)*D11_B0(0,0,0)*d1_wk0_dy - (2.0/3.0)*D00_B0(0,0,0)*wk1_B0(0,0,0)*SD010_B0(0,0,0) -
+      (2.0/3.0)*D00_B0(0,0,0)*wk5_B0(0,0,0)*SD110_B0(0,0,0) - (2.0/3.0)*D10_B0(0,0,0)*wk1_B0(0,0,0)*SD011_B0(0,0,0) -
+      (2.0/3.0)*D10_B0(0,0,0)*wk5_B0(0,0,0)*SD111_B0(0,0,0) + ((1.0/3.0))*D00_B0(0,0,0)*D01_B0(0,0,0)*d2_u1_dx +
+      ((1.0/3.0))*D00_B0(0,0,0)*D11_B0(0,0,0)*d1_wk1_dy + ((1.0/3.0))*D01_B0(0,0,0)*D10_B0(0,0,0)*d1_wk1_dy +
+      ((1.0/3.0))*D10_B0(0,0,0)*D11_B0(0,0,0)*d2_u1_dy + ((4.0/3.0))*D00_B0(0,0,0)*wk0_B0(0,0,0)*SD000_B0(0,0,0) +
+      ((4.0/3.0))*D00_B0(0,0,0)*wk4_B0(0,0,0)*SD100_B0(0,0,0) + ((4.0/3.0))*D10_B0(0,0,0)*wk0_B0(0,0,0)*SD001_B0(0,0,0)
+      + ((4.0/3.0))*D10_B0(0,0,0)*wk4_B0(0,0,0)*SD101_B0(0,0,0) + ((8.0/3.0))*D00_B0(0,0,0)*D10_B0(0,0,0)*d1_wk0_dy +
+      d2_u0_dz)*invRe*mu_B0(0,0,0)*u0_B0(0,0,0) + (D00_B0(0,0,0)*wk3_B0(0,0,0) +
+      D10_B0(0,0,0)*wk7_B0(0,0,0))*(D00_B0(0,0,0)*d1_mu_dx + D10_B0(0,0,0)*d1_mu_dy)*invPr*invRe*inv2Minf*inv_gamma_m1 +
+      (D01_B0(0,0,0)*wk3_B0(0,0,0) + D11_B0(0,0,0)*wk7_B0(0,0,0))*(D01_B0(0,0,0)*d1_mu_dx +
+      D11_B0(0,0,0)*d1_mu_dy)*invPr*invRe*inv2Minf*inv_gamma_m1 + ((D00_B0(0,0,0)*D00_B0(0,0,0))*d2_T_dx +
+      (D01_B0(0,0,0)*D01_B0(0,0,0))*d2_T_dx + (D10_B0(0,0,0)*D10_B0(0,0,0))*d2_T_dy +
+      (D11_B0(0,0,0)*D11_B0(0,0,0))*d2_T_dy + D00_B0(0,0,0)*wk3_B0(0,0,0)*SD000_B0(0,0,0) +
+      D00_B0(0,0,0)*wk7_B0(0,0,0)*SD100_B0(0,0,0) + D01_B0(0,0,0)*wk3_B0(0,0,0)*SD010_B0(0,0,0) +
+      D01_B0(0,0,0)*wk7_B0(0,0,0)*SD110_B0(0,0,0) + D10_B0(0,0,0)*wk3_B0(0,0,0)*SD001_B0(0,0,0) +
+      D10_B0(0,0,0)*wk7_B0(0,0,0)*SD101_B0(0,0,0) + D11_B0(0,0,0)*wk3_B0(0,0,0)*SD011_B0(0,0,0) +
+      D11_B0(0,0,0)*wk7_B0(0,0,0)*SD111_B0(0,0,0) + 2*D00_B0(0,0,0)*D10_B0(0,0,0)*d1_wk3_dy +
+      2*D01_B0(0,0,0)*D11_B0(0,0,0)*d1_wk3_dy + d2_T_dz)*invPr*invRe*inv2Minf*inv_gamma_m1*mu_B0(0,0,0) +
+      invPr*invRe*inv2Minf*inv_gamma_m1*wk11_B0(0,0,0)*d1_mu_dz + Residual4_B0(0,0,0);
+
+}
+
+
+//  ============================
+//  Cuda kernel wrapper function
+//  ============================
+__global__ void ops_opensbliblock00Kernel056(
+double* __restrict arg0,
+double* __restrict arg1,
+double* __restrict arg2,
+double* __restrict arg3,
+double* __restrict arg4,
+double* __restrict arg5,
+double* __restrict arg6,
+double* __restrict arg7,
+double* __restrict arg8,
+double* __restrict arg9,
+double* __restrict arg10,
+double* __restrict arg11,
+double* __restrict arg12,
+double* __restrict arg13,
+double* __restrict arg14,
+double* __restrict arg15,
+double* __restrict arg16,
+double* __restrict arg17,
+double* __restrict arg18,
+double* __restrict arg19,
+double* __restrict arg20,
+double* __restrict arg21,
+double* __restrict arg22,
+double* __restrict arg23,
+double* __restrict arg24,
+double* __restrict arg25,
+double* __restrict arg26,
+double* __restrict arg27,
+double* __restrict arg28,
+double* __restrict arg29,
+double* __restrict arg30,
+double* __restrict arg31,
+double* __restrict arg32,
+int arg_idx0, int arg_idx1, int arg_idx2,
+int size0,
+int size1,
+int size2) {
+    int idx_z = blockDim.z * blockIdx.z + threadIdx.z;
+    int idx_y = blockDim.y * blockIdx.y + threadIdx.y;
+    int idx_x = blockDim.x * blockIdx.x + threadIdx.x;
+
+    int arg_idx[3];
+    arg_idx[0] = arg_idx0+idx_x;
+    arg_idx[1] = arg_idx1+idx_y;
+    arg_idx[2] = arg_idx2+idx_z;
+
+    arg0 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[0][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[0][0] * dims_opensbliblock00Kernel056[0][1];
+    arg1 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[1][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[1][0] * dims_opensbliblock00Kernel056[1][1];
+    arg2 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[2][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[2][0] * dims_opensbliblock00Kernel056[2][1];
+    arg3 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[3][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[3][0] * dims_opensbliblock00Kernel056[3][1];
+    arg4 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[4][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[4][0] * dims_opensbliblock00Kernel056[4][1];
+    arg5 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[5][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[5][0] * dims_opensbliblock00Kernel056[5][1];
+    arg6 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[6][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[6][0] * dims_opensbliblock00Kernel056[6][1];
+    arg7 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[7][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[7][0] * dims_opensbliblock00Kernel056[7][1];
+    arg8 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[8][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[8][0] * dims_opensbliblock00Kernel056[8][1];
+    arg9 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[9][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[9][0] * dims_opensbliblock00Kernel056[9][1];
+    arg10 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[10][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[10][0] * dims_opensbliblock00Kernel056[10][1];
+    arg11 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[11][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[11][0] * dims_opensbliblock00Kernel056[11][1];
+    arg12 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[12][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[12][0] * dims_opensbliblock00Kernel056[12][1];
+    arg13 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[13][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[13][0] * dims_opensbliblock00Kernel056[13][1];
+    arg14 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[14][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[14][0] * dims_opensbliblock00Kernel056[14][1];
+    arg15 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[15][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[15][0] * dims_opensbliblock00Kernel056[15][1];
+    arg16 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[16][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[16][0] * dims_opensbliblock00Kernel056[16][1];
+    arg17 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[17][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[17][0] * dims_opensbliblock00Kernel056[17][1];
+    arg18 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[18][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[18][0] * dims_opensbliblock00Kernel056[18][1];
+    arg19 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[19][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[19][0] * dims_opensbliblock00Kernel056[19][1];
+    arg20 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[20][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[20][0] * dims_opensbliblock00Kernel056[20][1];
+    arg21 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[21][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[21][0] * dims_opensbliblock00Kernel056[21][1];
+    arg22 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[22][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[22][0] * dims_opensbliblock00Kernel056[22][1];
+    arg23 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[23][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[23][0] * dims_opensbliblock00Kernel056[23][1];
+    arg24 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[24][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[24][0] * dims_opensbliblock00Kernel056[24][1];
+    arg25 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[25][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[25][0] * dims_opensbliblock00Kernel056[25][1];
+    arg26 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[26][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[26][0] * dims_opensbliblock00Kernel056[26][1];
+    arg27 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[27][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[27][0] * dims_opensbliblock00Kernel056[27][1];
+    arg28 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[28][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[28][0] * dims_opensbliblock00Kernel056[28][1];
+    arg29 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[29][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[29][0] * dims_opensbliblock00Kernel056[29][1];
+    arg30 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[30][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[30][0] * dims_opensbliblock00Kernel056[30][1];
+    arg31 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[31][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[31][0] * dims_opensbliblock00Kernel056[31][1];
+    arg32 += idx_x * 1*1 + idx_y * 1*1 * dims_opensbliblock00Kernel056[32][0] + idx_z * 1*1 * dims_opensbliblock00Kernel056[32][0] * dims_opensbliblock00Kernel056[32][1];
+
+    if (idx_x < size0 && idx_y < size1 && idx_z < size2) {
+        const ACC<double> argp0(dims_opensbliblock00Kernel056[0][0], dims_opensbliblock00Kernel056[0][1], arg0);
+        const ACC<double> argp1(dims_opensbliblock00Kernel056[1][0], dims_opensbliblock00Kernel056[1][1], arg1);
+        const ACC<double> argp2(dims_opensbliblock00Kernel056[2][0], dims_opensbliblock00Kernel056[2][1], arg2);
+        const ACC<double> argp3(dims_opensbliblock00Kernel056[3][0], dims_opensbliblock00Kernel056[3][1], arg3);
+        const ACC<double> argp4(dims_opensbliblock00Kernel056[4][0], dims_opensbliblock00Kernel056[4][1], arg4);
+        const ACC<double> argp5(dims_opensbliblock00Kernel056[5][0], dims_opensbliblock00Kernel056[5][1], arg5);
+        const ACC<double> argp6(dims_opensbliblock00Kernel056[6][0], dims_opensbliblock00Kernel056[6][1], arg6);
+        const ACC<double> argp7(dims_opensbliblock00Kernel056[7][0], dims_opensbliblock00Kernel056[7][1], arg7);
+        const ACC<double> argp8(dims_opensbliblock00Kernel056[8][0], dims_opensbliblock00Kernel056[8][1], arg8);
+        const ACC<double> argp9(dims_opensbliblock00Kernel056[9][0], dims_opensbliblock00Kernel056[9][1], arg9);
+        const ACC<double> argp10(dims_opensbliblock00Kernel056[10][0], dims_opensbliblock00Kernel056[10][1], arg10);
+        const ACC<double> argp11(dims_opensbliblock00Kernel056[11][0], dims_opensbliblock00Kernel056[11][1], arg11);
+        const ACC<double> argp12(dims_opensbliblock00Kernel056[12][0], dims_opensbliblock00Kernel056[12][1], arg12);
+        const ACC<double> argp13(dims_opensbliblock00Kernel056[13][0], dims_opensbliblock00Kernel056[13][1], arg13);
+        const ACC<double> argp14(dims_opensbliblock00Kernel056[14][0], dims_opensbliblock00Kernel056[14][1], arg14);
+        const ACC<double> argp15(dims_opensbliblock00Kernel056[15][0], dims_opensbliblock00Kernel056[15][1], arg15);
+        const ACC<double> argp16(dims_opensbliblock00Kernel056[16][0], dims_opensbliblock00Kernel056[16][1], arg16);
+        const ACC<double> argp17(dims_opensbliblock00Kernel056[17][0], dims_opensbliblock00Kernel056[17][1], arg17);
+        const ACC<double> argp18(dims_opensbliblock00Kernel056[18][0], dims_opensbliblock00Kernel056[18][1], arg18);
+        const ACC<double> argp19(dims_opensbliblock00Kernel056[19][0], dims_opensbliblock00Kernel056[19][1], arg19);
+        const ACC<double> argp20(dims_opensbliblock00Kernel056[20][0], dims_opensbliblock00Kernel056[20][1], arg20);
+        const ACC<double> argp21(dims_opensbliblock00Kernel056[21][0], dims_opensbliblock00Kernel056[21][1], arg21);
+        const ACC<double> argp22(dims_opensbliblock00Kernel056[22][0], dims_opensbliblock00Kernel056[22][1], arg22);
+        const ACC<double> argp23(dims_opensbliblock00Kernel056[23][0], dims_opensbliblock00Kernel056[23][1], arg23);
+        const ACC<double> argp24(dims_opensbliblock00Kernel056[24][0], dims_opensbliblock00Kernel056[24][1], arg24);
+        const ACC<double> argp25(dims_opensbliblock00Kernel056[25][0], dims_opensbliblock00Kernel056[25][1], arg25);
+        const ACC<double> argp26(dims_opensbliblock00Kernel056[26][0], dims_opensbliblock00Kernel056[26][1], arg26);
+        const ACC<double> argp27(dims_opensbliblock00Kernel056[27][0], dims_opensbliblock00Kernel056[27][1], arg27);
+        const ACC<double> argp28(dims_opensbliblock00Kernel056[28][0], dims_opensbliblock00Kernel056[28][1], arg28);
+        ACC<double> argp29(dims_opensbliblock00Kernel056[29][0], dims_opensbliblock00Kernel056[29][1], arg29);
+        ACC<double> argp30(dims_opensbliblock00Kernel056[30][0], dims_opensbliblock00Kernel056[30][1], arg30);
+        ACC<double> argp31(dims_opensbliblock00Kernel056[31][0], dims_opensbliblock00Kernel056[31][1], arg31);
+        ACC<double> argp32(dims_opensbliblock00Kernel056[32][0], dims_opensbliblock00Kernel056[32][1], arg32);
+        opensbliblock00Kernel056_gpu(
+         argp0, argp1, argp2, argp3, argp4,
+         argp5, argp6, argp7, argp8, argp9,
+         argp10, argp11, argp12, argp13, argp14,
+         argp15, argp16, argp17, argp18, argp19,
+         argp20, argp21, argp22, argp23, argp24,
+         argp25, argp26, argp27, argp28, argp29,
+         argp30, argp31, argp32, arg_idx);
+    }
+
+} //End of cuda kernel wrapper function
+
+//  ==================
+//  Host stub function
+//  ==================
+#ifndef OPS_LAZY
+void ops_par_loop_opensbliblock00Kernel056(char const *name, ops_block block, int dim, int* range,
+ ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
+ ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
+ ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
+ ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
+ ops_arg arg16, ops_arg arg17, ops_arg arg18, ops_arg arg19,
+ ops_arg arg20, ops_arg arg21, ops_arg arg22, ops_arg arg23,
+ ops_arg arg24, ops_arg arg25, ops_arg arg26, ops_arg arg27,
+ ops_arg arg28, ops_arg arg29, ops_arg arg30, ops_arg arg31,
+ ops_arg arg32, ops_arg arg33) {
+#else
+void ops_par_loop_opensbliblock00Kernel056_execute(ops_kernel_descriptor *desc) {
+    ops_block block = desc->block;
+    int dim = desc->dim;
+    int *range = desc->range;
+    ops_arg arg0 = desc->args[0];
+    ops_arg arg1 = desc->args[1];
+    ops_arg arg2 = desc->args[2];
+    ops_arg arg3 = desc->args[3];
+    ops_arg arg4 = desc->args[4];
+    ops_arg arg5 = desc->args[5];
+    ops_arg arg6 = desc->args[6];
+    ops_arg arg7 = desc->args[7];
+    ops_arg arg8 = desc->args[8];
+    ops_arg arg9 = desc->args[9];
+    ops_arg arg10 = desc->args[10];
+    ops_arg arg11 = desc->args[11];
+    ops_arg arg12 = desc->args[12];
+    ops_arg arg13 = desc->args[13];
+    ops_arg arg14 = desc->args[14];
+    ops_arg arg15 = desc->args[15];
+    ops_arg arg16 = desc->args[16];
+    ops_arg arg17 = desc->args[17];
+    ops_arg arg18 = desc->args[18];
+    ops_arg arg19 = desc->args[19];
+    ops_arg arg20 = desc->args[20];
+    ops_arg arg21 = desc->args[21];
+    ops_arg arg22 = desc->args[22];
+    ops_arg arg23 = desc->args[23];
+    ops_arg arg24 = desc->args[24];
+    ops_arg arg25 = desc->args[25];
+    ops_arg arg26 = desc->args[26];
+    ops_arg arg27 = desc->args[27];
+    ops_arg arg28 = desc->args[28];
+    ops_arg arg29 = desc->args[29];
+    ops_arg arg30 = desc->args[30];
+    ops_arg arg31 = desc->args[31];
+    ops_arg arg32 = desc->args[32];
+    ops_arg arg33 = desc->args[33];
+#endif
+
+//  ======
+//  Timing
+//  ======
+    double __t1, __t2, __c1, __c2;
+
+    ops_arg args[34];
+
+    args[0] = arg0;
+    args[1] = arg1;
+    args[2] = arg2;
+    args[3] = arg3;
+    args[4] = arg4;
+    args[5] = arg5;
+    args[6] = arg6;
+    args[7] = arg7;
+    args[8] = arg8;
+    args[9] = arg9;
+    args[10] = arg10;
+    args[11] = arg11;
+    args[12] = arg12;
+    args[13] = arg13;
+    args[14] = arg14;
+    args[15] = arg15;
+    args[16] = arg16;
+    args[17] = arg17;
+    args[18] = arg18;
+    args[19] = arg19;
+    args[20] = arg20;
+    args[21] = arg21;
+    args[22] = arg22;
+    args[23] = arg23;
+    args[24] = arg24;
+    args[25] = arg25;
+    args[26] = arg26;
+    args[27] = arg27;
+    args[28] = arg28;
+    args[29] = arg29;
+    args[30] = arg30;
+    args[31] = arg31;
+    args[32] = arg32;
+    args[33] = arg33;
+
+#if CHECKPOINTING && !OPS_LAZY
+    if (!ops_checkpointing_before(args, 34, range, 37)) return;
+#endif
+
+    if (block->instance->OPS_diags > 1) {
+        ops_timing_realloc(block->instance, 37, "opensbliblock00Kernel056");
+        block->instance->OPS_kernels[37].count++;
+        ops_timers_core(&__c1, &__t1);
+    }
+
+//  =================================================
+//  compute locally allocated range for the sub-block
+//  =================================================
+    int start_indx[3];
+    int end_indx[3];
+    int arg_idx[3];
+
+#if defined(OPS_LAZY) || !defined(OPS_MPI)
+    for (int n = 0; n < 3; n++) {
+        start_indx[n] = range[2*n];
+        end_indx[n]   = range[2*n+1];
+    }
+#else
+    if (compute_ranges(args, 34, block, range, start_indx, end_indx, arg_idx) < 0) return;
+#endif
+
+#if defined(OPS_MPI)
+#if defined(OPS_LAZY)
+    sub_block_list sb = OPS_sub_block_list[block->index];
+    arg_idx[0] = sb->decomp_disp[0]+start_indx[0];
+    arg_idx[1] = sb->decomp_disp[1]+start_indx[1];
+    arg_idx[2] = sb->decomp_disp[2]+start_indx[2];
+#endif //OPS_LAZY
+#else //OPS_MPI
+    arg_idx[0] = start_indx[0];
+    arg_idx[1] = start_indx[1];
+    arg_idx[2] = start_indx[2];
+#endif //OPS_MPI
+
+    int xdim0 = args[0].dat->size[0];
+    int ydim0 = args[0].dat->size[1];
+    int xdim1 = args[1].dat->size[0];
+    int ydim1 = args[1].dat->size[1];
+    int xdim2 = args[2].dat->size[0];
+    int ydim2 = args[2].dat->size[1];
+    int xdim3 = args[3].dat->size[0];
+    int ydim3 = args[3].dat->size[1];
+    int xdim4 = args[4].dat->size[0];
+    int ydim4 = args[4].dat->size[1];
+    int xdim5 = args[5].dat->size[0];
+    int ydim5 = args[5].dat->size[1];
+    int xdim6 = args[6].dat->size[0];
+    int ydim6 = args[6].dat->size[1];
+    int xdim7 = args[7].dat->size[0];
+    int ydim7 = args[7].dat->size[1];
+    int xdim8 = args[8].dat->size[0];
+    int ydim8 = args[8].dat->size[1];
+    int xdim9 = args[9].dat->size[0];
+    int ydim9 = args[9].dat->size[1];
+    int xdim10 = args[10].dat->size[0];
+    int ydim10 = args[10].dat->size[1];
+    int xdim11 = args[11].dat->size[0];
+    int ydim11 = args[11].dat->size[1];
+    int xdim12 = args[12].dat->size[0];
+    int ydim12 = args[12].dat->size[1];
+    int xdim13 = args[13].dat->size[0];
+    int ydim13 = args[13].dat->size[1];
+    int xdim14 = args[14].dat->size[0];
+    int ydim14 = args[14].dat->size[1];
+    int xdim15 = args[15].dat->size[0];
+    int ydim15 = args[15].dat->size[1];
+    int xdim16 = args[16].dat->size[0];
+    int ydim16 = args[16].dat->size[1];
+    int xdim17 = args[17].dat->size[0];
+    int ydim17 = args[17].dat->size[1];
+    int xdim18 = args[18].dat->size[0];
+    int ydim18 = args[18].dat->size[1];
+    int xdim19 = args[19].dat->size[0];
+    int ydim19 = args[19].dat->size[1];
+    int xdim20 = args[20].dat->size[0];
+    int ydim20 = args[20].dat->size[1];
+    int xdim21 = args[21].dat->size[0];
+    int ydim21 = args[21].dat->size[1];
+    int xdim22 = args[22].dat->size[0];
+    int ydim22 = args[22].dat->size[1];
+    int xdim23 = args[23].dat->size[0];
+    int ydim23 = args[23].dat->size[1];
+    int xdim24 = args[24].dat->size[0];
+    int ydim24 = args[24].dat->size[1];
+    int xdim25 = args[25].dat->size[0];
+    int ydim25 = args[25].dat->size[1];
+    int xdim26 = args[26].dat->size[0];
+    int ydim26 = args[26].dat->size[1];
+    int xdim27 = args[27].dat->size[0];
+    int ydim27 = args[27].dat->size[1];
+    int xdim28 = args[28].dat->size[0];
+    int ydim28 = args[28].dat->size[1];
+    int xdim29 = args[29].dat->size[0];
+    int ydim29 = args[29].dat->size[1];
+    int xdim30 = args[30].dat->size[0];
+    int ydim30 = args[30].dat->size[1];
+    int xdim31 = args[31].dat->size[0];
+    int ydim31 = args[31].dat->size[1];
+    int xdim32 = args[32].dat->size[0];
+    int ydim32 = args[32].dat->size[1];
+
+    if (xdim0 != dims_opensbliblock00Kernel056_h[0][0] || ydim0 != dims_opensbliblock00Kernel056_h[0][1] || xdim1 != dims_opensbliblock00Kernel056_h[1][0] || ydim1 != dims_opensbliblock00Kernel056_h[1][1] || xdim2 != dims_opensbliblock00Kernel056_h[2][0] || ydim2 != dims_opensbliblock00Kernel056_h[2][1] || xdim3 != dims_opensbliblock00Kernel056_h[3][0] || ydim3 != dims_opensbliblock00Kernel056_h[3][1] || xdim4 != dims_opensbliblock00Kernel056_h[4][0] || ydim4 != dims_opensbliblock00Kernel056_h[4][1] || xdim5 != dims_opensbliblock00Kernel056_h[5][0] || ydim5 != dims_opensbliblock00Kernel056_h[5][1] || xdim6 != dims_opensbliblock00Kernel056_h[6][0] || ydim6 != dims_opensbliblock00Kernel056_h[6][1] || xdim7 != dims_opensbliblock00Kernel056_h[7][0] || ydim7 != dims_opensbliblock00Kernel056_h[7][1] || xdim8 != dims_opensbliblock00Kernel056_h[8][0] || ydim8 != dims_opensbliblock00Kernel056_h[8][1] || xdim9 != dims_opensbliblock00Kernel056_h[9][0] || ydim9 != dims_opensbliblock00Kernel056_h[9][1] || xdim10 != dims_opensbliblock00Kernel056_h[10][0] || ydim10 != dims_opensbliblock00Kernel056_h[10][1] || xdim11 != dims_opensbliblock00Kernel056_h[11][0] || ydim11 != dims_opensbliblock00Kernel056_h[11][1] || xdim12 != dims_opensbliblock00Kernel056_h[12][0] || ydim12 != dims_opensbliblock00Kernel056_h[12][1] || xdim13 != dims_opensbliblock00Kernel056_h[13][0] || ydim13 != dims_opensbliblock00Kernel056_h[13][1] || xdim14 != dims_opensbliblock00Kernel056_h[14][0] || ydim14 != dims_opensbliblock00Kernel056_h[14][1] || xdim15 != dims_opensbliblock00Kernel056_h[15][0] || ydim15 != dims_opensbliblock00Kernel056_h[15][1] || xdim16 != dims_opensbliblock00Kernel056_h[16][0] || ydim16 != dims_opensbliblock00Kernel056_h[16][1] || xdim17 != dims_opensbliblock00Kernel056_h[17][0] || ydim17 != dims_opensbliblock00Kernel056_h[17][1] || xdim18 != dims_opensbliblock00Kernel056_h[18][0] || ydim18 != dims_opensbliblock00Kernel056_h[18][1] || xdim19 != dims_opensbliblock00Kernel056_h[19][0] || ydim19 != dims_opensbliblock00Kernel056_h[19][1] || xdim20 != dims_opensbliblock00Kernel056_h[20][0] || ydim20 != dims_opensbliblock00Kernel056_h[20][1] || xdim21 != dims_opensbliblock00Kernel056_h[21][0] || ydim21 != dims_opensbliblock00Kernel056_h[21][1] || xdim22 != dims_opensbliblock00Kernel056_h[22][0] || ydim22 != dims_opensbliblock00Kernel056_h[22][1] || xdim23 != dims_opensbliblock00Kernel056_h[23][0] || ydim23 != dims_opensbliblock00Kernel056_h[23][1] || xdim24 != dims_opensbliblock00Kernel056_h[24][0] || ydim24 != dims_opensbliblock00Kernel056_h[24][1] || xdim25 != dims_opensbliblock00Kernel056_h[25][0] || ydim25 != dims_opensbliblock00Kernel056_h[25][1] || xdim26 != dims_opensbliblock00Kernel056_h[26][0] || ydim26 != dims_opensbliblock00Kernel056_h[26][1] || xdim27 != dims_opensbliblock00Kernel056_h[27][0] || ydim27 != dims_opensbliblock00Kernel056_h[27][1] || xdim28 != dims_opensbliblock00Kernel056_h[28][0] || ydim28 != dims_opensbliblock00Kernel056_h[28][1] || xdim29 != dims_opensbliblock00Kernel056_h[29][0] || ydim29 != dims_opensbliblock00Kernel056_h[29][1] || xdim30 != dims_opensbliblock00Kernel056_h[30][0] || ydim30 != dims_opensbliblock00Kernel056_h[30][1] || xdim31 != dims_opensbliblock00Kernel056_h[31][0] || ydim31 != dims_opensbliblock00Kernel056_h[31][1] || xdim32 != dims_opensbliblock00Kernel056_h[32][0] || ydim32 != dims_opensbliblock00Kernel056_h[32][1]) {
+        dims_opensbliblock00Kernel056_h[0][0] = xdim0;
+        dims_opensbliblock00Kernel056_h[0][1] = ydim0;
+        dims_opensbliblock00Kernel056_h[1][0] = xdim1;
+        dims_opensbliblock00Kernel056_h[1][1] = ydim1;
+        dims_opensbliblock00Kernel056_h[2][0] = xdim2;
+        dims_opensbliblock00Kernel056_h[2][1] = ydim2;
+        dims_opensbliblock00Kernel056_h[3][0] = xdim3;
+        dims_opensbliblock00Kernel056_h[3][1] = ydim3;
+        dims_opensbliblock00Kernel056_h[4][0] = xdim4;
+        dims_opensbliblock00Kernel056_h[4][1] = ydim4;
+        dims_opensbliblock00Kernel056_h[5][0] = xdim5;
+        dims_opensbliblock00Kernel056_h[5][1] = ydim5;
+        dims_opensbliblock00Kernel056_h[6][0] = xdim6;
+        dims_opensbliblock00Kernel056_h[6][1] = ydim6;
+        dims_opensbliblock00Kernel056_h[7][0] = xdim7;
+        dims_opensbliblock00Kernel056_h[7][1] = ydim7;
+        dims_opensbliblock00Kernel056_h[8][0] = xdim8;
+        dims_opensbliblock00Kernel056_h[8][1] = ydim8;
+        dims_opensbliblock00Kernel056_h[9][0] = xdim9;
+        dims_opensbliblock00Kernel056_h[9][1] = ydim9;
+        dims_opensbliblock00Kernel056_h[10][0] = xdim10;
+        dims_opensbliblock00Kernel056_h[10][1] = ydim10;
+        dims_opensbliblock00Kernel056_h[11][0] = xdim11;
+        dims_opensbliblock00Kernel056_h[11][1] = ydim11;
+        dims_opensbliblock00Kernel056_h[12][0] = xdim12;
+        dims_opensbliblock00Kernel056_h[12][1] = ydim12;
+        dims_opensbliblock00Kernel056_h[13][0] = xdim13;
+        dims_opensbliblock00Kernel056_h[13][1] = ydim13;
+        dims_opensbliblock00Kernel056_h[14][0] = xdim14;
+        dims_opensbliblock00Kernel056_h[14][1] = ydim14;
+        dims_opensbliblock00Kernel056_h[15][0] = xdim15;
+        dims_opensbliblock00Kernel056_h[15][1] = ydim15;
+        dims_opensbliblock00Kernel056_h[16][0] = xdim16;
+        dims_opensbliblock00Kernel056_h[16][1] = ydim16;
+        dims_opensbliblock00Kernel056_h[17][0] = xdim17;
+        dims_opensbliblock00Kernel056_h[17][1] = ydim17;
+        dims_opensbliblock00Kernel056_h[18][0] = xdim18;
+        dims_opensbliblock00Kernel056_h[18][1] = ydim18;
+        dims_opensbliblock00Kernel056_h[19][0] = xdim19;
+        dims_opensbliblock00Kernel056_h[19][1] = ydim19;
+        dims_opensbliblock00Kernel056_h[20][0] = xdim20;
+        dims_opensbliblock00Kernel056_h[20][1] = ydim20;
+        dims_opensbliblock00Kernel056_h[21][0] = xdim21;
+        dims_opensbliblock00Kernel056_h[21][1] = ydim21;
+        dims_opensbliblock00Kernel056_h[22][0] = xdim22;
+        dims_opensbliblock00Kernel056_h[22][1] = ydim22;
+        dims_opensbliblock00Kernel056_h[23][0] = xdim23;
+        dims_opensbliblock00Kernel056_h[23][1] = ydim23;
+        dims_opensbliblock00Kernel056_h[24][0] = xdim24;
+        dims_opensbliblock00Kernel056_h[24][1] = ydim24;
+        dims_opensbliblock00Kernel056_h[25][0] = xdim25;
+        dims_opensbliblock00Kernel056_h[25][1] = ydim25;
+        dims_opensbliblock00Kernel056_h[26][0] = xdim26;
+        dims_opensbliblock00Kernel056_h[26][1] = ydim26;
+        dims_opensbliblock00Kernel056_h[27][0] = xdim27;
+        dims_opensbliblock00Kernel056_h[27][1] = ydim27;
+        dims_opensbliblock00Kernel056_h[28][0] = xdim28;
+        dims_opensbliblock00Kernel056_h[28][1] = ydim28;
+        dims_opensbliblock00Kernel056_h[29][0] = xdim29;
+        dims_opensbliblock00Kernel056_h[29][1] = ydim29;
+        dims_opensbliblock00Kernel056_h[30][0] = xdim30;
+        dims_opensbliblock00Kernel056_h[30][1] = ydim30;
+        dims_opensbliblock00Kernel056_h[31][0] = xdim31;
+        dims_opensbliblock00Kernel056_h[31][1] = ydim31;
+        dims_opensbliblock00Kernel056_h[32][0] = xdim32;
+        dims_opensbliblock00Kernel056_h[32][1] = ydim32;
+
+        cutilSafeCall(block->instance->ostream(), cudaMemcpyToSymbol( dims_opensbliblock00Kernel056, dims_opensbliblock00Kernel056_h, sizeof(dims_opensbliblock00Kernel056)));
+    }
+
+
+    int x_size = MAX(0,end_indx[0]-start_indx[0]);
+    int y_size = MAX(0,end_indx[1]-start_indx[1]);
+    int z_size = MAX(0,end_indx[2]-start_indx[2]);
+
+    dim3 grid( (x_size-1)/block->instance->OPS_block_size_x+ 1, (y_size-1)/block->instance->OPS_block_size_y + 1, (z_size-1)/block->instance->OPS_block_size_z +1);
+    dim3 tblock(block->instance->OPS_block_size_x,block->instance->OPS_block_size_y,block->instance->OPS_block_size_z);
+
+
+
+    long long int dat0 = (block->instance->OPS_soa ? args[0].dat->type_size : args[0].dat->elem_size);
+    long long int dat1 = (block->instance->OPS_soa ? args[1].dat->type_size : args[1].dat->elem_size);
+    long long int dat2 = (block->instance->OPS_soa ? args[2].dat->type_size : args[2].dat->elem_size);
+    long long int dat3 = (block->instance->OPS_soa ? args[3].dat->type_size : args[3].dat->elem_size);
+    long long int dat4 = (block->instance->OPS_soa ? args[4].dat->type_size : args[4].dat->elem_size);
+    long long int dat5 = (block->instance->OPS_soa ? args[5].dat->type_size : args[5].dat->elem_size);
+    long long int dat6 = (block->instance->OPS_soa ? args[6].dat->type_size : args[6].dat->elem_size);
+    long long int dat7 = (block->instance->OPS_soa ? args[7].dat->type_size : args[7].dat->elem_size);
+    long long int dat8 = (block->instance->OPS_soa ? args[8].dat->type_size : args[8].dat->elem_size);
+    long long int dat9 = (block->instance->OPS_soa ? args[9].dat->type_size : args[9].dat->elem_size);
+    long long int dat10 = (block->instance->OPS_soa ? args[10].dat->type_size : args[10].dat->elem_size);
+    long long int dat11 = (block->instance->OPS_soa ? args[11].dat->type_size : args[11].dat->elem_size);
+    long long int dat12 = (block->instance->OPS_soa ? args[12].dat->type_size : args[12].dat->elem_size);
+    long long int dat13 = (block->instance->OPS_soa ? args[13].dat->type_size : args[13].dat->elem_size);
+    long long int dat14 = (block->instance->OPS_soa ? args[14].dat->type_size : args[14].dat->elem_size);
+    long long int dat15 = (block->instance->OPS_soa ? args[15].dat->type_size : args[15].dat->elem_size);
+    long long int dat16 = (block->instance->OPS_soa ? args[16].dat->type_size : args[16].dat->elem_size);
+    long long int dat17 = (block->instance->OPS_soa ? args[17].dat->type_size : args[17].dat->elem_size);
+    long long int dat18 = (block->instance->OPS_soa ? args[18].dat->type_size : args[18].dat->elem_size);
+    long long int dat19 = (block->instance->OPS_soa ? args[19].dat->type_size : args[19].dat->elem_size);
+    long long int dat20 = (block->instance->OPS_soa ? args[20].dat->type_size : args[20].dat->elem_size);
+    long long int dat21 = (block->instance->OPS_soa ? args[21].dat->type_size : args[21].dat->elem_size);
+    long long int dat22 = (block->instance->OPS_soa ? args[22].dat->type_size : args[22].dat->elem_size);
+    long long int dat23 = (block->instance->OPS_soa ? args[23].dat->type_size : args[23].dat->elem_size);
+    long long int dat24 = (block->instance->OPS_soa ? args[24].dat->type_size : args[24].dat->elem_size);
+    long long int dat25 = (block->instance->OPS_soa ? args[25].dat->type_size : args[25].dat->elem_size);
+    long long int dat26 = (block->instance->OPS_soa ? args[26].dat->type_size : args[26].dat->elem_size);
+    long long int dat27 = (block->instance->OPS_soa ? args[27].dat->type_size : args[27].dat->elem_size);
+    long long int dat28 = (block->instance->OPS_soa ? args[28].dat->type_size : args[28].dat->elem_size);
+    long long int dat29 = (block->instance->OPS_soa ? args[29].dat->type_size : args[29].dat->elem_size);
+    long long int dat30 = (block->instance->OPS_soa ? args[30].dat->type_size : args[30].dat->elem_size);
+    long long int dat31 = (block->instance->OPS_soa ? args[31].dat->type_size : args[31].dat->elem_size);
+    long long int dat32 = (block->instance->OPS_soa ? args[32].dat->type_size : args[32].dat->elem_size);
+
+    char *p_a[34];
+
+//  =======================
+//  set up initial pointers
+//  =======================
+    long long int base0 = args[0].dat->base_offset + 
+             dat0 * 1 * (start_indx[0] * args[0].stencil->stride[0]);
+    base0 = base0 + dat0 *
+                       args[0].dat->size[0] *
+                      (start_indx[1] * args[0].stencil->stride[1]);
+    base0 = base0 + dat0 *
+                       args[0].dat->size[0] *
+                       args[0].dat->size[1] *
+                      (start_indx[2] * args[0].stencil->stride[2]);
+    p_a[0] = (char *)args[0].data_d + base0;
+
+    long long int base1 = args[1].dat->base_offset + 
+             dat1 * 1 * (start_indx[0] * args[1].stencil->stride[0]);
+    base1 = base1 + dat1 *
+                       args[1].dat->size[0] *
+                      (start_indx[1] * args[1].stencil->stride[1]);
+    base1 = base1 + dat1 *
+                       args[1].dat->size[0] *
+                       args[1].dat->size[1] *
+                      (start_indx[2] * args[1].stencil->stride[2]);
+    p_a[1] = (char *)args[1].data_d + base1;
+
+    long long int base2 = args[2].dat->base_offset + 
+             dat2 * 1 * (start_indx[0] * args[2].stencil->stride[0]);
+    base2 = base2 + dat2 *
+                       args[2].dat->size[0] *
+                      (start_indx[1] * args[2].stencil->stride[1]);
+    base2 = base2 + dat2 *
+                       args[2].dat->size[0] *
+                       args[2].dat->size[1] *
+                      (start_indx[2] * args[2].stencil->stride[2]);
+    p_a[2] = (char *)args[2].data_d + base2;
+
+    long long int base3 = args[3].dat->base_offset + 
+             dat3 * 1 * (start_indx[0] * args[3].stencil->stride[0]);
+    base3 = base3 + dat3 *
+                       args[3].dat->size[0] *
+                      (start_indx[1] * args[3].stencil->stride[1]);
+    base3 = base3 + dat3 *
+                       args[3].dat->size[0] *
+                       args[3].dat->size[1] *
+                      (start_indx[2] * args[3].stencil->stride[2]);
+    p_a[3] = (char *)args[3].data_d + base3;
+
+    long long int base4 = args[4].dat->base_offset + 
+             dat4 * 1 * (start_indx[0] * args[4].stencil->stride[0]);
+    base4 = base4 + dat4 *
+                       args[4].dat->size[0] *
+                      (start_indx[1] * args[4].stencil->stride[1]);
+    base4 = base4 + dat4 *
+                       args[4].dat->size[0] *
+                       args[4].dat->size[1] *
+                      (start_indx[2] * args[4].stencil->stride[2]);
+    p_a[4] = (char *)args[4].data_d + base4;
+
+    long long int base5 = args[5].dat->base_offset + 
+             dat5 * 1 * (start_indx[0] * args[5].stencil->stride[0]);
+    base5 = base5 + dat5 *
+                       args[5].dat->size[0] *
+                      (start_indx[1] * args[5].stencil->stride[1]);
+    base5 = base5 + dat5 *
+                       args[5].dat->size[0] *
+                       args[5].dat->size[1] *
+                      (start_indx[2] * args[5].stencil->stride[2]);
+    p_a[5] = (char *)args[5].data_d + base5;
+
+    long long int base6 = args[6].dat->base_offset + 
+             dat6 * 1 * (start_indx[0] * args[6].stencil->stride[0]);
+    base6 = base6 + dat6 *
+                       args[6].dat->size[0] *
+                      (start_indx[1] * args[6].stencil->stride[1]);
+    base6 = base6 + dat6 *
+                       args[6].dat->size[0] *
+                       args[6].dat->size[1] *
+                      (start_indx[2] * args[6].stencil->stride[2]);
+    p_a[6] = (char *)args[6].data_d + base6;
+
+    long long int base7 = args[7].dat->base_offset + 
+             dat7 * 1 * (start_indx[0] * args[7].stencil->stride[0]);
+    base7 = base7 + dat7 *
+                       args[7].dat->size[0] *
+                      (start_indx[1] * args[7].stencil->stride[1]);
+    base7 = base7 + dat7 *
+                       args[7].dat->size[0] *
+                       args[7].dat->size[1] *
+                      (start_indx[2] * args[7].stencil->stride[2]);
+    p_a[7] = (char *)args[7].data_d + base7;
+
+    long long int base8 = args[8].dat->base_offset + 
+             dat8 * 1 * (start_indx[0] * args[8].stencil->stride[0]);
+    base8 = base8 + dat8 *
+                       args[8].dat->size[0] *
+                      (start_indx[1] * args[8].stencil->stride[1]);
+    base8 = base8 + dat8 *
+                       args[8].dat->size[0] *
+                       args[8].dat->size[1] *
+                      (start_indx[2] * args[8].stencil->stride[2]);
+    p_a[8] = (char *)args[8].data_d + base8;
+
+    long long int base9 = args[9].dat->base_offset + 
+             dat9 * 1 * (start_indx[0] * args[9].stencil->stride[0]);
+    base9 = base9 + dat9 *
+                       args[9].dat->size[0] *
+                      (start_indx[1] * args[9].stencil->stride[1]);
+    base9 = base9 + dat9 *
+                       args[9].dat->size[0] *
+                       args[9].dat->size[1] *
+                      (start_indx[2] * args[9].stencil->stride[2]);
+    p_a[9] = (char *)args[9].data_d + base9;
+
+    long long int base10 = args[10].dat->base_offset + 
+             dat10 * 1 * (start_indx[0] * args[10].stencil->stride[0]);
+    base10 = base10 + dat10 *
+                       args[10].dat->size[0] *
+                      (start_indx[1] * args[10].stencil->stride[1]);
+    base10 = base10 + dat10 *
+                       args[10].dat->size[0] *
+                       args[10].dat->size[1] *
+                      (start_indx[2] * args[10].stencil->stride[2]);
+    p_a[10] = (char *)args[10].data_d + base10;
+
+    long long int base11 = args[11].dat->base_offset + 
+             dat11 * 1 * (start_indx[0] * args[11].stencil->stride[0]);
+    base11 = base11 + dat11 *
+                       args[11].dat->size[0] *
+                      (start_indx[1] * args[11].stencil->stride[1]);
+    base11 = base11 + dat11 *
+                       args[11].dat->size[0] *
+                       args[11].dat->size[1] *
+                      (start_indx[2] * args[11].stencil->stride[2]);
+    p_a[11] = (char *)args[11].data_d + base11;
+
+    long long int base12 = args[12].dat->base_offset + 
+             dat12 * 1 * (start_indx[0] * args[12].stencil->stride[0]);
+    base12 = base12 + dat12 *
+                       args[12].dat->size[0] *
+                      (start_indx[1] * args[12].stencil->stride[1]);
+    base12 = base12 + dat12 *
+                       args[12].dat->size[0] *
+                       args[12].dat->size[1] *
+                      (start_indx[2] * args[12].stencil->stride[2]);
+    p_a[12] = (char *)args[12].data_d + base12;
+
+    long long int base13 = args[13].dat->base_offset + 
+             dat13 * 1 * (start_indx[0] * args[13].stencil->stride[0]);
+    base13 = base13 + dat13 *
+                       args[13].dat->size[0] *
+                      (start_indx[1] * args[13].stencil->stride[1]);
+    base13 = base13 + dat13 *
+                       args[13].dat->size[0] *
+                       args[13].dat->size[1] *
+                      (start_indx[2] * args[13].stencil->stride[2]);
+    p_a[13] = (char *)args[13].data_d + base13;
+
+    long long int base14 = args[14].dat->base_offset + 
+             dat14 * 1 * (start_indx[0] * args[14].stencil->stride[0]);
+    base14 = base14 + dat14 *
+                       args[14].dat->size[0] *
+                      (start_indx[1] * args[14].stencil->stride[1]);
+    base14 = base14 + dat14 *
+                       args[14].dat->size[0] *
+                       args[14].dat->size[1] *
+                      (start_indx[2] * args[14].stencil->stride[2]);
+    p_a[14] = (char *)args[14].data_d + base14;
+
+    long long int base15 = args[15].dat->base_offset + 
+             dat15 * 1 * (start_indx[0] * args[15].stencil->stride[0]);
+    base15 = base15 + dat15 *
+                       args[15].dat->size[0] *
+                      (start_indx[1] * args[15].stencil->stride[1]);
+    base15 = base15 + dat15 *
+                       args[15].dat->size[0] *
+                       args[15].dat->size[1] *
+                      (start_indx[2] * args[15].stencil->stride[2]);
+    p_a[15] = (char *)args[15].data_d + base15;
+
+    long long int base16 = args[16].dat->base_offset + 
+             dat16 * 1 * (start_indx[0] * args[16].stencil->stride[0]);
+    base16 = base16 + dat16 *
+                       args[16].dat->size[0] *
+                      (start_indx[1] * args[16].stencil->stride[1]);
+    base16 = base16 + dat16 *
+                       args[16].dat->size[0] *
+                       args[16].dat->size[1] *
+                      (start_indx[2] * args[16].stencil->stride[2]);
+    p_a[16] = (char *)args[16].data_d + base16;
+
+    long long int base17 = args[17].dat->base_offset + 
+             dat17 * 1 * (start_indx[0] * args[17].stencil->stride[0]);
+    base17 = base17 + dat17 *
+                       args[17].dat->size[0] *
+                      (start_indx[1] * args[17].stencil->stride[1]);
+    base17 = base17 + dat17 *
+                       args[17].dat->size[0] *
+                       args[17].dat->size[1] *
+                      (start_indx[2] * args[17].stencil->stride[2]);
+    p_a[17] = (char *)args[17].data_d + base17;
+
+    long long int base18 = args[18].dat->base_offset + 
+             dat18 * 1 * (start_indx[0] * args[18].stencil->stride[0]);
+    base18 = base18 + dat18 *
+                       args[18].dat->size[0] *
+                      (start_indx[1] * args[18].stencil->stride[1]);
+    base18 = base18 + dat18 *
+                       args[18].dat->size[0] *
+                       args[18].dat->size[1] *
+                      (start_indx[2] * args[18].stencil->stride[2]);
+    p_a[18] = (char *)args[18].data_d + base18;
+
+    long long int base19 = args[19].dat->base_offset + 
+             dat19 * 1 * (start_indx[0] * args[19].stencil->stride[0]);
+    base19 = base19 + dat19 *
+                       args[19].dat->size[0] *
+                      (start_indx[1] * args[19].stencil->stride[1]);
+    base19 = base19 + dat19 *
+                       args[19].dat->size[0] *
+                       args[19].dat->size[1] *
+                      (start_indx[2] * args[19].stencil->stride[2]);
+    p_a[19] = (char *)args[19].data_d + base19;
+
+    long long int base20 = args[20].dat->base_offset + 
+             dat20 * 1 * (start_indx[0] * args[20].stencil->stride[0]);
+    base20 = base20 + dat20 *
+                       args[20].dat->size[0] *
+                      (start_indx[1] * args[20].stencil->stride[1]);
+    base20 = base20 + dat20 *
+                       args[20].dat->size[0] *
+                       args[20].dat->size[1] *
+                      (start_indx[2] * args[20].stencil->stride[2]);
+    p_a[20] = (char *)args[20].data_d + base20;
+
+    long long int base21 = args[21].dat->base_offset + 
+             dat21 * 1 * (start_indx[0] * args[21].stencil->stride[0]);
+    base21 = base21 + dat21 *
+                       args[21].dat->size[0] *
+                      (start_indx[1] * args[21].stencil->stride[1]);
+    base21 = base21 + dat21 *
+                       args[21].dat->size[0] *
+                       args[21].dat->size[1] *
+                      (start_indx[2] * args[21].stencil->stride[2]);
+    p_a[21] = (char *)args[21].data_d + base21;
+
+    long long int base22 = args[22].dat->base_offset + 
+             dat22 * 1 * (start_indx[0] * args[22].stencil->stride[0]);
+    base22 = base22 + dat22 *
+                       args[22].dat->size[0] *
+                      (start_indx[1] * args[22].stencil->stride[1]);
+    base22 = base22 + dat22 *
+                       args[22].dat->size[0] *
+                       args[22].dat->size[1] *
+                      (start_indx[2] * args[22].stencil->stride[2]);
+    p_a[22] = (char *)args[22].data_d + base22;
+
+    long long int base23 = args[23].dat->base_offset + 
+             dat23 * 1 * (start_indx[0] * args[23].stencil->stride[0]);
+    base23 = base23 + dat23 *
+                       args[23].dat->size[0] *
+                      (start_indx[1] * args[23].stencil->stride[1]);
+    base23 = base23 + dat23 *
+                       args[23].dat->size[0] *
+                       args[23].dat->size[1] *
+                      (start_indx[2] * args[23].stencil->stride[2]);
+    p_a[23] = (char *)args[23].data_d + base23;
+
+    long long int base24 = args[24].dat->base_offset + 
+             dat24 * 1 * (start_indx[0] * args[24].stencil->stride[0]);
+    base24 = base24 + dat24 *
+                       args[24].dat->size[0] *
+                      (start_indx[1] * args[24].stencil->stride[1]);
+    base24 = base24 + dat24 *
+                       args[24].dat->size[0] *
+                       args[24].dat->size[1] *
+                      (start_indx[2] * args[24].stencil->stride[2]);
+    p_a[24] = (char *)args[24].data_d + base24;
+
+    long long int base25 = args[25].dat->base_offset + 
+             dat25 * 1 * (start_indx[0] * args[25].stencil->stride[0]);
+    base25 = base25 + dat25 *
+                       args[25].dat->size[0] *
+                      (start_indx[1] * args[25].stencil->stride[1]);
+    base25 = base25 + dat25 *
+                       args[25].dat->size[0] *
+                       args[25].dat->size[1] *
+                      (start_indx[2] * args[25].stencil->stride[2]);
+    p_a[25] = (char *)args[25].data_d + base25;
+
+    long long int base26 = args[26].dat->base_offset + 
+             dat26 * 1 * (start_indx[0] * args[26].stencil->stride[0]);
+    base26 = base26 + dat26 *
+                       args[26].dat->size[0] *
+                      (start_indx[1] * args[26].stencil->stride[1]);
+    base26 = base26 + dat26 *
+                       args[26].dat->size[0] *
+                       args[26].dat->size[1] *
+                      (start_indx[2] * args[26].stencil->stride[2]);
+    p_a[26] = (char *)args[26].data_d + base26;
+
+    long long int base27 = args[27].dat->base_offset + 
+             dat27 * 1 * (start_indx[0] * args[27].stencil->stride[0]);
+    base27 = base27 + dat27 *
+                       args[27].dat->size[0] *
+                      (start_indx[1] * args[27].stencil->stride[1]);
+    base27 = base27 + dat27 *
+                       args[27].dat->size[0] *
+                       args[27].dat->size[1] *
+                      (start_indx[2] * args[27].stencil->stride[2]);
+    p_a[27] = (char *)args[27].data_d + base27;
+
+    long long int base28 = args[28].dat->base_offset + 
+             dat28 * 1 * (start_indx[0] * args[28].stencil->stride[0]);
+    base28 = base28 + dat28 *
+                       args[28].dat->size[0] *
+                      (start_indx[1] * args[28].stencil->stride[1]);
+    base28 = base28 + dat28 *
+                       args[28].dat->size[0] *
+                       args[28].dat->size[1] *
+                      (start_indx[2] * args[28].stencil->stride[2]);
+    p_a[28] = (char *)args[28].data_d + base28;
+
+    long long int base29 = args[29].dat->base_offset + 
+             dat29 * 1 * (start_indx[0] * args[29].stencil->stride[0]);
+    base29 = base29 + dat29 *
+                       args[29].dat->size[0] *
+                      (start_indx[1] * args[29].stencil->stride[1]);
+    base29 = base29 + dat29 *
+                       args[29].dat->size[0] *
+                       args[29].dat->size[1] *
+                      (start_indx[2] * args[29].stencil->stride[2]);
+    p_a[29] = (char *)args[29].data_d + base29;
+
+    long long int base30 = args[30].dat->base_offset + 
+             dat30 * 1 * (start_indx[0] * args[30].stencil->stride[0]);
+    base30 = base30 + dat30 *
+                       args[30].dat->size[0] *
+                      (start_indx[1] * args[30].stencil->stride[1]);
+    base30 = base30 + dat30 *
+                       args[30].dat->size[0] *
+                       args[30].dat->size[1] *
+                      (start_indx[2] * args[30].stencil->stride[2]);
+    p_a[30] = (char *)args[30].data_d + base30;
+
+    long long int base31 = args[31].dat->base_offset + 
+             dat31 * 1 * (start_indx[0] * args[31].stencil->stride[0]);
+    base31 = base31 + dat31 *
+                       args[31].dat->size[0] *
+                      (start_indx[1] * args[31].stencil->stride[1]);
+    base31 = base31 + dat31 *
+                       args[31].dat->size[0] *
+                       args[31].dat->size[1] *
+                      (start_indx[2] * args[31].stencil->stride[2]);
+    p_a[31] = (char *)args[31].data_d + base31;
+
+    long long int base32 = args[32].dat->base_offset + 
+             dat32 * 1 * (start_indx[0] * args[32].stencil->stride[0]);
+    base32 = base32 + dat32 *
+                       args[32].dat->size[0] *
+                      (start_indx[1] * args[32].stencil->stride[1]);
+    base32 = base32 + dat32 *
+                       args[32].dat->size[0] *
+                       args[32].dat->size[1] *
+                      (start_indx[2] * args[32].stencil->stride[2]);
+    p_a[32] = (char *)args[32].data_d + base32;
+
+//  =============
+//  Halo exchange
+//  =============
+#ifndef OPS_LAZY
+    ops_H_D_exchanges_device(args, 34);
+    ops_halo_exchanges(args, 34, range);
+#endif
+
+    if (block->instance->OPS_diags > 1) {
+        ops_timers_core(&__c2, &__t2);
+        block->instance->OPS_kernels[37].mpi_time += __t2 - __t1;
+    }
+
+
+//call kernel wrapper function, passing in pointers to data
+    if (x_size > 0 && y_size > 0 && z_size > 0) {
+
+        ops_opensbliblock00Kernel056<<<grid, tblock >>> ( 
+         (double *)p_a[0], (double *)p_a[1],
+         (double *)p_a[2], (double *)p_a[3],
+         (double *)p_a[4], (double *)p_a[5],
+         (double *)p_a[6], (double *)p_a[7],
+         (double *)p_a[8], (double *)p_a[9],
+         (double *)p_a[10], (double *)p_a[11],
+         (double *)p_a[12], (double *)p_a[13],
+         (double *)p_a[14], (double *)p_a[15],
+         (double *)p_a[16], (double *)p_a[17],
+         (double *)p_a[18], (double *)p_a[19],
+         (double *)p_a[20], (double *)p_a[21],
+         (double *)p_a[22], (double *)p_a[23],
+         (double *)p_a[24], (double *)p_a[25],
+         (double *)p_a[26], (double *)p_a[27],
+         (double *)p_a[28], (double *)p_a[29],
+         (double *)p_a[30], (double *)p_a[31],
+         (double *)p_a[32], arg_idx[0], arg_idx[1], arg_idx[2],
+        x_size, y_size, z_size);
+
+    }
+
+    cutilSafeCall(block->instance->ostream(), cudaGetLastError());
+
+    if (block->instance->OPS_diags>1) {
+        cutilSafeCall(block->instance->ostream(), cudaDeviceSynchronize());
+        ops_timers_core(&__c1, &__t1);
+        block->instance->OPS_kernels[37].time += __t1 - __t2;
+    }
+
+#ifndef OPS_LAZY
+    ops_set_dirtybit_device(args, 34);
+    ops_set_halo_dirtybit3(&args[29], range);
+    ops_set_halo_dirtybit3(&args[30], range);
+    ops_set_halo_dirtybit3(&args[31], range);
+    ops_set_halo_dirtybit3(&args[32], range);
+#endif
+
+    if (block->instance->OPS_diags > 1) {
+        //  ====================
+        //  Update kernel record
+        //  ====================
+        ops_timers_core(&__c2, &__t2);
+        block->instance->OPS_kernels[37].mpi_time += __t2 - __t1;
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg0);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg1);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg2);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg3);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg4);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg5);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg6);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg7);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg8);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg9);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg10);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg11);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg12);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg13);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg14);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg15);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg16);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg17);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg18);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg19);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg20);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg21);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg22);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg23);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg24);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg25);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg26);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg27);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg28);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg29);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg30);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg31);
+        block->instance->OPS_kernels[37].transfer += ops_compute_transfer(dim, start_indx, end_indx, &arg32);
+    }
+}
+
+#ifdef OPS_LAZY
+void ops_par_loop_opensbliblock00Kernel056(char const *name, ops_block block, int dim, int* range,
+ ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
+ ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
+ ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
+ ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
+ ops_arg arg16, ops_arg arg17, ops_arg arg18, ops_arg arg19,
+ ops_arg arg20, ops_arg arg21, ops_arg arg22, ops_arg arg23,
+ ops_arg arg24, ops_arg arg25, ops_arg arg26, ops_arg arg27,
+ ops_arg arg28, ops_arg arg29, ops_arg arg30, ops_arg arg31,
+ ops_arg arg32, ops_arg arg33)
+{
+    ops_arg args[34];
+
+    args[0] = arg0;
+    args[1] = arg1;
+    args[2] = arg2;
+    args[3] = arg3;
+    args[4] = arg4;
+    args[5] = arg5;
+    args[6] = arg6;
+    args[7] = arg7;
+    args[8] = arg8;
+    args[9] = arg9;
+    args[10] = arg10;
+    args[11] = arg11;
+    args[12] = arg12;
+    args[13] = arg13;
+    args[14] = arg14;
+    args[15] = arg15;
+    args[16] = arg16;
+    args[17] = arg17;
+    args[18] = arg18;
+    args[19] = arg19;
+    args[20] = arg20;
+    args[21] = arg21;
+    args[22] = arg22;
+    args[23] = arg23;
+    args[24] = arg24;
+    args[25] = arg25;
+    args[26] = arg26;
+    args[27] = arg27;
+    args[28] = arg28;
+    args[29] = arg29;
+    args[30] = arg30;
+    args[31] = arg31;
+    args[32] = arg32;
+    args[33] = arg33;
+
+    create_kerneldesc_and_enque("opensbliblock00Kernel056", args, 34, 37, dim, 1, range, block, ops_par_loop_opensbliblock00Kernel056_execute);
+}
+#endif

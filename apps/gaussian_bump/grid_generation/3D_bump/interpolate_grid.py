@@ -13,8 +13,8 @@ y = data[:, 1]
 z = data[:, 2]
 
 # Define new uniform grid ranges
-x_uniform = np.linspace(min(x), max(x), 1500)
-z_uniform = np.linspace(min(z), max(z), 400)
+x_uniform = np.linspace(min(x), max(x), 1500) #change value to number of x points you want
+z_uniform = np.linspace(min(z), max(z), 400)#change value to number of z points you want
 
 # Create a meshgrid for the new coordinates
 X_uniform, Z_uniform = np.meshgrid(x_uniform, z_uniform)
@@ -48,6 +48,6 @@ ax.set_xlabel('x')
 ax.set_ylabel('y')
 ax.set_zlabel('z')
 ax.set_title('3D Scatter Plot of Interpolated Data')
+plt.show()
 fig.savefig('scatter_interpolated.pdf')
-# Show the plot
-# plt.show()
+

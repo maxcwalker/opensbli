@@ -13,7 +13,7 @@ def process_stl_file(input_filename, output_filename):
                 _, x, y, z = line.strip().split()
                 x, y, z = float(x), float(y), float(z)
                 # Adjust the y value
-                y -= 12.43
+                y -= 1
                 # Add to the set to remove duplicates if y is greater than or equal to 0
                 if y >= 0:
                     vertices.add((x, y, z))
@@ -70,7 +70,7 @@ def create_contour_plot(vertices, elev=30, azim=130):
 
 # Main function
 def main():
-    input_filename = 'dome_gemoetry_flatPlate.STL'  # Replace with your input STL file name
+    input_filename = 'dome_geometry_flatPlate_30deg.STL'  # Replace with your input STL file name
     output_filename = 'output.dat'
 
     vertices = process_stl_file(input_filename, output_filename)

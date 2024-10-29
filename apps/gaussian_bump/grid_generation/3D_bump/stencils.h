@@ -1,13 +1,13 @@
+int stencil_0_00_00_00_3temp[] = {0, 0, 0};
+ops_stencil stencil_0_00_00_00_3 = ops_decl_stencil(3,1,stencil_0_00_00_00_3temp,"stencil_0_00_00_00_3temp");
+int stencil_0_00_00_22_11temp[] = {0, 0, -2, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 0, 2};
+ops_stencil stencil_0_00_00_22_11 = ops_decl_stencil(3,5,stencil_0_00_00_22_11temp,"stencil_0_00_00_22_11temp");
 int stencil_0_00_24_22_23temp[] = {0, -2, 0, 0, -1, 0, 0, 0, -2, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0};
 ops_stencil stencil_0_00_24_22_23 = ops_decl_stencil(3,11,stencil_0_00_24_22_23temp,"stencil_0_00_24_22_23temp");
 int stencil_0_44_24_22_39temp[] = {-4, 0, 0, -3, 0, 0, -2, 0, 0, -1, 0, 0, 0, -2, 0, 0, -1, 0, 0, 0, -2, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0};
 ops_stencil stencil_0_44_24_22_39 = ops_decl_stencil(3,19,stencil_0_44_24_22_39temp,"stencil_0_44_24_22_39temp");
-int stencil_0_00_00_00_3temp[] = {0, 0, 0};
-ops_stencil stencil_0_00_00_00_3 = ops_decl_stencil(3,1,stencil_0_00_00_00_3temp,"stencil_0_00_00_00_3temp");
 int stencil_0_00_24_00_15temp[] = {0, -2, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0};
 ops_stencil stencil_0_00_24_00_15 = ops_decl_stencil(3,7,stencil_0_00_24_00_15temp,"stencil_0_00_24_00_15temp");
-int stencil_0_00_00_22_11temp[] = {0, 0, -2, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 0, 2};
-ops_stencil stencil_0_00_00_22_11 = ops_decl_stencil(3,5,stencil_0_00_00_22_11temp,"stencil_0_00_00_22_11temp");
 int stencil_0_23_00_00_13temp[] = {-2, 0, 0, -1, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0};
 ops_stencil stencil_0_23_00_00_13 = ops_decl_stencil(3,6,stencil_0_23_00_00_13temp,"stencil_0_23_00_00_13temp");
 int stencil_0_01_00_00_5temp[] = {0, 0, 0, 1, 0, 0};

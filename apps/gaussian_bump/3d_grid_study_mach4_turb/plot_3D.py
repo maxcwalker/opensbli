@@ -1,29 +1,15 @@
-import numpy
-from mpl_toolkits.axes_grid1 import make_axes_locatable
+import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import h5py
-import os.path
-import matplotlib.cm as cm
 import os
 import sys
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+import matplotlib.patches as patches
 
 
 class plotFunctions(object):
     def __init__(self):
-        return
-
-    def contour_local(self, fig, levels0, label, variable):
-        ax1 = fig.add_subplot(1, 1, 1, aspect='equal')
-        ax1.set_xlabel(r"$x_0$", fontsize=20)
-        ax1.set_ylabel(r"$x_1$", fontsize=20)
-        # ax1.set_xlim([0, 0.1])
-        # ax1.set_ylim([0, 0.1])
-        CS = ax1.contourf(self.x[50,:,:], self.y[50,:,:], variable[50,:,:], levels=levels0, cmap=cm.jet)
-        divider = make_axes_locatable(ax1)
-        cax1 = divider.append_axes("right", size="5%", pad=0.05)
-        ticks_at = numpy.linspace(levels0[0], levels0[-1], 10)
-        cbar = plt.colorbar(CS, cax=cax1, ticks=ticks_at, format='%.3f')
-        cbar.ax.set_ylabel(r"$%s$" % label, fontsize=20)
         return
 
     def read_file(self, fname):
@@ -35,7 +21,7 @@ class plotFunctions(object):
         d_m = group["%s" % (dataset)].attrs['d_m']
         size = group["%s" % (dataset)].shape
         read_start = [abs(d) for d in d_m]
-        read_end = [s-abs(d) for d, s in zip(d_m, size)]
+        read_end = [s - abs(d) for d, s in zip(d_m, size)]
         if len(read_end) == 2:
             read_data = group["%s" % (dataset)][read_start[0]:read_end[0], read_start[1]:read_end[1]]
         elif len(read_end) == 3:
@@ -63,24 +49,8 @@ class plots_3D(plotFunctions):
         x = self.read_dataset(group1, "x0_B0")
         y = self.read_dataset(group1, "x1_B0")
         z = self.read_dataset(group1, "x2_B0")
-        dx, dy, dz = x[0, 0, 1], y[0, 1, 0], z[1,0,0]
         print("Grid size (x,y,z)  is: (%d, %d, %d)" % (x.shape[2], x.shape[1], x.shape[0]))
-        print("First grid point dx: %f, dy: %f" % (dx, dy))
-        dx, dy, dz = x[0,0, -1]-x[0,0, -2], y[0,-1, 0]-y[0,-2, 0], z[-1,0, 0]-z[-2,0, 0]
-        print("Last grid point dx: %f, dy: %f" % (dx, dy))
         return x, y, z
-
-    def viscous_length_scale(self, fname):
-        f, group1 = self.read_file(fname)
-        rho, u, v, rhoE, p, T, M, mu = self.extract_flow_variables(group1)
-        Cf, tau_wall = self.compute_skin_friction(u, mu)
-        # Wall viscosity all x points
-        mu_wall = mu[0, 0, :]
-        # print(rho[0,0,:])
-        u_tau = numpy.sqrt(abs(tau_wall / rho[0,0,:])) # friction velocity
-        # print(u_tau)
-        dv = mu_wall / (rho[0,0,:]*u_tau)  # viscous length scale
-        return dv, u_tau
 
     def extract_metrics(self):
         fname = sys.argv[1]
@@ -94,182 +64,169 @@ class plots_3D(plotFunctions):
         rhov = self.read_dataset(group, "rhou1_B0")
         rhow = self.read_dataset(group, "rhou2_B0")
         rhoE = self.read_dataset(group, "rhoE_B0")
-        u = rhou/rho
-        v = rhov/rho
-        w = rhow/rho
-        p = (0.4)*(rhoE - 0.5*(u**2+v**2+w**2)*rho)
-        a = numpy.sqrt(1.4*p/rho)
-        M = numpy.sqrt(u**2 + v**2 + w**2)/a
-        T = 1.4*(self.Minf**2)*p/rho
-        mu = self.compute_viscosity(T)
-        return rho, u, v, rhoE, p, T, M, mu
+        u = rhou / rho
+        v = rhov / rho
+        w = rhow / rho
+        p = (0.4) * (rhoE - 0.5 * (u ** 2 + v ** 2 + w ** 2) * rho)
+        a = np.sqrt(1.4 * p / rho)
+        M = np.sqrt(u ** 2 + v ** 2 + w ** 2) / a
+        return rho, M
 
-    def compute_wall_derivative(self, variable):
-        ny = numpy.size(self.y[:, 0])
-        Ly = self.Ly
-        delta = Ly/(ny-1.0)
-        D11 = self.D11[0, 0:6, :]
-        var = variable[0, 0:6, :]
-        coeffs = numpy.array([-1.83333333333334, 3.00000000000002, -1.50000000000003, 0.333333333333356, -8.34617916606957e-15, 1.06910884386911e-15])
-        coeffs = coeffs.reshape([6, 1])
-        dudy = sum(D11*var*coeffs)/delta
-        return dudy
+    def plot_3d(self, x, y, z, data, label):
+        fig = plt.figure(figsize=(10, 7))
+        ax = fig.add_subplot(111, projection='3d')
+        ax.set_xlabel('x')
+        ax.set_ylabel('y')
+        ax.set_zlabel('z')
 
-    def compute_viscosity(self, T):
-        mu = (T**(1.5)*(1.0+self.SuthT/self.RefT)/(T+self.SuthT/self.RefT))
-        return mu
+        # Set the view to be rotated by 180 degrees
+        ax.view_init(elev=120, azim=260)
 
-    def compute_skin_friction(self, u, mu):
-        # Wall viscosity all x points
-        mu_wall = mu[0, 0, :]
-        dudy = self.compute_wall_derivative(u)
-        tau_wall = dudy*mu_wall
-        Cf = tau_wall/(0.5*self.Re)
-        return Cf, tau_wall
-    
-    def compute_heat_flux(self,T,mu):
-        dTdy = self.compute_wall_derivative(T)
-        mu_wall = mu[0, 0, :]
-        q = (mu_wall/(0.4*self.Minf**2*self.Pr*self.Re)*dTdy)
-        return q
-    
-    def St_Rex(self,Cf, mu,rho,u,T):
-        Rex = 0.5*(self.Re / self.scale)**2 + self.x[0, 1, :]*self.Re
+        # Downsample data for better performance
+        sample_rate = 10
+        x, y, z, data = x[::sample_rate, 0, ::sample_rate], y[::sample_rate, 0, ::sample_rate], z[::sample_rate, 0, ::sample_rate], data[::sample_rate, 0, ::sample_rate]
 
-        St_Re_ana = Cf / (2*self.Pr**(2/3)) # this is the reynolds analogy one
+        # Calculate the ranges for each axis
+        x_range = np.max(x) - np.min(x)
+        y_range = np.max(y) - np.min(y)
+        z_range = np.max(z) - np.min(z)
 
-        inf = 70#int(len(mu[0,:,0])*1/3)
-        r = self.Pr**1/3
-        dTdy = self.compute_wall_derivative(T)
-        Tr = 1+r*0.2*self.Minf**2
-        print(dTdy[192])
-        St_act = mu[0, 0, :] / (self.Pr*self.Re*(Tr-self.Tw)) * dTdy #actual St number
-        return Rex, St_Re_ana, St_act
+        # Determine the maximum range
+        max_range = max(x_range, y_range, z_range)
 
-    def SBLI_comparison(self, Cf, P):
-        fig = plt.figure()
-        ax = fig.add_subplot(111)
+        # Set the limits of each axis to be equal
+        x_center = (np.max(x) + np.min(x)) / 2
+        y_center = (np.max(y) + np.min(y)) / 2
+        z_center = (np.max(z) + np.min(z)) / 2
 
-        dv, u_tau = self.viscous_length_scale(fname)
-        dx, dy, dz = self.x[0, 0, 1], self.y[0, 1, 0], self.z[1,0,0]
-        dx_plus, dy_plus, dz_plus = dx/ dv, dy/ dv, dz/ dv
+        ax.set_xlim([x_center - max_range / 2, x_center + max_range / 2])
+        ax.set_ylim([y_center - max_range / 2, y_center + max_range / 2])
+        ax.set_zlim([z_center - max_range / 2, z_center + max_range / 2])
 
-        ax.plot(self.x[0, 1, :], Cf, color='k', label='OpenSBLI')
-        ax.axhline(y=0.0, linestyle='--', color='k')
-        ax.annotate("At x=%.1f \n$dx^+$: %.2f \n$dy^+$: %.2f \n$dz^+$: %.2f" % (self.x[0,0,self.loc], dx_plus[self.loc], dy_plus[self.loc], dz_plus[self.loc]), xy =(350,0.31), xycoords='data', xytext=(-90,-5),
-            textcoords='offset points',bbox=dict(boxstyle="round", fc="0.8"), arrowprops=dict(arrowstyle="->"))
-        ax.set_xlabel(r'$x_0$', fontsize=20)
-        ax.set_ylabel(r'$C_f$', fontsize=20)
-        # ax.set_ylim([-0.004, 0.004])
-        ax.set_xlim([min(self.x[0, 1, :]), max(self.x[0, 1, :])])
-        ax.set_title('Skin friction')
-        plt.legend(loc="best")
-        ax.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        fig.savefig(directory + 'skin_friction.pdf', bbox_inches='tight')
-        fig.clf()
+        # Plotting the data
+        img = ax.scatter(x.flatten(), y.flatten(), z.flatten(), c=data.flatten(), cmap='jet', marker='o', s=5)
 
-        plt.plot(self.x[0, 1, :], P[0, 0, :]/P[0, 0, 0], color='k', label="OpenSBLI")
-        # linestyle='', marker='o',markevery=10)
-        plt.xlabel(r'$x_0$', fontsize=20)
-        plt.xlim(-10)
-        plt.grid()
-        plt.ylabel(r'$\frac{P_w}{P_1}$', fontsize=22)
-        plt.title('Normalized wall pressure')
-        plt.legend(loc="best")
-        plt.savefig(directory + "wall_pressure.pdf", bbox_inches='tight')
+        fig.colorbar(img)
+        plt.title(f'3D Visualization of {label}')
+        fig.savefig(f'3D_plot_{label}.pdf')
+        plt.show()
 
-
-        plt.clf()
-        return
-
-    def main_plot(self, fname, n_levels):
+    def main_plot(self, fname):
         f, group1 = self.read_file(fname)
-
         self.x, self.y, self.z = self.extract_coordinates()
-        rho, u, v, rhoE, p, T, M, mu = self.extract_flow_variables(group1)
-        # self.loc = 10
+        rho, M = self.extract_flow_variables(group1)
+        self.plot_3d(self.x, self.y, self.z, rho, 'rho')
+        self.plot_3d(self.x, self.y, self.z, M, 'M')
 
-        for i, x in enumerate(self.x[0, 1, :]):
-            if x >=350:
-                self.loc = int(i)
-                break
-            continue
-            return
-        print("index of point 350 is %f" % self.loc)
-        print("exact position of lic is %f" % self.x[0,0,self.loc])
 
-        
-        variables = [rho, u, v, rhoE, p, M, T, mu]
-        names = ["rho", "u", "v", "rhoE", "P", "M", "T", "mu"]
+class slice_plots(plotFunctions):
+    def __init__(self):
+        pass
 
-        # Contour plots
-        for var, name in zip(variables, names):
-            min_val = numpy.min(var)
-            max_val = numpy.max(var)
-            levels = numpy.linspace(min_val, max_val, n_levels)
-            print("%s" % name)
-            print(levels)
-            fig = plt.figure()
-            self.contour_local(fig, levels, "%s" % name, var)
-            plt.savefig(directory + "gaussian_bump_3D_%s.pdf" % name, bbox_inches='tight')
-            plt.clf()
-        # Compare to SBLI
-        Cf, tau_wall = self.compute_skin_friction(u, mu)
-        self.SBLI_comparison(Cf, p)
-
-        q = self.compute_heat_flux(T,mu)
-        fig, ax = plt.subplots()
-        ax.plot(self.x[0, 1, :], q, color='k') #, label='OpenSBLI'
-        ax.set_xlabel(r'$x_0$', fontsize=15)
-        ax.set_ylabel(r'$\dot{q}$', fontsize=15)
-        ax.set_xlim([min(self.x[0, 1, :]), max(self.x[0, 1, :])])
-        ax.set_title('Wall heat flux')
-        # plt.legend(loc="best")
-        ax.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        fig.savefig(directory + 'heat_flux.pdf', bbox_inches='tight')
-
-        Rex,St_rey_ana,St_acc = self.St_Rex(Cf, mu,rho,u,T)
-        fig1, ax1 = plt.subplots()
-        # ax1.plot(Rex, St_rey_ana,label='Reynolds Analogy \nStanton Number')
-        ax1.plot(Rex, St_acc,color='k',label='Stanton Number\nEquation')
-        ax1.set_xlabel(r'$Re_x$', fontsize=20)
-        ax1.set_ylabel(r'$St$', fontsize=20)
-        # ax1.set_ylim([-0.2,3])
-        ax1.set_xlim([min(Rex),max(Rex)])
-        # ax1.legend(loc='best')
-        ax1.set_title('Reynolds number vs Stanton number', fontsize=15)
-        fig1.savefig(directory+'Rex_St.pdf', bbox_inches='tight')
-
-    def turbulence_plots(self, fname):
+    def extract_coordinates(self):
         f, group1 = self.read_file(fname)
-        # self.x, self.y, self.z = self.extract_coordinates()
-        dv, u_tau = self.viscous_length_scale(fname)
-        rho, u, v, rhoE, p, T, M, mu = self.extract_flow_variables(group1)
-        dx, dy, dz = self.x[0, 0, 1], self.y[0, 1, 0], self.z[1,0,0]
-        dx_plus, dy_plus, dz_plus = dx/ dv, dy/ dv, dz/ dv
+        x = self.read_dataset(group1, "x0_B0")
+        y = self.read_dataset(group1, "x1_B0")
+        z = self.read_dataset(group1, "x2_B0")
+        return x, y, z
 
-        print(r'at x=%.1f: dx+: %f, dy+: %f, dz+: %f' % (self.x[0,0,self.loc],dx_plus[self.loc], dy_plus[self.loc], dz_plus[self.loc]))
-        
-        u_plus = u[0,1] / u_tau
-        y_plus = dy*u_tau*rho[0,0,:] / mu[0,0,:]
-        fig, ax = plt.subplots()
-        ax.plot(self.x[0,0,:],y_plus)
-        ax.set_ylabel(r'$Y^+$', fontsize=20)
-        ax.set_xlabel(r'$x_0$', fontsize=20)
-        ax.set_xlim([0,400])
-        ax.grid()
-        # ax.set_ylim([-0.004, 0.004])
-        ax.set_title(r'$Y^+$ value along the wall',fontsize=15)
-        ax.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
-        fig.savefig(directory + "y_plus.pdf", bbox_inches='tight')
+    def extract_flow_variables(self, group):
+        rho = self.read_dataset(group, "rho_B0")
+        rhou = self.read_dataset(group, "rhou0_B0")
+        rhov = self.read_dataset(group, "rhou1_B0")
+        rhow = self.read_dataset(group, "rhou2_B0")
+        rhoE = self.read_dataset(group, "rhoE_B0")
+        u = rhou / rho
+        v = rhov / rho
+        w = rhow / rho
+        p = (0.4) * (rhoE - 0.5 * (u ** 2 + v ** 2 + w ** 2) * rho)
+        a = np.sqrt(1.4 * p / rho)
+        M = np.sqrt(u ** 2 + v ** 2 + w ** 2) / a
+        return rho, M
 
+
+
+    def plot_slice(self, x, y, data, plane, idx, label):
+        fig, ax = plt.subplots(figsize=(10, 7))
+
+        # Create a contourf plot to fill the contours
+        contour = ax.contourf(x, y, data, cmap='jet')
+        fig.colorbar(contour, ax=ax)
+
+        # Set equal aspect ratio and labels
+        ax.set_aspect('equal')
+        ax.set_title(f'{label} on {plane}-plane at index {idx}')
+        ax.set_xlabel(f'{plane[0]} axis')
+        ax.set_ylabel(f'{plane[1]} axis')
+
+        # Only create an inset for the z-y slice at index 750
+        if plane == "z-y" and idx == 750:
+            # Create an inset axis for the scatter plot
+            inset_ax = inset_axes(ax, width="30%", height="30%", loc='upper left')  # You can change loc as needed
+            
+            # Define limits for the inset axis (adjust these based on your data)
+            inset_ax.set_xlim(35, 65)  # Example limits for zooming in
+            inset_ax.set_ylim(0, 20)    # Example limits for zooming in
+
+            # Scatter plot for the inset axis
+            scatter = inset_ax.scatter(x.flatten(), y.flatten(), c=data.flatten(), cmap='jet', edgecolors='k', marker='o', s=10)
+            
+            # Optionally set the title and labels for the inset
+            inset_ax.set_title('Zoomed In Scatter')
+            inset_ax.set_xlabel(f'{plane[0]} axis')
+            inset_ax.set_ylabel(f'{plane[1]} axis')
+
+            # Highlight the zoomed area on the main plot with a rectangle
+            zoom_rect = patches.Rectangle((35, 0), 30, 20, linewidth=1, edgecolor='white', facecolor='none', linestyle='--')  # Adjust dimensions if needed
+            ax.add_patch(zoom_rect)
+
+        # Save the figure
+        fig.savefig(directory + f'/{label}_slice_{plane}_{idx}.pdf')
+
+        # Close the figure to free up memory
+        plt.close(fig)
+
+
+        # Save the figure
+        fig.savefig(directory + f'/{label}_slice_{plane}_{idx}_scatter.pdf')
+
+
+    def plot_slices(self, x, y, z, data, label):
+        # Random indexes for slicing (replace these with correct values)
+        x_slices = [10, 20, 30]  # z-y plane
+        y_slices = [5, 15, 25]   # x-z plane
+        z_slices = [3, 13, 23]   # x-y plane
+
+        # Slicing along x (z-y plane)
+        for idx in x_slices:
+            self.plot_slice(z[:, :, idx], y[:, :, idx], data[:, :, idx], 'z-y', idx, label)
+
+        # Slicing along y (x-z plane)
+        for idx in y_slices:
+            self.plot_slice(x[:, idx, :], z[:, idx, :], data[:, idx, :], 'x-z', idx, label)
+
+        # Slicing along z (x-y plane)
+        for idx in z_slices:
+            self.plot_slice(x[idx, :, :], y[idx, :, :], data[idx, :, :], 'x-y', idx, label)
+
+    def main_slice_plot(self, fname):
+        f, group1 = self.read_file(fname)
+        x, y, z = self.extract_coordinates()
+        rho, M = self.extract_flow_variables(group1)
+        self.plot_slices(x, y, z, rho, 'rho')
+        self.plot_slices(x, y, z, M, 'M')
+
+
+# Parameters
 fname = sys.argv[1]
-n_contour_levels = 25
 directory = './simulation_plots/'
 
 if not os.path.exists(directory):
     os.makedirs(directory)
 
+# Call plot classes independently
 plots = plots_3D()
-plots.main_plot(fname, n_contour_levels)
-plots.turbulence_plots(fname)
+plots.main_plot(fname)
+
+slice_plots = slice_plots()
+slice_plots.main_slice_plot(fname)

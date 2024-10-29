@@ -138,8 +138,6 @@ def read_blocks(block_data):
 
 
 
-
-
 block_data = {}
 
 # Specify the input grid files

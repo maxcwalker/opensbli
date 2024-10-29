@@ -77,9 +77,12 @@ class plots_3D(plotFunctions):
         ax.set_ylabel('y')
         ax.set_zlabel('z')
 
+        # Set the view to be rotated by 180 degrees
+        ax.view_init(elev=30, azim=180)
+        
         # Downsample data for better performance
         sample_rate = 1
-        x, y, z, data = x[::sample_rate, ::sample_rate, 0], y[::sample_rate, ::sample_rate, 0], z[::sample_rate, ::sample_rate, 0], data[::sample_rate, ::sample_rate, 0]
+        x, y, z, data = x[::sample_rate, 0, ::sample_rate], y[::sample_rate, 0, ::sample_rate], z[::sample_rate, 0, ::sample_rate], data[::sample_rate, 0, ::sample_rate]
 
         # Calculate the ranges for each axis
         x_range = np.max(x) - np.min(x)
@@ -100,14 +103,12 @@ class plots_3D(plotFunctions):
 
         # Plotting the data
         img = ax.scatter(x.flatten(), y.flatten(), z.flatten(), c=data.flatten(), cmap='jet', marker='o', s=5)
-        
+
         fig.colorbar(img)
         plt.title(f'3D Visualization of {label}')
         fig.savefig(f'3D_plot_{label}.pdf')
         plt.show()
 
-
-        
     def main_plot(self, fname):
         f, group1 = self.read_file(fname)
         self.x, self.y, self.z = self.extract_coordinates()

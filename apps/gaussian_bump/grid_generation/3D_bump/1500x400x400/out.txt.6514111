@@ -1,0 +1,101 @@
+
+ Using CUDA device: 0 Tesla V100-PCIE-16GB
+
+ Using CUDA device: 1 Tesla V100-PCIE-16GB
+
+ Using CUDA device: 0 Tesla V100-PCIE-16GB
+
+ Using CUDA device: 1 Tesla V100-PCIE-16GB
+block "opensbliblock00" decomposed on to a processor grid of 2 x 2 x 1  
+terminate called after throwing an instance of 'OPSException'
+  what():  out of memory
+[indigo53:188056] *** Process received signal ***
+[indigo53:188056] Signal: Aborted (6)
+[indigo53:188056] Signal code:  (-6)
+[indigo53:188056] [ 0] /usr/lib64/libpthread.so.0(+0xf630)[0x2b7a2c256630]
+[indigo53:188056] [ 1] /usr/lib64/libc.so.6(gsignal+0x37)[0x2b7a2c499387]
+[indigo53:188056] [ 2] /usr/lib64/libc.so.6(abort+0x148)[0x2b7a2c49aa78]
+[indigo53:188056] [ 3] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0x9963c)[0x2b7a2b5e163c]
+[indigo53:188056] [ 4] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa4886)[0x2b7a2b5ec886]
+[indigo53:188056] [ 5] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa48f1)[0x2b7a2b5ec8f1]
+[indigo53:188056] [ 6] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa4b85)[0x2b7a2b5ecb85]
+[indigo53:188056] [ 7] ./opensbli_mpi_cuda[0x40f0e4]
+[indigo53:188056] [ 8] ./opensbli_mpi_cuda[0x4bf64e]
+[indigo53:188056] [ 9] ./opensbli_mpi_cuda[0x4fcef2]
+[indigo53:188056] [10] ./opensbli_mpi_cuda[0x4fc450]
+[indigo53:188056] [11] ./opensbli_mpi_cuda[0x50258b]
+[indigo53:188056] [12] ./opensbli_mpi_cuda[0x414a79]
+[indigo53:188056] [13] /usr/lib64/libc.so.6(__libc_start_main+0xf5)[0x2b7a2c485555]
+[indigo53:188056] [14] ./opensbli_mpi_cuda[0x4109c7]
+[indigo53:188056] *** End of error message ***
+terminate called after throwing an instance of 'OPSException'
+  what():  out of memory
+[indigo53:188057] *** Process received signal ***
+[indigo53:188057] Signal: Aborted (6)
+[indigo53:188057] Signal code:  (-6)
+[indigo53:188057] [ 0] /usr/lib64/libpthread.so.0(+0xf630)[0x2afabec40630]
+[indigo53:188057] [ 1] /usr/lib64/libc.so.6(gsignal+0x37)[0x2afabee83387]
+[indigo53:188057] [ 2] /usr/lib64/libc.so.6(abort+0x148)[0x2afabee84a78]
+[indigo53:188057] [ 3] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0x9963c)[0x2afabdfcb63c]
+[indigo53:188057] [ 4] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa4886)[0x2afabdfd6886]
+[indigo53:188057] [ 5] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa48f1)[0x2afabdfd68f1]
+[indigo53:188057] [ 6] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa4b85)[0x2afabdfd6b85]
+[indigo53:188057] [ 7] ./opensbli_mpi_cuda[0x40f0e4]
+[indigo53:188057] [ 8] ./opensbli_mpi_cuda[0x4bf64e]
+[indigo53:188057] [ 9] ./opensbli_mpi_cuda[0x4fcef2]
+[indigo53:188057] [10] ./opensbli_mpi_cuda[0x4fc450]
+[indigo53:188057] [11] ./opensbli_mpi_cuda[0x50258b]
+[indigo53:188057] [12] ./opensbli_mpi_cuda[0x414a79]
+[indigo53:188057] [13] /usr/lib64/libc.so.6(__libc_start_main+0xf5)[0x2afabee6f555]
+[indigo53:188057] [14] ./opensbli_mpi_cuda[0x4109c7]
+[indigo53:188057] *** End of error message ***
+src/cuda/ops_cuda_common.cu(79) : cutilSafeCall() Runtime API error : out of memory.
+terminate called after throwing an instance of 'OPSException'
+  what():  out of memory
+[indigo52:185174] *** Process received signal ***
+[indigo52:185174] Signal: Aborted (6)
+[indigo52:185174] Signal code:  (-6)
+[indigo52:185174] [ 0] /usr/lib64/libpthread.so.0(+0xf630)[0x2b25098ee630]
+[indigo52:185174] [ 1] /usr/lib64/libc.so.6(gsignal+0x37)[0x2b2509b31387]
+[indigo52:185174] [ 2] /usr/lib64/libc.so.6(abort+0x148)[0x2b2509b32a78]
+[indigo52:185174] [ 3] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0x9963c)[0x2b2508c7963c]
+[indigo52:185174] [ 4] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa4886)[0x2b2508c84886]
+[indigo52:185174] [ 5] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa48f1)[0x2b2508c848f1]
+[indigo52:185174] [ 6] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa4b85)[0x2b2508c84b85]
+[indigo52:185174] [ 7] ./opensbli_mpi_cuda[0x40f0e4]
+[indigo52:185174] [ 8] ./opensbli_mpi_cuda[0x4bf64e]
+[indigo52:185174] [ 9] ./opensbli_mpi_cuda[0x4fcef2]
+[indigo52:185174] terminate called after throwing an instance of 'OPSException'
+  what():  out of memory
+[indigo52:185175] *** Process received signal ***
+[indigo52:185175] Signal: Aborted (6)
+[indigo52:185175] Signal code:  (-6)
+[indigo52:185175] [ 0] /usr/lib64/libpthread.so.0(+0xf630)[0x2b6ac3e24630]
+[indigo52:185175] [ 1] /usr/lib64/libc.so.6(gsignal+0x37)[0x2b6ac4067387]
+[indigo52:185175] [ 2] /usr/lib64/libc.so.6(abort+0x148)[0x2b6ac4068a78]
+[indigo52:185175] [ 3] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0x9963c)[0x2b6ac31af63c]
+[indigo52:185175] [ 4] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa4886)[0x2b6ac31ba886]
+[indigo52:185175] [ 5] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa48f1)[0x2b6ac31ba8f1]
+[indigo52:185175] [ 6] /local/software/gcc/10.3.0/lib64/libstdc++.so.6(+0xa4b85)[0x2b6ac31bab85]
+[indigo52:185175] [ 7] ./opensbli_mpi_cuda[0x40f0e4]
+[indigo52:185175] [ 8] ./opensbli_mpi_cuda[0x4bf64e]
+[indigo52:185175] [ 9] ./opensbli_mpi_cuda[0x4fcef2]
+[indigo52:185175] [10] ./opensbli_mpi_cuda[0x4fc450]
+[indigo52:185175] [11] ./opensbli_mpi_cuda[0x50258b]
+[indigo52:185175] [12] ./opensbli_mpi_cuda[0x414a79]
+[indigo52:185175] [13] /usr/lib64/libc.so.6(__libc_start_main+0xf5)[0x2b6ac4053555]
+[indigo52:185175] [14] ./opensbli_mpi_cuda[0x4109c7]
+[indigo52:185175] *** End of error message ***
+[10] ./opensbli_mpi_cuda[0x4fc450]
+[indigo52:185174] [11] ./opensbli_mpi_cuda[0x50258b]
+[indigo52:185174] [12] ./opensbli_mpi_cuda[0x414a79]
+[indigo52:185174] [13] /usr/lib64/libc.so.6(__libc_start_main+0xf5)[0x2b2509b1d555]
+[indigo52:185174] [14] ./opensbli_mpi_cuda[0x4109c7]
+[indigo52:185174] *** End of error message ***
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 1 with PID 0 on node indigo52 exited on signal 6 (Aborted).
+--------------------------------------------------------------------------

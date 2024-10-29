@@ -1,6 +1,6 @@
 import numpy as np
 import h5py
-#from opensbli import *
+from opensbli import *
 
 def apply_group_attributes(group, block):
     group.attrs.create("dims", [block.ndim], dtype="int32")
