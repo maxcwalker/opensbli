@@ -28,6 +28,7 @@ from matplotlib.ticker import FormatStrFormatter
 # Create the new array
 pressure_loc = new_columns[2:33]
 
+
 # Select every other column
 pressure_loc = pressure_loc[::2]
 
@@ -71,6 +72,17 @@ for i in range(2):
 plt.subplots_adjust(hspace=0.5, wspace=0.3)
 fig.savefig(directory_monitor + "monitoring_pressure.pdf", bbox_inches='tight')
 
+
+p_350 = new_columns[34]
+
+fig, ax = plt.subplots(1,figsize=(10,1))
+ax.plot(df['Time'],df[p_350],'k')
+ax.set_ylabel('p')
+ax.set_xlabel('Time')
+ax.grid(True)
+ax.set_xlim([4000,11000])
+ax.yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+fig.savefig(directory_monitor +'pressure_350.pdf', bbox_inches='tight')
 
 exit()
 

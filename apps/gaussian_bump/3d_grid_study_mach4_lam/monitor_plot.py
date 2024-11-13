@@ -110,8 +110,9 @@ fig1, ax1 = plt.subplots(36, 1, figsize=(6,35))
 w_monitors = new_columns[76:112]
 
 # Indices to exclude
-exclude_indices = {0, 1, 3, 5, 11, 13, 15, 17, 28, 29, 30, 31, 32, 33, 34, 35}
-
+exclude_indices = {1, 3, 5, 11, 13, 15, 17, 28, 29, 30, 31, 32, 33, 34, 35}
+# for concise graph
+# exclude_indices = {0,1, 2, 3, 4, 5,6,  11, 13, 15, 17, 22,23,24,25,26,27,28, 29, 30, 31, 32, 33, 34, 35} 
 # Create the new list excluding the specified indices
 filtered_monitors = [val for i, val in enumerate(w_monitors) if i not in exclude_indices]
 
@@ -124,16 +125,17 @@ ax = ax.flatten()  # Flatten in case it's a 1D array
 
 # Plot each filtered monitor with inverted axes
 for i, val in enumerate(filtered_monitors):
-    ax[i].plot(df[val][10000::], (df['Time'][10000::]), color='k', linewidth=0.7)  # Swap x and y, reverse time
-
+    range1=29400
+    range2=33723
+    ax[i].plot(df[val][range1:range2], (df['Time'][range1:range2]-6000), color='k', linewidth=0.7)  # Swap x and y, reverse time 29400:32000
     ax[i].set_xlabel(val[2:], loc='center', labelpad=20)  # Set monitor label on x-axis at the top
-
     ax[i].grid(True)
 
     # Invert the y-axis so data is flipped vertically
-    ax[i].invert_yaxis()
-    # lim = 1e-15
-    # ax[i].set_xlim([-lim,lim])
+    # ax[i].invert_yaxis()
+    lim = 1e-12
+    ax[i].set_xlim([-lim,lim])
+    ax[i].set_ylim([df['Time'][range1]-6000,df['Time'][range2]-6000])
 
     # Remove y-ticks for all plots except the first
     if i > 0:

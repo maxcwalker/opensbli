@@ -143,7 +143,7 @@ weno_order = 5
 # averaging procedure to be used for the eigen system evaluation
 Avg = SimpleAverage([0, 1])
 # LLF scheme
-LLF = LLFWeno(weno_order, formulation='Z', averaging=Avg)
+LLF = LFWeno(weno_order, formulation='Z', averaging=Avg)
 # add to schemes
 schemes[LLF.name] = LLF
 
@@ -252,4 +252,4 @@ SimulationDataType.set_datatype(Double)
 OPSC(alg)
 
 substitute_simulation_parameters(constants, values)
-print_iteration_ops(NaN_check='rho_B0')
+print_iteration_ops(every=5,NaN_check='rho_B0')
