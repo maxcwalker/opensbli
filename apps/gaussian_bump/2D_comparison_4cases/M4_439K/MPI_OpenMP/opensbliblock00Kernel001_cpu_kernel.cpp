@@ -42,12 +42,12 @@ void ops_par_loop_opensbliblock00Kernel001_execute(ops_kernel_descriptor *desc) 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,16,range,32)) return;
+  if (!ops_checkpointing_before(args,16,range,20)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,32,"opensbliblock00Kernel001");
-    block->instance->OPS_kernels[32].count++;
+    ops_timing_realloc(block->instance,20,"opensbliblock00Kernel001");
+    block->instance->OPS_kernels[20].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -150,7 +150,7 @@ void ops_par_loop_opensbliblock00Kernel001_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[32].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[20].mpi_time += __t1-__t2;
   }
 
   #pragma omp parallel for
@@ -274,17 +274,17 @@ void ops_par_loop_opensbliblock00Kernel001_execute(ops_kernel_descriptor *desc) 
    double omega_0 = 0.0;
    double omega_1 = 0.0;
    double omega_2 = 0.0;
-   AVG_1_u0 = ((1.0/2.0))*(u0_B0(0,0) + u0_B0(0,1));
-
    AVG_1_u1 = ((1.0/2.0))*(u1_B0(0,0) + u1_B0(0,1));
-
-   AVG_1_a = ((1.0/2.0))*(a_B0(0,0) + a_B0(0,1));
 
    AVG_1_rho = ((1.0/2.0))*(rho_B0(0,0) + rho_B0(0,1));
 
-   AVG_1_detJ = ((1.0/2.0))*(detJ_B0(0,0) + detJ_B0(0,1));
+   AVG_1_a = ((1.0/2.0))*(a_B0(0,0) + a_B0(0,1));
+
+   AVG_1_u0 = ((1.0/2.0))*(u0_B0(0,0) + u0_B0(0,1));
 
    AVG_1_D10 = ((1.0/2.0))*(D10_B0(0,0) + D10_B0(0,1));
+
+   AVG_1_detJ = ((1.0/2.0))*(detJ_B0(0,0) + detJ_B0(0,1));
 
    AVG_1_D11 = ((1.0/2.0))*(D11_B0(0,0) + D11_B0(0,1));
 
@@ -520,11 +520,11 @@ void ops_par_loop_opensbliblock00Kernel001_execute(ops_kernel_descriptor *desc) 
 
    max_lambda_11 = max_lambda_00;
 
-    max_lambda_22 = shock_filter_control*fmax(fabs(sqrt((D10_B0(0,1)*D10_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)) +
-      (D11_B0(0,1)*D11_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)))*a_B0(0,1) + u0_B0(0,1)*D10_B0(0,1)*detJ_B0(0,1) +
-      u1_B0(0,1)*D11_B0(0,1)*detJ_B0(0,1)), fabs(sqrt((D10_B0(0,0)*D10_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
+    max_lambda_22 = shock_filter_control*fmax(fabs(sqrt((D10_B0(0,0)*D10_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
       (D11_B0(0,0)*D11_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)))*a_B0(0,0) + u0_B0(0,0)*D10_B0(0,0)*detJ_B0(0,0) +
-      u1_B0(0,0)*D11_B0(0,0)*detJ_B0(0,0)));
+      u1_B0(0,0)*D11_B0(0,0)*detJ_B0(0,0)), fabs(sqrt((D10_B0(0,1)*D10_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)) +
+      (D11_B0(0,1)*D11_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)))*a_B0(0,1) + u0_B0(0,1)*D10_B0(0,1)*detJ_B0(0,1) +
+      u1_B0(0,1)*D11_B0(0,1)*detJ_B0(0,1)));
 
     max_lambda_33 = shock_filter_control*fmax(fabs(-sqrt((D10_B0(0,0)*D10_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
       (D11_B0(0,0)*D11_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)))*a_B0(0,0) + u0_B0(0,0)*D10_B0(0,0)*detJ_B0(0,0) +
@@ -876,7 +876,7 @@ void ops_par_loop_opensbliblock00Kernel001_execute(ops_kernel_descriptor *desc) 
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[32].time += __t2-__t1;
+    block->instance->OPS_kernels[20].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_host(args, 16);
@@ -889,23 +889,23 @@ void ops_par_loop_opensbliblock00Kernel001_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[32].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg2);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg3);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg4);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg5);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg6);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg7);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg8);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg9);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg10);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg11);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg12);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg13);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg14);
-    block->instance->OPS_kernels[32].transfer += ops_compute_transfer(dim, start, end, &arg15);
+    block->instance->OPS_kernels[20].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg5);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg6);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg7);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg8);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg9);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg10);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg11);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg12);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg13);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg14);
+    block->instance->OPS_kernels[20].transfer += ops_compute_transfer(dim, start, end, &arg15);
   }
 }
 
@@ -919,6 +919,6 @@ void ops_par_loop_opensbliblock00Kernel001(char const *name, ops_block block, in
   ops_arg args[16] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 16, 32, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel001_execute);
+  create_kerneldesc_and_enque(name, args, 16, 20, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel001_execute);
 }
 #endif

@@ -1,6 +1,6 @@
 #ifndef OPENSBLIBLOCK00_KERNEL_H
 #define OPENSBLIBLOCK00_KERNEL_H
- void opensbliblock00Kernel049(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<double> &rhou0_B0, ACC<double> &rhou1_B0,
+ void opensbliblock00Kernel066(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<double> &rhou0_B0, ACC<double> &rhou1_B0,
 ACC<double> &x0_B0, ACC<double> &x1_B0, const int *idx)
 {
    double T = 0.0;
@@ -123,37 +123,26 @@ ACC<double> &x0_B0, ACC<double> &x1_B0, const int *idx)
 
 }
 
- void opensbliblock00Kernel052(const ACC<double> &x0_B0, const ACC<double> &x1_B0, ACC<double> &D00_B0, ACC<double>
-&D01_B0, ACC<double> &D10_B0, ACC<double> &D11_B0, ACC<double> &detJ_B0, ACC<double> &wk0_B0, ACC<double> &wk1_B0,
-ACC<double> &wk2_B0, ACC<double> &wk3_B0, const int *idx)
+void opensbliblock00Kernel067(const ACC<double> &x1_B0, ACC<double> &wk0_B0, const int *idx)
 {
-   double d1_x0_dx = 0.0;
-   double d1_x0_dy = 0.0;
-   double d1_x1_dx = 0.0;
-   double d1_x1_dy = 0.0;
-    d1_x0_dx = invDelta0block0*((idx[0] == 0) ? (
-   -3*x0_B0(2,0) + 4*x0_B0(1,0) - (25.0/12.0)*x0_B0(0,0) -
-      (1.0/4.0)*x0_B0(4,0) + ((4.0/3.0))*x0_B0(3,0)
+    wk0_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*x1_B0(0,2) + 4*x1_B0(0,1) - (25.0/12.0)*x1_B0(0,0) -
+      (1.0/4.0)*x1_B0(0,4) + ((4.0/3.0))*x1_B0(0,3)
 )
-: ((idx[0] == 1) ? (
-   -(5.0/6.0)*x0_B0(0,0) -
-      (1.0/2.0)*x0_B0(2,0) - (1.0/4.0)*x0_B0(-1,0) + ((1.0/12.0))*x0_B0(3,0) + ((3.0/2.0))*x0_B0(1,0)
-)
-: ((idx[0] == -1
-      + block0np0) ? (
-   -4*x0_B0(-1,0) + 3*x0_B0(-2,0) - (4.0/3.0)*x0_B0(-3,0) + ((1.0/4.0))*x0_B0(-4,0) +
-      ((25.0/12.0))*x0_B0(0,0)
-)
-: ((idx[0] == -2 + block0np0) ? (
-   ((1.0/2.0))*x0_B0(-2,0) - (3.0/2.0)*x0_B0(-1,0) -
-      (1.0/12.0)*x0_B0(-3,0) + ((1.0/4.0))*x0_B0(1,0) + ((5.0/6.0))*x0_B0(0,0)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*x1_B0(0,0) -
+      (1.0/2.0)*x1_B0(0,2) - (1.0/4.0)*x1_B0(0,-1) + ((1.0/12.0))*x1_B0(0,3) + ((3.0/2.0))*x1_B0(0,1)
 )
 : (
-   -(2.0/3.0)*x0_B0(-1,0) -
-      (1.0/12.0)*x0_B0(2,0) + ((1.0/12.0))*x0_B0(-2,0) + ((2.0/3.0))*x0_B0(1,0)
-)))));
+  
+      -(2.0/3.0)*x1_B0(0,-1) - (1.0/12.0)*x1_B0(0,2) + ((1.0/12.0))*x1_B0(0,-2) + ((2.0/3.0))*x1_B0(0,1)
+)));
 
-    d1_x1_dx = invDelta0block0*((idx[0] == 0) ? (
+}
+
+void opensbliblock00Kernel068(const ACC<double> &x1_B0, ACC<double> &wk1_B0, const int *idx)
+{
+    wk1_B0(0,0) = invDelta0block0*((idx[0] == 0) ? (
    -3*x1_B0(2,0) + 4*x1_B0(1,0) - (25.0/12.0)*x1_B0(0,0) -
       (1.0/4.0)*x1_B0(4,0) + ((4.0/3.0))*x1_B0(3,0)
 )
@@ -175,20 +164,37 @@ ACC<double> &wk2_B0, ACC<double> &wk3_B0, const int *idx)
       (1.0/12.0)*x1_B0(2,0) + ((1.0/12.0))*x1_B0(-2,0) + ((2.0/3.0))*x1_B0(1,0)
 )))));
 
-    d1_x1_dy = invDelta1block0*((idx[1] == 0) ? (
-   -3*x1_B0(0,2) + 4*x1_B0(0,1) - (25.0/12.0)*x1_B0(0,0) -
-      (1.0/4.0)*x1_B0(0,4) + ((4.0/3.0))*x1_B0(0,3)
+}
+
+void opensbliblock00Kernel069(const ACC<double> &x0_B0, ACC<double> &wk2_B0, const int *idx)
+{
+    wk2_B0(0,0) = invDelta0block0*((idx[0] == 0) ? (
+   -3*x0_B0(2,0) + 4*x0_B0(1,0) - (25.0/12.0)*x0_B0(0,0) -
+      (1.0/4.0)*x0_B0(4,0) + ((4.0/3.0))*x0_B0(3,0)
 )
-: ((idx[1] == 1) ? (
-   -(5.0/6.0)*x1_B0(0,0) -
-      (1.0/2.0)*x1_B0(0,2) - (1.0/4.0)*x1_B0(0,-1) + ((1.0/12.0))*x1_B0(0,3) + ((3.0/2.0))*x1_B0(0,1)
+: ((idx[0] == 1) ? (
+   -(5.0/6.0)*x0_B0(0,0) -
+      (1.0/2.0)*x0_B0(2,0) - (1.0/4.0)*x0_B0(-1,0) + ((1.0/12.0))*x0_B0(3,0) + ((3.0/2.0))*x0_B0(1,0)
+)
+: ((idx[0] == -1
+      + block0np0) ? (
+   -4*x0_B0(-1,0) + 3*x0_B0(-2,0) - (4.0/3.0)*x0_B0(-3,0) + ((1.0/4.0))*x0_B0(-4,0) +
+      ((25.0/12.0))*x0_B0(0,0)
+)
+: ((idx[0] == -2 + block0np0) ? (
+   ((1.0/2.0))*x0_B0(-2,0) - (3.0/2.0)*x0_B0(-1,0) -
+      (1.0/12.0)*x0_B0(-3,0) + ((1.0/4.0))*x0_B0(1,0) + ((5.0/6.0))*x0_B0(0,0)
 )
 : (
-  
-      -(2.0/3.0)*x1_B0(0,-1) - (1.0/12.0)*x1_B0(0,2) + ((1.0/12.0))*x1_B0(0,-2) + ((2.0/3.0))*x1_B0(0,1)
-)));
+   -(2.0/3.0)*x0_B0(-1,0) -
+      (1.0/12.0)*x0_B0(2,0) + ((1.0/12.0))*x0_B0(-2,0) + ((2.0/3.0))*x0_B0(1,0)
+)))));
 
-    d1_x0_dy = invDelta1block0*((idx[1] == 0) ? (
+}
+
+void opensbliblock00Kernel070(const ACC<double> &x0_B0, ACC<double> &wk3_B0, const int *idx)
+{
+    wk3_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
    -3*x0_B0(0,2) + 4*x0_B0(0,1) - (25.0/12.0)*x0_B0(0,0) -
       (1.0/4.0)*x0_B0(0,4) + ((4.0/3.0))*x0_B0(0,3)
 )
@@ -201,27 +207,32 @@ ACC<double> &wk2_B0, ACC<double> &wk3_B0, const int *idx)
       -(2.0/3.0)*x0_B0(0,-1) - (1.0/12.0)*x0_B0(0,2) + ((1.0/12.0))*x0_B0(0,-2) + ((2.0/3.0))*x0_B0(0,1)
 )));
 
-   wk0_B0(0,0) = d1_x0_dx;
+}
 
-   wk1_B0(0,0) = d1_x0_dy;
+ void opensbliblock00Kernel073(ACC<double> &D00_B0, ACC<double> &D01_B0, ACC<double> &D10_B0, ACC<double> &D11_B0,
+ACC<double> &detJ_B0, ACC<double> &wk0_B0, ACC<double> &wk1_B0, ACC<double> &wk2_B0, ACC<double> &wk3_B0)
+{
+   wk0_B0(0,0) = wk2_B0(0,0);
 
-   wk2_B0(0,0) = d1_x1_dx;
+   wk1_B0(0,0) = wk3_B0(0,0);
 
-   wk3_B0(0,0) = d1_x1_dy;
+   wk2_B0(0,0) = wk1_B0(0,0);
 
-   detJ_B0(0,0) = d1_x0_dx*d1_x1_dy - d1_x0_dy*d1_x1_dx;
+   wk3_B0(0,0) = wk0_B0(0,0);
 
-   D00_B0(0,0) = d1_x1_dy/(d1_x0_dx*d1_x1_dy - d1_x0_dy*d1_x1_dx);
+   detJ_B0(0,0) = wk0_B0(0,0)*wk2_B0(0,0) - wk1_B0(0,0)*wk3_B0(0,0);
 
-   D01_B0(0,0) = -d1_x0_dy/(d1_x0_dx*d1_x1_dy - d1_x0_dy*d1_x1_dx);
+   D00_B0(0,0) = wk0_B0(0,0)/(wk0_B0(0,0)*wk2_B0(0,0) - wk1_B0(0,0)*wk3_B0(0,0));
 
-   D10_B0(0,0) = -d1_x1_dx/(d1_x0_dx*d1_x1_dy - d1_x0_dy*d1_x1_dx);
+   D01_B0(0,0) = -wk3_B0(0,0)/(wk0_B0(0,0)*wk2_B0(0,0) - wk1_B0(0,0)*wk3_B0(0,0));
 
-   D11_B0(0,0) = d1_x0_dx/(d1_x0_dx*d1_x1_dy - d1_x0_dy*d1_x1_dx);
+   D10_B0(0,0) = -wk1_B0(0,0)/(wk0_B0(0,0)*wk2_B0(0,0) - wk1_B0(0,0)*wk3_B0(0,0));
+
+   D11_B0(0,0) = wk2_B0(0,0)/(wk0_B0(0,0)*wk2_B0(0,0) - wk1_B0(0,0)*wk3_B0(0,0));
 
 }
 
- void opensbliblock00Kernel053(ACC<double> &D00_B0, ACC<double> &D01_B0, ACC<double> &D10_B0, ACC<double> &D11_B0,
+ void opensbliblock00Kernel074(ACC<double> &D00_B0, ACC<double> &D01_B0, ACC<double> &D10_B0, ACC<double> &D11_B0,
 ACC<double> &detJ_B0)
 {
    D00_B0(-1,0) = D00_B0(1,0);
@@ -266,7 +277,7 @@ ACC<double> &detJ_B0)
 
 }
 
- void opensbliblock00Kernel054(ACC<double> &D00_B0, ACC<double> &D01_B0, ACC<double> &D10_B0, ACC<double> &D11_B0,
+ void opensbliblock00Kernel075(ACC<double> &D00_B0, ACC<double> &D01_B0, ACC<double> &D10_B0, ACC<double> &D11_B0,
 ACC<double> &detJ_B0)
 {
    D00_B0(1,0) = D00_B0(-1,0);
@@ -311,7 +322,7 @@ ACC<double> &detJ_B0)
 
 }
 
- void opensbliblock00Kernel055(ACC<double> &D00_B0, ACC<double> &D01_B0, ACC<double> &D10_B0, ACC<double> &D11_B0,
+ void opensbliblock00Kernel076(ACC<double> &D00_B0, ACC<double> &D01_B0, ACC<double> &D10_B0, ACC<double> &D11_B0,
 ACC<double> &detJ_B0)
 {
    D00_B0(0,-1) = D00_B0(0,1);
@@ -356,7 +367,7 @@ ACC<double> &detJ_B0)
 
 }
 
- void opensbliblock00Kernel056(ACC<double> &D00_B0, ACC<double> &D01_B0, ACC<double> &D10_B0, ACC<double> &D11_B0,
+ void opensbliblock00Kernel077(ACC<double> &D00_B0, ACC<double> &D01_B0, ACC<double> &D10_B0, ACC<double> &D11_B0,
 ACC<double> &detJ_B0)
 {
    D00_B0(0,1) = D00_B0(0,-1);
@@ -401,93 +412,9 @@ ACC<double> &detJ_B0)
 
 }
 
- void opensbliblock00Kernel061(const ACC<double> &D00_B0, const ACC<double> &D01_B0, const ACC<double> &D10_B0, const
-ACC<double> &D11_B0, ACC<double> &SD000_B0, ACC<double> &SD001_B0, ACC<double> &SD010_B0, ACC<double> &SD011_B0,
-ACC<double> &SD100_B0, ACC<double> &SD101_B0, ACC<double> &SD110_B0, ACC<double> &SD111_B0, const int *idx)
+void opensbliblock00Kernel078(const ACC<double> &D10_B0, ACC<double> &wk0_B0, const int *idx)
 {
-   double d1_D00_dx = 0.0;
-   double d1_D00_dy = 0.0;
-   double d1_D01_dx = 0.0;
-   double d1_D01_dy = 0.0;
-   double d1_D10_dx = 0.0;
-   double d1_D10_dy = 0.0;
-   double d1_D11_dx = 0.0;
-   double d1_D11_dy = 0.0;
-    d1_D10_dy = invDelta1block0*((idx[1] == 0) ? (
-   -3*D10_B0(0,2) + 4*D10_B0(0,1) - (25.0/12.0)*D10_B0(0,0) -
-      (1.0/4.0)*D10_B0(0,4) + ((4.0/3.0))*D10_B0(0,3)
-)
-: ((idx[1] == 1) ? (
-   -(5.0/6.0)*D10_B0(0,0) -
-      (1.0/2.0)*D10_B0(0,2) - (1.0/4.0)*D10_B0(0,-1) + ((1.0/12.0))*D10_B0(0,3) + ((3.0/2.0))*D10_B0(0,1)
-)
-: (
-  
-      -(2.0/3.0)*D10_B0(0,-1) - (1.0/12.0)*D10_B0(0,2) + ((1.0/12.0))*D10_B0(0,-2) + ((2.0/3.0))*D10_B0(0,1)
-)));
-
-    d1_D01_dy = invDelta1block0*((idx[1] == 0) ? (
-   -3*D01_B0(0,2) + 4*D01_B0(0,1) - (25.0/12.0)*D01_B0(0,0) -
-      (1.0/4.0)*D01_B0(0,4) + ((4.0/3.0))*D01_B0(0,3)
-)
-: ((idx[1] == 1) ? (
-   -(5.0/6.0)*D01_B0(0,0) -
-      (1.0/2.0)*D01_B0(0,2) - (1.0/4.0)*D01_B0(0,-1) + ((1.0/12.0))*D01_B0(0,3) + ((3.0/2.0))*D01_B0(0,1)
-)
-: (
-  
-      -(2.0/3.0)*D01_B0(0,-1) - (1.0/12.0)*D01_B0(0,2) + ((1.0/12.0))*D01_B0(0,-2) + ((2.0/3.0))*D01_B0(0,1)
-)));
-
-    d1_D11_dy = invDelta1block0*((idx[1] == 0) ? (
-   -3*D11_B0(0,2) + 4*D11_B0(0,1) - (25.0/12.0)*D11_B0(0,0) -
-      (1.0/4.0)*D11_B0(0,4) + ((4.0/3.0))*D11_B0(0,3)
-)
-: ((idx[1] == 1) ? (
-   -(5.0/6.0)*D11_B0(0,0) -
-      (1.0/2.0)*D11_B0(0,2) - (1.0/4.0)*D11_B0(0,-1) + ((1.0/12.0))*D11_B0(0,3) + ((3.0/2.0))*D11_B0(0,1)
-)
-: (
-  
-      -(2.0/3.0)*D11_B0(0,-1) - (1.0/12.0)*D11_B0(0,2) + ((1.0/12.0))*D11_B0(0,-2) + ((2.0/3.0))*D11_B0(0,1)
-)));
-
-    d1_D00_dy = invDelta1block0*((idx[1] == 0) ? (
-   -3*D00_B0(0,2) + 4*D00_B0(0,1) - (25.0/12.0)*D00_B0(0,0) -
-      (1.0/4.0)*D00_B0(0,4) + ((4.0/3.0))*D00_B0(0,3)
-)
-: ((idx[1] == 1) ? (
-   -(5.0/6.0)*D00_B0(0,0) -
-      (1.0/2.0)*D00_B0(0,2) - (1.0/4.0)*D00_B0(0,-1) + ((1.0/12.0))*D00_B0(0,3) + ((3.0/2.0))*D00_B0(0,1)
-)
-: (
-  
-      -(2.0/3.0)*D00_B0(0,-1) - (1.0/12.0)*D00_B0(0,2) + ((1.0/12.0))*D00_B0(0,-2) + ((2.0/3.0))*D00_B0(0,1)
-)));
-
-    d1_D01_dx = invDelta0block0*((idx[0] == 0) ? (
-   -3*D01_B0(2,0) + 4*D01_B0(1,0) - (25.0/12.0)*D01_B0(0,0) -
-      (1.0/4.0)*D01_B0(4,0) + ((4.0/3.0))*D01_B0(3,0)
-)
-: ((idx[0] == 1) ? (
-   -(5.0/6.0)*D01_B0(0,0) -
-      (1.0/2.0)*D01_B0(2,0) - (1.0/4.0)*D01_B0(-1,0) + ((1.0/12.0))*D01_B0(3,0) + ((3.0/2.0))*D01_B0(1,0)
-)
-: ((idx[0]
-      == -1 + block0np0) ? (
-   -4*D01_B0(-1,0) + 3*D01_B0(-2,0) - (4.0/3.0)*D01_B0(-3,0) + ((1.0/4.0))*D01_B0(-4,0) +
-      ((25.0/12.0))*D01_B0(0,0)
-)
-: ((idx[0] == -2 + block0np0) ? (
-   ((1.0/2.0))*D01_B0(-2,0) - (3.0/2.0)*D01_B0(-1,0)
-      - (1.0/12.0)*D01_B0(-3,0) + ((1.0/4.0))*D01_B0(1,0) + ((5.0/6.0))*D01_B0(0,0)
-)
-: (
-   -(2.0/3.0)*D01_B0(-1,0) -
-      (1.0/12.0)*D01_B0(2,0) + ((1.0/12.0))*D01_B0(-2,0) + ((2.0/3.0))*D01_B0(1,0)
-)))));
-
-    d1_D10_dx = invDelta0block0*((idx[0] == 0) ? (
+    wk0_B0(0,0) = invDelta0block0*((idx[0] == 0) ? (
    -3*D10_B0(2,0) + 4*D10_B0(1,0) - (25.0/12.0)*D10_B0(0,0) -
       (1.0/4.0)*D10_B0(4,0) + ((4.0/3.0))*D10_B0(3,0)
 )
@@ -509,29 +436,62 @@ ACC<double> &SD100_B0, ACC<double> &SD101_B0, ACC<double> &SD110_B0, ACC<double>
       (1.0/12.0)*D10_B0(2,0) + ((1.0/12.0))*D10_B0(-2,0) + ((2.0/3.0))*D10_B0(1,0)
 )))));
 
-    d1_D00_dx = invDelta0block0*((idx[0] == 0) ? (
-   -3*D00_B0(2,0) + 4*D00_B0(1,0) - (25.0/12.0)*D00_B0(0,0) -
-      (1.0/4.0)*D00_B0(4,0) + ((4.0/3.0))*D00_B0(3,0)
+}
+
+void opensbliblock00Kernel079(const ACC<double> &D10_B0, ACC<double> &wk1_B0, const int *idx)
+{
+    wk1_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*D10_B0(0,2) + 4*D10_B0(0,1) - (25.0/12.0)*D10_B0(0,0) -
+      (1.0/4.0)*D10_B0(0,4) + ((4.0/3.0))*D10_B0(0,3)
 )
-: ((idx[0] == 1) ? (
-   -(5.0/6.0)*D00_B0(0,0) -
-      (1.0/2.0)*D00_B0(2,0) - (1.0/4.0)*D00_B0(-1,0) + ((1.0/12.0))*D00_B0(3,0) + ((3.0/2.0))*D00_B0(1,0)
-)
-: ((idx[0]
-      == -1 + block0np0) ? (
-   -4*D00_B0(-1,0) + 3*D00_B0(-2,0) - (4.0/3.0)*D00_B0(-3,0) + ((1.0/4.0))*D00_B0(-4,0) +
-      ((25.0/12.0))*D00_B0(0,0)
-)
-: ((idx[0] == -2 + block0np0) ? (
-   ((1.0/2.0))*D00_B0(-2,0) - (3.0/2.0)*D00_B0(-1,0)
-      - (1.0/12.0)*D00_B0(-3,0) + ((1.0/4.0))*D00_B0(1,0) + ((5.0/6.0))*D00_B0(0,0)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*D10_B0(0,0) -
+      (1.0/2.0)*D10_B0(0,2) - (1.0/4.0)*D10_B0(0,-1) + ((1.0/12.0))*D10_B0(0,3) + ((3.0/2.0))*D10_B0(0,1)
 )
 : (
-   -(2.0/3.0)*D00_B0(-1,0) -
-      (1.0/12.0)*D00_B0(2,0) + ((1.0/12.0))*D00_B0(-2,0) + ((2.0/3.0))*D00_B0(1,0)
-)))));
+  
+      -(2.0/3.0)*D10_B0(0,-1) - (1.0/12.0)*D10_B0(0,2) + ((1.0/12.0))*D10_B0(0,-2) + ((2.0/3.0))*D10_B0(0,1)
+)));
 
-    d1_D11_dx = invDelta0block0*((idx[0] == 0) ? (
+}
+
+void opensbliblock00Kernel080(const ACC<double> &D00_B0, ACC<double> &wk2_B0, const int *idx)
+{
+    wk2_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*D00_B0(0,2) + 4*D00_B0(0,1) - (25.0/12.0)*D00_B0(0,0) -
+      (1.0/4.0)*D00_B0(0,4) + ((4.0/3.0))*D00_B0(0,3)
+)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*D00_B0(0,0) -
+      (1.0/2.0)*D00_B0(0,2) - (1.0/4.0)*D00_B0(0,-1) + ((1.0/12.0))*D00_B0(0,3) + ((3.0/2.0))*D00_B0(0,1)
+)
+: (
+  
+      -(2.0/3.0)*D00_B0(0,-1) - (1.0/12.0)*D00_B0(0,2) + ((1.0/12.0))*D00_B0(0,-2) + ((2.0/3.0))*D00_B0(0,1)
+)));
+
+}
+
+void opensbliblock00Kernel081(const ACC<double> &D01_B0, ACC<double> &wk3_B0, const int *idx)
+{
+    wk3_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*D01_B0(0,2) + 4*D01_B0(0,1) - (25.0/12.0)*D01_B0(0,0) -
+      (1.0/4.0)*D01_B0(0,4) + ((4.0/3.0))*D01_B0(0,3)
+)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*D01_B0(0,0) -
+      (1.0/2.0)*D01_B0(0,2) - (1.0/4.0)*D01_B0(0,-1) + ((1.0/12.0))*D01_B0(0,3) + ((3.0/2.0))*D01_B0(0,1)
+)
+: (
+  
+      -(2.0/3.0)*D01_B0(0,-1) - (1.0/12.0)*D01_B0(0,2) + ((1.0/12.0))*D01_B0(0,-2) + ((2.0/3.0))*D01_B0(0,1)
+)));
+
+}
+
+void opensbliblock00Kernel082(const ACC<double> &D11_B0, ACC<double> &wk4_B0, const int *idx)
+{
+    wk4_B0(0,0) = invDelta0block0*((idx[0] == 0) ? (
    -3*D11_B0(2,0) + 4*D11_B0(1,0) - (25.0/12.0)*D11_B0(0,0) -
       (1.0/4.0)*D11_B0(4,0) + ((4.0/3.0))*D11_B0(3,0)
 )
@@ -553,25 +513,101 @@ ACC<double> &SD100_B0, ACC<double> &SD101_B0, ACC<double> &SD110_B0, ACC<double>
       (1.0/12.0)*D11_B0(2,0) + ((1.0/12.0))*D11_B0(-2,0) + ((2.0/3.0))*D11_B0(1,0)
 )))));
 
-   SD000_B0(0,0) = d1_D00_dx;
+}
 
-   SD001_B0(0,0) = d1_D00_dy;
-
-   SD010_B0(0,0) = d1_D01_dx;
-
-   SD011_B0(0,0) = d1_D01_dy;
-
-   SD100_B0(0,0) = d1_D10_dx;
-
-   SD101_B0(0,0) = d1_D10_dy;
-
-   SD110_B0(0,0) = d1_D11_dx;
-
-   SD111_B0(0,0) = d1_D11_dy;
+void opensbliblock00Kernel083(const ACC<double> &D11_B0, ACC<double> &wk5_B0, const int *idx)
+{
+    wk5_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*D11_B0(0,2) + 4*D11_B0(0,1) - (25.0/12.0)*D11_B0(0,0) -
+      (1.0/4.0)*D11_B0(0,4) + ((4.0/3.0))*D11_B0(0,3)
+)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*D11_B0(0,0) -
+      (1.0/2.0)*D11_B0(0,2) - (1.0/4.0)*D11_B0(0,-1) + ((1.0/12.0))*D11_B0(0,3) + ((3.0/2.0))*D11_B0(0,1)
+)
+: (
+  
+      -(2.0/3.0)*D11_B0(0,-1) - (1.0/12.0)*D11_B0(0,2) + ((1.0/12.0))*D11_B0(0,-2) + ((2.0/3.0))*D11_B0(0,1)
+)));
 
 }
 
-void opensbliblock00Kernel045(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<double> &rhou0_B0, ACC<double> &rhou1_B0)
+void opensbliblock00Kernel084(const ACC<double> &D01_B0, ACC<double> &wk6_B0, const int *idx)
+{
+    wk6_B0(0,0) = invDelta0block0*((idx[0] == 0) ? (
+   -3*D01_B0(2,0) + 4*D01_B0(1,0) - (25.0/12.0)*D01_B0(0,0) -
+      (1.0/4.0)*D01_B0(4,0) + ((4.0/3.0))*D01_B0(3,0)
+)
+: ((idx[0] == 1) ? (
+   -(5.0/6.0)*D01_B0(0,0) -
+      (1.0/2.0)*D01_B0(2,0) - (1.0/4.0)*D01_B0(-1,0) + ((1.0/12.0))*D01_B0(3,0) + ((3.0/2.0))*D01_B0(1,0)
+)
+: ((idx[0]
+      == -1 + block0np0) ? (
+   -4*D01_B0(-1,0) + 3*D01_B0(-2,0) - (4.0/3.0)*D01_B0(-3,0) + ((1.0/4.0))*D01_B0(-4,0) +
+      ((25.0/12.0))*D01_B0(0,0)
+)
+: ((idx[0] == -2 + block0np0) ? (
+   ((1.0/2.0))*D01_B0(-2,0) - (3.0/2.0)*D01_B0(-1,0)
+      - (1.0/12.0)*D01_B0(-3,0) + ((1.0/4.0))*D01_B0(1,0) + ((5.0/6.0))*D01_B0(0,0)
+)
+: (
+   -(2.0/3.0)*D01_B0(-1,0) -
+      (1.0/12.0)*D01_B0(2,0) + ((1.0/12.0))*D01_B0(-2,0) + ((2.0/3.0))*D01_B0(1,0)
+)))));
+
+}
+
+void opensbliblock00Kernel085(const ACC<double> &D00_B0, ACC<double> &wk7_B0, const int *idx)
+{
+    wk7_B0(0,0) = invDelta0block0*((idx[0] == 0) ? (
+   -3*D00_B0(2,0) + 4*D00_B0(1,0) - (25.0/12.0)*D00_B0(0,0) -
+      (1.0/4.0)*D00_B0(4,0) + ((4.0/3.0))*D00_B0(3,0)
+)
+: ((idx[0] == 1) ? (
+   -(5.0/6.0)*D00_B0(0,0) -
+      (1.0/2.0)*D00_B0(2,0) - (1.0/4.0)*D00_B0(-1,0) + ((1.0/12.0))*D00_B0(3,0) + ((3.0/2.0))*D00_B0(1,0)
+)
+: ((idx[0]
+      == -1 + block0np0) ? (
+   -4*D00_B0(-1,0) + 3*D00_B0(-2,0) - (4.0/3.0)*D00_B0(-3,0) + ((1.0/4.0))*D00_B0(-4,0) +
+      ((25.0/12.0))*D00_B0(0,0)
+)
+: ((idx[0] == -2 + block0np0) ? (
+   ((1.0/2.0))*D00_B0(-2,0) - (3.0/2.0)*D00_B0(-1,0)
+      - (1.0/12.0)*D00_B0(-3,0) + ((1.0/4.0))*D00_B0(1,0) + ((5.0/6.0))*D00_B0(0,0)
+)
+: (
+   -(2.0/3.0)*D00_B0(-1,0) -
+      (1.0/12.0)*D00_B0(2,0) + ((1.0/12.0))*D00_B0(-2,0) + ((2.0/3.0))*D00_B0(1,0)
+)))));
+
+}
+
+ void opensbliblock00Kernel090(const ACC<double> &wk0_B0, const ACC<double> &wk1_B0, const ACC<double> &wk2_B0, const
+ACC<double> &wk3_B0, const ACC<double> &wk4_B0, const ACC<double> &wk5_B0, const ACC<double> &wk6_B0, const ACC<double>
+&wk7_B0, ACC<double> &SD000_B0, ACC<double> &SD001_B0, ACC<double> &SD010_B0, ACC<double> &SD011_B0, ACC<double>
+&SD100_B0, ACC<double> &SD101_B0, ACC<double> &SD110_B0, ACC<double> &SD111_B0)
+{
+   SD000_B0(0,0) = wk7_B0(0,0);
+
+   SD001_B0(0,0) = wk2_B0(0,0);
+
+   SD010_B0(0,0) = wk6_B0(0,0);
+
+   SD011_B0(0,0) = wk3_B0(0,0);
+
+   SD100_B0(0,0) = wk0_B0(0,0);
+
+   SD101_B0(0,0) = wk1_B0(0,0);
+
+   SD110_B0(0,0) = wk4_B0(0,0);
+
+   SD111_B0(0,0) = wk5_B0(0,0);
+
+}
+
+void opensbliblock00Kernel062(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<double> &rhou0_B0, ACC<double> &rhou1_B0)
 {
    rho_B0(0,0) = rho_B0(-1,0);
 
@@ -583,7 +619,7 @@ void opensbliblock00Kernel045(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<dou
 
 }
 
-void opensbliblock00Kernel046(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<double> &rhou0_B0, ACC<double> &rhou1_B0)
+void opensbliblock00Kernel063(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<double> &rhou0_B0, ACC<double> &rhou1_B0)
 {
    rho_B0(0,0) = rho_B0(-1,0);
 
@@ -627,8 +663,7 @@ void opensbliblock00Kernel046(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<dou
 
 }
 
- void opensbliblock00Kernel047(const int *iter, const ACC<double> &x0_B0, ACC<double> &rhoE_B0, ACC<double> &rho_B0,
-ACC<double> &rhou0_B0, ACC<double> &rhou1_B0)
+void opensbliblock00Kernel064(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<double> &rhou0_B0, ACC<double> &rhou1_B0)
 {
    double Pwall = 0.0;
    double T1 = 0.0;
@@ -648,9 +683,9 @@ ACC<double> &rhou0_B0, ACC<double> &rhou1_B0)
    double u12 = 0.0;
    double u13 = 0.0;
    double u14 = 0.0;
-   rhou1_B0(0,0) = tripA*rho_B0(0,0)*exp(-((-xts + x0_B0(0,0))*(-xts + x0_B0(0,0)))*k_0)*sin(dt*omega_0* *iter);
-
    rhou0_B0(0,0) = 0.0;
+
+   rhou1_B0(0,0) = 0.0;
 
    rhoE_B0(0,0) = Twall*inv2Minf*rho_B0(0,0)/(gama*(-1.0 + gama));
 
@@ -678,9 +713,69 @@ ACC<double> &rhou0_B0, ACC<double> &rhou1_B0)
 
    T1 = -T_above + 2*Twall;
 
+   rho_halo_1 = (Minf*Minf)*gama*Pwall/T1;
+
+   rho_B0(0,-1) = rho_halo_1;
+
+   rhou0_B0(0,-1) = -rho_halo_1*u01;
+
+   rhou1_B0(0,-1) = -rho_halo_1*u11;
+
+   rhoE_B0(0,-1) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u01*u01) + (u11*u11))*rho_halo_1;
+
    T2 = -2*T_above + 3*Twall;
 
+   rho_halo_1 = (Minf*Minf)*gama*Pwall/T1;
+
+   rho_B0(0,-1) = rho_halo_1;
+
+   rho_halo_2 = (Minf*Minf)*gama*Pwall/T2;
+
+   rho_B0(0,-2) = rho_halo_2;
+
+   rhou0_B0(0,-1) = -rho_halo_1*u01;
+
+   rhou1_B0(0,-1) = -rho_halo_1*u11;
+
+   rhou0_B0(0,-2) = -rho_halo_2*u02;
+
+   rhou1_B0(0,-2) = -rho_halo_2*u12;
+
+   rhoE_B0(0,-1) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u01*u01) + (u11*u11))*rho_halo_1;
+
+   rhoE_B0(0,-2) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u02*u02) + (u12*u12))*rho_halo_2;
+
    T3 = -3*T_above + 4*Twall;
+
+   rho_halo_1 = (Minf*Minf)*gama*Pwall/T1;
+
+   rho_B0(0,-1) = rho_halo_1;
+
+   rho_halo_2 = (Minf*Minf)*gama*Pwall/T2;
+
+   rho_B0(0,-2) = rho_halo_2;
+
+   rho_halo_3 = (Minf*Minf)*gama*Pwall/T3;
+
+   rho_B0(0,-3) = rho_halo_3;
+
+   rhou0_B0(0,-1) = -rho_halo_1*u01;
+
+   rhou1_B0(0,-1) = -rho_halo_1*u11;
+
+   rhou0_B0(0,-2) = -rho_halo_2*u02;
+
+   rhou1_B0(0,-2) = -rho_halo_2*u12;
+
+   rhou0_B0(0,-3) = -rho_halo_3*u03;
+
+   rhou1_B0(0,-3) = -rho_halo_3*u13;
+
+   rhoE_B0(0,-1) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u01*u01) + (u11*u11))*rho_halo_1;
+
+   rhoE_B0(0,-2) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u02*u02) + (u12*u12))*rho_halo_2;
+
+   rhoE_B0(0,-3) = inv_gamma_m1*Pwall + ((1.0/2.0))*((u03*u03) + (u13*u13))*rho_halo_3;
 
    T4 = -4*T_above + 5*Twall;
 
@@ -726,7 +821,7 @@ ACC<double> &rhou0_B0, ACC<double> &rhou1_B0)
 
 }
 
-void opensbliblock00Kernel048(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<double> &rhou0_B0, ACC<double> &rhou1_B0)
+void opensbliblock00Kernel065(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<double> &rhou0_B0, ACC<double> &rhou1_B0)
 {
    rho_B0(0,0) = rho_B0(0,-1);
 
@@ -770,19 +865,19 @@ void opensbliblock00Kernel048(ACC<double> &rhoE_B0, ACC<double> &rho_B0, ACC<dou
 
 }
 
+void opensbliblock00Kernel003(const ACC<double> &rho_B0, const ACC<double> &rhou1_B0, ACC<double> &u1_B0)
+{
+   u1_B0(0,0) = rhou1_B0(0,0)/rho_B0(0,0);
+
+}
+
 void opensbliblock00Kernel010(const ACC<double> &rho_B0, const ACC<double> &rhou0_B0, ACC<double> &u0_B0)
 {
    u0_B0(0,0) = rhou0_B0(0,0)/rho_B0(0,0);
 
 }
 
-void opensbliblock00Kernel011(const ACC<double> &rho_B0, const ACC<double> &rhou1_B0, ACC<double> &u1_B0)
-{
-   u1_B0(0,0) = rhou1_B0(0,0)/rho_B0(0,0);
-
-}
-
- void opensbliblock00Kernel002(const ACC<double> &rhoE_B0, const ACC<double> &rho_B0, const ACC<double> &u0_B0, const
+ void opensbliblock00Kernel005(const ACC<double> &rhoE_B0, const ACC<double> &rho_B0, const ACC<double> &u0_B0, const
 ACC<double> &u1_B0, ACC<double> &p_B0)
 {
     p_B0(0,0) = (-1 + gama)*(-(1.0/2.0)*(u0_B0(0,0)*u0_B0(0,0))*rho_B0(0,0) -
@@ -790,27 +885,27 @@ ACC<double> &u1_B0, ACC<double> &p_B0)
 
 }
 
- void opensbliblock00Kernel005(const ACC<double> &D00_B0, const ACC<double> &D01_B0, const ACC<double> &u0_B0, const
+ void opensbliblock00Kernel006(const ACC<double> &D00_B0, const ACC<double> &D01_B0, const ACC<double> &u0_B0, const
 ACC<double> &u1_B0, ACC<double> &U0_B0)
 {
    U0_B0(0,0) = u0_B0(0,0)*D00_B0(0,0) + u1_B0(0,0)*D01_B0(0,0);
 
 }
 
- void opensbliblock00Kernel014(const ACC<double> &D10_B0, const ACC<double> &D11_B0, const ACC<double> &u0_B0, const
+ void opensbliblock00Kernel015(const ACC<double> &D10_B0, const ACC<double> &D11_B0, const ACC<double> &u0_B0, const
 ACC<double> &u1_B0, ACC<double> &U1_B0)
 {
    U1_B0(0,0) = u0_B0(0,0)*D10_B0(0,0) + u1_B0(0,0)*D11_B0(0,0);
 
 }
 
-void opensbliblock00Kernel006(const ACC<double> &p_B0, const ACC<double> &rho_B0, ACC<double> &a_B0)
+void opensbliblock00Kernel012(const ACC<double> &p_B0, const ACC<double> &rho_B0, ACC<double> &a_B0)
 {
    a_B0(0,0) = sqrt(gama*p_B0(0,0)/rho_B0(0,0));
 
 }
 
-void opensbliblock00Kernel021(const ACC<double> &p_B0, const ACC<double> &rho_B0, ACC<double> &T_B0)
+void opensbliblock00Kernel020(const ACC<double> &p_B0, const ACC<double> &rho_B0, ACC<double> &T_B0)
 {
    T_B0(0,0) = (Minf*Minf)*gama*p_B0(0,0)/rho_B0(0,0);
 
@@ -920,11 +1015,11 @@ ACC<double> &wk0_B0, ACC<double> &wk1_B0, ACC<double> &wk2_B0, ACC<double> &wk3_
    double omega_2 = 0.0;
    AVG_0_u1 = ((1.0/2.0))*(u1_B0(0,0) + u1_B0(1,0));
 
+   AVG_0_rho = ((1.0/2.0))*(rho_B0(0,0) + rho_B0(1,0));
+
    AVG_0_u0 = ((1.0/2.0))*(u0_B0(0,0) + u0_B0(1,0));
 
    AVG_0_a = ((1.0/2.0))*(a_B0(0,0) + a_B0(1,0));
-
-   AVG_0_rho = ((1.0/2.0))*(rho_B0(0,0) + rho_B0(1,0));
 
    AVG_0_D01 = ((1.0/2.0))*(D01_B0(0,0) + D01_B0(1,0));
 
@@ -1158,23 +1253,23 @@ ACC<double> &wk0_B0, ACC<double> &wk1_B0, ACC<double> &wk2_B0, ACC<double> &wk3_
     CS_35 = rho_B0(3,0)*AVG_0_0_LEV_30 + rhoE_B0(3,0)*AVG_0_0_LEV_33 + rhou0_B0(3,0)*AVG_0_0_LEV_31 +
       rhou1_B0(3,0)*AVG_0_0_LEV_32;
 
-    max_lambda_00 = shock_filter_control*fmax(fabs(u0_B0(0,0)*D00_B0(0,0)*detJ_B0(0,0) +
-      u1_B0(0,0)*D01_B0(0,0)*detJ_B0(0,0)), fabs(u0_B0(1,0)*D00_B0(1,0)*detJ_B0(1,0) +
-      u1_B0(1,0)*D01_B0(1,0)*detJ_B0(1,0)));
+    max_lambda_00 = shock_filter_control*fmax(fabs(u0_B0(1,0)*D00_B0(1,0)*detJ_B0(1,0) +
+      u1_B0(1,0)*D01_B0(1,0)*detJ_B0(1,0)), fabs(u0_B0(0,0)*D00_B0(0,0)*detJ_B0(0,0) +
+      u1_B0(0,0)*D01_B0(0,0)*detJ_B0(0,0)));
 
    max_lambda_11 = max_lambda_00;
 
-    max_lambda_22 = shock_filter_control*fmax(fabs(sqrt((D00_B0(0,0)*D00_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
-      (D01_B0(0,0)*D01_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)))*a_B0(0,0) + u0_B0(0,0)*D00_B0(0,0)*detJ_B0(0,0) +
-      u1_B0(0,0)*D01_B0(0,0)*detJ_B0(0,0)), fabs(sqrt((D00_B0(1,0)*D00_B0(1,0))*(detJ_B0(1,0)*detJ_B0(1,0)) +
+    max_lambda_22 = shock_filter_control*fmax(fabs(sqrt((D00_B0(1,0)*D00_B0(1,0))*(detJ_B0(1,0)*detJ_B0(1,0)) +
       (D01_B0(1,0)*D01_B0(1,0))*(detJ_B0(1,0)*detJ_B0(1,0)))*a_B0(1,0) + u0_B0(1,0)*D00_B0(1,0)*detJ_B0(1,0) +
-      u1_B0(1,0)*D01_B0(1,0)*detJ_B0(1,0)));
+      u1_B0(1,0)*D01_B0(1,0)*detJ_B0(1,0)), fabs(sqrt((D00_B0(0,0)*D00_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
+      (D01_B0(0,0)*D01_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)))*a_B0(0,0) + u0_B0(0,0)*D00_B0(0,0)*detJ_B0(0,0) +
+      u1_B0(0,0)*D01_B0(0,0)*detJ_B0(0,0)));
 
-    max_lambda_33 = shock_filter_control*fmax(fabs(-sqrt((D00_B0(0,0)*D00_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
-      (D01_B0(0,0)*D01_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)))*a_B0(0,0) + u0_B0(0,0)*D00_B0(0,0)*detJ_B0(0,0) +
-      u1_B0(0,0)*D01_B0(0,0)*detJ_B0(0,0)), fabs(-sqrt((D00_B0(1,0)*D00_B0(1,0))*(detJ_B0(1,0)*detJ_B0(1,0)) +
+    max_lambda_33 = shock_filter_control*fmax(fabs(-sqrt((D00_B0(1,0)*D00_B0(1,0))*(detJ_B0(1,0)*detJ_B0(1,0)) +
       (D01_B0(1,0)*D01_B0(1,0))*(detJ_B0(1,0)*detJ_B0(1,0)))*a_B0(1,0) + u0_B0(1,0)*D00_B0(1,0)*detJ_B0(1,0) +
-      u1_B0(1,0)*D01_B0(1,0)*detJ_B0(1,0)));
+      u1_B0(1,0)*D01_B0(1,0)*detJ_B0(1,0)), fabs(-sqrt((D00_B0(0,0)*D00_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
+      (D01_B0(0,0)*D01_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)))*a_B0(0,0) + u0_B0(0,0)*D00_B0(0,0)*detJ_B0(0,0) +
+      u1_B0(0,0)*D01_B0(0,0)*detJ_B0(0,0)));
 
     beta_0 = ((1.0/3.0))*((CS_04*max_lambda_00 + CF_04)*(CS_04*max_lambda_00 + CF_04)) +
       ((1.0/2.0))*(-(19.0/6.0)*(CS_04*max_lambda_00 + CF_04) + ((25.0/6.0))*(CS_03*max_lambda_00 +
@@ -1615,17 +1710,17 @@ ACC<double> &wk4_B0, ACC<double> &wk5_B0, ACC<double> &wk6_B0, ACC<double> &wk7_
    double omega_2 = 0.0;
    AVG_1_u1 = ((1.0/2.0))*(u1_B0(0,0) + u1_B0(0,1));
 
+   AVG_1_rho = ((1.0/2.0))*(rho_B0(0,0) + rho_B0(0,1));
+
    AVG_1_u0 = ((1.0/2.0))*(u0_B0(0,0) + u0_B0(0,1));
 
    AVG_1_a = ((1.0/2.0))*(a_B0(0,0) + a_B0(0,1));
 
-   AVG_1_rho = ((1.0/2.0))*(rho_B0(0,0) + rho_B0(0,1));
+   AVG_1_D10 = ((1.0/2.0))*(D10_B0(0,0) + D10_B0(0,1));
 
    AVG_1_detJ = ((1.0/2.0))*(detJ_B0(0,0) + detJ_B0(0,1));
 
    AVG_1_D11 = ((1.0/2.0))*(D11_B0(0,0) + D11_B0(0,1));
-
-   AVG_1_D10 = ((1.0/2.0))*(D10_B0(0,0) + D10_B0(0,1));
 
    inv_AVG_a = 1.0/(AVG_1_a);
 
@@ -1865,11 +1960,11 @@ ACC<double> &wk4_B0, ACC<double> &wk5_B0, ACC<double> &wk6_B0, ACC<double> &wk7_
       (D11_B0(0,1)*D11_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)))*a_B0(0,1) + u0_B0(0,1)*D10_B0(0,1)*detJ_B0(0,1) +
       u1_B0(0,1)*D11_B0(0,1)*detJ_B0(0,1)));
 
-    max_lambda_33 = shock_filter_control*fmax(fabs(-sqrt((D10_B0(0,1)*D10_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)) +
-      (D11_B0(0,1)*D11_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)))*a_B0(0,1) + u0_B0(0,1)*D10_B0(0,1)*detJ_B0(0,1) +
-      u1_B0(0,1)*D11_B0(0,1)*detJ_B0(0,1)), fabs(-sqrt((D10_B0(0,0)*D10_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
+    max_lambda_33 = shock_filter_control*fmax(fabs(-sqrt((D10_B0(0,0)*D10_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)) +
       (D11_B0(0,0)*D11_B0(0,0))*(detJ_B0(0,0)*detJ_B0(0,0)))*a_B0(0,0) + u0_B0(0,0)*D10_B0(0,0)*detJ_B0(0,0) +
-      u1_B0(0,0)*D11_B0(0,0)*detJ_B0(0,0)));
+      u1_B0(0,0)*D11_B0(0,0)*detJ_B0(0,0)), fabs(-sqrt((D10_B0(0,1)*D10_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)) +
+      (D11_B0(0,1)*D11_B0(0,1))*(detJ_B0(0,1)*detJ_B0(0,1)))*a_B0(0,1) + u0_B0(0,1)*D10_B0(0,1)*detJ_B0(0,1) +
+      u1_B0(0,1)*D11_B0(0,1)*detJ_B0(0,1)));
 
     beta_0 = ((1.0/3.0))*((CS_04*max_lambda_00 + CF_04)*(CS_04*max_lambda_00 + CF_04)) +
       ((1.0/2.0))*(-(19.0/6.0)*(CS_04*max_lambda_00 + CF_04) + ((25.0/6.0))*(CS_03*max_lambda_00 +
@@ -2231,500 +2326,472 @@ ACC<double> &Residual3_B0)
 
 }
 
-void opensbliblock00Kernel028(const ACC<double> &u0_B0, ACC<double> &wk0_B0, const int *idx)
+void opensbliblock00Kernel028(const ACC<double> &u1_B0, ACC<double> &wk0_B0, const int *idx)
 {
-   if (idx[0] == 0){
-
-       wk0_B0(0,0) = (-3*u0_B0(2,0) + 4*u0_B0(1,0) - (25.0/12.0)*u0_B0(0,0) - (1.0/4.0)*u0_B0(4,0) +
-            ((4.0/3.0))*u0_B0(3,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == 1){
-
-       wk0_B0(0,0) = (-(5.0/6.0)*u0_B0(0,0) - (1.0/2.0)*u0_B0(2,0) - (1.0/4.0)*u0_B0(-1,0) + ((1.0/12.0))*u0_B0(3,0) +
-            ((3.0/2.0))*u0_B0(1,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == -1 + block0np0){
-
-       wk0_B0(0,0) = (-4*u0_B0(-1,0) + 3*u0_B0(-2,0) - (4.0/3.0)*u0_B0(-3,0) + ((1.0/4.0))*u0_B0(-4,0) +
-            ((25.0/12.0))*u0_B0(0,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == -2 + block0np0){
-
-       wk0_B0(0,0) = (((1.0/2.0))*u0_B0(-2,0) - (3.0/2.0)*u0_B0(-1,0) - (1.0/12.0)*u0_B0(-3,0) + ((1.0/4.0))*u0_B0(1,0)
-            + ((5.0/6.0))*u0_B0(0,0))*invDelta0block0;
-
-   }
-
-   else{
-
-       wk0_B0(0,0) = (-(2.0/3.0)*u0_B0(-1,0) - (1.0/12.0)*u0_B0(2,0) + ((1.0/12.0))*u0_B0(-2,0) +
-            ((2.0/3.0))*u0_B0(1,0))*invDelta0block0;
-
-   }
+    wk0_B0(0,0) = invDelta0block0*((idx[0] == 0) ? (
+   -3*u1_B0(2,0) + 4*u1_B0(1,0) - (25.0/12.0)*u1_B0(0,0) -
+      (1.0/4.0)*u1_B0(4,0) + ((4.0/3.0))*u1_B0(3,0)
+)
+: ((idx[0] == 1) ? (
+   -(5.0/6.0)*u1_B0(0,0) -
+      (1.0/2.0)*u1_B0(2,0) - (1.0/4.0)*u1_B0(-1,0) + ((1.0/12.0))*u1_B0(3,0) + ((3.0/2.0))*u1_B0(1,0)
+)
+: ((idx[0] == -1
+      + block0np0) ? (
+   -4*u1_B0(-1,0) + 3*u1_B0(-2,0) - (4.0/3.0)*u1_B0(-3,0) + ((1.0/4.0))*u1_B0(-4,0) +
+      ((25.0/12.0))*u1_B0(0,0)
+)
+: ((idx[0] == -2 + block0np0) ? (
+   ((1.0/2.0))*u1_B0(-2,0) - (3.0/2.0)*u1_B0(-1,0) -
+      (1.0/12.0)*u1_B0(-3,0) + ((1.0/4.0))*u1_B0(1,0) + ((5.0/6.0))*u1_B0(0,0)
+)
+: (
+   -(2.0/3.0)*u1_B0(-1,0) -
+      (1.0/12.0)*u1_B0(2,0) + ((1.0/12.0))*u1_B0(-2,0) + ((2.0/3.0))*u1_B0(1,0)
+)))));
 
 }
 
-void opensbliblock00Kernel030(const ACC<double> &u1_B0, ACC<double> &wk1_B0, const int *idx)
+void opensbliblock00Kernel029(const ACC<double> &u0_B0, ACC<double> &wk1_B0, const int *idx)
 {
-   if (idx[0] == 0){
-
-       wk1_B0(0,0) = (-3*u1_B0(2,0) + 4*u1_B0(1,0) - (25.0/12.0)*u1_B0(0,0) - (1.0/4.0)*u1_B0(4,0) +
-            ((4.0/3.0))*u1_B0(3,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == 1){
-
-       wk1_B0(0,0) = (-(5.0/6.0)*u1_B0(0,0) - (1.0/2.0)*u1_B0(2,0) - (1.0/4.0)*u1_B0(-1,0) + ((1.0/12.0))*u1_B0(3,0) +
-            ((3.0/2.0))*u1_B0(1,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == -1 + block0np0){
-
-       wk1_B0(0,0) = (-4*u1_B0(-1,0) + 3*u1_B0(-2,0) - (4.0/3.0)*u1_B0(-3,0) + ((1.0/4.0))*u1_B0(-4,0) +
-            ((25.0/12.0))*u1_B0(0,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == -2 + block0np0){
-
-       wk1_B0(0,0) = (((1.0/2.0))*u1_B0(-2,0) - (3.0/2.0)*u1_B0(-1,0) - (1.0/12.0)*u1_B0(-3,0) + ((1.0/4.0))*u1_B0(1,0)
-            + ((5.0/6.0))*u1_B0(0,0))*invDelta0block0;
-
-   }
-
-   else{
-
-       wk1_B0(0,0) = (-(2.0/3.0)*u1_B0(-1,0) - (1.0/12.0)*u1_B0(2,0) + ((1.0/12.0))*u1_B0(-2,0) +
-            ((2.0/3.0))*u1_B0(1,0))*invDelta0block0;
-
-   }
+    wk1_B0(0,0) = inv2Delta0block0*((idx[0] == 0) ? (
+   -(26.0/3.0)*u0_B0(1,0) - (14.0/3.0)*u0_B0(3,0) +
+      ((11.0/12.0))*u0_B0(4,0) + ((19.0/2.0))*u0_B0(2,0) + ((35.0/12.0))*u0_B0(0,0)
+)
+: ((idx[0] == 1) ? (
+  
+      ((1.0/2.0))*u0_B0(1,0) - (5.0/3.0)*u0_B0(0,0) - (1.0/12.0)*u0_B0(3,0) + ((1.0/3.0))*u0_B0(2,0) +
+      ((11.0/12.0))*u0_B0(-1,0)
+)
+: ((idx[0] == -1 + block0np0) ? (
+   -(26.0/3.0)*u0_B0(-1,0) - (14.0/3.0)*u0_B0(-3,0)
+      + ((11.0/12.0))*u0_B0(-4,0) + ((19.0/2.0))*u0_B0(-2,0) + ((35.0/12.0))*u0_B0(0,0)
+)
+: ((idx[0] == -2 + block0np0)
+      ? (
+   ((1.0/2.0))*u0_B0(-1,0) - (5.0/3.0)*u0_B0(0,0) - (1.0/12.0)*u0_B0(-3,0) + ((1.0/3.0))*u0_B0(-2,0) +
+      ((11.0/12.0))*u0_B0(1,0)
+)
+: (
+   -(5.0/2.0)*u0_B0(0,0) - (1.0/12.0)*u0_B0(-2,0) - (1.0/12.0)*u0_B0(2,0) +
+      ((4.0/3.0))*u0_B0(1,0) + ((4.0/3.0))*u0_B0(-1,0)
+)))));
 
 }
 
-void opensbliblock00Kernel032(const ACC<double> &T_B0, ACC<double> &wk2_B0, const int *idx)
+void opensbliblock00Kernel031(const ACC<double> &T_B0, ACC<double> &wk3_B0, const int *idx)
 {
-   if (idx[0] == 0){
-
-       wk2_B0(0,0) = (-3*T_B0(2,0) + 4*T_B0(1,0) - (25.0/12.0)*T_B0(0,0) - (1.0/4.0)*T_B0(4,0) +
-            ((4.0/3.0))*T_B0(3,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == 1){
-
-       wk2_B0(0,0) = (-(5.0/6.0)*T_B0(0,0) - (1.0/2.0)*T_B0(2,0) - (1.0/4.0)*T_B0(-1,0) + ((1.0/12.0))*T_B0(3,0) +
-            ((3.0/2.0))*T_B0(1,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == -1 + block0np0){
-
-       wk2_B0(0,0) = (-4*T_B0(-1,0) + 3*T_B0(-2,0) - (4.0/3.0)*T_B0(-3,0) + ((1.0/4.0))*T_B0(-4,0) +
-            ((25.0/12.0))*T_B0(0,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == -2 + block0np0){
-
-       wk2_B0(0,0) = (((1.0/2.0))*T_B0(-2,0) - (3.0/2.0)*T_B0(-1,0) - (1.0/12.0)*T_B0(-3,0) + ((1.0/4.0))*T_B0(1,0) +
-            ((5.0/6.0))*T_B0(0,0))*invDelta0block0;
-
-   }
-
-   else{
-
-       wk2_B0(0,0) = (-(2.0/3.0)*T_B0(-1,0) - (1.0/12.0)*T_B0(2,0) + ((1.0/12.0))*T_B0(-2,0) +
-            ((2.0/3.0))*T_B0(1,0))*invDelta0block0;
-
-   }
+    wk3_B0(0,0) = invDelta0block0*((idx[0] == 0) ? (
+   -3*T_B0(2,0) + 4*T_B0(1,0) - (25.0/12.0)*T_B0(0,0) -
+      (1.0/4.0)*T_B0(4,0) + ((4.0/3.0))*T_B0(3,0)
+)
+: ((idx[0] == 1) ? (
+   -(5.0/6.0)*T_B0(0,0) - (1.0/2.0)*T_B0(2,0) -
+      (1.0/4.0)*T_B0(-1,0) + ((1.0/12.0))*T_B0(3,0) + ((3.0/2.0))*T_B0(1,0)
+)
+: ((idx[0] == -1 + block0np0) ? (
+  
+      -4*T_B0(-1,0) + 3*T_B0(-2,0) - (4.0/3.0)*T_B0(-3,0) + ((1.0/4.0))*T_B0(-4,0) + ((25.0/12.0))*T_B0(0,0)
+)
+:
+      ((idx[0] == -2 + block0np0) ? (
+   ((1.0/2.0))*T_B0(-2,0) - (3.0/2.0)*T_B0(-1,0) - (1.0/12.0)*T_B0(-3,0) +
+      ((1.0/4.0))*T_B0(1,0) + ((5.0/6.0))*T_B0(0,0)
+)
+: (
+   -(2.0/3.0)*T_B0(-1,0) - (1.0/12.0)*T_B0(2,0) +
+      ((1.0/12.0))*T_B0(-2,0) + ((2.0/3.0))*T_B0(1,0)
+)))));
 
 }
 
-void opensbliblock00Kernel034(const ACC<double> &u0_B0, ACC<double> &wk3_B0, const int *idx)
+void opensbliblock00Kernel032(const ACC<double> &u1_B0, ACC<double> &wk4_B0, const int *idx)
 {
-   if (idx[1] == 0){
-
-       wk3_B0(0,0) = (-3*u0_B0(0,2) + 4*u0_B0(0,1) - (25.0/12.0)*u0_B0(0,0) - (1.0/4.0)*u0_B0(0,4) +
-            ((4.0/3.0))*u0_B0(0,3))*invDelta1block0;
-
-   }
-
-   else if (idx[1] == 1){
-
-       wk3_B0(0,0) = (-(5.0/6.0)*u0_B0(0,0) - (1.0/2.0)*u0_B0(0,2) - (1.0/4.0)*u0_B0(0,-1) + ((1.0/12.0))*u0_B0(0,3) +
-            ((3.0/2.0))*u0_B0(0,1))*invDelta1block0;
-
-   }
-
-   else{
-
-       wk3_B0(0,0) = (-(2.0/3.0)*u0_B0(0,-1) - (1.0/12.0)*u0_B0(0,2) + ((1.0/12.0))*u0_B0(0,-2) +
-            ((2.0/3.0))*u0_B0(0,1))*invDelta1block0;
-
-   }
+    wk4_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*u1_B0(0,2) + 4*u1_B0(0,1) - (25.0/12.0)*u1_B0(0,0) -
+      (1.0/4.0)*u1_B0(0,4) + ((4.0/3.0))*u1_B0(0,3)
+)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*u1_B0(0,0) -
+      (1.0/2.0)*u1_B0(0,2) - (1.0/4.0)*u1_B0(0,-1) + ((1.0/12.0))*u1_B0(0,3) + ((3.0/2.0))*u1_B0(0,1)
+)
+: (
+  
+      -(2.0/3.0)*u1_B0(0,-1) - (1.0/12.0)*u1_B0(0,2) + ((1.0/12.0))*u1_B0(0,-2) + ((2.0/3.0))*u1_B0(0,1)
+)));
 
 }
 
-void opensbliblock00Kernel035(const ACC<double> &u1_B0, ACC<double> &wk4_B0, const int *idx)
+void opensbliblock00Kernel033(const ACC<double> &u0_B0, ACC<double> &wk5_B0, const int *idx)
 {
-   if (idx[1] == 0){
-
-       wk4_B0(0,0) = (-3*u1_B0(0,2) + 4*u1_B0(0,1) - (25.0/12.0)*u1_B0(0,0) - (1.0/4.0)*u1_B0(0,4) +
-            ((4.0/3.0))*u1_B0(0,3))*invDelta1block0;
-
-   }
-
-   else if (idx[1] == 1){
-
-       wk4_B0(0,0) = (-(5.0/6.0)*u1_B0(0,0) - (1.0/2.0)*u1_B0(0,2) - (1.0/4.0)*u1_B0(0,-1) + ((1.0/12.0))*u1_B0(0,3) +
-            ((3.0/2.0))*u1_B0(0,1))*invDelta1block0;
-
-   }
-
-   else{
-
-       wk4_B0(0,0) = (-(2.0/3.0)*u1_B0(0,-1) - (1.0/12.0)*u1_B0(0,2) + ((1.0/12.0))*u1_B0(0,-2) +
-            ((2.0/3.0))*u1_B0(0,1))*invDelta1block0;
-
-   }
+    wk5_B0(0,0) = invDelta0block0*((idx[0] == 0) ? (
+   -3*u0_B0(2,0) + 4*u0_B0(1,0) - (25.0/12.0)*u0_B0(0,0) -
+      (1.0/4.0)*u0_B0(4,0) + ((4.0/3.0))*u0_B0(3,0)
+)
+: ((idx[0] == 1) ? (
+   -(5.0/6.0)*u0_B0(0,0) -
+      (1.0/2.0)*u0_B0(2,0) - (1.0/4.0)*u0_B0(-1,0) + ((1.0/12.0))*u0_B0(3,0) + ((3.0/2.0))*u0_B0(1,0)
+)
+: ((idx[0] == -1
+      + block0np0) ? (
+   -4*u0_B0(-1,0) + 3*u0_B0(-2,0) - (4.0/3.0)*u0_B0(-3,0) + ((1.0/4.0))*u0_B0(-4,0) +
+      ((25.0/12.0))*u0_B0(0,0)
+)
+: ((idx[0] == -2 + block0np0) ? (
+   ((1.0/2.0))*u0_B0(-2,0) - (3.0/2.0)*u0_B0(-1,0) -
+      (1.0/12.0)*u0_B0(-3,0) + ((1.0/4.0))*u0_B0(1,0) + ((5.0/6.0))*u0_B0(0,0)
+)
+: (
+   -(2.0/3.0)*u0_B0(-1,0) -
+      (1.0/12.0)*u0_B0(2,0) + ((1.0/12.0))*u0_B0(-2,0) + ((2.0/3.0))*u0_B0(1,0)
+)))));
 
 }
 
-void opensbliblock00Kernel036(const ACC<double> &T_B0, ACC<double> &wk5_B0, const int *idx)
+void opensbliblock00Kernel036(const ACC<double> &mu_B0, ACC<double> &wk8_B0, const int *idx)
 {
-   if (idx[1] == 0){
-
-       wk5_B0(0,0) = (-3*T_B0(0,2) + 4*T_B0(0,1) - (25.0/12.0)*T_B0(0,0) - (1.0/4.0)*T_B0(0,4) +
-            ((4.0/3.0))*T_B0(0,3))*invDelta1block0;
-
-   }
-
-   else if (idx[1] == 1){
-
-       wk5_B0(0,0) = (-(5.0/6.0)*T_B0(0,0) - (1.0/2.0)*T_B0(0,2) - (1.0/4.0)*T_B0(0,-1) + ((1.0/12.0))*T_B0(0,3) +
-            ((3.0/2.0))*T_B0(0,1))*invDelta1block0;
-
-   }
-
-   else{
-
-       wk5_B0(0,0) = (-(2.0/3.0)*T_B0(0,-1) - (1.0/12.0)*T_B0(0,2) + ((1.0/12.0))*T_B0(0,-2) +
-            ((2.0/3.0))*T_B0(0,1))*invDelta1block0;
-
-   }
+    wk8_B0(0,0) = invDelta0block0*((idx[0] == 0) ? (
+   -3*mu_B0(2,0) + 4*mu_B0(1,0) - (25.0/12.0)*mu_B0(0,0) -
+      (1.0/4.0)*mu_B0(4,0) + ((4.0/3.0))*mu_B0(3,0)
+)
+: ((idx[0] == 1) ? (
+   -(5.0/6.0)*mu_B0(0,0) -
+      (1.0/2.0)*mu_B0(2,0) - (1.0/4.0)*mu_B0(-1,0) + ((1.0/12.0))*mu_B0(3,0) + ((3.0/2.0))*mu_B0(1,0)
+)
+: ((idx[0] == -1
+      + block0np0) ? (
+   -4*mu_B0(-1,0) + 3*mu_B0(-2,0) - (4.0/3.0)*mu_B0(-3,0) + ((1.0/4.0))*mu_B0(-4,0) +
+      ((25.0/12.0))*mu_B0(0,0)
+)
+: ((idx[0] == -2 + block0np0) ? (
+   ((1.0/2.0))*mu_B0(-2,0) - (3.0/2.0)*mu_B0(-1,0) -
+      (1.0/12.0)*mu_B0(-3,0) + ((1.0/4.0))*mu_B0(1,0) + ((5.0/6.0))*mu_B0(0,0)
+)
+: (
+   -(2.0/3.0)*mu_B0(-1,0) -
+      (1.0/12.0)*mu_B0(2,0) + ((1.0/12.0))*mu_B0(-2,0) + ((2.0/3.0))*mu_B0(1,0)
+)))));
 
 }
 
- void opensbliblock00Kernel041(const ACC<double> &D00_B0, const ACC<double> &D01_B0, const ACC<double> &D10_B0, const
+void opensbliblock00Kernel037(const ACC<double> &u1_B0, ACC<double> &wk9_B0, const int *idx)
+{
+    wk9_B0(0,0) = inv2Delta0block0*((idx[0] == 0) ? (
+   -(26.0/3.0)*u1_B0(1,0) - (14.0/3.0)*u1_B0(3,0) +
+      ((11.0/12.0))*u1_B0(4,0) + ((19.0/2.0))*u1_B0(2,0) + ((35.0/12.0))*u1_B0(0,0)
+)
+: ((idx[0] == 1) ? (
+  
+      ((1.0/2.0))*u1_B0(1,0) - (5.0/3.0)*u1_B0(0,0) - (1.0/12.0)*u1_B0(3,0) + ((1.0/3.0))*u1_B0(2,0) +
+      ((11.0/12.0))*u1_B0(-1,0)
+)
+: ((idx[0] == -1 + block0np0) ? (
+   -(26.0/3.0)*u1_B0(-1,0) - (14.0/3.0)*u1_B0(-3,0)
+      + ((11.0/12.0))*u1_B0(-4,0) + ((19.0/2.0))*u1_B0(-2,0) + ((35.0/12.0))*u1_B0(0,0)
+)
+: ((idx[0] == -2 + block0np0)
+      ? (
+   ((1.0/2.0))*u1_B0(-1,0) - (5.0/3.0)*u1_B0(0,0) - (1.0/12.0)*u1_B0(-3,0) + ((1.0/3.0))*u1_B0(-2,0) +
+      ((11.0/12.0))*u1_B0(1,0)
+)
+: (
+   -(5.0/2.0)*u1_B0(0,0) - (1.0/12.0)*u1_B0(-2,0) - (1.0/12.0)*u1_B0(2,0) +
+      ((4.0/3.0))*u1_B0(1,0) + ((4.0/3.0))*u1_B0(-1,0)
+)))));
+
+}
+
+void opensbliblock00Kernel038(const ACC<double> &T_B0, ACC<double> &wk10_B0, const int *idx)
+{
+    wk10_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*T_B0(0,2) + 4*T_B0(0,1) - (25.0/12.0)*T_B0(0,0) -
+      (1.0/4.0)*T_B0(0,4) + ((4.0/3.0))*T_B0(0,3)
+)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*T_B0(0,0) - (1.0/2.0)*T_B0(0,2) -
+      (1.0/4.0)*T_B0(0,-1) + ((1.0/12.0))*T_B0(0,3) + ((3.0/2.0))*T_B0(0,1)
+)
+: (
+   -(2.0/3.0)*T_B0(0,-1) -
+      (1.0/12.0)*T_B0(0,2) + ((1.0/12.0))*T_B0(0,-2) + ((2.0/3.0))*T_B0(0,1)
+)));
+
+}
+
+void opensbliblock00Kernel039(const ACC<double> &T_B0, ACC<double> &wk11_B0, const int *idx)
+{
+    wk11_B0(0,0) = inv2Delta1block0*((idx[1] == 0) ? (
+   -(26.0/3.0)*T_B0(0,1) - (14.0/3.0)*T_B0(0,3) +
+      ((11.0/12.0))*T_B0(0,4) + ((19.0/2.0))*T_B0(0,2) + ((35.0/12.0))*T_B0(0,0)
+)
+: ((idx[1] == 1) ? (
+  
+      ((1.0/2.0))*T_B0(0,1) - (5.0/3.0)*T_B0(0,0) - (1.0/12.0)*T_B0(0,3) + ((1.0/3.0))*T_B0(0,2) +
+      ((11.0/12.0))*T_B0(0,-1)
+)
+: (
+   -(5.0/2.0)*T_B0(0,0) - (1.0/12.0)*T_B0(0,-2) - (1.0/12.0)*T_B0(0,2) +
+      ((4.0/3.0))*T_B0(0,1) + ((4.0/3.0))*T_B0(0,-1)
+)));
+
+}
+
+void opensbliblock00Kernel040(const ACC<double> &T_B0, ACC<double> &wk12_B0, const int *idx)
+{
+    wk12_B0(0,0) = inv2Delta0block0*((idx[0] == 0) ? (
+   -(26.0/3.0)*T_B0(1,0) - (14.0/3.0)*T_B0(3,0) +
+      ((11.0/12.0))*T_B0(4,0) + ((19.0/2.0))*T_B0(2,0) + ((35.0/12.0))*T_B0(0,0)
+)
+: ((idx[0] == 1) ? (
+  
+      ((1.0/2.0))*T_B0(1,0) - (5.0/3.0)*T_B0(0,0) - (1.0/12.0)*T_B0(3,0) + ((1.0/3.0))*T_B0(2,0) +
+      ((11.0/12.0))*T_B0(-1,0)
+)
+: ((idx[0] == -1 + block0np0) ? (
+   -(26.0/3.0)*T_B0(-1,0) - (14.0/3.0)*T_B0(-3,0) +
+      ((11.0/12.0))*T_B0(-4,0) + ((19.0/2.0))*T_B0(-2,0) + ((35.0/12.0))*T_B0(0,0)
+)
+: ((idx[0] == -2 + block0np0) ? (
+ 
+       ((1.0/2.0))*T_B0(-1,0) - (5.0/3.0)*T_B0(0,0) - (1.0/12.0)*T_B0(-3,0) + ((1.0/3.0))*T_B0(-2,0) +
+      ((11.0/12.0))*T_B0(1,0)
+)
+: (
+   -(5.0/2.0)*T_B0(0,0) - (1.0/12.0)*T_B0(-2,0) - (1.0/12.0)*T_B0(2,0) +
+      ((4.0/3.0))*T_B0(1,0) + ((4.0/3.0))*T_B0(-1,0)
+)))));
+
+}
+
+void opensbliblock00Kernel041(const ACC<double> &mu_B0, ACC<double> &wk13_B0, const int *idx)
+{
+    wk13_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*mu_B0(0,2) + 4*mu_B0(0,1) - (25.0/12.0)*mu_B0(0,0) -
+      (1.0/4.0)*mu_B0(0,4) + ((4.0/3.0))*mu_B0(0,3)
+)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*mu_B0(0,0) -
+      (1.0/2.0)*mu_B0(0,2) - (1.0/4.0)*mu_B0(0,-1) + ((1.0/12.0))*mu_B0(0,3) + ((3.0/2.0))*mu_B0(0,1)
+)
+: (
+  
+      -(2.0/3.0)*mu_B0(0,-1) - (1.0/12.0)*mu_B0(0,2) + ((1.0/12.0))*mu_B0(0,-2) + ((2.0/3.0))*mu_B0(0,1)
+)));
+
+}
+
+void opensbliblock00Kernel042(const ACC<double> &u1_B0, ACC<double> &wk14_B0, const int *idx)
+{
+    wk14_B0(0,0) = inv2Delta1block0*((idx[1] == 0) ? (
+   -(26.0/3.0)*u1_B0(0,1) - (14.0/3.0)*u1_B0(0,3) +
+      ((11.0/12.0))*u1_B0(0,4) + ((19.0/2.0))*u1_B0(0,2) + ((35.0/12.0))*u1_B0(0,0)
+)
+: ((idx[1] == 1) ? (
+  
+      ((1.0/2.0))*u1_B0(0,1) - (5.0/3.0)*u1_B0(0,0) - (1.0/12.0)*u1_B0(0,3) + ((1.0/3.0))*u1_B0(0,2) +
+      ((11.0/12.0))*u1_B0(0,-1)
+)
+: (
+   -(5.0/2.0)*u1_B0(0,0) - (1.0/12.0)*u1_B0(0,-2) - (1.0/12.0)*u1_B0(0,2) +
+      ((4.0/3.0))*u1_B0(0,1) + ((4.0/3.0))*u1_B0(0,-1)
+)));
+
+}
+
+void opensbliblock00Kernel043(const ACC<double> &u0_B0, ACC<double> &wk15_B0, const int *idx)
+{
+    wk15_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*u0_B0(0,2) + 4*u0_B0(0,1) - (25.0/12.0)*u0_B0(0,0) -
+      (1.0/4.0)*u0_B0(0,4) + ((4.0/3.0))*u0_B0(0,3)
+)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*u0_B0(0,0) -
+      (1.0/2.0)*u0_B0(0,2) - (1.0/4.0)*u0_B0(0,-1) + ((1.0/12.0))*u0_B0(0,3) + ((3.0/2.0))*u0_B0(0,1)
+)
+: (
+  
+      -(2.0/3.0)*u0_B0(0,-1) - (1.0/12.0)*u0_B0(0,2) + ((1.0/12.0))*u0_B0(0,-2) + ((2.0/3.0))*u0_B0(0,1)
+)));
+
+}
+
+void opensbliblock00Kernel044(const ACC<double> &u0_B0, ACC<double> &wk16_B0, const int *idx)
+{
+    wk16_B0(0,0) = inv2Delta1block0*((idx[1] == 0) ? (
+   -(26.0/3.0)*u0_B0(0,1) - (14.0/3.0)*u0_B0(0,3) +
+      ((11.0/12.0))*u0_B0(0,4) + ((19.0/2.0))*u0_B0(0,2) + ((35.0/12.0))*u0_B0(0,0)
+)
+: ((idx[1] == 1) ? (
+  
+      ((1.0/2.0))*u0_B0(0,1) - (5.0/3.0)*u0_B0(0,0) - (1.0/12.0)*u0_B0(0,3) + ((1.0/3.0))*u0_B0(0,2) +
+      ((11.0/12.0))*u0_B0(0,-1)
+)
+: (
+   -(5.0/2.0)*u0_B0(0,0) - (1.0/12.0)*u0_B0(0,-2) - (1.0/12.0)*u0_B0(0,2) +
+      ((4.0/3.0))*u0_B0(0,1) + ((4.0/3.0))*u0_B0(0,-1)
+)));
+
+}
+
+void opensbliblock00Kernel030(const ACC<double> &wk5_B0, ACC<double> &wk2_B0, const int *idx)
+{
+    wk2_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*wk5_B0(0,2) + 4*wk5_B0(0,1) - (25.0/12.0)*wk5_B0(0,0) -
+      (1.0/4.0)*wk5_B0(0,4) + ((4.0/3.0))*wk5_B0(0,3)
+)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*wk5_B0(0,0) -
+      (1.0/2.0)*wk5_B0(0,2) - (1.0/4.0)*wk5_B0(0,-1) + ((1.0/12.0))*wk5_B0(0,3) + ((3.0/2.0))*wk5_B0(0,1)
+)
+: (
+  
+      -(2.0/3.0)*wk5_B0(0,-1) - (1.0/12.0)*wk5_B0(0,2) + ((1.0/12.0))*wk5_B0(0,-2) + ((2.0/3.0))*wk5_B0(0,1)
+)));
+
+}
+
+void opensbliblock00Kernel034(const ACC<double> &wk0_B0, ACC<double> &wk6_B0, const int *idx)
+{
+    wk6_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*wk0_B0(0,2) + 4*wk0_B0(0,1) - (25.0/12.0)*wk0_B0(0,0) -
+      (1.0/4.0)*wk0_B0(0,4) + ((4.0/3.0))*wk0_B0(0,3)
+)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*wk0_B0(0,0) -
+      (1.0/2.0)*wk0_B0(0,2) - (1.0/4.0)*wk0_B0(0,-1) + ((1.0/12.0))*wk0_B0(0,3) + ((3.0/2.0))*wk0_B0(0,1)
+)
+: (
+  
+      -(2.0/3.0)*wk0_B0(0,-1) - (1.0/12.0)*wk0_B0(0,2) + ((1.0/12.0))*wk0_B0(0,-2) + ((2.0/3.0))*wk0_B0(0,1)
+)));
+
+}
+
+void opensbliblock00Kernel035(const ACC<double> &wk3_B0, ACC<double> &wk7_B0, const int *idx)
+{
+    wk7_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
+   -3*wk3_B0(0,2) + 4*wk3_B0(0,1) - (25.0/12.0)*wk3_B0(0,0) -
+      (1.0/4.0)*wk3_B0(0,4) + ((4.0/3.0))*wk3_B0(0,3)
+)
+: ((idx[1] == 1) ? (
+   -(5.0/6.0)*wk3_B0(0,0) -
+      (1.0/2.0)*wk3_B0(0,2) - (1.0/4.0)*wk3_B0(0,-1) + ((1.0/12.0))*wk3_B0(0,3) + ((3.0/2.0))*wk3_B0(0,1)
+)
+: (
+  
+      -(2.0/3.0)*wk3_B0(0,-1) - (1.0/12.0)*wk3_B0(0,2) + ((1.0/12.0))*wk3_B0(0,-2) + ((2.0/3.0))*wk3_B0(0,1)
+)));
+
+}
+
+ void opensbliblock00Kernel061(const ACC<double> &D00_B0, const ACC<double> &D01_B0, const ACC<double> &D10_B0, const
 ACC<double> &D11_B0, const ACC<double> &SD000_B0, const ACC<double> &SD001_B0, const ACC<double> &SD010_B0, const
 ACC<double> &SD011_B0, const ACC<double> &SD100_B0, const ACC<double> &SD101_B0, const ACC<double> &SD110_B0, const
-ACC<double> &SD111_B0, const ACC<double> &T_B0, const ACC<double> &mu_B0, const ACC<double> &u0_B0, const ACC<double>
-&u1_B0, const ACC<double> &wk0_B0, const ACC<double> &wk1_B0, const ACC<double> &wk2_B0, const ACC<double> &wk3_B0,
-const ACC<double> &wk4_B0, const ACC<double> &wk5_B0, ACC<double> &Residual1_B0, ACC<double> &Residual2_B0, ACC<double>
-&Residual3_B0, const int *idx)
+ACC<double> &SD111_B0, const ACC<double> &mu_B0, const ACC<double> &u0_B0, const ACC<double> &u1_B0, const ACC<double>
+&wk0_B0, const ACC<double> &wk10_B0, const ACC<double> &wk11_B0, const ACC<double> &wk12_B0, const ACC<double> &wk13_B0,
+const ACC<double> &wk14_B0, const ACC<double> &wk15_B0, const ACC<double> &wk16_B0, const ACC<double> &wk1_B0, const
+ACC<double> &wk2_B0, const ACC<double> &wk3_B0, const ACC<double> &wk4_B0, const ACC<double> &wk5_B0, const ACC<double>
+&wk6_B0, const ACC<double> &wk7_B0, const ACC<double> &wk8_B0, const ACC<double> &wk9_B0, ACC<double> &Residual1_B0,
+ACC<double> &Residual2_B0, ACC<double> &Residual3_B0)
 {
-   double d1_mu_dx = 0.0;
-   double d1_mu_dy = 0.0;
-   double d1_wk0_dy = 0.0;
-   double d1_wk1_dy = 0.0;
-   double d1_wk2_dy = 0.0;
-   double d2_T_dx = 0.0;
-   double d2_T_dy = 0.0;
-   double d2_u0_dx = 0.0;
-   double d2_u0_dy = 0.0;
-   double d2_u1_dx = 0.0;
-   double d2_u1_dy = 0.0;
-   if (idx[0] == 0){
-
-       d1_mu_dx = (-3*mu_B0(2,0) + 4*mu_B0(1,0) - (25.0/12.0)*mu_B0(0,0) - (1.0/4.0)*mu_B0(4,0) +
-            ((4.0/3.0))*mu_B0(3,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == 1){
-
-       d1_mu_dx = (-(5.0/6.0)*mu_B0(0,0) - (1.0/2.0)*mu_B0(2,0) - (1.0/4.0)*mu_B0(-1,0) + ((1.0/12.0))*mu_B0(3,0) +
-            ((3.0/2.0))*mu_B0(1,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == -1 + block0np0){
-
-       d1_mu_dx = (-4*mu_B0(-1,0) + 3*mu_B0(-2,0) - (4.0/3.0)*mu_B0(-3,0) + ((1.0/4.0))*mu_B0(-4,0) +
-            ((25.0/12.0))*mu_B0(0,0))*invDelta0block0;
-
-   }
-
-   else if (idx[0] == -2 + block0np0){
-
-       d1_mu_dx = (((1.0/2.0))*mu_B0(-2,0) - (3.0/2.0)*mu_B0(-1,0) - (1.0/12.0)*mu_B0(-3,0) + ((1.0/4.0))*mu_B0(1,0) +
-            ((5.0/6.0))*mu_B0(0,0))*invDelta0block0;
-
-   }
-
-   else{
-
-       d1_mu_dx = (-(2.0/3.0)*mu_B0(-1,0) - (1.0/12.0)*mu_B0(2,0) + ((1.0/12.0))*mu_B0(-2,0) +
-            ((2.0/3.0))*mu_B0(1,0))*invDelta0block0;
-
-   }
-
-   if (idx[0] == 0){
-
-       d2_T_dx = (-(26.0/3.0)*T_B0(1,0) - (14.0/3.0)*T_B0(3,0) + ((11.0/12.0))*T_B0(4,0) + ((19.0/2.0))*T_B0(2,0) +
-            ((35.0/12.0))*T_B0(0,0))*inv2Delta0block0;
-
-       d2_u0_dx = (-(26.0/3.0)*u0_B0(1,0) - (14.0/3.0)*u0_B0(3,0) + ((11.0/12.0))*u0_B0(4,0) + ((19.0/2.0))*u0_B0(2,0) +
-            ((35.0/12.0))*u0_B0(0,0))*inv2Delta0block0;
-
-       d2_u1_dx = (-(26.0/3.0)*u1_B0(1,0) - (14.0/3.0)*u1_B0(3,0) + ((11.0/12.0))*u1_B0(4,0) + ((19.0/2.0))*u1_B0(2,0) +
-            ((35.0/12.0))*u1_B0(0,0))*inv2Delta0block0;
-
-   }
-
-   else if (idx[0] == 1){
-
-       d2_T_dx = (((1.0/2.0))*T_B0(1,0) - (5.0/3.0)*T_B0(0,0) - (1.0/12.0)*T_B0(3,0) + ((1.0/3.0))*T_B0(2,0) +
-            ((11.0/12.0))*T_B0(-1,0))*inv2Delta0block0;
-
-       d2_u0_dx = (((1.0/2.0))*u0_B0(1,0) - (5.0/3.0)*u0_B0(0,0) - (1.0/12.0)*u0_B0(3,0) + ((1.0/3.0))*u0_B0(2,0) +
-            ((11.0/12.0))*u0_B0(-1,0))*inv2Delta0block0;
-
-       d2_u1_dx = (((1.0/2.0))*u1_B0(1,0) - (5.0/3.0)*u1_B0(0,0) - (1.0/12.0)*u1_B0(3,0) + ((1.0/3.0))*u1_B0(2,0) +
-            ((11.0/12.0))*u1_B0(-1,0))*inv2Delta0block0;
-
-   }
-
-   else if (idx[0] == -1 + block0np0){
-
-       d2_T_dx = (-(26.0/3.0)*T_B0(-1,0) - (14.0/3.0)*T_B0(-3,0) + ((11.0/12.0))*T_B0(-4,0) + ((19.0/2.0))*T_B0(-2,0) +
-            ((35.0/12.0))*T_B0(0,0))*inv2Delta0block0;
-
-       d2_u0_dx = (-(26.0/3.0)*u0_B0(-1,0) - (14.0/3.0)*u0_B0(-3,0) + ((11.0/12.0))*u0_B0(-4,0) +
-            ((19.0/2.0))*u0_B0(-2,0) + ((35.0/12.0))*u0_B0(0,0))*inv2Delta0block0;
-
-       d2_u1_dx = (-(26.0/3.0)*u1_B0(-1,0) - (14.0/3.0)*u1_B0(-3,0) + ((11.0/12.0))*u1_B0(-4,0) +
-            ((19.0/2.0))*u1_B0(-2,0) + ((35.0/12.0))*u1_B0(0,0))*inv2Delta0block0;
-
-   }
-
-   else if (idx[0] == -2 + block0np0){
-
-       d2_T_dx = (((1.0/2.0))*T_B0(-1,0) - (5.0/3.0)*T_B0(0,0) - (1.0/12.0)*T_B0(-3,0) + ((1.0/3.0))*T_B0(-2,0) +
-            ((11.0/12.0))*T_B0(1,0))*inv2Delta0block0;
-
-       d2_u0_dx = (((1.0/2.0))*u0_B0(-1,0) - (5.0/3.0)*u0_B0(0,0) - (1.0/12.0)*u0_B0(-3,0) + ((1.0/3.0))*u0_B0(-2,0) +
-            ((11.0/12.0))*u0_B0(1,0))*inv2Delta0block0;
-
-       d2_u1_dx = (((1.0/2.0))*u1_B0(-1,0) - (5.0/3.0)*u1_B0(0,0) - (1.0/12.0)*u1_B0(-3,0) + ((1.0/3.0))*u1_B0(-2,0) +
-            ((11.0/12.0))*u1_B0(1,0))*inv2Delta0block0;
-
-   }
-
-   else{
-
-       d2_T_dx = (-(5.0/2.0)*T_B0(0,0) - (1.0/12.0)*T_B0(-2,0) - (1.0/12.0)*T_B0(2,0) + ((4.0/3.0))*T_B0(1,0) +
-            ((4.0/3.0))*T_B0(-1,0))*inv2Delta0block0;
-
-       d2_u0_dx = (-(5.0/2.0)*u0_B0(0,0) - (1.0/12.0)*u0_B0(-2,0) - (1.0/12.0)*u0_B0(2,0) + ((4.0/3.0))*u0_B0(1,0) +
-            ((4.0/3.0))*u0_B0(-1,0))*inv2Delta0block0;
-
-       d2_u1_dx = (-(5.0/2.0)*u1_B0(0,0) - (1.0/12.0)*u1_B0(-2,0) - (1.0/12.0)*u1_B0(2,0) + ((4.0/3.0))*u1_B0(1,0) +
-            ((4.0/3.0))*u1_B0(-1,0))*inv2Delta0block0;
-
-   }
-
-   if (idx[1] == 0){
-
-       d1_mu_dy = (-3*mu_B0(0,2) + 4*mu_B0(0,1) - (25.0/12.0)*mu_B0(0,0) - (1.0/4.0)*mu_B0(0,4) +
-            ((4.0/3.0))*mu_B0(0,3))*invDelta1block0;
-
-       d1_wk0_dy = (-3*wk0_B0(0,2) + 4*wk0_B0(0,1) - (25.0/12.0)*wk0_B0(0,0) - (1.0/4.0)*wk0_B0(0,4) +
-            ((4.0/3.0))*wk0_B0(0,3))*invDelta1block0;
-
-       d1_wk1_dy = (-3*wk1_B0(0,2) + 4*wk1_B0(0,1) - (25.0/12.0)*wk1_B0(0,0) - (1.0/4.0)*wk1_B0(0,4) +
-            ((4.0/3.0))*wk1_B0(0,3))*invDelta1block0;
-
-       d1_wk2_dy = (-3*wk2_B0(0,2) + 4*wk2_B0(0,1) - (25.0/12.0)*wk2_B0(0,0) - (1.0/4.0)*wk2_B0(0,4) +
-            ((4.0/3.0))*wk2_B0(0,3))*invDelta1block0;
-
-   }
-
-   else if (idx[1] == 1){
-
-       d1_mu_dy = (-(5.0/6.0)*mu_B0(0,0) - (1.0/2.0)*mu_B0(0,2) - (1.0/4.0)*mu_B0(0,-1) + ((1.0/12.0))*mu_B0(0,3) +
-            ((3.0/2.0))*mu_B0(0,1))*invDelta1block0;
-
-       d1_wk0_dy = (-(5.0/6.0)*wk0_B0(0,0) - (1.0/2.0)*wk0_B0(0,2) - (1.0/4.0)*wk0_B0(0,-1) + ((1.0/12.0))*wk0_B0(0,3) +
-            ((3.0/2.0))*wk0_B0(0,1))*invDelta1block0;
-
-       d1_wk1_dy = (-(5.0/6.0)*wk1_B0(0,0) - (1.0/2.0)*wk1_B0(0,2) - (1.0/4.0)*wk1_B0(0,-1) + ((1.0/12.0))*wk1_B0(0,3) +
-            ((3.0/2.0))*wk1_B0(0,1))*invDelta1block0;
-
-       d1_wk2_dy = (-(5.0/6.0)*wk2_B0(0,0) - (1.0/2.0)*wk2_B0(0,2) - (1.0/4.0)*wk2_B0(0,-1) + ((1.0/12.0))*wk2_B0(0,3) +
-            ((3.0/2.0))*wk2_B0(0,1))*invDelta1block0;
-
-   }
-
-   else{
-
-       d1_mu_dy = (-(2.0/3.0)*mu_B0(0,-1) - (1.0/12.0)*mu_B0(0,2) + ((1.0/12.0))*mu_B0(0,-2) +
-            ((2.0/3.0))*mu_B0(0,1))*invDelta1block0;
-
-       d1_wk0_dy = (-(2.0/3.0)*wk0_B0(0,-1) - (1.0/12.0)*wk0_B0(0,2) + ((1.0/12.0))*wk0_B0(0,-2) +
-            ((2.0/3.0))*wk0_B0(0,1))*invDelta1block0;
-
-       d1_wk1_dy = (-(2.0/3.0)*wk1_B0(0,-1) - (1.0/12.0)*wk1_B0(0,2) + ((1.0/12.0))*wk1_B0(0,-2) +
-            ((2.0/3.0))*wk1_B0(0,1))*invDelta1block0;
-
-       d1_wk2_dy = (-(2.0/3.0)*wk2_B0(0,-1) - (1.0/12.0)*wk2_B0(0,2) + ((1.0/12.0))*wk2_B0(0,-2) +
-            ((2.0/3.0))*wk2_B0(0,1))*invDelta1block0;
-
-   }
-
-   if (idx[1] == 0){
-
-       d2_T_dy = (-(26.0/3.0)*T_B0(0,1) - (14.0/3.0)*T_B0(0,3) + ((11.0/12.0))*T_B0(0,4) + ((19.0/2.0))*T_B0(0,2) +
-            ((35.0/12.0))*T_B0(0,0))*inv2Delta1block0;
-
-       d2_u0_dy = (-(26.0/3.0)*u0_B0(0,1) - (14.0/3.0)*u0_B0(0,3) + ((11.0/12.0))*u0_B0(0,4) + ((19.0/2.0))*u0_B0(0,2) +
-            ((35.0/12.0))*u0_B0(0,0))*inv2Delta1block0;
-
-       d2_u1_dy = (-(26.0/3.0)*u1_B0(0,1) - (14.0/3.0)*u1_B0(0,3) + ((11.0/12.0))*u1_B0(0,4) + ((19.0/2.0))*u1_B0(0,2) +
-            ((35.0/12.0))*u1_B0(0,0))*inv2Delta1block0;
-
-   }
-
-   else if (idx[1] == 1){
-
-       d2_T_dy = (((1.0/2.0))*T_B0(0,1) - (5.0/3.0)*T_B0(0,0) - (1.0/12.0)*T_B0(0,3) + ((1.0/3.0))*T_B0(0,2) +
-            ((11.0/12.0))*T_B0(0,-1))*inv2Delta1block0;
-
-       d2_u0_dy = (((1.0/2.0))*u0_B0(0,1) - (5.0/3.0)*u0_B0(0,0) - (1.0/12.0)*u0_B0(0,3) + ((1.0/3.0))*u0_B0(0,2) +
-            ((11.0/12.0))*u0_B0(0,-1))*inv2Delta1block0;
-
-       d2_u1_dy = (((1.0/2.0))*u1_B0(0,1) - (5.0/3.0)*u1_B0(0,0) - (1.0/12.0)*u1_B0(0,3) + ((1.0/3.0))*u1_B0(0,2) +
-            ((11.0/12.0))*u1_B0(0,-1))*inv2Delta1block0;
-
-   }
-
-   else{
-
-       d2_T_dy = (-(5.0/2.0)*T_B0(0,0) - (1.0/12.0)*T_B0(0,-2) - (1.0/12.0)*T_B0(0,2) + ((4.0/3.0))*T_B0(0,1) +
-            ((4.0/3.0))*T_B0(0,-1))*inv2Delta1block0;
-
-       d2_u0_dy = (-(5.0/2.0)*u0_B0(0,0) - (1.0/12.0)*u0_B0(0,-2) - (1.0/12.0)*u0_B0(0,2) + ((4.0/3.0))*u0_B0(0,1) +
-            ((4.0/3.0))*u0_B0(0,-1))*inv2Delta1block0;
-
-       d2_u1_dy = (-(5.0/2.0)*u1_B0(0,0) - (1.0/12.0)*u1_B0(0,-2) - (1.0/12.0)*u1_B0(0,2) + ((4.0/3.0))*u1_B0(0,1) +
-            ((4.0/3.0))*u1_B0(0,-1))*inv2Delta1block0;
-
-   }
-
-    Residual1_B0(0,0) = (D00_B0(0,0)*d1_mu_dx + D10_B0(0,0)*d1_mu_dy)*(-(2.0/3.0)*D01_B0(0,0)*wk1_B0(0,0) -
-      (2.0/3.0)*D11_B0(0,0)*wk4_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk0_B0(0,0) +
-      ((4.0/3.0))*D10_B0(0,0)*wk3_B0(0,0))*invRe + (D01_B0(0,0)*d1_mu_dx +
-      D11_B0(0,0)*d1_mu_dy)*(D00_B0(0,0)*wk1_B0(0,0) + D01_B0(0,0)*wk0_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0) +
-      D11_B0(0,0)*wk3_B0(0,0))*invRe + ((D01_B0(0,0)*D01_B0(0,0))*d2_u0_dx + (D11_B0(0,0)*D11_B0(0,0))*d2_u0_dy +
-      ((4.0/3.0))*(D00_B0(0,0)*D00_B0(0,0))*d2_u0_dx + ((4.0/3.0))*(D10_B0(0,0)*D10_B0(0,0))*d2_u0_dy +
-      D01_B0(0,0)*wk0_B0(0,0)*SD010_B0(0,0) + D01_B0(0,0)*wk1_B0(0,0)*SD000_B0(0,0) +
-      D01_B0(0,0)*wk3_B0(0,0)*SD110_B0(0,0) + D01_B0(0,0)*wk4_B0(0,0)*SD100_B0(0,0) +
-      D11_B0(0,0)*wk0_B0(0,0)*SD011_B0(0,0) + D11_B0(0,0)*wk1_B0(0,0)*SD001_B0(0,0) +
-      D11_B0(0,0)*wk3_B0(0,0)*SD111_B0(0,0) + D11_B0(0,0)*wk4_B0(0,0)*SD101_B0(0,0) +
-      2*D01_B0(0,0)*D11_B0(0,0)*d1_wk0_dy - (2.0/3.0)*D00_B0(0,0)*wk1_B0(0,0)*SD010_B0(0,0) -
-      (2.0/3.0)*D00_B0(0,0)*wk4_B0(0,0)*SD110_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk1_B0(0,0)*SD011_B0(0,0) -
-      (2.0/3.0)*D10_B0(0,0)*wk4_B0(0,0)*SD111_B0(0,0) + ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*d2_u1_dx +
-      ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*d1_wk1_dy + ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*d1_wk1_dy +
-      ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*d2_u1_dy + ((4.0/3.0))*D00_B0(0,0)*wk0_B0(0,0)*SD000_B0(0,0) +
-      ((4.0/3.0))*D00_B0(0,0)*wk3_B0(0,0)*SD100_B0(0,0) + ((4.0/3.0))*D10_B0(0,0)*wk0_B0(0,0)*SD001_B0(0,0) +
-      ((4.0/3.0))*D10_B0(0,0)*wk3_B0(0,0)*SD101_B0(0,0) +
-      ((8.0/3.0))*D00_B0(0,0)*D10_B0(0,0)*d1_wk0_dy)*invRe*mu_B0(0,0) + Residual1_B0(0,0);
-
-    Residual2_B0(0,0) = (D00_B0(0,0)*d1_mu_dx + D10_B0(0,0)*d1_mu_dy)*(D00_B0(0,0)*wk1_B0(0,0) + D01_B0(0,0)*wk0_B0(0,0)
-      + D10_B0(0,0)*wk4_B0(0,0) + D11_B0(0,0)*wk3_B0(0,0))*invRe + (D01_B0(0,0)*d1_mu_dx +
-      D11_B0(0,0)*d1_mu_dy)*(-(2.0/3.0)*D00_B0(0,0)*wk0_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk3_B0(0,0) +
-      ((4.0/3.0))*D01_B0(0,0)*wk1_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk4_B0(0,0))*invRe +
-      ((D00_B0(0,0)*D00_B0(0,0))*d2_u1_dx + (D10_B0(0,0)*D10_B0(0,0))*d2_u1_dy +
-      ((4.0/3.0))*(D01_B0(0,0)*D01_B0(0,0))*d2_u1_dx + ((4.0/3.0))*(D11_B0(0,0)*D11_B0(0,0))*d2_u1_dy +
-      D00_B0(0,0)*wk0_B0(0,0)*SD010_B0(0,0) + D00_B0(0,0)*wk1_B0(0,0)*SD000_B0(0,0) +
-      D00_B0(0,0)*wk3_B0(0,0)*SD110_B0(0,0) + D00_B0(0,0)*wk4_B0(0,0)*SD100_B0(0,0) +
-      D10_B0(0,0)*wk0_B0(0,0)*SD011_B0(0,0) + D10_B0(0,0)*wk1_B0(0,0)*SD001_B0(0,0) +
-      D10_B0(0,0)*wk3_B0(0,0)*SD111_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0)*SD101_B0(0,0) +
-      2*D00_B0(0,0)*D10_B0(0,0)*d1_wk1_dy - (2.0/3.0)*D01_B0(0,0)*wk0_B0(0,0)*SD000_B0(0,0) -
-      (2.0/3.0)*D01_B0(0,0)*wk3_B0(0,0)*SD100_B0(0,0) - (2.0/3.0)*D11_B0(0,0)*wk0_B0(0,0)*SD001_B0(0,0) -
-      (2.0/3.0)*D11_B0(0,0)*wk3_B0(0,0)*SD101_B0(0,0) + ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*d2_u0_dx +
-      ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*d1_wk0_dy + ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*d1_wk0_dy +
-      ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*d2_u0_dy + ((4.0/3.0))*D01_B0(0,0)*wk1_B0(0,0)*SD010_B0(0,0) +
-      ((4.0/3.0))*D01_B0(0,0)*wk4_B0(0,0)*SD110_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk1_B0(0,0)*SD011_B0(0,0) +
+    Residual1_B0(0,0) = (D00_B0(0,0)*wk8_B0(0,0) + D10_B0(0,0)*wk13_B0(0,0))*(-(2.0/3.0)*D01_B0(0,0)*wk0_B0(0,0) -
+      (2.0/3.0)*D11_B0(0,0)*wk4_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk5_B0(0,0) +
+      ((4.0/3.0))*D10_B0(0,0)*wk15_B0(0,0))*invRe + (D01_B0(0,0)*wk8_B0(0,0) +
+      D11_B0(0,0)*wk13_B0(0,0))*(D00_B0(0,0)*wk0_B0(0,0) + D01_B0(0,0)*wk5_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0) +
+      D11_B0(0,0)*wk15_B0(0,0))*invRe + ((D01_B0(0,0)*D01_B0(0,0))*wk1_B0(0,0) + (D11_B0(0,0)*D11_B0(0,0))*wk16_B0(0,0)
+      + ((4.0/3.0))*(D00_B0(0,0)*D00_B0(0,0))*wk1_B0(0,0) + ((4.0/3.0))*(D10_B0(0,0)*D10_B0(0,0))*wk16_B0(0,0) +
+      D01_B0(0,0)*wk0_B0(0,0)*SD000_B0(0,0) + D01_B0(0,0)*wk4_B0(0,0)*SD100_B0(0,0) +
+      D01_B0(0,0)*wk5_B0(0,0)*SD010_B0(0,0) + D01_B0(0,0)*wk15_B0(0,0)*SD110_B0(0,0) +
+      D11_B0(0,0)*wk0_B0(0,0)*SD001_B0(0,0) + D11_B0(0,0)*wk4_B0(0,0)*SD101_B0(0,0) +
+      D11_B0(0,0)*wk5_B0(0,0)*SD011_B0(0,0) + D11_B0(0,0)*wk15_B0(0,0)*SD111_B0(0,0) +
+      2*D01_B0(0,0)*D11_B0(0,0)*wk2_B0(0,0) - (2.0/3.0)*D00_B0(0,0)*wk0_B0(0,0)*SD010_B0(0,0) -
+      (2.0/3.0)*D00_B0(0,0)*wk4_B0(0,0)*SD110_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk0_B0(0,0)*SD011_B0(0,0) -
+      (2.0/3.0)*D10_B0(0,0)*wk4_B0(0,0)*SD111_B0(0,0) + ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*wk9_B0(0,0) +
+      ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*wk6_B0(0,0) + ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*wk6_B0(0,0) +
+      ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*wk14_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk5_B0(0,0)*SD000_B0(0,0) +
+      ((4.0/3.0))*D00_B0(0,0)*wk15_B0(0,0)*SD100_B0(0,0) + ((4.0/3.0))*D10_B0(0,0)*wk5_B0(0,0)*SD001_B0(0,0) +
+      ((4.0/3.0))*D10_B0(0,0)*wk15_B0(0,0)*SD101_B0(0,0) +
+      ((8.0/3.0))*D00_B0(0,0)*D10_B0(0,0)*wk2_B0(0,0))*invRe*mu_B0(0,0) + Residual1_B0(0,0);
+
+    Residual2_B0(0,0) = (D00_B0(0,0)*wk8_B0(0,0) + D10_B0(0,0)*wk13_B0(0,0))*(D00_B0(0,0)*wk0_B0(0,0) +
+      D01_B0(0,0)*wk5_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0) + D11_B0(0,0)*wk15_B0(0,0))*invRe + (D01_B0(0,0)*wk8_B0(0,0) +
+      D11_B0(0,0)*wk13_B0(0,0))*(-(2.0/3.0)*D00_B0(0,0)*wk5_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk15_B0(0,0) +
+      ((4.0/3.0))*D01_B0(0,0)*wk0_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk4_B0(0,0))*invRe +
+      ((D00_B0(0,0)*D00_B0(0,0))*wk9_B0(0,0) + (D10_B0(0,0)*D10_B0(0,0))*wk14_B0(0,0) +
+      ((4.0/3.0))*(D01_B0(0,0)*D01_B0(0,0))*wk9_B0(0,0) + ((4.0/3.0))*(D11_B0(0,0)*D11_B0(0,0))*wk14_B0(0,0) +
+      D00_B0(0,0)*wk0_B0(0,0)*SD000_B0(0,0) + D00_B0(0,0)*wk4_B0(0,0)*SD100_B0(0,0) +
+      D00_B0(0,0)*wk5_B0(0,0)*SD010_B0(0,0) + D00_B0(0,0)*wk15_B0(0,0)*SD110_B0(0,0) +
+      D10_B0(0,0)*wk0_B0(0,0)*SD001_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0)*SD101_B0(0,0) +
+      D10_B0(0,0)*wk5_B0(0,0)*SD011_B0(0,0) + D10_B0(0,0)*wk15_B0(0,0)*SD111_B0(0,0) +
+      2*D00_B0(0,0)*D10_B0(0,0)*wk6_B0(0,0) - (2.0/3.0)*D01_B0(0,0)*wk5_B0(0,0)*SD000_B0(0,0) -
+      (2.0/3.0)*D01_B0(0,0)*wk15_B0(0,0)*SD100_B0(0,0) - (2.0/3.0)*D11_B0(0,0)*wk5_B0(0,0)*SD001_B0(0,0) -
+      (2.0/3.0)*D11_B0(0,0)*wk15_B0(0,0)*SD101_B0(0,0) + ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*wk1_B0(0,0) +
+      ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*wk2_B0(0,0) + ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*wk2_B0(0,0) +
+      ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*wk16_B0(0,0) + ((4.0/3.0))*D01_B0(0,0)*wk0_B0(0,0)*SD010_B0(0,0) +
+      ((4.0/3.0))*D01_B0(0,0)*wk4_B0(0,0)*SD110_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk0_B0(0,0)*SD011_B0(0,0) +
       ((4.0/3.0))*D11_B0(0,0)*wk4_B0(0,0)*SD111_B0(0,0) +
-      ((8.0/3.0))*D01_B0(0,0)*D11_B0(0,0)*d1_wk1_dy)*invRe*mu_B0(0,0) + Residual2_B0(0,0);
+      ((8.0/3.0))*D01_B0(0,0)*D11_B0(0,0)*wk6_B0(0,0))*invRe*mu_B0(0,0) + Residual2_B0(0,0);
 
-    Residual3_B0(0,0) = (D00_B0(0,0)*wk0_B0(0,0) + D10_B0(0,0)*wk3_B0(0,0))*(-(2.0/3.0)*D01_B0(0,0)*wk1_B0(0,0) -
-      (2.0/3.0)*D11_B0(0,0)*wk4_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk0_B0(0,0) +
-      ((4.0/3.0))*D10_B0(0,0)*wk3_B0(0,0))*invRe*mu_B0(0,0) + (D00_B0(0,0)*wk1_B0(0,0) +
-      D10_B0(0,0)*wk4_B0(0,0))*(D00_B0(0,0)*wk1_B0(0,0) + D01_B0(0,0)*wk0_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0) +
-      D11_B0(0,0)*wk3_B0(0,0))*invRe*mu_B0(0,0) + (D00_B0(0,0)*d1_mu_dx + D10_B0(0,0)*d1_mu_dy)*(D00_B0(0,0)*wk1_B0(0,0)
-      + D01_B0(0,0)*wk0_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0) + D11_B0(0,0)*wk3_B0(0,0))*invRe*u1_B0(0,0) +
-      (D00_B0(0,0)*d1_mu_dx + D10_B0(0,0)*d1_mu_dy)*(-(2.0/3.0)*D01_B0(0,0)*wk1_B0(0,0) -
-      (2.0/3.0)*D11_B0(0,0)*wk4_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk0_B0(0,0) +
-      ((4.0/3.0))*D10_B0(0,0)*wk3_B0(0,0))*invRe*u0_B0(0,0) + (D01_B0(0,0)*wk0_B0(0,0) +
-      D11_B0(0,0)*wk3_B0(0,0))*(D00_B0(0,0)*wk1_B0(0,0) + D01_B0(0,0)*wk0_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0) +
-      D11_B0(0,0)*wk3_B0(0,0))*invRe*mu_B0(0,0) + (D01_B0(0,0)*wk1_B0(0,0) +
-      D11_B0(0,0)*wk4_B0(0,0))*(-(2.0/3.0)*D00_B0(0,0)*wk0_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk3_B0(0,0) +
-      ((4.0/3.0))*D01_B0(0,0)*wk1_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk4_B0(0,0))*invRe*mu_B0(0,0) +
-      (D01_B0(0,0)*d1_mu_dx + D11_B0(0,0)*d1_mu_dy)*(D00_B0(0,0)*wk1_B0(0,0) + D01_B0(0,0)*wk0_B0(0,0) +
-      D10_B0(0,0)*wk4_B0(0,0) + D11_B0(0,0)*wk3_B0(0,0))*invRe*u0_B0(0,0) + (D01_B0(0,0)*d1_mu_dx +
-      D11_B0(0,0)*d1_mu_dy)*(-(2.0/3.0)*D00_B0(0,0)*wk0_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk3_B0(0,0) +
-      ((4.0/3.0))*D01_B0(0,0)*wk1_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk4_B0(0,0))*invRe*u1_B0(0,0) +
-      ((D00_B0(0,0)*D00_B0(0,0))*d2_u1_dx + (D10_B0(0,0)*D10_B0(0,0))*d2_u1_dy +
-      ((4.0/3.0))*(D01_B0(0,0)*D01_B0(0,0))*d2_u1_dx + ((4.0/3.0))*(D11_B0(0,0)*D11_B0(0,0))*d2_u1_dy +
-      D00_B0(0,0)*wk0_B0(0,0)*SD010_B0(0,0) + D00_B0(0,0)*wk1_B0(0,0)*SD000_B0(0,0) +
-      D00_B0(0,0)*wk3_B0(0,0)*SD110_B0(0,0) + D00_B0(0,0)*wk4_B0(0,0)*SD100_B0(0,0) +
-      D10_B0(0,0)*wk0_B0(0,0)*SD011_B0(0,0) + D10_B0(0,0)*wk1_B0(0,0)*SD001_B0(0,0) +
-      D10_B0(0,0)*wk3_B0(0,0)*SD111_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0)*SD101_B0(0,0) +
-      2*D00_B0(0,0)*D10_B0(0,0)*d1_wk1_dy - (2.0/3.0)*D01_B0(0,0)*wk0_B0(0,0)*SD000_B0(0,0) -
-      (2.0/3.0)*D01_B0(0,0)*wk3_B0(0,0)*SD100_B0(0,0) - (2.0/3.0)*D11_B0(0,0)*wk0_B0(0,0)*SD001_B0(0,0) -
-      (2.0/3.0)*D11_B0(0,0)*wk3_B0(0,0)*SD101_B0(0,0) + ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*d2_u0_dx +
-      ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*d1_wk0_dy + ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*d1_wk0_dy +
-      ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*d2_u0_dy + ((4.0/3.0))*D01_B0(0,0)*wk1_B0(0,0)*SD010_B0(0,0) +
-      ((4.0/3.0))*D01_B0(0,0)*wk4_B0(0,0)*SD110_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk1_B0(0,0)*SD011_B0(0,0) +
+    Residual3_B0(0,0) = (D00_B0(0,0)*wk0_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0))*(D00_B0(0,0)*wk0_B0(0,0) +
+      D01_B0(0,0)*wk5_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0) + D11_B0(0,0)*wk15_B0(0,0))*invRe*mu_B0(0,0) +
+      (D00_B0(0,0)*wk5_B0(0,0) + D10_B0(0,0)*wk15_B0(0,0))*(-(2.0/3.0)*D01_B0(0,0)*wk0_B0(0,0) -
+      (2.0/3.0)*D11_B0(0,0)*wk4_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk5_B0(0,0) +
+      ((4.0/3.0))*D10_B0(0,0)*wk15_B0(0,0))*invRe*mu_B0(0,0) + (D00_B0(0,0)*wk8_B0(0,0) +
+      D10_B0(0,0)*wk13_B0(0,0))*(D00_B0(0,0)*wk0_B0(0,0) + D01_B0(0,0)*wk5_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0) +
+      D11_B0(0,0)*wk15_B0(0,0))*invRe*u1_B0(0,0) + (D00_B0(0,0)*wk8_B0(0,0) +
+      D10_B0(0,0)*wk13_B0(0,0))*(-(2.0/3.0)*D01_B0(0,0)*wk0_B0(0,0) - (2.0/3.0)*D11_B0(0,0)*wk4_B0(0,0) +
+      ((4.0/3.0))*D00_B0(0,0)*wk5_B0(0,0) + ((4.0/3.0))*D10_B0(0,0)*wk15_B0(0,0))*invRe*u0_B0(0,0) +
+      (D01_B0(0,0)*wk0_B0(0,0) + D11_B0(0,0)*wk4_B0(0,0))*(-(2.0/3.0)*D00_B0(0,0)*wk5_B0(0,0) -
+      (2.0/3.0)*D10_B0(0,0)*wk15_B0(0,0) + ((4.0/3.0))*D01_B0(0,0)*wk0_B0(0,0) +
+      ((4.0/3.0))*D11_B0(0,0)*wk4_B0(0,0))*invRe*mu_B0(0,0) + (D01_B0(0,0)*wk5_B0(0,0) +
+      D11_B0(0,0)*wk15_B0(0,0))*(D00_B0(0,0)*wk0_B0(0,0) + D01_B0(0,0)*wk5_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0) +
+      D11_B0(0,0)*wk15_B0(0,0))*invRe*mu_B0(0,0) + (D01_B0(0,0)*wk8_B0(0,0) +
+      D11_B0(0,0)*wk13_B0(0,0))*(D00_B0(0,0)*wk0_B0(0,0) + D01_B0(0,0)*wk5_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0) +
+      D11_B0(0,0)*wk15_B0(0,0))*invRe*u0_B0(0,0) + (D01_B0(0,0)*wk8_B0(0,0) +
+      D11_B0(0,0)*wk13_B0(0,0))*(-(2.0/3.0)*D00_B0(0,0)*wk5_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk15_B0(0,0) +
+      ((4.0/3.0))*D01_B0(0,0)*wk0_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk4_B0(0,0))*invRe*u1_B0(0,0) +
+      ((D00_B0(0,0)*D00_B0(0,0))*wk9_B0(0,0) + (D10_B0(0,0)*D10_B0(0,0))*wk14_B0(0,0) +
+      ((4.0/3.0))*(D01_B0(0,0)*D01_B0(0,0))*wk9_B0(0,0) + ((4.0/3.0))*(D11_B0(0,0)*D11_B0(0,0))*wk14_B0(0,0) +
+      D00_B0(0,0)*wk0_B0(0,0)*SD000_B0(0,0) + D00_B0(0,0)*wk4_B0(0,0)*SD100_B0(0,0) +
+      D00_B0(0,0)*wk5_B0(0,0)*SD010_B0(0,0) + D00_B0(0,0)*wk15_B0(0,0)*SD110_B0(0,0) +
+      D10_B0(0,0)*wk0_B0(0,0)*SD001_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0)*SD101_B0(0,0) +
+      D10_B0(0,0)*wk5_B0(0,0)*SD011_B0(0,0) + D10_B0(0,0)*wk15_B0(0,0)*SD111_B0(0,0) +
+      2*D00_B0(0,0)*D10_B0(0,0)*wk6_B0(0,0) - (2.0/3.0)*D01_B0(0,0)*wk5_B0(0,0)*SD000_B0(0,0) -
+      (2.0/3.0)*D01_B0(0,0)*wk15_B0(0,0)*SD100_B0(0,0) - (2.0/3.0)*D11_B0(0,0)*wk5_B0(0,0)*SD001_B0(0,0) -
+      (2.0/3.0)*D11_B0(0,0)*wk15_B0(0,0)*SD101_B0(0,0) + ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*wk1_B0(0,0) +
+      ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*wk2_B0(0,0) + ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*wk2_B0(0,0) +
+      ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*wk16_B0(0,0) + ((4.0/3.0))*D01_B0(0,0)*wk0_B0(0,0)*SD010_B0(0,0) +
+      ((4.0/3.0))*D01_B0(0,0)*wk4_B0(0,0)*SD110_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk0_B0(0,0)*SD011_B0(0,0) +
       ((4.0/3.0))*D11_B0(0,0)*wk4_B0(0,0)*SD111_B0(0,0) +
-      ((8.0/3.0))*D01_B0(0,0)*D11_B0(0,0)*d1_wk1_dy)*invRe*mu_B0(0,0)*u1_B0(0,0) + ((D01_B0(0,0)*D01_B0(0,0))*d2_u0_dx +
-      (D11_B0(0,0)*D11_B0(0,0))*d2_u0_dy + ((4.0/3.0))*(D00_B0(0,0)*D00_B0(0,0))*d2_u0_dx +
-      ((4.0/3.0))*(D10_B0(0,0)*D10_B0(0,0))*d2_u0_dy + D01_B0(0,0)*wk0_B0(0,0)*SD010_B0(0,0) +
-      D01_B0(0,0)*wk1_B0(0,0)*SD000_B0(0,0) + D01_B0(0,0)*wk3_B0(0,0)*SD110_B0(0,0) +
-      D01_B0(0,0)*wk4_B0(0,0)*SD100_B0(0,0) + D11_B0(0,0)*wk0_B0(0,0)*SD011_B0(0,0) +
-      D11_B0(0,0)*wk1_B0(0,0)*SD001_B0(0,0) + D11_B0(0,0)*wk3_B0(0,0)*SD111_B0(0,0) +
-      D11_B0(0,0)*wk4_B0(0,0)*SD101_B0(0,0) + 2*D01_B0(0,0)*D11_B0(0,0)*d1_wk0_dy -
-      (2.0/3.0)*D00_B0(0,0)*wk1_B0(0,0)*SD010_B0(0,0) - (2.0/3.0)*D00_B0(0,0)*wk4_B0(0,0)*SD110_B0(0,0) -
-      (2.0/3.0)*D10_B0(0,0)*wk1_B0(0,0)*SD011_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk4_B0(0,0)*SD111_B0(0,0) +
-      ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*d2_u1_dx + ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*d1_wk1_dy +
-      ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*d1_wk1_dy + ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*d2_u1_dy +
-      ((4.0/3.0))*D00_B0(0,0)*wk0_B0(0,0)*SD000_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk3_B0(0,0)*SD100_B0(0,0) +
-      ((4.0/3.0))*D10_B0(0,0)*wk0_B0(0,0)*SD001_B0(0,0) + ((4.0/3.0))*D10_B0(0,0)*wk3_B0(0,0)*SD101_B0(0,0) +
-      ((8.0/3.0))*D00_B0(0,0)*D10_B0(0,0)*d1_wk0_dy)*invRe*mu_B0(0,0)*u0_B0(0,0) + (D00_B0(0,0)*wk2_B0(0,0) +
-      D10_B0(0,0)*wk5_B0(0,0))*(D00_B0(0,0)*d1_mu_dx + D10_B0(0,0)*d1_mu_dy)*invPr*invRe*inv2Minf*inv_gamma_m1 +
-      (D01_B0(0,0)*wk2_B0(0,0) + D11_B0(0,0)*wk5_B0(0,0))*(D01_B0(0,0)*d1_mu_dx +
-      D11_B0(0,0)*d1_mu_dy)*invPr*invRe*inv2Minf*inv_gamma_m1 + ((D00_B0(0,0)*D00_B0(0,0))*d2_T_dx +
-      (D01_B0(0,0)*D01_B0(0,0))*d2_T_dx + (D10_B0(0,0)*D10_B0(0,0))*d2_T_dy + (D11_B0(0,0)*D11_B0(0,0))*d2_T_dy +
-      D00_B0(0,0)*wk2_B0(0,0)*SD000_B0(0,0) + D00_B0(0,0)*wk5_B0(0,0)*SD100_B0(0,0) +
-      D01_B0(0,0)*wk2_B0(0,0)*SD010_B0(0,0) + D01_B0(0,0)*wk5_B0(0,0)*SD110_B0(0,0) +
-      D10_B0(0,0)*wk2_B0(0,0)*SD001_B0(0,0) + D10_B0(0,0)*wk5_B0(0,0)*SD101_B0(0,0) +
-      D11_B0(0,0)*wk2_B0(0,0)*SD011_B0(0,0) + D11_B0(0,0)*wk5_B0(0,0)*SD111_B0(0,0) +
-      2*D00_B0(0,0)*D10_B0(0,0)*d1_wk2_dy +
-      2*D01_B0(0,0)*D11_B0(0,0)*d1_wk2_dy)*invPr*invRe*inv2Minf*inv_gamma_m1*mu_B0(0,0) + Residual3_B0(0,0);
+      ((8.0/3.0))*D01_B0(0,0)*D11_B0(0,0)*wk6_B0(0,0))*invRe*mu_B0(0,0)*u1_B0(0,0) +
+      ((D01_B0(0,0)*D01_B0(0,0))*wk1_B0(0,0) + (D11_B0(0,0)*D11_B0(0,0))*wk16_B0(0,0) +
+      ((4.0/3.0))*(D00_B0(0,0)*D00_B0(0,0))*wk1_B0(0,0) + ((4.0/3.0))*(D10_B0(0,0)*D10_B0(0,0))*wk16_B0(0,0) +
+      D01_B0(0,0)*wk0_B0(0,0)*SD000_B0(0,0) + D01_B0(0,0)*wk4_B0(0,0)*SD100_B0(0,0) +
+      D01_B0(0,0)*wk5_B0(0,0)*SD010_B0(0,0) + D01_B0(0,0)*wk15_B0(0,0)*SD110_B0(0,0) +
+      D11_B0(0,0)*wk0_B0(0,0)*SD001_B0(0,0) + D11_B0(0,0)*wk4_B0(0,0)*SD101_B0(0,0) +
+      D11_B0(0,0)*wk5_B0(0,0)*SD011_B0(0,0) + D11_B0(0,0)*wk15_B0(0,0)*SD111_B0(0,0) +
+      2*D01_B0(0,0)*D11_B0(0,0)*wk2_B0(0,0) - (2.0/3.0)*D00_B0(0,0)*wk0_B0(0,0)*SD010_B0(0,0) -
+      (2.0/3.0)*D00_B0(0,0)*wk4_B0(0,0)*SD110_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk0_B0(0,0)*SD011_B0(0,0) -
+      (2.0/3.0)*D10_B0(0,0)*wk4_B0(0,0)*SD111_B0(0,0) + ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*wk9_B0(0,0) +
+      ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*wk6_B0(0,0) + ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*wk6_B0(0,0) +
+      ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*wk14_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk5_B0(0,0)*SD000_B0(0,0) +
+      ((4.0/3.0))*D00_B0(0,0)*wk15_B0(0,0)*SD100_B0(0,0) + ((4.0/3.0))*D10_B0(0,0)*wk5_B0(0,0)*SD001_B0(0,0) +
+      ((4.0/3.0))*D10_B0(0,0)*wk15_B0(0,0)*SD101_B0(0,0) +
+      ((8.0/3.0))*D00_B0(0,0)*D10_B0(0,0)*wk2_B0(0,0))*invRe*mu_B0(0,0)*u0_B0(0,0) + (D00_B0(0,0)*wk3_B0(0,0) +
+      D10_B0(0,0)*wk10_B0(0,0))*(D00_B0(0,0)*wk8_B0(0,0) + D10_B0(0,0)*wk13_B0(0,0))*invPr*invRe*inv2Minf*inv_gamma_m1 +
+      (D01_B0(0,0)*wk3_B0(0,0) + D11_B0(0,0)*wk10_B0(0,0))*(D01_B0(0,0)*wk8_B0(0,0) +
+      D11_B0(0,0)*wk13_B0(0,0))*invPr*invRe*inv2Minf*inv_gamma_m1 + ((D00_B0(0,0)*D00_B0(0,0))*wk12_B0(0,0) +
+      (D01_B0(0,0)*D01_B0(0,0))*wk12_B0(0,0) + (D10_B0(0,0)*D10_B0(0,0))*wk11_B0(0,0) +
+      (D11_B0(0,0)*D11_B0(0,0))*wk11_B0(0,0) + D00_B0(0,0)*wk3_B0(0,0)*SD000_B0(0,0) +
+      D00_B0(0,0)*wk10_B0(0,0)*SD100_B0(0,0) + D01_B0(0,0)*wk3_B0(0,0)*SD010_B0(0,0) +
+      D01_B0(0,0)*wk10_B0(0,0)*SD110_B0(0,0) + D10_B0(0,0)*wk3_B0(0,0)*SD001_B0(0,0) +
+      D10_B0(0,0)*wk10_B0(0,0)*SD101_B0(0,0) + D11_B0(0,0)*wk3_B0(0,0)*SD011_B0(0,0) +
+      D11_B0(0,0)*wk10_B0(0,0)*SD111_B0(0,0) + 2*D00_B0(0,0)*D10_B0(0,0)*wk7_B0(0,0) +
+      2*D01_B0(0,0)*D11_B0(0,0)*wk7_B0(0,0))*invPr*invRe*inv2Minf*inv_gamma_m1*mu_B0(0,0) + Residual3_B0(0,0);
 
 }
 
- void opensbliblock00Kernel062(const ACC<double> &Residual0_B0, const ACC<double> &Residual1_B0, const ACC<double>
+ void opensbliblock00Kernel091(const ACC<double> &Residual0_B0, const ACC<double> &Residual1_B0, const ACC<double>
 &Residual2_B0, const ACC<double> &Residual3_B0, ACC<double> &rhoE_B0, ACC<double> &rhoE_RKold_B0, ACC<double> &rho_B0,
 ACC<double> &rho_RKold_B0, ACC<double> &rhou0_B0, ACC<double> &rhou0_RKold_B0, ACC<double> &rhou1_B0, ACC<double>
 &rhou1_RKold_B0, const double *rkA, const double *rkB)

@@ -25,12 +25,12 @@ void ops_par_loop_monitor_28_p_B0(char const *name, ops_block block, int dim, in
 
 
   #ifdef CHECKPOINTING
-  if (!ops_checkpointing_before(args,2,range,81)) return;
+  if (!ops_checkpointing_before(args,2,range,58)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,81,"monitor_28_p_B0");
-    block->instance->OPS_kernels[81].count++;
+    ops_timing_realloc(block->instance,58,"monitor_28_p_B0");
+    block->instance->OPS_kernels[58].count++;
   }
 
   //compute localy allocated range for the sub-block
@@ -86,7 +86,7 @@ void ops_par_loop_monitor_28_p_B0(char const *name, ops_block block, int dim, in
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[81].mpi_time += t1-t2;
+    block->instance->OPS_kernels[58].mpi_time += t1-t2;
   }
 
   monitor_28_p_B0_c_wrapper(
@@ -96,12 +96,12 @@ void ops_par_loop_monitor_28_p_B0(char const *name, ops_block block, int dim, in
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[81].time += t2-t1;
+    block->instance->OPS_kernels[58].time += t2-t1;
   }
   ops_set_dirtybit_host(args, 2);
 
   //Update kernel record
   if (block->instance->OPS_diags > 1) {
-    block->instance->OPS_kernels[81].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[58].transfer += ops_compute_transfer(dim, start, end, &arg0);
   }
 }

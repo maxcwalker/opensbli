@@ -60,12 +60,12 @@ void ops_par_loop_opensbliblock00Kernel025_execute(ops_kernel_descriptor *desc) 
 
 
   #if CHECKPOINTING && !OPS_LAZY
-  if (!ops_checkpointing_before(args,2,range,30)) return;
+  if (!ops_checkpointing_before(args,2,range,18)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,30,"opensbliblock00Kernel025");
-    block->instance->OPS_kernels[30].count++;
+    ops_timing_realloc(block->instance,18,"opensbliblock00Kernel025");
+    block->instance->OPS_kernels[18].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -131,7 +131,7 @@ void ops_par_loop_opensbliblock00Kernel025_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[30].mpi_time += t2-t1;
+    block->instance->OPS_kernels[18].mpi_time += t2-t1;
   }
 
 
@@ -146,7 +146,7 @@ void ops_par_loop_opensbliblock00Kernel025_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags>1) {
     hipSafeCall(block->instance->ostream(), hipDeviceSynchronize());
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[30].time += t1-t2;
+    block->instance->OPS_kernels[18].time += t1-t2;
   }
 
   #ifndef OPS_LAZY
@@ -157,9 +157,9 @@ void ops_par_loop_opensbliblock00Kernel025_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[30].mpi_time += t2-t1;
-    block->instance->OPS_kernels[30].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[30].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[18].mpi_time += t2-t1;
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
@@ -169,6 +169,6 @@ void ops_par_loop_opensbliblock00Kernel025(char const *name, ops_block block, in
   ops_arg args[2] = { arg0, arg1 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 2, 30, dim, 1, range, block, ops_par_loop_opensbliblock00Kernel025_execute);
+  create_kerneldesc_and_enque(name, args, 2, 18, dim, 1, range, block, ops_par_loop_opensbliblock00Kernel025_execute);
 }
 #endif

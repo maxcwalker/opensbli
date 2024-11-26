@@ -25,12 +25,12 @@ void ops_par_loop_monitor_69_rhou0_B0_execute(ops_kernel_descriptor *desc) {
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,2,range,122)) return;
+  if (!ops_checkpointing_before(args,2,range,99)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,122,"monitor_69_rhou0_B0");
-    block->instance->OPS_kernels[122].count++;
+    ops_timing_realloc(block->instance,99,"monitor_69_rhou0_B0");
+    block->instance->OPS_kernels[99].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -92,7 +92,7 @@ void ops_par_loop_monitor_69_rhou0_B0_execute(ops_kernel_descriptor *desc) {
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[122].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[99].mpi_time += __t1-__t2;
   }
 
   double p_a1_0 = p_a1[0];
@@ -111,7 +111,7 @@ void ops_par_loop_monitor_69_rhou0_B0_execute(ops_kernel_descriptor *desc) {
   p_a1[0] = p_a1_0;
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[122].time += __t2-__t1;
+    block->instance->OPS_kernels[99].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_device(args, 2);
@@ -120,8 +120,8 @@ void ops_par_loop_monitor_69_rhou0_B0_execute(ops_kernel_descriptor *desc) {
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[122].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[122].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[99].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[99].transfer += ops_compute_transfer(dim, start, end, &arg0);
   }
 }
 
@@ -132,6 +132,6 @@ void ops_par_loop_monitor_69_rhou0_B0(char const *name, ops_block block, int dim
   ops_arg args[2] = { arg0, arg1 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 2, 122, dim, 0, range, block, ops_par_loop_monitor_69_rhou0_B0_execute);
+  create_kerneldesc_and_enque(name, args, 2, 99, dim, 0, range, block, ops_par_loop_monitor_69_rhou0_B0_execute);
 }
 #endif

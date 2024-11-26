@@ -41,12 +41,12 @@ void ops_par_loop_opensbliblock00Kernel003(char const *name, ops_block block, in
 
 
   #ifdef CHECKPOINTING
-  if (!ops_checkpointing_before(args,5,range,25)) return;
+  if (!ops_checkpointing_before(args,5,range,13)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,25,"opensbliblock00Kernel003");
-    block->instance->OPS_kernels[25].count++;
+    ops_timing_realloc(block->instance,13,"opensbliblock00Kernel003");
+    block->instance->OPS_kernels[13].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -166,7 +166,7 @@ void ops_par_loop_opensbliblock00Kernel003(char const *name, ops_block block, in
   #endif
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[25].mpi_time += t2-t1;
+    block->instance->OPS_kernels[13].mpi_time += t2-t1;
   }
 
   opensbliblock00Kernel003_c_wrapper(
@@ -179,7 +179,7 @@ void ops_par_loop_opensbliblock00Kernel003(char const *name, ops_block block, in
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[25].time += t1-t2;
+    block->instance->OPS_kernels[13].time += t1-t2;
   }
   #ifdef OPS_GPU
   ops_set_dirtybit_device(args, 5);
@@ -191,11 +191,11 @@ void ops_par_loop_opensbliblock00Kernel003(char const *name, ops_block block, in
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[25].mpi_time += t2-t1;
-    block->instance->OPS_kernels[25].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[25].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[25].transfer += ops_compute_transfer(dim, start, end, &arg2);
-    block->instance->OPS_kernels[25].transfer += ops_compute_transfer(dim, start, end, &arg3);
-    block->instance->OPS_kernels[25].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[13].mpi_time += t2-t1;
+    block->instance->OPS_kernels[13].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[13].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[13].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[13].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[13].transfer += ops_compute_transfer(dim, start, end, &arg4);
   }
 }

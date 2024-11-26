@@ -10,12 +10,7 @@ void ops_par_loop_opensbliblock00Kernel061(char const *name, ops_block block, in
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
  ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
  ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
- ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
- ops_arg arg16, ops_arg arg17, ops_arg arg18, ops_arg arg19,
- ops_arg arg20, ops_arg arg21, ops_arg arg22, ops_arg arg23,
- ops_arg arg24, ops_arg arg25, ops_arg arg26, ops_arg arg27,
- ops_arg arg28, ops_arg arg29, ops_arg arg30, ops_arg arg31,
- ops_arg arg32, ops_arg arg33, ops_arg arg34) {
+ ops_arg arg12) {
 #else
 void ops_par_loop_opensbliblock00Kernel061_execute(ops_kernel_descriptor *desc) {
   ops_block block = desc->block;
@@ -34,44 +29,22 @@ void ops_par_loop_opensbliblock00Kernel061_execute(ops_kernel_descriptor *desc) 
   ops_arg arg10 = desc->args[10];
   ops_arg arg11 = desc->args[11];
   ops_arg arg12 = desc->args[12];
-  ops_arg arg13 = desc->args[13];
-  ops_arg arg14 = desc->args[14];
-  ops_arg arg15 = desc->args[15];
-  ops_arg arg16 = desc->args[16];
-  ops_arg arg17 = desc->args[17];
-  ops_arg arg18 = desc->args[18];
-  ops_arg arg19 = desc->args[19];
-  ops_arg arg20 = desc->args[20];
-  ops_arg arg21 = desc->args[21];
-  ops_arg arg22 = desc->args[22];
-  ops_arg arg23 = desc->args[23];
-  ops_arg arg24 = desc->args[24];
-  ops_arg arg25 = desc->args[25];
-  ops_arg arg26 = desc->args[26];
-  ops_arg arg27 = desc->args[27];
-  ops_arg arg28 = desc->args[28];
-  ops_arg arg29 = desc->args[29];
-  ops_arg arg30 = desc->args[30];
-  ops_arg arg31 = desc->args[31];
-  ops_arg arg32 = desc->args[32];
-  ops_arg arg33 = desc->args[33];
-  ops_arg arg34 = desc->args[34];
   #endif
 
   //Timing
   double __t1,__t2,__c1,__c2;
 
-  ops_arg args[35] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27, arg28, arg29, arg30, arg31, arg32, arg33, arg34};
+  ops_arg args[13] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12};
 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,35,range,51)) return;
+  if (!ops_checkpointing_before(args,13,range,6)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,51,"opensbliblock00Kernel061");
-    block->instance->OPS_kernels[51].count++;
+    ops_timing_realloc(block->instance,6,"opensbliblock00Kernel061");
+    block->instance->OPS_kernels[6].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -83,15 +56,13 @@ void ops_par_loop_opensbliblock00Kernel061_execute(ops_kernel_descriptor *desc) 
   //compute locally allocated range for the sub-block
   int start[2];
   int end[2];
-  #if defined(OPS_MPI) && !defined(OPS_LAZY)
   int arg_idx[2];
-  #endif
   #if defined(OPS_LAZY) || !defined(OPS_MPI)
   for ( int n=0; n<2; n++ ){
     start[n] = range[2*n];end[n] = range[2*n+1];
   }
   #else
-  if (compute_ranges(args, 35,block, range, start, end, arg_idx) < 0) return;
+  if (compute_ranges(args, 13,block, range, start, end, arg_idx) < 0) return;
   #endif
 
   int start0 = start[0];
@@ -99,6 +70,19 @@ void ops_par_loop_opensbliblock00Kernel061_execute(ops_kernel_descriptor *desc) 
   int start1 = start[1];
   int end1 = end[1];
 
+  #if defined(OPS_MPI)
+  #if defined(OPS_LAZY)
+  sub_block_list sb = OPS_sub_block_list[block->index];
+  arg_idx[0] = sb->decomp_disp[0];
+  arg_idx[1] = sb->decomp_disp[1];
+  #else
+  arg_idx[0] -= start[0];
+  arg_idx[1] -= start[1];
+  #endif
+  #else //OPS_MPI
+  arg_idx[0] = 0;
+  arg_idx[1] = 0;
+  #endif //OPS_MPI
 
   //initialize global variable with the dimension of dats
   int xdim0_opensbliblock00Kernel061 = args[0].dat->size[0];
@@ -113,29 +97,6 @@ void ops_par_loop_opensbliblock00Kernel061_execute(ops_kernel_descriptor *desc) 
   int xdim9_opensbliblock00Kernel061 = args[9].dat->size[0];
   int xdim10_opensbliblock00Kernel061 = args[10].dat->size[0];
   int xdim11_opensbliblock00Kernel061 = args[11].dat->size[0];
-  int xdim12_opensbliblock00Kernel061 = args[12].dat->size[0];
-  int xdim13_opensbliblock00Kernel061 = args[13].dat->size[0];
-  int xdim14_opensbliblock00Kernel061 = args[14].dat->size[0];
-  int xdim15_opensbliblock00Kernel061 = args[15].dat->size[0];
-  int xdim16_opensbliblock00Kernel061 = args[16].dat->size[0];
-  int xdim17_opensbliblock00Kernel061 = args[17].dat->size[0];
-  int xdim18_opensbliblock00Kernel061 = args[18].dat->size[0];
-  int xdim19_opensbliblock00Kernel061 = args[19].dat->size[0];
-  int xdim20_opensbliblock00Kernel061 = args[20].dat->size[0];
-  int xdim21_opensbliblock00Kernel061 = args[21].dat->size[0];
-  int xdim22_opensbliblock00Kernel061 = args[22].dat->size[0];
-  int xdim23_opensbliblock00Kernel061 = args[23].dat->size[0];
-  int xdim24_opensbliblock00Kernel061 = args[24].dat->size[0];
-  int xdim25_opensbliblock00Kernel061 = args[25].dat->size[0];
-  int xdim26_opensbliblock00Kernel061 = args[26].dat->size[0];
-  int xdim27_opensbliblock00Kernel061 = args[27].dat->size[0];
-  int xdim28_opensbliblock00Kernel061 = args[28].dat->size[0];
-  int xdim29_opensbliblock00Kernel061 = args[29].dat->size[0];
-  int xdim30_opensbliblock00Kernel061 = args[30].dat->size[0];
-  int xdim31_opensbliblock00Kernel061 = args[31].dat->size[0];
-  int xdim32_opensbliblock00Kernel061 = args[32].dat->size[0];
-  int xdim33_opensbliblock00Kernel061 = args[33].dat->size[0];
-  int xdim34_opensbliblock00Kernel061 = args[34].dat->size[0];
 
   //set up initial pointers and exchange halos if necessary
   int base0 = args[0].dat->base_offset;
@@ -174,274 +135,373 @@ void ops_par_loop_opensbliblock00Kernel061_execute(ops_kernel_descriptor *desc) 
   int base11 = args[11].dat->base_offset;
   double * __restrict__ SD111_B0_p = (double *)(args[11].data_d + base11);
 
-  int base12 = args[12].dat->base_offset;
-  double * __restrict__ mu_B0_p = (double *)(args[12].data_d + base12);
-
-  int base13 = args[13].dat->base_offset;
-  double * __restrict__ u0_B0_p = (double *)(args[13].data_d + base13);
-
-  int base14 = args[14].dat->base_offset;
-  double * __restrict__ u1_B0_p = (double *)(args[14].data_d + base14);
-
-  int base15 = args[15].dat->base_offset;
-  double * __restrict__ wk0_B0_p = (double *)(args[15].data_d + base15);
-
-  int base16 = args[16].dat->base_offset;
-  double * __restrict__ wk10_B0_p = (double *)(args[16].data_d + base16);
-
-  int base17 = args[17].dat->base_offset;
-  double * __restrict__ wk11_B0_p = (double *)(args[17].data_d + base17);
-
-  int base18 = args[18].dat->base_offset;
-  double * __restrict__ wk12_B0_p = (double *)(args[18].data_d + base18);
-
-  int base19 = args[19].dat->base_offset;
-  double * __restrict__ wk13_B0_p = (double *)(args[19].data_d + base19);
-
-  int base20 = args[20].dat->base_offset;
-  double * __restrict__ wk14_B0_p = (double *)(args[20].data_d + base20);
-
-  int base21 = args[21].dat->base_offset;
-  double * __restrict__ wk15_B0_p = (double *)(args[21].data_d + base21);
-
-  int base22 = args[22].dat->base_offset;
-  double * __restrict__ wk16_B0_p = (double *)(args[22].data_d + base22);
-
-  int base23 = args[23].dat->base_offset;
-  double * __restrict__ wk1_B0_p = (double *)(args[23].data_d + base23);
-
-  int base24 = args[24].dat->base_offset;
-  double * __restrict__ wk2_B0_p = (double *)(args[24].data_d + base24);
-
-  int base25 = args[25].dat->base_offset;
-  double * __restrict__ wk3_B0_p = (double *)(args[25].data_d + base25);
-
-  int base26 = args[26].dat->base_offset;
-  double * __restrict__ wk4_B0_p = (double *)(args[26].data_d + base26);
-
-  int base27 = args[27].dat->base_offset;
-  double * __restrict__ wk5_B0_p = (double *)(args[27].data_d + base27);
-
-  int base28 = args[28].dat->base_offset;
-  double * __restrict__ wk6_B0_p = (double *)(args[28].data_d + base28);
-
-  int base29 = args[29].dat->base_offset;
-  double * __restrict__ wk7_B0_p = (double *)(args[29].data_d + base29);
-
-  int base30 = args[30].dat->base_offset;
-  double * __restrict__ wk8_B0_p = (double *)(args[30].data_d + base30);
-
-  int base31 = args[31].dat->base_offset;
-  double * __restrict__ wk9_B0_p = (double *)(args[31].data_d + base31);
-
-  int base32 = args[32].dat->base_offset;
-  double * __restrict__ Residual1_B0_p = (double *)(args[32].data_d + base32);
-
-  int base33 = args[33].dat->base_offset;
-  double * __restrict__ Residual2_B0_p = (double *)(args[33].data_d + base33);
-
-  int base34 = args[34].dat->base_offset;
-  double * __restrict__ Residual3_B0_p = (double *)(args[34].data_d + base34);
 
 
 
   #ifndef OPS_LAZY
   //Halo Exchanges
-  ops_H_D_exchanges_device(args, 35);
-  ops_halo_exchanges(args,35,range);
-  ops_H_D_exchanges_device(args, 35);
+  ops_H_D_exchanges_device(args, 13);
+  ops_halo_exchanges(args,13,range);
+  ops_H_D_exchanges_device(args, 13);
   #endif
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[51].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[6].mpi_time += __t1-__t2;
   }
 
   #pragma omp target teams distribute parallel for collapse(2)
   for ( int n_y=start1; n_y<end1; n_y++ ){
     for ( int n_x=start0; n_x<end0; n_x++ ){
+      int idx[] = {arg_idx[0]+n_x, arg_idx[1]+n_y};
       const ACC<double> D00_B0(xdim0_opensbliblock00Kernel061, D00_B0_p + n_x*1 + n_y * xdim0_opensbliblock00Kernel061*1);
       const ACC<double> D01_B0(xdim1_opensbliblock00Kernel061, D01_B0_p + n_x*1 + n_y * xdim1_opensbliblock00Kernel061*1);
       const ACC<double> D10_B0(xdim2_opensbliblock00Kernel061, D10_B0_p + n_x*1 + n_y * xdim2_opensbliblock00Kernel061*1);
       const ACC<double> D11_B0(xdim3_opensbliblock00Kernel061, D11_B0_p + n_x*1 + n_y * xdim3_opensbliblock00Kernel061*1);
-      const ACC<double> SD000_B0(xdim4_opensbliblock00Kernel061, SD000_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel061*1);
-      const ACC<double> SD001_B0(xdim5_opensbliblock00Kernel061, SD001_B0_p + n_x*1 + n_y * xdim5_opensbliblock00Kernel061*1);
-      const ACC<double> SD010_B0(xdim6_opensbliblock00Kernel061, SD010_B0_p + n_x*1 + n_y * xdim6_opensbliblock00Kernel061*1);
-      const ACC<double> SD011_B0(xdim7_opensbliblock00Kernel061, SD011_B0_p + n_x*1 + n_y * xdim7_opensbliblock00Kernel061*1);
-      const ACC<double> SD100_B0(xdim8_opensbliblock00Kernel061, SD100_B0_p + n_x*1 + n_y * xdim8_opensbliblock00Kernel061*1);
-      const ACC<double> SD101_B0(xdim9_opensbliblock00Kernel061, SD101_B0_p + n_x*1 + n_y * xdim9_opensbliblock00Kernel061*1);
-      const ACC<double> SD110_B0(xdim10_opensbliblock00Kernel061, SD110_B0_p + n_x*1 + n_y * xdim10_opensbliblock00Kernel061*1);
-      const ACC<double> SD111_B0(xdim11_opensbliblock00Kernel061, SD111_B0_p + n_x*1 + n_y * xdim11_opensbliblock00Kernel061*1);
-      const ACC<double> mu_B0(xdim12_opensbliblock00Kernel061, mu_B0_p + n_x*1 + n_y * xdim12_opensbliblock00Kernel061*1);
-      const ACC<double> u0_B0(xdim13_opensbliblock00Kernel061, u0_B0_p + n_x*1 + n_y * xdim13_opensbliblock00Kernel061*1);
-      const ACC<double> u1_B0(xdim14_opensbliblock00Kernel061, u1_B0_p + n_x*1 + n_y * xdim14_opensbliblock00Kernel061*1);
-      const ACC<double> wk0_B0(xdim15_opensbliblock00Kernel061, wk0_B0_p + n_x*1 + n_y * xdim15_opensbliblock00Kernel061*1);
-      const ACC<double> wk10_B0(xdim16_opensbliblock00Kernel061, wk10_B0_p + n_x*1 + n_y * xdim16_opensbliblock00Kernel061*1);
-      const ACC<double> wk11_B0(xdim17_opensbliblock00Kernel061, wk11_B0_p + n_x*1 + n_y * xdim17_opensbliblock00Kernel061*1);
-      const ACC<double> wk12_B0(xdim18_opensbliblock00Kernel061, wk12_B0_p + n_x*1 + n_y * xdim18_opensbliblock00Kernel061*1);
-      const ACC<double> wk13_B0(xdim19_opensbliblock00Kernel061, wk13_B0_p + n_x*1 + n_y * xdim19_opensbliblock00Kernel061*1);
-      const ACC<double> wk14_B0(xdim20_opensbliblock00Kernel061, wk14_B0_p + n_x*1 + n_y * xdim20_opensbliblock00Kernel061*1);
-      const ACC<double> wk15_B0(xdim21_opensbliblock00Kernel061, wk15_B0_p + n_x*1 + n_y * xdim21_opensbliblock00Kernel061*1);
-      const ACC<double> wk16_B0(xdim22_opensbliblock00Kernel061, wk16_B0_p + n_x*1 + n_y * xdim22_opensbliblock00Kernel061*1);
-      const ACC<double> wk1_B0(xdim23_opensbliblock00Kernel061, wk1_B0_p + n_x*1 + n_y * xdim23_opensbliblock00Kernel061*1);
-      const ACC<double> wk2_B0(xdim24_opensbliblock00Kernel061, wk2_B0_p + n_x*1 + n_y * xdim24_opensbliblock00Kernel061*1);
-      const ACC<double> wk3_B0(xdim25_opensbliblock00Kernel061, wk3_B0_p + n_x*1 + n_y * xdim25_opensbliblock00Kernel061*1);
-      const ACC<double> wk4_B0(xdim26_opensbliblock00Kernel061, wk4_B0_p + n_x*1 + n_y * xdim26_opensbliblock00Kernel061*1);
-      const ACC<double> wk5_B0(xdim27_opensbliblock00Kernel061, wk5_B0_p + n_x*1 + n_y * xdim27_opensbliblock00Kernel061*1);
-      const ACC<double> wk6_B0(xdim28_opensbliblock00Kernel061, wk6_B0_p + n_x*1 + n_y * xdim28_opensbliblock00Kernel061*1);
-      const ACC<double> wk7_B0(xdim29_opensbliblock00Kernel061, wk7_B0_p + n_x*1 + n_y * xdim29_opensbliblock00Kernel061*1);
-      const ACC<double> wk8_B0(xdim30_opensbliblock00Kernel061, wk8_B0_p + n_x*1 + n_y * xdim30_opensbliblock00Kernel061*1);
-      const ACC<double> wk9_B0(xdim31_opensbliblock00Kernel061, wk9_B0_p + n_x*1 + n_y * xdim31_opensbliblock00Kernel061*1);
-      ACC<double> Residual1_B0(xdim32_opensbliblock00Kernel061, Residual1_B0_p + n_x*1 + n_y * xdim32_opensbliblock00Kernel061*1);
-      ACC<double> Residual2_B0(xdim33_opensbliblock00Kernel061, Residual2_B0_p + n_x*1 + n_y * xdim33_opensbliblock00Kernel061*1);
-      ACC<double> Residual3_B0(xdim34_opensbliblock00Kernel061, Residual3_B0_p + n_x*1 + n_y * xdim34_opensbliblock00Kernel061*1);
+      ACC<double> SD000_B0(xdim4_opensbliblock00Kernel061, SD000_B0_p + n_x*1 + n_y * xdim4_opensbliblock00Kernel061*1);
+      ACC<double> SD001_B0(xdim5_opensbliblock00Kernel061, SD001_B0_p + n_x*1 + n_y * xdim5_opensbliblock00Kernel061*1);
+      ACC<double> SD010_B0(xdim6_opensbliblock00Kernel061, SD010_B0_p + n_x*1 + n_y * xdim6_opensbliblock00Kernel061*1);
+      ACC<double> SD011_B0(xdim7_opensbliblock00Kernel061, SD011_B0_p + n_x*1 + n_y * xdim7_opensbliblock00Kernel061*1);
+      ACC<double> SD100_B0(xdim8_opensbliblock00Kernel061, SD100_B0_p + n_x*1 + n_y * xdim8_opensbliblock00Kernel061*1);
+      ACC<double> SD101_B0(xdim9_opensbliblock00Kernel061, SD101_B0_p + n_x*1 + n_y * xdim9_opensbliblock00Kernel061*1);
+      ACC<double> SD110_B0(xdim10_opensbliblock00Kernel061, SD110_B0_p + n_x*1 + n_y * xdim10_opensbliblock00Kernel061*1);
+      ACC<double> SD111_B0(xdim11_opensbliblock00Kernel061, SD111_B0_p + n_x*1 + n_y * xdim11_opensbliblock00Kernel061*1);
       
-    Residual1_B0(0,0) = (D00_B0(0,0)*wk6_B0(0,0) + D10_B0(0,0)*wk11_B0(0,0))*(-(2.0/3.0)*D01_B0(0,0)*wk4_B0(0,0) -
-      (2.0/3.0)*D11_B0(0,0)*wk1_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk10_B0(0,0) +
-      ((4.0/3.0))*D10_B0(0,0)*wk7_B0(0,0))*invRe + (D01_B0(0,0)*wk6_B0(0,0) +
-      D11_B0(0,0)*wk11_B0(0,0))*(D00_B0(0,0)*wk4_B0(0,0) + D01_B0(0,0)*wk10_B0(0,0) + D10_B0(0,0)*wk1_B0(0,0) +
-      D11_B0(0,0)*wk7_B0(0,0))*invRe + ((D01_B0(0,0)*D01_B0(0,0))*wk13_B0(0,0) + (D11_B0(0,0)*D11_B0(0,0))*wk15_B0(0,0)
-      + ((4.0/3.0))*(D00_B0(0,0)*D00_B0(0,0))*wk13_B0(0,0) + ((4.0/3.0))*(D10_B0(0,0)*D10_B0(0,0))*wk15_B0(0,0) +
-      D01_B0(0,0)*wk1_B0(0,0)*SD100_B0(0,0) + D01_B0(0,0)*wk4_B0(0,0)*SD000_B0(0,0) +
-      D01_B0(0,0)*wk7_B0(0,0)*SD110_B0(0,0) + D01_B0(0,0)*wk10_B0(0,0)*SD010_B0(0,0) +
-      D11_B0(0,0)*wk1_B0(0,0)*SD101_B0(0,0) + D11_B0(0,0)*wk4_B0(0,0)*SD001_B0(0,0) +
-      D11_B0(0,0)*wk7_B0(0,0)*SD111_B0(0,0) + D11_B0(0,0)*wk10_B0(0,0)*SD011_B0(0,0) +
-      2*D01_B0(0,0)*D11_B0(0,0)*wk0_B0(0,0) - (2.0/3.0)*D00_B0(0,0)*wk1_B0(0,0)*SD110_B0(0,0) -
-      (2.0/3.0)*D00_B0(0,0)*wk4_B0(0,0)*SD010_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk1_B0(0,0)*SD111_B0(0,0) -
-      (2.0/3.0)*D10_B0(0,0)*wk4_B0(0,0)*SD011_B0(0,0) + ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*wk14_B0(0,0) +
-      ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*wk8_B0(0,0) + ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*wk8_B0(0,0) +
-      ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*wk16_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk7_B0(0,0)*SD100_B0(0,0) +
-      ((4.0/3.0))*D00_B0(0,0)*wk10_B0(0,0)*SD000_B0(0,0) + ((4.0/3.0))*D10_B0(0,0)*wk7_B0(0,0)*SD101_B0(0,0) +
-      ((4.0/3.0))*D10_B0(0,0)*wk10_B0(0,0)*SD001_B0(0,0) +
-      ((8.0/3.0))*D00_B0(0,0)*D10_B0(0,0)*wk0_B0(0,0))*invRe*mu_B0(0,0) + Residual1_B0(0,0);
+   double d1_D00_dx = 0.0;
+   double d1_D00_dy = 0.0;
+   double d1_D01_dx = 0.0;
+   double d1_D01_dy = 0.0;
+   double d1_D10_dx = 0.0;
+   double d1_D10_dy = 0.0;
+   double d1_D11_dx = 0.0;
+   double d1_D11_dy = 0.0;
+    d1_D00_dy = invDelta1block0*((idx[1] == 0) ? (
+   3.0*D00_B0(0,1) + 0.333333333333333*D00_B0(0,3) - 1.5*D00_B0(0,2)
+      - 1.83333333333333*D00_B0(0,0)
+)
+: ((idx[1] == 1) ? (
+   0.0394168524399447*D00_B0(0,2) +
+      0.00571369039775442*D00_B0(0,4) + 0.719443173328855*D00_B0(0,1) - 0.322484932882161*D00_B0(0,0) -
+      0.0658051057710389*D00_B0(0,3) - 0.376283677513354*D00_B0(0,-1)
+)
+: ((idx[1] == 2) ? (
 
-    Residual2_B0(0,0) = (D00_B0(0,0)*wk6_B0(0,0) + D10_B0(0,0)*wk11_B0(0,0))*(D00_B0(0,0)*wk4_B0(0,0) +
-      D01_B0(0,0)*wk10_B0(0,0) + D10_B0(0,0)*wk1_B0(0,0) + D11_B0(0,0)*wk7_B0(0,0))*invRe + (D01_B0(0,0)*wk6_B0(0,0) +
-      D11_B0(0,0)*wk11_B0(0,0))*(-(2.0/3.0)*D00_B0(0,0)*wk10_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk7_B0(0,0) +
-      ((4.0/3.0))*D01_B0(0,0)*wk4_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk1_B0(0,0))*invRe +
-      ((D00_B0(0,0)*D00_B0(0,0))*wk14_B0(0,0) + (D10_B0(0,0)*D10_B0(0,0))*wk16_B0(0,0) +
-      ((4.0/3.0))*(D01_B0(0,0)*D01_B0(0,0))*wk14_B0(0,0) + ((4.0/3.0))*(D11_B0(0,0)*D11_B0(0,0))*wk16_B0(0,0) +
-      D00_B0(0,0)*wk1_B0(0,0)*SD100_B0(0,0) + D00_B0(0,0)*wk4_B0(0,0)*SD000_B0(0,0) +
-      D00_B0(0,0)*wk7_B0(0,0)*SD110_B0(0,0) + D00_B0(0,0)*wk10_B0(0,0)*SD010_B0(0,0) +
-      D10_B0(0,0)*wk1_B0(0,0)*SD101_B0(0,0) + D10_B0(0,0)*wk4_B0(0,0)*SD001_B0(0,0) +
-      D10_B0(0,0)*wk7_B0(0,0)*SD111_B0(0,0) + D10_B0(0,0)*wk10_B0(0,0)*SD011_B0(0,0) +
-      2*D00_B0(0,0)*D10_B0(0,0)*wk8_B0(0,0) - (2.0/3.0)*D01_B0(0,0)*wk7_B0(0,0)*SD100_B0(0,0) -
-      (2.0/3.0)*D01_B0(0,0)*wk10_B0(0,0)*SD000_B0(0,0) - (2.0/3.0)*D11_B0(0,0)*wk7_B0(0,0)*SD101_B0(0,0) -
-      (2.0/3.0)*D11_B0(0,0)*wk10_B0(0,0)*SD001_B0(0,0) + ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*wk13_B0(0,0) +
-      ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*wk0_B0(0,0) + ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*wk0_B0(0,0) +
-      ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*wk15_B0(0,0) + ((4.0/3.0))*D01_B0(0,0)*wk1_B0(0,0)*SD110_B0(0,0) +
-      ((4.0/3.0))*D01_B0(0,0)*wk4_B0(0,0)*SD010_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk1_B0(0,0)*SD111_B0(0,0) +
-      ((4.0/3.0))*D11_B0(0,0)*wk4_B0(0,0)*SD011_B0(0,0) +
-      ((8.0/3.0))*D01_B0(0,0)*D11_B0(0,0)*wk8_B0(0,0))*invRe*mu_B0(0,0) + Residual2_B0(0,0);
+      0.197184333887745*D00_B0(0,0) + 0.521455851089587*D00_B0(0,1) + 0.113446470384241*D00_B0(0,-2) -
+      0.00412637789557492*D00_B0(0,3) - 0.0367146847001261*D00_B0(0,2) - 0.791245592765872*D00_B0(0,-1)
+)
+: ((idx[1] ==
+      3) ? (
+   0.0451033223343881*D00_B0(0,0) + 0.652141084861241*D00_B0(0,1) + 0.121937153224065*D00_B0(0,-2) -
+      0.00932597985049999*D00_B0(0,-3) - 0.727822147724592*D00_B0(0,-1) - 0.082033432844602*D00_B0(0,2)
+)
+: (
 
-    Residual3_B0(0,0) = (D00_B0(0,0)*wk4_B0(0,0) + D10_B0(0,0)*wk1_B0(0,0))*(D00_B0(0,0)*wk4_B0(0,0) +
-      D01_B0(0,0)*wk10_B0(0,0) + D10_B0(0,0)*wk1_B0(0,0) + D11_B0(0,0)*wk7_B0(0,0))*invRe*mu_B0(0,0) +
-      (D00_B0(0,0)*wk6_B0(0,0) + D10_B0(0,0)*wk11_B0(0,0))*(D00_B0(0,0)*wk4_B0(0,0) + D01_B0(0,0)*wk10_B0(0,0) +
-      D10_B0(0,0)*wk1_B0(0,0) + D11_B0(0,0)*wk7_B0(0,0))*invRe*u1_B0(0,0) + (D00_B0(0,0)*wk6_B0(0,0) +
-      D10_B0(0,0)*wk11_B0(0,0))*(-(2.0/3.0)*D01_B0(0,0)*wk4_B0(0,0) - (2.0/3.0)*D11_B0(0,0)*wk1_B0(0,0) +
-      ((4.0/3.0))*D00_B0(0,0)*wk10_B0(0,0) + ((4.0/3.0))*D10_B0(0,0)*wk7_B0(0,0))*invRe*u0_B0(0,0) +
-      (D00_B0(0,0)*wk10_B0(0,0) + D10_B0(0,0)*wk7_B0(0,0))*(-(2.0/3.0)*D01_B0(0,0)*wk4_B0(0,0) -
-      (2.0/3.0)*D11_B0(0,0)*wk1_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk10_B0(0,0) +
-      ((4.0/3.0))*D10_B0(0,0)*wk7_B0(0,0))*invRe*mu_B0(0,0) + (D01_B0(0,0)*wk4_B0(0,0) +
-      D11_B0(0,0)*wk1_B0(0,0))*(-(2.0/3.0)*D00_B0(0,0)*wk10_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk7_B0(0,0) +
-      ((4.0/3.0))*D01_B0(0,0)*wk4_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk1_B0(0,0))*invRe*mu_B0(0,0) +
-      (D01_B0(0,0)*wk6_B0(0,0) + D11_B0(0,0)*wk11_B0(0,0))*(D00_B0(0,0)*wk4_B0(0,0) + D01_B0(0,0)*wk10_B0(0,0) +
-      D10_B0(0,0)*wk1_B0(0,0) + D11_B0(0,0)*wk7_B0(0,0))*invRe*u0_B0(0,0) + (D01_B0(0,0)*wk6_B0(0,0) +
-      D11_B0(0,0)*wk11_B0(0,0))*(-(2.0/3.0)*D00_B0(0,0)*wk10_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk7_B0(0,0) +
-      ((4.0/3.0))*D01_B0(0,0)*wk4_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk1_B0(0,0))*invRe*u1_B0(0,0) +
-      (D01_B0(0,0)*wk10_B0(0,0) + D11_B0(0,0)*wk7_B0(0,0))*(D00_B0(0,0)*wk4_B0(0,0) + D01_B0(0,0)*wk10_B0(0,0) +
-      D10_B0(0,0)*wk1_B0(0,0) + D11_B0(0,0)*wk7_B0(0,0))*invRe*mu_B0(0,0) + ((D00_B0(0,0)*D00_B0(0,0))*wk14_B0(0,0) +
-      (D10_B0(0,0)*D10_B0(0,0))*wk16_B0(0,0) + ((4.0/3.0))*(D01_B0(0,0)*D01_B0(0,0))*wk14_B0(0,0) +
-      ((4.0/3.0))*(D11_B0(0,0)*D11_B0(0,0))*wk16_B0(0,0) + D00_B0(0,0)*wk1_B0(0,0)*SD100_B0(0,0) +
-      D00_B0(0,0)*wk4_B0(0,0)*SD000_B0(0,0) + D00_B0(0,0)*wk7_B0(0,0)*SD110_B0(0,0) +
-      D00_B0(0,0)*wk10_B0(0,0)*SD010_B0(0,0) + D10_B0(0,0)*wk1_B0(0,0)*SD101_B0(0,0) +
-      D10_B0(0,0)*wk4_B0(0,0)*SD001_B0(0,0) + D10_B0(0,0)*wk7_B0(0,0)*SD111_B0(0,0) +
-      D10_B0(0,0)*wk10_B0(0,0)*SD011_B0(0,0) + 2*D00_B0(0,0)*D10_B0(0,0)*wk8_B0(0,0) -
-      (2.0/3.0)*D01_B0(0,0)*wk7_B0(0,0)*SD100_B0(0,0) - (2.0/3.0)*D01_B0(0,0)*wk10_B0(0,0)*SD000_B0(0,0) -
-      (2.0/3.0)*D11_B0(0,0)*wk7_B0(0,0)*SD101_B0(0,0) - (2.0/3.0)*D11_B0(0,0)*wk10_B0(0,0)*SD001_B0(0,0) +
-      ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*wk13_B0(0,0) + ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*wk0_B0(0,0) +
-      ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*wk0_B0(0,0) + ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*wk15_B0(0,0) +
-      ((4.0/3.0))*D01_B0(0,0)*wk1_B0(0,0)*SD110_B0(0,0) + ((4.0/3.0))*D01_B0(0,0)*wk4_B0(0,0)*SD010_B0(0,0) +
-      ((4.0/3.0))*D11_B0(0,0)*wk1_B0(0,0)*SD111_B0(0,0) + ((4.0/3.0))*D11_B0(0,0)*wk4_B0(0,0)*SD011_B0(0,0) +
-      ((8.0/3.0))*D01_B0(0,0)*D11_B0(0,0)*wk8_B0(0,0))*invRe*mu_B0(0,0)*u1_B0(0,0) +
-      ((D01_B0(0,0)*D01_B0(0,0))*wk13_B0(0,0) + (D11_B0(0,0)*D11_B0(0,0))*wk15_B0(0,0) +
-      ((4.0/3.0))*(D00_B0(0,0)*D00_B0(0,0))*wk13_B0(0,0) + ((4.0/3.0))*(D10_B0(0,0)*D10_B0(0,0))*wk15_B0(0,0) +
-      D01_B0(0,0)*wk1_B0(0,0)*SD100_B0(0,0) + D01_B0(0,0)*wk4_B0(0,0)*SD000_B0(0,0) +
-      D01_B0(0,0)*wk7_B0(0,0)*SD110_B0(0,0) + D01_B0(0,0)*wk10_B0(0,0)*SD010_B0(0,0) +
-      D11_B0(0,0)*wk1_B0(0,0)*SD101_B0(0,0) + D11_B0(0,0)*wk4_B0(0,0)*SD001_B0(0,0) +
-      D11_B0(0,0)*wk7_B0(0,0)*SD111_B0(0,0) + D11_B0(0,0)*wk10_B0(0,0)*SD011_B0(0,0) +
-      2*D01_B0(0,0)*D11_B0(0,0)*wk0_B0(0,0) - (2.0/3.0)*D00_B0(0,0)*wk1_B0(0,0)*SD110_B0(0,0) -
-      (2.0/3.0)*D00_B0(0,0)*wk4_B0(0,0)*SD010_B0(0,0) - (2.0/3.0)*D10_B0(0,0)*wk1_B0(0,0)*SD111_B0(0,0) -
-      (2.0/3.0)*D10_B0(0,0)*wk4_B0(0,0)*SD011_B0(0,0) + ((1.0/3.0))*D00_B0(0,0)*D01_B0(0,0)*wk14_B0(0,0) +
-      ((1.0/3.0))*D00_B0(0,0)*D11_B0(0,0)*wk8_B0(0,0) + ((1.0/3.0))*D01_B0(0,0)*D10_B0(0,0)*wk8_B0(0,0) +
-      ((1.0/3.0))*D10_B0(0,0)*D11_B0(0,0)*wk16_B0(0,0) + ((4.0/3.0))*D00_B0(0,0)*wk7_B0(0,0)*SD100_B0(0,0) +
-      ((4.0/3.0))*D00_B0(0,0)*wk10_B0(0,0)*SD000_B0(0,0) + ((4.0/3.0))*D10_B0(0,0)*wk7_B0(0,0)*SD101_B0(0,0) +
-      ((4.0/3.0))*D10_B0(0,0)*wk10_B0(0,0)*SD001_B0(0,0) +
-      ((8.0/3.0))*D00_B0(0,0)*D10_B0(0,0)*wk0_B0(0,0))*invRe*mu_B0(0,0)*u0_B0(0,0) + (D00_B0(0,0)*wk2_B0(0,0) +
-      D10_B0(0,0)*wk3_B0(0,0))*(D00_B0(0,0)*wk6_B0(0,0) + D10_B0(0,0)*wk11_B0(0,0))*invPr*invRe*inv2Minf*inv_gamma_m1 +
-      (D01_B0(0,0)*wk2_B0(0,0) + D11_B0(0,0)*wk3_B0(0,0))*(D01_B0(0,0)*wk6_B0(0,0) +
-      D11_B0(0,0)*wk11_B0(0,0))*invPr*invRe*inv2Minf*inv_gamma_m1 + ((D00_B0(0,0)*D00_B0(0,0))*wk9_B0(0,0) +
-      (D01_B0(0,0)*D01_B0(0,0))*wk9_B0(0,0) + (D10_B0(0,0)*D10_B0(0,0))*wk12_B0(0,0) +
-      (D11_B0(0,0)*D11_B0(0,0))*wk12_B0(0,0) + D00_B0(0,0)*wk2_B0(0,0)*SD000_B0(0,0) +
-      D00_B0(0,0)*wk3_B0(0,0)*SD100_B0(0,0) + D01_B0(0,0)*wk2_B0(0,0)*SD010_B0(0,0) +
-      D01_B0(0,0)*wk3_B0(0,0)*SD110_B0(0,0) + D10_B0(0,0)*wk2_B0(0,0)*SD001_B0(0,0) +
-      D10_B0(0,0)*wk3_B0(0,0)*SD101_B0(0,0) + D11_B0(0,0)*wk2_B0(0,0)*SD011_B0(0,0) +
-      D11_B0(0,0)*wk3_B0(0,0)*SD111_B0(0,0) + 2*D00_B0(0,0)*D10_B0(0,0)*wk5_B0(0,0) +
-      2*D01_B0(0,0)*D11_B0(0,0)*wk5_B0(0,0))*invPr*invRe*inv2Minf*inv_gamma_m1*mu_B0(0,0) + Residual3_B0(0,0);
+      -(2.0/3.0)*D00_B0(0,-1) - (1.0/12.0)*D00_B0(0,2) + ((1.0/12.0))*D00_B0(0,-2) + ((2.0/3.0))*D00_B0(0,1)
+)))));
+
+    d1_D10_dx = invDelta0block0*((idx[0] == 0) ? (
+   3.0*D10_B0(1,0) + 0.333333333333333*D10_B0(3,0) - 1.5*D10_B0(2,0)
+      - 1.83333333333333*D10_B0(0,0)
+)
+: ((idx[0] == 1) ? (
+   0.0394168524399447*D10_B0(2,0) +
+      0.00571369039775442*D10_B0(4,0) + 0.719443173328855*D10_B0(1,0) - 0.322484932882161*D10_B0(0,0) -
+      0.0658051057710389*D10_B0(3,0) - 0.376283677513354*D10_B0(-1,0)
+)
+: ((idx[0] == 2) ? (
+
+      0.197184333887745*D10_B0(0,0) + 0.521455851089587*D10_B0(1,0) + 0.113446470384241*D10_B0(-2,0) -
+      0.00412637789557492*D10_B0(3,0) - 0.0367146847001261*D10_B0(2,0) - 0.791245592765872*D10_B0(-1,0)
+)
+: ((idx[0] ==
+      3) ? (
+   0.0451033223343881*D10_B0(0,0) + 0.652141084861241*D10_B0(1,0) + 0.121937153224065*D10_B0(-2,0) -
+      0.00932597985049999*D10_B0(-3,0) - 0.727822147724592*D10_B0(-1,0) - 0.082033432844602*D10_B0(2,0)
+)
+: ((idx[0] ==
+      -1 + block0np0) ? (
+   1.5*D10_B0(-2,0) + 1.83333333333333*D10_B0(0,0) - 3.0*D10_B0(-1,0) -
+      0.333333333333333*D10_B0(-3,0)
+)
+: ((idx[0] == -2 + block0np0) ? (
+   0.322484932882161*D10_B0(0,0) +
+      0.0658051057710389*D10_B0(-3,0) + 0.376283677513354*D10_B0(1,0) - 0.0394168524399447*D10_B0(-2,0) -
+      0.00571369039775442*D10_B0(-4,0) - 0.719443173328855*D10_B0(-1,0)
+)
+: ((idx[0] == -3 + block0np0) ? (
+
+      0.00412637789557492*D10_B0(-3,0) + 0.0367146847001261*D10_B0(-2,0) + 0.791245592765872*D10_B0(1,0) -
+      0.197184333887745*D10_B0(0,0) - 0.521455851089587*D10_B0(-1,0) - 0.113446470384241*D10_B0(2,0)
+)
+: ((idx[0] == -4
+      + block0np0) ? (
+   0.00932597985049999*D10_B0(3,0) + 0.727822147724592*D10_B0(1,0) +
+      0.082033432844602*D10_B0(-2,0) - 0.0451033223343881*D10_B0(0,0) - 0.652141084861241*D10_B0(-1,0) -
+      0.121937153224065*D10_B0(2,0)
+)
+: (
+   -(2.0/3.0)*D10_B0(-1,0) - (1.0/12.0)*D10_B0(2,0) +
+      ((1.0/12.0))*D10_B0(-2,0) + ((2.0/3.0))*D10_B0(1,0)
+)))))))));
+
+    d1_D11_dx = invDelta0block0*((idx[0] == 0) ? (
+   3.0*D11_B0(1,0) + 0.333333333333333*D11_B0(3,0) - 1.5*D11_B0(2,0)
+      - 1.83333333333333*D11_B0(0,0)
+)
+: ((idx[0] == 1) ? (
+   0.0394168524399447*D11_B0(2,0) +
+      0.00571369039775442*D11_B0(4,0) + 0.719443173328855*D11_B0(1,0) - 0.322484932882161*D11_B0(0,0) -
+      0.0658051057710389*D11_B0(3,0) - 0.376283677513354*D11_B0(-1,0)
+)
+: ((idx[0] == 2) ? (
+
+      0.197184333887745*D11_B0(0,0) + 0.521455851089587*D11_B0(1,0) + 0.113446470384241*D11_B0(-2,0) -
+      0.00412637789557492*D11_B0(3,0) - 0.0367146847001261*D11_B0(2,0) - 0.791245592765872*D11_B0(-1,0)
+)
+: ((idx[0] ==
+      3) ? (
+   0.0451033223343881*D11_B0(0,0) + 0.652141084861241*D11_B0(1,0) + 0.121937153224065*D11_B0(-2,0) -
+      0.00932597985049999*D11_B0(-3,0) - 0.727822147724592*D11_B0(-1,0) - 0.082033432844602*D11_B0(2,0)
+)
+: ((idx[0] ==
+      -1 + block0np0) ? (
+   1.5*D11_B0(-2,0) + 1.83333333333333*D11_B0(0,0) - 3.0*D11_B0(-1,0) -
+      0.333333333333333*D11_B0(-3,0)
+)
+: ((idx[0] == -2 + block0np0) ? (
+   0.322484932882161*D11_B0(0,0) +
+      0.0658051057710389*D11_B0(-3,0) + 0.376283677513354*D11_B0(1,0) - 0.0394168524399447*D11_B0(-2,0) -
+      0.00571369039775442*D11_B0(-4,0) - 0.719443173328855*D11_B0(-1,0)
+)
+: ((idx[0] == -3 + block0np0) ? (
+
+      0.00412637789557492*D11_B0(-3,0) + 0.0367146847001261*D11_B0(-2,0) + 0.791245592765872*D11_B0(1,0) -
+      0.197184333887745*D11_B0(0,0) - 0.521455851089587*D11_B0(-1,0) - 0.113446470384241*D11_B0(2,0)
+)
+: ((idx[0] == -4
+      + block0np0) ? (
+   0.00932597985049999*D11_B0(3,0) + 0.727822147724592*D11_B0(1,0) +
+      0.082033432844602*D11_B0(-2,0) - 0.0451033223343881*D11_B0(0,0) - 0.652141084861241*D11_B0(-1,0) -
+      0.121937153224065*D11_B0(2,0)
+)
+: (
+   -(2.0/3.0)*D11_B0(-1,0) - (1.0/12.0)*D11_B0(2,0) +
+      ((1.0/12.0))*D11_B0(-2,0) + ((2.0/3.0))*D11_B0(1,0)
+)))))))));
+
+    d1_D00_dx = invDelta0block0*((idx[0] == 0) ? (
+   3.0*D00_B0(1,0) + 0.333333333333333*D00_B0(3,0) - 1.5*D00_B0(2,0)
+      - 1.83333333333333*D00_B0(0,0)
+)
+: ((idx[0] == 1) ? (
+   0.0394168524399447*D00_B0(2,0) +
+      0.00571369039775442*D00_B0(4,0) + 0.719443173328855*D00_B0(1,0) - 0.322484932882161*D00_B0(0,0) -
+      0.0658051057710389*D00_B0(3,0) - 0.376283677513354*D00_B0(-1,0)
+)
+: ((idx[0] == 2) ? (
+
+      0.197184333887745*D00_B0(0,0) + 0.521455851089587*D00_B0(1,0) + 0.113446470384241*D00_B0(-2,0) -
+      0.00412637789557492*D00_B0(3,0) - 0.0367146847001261*D00_B0(2,0) - 0.791245592765872*D00_B0(-1,0)
+)
+: ((idx[0] ==
+      3) ? (
+   0.0451033223343881*D00_B0(0,0) + 0.652141084861241*D00_B0(1,0) + 0.121937153224065*D00_B0(-2,0) -
+      0.00932597985049999*D00_B0(-3,0) - 0.727822147724592*D00_B0(-1,0) - 0.082033432844602*D00_B0(2,0)
+)
+: ((idx[0] ==
+      -1 + block0np0) ? (
+   1.5*D00_B0(-2,0) + 1.83333333333333*D00_B0(0,0) - 3.0*D00_B0(-1,0) -
+      0.333333333333333*D00_B0(-3,0)
+)
+: ((idx[0] == -2 + block0np0) ? (
+   0.322484932882161*D00_B0(0,0) +
+      0.0658051057710389*D00_B0(-3,0) + 0.376283677513354*D00_B0(1,0) - 0.0394168524399447*D00_B0(-2,0) -
+      0.00571369039775442*D00_B0(-4,0) - 0.719443173328855*D00_B0(-1,0)
+)
+: ((idx[0] == -3 + block0np0) ? (
+
+      0.00412637789557492*D00_B0(-3,0) + 0.0367146847001261*D00_B0(-2,0) + 0.791245592765872*D00_B0(1,0) -
+      0.197184333887745*D00_B0(0,0) - 0.521455851089587*D00_B0(-1,0) - 0.113446470384241*D00_B0(2,0)
+)
+: ((idx[0] == -4
+      + block0np0) ? (
+   0.00932597985049999*D00_B0(3,0) + 0.727822147724592*D00_B0(1,0) +
+      0.082033432844602*D00_B0(-2,0) - 0.0451033223343881*D00_B0(0,0) - 0.652141084861241*D00_B0(-1,0) -
+      0.121937153224065*D00_B0(2,0)
+)
+: (
+   -(2.0/3.0)*D00_B0(-1,0) - (1.0/12.0)*D00_B0(2,0) +
+      ((1.0/12.0))*D00_B0(-2,0) + ((2.0/3.0))*D00_B0(1,0)
+)))))))));
+
+    d1_D10_dy = invDelta1block0*((idx[1] == 0) ? (
+   3.0*D10_B0(0,1) + 0.333333333333333*D10_B0(0,3) - 1.5*D10_B0(0,2)
+      - 1.83333333333333*D10_B0(0,0)
+)
+: ((idx[1] == 1) ? (
+   0.0394168524399447*D10_B0(0,2) +
+      0.00571369039775442*D10_B0(0,4) + 0.719443173328855*D10_B0(0,1) - 0.322484932882161*D10_B0(0,0) -
+      0.0658051057710389*D10_B0(0,3) - 0.376283677513354*D10_B0(0,-1)
+)
+: ((idx[1] == 2) ? (
+
+      0.197184333887745*D10_B0(0,0) + 0.521455851089587*D10_B0(0,1) + 0.113446470384241*D10_B0(0,-2) -
+      0.00412637789557492*D10_B0(0,3) - 0.0367146847001261*D10_B0(0,2) - 0.791245592765872*D10_B0(0,-1)
+)
+: ((idx[1] ==
+      3) ? (
+   0.0451033223343881*D10_B0(0,0) + 0.652141084861241*D10_B0(0,1) + 0.121937153224065*D10_B0(0,-2) -
+      0.00932597985049999*D10_B0(0,-3) - 0.727822147724592*D10_B0(0,-1) - 0.082033432844602*D10_B0(0,2)
+)
+: (
+
+      -(2.0/3.0)*D10_B0(0,-1) - (1.0/12.0)*D10_B0(0,2) + ((1.0/12.0))*D10_B0(0,-2) + ((2.0/3.0))*D10_B0(0,1)
+)))));
+
+    d1_D11_dy = invDelta1block0*((idx[1] == 0) ? (
+   3.0*D11_B0(0,1) + 0.333333333333333*D11_B0(0,3) - 1.5*D11_B0(0,2)
+      - 1.83333333333333*D11_B0(0,0)
+)
+: ((idx[1] == 1) ? (
+   0.0394168524399447*D11_B0(0,2) +
+      0.00571369039775442*D11_B0(0,4) + 0.719443173328855*D11_B0(0,1) - 0.322484932882161*D11_B0(0,0) -
+      0.0658051057710389*D11_B0(0,3) - 0.376283677513354*D11_B0(0,-1)
+)
+: ((idx[1] == 2) ? (
+
+      0.197184333887745*D11_B0(0,0) + 0.521455851089587*D11_B0(0,1) + 0.113446470384241*D11_B0(0,-2) -
+      0.00412637789557492*D11_B0(0,3) - 0.0367146847001261*D11_B0(0,2) - 0.791245592765872*D11_B0(0,-1)
+)
+: ((idx[1] ==
+      3) ? (
+   0.0451033223343881*D11_B0(0,0) + 0.652141084861241*D11_B0(0,1) + 0.121937153224065*D11_B0(0,-2) -
+      0.00932597985049999*D11_B0(0,-3) - 0.727822147724592*D11_B0(0,-1) - 0.082033432844602*D11_B0(0,2)
+)
+: (
+
+      -(2.0/3.0)*D11_B0(0,-1) - (1.0/12.0)*D11_B0(0,2) + ((1.0/12.0))*D11_B0(0,-2) + ((2.0/3.0))*D11_B0(0,1)
+)))));
+
+    d1_D01_dx = invDelta0block0*((idx[0] == 0) ? (
+   3.0*D01_B0(1,0) + 0.333333333333333*D01_B0(3,0) - 1.5*D01_B0(2,0)
+      - 1.83333333333333*D01_B0(0,0)
+)
+: ((idx[0] == 1) ? (
+   0.0394168524399447*D01_B0(2,0) +
+      0.00571369039775442*D01_B0(4,0) + 0.719443173328855*D01_B0(1,0) - 0.322484932882161*D01_B0(0,0) -
+      0.0658051057710389*D01_B0(3,0) - 0.376283677513354*D01_B0(-1,0)
+)
+: ((idx[0] == 2) ? (
+
+      0.197184333887745*D01_B0(0,0) + 0.521455851089587*D01_B0(1,0) + 0.113446470384241*D01_B0(-2,0) -
+      0.00412637789557492*D01_B0(3,0) - 0.0367146847001261*D01_B0(2,0) - 0.791245592765872*D01_B0(-1,0)
+)
+: ((idx[0] ==
+      3) ? (
+   0.0451033223343881*D01_B0(0,0) + 0.652141084861241*D01_B0(1,0) + 0.121937153224065*D01_B0(-2,0) -
+      0.00932597985049999*D01_B0(-3,0) - 0.727822147724592*D01_B0(-1,0) - 0.082033432844602*D01_B0(2,0)
+)
+: ((idx[0] ==
+      -1 + block0np0) ? (
+   1.5*D01_B0(-2,0) + 1.83333333333333*D01_B0(0,0) - 3.0*D01_B0(-1,0) -
+      0.333333333333333*D01_B0(-3,0)
+)
+: ((idx[0] == -2 + block0np0) ? (
+   0.322484932882161*D01_B0(0,0) +
+      0.0658051057710389*D01_B0(-3,0) + 0.376283677513354*D01_B0(1,0) - 0.0394168524399447*D01_B0(-2,0) -
+      0.00571369039775442*D01_B0(-4,0) - 0.719443173328855*D01_B0(-1,0)
+)
+: ((idx[0] == -3 + block0np0) ? (
+
+      0.00412637789557492*D01_B0(-3,0) + 0.0367146847001261*D01_B0(-2,0) + 0.791245592765872*D01_B0(1,0) -
+      0.197184333887745*D01_B0(0,0) - 0.521455851089587*D01_B0(-1,0) - 0.113446470384241*D01_B0(2,0)
+)
+: ((idx[0] == -4
+      + block0np0) ? (
+   0.00932597985049999*D01_B0(3,0) + 0.727822147724592*D01_B0(1,0) +
+      0.082033432844602*D01_B0(-2,0) - 0.0451033223343881*D01_B0(0,0) - 0.652141084861241*D01_B0(-1,0) -
+      0.121937153224065*D01_B0(2,0)
+)
+: (
+   -(2.0/3.0)*D01_B0(-1,0) - (1.0/12.0)*D01_B0(2,0) +
+      ((1.0/12.0))*D01_B0(-2,0) + ((2.0/3.0))*D01_B0(1,0)
+)))))))));
+
+    d1_D01_dy = invDelta1block0*((idx[1] == 0) ? (
+   3.0*D01_B0(0,1) + 0.333333333333333*D01_B0(0,3) - 1.5*D01_B0(0,2)
+      - 1.83333333333333*D01_B0(0,0)
+)
+: ((idx[1] == 1) ? (
+   0.0394168524399447*D01_B0(0,2) +
+      0.00571369039775442*D01_B0(0,4) + 0.719443173328855*D01_B0(0,1) - 0.322484932882161*D01_B0(0,0) -
+      0.0658051057710389*D01_B0(0,3) - 0.376283677513354*D01_B0(0,-1)
+)
+: ((idx[1] == 2) ? (
+
+      0.197184333887745*D01_B0(0,0) + 0.521455851089587*D01_B0(0,1) + 0.113446470384241*D01_B0(0,-2) -
+      0.00412637789557492*D01_B0(0,3) - 0.0367146847001261*D01_B0(0,2) - 0.791245592765872*D01_B0(0,-1)
+)
+: ((idx[1] ==
+      3) ? (
+   0.0451033223343881*D01_B0(0,0) + 0.652141084861241*D01_B0(0,1) + 0.121937153224065*D01_B0(0,-2) -
+      0.00932597985049999*D01_B0(0,-3) - 0.727822147724592*D01_B0(0,-1) - 0.082033432844602*D01_B0(0,2)
+)
+: (
+
+      -(2.0/3.0)*D01_B0(0,-1) - (1.0/12.0)*D01_B0(0,2) + ((1.0/12.0))*D01_B0(0,-2) + ((2.0/3.0))*D01_B0(0,1)
+)))));
+
+   SD000_B0(0,0) = d1_D00_dx;
+
+   SD001_B0(0,0) = d1_D00_dy;
+
+   SD010_B0(0,0) = d1_D01_dx;
+
+   SD011_B0(0,0) = d1_D01_dy;
+
+   SD100_B0(0,0) = d1_D10_dx;
+
+   SD101_B0(0,0) = d1_D10_dy;
+
+   SD110_B0(0,0) = d1_D11_dx;
+
+   SD111_B0(0,0) = d1_D11_dy;
 
 
     }
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[51].time += __t2-__t1;
+    block->instance->OPS_kernels[6].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
-  ops_set_dirtybit_device(args, 35);
-  ops_set_halo_dirtybit3(&args[32],range);
-  ops_set_halo_dirtybit3(&args[33],range);
-  ops_set_halo_dirtybit3(&args[34],range);
+  ops_set_dirtybit_device(args, 13);
+  ops_set_halo_dirtybit3(&args[4],range);
+  ops_set_halo_dirtybit3(&args[5],range);
+  ops_set_halo_dirtybit3(&args[6],range);
+  ops_set_halo_dirtybit3(&args[7],range);
+  ops_set_halo_dirtybit3(&args[8],range);
+  ops_set_halo_dirtybit3(&args[9],range);
+  ops_set_halo_dirtybit3(&args[10],range);
+  ops_set_halo_dirtybit3(&args[11],range);
   #endif
 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[51].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg2);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg3);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg4);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg5);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg6);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg7);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg8);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg9);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg10);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg11);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg12);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg13);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg14);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg15);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg16);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg17);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg18);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg19);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg20);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg21);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg22);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg23);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg24);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg25);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg26);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg27);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg28);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg29);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg30);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg31);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg32);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg33);
-    block->instance->OPS_kernels[51].transfer += ops_compute_transfer(dim, start, end, &arg34);
+    block->instance->OPS_kernels[6].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg5);
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg6);
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg7);
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg8);
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg9);
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg10);
+    block->instance->OPS_kernels[6].transfer += ops_compute_transfer(dim, start, end, &arg11);
   }
 }
 
@@ -451,15 +511,10 @@ void ops_par_loop_opensbliblock00Kernel061(char const *name, ops_block block, in
  ops_arg arg0, ops_arg arg1, ops_arg arg2, ops_arg arg3,
  ops_arg arg4, ops_arg arg5, ops_arg arg6, ops_arg arg7,
  ops_arg arg8, ops_arg arg9, ops_arg arg10, ops_arg arg11,
- ops_arg arg12, ops_arg arg13, ops_arg arg14, ops_arg arg15,
- ops_arg arg16, ops_arg arg17, ops_arg arg18, ops_arg arg19,
- ops_arg arg20, ops_arg arg21, ops_arg arg22, ops_arg arg23,
- ops_arg arg24, ops_arg arg25, ops_arg arg26, ops_arg arg27,
- ops_arg arg28, ops_arg arg29, ops_arg arg30, ops_arg arg31,
- ops_arg arg32, ops_arg arg33, ops_arg arg34) {
-  ops_arg args[35] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17, arg18, arg19, arg20, arg21, arg22, arg23, arg24, arg25, arg26, arg27, arg28, arg29, arg30, arg31, arg32, arg33, arg34 };
+ ops_arg arg12) {
+  ops_arg args[13] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 35, 51, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel061_execute);
+  create_kerneldesc_and_enque(name, args, 13, 6, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel061_execute);
 }
 #endif

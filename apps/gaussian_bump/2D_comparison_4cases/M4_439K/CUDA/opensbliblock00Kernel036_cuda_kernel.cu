@@ -7,33 +7,46 @@ static int dims_opensbliblock00Kernel036_h [3][1] = {{0}};
 //user function
 __device__
 
-void opensbliblock00Kernel036_gpu(const ACC<double> &wk4_B0,
-  ACC<double> &wk8_B0,
+void opensbliblock00Kernel036_gpu(const ACC<double> &T_B0,
+  ACC<double> &wk5_B0,
   const int *idx)
 {
-    wk8_B0(0,0) = invDelta1block0*((idx[1] == 0) ? (
-   3.0*wk4_B0(0,1) + 0.333333333333333*wk4_B0(0,3) -
-      1.5*wk4_B0(0,2) - 1.83333333333333*wk4_B0(0,0)
-)
-: ((idx[1] == 1) ? (
-   0.0394168524399447*wk4_B0(0,2) +
-      0.00571369039775442*wk4_B0(0,4) + 0.719443173328855*wk4_B0(0,1) - 0.322484932882161*wk4_B0(0,0) -
-      0.0658051057710389*wk4_B0(0,3) - 0.376283677513354*wk4_B0(0,-1)
-)
-: ((idx[1] == 2) ? (
+   if (idx[1] == 0){
 
-      0.197184333887745*wk4_B0(0,0) + 0.521455851089587*wk4_B0(0,1) + 0.113446470384241*wk4_B0(0,-2) -
-      0.00412637789557492*wk4_B0(0,3) - 0.0367146847001261*wk4_B0(0,2) - 0.791245592765872*wk4_B0(0,-1)
-)
-: ((idx[1] ==
-      3) ? (
-   0.0451033223343881*wk4_B0(0,0) + 0.652141084861241*wk4_B0(0,1) + 0.121937153224065*wk4_B0(0,-2) -
-      0.00932597985049999*wk4_B0(0,-3) - 0.727822147724592*wk4_B0(0,-1) - 0.082033432844602*wk4_B0(0,2)
-)
-: (
+       wk5_B0(0,0) = (3.0*T_B0(0,1) + 0.333333333333333*T_B0(0,3) - 1.5*T_B0(0,2) -
+            1.83333333333333*T_B0(0,0))*invDelta1block0;
 
-      -(2.0/3.0)*wk4_B0(0,-1) - (1.0/12.0)*wk4_B0(0,2) + ((1.0/12.0))*wk4_B0(0,-2) + ((2.0/3.0))*wk4_B0(0,1)
-)))));
+   }
+
+   else if (idx[1] == 1){
+
+       wk5_B0(0,0) = (0.0394168524399447*T_B0(0,2) + 0.00571369039775442*T_B0(0,4) + 0.719443173328855*T_B0(0,1) -
+            0.322484932882161*T_B0(0,0) - 0.0658051057710389*T_B0(0,3) - 0.376283677513354*T_B0(0,-1))*invDelta1block0;
+
+   }
+
+   else if (idx[1] == 2){
+
+       wk5_B0(0,0) = (0.197184333887745*T_B0(0,0) + 0.521455851089587*T_B0(0,1) + 0.113446470384241*T_B0(0,-2) -
+            0.00412637789557492*T_B0(0,3) - 0.0367146847001261*T_B0(0,2) -
+            0.791245592765872*T_B0(0,-1))*invDelta1block0;
+
+   }
+
+   else if (idx[1] == 3){
+
+       wk5_B0(0,0) = (0.0451033223343881*T_B0(0,0) + 0.652141084861241*T_B0(0,1) + 0.121937153224065*T_B0(0,-2) -
+            0.00932597985049999*T_B0(0,-3) - 0.727822147724592*T_B0(0,-1) -
+            0.082033432844602*T_B0(0,2))*invDelta1block0;
+
+   }
+
+   else{
+
+       wk5_B0(0,0) = (-(2.0/3.0)*T_B0(0,-1) - (1.0/12.0)*T_B0(0,2) + ((1.0/12.0))*T_B0(0,-2) +
+            ((2.0/3.0))*T_B0(0,1))*invDelta1block0;
+
+   }
 
 }
 
@@ -88,12 +101,12 @@ void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) 
 
 
   #if CHECKPOINTING && !OPS_LAZY
-  if (!ops_checkpointing_before(args,3,range,50)) return;
+  if (!ops_checkpointing_before(args,3,range,27)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,50,"opensbliblock00Kernel036");
-    block->instance->OPS_kernels[50].count++;
+    ops_timing_realloc(block->instance,27,"opensbliblock00Kernel036");
+    block->instance->OPS_kernels[27].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -167,7 +180,7 @@ void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[50].mpi_time += t2-t1;
+    block->instance->OPS_kernels[27].mpi_time += t2-t1;
   }
 
 
@@ -183,7 +196,7 @@ void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags>1) {
     cutilSafeCall(block->instance->ostream(), cudaDeviceSynchronize());
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[50].time += t1-t2;
+    block->instance->OPS_kernels[27].time += t1-t2;
   }
 
   #ifndef OPS_LAZY
@@ -194,9 +207,9 @@ void ops_par_loop_opensbliblock00Kernel036_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[50].mpi_time += t2-t1;
-    block->instance->OPS_kernels[50].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[50].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[27].mpi_time += t2-t1;
+    block->instance->OPS_kernels[27].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[27].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
@@ -206,6 +219,6 @@ void ops_par_loop_opensbliblock00Kernel036(char const *name, ops_block block, in
   ops_arg args[3] = { arg0, arg1, arg2 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 3, 50, dim, 1, range, block, ops_par_loop_opensbliblock00Kernel036_execute);
+  create_kerneldesc_and_enque(name, args, 3, 27, dim, 1, range, block, ops_par_loop_opensbliblock00Kernel036_execute);
 }
 #endif

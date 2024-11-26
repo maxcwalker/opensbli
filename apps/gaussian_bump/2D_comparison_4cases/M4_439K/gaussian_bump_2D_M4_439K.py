@@ -8,7 +8,7 @@
 
 from opensbli import *
 import copy
-# from opensbli.utilities.katzer_init import Initialise_Katzer
+from opensbli.utilities.katzer_init import Initialise_Katzer
 from opensbli.utilities.flat_init import Initialise_Flatplate
 from opensbli.utilities.helperfunctions import substitute_simulation_parameters
 from sympy import sin, cos, sinh, tanh, exp, pi, log
@@ -25,7 +25,7 @@ input_dict = {
     "Pr"                   : "0.72",
     "Re"                   : "4000.0",
     "Twall"                : "1.37",
-    "dt"                   : "0.01", 
+    "dt"                   : "0.001",
     "niter"                : "250000", 
     "block0np0"            : "1000", 
     "block0np1"            : "400",
@@ -238,7 +238,7 @@ gridx0 = parse_expr("Eq(DataObject(x0), block.deltas[0]*block.grid_indexes[0])",
 gridx1 = parse_expr("Eq(DataObject(x1), H/20*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2) + (H - H/20*exp(-((block.deltas[0]*block.grid_indexes[0]-L/2)/a)**2))*sinh(b*block.deltas[1]*block.grid_indexes[1]/H)/sinh(b))", local_dict=local_dict)
 coordinate_evaluation = [gridx0, gridx1]
 initial = Initialise_Flatplate(polynomial_directions, n_poly_coefficients, Re, xMach, Tinf, Twall, coordinate_evaluations=coordinate_evaluation)
-
+# initial = Initialise_Katzer(polynomial_directions, n_poly_coefficients,  Re, xMach, Tinf, coordinate_evaluation)
 #############################################################################################################################################
 #																																			#
 # Data i/o 																																	#

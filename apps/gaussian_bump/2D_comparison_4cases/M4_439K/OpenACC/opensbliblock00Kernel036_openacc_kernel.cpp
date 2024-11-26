@@ -33,12 +33,12 @@ void ops_par_loop_opensbliblock00Kernel036(char const *name, ops_block block, in
 
 
   #ifdef CHECKPOINTING
-  if (!ops_checkpointing_before(args,3,range,50)) return;
+  if (!ops_checkpointing_before(args,3,range,27)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,50,"opensbliblock00Kernel036");
-    block->instance->OPS_kernels[50].count++;
+    ops_timing_realloc(block->instance,27,"opensbliblock00Kernel036");
+    block->instance->OPS_kernels[27].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -118,7 +118,7 @@ void ops_par_loop_opensbliblock00Kernel036(char const *name, ops_block block, in
   #endif
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[50].mpi_time += t2-t1;
+    block->instance->OPS_kernels[27].mpi_time += t2-t1;
   }
 
   opensbliblock00Kernel036_c_wrapper(
@@ -130,7 +130,7 @@ void ops_par_loop_opensbliblock00Kernel036(char const *name, ops_block block, in
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[50].time += t1-t2;
+    block->instance->OPS_kernels[27].time += t1-t2;
   }
   #ifdef OPS_GPU
   ops_set_dirtybit_device(args, 3);
@@ -142,8 +142,8 @@ void ops_par_loop_opensbliblock00Kernel036(char const *name, ops_block block, in
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[50].mpi_time += t2-t1;
-    block->instance->OPS_kernels[50].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[50].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[27].mpi_time += t2-t1;
+    block->instance->OPS_kernels[27].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[27].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }

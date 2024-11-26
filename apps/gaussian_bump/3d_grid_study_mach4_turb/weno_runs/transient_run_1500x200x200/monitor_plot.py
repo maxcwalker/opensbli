@@ -23,8 +23,14 @@ df.columns = new_columns
 fig1, ax1 = plt.subplots(7, 1, figsize=(6,5.5))
 # Plot
 
+import matplotlib
 
-
+matplotlib.rcParams["text.usetex"] = True
+plt.rcParams.update({
+    "text.usetex": True,
+    "font.family": "serif",
+    "font.serif": ["Computer Modern Roman"]
+})
 
 from matplotlib.ticker import ScalarFormatter
 from matplotlib.ticker import FormatStrFormatter
@@ -73,8 +79,21 @@ for i in range(2):
 plt.subplots_adjust(hspace=0.5, wspace=0.2)
 fig.savefig(directory_monitor + "monitoring_pressure.pdf", bbox_inches='tight')
 
-exit()
+fig1, ax1 = plt.subplots(10, 1, figsize=(10,8.6))
+for i, val in enumerate(new_columns[9:19]):
 
+    ax1[i].plot(df['Time'], df[val],color='k',linewidth=0.7)  # Adjust column name as needed
+    ax1[i].set_ylabel(r'%s'%val[2:],fontsize=12)
+    ax1[i].set
+    ax1[i].yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+    ax1[i].grid(True)
+    ax1[i].set_xlabel('Time',fontsize=12)
+    ax1[i].set_xlim([0,df['Time'].iloc[-1]])
+    ax1[i].tick_params(labelbottom=False)
+ax1[-1].tick_params(labelbottom=True)
+    
+# ax1[0].set_ylim([0.0001,0.1])
+fig1.savefig(directory_monitor+"monitoring_pressure_downstream.pdf",bbox_inches='tight')
 
 
 

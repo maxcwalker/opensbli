@@ -29,12 +29,12 @@ void ops_par_loop_monitor_12_p_B0(char const *name, ops_block block, int dim, in
 
 
   #ifdef CHECKPOINTING
-  if (!ops_checkpointing_before(args,2,range,65)) return;
+  if (!ops_checkpointing_before(args,2,range,42)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,65,"monitor_12_p_B0");
-    block->instance->OPS_kernels[65].count++;
+    ops_timing_realloc(block->instance,42,"monitor_12_p_B0");
+    block->instance->OPS_kernels[42].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -104,7 +104,7 @@ void ops_par_loop_monitor_12_p_B0(char const *name, ops_block block, int dim, in
   #endif
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[65].mpi_time += t2-t1;
+    block->instance->OPS_kernels[42].mpi_time += t2-t1;
   }
 
   monitor_12_p_B0_c_wrapper(
@@ -114,7 +114,7 @@ void ops_par_loop_monitor_12_p_B0(char const *name, ops_block block, int dim, in
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[65].time += t1-t2;
+    block->instance->OPS_kernels[42].time += t1-t2;
   }
   #ifdef OPS_GPU
   ops_set_dirtybit_device(args, 2);
@@ -125,7 +125,7 @@ void ops_par_loop_monitor_12_p_B0(char const *name, ops_block block, int dim, in
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[65].mpi_time += t2-t1;
-    block->instance->OPS_kernels[65].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[42].mpi_time += t2-t1;
+    block->instance->OPS_kernels[42].transfer += ops_compute_transfer(dim, start, end, &arg0);
   }
 }

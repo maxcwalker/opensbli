@@ -132,12 +132,12 @@ void ops_par_loop_opensbliblock00Kernel017_execute(ops_kernel_descriptor *desc) 
 
 
   #if CHECKPOINTING && !OPS_LAZY
-  if (!ops_checkpointing_before(args,13,range,33)) return;
+  if (!ops_checkpointing_before(args,13,range,21)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,33,"opensbliblock00Kernel017");
-    block->instance->OPS_kernels[33].count++;
+    ops_timing_realloc(block->instance,21,"opensbliblock00Kernel017");
+    block->instance->OPS_kernels[21].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -313,7 +313,7 @@ void ops_par_loop_opensbliblock00Kernel017_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[33].mpi_time += t2-t1;
+    block->instance->OPS_kernels[21].mpi_time += t2-t1;
   }
 
 
@@ -334,7 +334,7 @@ void ops_par_loop_opensbliblock00Kernel017_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags>1) {
     hipSafeCall(block->instance->ostream(), hipDeviceSynchronize());
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[33].time += t1-t2;
+    block->instance->OPS_kernels[21].time += t1-t2;
   }
 
   #ifndef OPS_LAZY
@@ -348,20 +348,20 @@ void ops_par_loop_opensbliblock00Kernel017_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[33].mpi_time += t2-t1;
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg1);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg2);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg3);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg4);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg5);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg6);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg7);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg8);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg9);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg10);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg11);
-    block->instance->OPS_kernels[33].transfer += ops_compute_transfer(dim, start, end, &arg12);
+    block->instance->OPS_kernels[21].mpi_time += t2-t1;
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg2);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg3);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg4);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg5);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg6);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg7);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg8);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg9);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg10);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg11);
+    block->instance->OPS_kernels[21].transfer += ops_compute_transfer(dim, start, end, &arg12);
   }
 }
 
@@ -374,6 +374,6 @@ void ops_par_loop_opensbliblock00Kernel017(char const *name, ops_block block, in
   ops_arg args[13] = { arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 13, 33, dim, 1, range, block, ops_par_loop_opensbliblock00Kernel017_execute);
+  create_kerneldesc_and_enque(name, args, 13, 21, dim, 1, range, block, ops_par_loop_opensbliblock00Kernel017_execute);
 }
 #endif

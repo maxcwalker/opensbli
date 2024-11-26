@@ -25,12 +25,12 @@ void ops_par_loop_opensbliblock00Kernel026_execute(ops_kernel_descriptor *desc) 
 
 
   #if defined(CHECKPOINTING) && !defined(OPS_LAZY)
-  if (!ops_checkpointing_before(args,2,range,30)) return;
+  if (!ops_checkpointing_before(args,2,range,18)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,30,"opensbliblock00Kernel026");
-    block->instance->OPS_kernels[30].count++;
+    ops_timing_realloc(block->instance,18,"opensbliblock00Kernel026");
+    block->instance->OPS_kernels[18].count++;
     ops_timers_core(&__c2,&__t2);
   }
 
@@ -81,7 +81,7 @@ void ops_par_loop_opensbliblock00Kernel026_execute(ops_kernel_descriptor *desc) 
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[30].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[18].mpi_time += __t1-__t2;
   }
 
   #pragma omp target teams distribute parallel for collapse(2)
@@ -97,7 +97,7 @@ void ops_par_loop_opensbliblock00Kernel026_execute(ops_kernel_descriptor *desc) 
   }
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&__c2,&__t2);
-    block->instance->OPS_kernels[30].time += __t2-__t1;
+    block->instance->OPS_kernels[18].time += __t2-__t1;
   }
   #ifndef OPS_LAZY
   ops_set_dirtybit_device(args, 2);
@@ -107,9 +107,9 @@ void ops_par_loop_opensbliblock00Kernel026_execute(ops_kernel_descriptor *desc) 
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&__c1,&__t1);
-    block->instance->OPS_kernels[30].mpi_time += __t1-__t2;
-    block->instance->OPS_kernels[30].transfer += ops_compute_transfer(dim, start, end, &arg0);
-    block->instance->OPS_kernels[30].transfer += ops_compute_transfer(dim, start, end, &arg1);
+    block->instance->OPS_kernels[18].mpi_time += __t1-__t2;
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[18].transfer += ops_compute_transfer(dim, start, end, &arg1);
   }
 }
 
@@ -120,6 +120,6 @@ void ops_par_loop_opensbliblock00Kernel026(char const *name, ops_block block, in
   ops_arg args[2] = { arg0, arg1 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 2, 30, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel026_execute);
+  create_kerneldesc_and_enque(name, args, 2, 18, dim, 0, range, block, ops_par_loop_opensbliblock00Kernel026_execute);
 }
 #endif

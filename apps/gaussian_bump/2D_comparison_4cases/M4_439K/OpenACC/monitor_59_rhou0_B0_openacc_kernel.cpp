@@ -29,12 +29,12 @@ void ops_par_loop_monitor_59_rhou0_B0(char const *name, ops_block block, int dim
 
 
   #ifdef CHECKPOINTING
-  if (!ops_checkpointing_before(args,2,range,112)) return;
+  if (!ops_checkpointing_before(args,2,range,89)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,112,"monitor_59_rhou0_B0");
-    block->instance->OPS_kernels[112].count++;
+    ops_timing_realloc(block->instance,89,"monitor_59_rhou0_B0");
+    block->instance->OPS_kernels[89].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -104,7 +104,7 @@ void ops_par_loop_monitor_59_rhou0_B0(char const *name, ops_block block, int dim
   #endif
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[112].mpi_time += t2-t1;
+    block->instance->OPS_kernels[89].mpi_time += t2-t1;
   }
 
   monitor_59_rhou0_B0_c_wrapper(
@@ -114,7 +114,7 @@ void ops_par_loop_monitor_59_rhou0_B0(char const *name, ops_block block, int dim
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[112].time += t1-t2;
+    block->instance->OPS_kernels[89].time += t1-t2;
   }
   #ifdef OPS_GPU
   ops_set_dirtybit_device(args, 2);
@@ -125,7 +125,7 @@ void ops_par_loop_monitor_59_rhou0_B0(char const *name, ops_block block, int dim
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[112].mpi_time += t2-t1;
-    block->instance->OPS_kernels[112].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[89].mpi_time += t2-t1;
+    block->instance->OPS_kernels[89].transfer += ops_compute_transfer(dim, start, end, &arg0);
   }
 }

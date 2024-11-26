@@ -60,12 +60,12 @@ void ops_par_loop_monitor_54_rhou0_B0_execute(ops_kernel_descriptor *desc) {
 
 
   #if CHECKPOINTING && !OPS_LAZY
-  if (!ops_checkpointing_before(args,2,range,107)) return;
+  if (!ops_checkpointing_before(args,2,range,84)) return;
   #endif
 
   if (block->instance->OPS_diags > 1) {
-    ops_timing_realloc(block->instance,107,"monitor_54_rhou0_B0");
-    block->instance->OPS_kernels[107].count++;
+    ops_timing_realloc(block->instance,84,"monitor_54_rhou0_B0");
+    block->instance->OPS_kernels[84].count++;
     ops_timers_core(&c1,&t1);
   }
 
@@ -146,7 +146,7 @@ void ops_par_loop_monitor_54_rhou0_B0_execute(ops_kernel_descriptor *desc) {
 
   if (block->instance->OPS_diags > 1) {
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[107].mpi_time += t2-t1;
+    block->instance->OPS_kernels[84].mpi_time += t2-t1;
   }
 
   size_t nshared = 0;
@@ -175,7 +175,7 @@ void ops_par_loop_monitor_54_rhou0_B0_execute(ops_kernel_descriptor *desc) {
   if (block->instance->OPS_diags>1) {
     hipSafeCall(block->instance->ostream(), hipDeviceSynchronize());
     ops_timers_core(&c1,&t1);
-    block->instance->OPS_kernels[107].time += t1-t2;
+    block->instance->OPS_kernels[84].time += t1-t2;
   }
 
   #ifndef OPS_LAZY
@@ -185,8 +185,8 @@ void ops_par_loop_monitor_54_rhou0_B0_execute(ops_kernel_descriptor *desc) {
   if (block->instance->OPS_diags > 1) {
     //Update kernel record
     ops_timers_core(&c2,&t2);
-    block->instance->OPS_kernels[107].mpi_time += t2-t1;
-    block->instance->OPS_kernels[107].transfer += ops_compute_transfer(dim, start, end, &arg0);
+    block->instance->OPS_kernels[84].mpi_time += t2-t1;
+    block->instance->OPS_kernels[84].transfer += ops_compute_transfer(dim, start, end, &arg0);
   }
 }
 
@@ -196,6 +196,6 @@ void ops_par_loop_monitor_54_rhou0_B0(char const *name, ops_block block, int dim
   ops_arg args[2] = { arg0, arg1 };
 
   //create kernel descriptor and pass it to ops_enqueue_kernel
-  create_kerneldesc_and_enque(name, args, 2, 107, dim, 1, range, block, ops_par_loop_monitor_54_rhou0_B0_execute);
+  create_kerneldesc_and_enque(name, args, 2, 84, dim, 1, range, block, ops_par_loop_monitor_54_rhou0_B0_execute);
 }
 #endif

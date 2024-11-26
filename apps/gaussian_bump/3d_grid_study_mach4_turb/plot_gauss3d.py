@@ -11,6 +11,19 @@ from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 
 
+import matplotlib
+
+ 
+# change the axis to latex font (might have to install texlive and pip install latex)
+matplotlib.rcParams["text.usetex"] = True
+ 
+# pdf plot printing
+plt.rcParams.update({
+"text.usetex": True,
+"font.family": "serif",
+"font.serif": ["Computer Modern Roman"]})
+
+
 def read_dataset(file, dataset):
     group = file["opensbliblock00"]
     d_m = group["%s" % (dataset)].attrs['d_m']

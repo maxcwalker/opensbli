@@ -10,7 +10,6 @@ import copy
 from opensbli.utilities.katzer_init import Initialise_Katzer
 from opensbli.utilities.helperfunctions import substitute_simulation_parameters
 from sympy import sin, cos, sinh, tanh, exp, pi, log
-
 #############################################################################################################################################
 #																																			#
 # Inputs			 																														#
@@ -142,7 +141,7 @@ weno_order = 5
 # averaging procedure to be used for the eigen system evaluation
 Avg = SimpleAverage([0, 1])
 # LLF scheme
-LLF = LLFWeno(weno_order, formulation='Z', averaging=Avg)
+LLF = LFWeno(weno_order, formulation='Z', averaging=Avg)
 # add to schemes
 schemes[LLF.name] = LLF
 

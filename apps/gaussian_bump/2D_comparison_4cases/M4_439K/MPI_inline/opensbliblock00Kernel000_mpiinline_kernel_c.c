@@ -153,17 +153,17 @@ void opensbliblock00Kernel000_c_wrapper(
    double omega_0 = 0.0;
    double omega_1 = 0.0;
    double omega_2 = 0.0;
-   AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0,0) + OPS_ACC(u0_B0, 1,0));
-
    AVG_0_u1 = ((1.0/2.0))*(OPS_ACC(u1_B0, 0,0) + OPS_ACC(u1_B0, 1,0));
-
-   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0,0) + OPS_ACC(a_B0, 1,0));
 
    AVG_0_rho = ((1.0/2.0))*(OPS_ACC(rho_B0, 0,0) + OPS_ACC(rho_B0, 1,0));
 
-   AVG_0_detJ = ((1.0/2.0))*(OPS_ACC(detJ_B0, 0,0) + OPS_ACC(detJ_B0, 1,0));
+   AVG_0_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0,0) + OPS_ACC(a_B0, 1,0));
+
+   AVG_0_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0,0) + OPS_ACC(u0_B0, 1,0));
 
    AVG_0_D00 = ((1.0/2.0))*(OPS_ACC(D00_B0, 0,0) + OPS_ACC(D00_B0, 1,0));
+
+   AVG_0_detJ = ((1.0/2.0))*(OPS_ACC(detJ_B0, 0,0) + OPS_ACC(detJ_B0, 1,0));
 
    AVG_0_D01 = ((1.0/2.0))*(OPS_ACC(D01_B0, 0,0) + OPS_ACC(D01_B0, 1,0));
 
@@ -393,9 +393,9 @@ void opensbliblock00Kernel000_c_wrapper(
     CS_35 = OPS_ACC(rho_B0, 3,0)*AVG_0_0_LEV_30 + OPS_ACC(rhoE_B0, 3,0)*AVG_0_0_LEV_33 + OPS_ACC(rhou0_B0, 3,0)*AVG_0_0_LEV_31 +
       OPS_ACC(rhou1_B0, 3,0)*AVG_0_0_LEV_32;
 
-    max_lambda_00 = shock_filter_control*fmax(fabs(OPS_ACC(u0_B0, 1,0)*OPS_ACC(D00_B0, 1,0)*OPS_ACC(detJ_B0, 1,0) +
-      OPS_ACC(u1_B0, 1,0)*OPS_ACC(D01_B0, 1,0)*OPS_ACC(detJ_B0, 1,0)), fabs(OPS_ACC(u0_B0, 0,0)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(detJ_B0, 0,0) +
-      OPS_ACC(u1_B0, 0,0)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(detJ_B0, 0,0)));
+    max_lambda_00 = shock_filter_control*fmax(fabs(OPS_ACC(u0_B0, 0,0)*OPS_ACC(D00_B0, 0,0)*OPS_ACC(detJ_B0, 0,0) +
+      OPS_ACC(u1_B0, 0,0)*OPS_ACC(D01_B0, 0,0)*OPS_ACC(detJ_B0, 0,0)), fabs(OPS_ACC(u0_B0, 1,0)*OPS_ACC(D00_B0, 1,0)*OPS_ACC(detJ_B0, 1,0) +
+      OPS_ACC(u1_B0, 1,0)*OPS_ACC(D01_B0, 1,0)*OPS_ACC(detJ_B0, 1,0)));
 
    max_lambda_11 = max_lambda_00;
 

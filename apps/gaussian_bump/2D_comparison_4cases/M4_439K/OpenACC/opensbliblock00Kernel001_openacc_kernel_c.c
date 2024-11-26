@@ -132,17 +132,17 @@ ptr_double a_B0,
    double omega_0 = 0.0;
    double omega_1 = 0.0;
    double omega_2 = 0.0;
-   AVG_1_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0,0) + OPS_ACC(u0_B0, 0,1));
-
    AVG_1_u1 = ((1.0/2.0))*(OPS_ACC(u1_B0, 0,0) + OPS_ACC(u1_B0, 0,1));
-
-   AVG_1_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0,0) + OPS_ACC(a_B0, 0,1));
 
    AVG_1_rho = ((1.0/2.0))*(OPS_ACC(rho_B0, 0,0) + OPS_ACC(rho_B0, 0,1));
 
-   AVG_1_detJ = ((1.0/2.0))*(OPS_ACC(detJ_B0, 0,0) + OPS_ACC(detJ_B0, 0,1));
+   AVG_1_a = ((1.0/2.0))*(OPS_ACC(a_B0, 0,0) + OPS_ACC(a_B0, 0,1));
+
+   AVG_1_u0 = ((1.0/2.0))*(OPS_ACC(u0_B0, 0,0) + OPS_ACC(u0_B0, 0,1));
 
    AVG_1_D10 = ((1.0/2.0))*(OPS_ACC(D10_B0, 0,0) + OPS_ACC(D10_B0, 0,1));
+
+   AVG_1_detJ = ((1.0/2.0))*(OPS_ACC(detJ_B0, 0,0) + OPS_ACC(detJ_B0, 0,1));
 
    AVG_1_D11 = ((1.0/2.0))*(OPS_ACC(D11_B0, 0,0) + OPS_ACC(D11_B0, 0,1));
 
@@ -378,11 +378,11 @@ ptr_double a_B0,
 
    max_lambda_11 = max_lambda_00;
 
-    max_lambda_22 = shock_filter_control*fmax(fabs(sqrt((OPS_ACC(D10_B0, 0,1)*OPS_ACC(D10_B0, 0,1))*(OPS_ACC(detJ_B0, 0,1)*OPS_ACC(detJ_B0, 0,1)) +
-      (OPS_ACC(D11_B0, 0,1)*OPS_ACC(D11_B0, 0,1))*(OPS_ACC(detJ_B0, 0,1)*OPS_ACC(detJ_B0, 0,1)))*OPS_ACC(a_B0, 0,1) + OPS_ACC(u0_B0, 0,1)*OPS_ACC(D10_B0, 0,1)*OPS_ACC(detJ_B0, 0,1) +
-      OPS_ACC(u1_B0, 0,1)*OPS_ACC(D11_B0, 0,1)*OPS_ACC(detJ_B0, 0,1)), fabs(sqrt((OPS_ACC(D10_B0, 0,0)*OPS_ACC(D10_B0, 0,0))*(OPS_ACC(detJ_B0, 0,0)*OPS_ACC(detJ_B0, 0,0)) +
+    max_lambda_22 = shock_filter_control*fmax(fabs(sqrt((OPS_ACC(D10_B0, 0,0)*OPS_ACC(D10_B0, 0,0))*(OPS_ACC(detJ_B0, 0,0)*OPS_ACC(detJ_B0, 0,0)) +
       (OPS_ACC(D11_B0, 0,0)*OPS_ACC(D11_B0, 0,0))*(OPS_ACC(detJ_B0, 0,0)*OPS_ACC(detJ_B0, 0,0)))*OPS_ACC(a_B0, 0,0) + OPS_ACC(u0_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(detJ_B0, 0,0) +
-      OPS_ACC(u1_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(detJ_B0, 0,0)));
+      OPS_ACC(u1_B0, 0,0)*OPS_ACC(D11_B0, 0,0)*OPS_ACC(detJ_B0, 0,0)), fabs(sqrt((OPS_ACC(D10_B0, 0,1)*OPS_ACC(D10_B0, 0,1))*(OPS_ACC(detJ_B0, 0,1)*OPS_ACC(detJ_B0, 0,1)) +
+      (OPS_ACC(D11_B0, 0,1)*OPS_ACC(D11_B0, 0,1))*(OPS_ACC(detJ_B0, 0,1)*OPS_ACC(detJ_B0, 0,1)))*OPS_ACC(a_B0, 0,1) + OPS_ACC(u0_B0, 0,1)*OPS_ACC(D10_B0, 0,1)*OPS_ACC(detJ_B0, 0,1) +
+      OPS_ACC(u1_B0, 0,1)*OPS_ACC(D11_B0, 0,1)*OPS_ACC(detJ_B0, 0,1)));
 
     max_lambda_33 = shock_filter_control*fmax(fabs(-sqrt((OPS_ACC(D10_B0, 0,0)*OPS_ACC(D10_B0, 0,0))*(OPS_ACC(detJ_B0, 0,0)*OPS_ACC(detJ_B0, 0,0)) +
       (OPS_ACC(D11_B0, 0,0)*OPS_ACC(D11_B0, 0,0))*(OPS_ACC(detJ_B0, 0,0)*OPS_ACC(detJ_B0, 0,0)))*OPS_ACC(a_B0, 0,0) + OPS_ACC(u0_B0, 0,0)*OPS_ACC(D10_B0, 0,0)*OPS_ACC(detJ_B0, 0,0) +

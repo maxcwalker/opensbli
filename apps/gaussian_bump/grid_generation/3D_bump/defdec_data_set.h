@@ -52,6 +52,10 @@ int base[] = {0, 0, 0};
 double* value = NULL;
 detJ_B0 = ops_decl_dat(opensbliblock00, 1, size, base, halo_m, halo_p, value, "double", "detJ_B0");
 }
+ops_dat h0_B0;
+{
+h0_B0 = ops_decl_dat_hdf5(opensbliblock00, 1, "double", "h0_B0", "data.h5");
+}
 ops_dat mu_B0;
 {
 int halo_p[] = {5, 5, 5};

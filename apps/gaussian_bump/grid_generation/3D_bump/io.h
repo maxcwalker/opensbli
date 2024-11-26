@@ -55,7 +55,7 @@ ops_timers(&cpu_end0, &elapsed_end0);
 ops_printf("-----------------------------------------\n");
 ops_printf("Time to write HDF5 file: %s: %lf\n", name0, elapsed_end0-elapsed_start0);
 ops_printf("-----------------------------------------\n");
-fflush(stdout);
+
 }
 }
 
@@ -86,7 +86,7 @@ ops_timers(&cpu_end0, &elapsed_end0);
 ops_printf("-----------------------------------------\n");
 ops_printf("Time to write HDF5 file: %s: %lf\n", name0, elapsed_end0-elapsed_start0);
 ops_printf("-----------------------------------------\n");
-fflush(stdout);
+
 }
 }
 
