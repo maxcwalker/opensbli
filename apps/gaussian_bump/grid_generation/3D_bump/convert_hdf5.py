@@ -85,14 +85,14 @@ def fill_halo_coordinates(block_data, block_number):
             full_x[nhalo:nhalo+nz, j, nhalo:nhalo+nx] = full_x[nhalo:nhalo+nz, ny + nhalo - 1, nhalo:nhalo+nx] + (full_x[nhalo:nhalo+nz, ny + nhalo - 1, nhalo:nhalo+nx] - full_x[nhalo:nhalo+nz, ny + nhalo - 2, nhalo:nhalo+nx])
 
     # Difference values for incremental adjustments
-    left_diff = full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo] - full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo + 1]
+    left_diff = full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo + 1] - full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo]
     right_diff = full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 1] - full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 2]
 
     # Apply changes incrementally for the left and right halo regions
     for i in range(nx + 2 * nhalo):
         # Left (i < nhalo)
         if i < nhalo:
-            full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, i] = -(full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo] - left_diff * (nhalo - i)) 
+            full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, i] = (full_x[nhalo:nhalo+nz, nhalo:nhalo+ny, nhalo] - left_diff * (nhalo - i)) 
 
         # Right (i >= nx + nhalo)
         if i >= nx + nhalo:
@@ -108,14 +108,14 @@ def fill_halo_coordinates(block_data, block_number):
             full_y[k, nhalo:nhalo+ny, nhalo:nhalo+nx] = full_y[nz + nhalo - 1, nhalo:nhalo+ny, nhalo:nhalo+nx] + (full_y[nz + nhalo - 1, nhalo:nhalo+ny, nhalo:nhalo+nx] - full_y[nz + nhalo - 2, nhalo:nhalo+ny, nhalo:nhalo+nx])
     
     # Difference values for incremental adjustments
-    bottom_diff = full_y[nhalo:nhalo+nz, nhalo, nhalo:nhalo+nx] - full_y[nhalo:nhalo+nz, nhalo + 1, nhalo:nhalo+nx]
+    bottom_diff = full_y[nhalo:nhalo+nz, nhalo + 1, nhalo:nhalo+nx] - full_y[nhalo:nhalo+nz, nhalo, nhalo:nhalo+nx]
     top_diff = full_y[nhalo:nhalo+nz, ny + nhalo - 1, nhalo:nhalo+nx] - full_y[nhalo:nhalo+nz, ny + nhalo - 2, nhalo:nhalo+nx]
 
     # Apply changes incrementally for the bottom and top halo regions
     for j in range(ny + 2 * nhalo):
         # Bottom (j < nhalo)
         if j < nhalo:
-            full_y[nhalo:nhalo+nz, j, nhalo:nhalo+nx] = -(full_y[nhalo:nhalo+nz, nhalo, nhalo:nhalo+nx] - bottom_diff * (nhalo - j))
+            full_y[nhalo:nhalo+nz, j, nhalo:nhalo+nx] = (full_y[nhalo:nhalo+nz, nhalo, nhalo:nhalo+nx] - bottom_diff * (nhalo - j))
 
         # Top (j >= ny + nhalo)
         if j >= ny + nhalo:
@@ -130,14 +130,14 @@ def fill_halo_coordinates(block_data, block_number):
             full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, i] = full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 1] + (full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 1] - full_y[nhalo:nhalo+nz, nhalo:nhalo+ny, nx + nhalo - 2])
 
     # Difference values for incremental adjustments
-    bottom_side_diff = full_z[nhalo, nhalo:nhalo+ny, nhalo:nhalo+nx] - full_z[nhalo + 1, nhalo:nhalo+ny, nhalo:nhalo+nx]
+    bottom_side_diff = full_z[nhalo + 1, nhalo:nhalo+ny, nhalo:nhalo+nx] - full_z[nhalo, nhalo:nhalo+ny, nhalo:nhalo+nx]
     top_side_diff = full_z[nz + nhalo - 1, nhalo:nhalo+ny, nhalo:nhalo+nx] - full_z[nz + nhalo - 2, nhalo:nhalo+ny, nhalo:nhalo+nx]
 
     # Apply changes incrementally for the sides in the z direction
     for k in range(nz + 2 * nhalo):
         # Bottom Side (k < nhalo)
         if k < nhalo:
-            full_z[k, nhalo:nhalo+ny, nhalo:nhalo+nx] = -(full_z[nhalo, nhalo:nhalo+ny, nhalo:nhalo+nx] - bottom_side_diff * (nhalo - k))
+            full_z[k, nhalo:nhalo+ny, nhalo:nhalo+nx] = (full_z[nhalo, nhalo:nhalo+ny, nhalo:nhalo+nx] - bottom_side_diff * (nhalo - k))
 
         # Top Side (k >= nz + nhalo)
         if k >= nz + nhalo:

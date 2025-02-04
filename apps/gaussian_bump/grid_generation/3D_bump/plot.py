@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 import h5py
 import os
 import sys
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+import matplotlib.patches as patches
 
 
 class plotFunctions(object):
@@ -16,113 +19,99 @@ class plotFunctions(object):
         return f, group
 
     def read_dataset(self, group, dataset):
-        d_m = group["%s" % (dataset)].attrs['d_m']
-        size = group["%s" % (dataset)].shape
+        d_m = group[f"{dataset}"].attrs['d_m']
+        size = group[f"{dataset}"].shape
         read_start = [abs(d) for d in d_m]
-        read_end = [s-abs(d) for d, s in zip(d_m, size)]
+        read_end = [s - abs(d) for d, s in zip(d_m, size)]
         if len(read_end) == 2:
-            read_data = group["%s" % (dataset)][read_start[0]:read_end[0], read_start[1]:read_end[1]]
+            read_data = group[f"{dataset}"][read_start[0]:read_end[0], read_start[1]:read_end[1]]
         elif len(read_end) == 3:
-            read_data = group["%s" % (dataset)][read_start[0]:read_end[0], read_start[1]:read_end[1], read_start[2]:read_end[2]]
+            read_data = group[f"{dataset}"][read_start[0]:read_end[0], read_start[1]:read_end[1], read_start[2]:read_end[2]]
         else:
-            raise NotImplementedError("")
+            raise NotImplementedError("Unsupported dataset dimensionality.")
         return read_data
 
 
 class plots_3D(plotFunctions):
-    def __init__(self):
-        self.Minf = 4.0
-        self.Re = 4000
-        self.RefT = 439.0
-        self.SuthT = 110.4
-        self.Tw = 1.37
-        self.Ly = 115.0
-        self.Lx = 400.0
-        self.scale = 4.959043
-        self.D11 = self.extract_metrics()
-        self.Pr = 0.72
+    def __init__(self, fname):
+        super().__init__()
+        self.fname = fname
+        with h5py.File(fname, 'r') as f:
+            self.gama = f["gama"][:]
+            self.Minf = f["Minf"][:]
+            self.RefT = f["RefT"][:]
+            self.SuthT = f["SuthT"][:]
+            self.Re = f["Re"][:]
+        print("Initialized with file:", fname)
 
     def extract_coordinates(self):
-        f, group1 = self.read_file(fname)
+        f, group1 = self.read_file(self.fname)
         x = self.read_dataset(group1, "x0_B0")
         y = self.read_dataset(group1, "x1_B0")
         z = self.read_dataset(group1, "x2_B0")
-        print("Grid size (x,y,z)  is: (%d, %d, %d)" % (x.shape[2], x.shape[1], x.shape[0]))
+        print("Grid size (x,y,z):", x.shape)
         return x, y, z
 
-    def extract_metrics(self):
-        fname = sys.argv[1]
-        f, group1 = self.read_file(fname)
-        D11 = self.read_dataset(group1, "D11_B0")
-        return D11
+    def extract_flow_variables(self, group, span_locs):
+        rho = self.read_dataset(group, "rho_B0")[span_locs, :, :]
+        rhou = self.read_dataset(group, "rhou0_B0")[span_locs, :, :]
+        rhov = self.read_dataset(group, "rhou1_B0")[span_locs, :, :]
+        rhow = self.read_dataset(group, "rhou2_B0")[span_locs, :, :]
+        rhoE = self.read_dataset(group, "rhoE_B0")[span_locs, :, :]
+        u = rhou / rho
+        v = rhov / rho
+        w = rhow / rho
+        p = 0.4 * (rhoE - 0.5 * rho * (u**2 + v**2 + w**2))
+        return rho, u, v, p
 
-    def extract_flow_variables(self, group):
-        rho = self.read_dataset(group, "rho_B0")
-        rhou = self.read_dataset(group, "rhou0_B0")
-        rhov = self.read_dataset(group, "rhou1_B0")
-        rhow = self.read_dataset(group, "rhou2_B0")
-        rhoE = self.read_dataset(group, "rhoE_B0")
-        u = rhou/rho
-        v = rhov/rho
-        w = rhow/rho
-        p = (0.4)*(rhoE - 0.5*(u**2+v**2+w**2)*rho)
-        a = np.sqrt(1.4*p/rho)
-        M = np.sqrt(u**2 + v**2 + w**2)/a
-        return rho, M
+    def compute_skin_friction(self, u, mu):
+        mu_wall = mu[:, 0, :]
+        dudy = np.gradient(u, axis=1)[:, 0, :]
+        tau_wall = mu_wall * dudy
+        Cf = tau_wall / (0.5 * self.Re)
+        return Cf
 
-    def plot_3d(self, x, y, z, data, label):
-        fig = plt.figure(figsize=(10, 7))
-        ax = fig.add_subplot(111, projection='3d')
-        ax.set_xlabel('x')
-        ax.set_ylabel('y')
-        ax.set_zlabel('z')
+    def plot_skin_friction_and_pressure(self, x, Cf, p, span_idx):
+        plt.figure(figsize=(8,4))
+        plt.plot(x[span_idx, 0, :], Cf[span_idx, :], label=f"Span {span_idx}",color="k")
+        plt.axhline(y=0, color='black', linestyle='--', linewidth=1)
+        plt.xlabel(r"$x$")
+        plt.ylabel(r"$C_f$")
+        plt.xlim([min(x[0,0,:]),max(x[0,0,:])])
+        # plt.title("Skin Friction")
+        plt.legend()
+        plt.savefig(f"skin_friction_span_{span_idx}.pdf",bbox_inches='tight')
+        plt.clf()
 
-        # Set the view to be rotated by 180 degrees
-        ax.view_init(elev=30, azim=180)
-        
-        # Downsample data for better performance
-        sample_rate = 1
-        x, y, z, data = x[::sample_rate, 0, ::sample_rate], y[::sample_rate, 0, ::sample_rate], z[::sample_rate, 0, ::sample_rate], data[::sample_rate, 0, ::sample_rate]
+        plt.figure(figsize=(8,4))
+        plt.plot(x[span_idx, 0, :], p[span_idx, 0, :] / p[span_idx, 0, 0], label=f"Span {span_idx}",color="k")
+        plt.xlabel(r"$x$")
+        plt.ylabel(r"$p/p_0$")
+        plt.xlim([min(x[0,0,:]),max(x[0,0,:])])
+        # plt.title("Wall Pressure")
+        plt.legend()
+        plt.savefig(f"wall_pressure_span_{span_idx}.pdf",bbox_inches='tight')
+        plt.clf()
 
-        # Calculate the ranges for each axis
-        x_range = np.max(x) - np.min(x)
-        y_range = np.max(y) - np.min(y)
-        z_range = np.max(z) - np.min(z)
+    def main_plot(self, span_locs):
+        f, group1 = self.read_file(self.fname)
+        x, y, z = self.extract_coordinates()
+        rho, u, v, p = self.extract_flow_variables(group1, span_locs)
+        mu = (self.RefT**1.5) * (1 + self.SuthT / self.RefT) / (rho * self.SuthT / self.RefT)
+        Cf = self.compute_skin_friction(u, mu)
 
-        # Determine the maximum range
-        max_range = max(x_range, y_range, z_range)
-
-        # Set the limits of each axis to be equal
-        x_center = (np.max(x) + np.min(x)) / 2
-        y_center = (np.max(y) + np.min(y)) / 2
-        z_center = (np.max(z) + np.min(z)) / 2
-
-        ax.set_xlim([x_center - max_range / 2, x_center + max_range / 2])
-        ax.set_ylim([y_center - max_range / 2, y_center + max_range / 2])
-        ax.set_zlim([z_center - max_range / 2, z_center + max_range / 2])
-
-        # Plotting the data
-        img = ax.scatter(x.flatten(), y.flatten(), z.flatten(), c=data.flatten(), cmap='jet', marker='o', s=5)
-
-        fig.colorbar(img)
-        plt.title(f'3D Visualization of {label}')
-        fig.savefig(f'3D_plot_{label}.pdf')
-        plt.show()
-
-    def main_plot(self, fname):
-        f, group1 = self.read_file(fname)
-        self.x, self.y, self.z = self.extract_coordinates()
-        rho, M = self.extract_flow_variables(group1)
-        self.plot_3d(self.x, self.y, self.z, rho, 'rho')
-        self.plot_3d(self.x, self.y, self.z, M, 'M')
+        for idx, span_idx in enumerate(span_locs):
+            self.plot_skin_friction_and_pressure(x, Cf, p, idx)
 
 
-# Parameters
-fname = sys.argv[1]
-directory = './simulation_plots/'
+# Example usage
+if __name__ == "__main__":
+    fname = sys.argv[1]
+    directory = "./simulation_plots/"
 
-if not os.path.exists(directory):
-    os.makedirs(directory)
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
-plots = plots_3D()
-plots.main_plot(fname)
+    span_locs = [100]  # Example spanwise location indices
+    plots = plots_3D(fname)
+    plots.main_plot(span_locs)

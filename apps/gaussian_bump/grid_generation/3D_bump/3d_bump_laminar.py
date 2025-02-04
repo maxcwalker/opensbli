@@ -12,6 +12,7 @@ from opensbli.utilities.katzer_init import Initialise_Katzer
 from opensbli.utilities.flat_init import Initialise_Flatplate
 from opensbli.utilities.helperfunctions import substitute_simulation_parameters
 from sympy import sin, cos, sinh, tanh, exp, pi, log
+
 #############################################################################################################################################
 #																																			#
 # Inputs			 																														#
@@ -292,9 +293,9 @@ if monitor:
 #############################################################################################################################################
 # Read in the grid file
 kwargs = {'iotype': "Read"}
-x,y,z, h = symbols("x0, x1 x2, h0", **{'cls':DataObject})
+x,y,z = symbols("x0, x1 x2", **{'cls':DataObject})
 grid_hdf5 = iohdf5(**kwargs)
-grid_hdf5.add_arrays([x, y, z, h])
+grid_hdf5.add_arrays([x, y, z])
 # Re, xMach, Tinf,Twall = symbols('Re Minf RefT Twall', **{'cls': ConstantObject})
 Re, xMach, Tinf,Twall = 4000.0, 4.0, 439.0, 1.37
 ## Ensure the grid size passed to the initialisation routine matches the grid sizes used in the simulation parameters

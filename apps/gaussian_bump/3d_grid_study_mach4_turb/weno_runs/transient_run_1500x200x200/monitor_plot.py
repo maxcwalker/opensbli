@@ -19,17 +19,23 @@ if not os.path.exists(directory_monitor):
     os.makedirs(directory_monitor)
 # Add new columns
 new_columns = ['Iter', 'Time', 'p_50', 'p_96', 'p_100', 'p_175', 'p_187', 'p_191', 'p_200', 'p_213', 'p_225', 'p_240', 'p_250', 'p_275', 'p_300', 'p_325', 'p_350', 'p_375', 'p_400', 'u_50', 'u_96', 'u_100', 'u_175', 'u_187', 'u_191', 'u_200', 'u_213', 'u_225', 'u_240', 'u_250', 'u_275', 'u_300', 'u_325', 'u_350', 'u_375', 'u_400']
+
 df.columns = new_columns
 fig1, ax1 = plt.subplots(7, 1, figsize=(6,5.5))
 # Plot
 
 import matplotlib
-
-matplotlib.rcParams["text.usetex"] = True
-plt.rcParams.update({
+matplotlib.rcParams.update({
     "text.usetex": True,
     "font.family": "serif",
-    "font.serif": ["Computer Modern Roman"]
+    "font.serif": ["Computer Modern Roman"],
+    "font.size": 8,  # Match Overleaf's body font size
+    "axes.titlesize": 8,
+    "axes.labelsize": 8,
+    "xtick.labelsize": 6,
+    "ytick.labelsize": 3,
+    "legend.fontsize": 8,
+    "figure.titlesize": 8,
 })
 
 from matplotlib.ticker import ScalarFormatter
@@ -79,15 +85,15 @@ for i in range(2):
 plt.subplots_adjust(hspace=0.5, wspace=0.2)
 fig.savefig(directory_monitor + "monitoring_pressure.pdf", bbox_inches='tight')
 
-fig1, ax1 = plt.subplots(10, 1, figsize=(10,8.6))
+fig1, ax1 = plt.subplots(10, 1, figsize=(7,6))
 for i, val in enumerate(new_columns[9:19]):
 
-    ax1[i].plot(df['Time'], df[val],color='k',linewidth=0.7)  # Adjust column name as needed
-    ax1[i].set_ylabel(r'%s'%val[2:],fontsize=12)
+    ax1[i].plot(df['Time'], df[val],color='k',linewidth=1)  # Adjust column name as needed
+    ax1[i].set_ylabel(r'%s'%val[2:])
     ax1[i].set
     ax1[i].yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
     ax1[i].grid(True)
-    ax1[i].set_xlabel('Time',fontsize=12)
+    ax1[i].set_xlabel('Time')
     ax1[i].set_xlim([0,df['Time'].iloc[-1]])
     ax1[i].tick_params(labelbottom=False)
 ax1[-1].tick_params(labelbottom=True)

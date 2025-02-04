@@ -19,7 +19,7 @@ def read_data_from_file(filename):
     return x, Cf, p_norm
 
 # Load data for each case
-labels = ['Mach4 1.37Tr', 'Mach5 1.95Tr', 'Mach4 1.95Tr', 'Mach5 1.37Tr']
+labels = ['Mach4 1.37Tw/T_\infty', 'Mach5 1.95Tw/T_\infty', 'Mach4 1.95 Tw/T_\infty', 'Mach5 1.37 Tw/T_\infty']
 dat_directory = './comparison_data/'
 
 fig1, ax1 = plt.subplots(figsize=(10, 6))

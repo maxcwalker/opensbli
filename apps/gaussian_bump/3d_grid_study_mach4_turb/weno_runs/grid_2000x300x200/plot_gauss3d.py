@@ -170,7 +170,7 @@ def spanaverage(variable):
 # ###################################################################################################
 
 y_idx=[1,20,40,60]
-zoom =True
+zoom =False
 
 for idx in y_idx:
     ## plan view slice at y_idx point

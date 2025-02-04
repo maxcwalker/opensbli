@@ -13,8 +13,8 @@ y = data[:, 1]
 z = data[:, 2]
 
 # Define new uniform grid ranges
-x_uniform = np.linspace(min(x), max(x), 1500) #change value to number of x points you want
-z_uniform = np.linspace(min(z), max(z), 400)#change value to number of z points you want
+x_uniform = np.linspace(min(x), max(x),1500) #change value to number of x points you want
+z_uniform = np.linspace(min(z), max(z), 200)#change value to number of z points you want
 
 # Create a meshgrid for the new coordinates
 X_uniform, Z_uniform = np.meshgrid(x_uniform, z_uniform)
@@ -30,6 +30,7 @@ y_flat = Y_interpolated.flatten()
 # Write the new coordinates and interpolated values to a file
 with open('output_interpolated.dat', 'w') as f:
     for xi, yi, zi in zip(x_flat, y_flat, z_flat):
+        print('%f'%zi)
         f.write(f"{xi:.6f} {yi:.6f} {zi:.6f}\n")
 
 # 3D Scatter plot of the new interpolated data

@@ -11,6 +11,21 @@ from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes
 from mpl_toolkits.axes_grid1.inset_locator import mark_inset
 
 # plt.style.use('classic')
+# Set LaTeX-style fonts
+import matplotlib
+matplotlib.rcParams.update({
+    "text.usetex": True,
+    "font.family": "serif",
+    "font.serif": ["Computer Modern Roman"],
+    "font.size": 8,  # Match Overleaf's body font size
+    "axes.titlesize": 8,
+    "axes.labelsize": 8,
+    "xtick.labelsize": 6,
+    "ytick.labelsize": 6,
+    "legend.fontsize": 8,
+    "figure.titlesize": 8,
+})
+
 
 try:
     fname = sys.argv[1]
@@ -52,8 +67,8 @@ scale = 4.959043
 
 list = ['400x200x100','1000x200x100', '1000x200x200','1000x300x200','1500x200x200','1500x300x200']
 # list = ['1000x200x100', '1000x200x200']
-fig1, ax1 = plt.subplots(1,1)
-fig2, ax2 = plt.subplots(1,1)
+fig1, ax1 = plt.subplots(figsize=(10, 4))
+fig2, ax2 = plt.subplots(figsize=(10, 4))
 
 line_styles = ['-', '-', '-', '-','-', '-']
 line_colours = ['k','b', 'orange','y','green','c']
@@ -142,16 +157,16 @@ axins2.set_yticks([])
 
 
 ax1.axhline(y=0.0, linestyle='--', color='black')
-ax1.set_xlabel(r'$x_0$', fontsize=20)
-ax1.set_ylabel(r'$C_f$', fontsize=20)
+ax1.set_xlabel(r'$x_0$')
+ax1.set_ylabel(r'$C_f$')
 # ax1.set_title('Skin friction')
 ax1.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
 ax1.legend(loc='upper right')
 ax1.grid()
 fig1.savefig(directory+'skin_friction.pdf',bbox_inches='tight')
 
-ax2.set_xlabel(r'$x_0$', fontsize=20)
-ax2.set_ylabel(r'$\frac{P_w}{P_1}$', fontsize=22)
+ax2.set_xlabel(r'$x_0$')
+ax2.set_ylabel(r'$\frac{P_w}{P_1}$')
 # ax2.set_title('Normalised wall pressure')
 ax2.legend(loc='best')
 ax2.grid()
